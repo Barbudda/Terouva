@@ -1,0 +1,15 @@
+# Copy this file to .cargo/config.toml (gitignored) and adjust if needed.
+#
+# Why: when this repo lives inside a synced folder (OneDrive, Dropbox, iCloud),
+# cargo build scripts (autocfg in particular) randomly fail with
+# "output path is not a writable directory" because the sync agent re-locks files.
+# The fix is to redirect cargo's target dir outside the synced folder.
+#
+# Windows:
+#   target-dir = "C:/cargo-targets/terouva"
+# macOS / Linux:
+#   target-dir = "/tmp/cargo-targets/terouva"
+# If your repo lives on a non-synced disk, you can delete this file entirely.
+
+[build]
+target-dir = "C:/cargo-targets/terouva"

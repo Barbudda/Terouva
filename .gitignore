@@ -1,0 +1,70 @@
+# =====================================================================
+# Terouva monorepo — root .gitignore
+# Apps live under apps/{desktop,web,extension}. This file covers all.
+# =====================================================================
+
+# --- Secrets (never commit) ---
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# --- Node ---
+node_modules/
+**/node_modules/
+.pnpm-store/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Build outputs ---
+dist/
+out/
+.next/
+.vite/
+.turbo/
+**/dist/
+**/out/
+**/.next/
+**/.vite/
+
+# --- TypeScript build cache ---
+*.tsbuildinfo
+**/*.tsbuildinfo
+
+# --- Tauri / Rust ---
+**/target/
+**/src-tauri/gen/
+**/src-tauri/Cargo.lock
+
+# --- Cargo local config (machine-specific target-dir override) ---
+.cargo/config.toml
+**/.cargo/config.toml
+
+# --- SQLite local DBs ---
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+data.db
+
+# --- Vite generated declarations / JS for config files ---
+vite.config.d.ts
+vite.config.js
+
+# --- Ruflo runtime artifacts (local cache, sessions, logs) ---
+.claude-flow/data/
+.claude-flow/logs/
+.claude-flow/sessions/
+.claude-flow/cache/
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Vercel ---
+.vercel/

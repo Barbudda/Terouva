@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Terouva</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">T</div>
+      <div>
+        <div class="title">Terouva</div>
+        <div class="subtitle">Capture LBC</div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div id="loading" class="state">
+        <p>Lecture de la page…</p>
+      </div>
+      <div id="error" class="state hidden">
+        <p id="error-text"></p>
+        <p class="hint">Ouvre une annonce Leboncoin (URL <code>/ad/...</code>) puis clique l'icône.</p>
+      </div>
+      <div id="ready" class="state hidden">
+        <div class="card">
+          <div id="title" class="card-title"></div>
+          <div id="meta" class="card-meta"></div>
+        </div>
+        <button id="copy" class="btn-primary">Copier vers Terouva</button>
+        <div id="copied" class="copied hidden">✓ Copié — colle dans Terouva (Annonces → Importer depuis presse-papier)</div>
+      </div>
+    </main>
+
+    <footer>
+      <span>v0.1 · local-first</span>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

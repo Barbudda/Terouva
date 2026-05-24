@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces */
+  --color-bg: #0a0a0b;
+  --color-bg-2: #111114;
+  --color-panel: #15151a;
+  --color-panel-2: #1c1c22;
+  --color-border: #232329;
+  --color-border-2: #2c2c33;
+
+  /* Text */
+  --color-text: #ededee;
+  --color-text-muted: #a3a3aa;
+  --color-text-faint: #6f6f78;
+
+  /* Accents */
+  --color-signal: #7ee8c8;
+  --color-signal-soft: rgba(126, 232, 200, 0.12);
+  --color-signal-strong: #5fd4b1;
+
+  --color-urgent: #ffb84d;
+  --color-urgent-soft: rgba(255, 184, 77, 0.12);
+
+  --color-danger: #ff6f6f;
+
+  /* Fonts (set in layout.tsx as CSS vars) */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-signal);
+  color: #0a0a0b;
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-2);
+  border-radius: 8px;
+  border: 3px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: #3c3c44; }
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Background grid (utility classes for sections) */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.bg-grid-fade {
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 80%);
+}
+
+/* Noise overlay (very subtle film grain) */
+.bg-noise {
+  position: relative;
+  isolation: isolate;
+}
+.bg-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+
+/* Soft glow for signal elements */
+.glow-signal {
+  box-shadow:
+    0 0 0 1px rgba(126,232,200,0.20),
+    0 8px 32px -6px rgba(126,232,200,0.20),
+    0 0 60px -10px rgba(126,232,200,0.15);
+}
+
+.glow-urgent {
+  box-shadow:
+    0 0 0 1px rgba(255,184,77,0.20),
+    0 8px 32px -6px rgba(255,184,77,0.18);
+}
+
+/* Number tabular for counters */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Hide content visually but keep for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* Animation utilities */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-ticker {
+  animation: ticker 60s linear infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.7); opacity: 0.6; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-ticker { animation: none; }
+}

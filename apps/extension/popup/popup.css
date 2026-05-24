@@ -1,0 +1,141 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 340px;
+  background: #09090b;
+  color: #fafafa;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #27272a;
+  background: #18181b;
+}
+
+.logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #8b5cf6, #d946ef);
+  color: white;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.subtitle {
+  font-size: 10px;
+  color: #a1a1aa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+main {
+  padding: 16px;
+  min-height: 140px;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.hint {
+  font-size: 11px;
+  color: #71717a;
+}
+
+.hint code {
+  background: #27272a;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: ui-monospace, monospace;
+}
+
+.card {
+  border: 1px solid #27272a;
+  background: #18181b;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-meta {
+  font-size: 11px;
+  color: #a1a1aa;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-primary {
+  width: 100%;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  background: #8b5cf6;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.btn-primary:hover {
+  background: #a78bfa;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.copied {
+  font-size: 11px;
+  color: #34d399;
+  text-align: center;
+  line-height: 1.4;
+}
+
+footer {
+  padding: 8px 16px;
+  border-top: 1px solid #27272a;
+  font-size: 10px;
+  color: #52525b;
+  text-align: center;
+}
+
+#error-text {
+  color: #f87171;
+  font-size: 12px;
+}
