@@ -1,0 +1,24 @@
+{
+  "name": "terouva-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Terouva — local-first rental copilot. Monorepo with desktop (Tauri), web (Next.js) and Chrome extension.",
+  "scripts": {
+    "dev:web": "npm --prefix apps/web run dev",
+    "dev:desktop": "npm --prefix apps/desktop run tauri:dev",
+    "build:web": "npm --prefix apps/web run build",
+    "build:desktop": "npm --prefix apps/desktop run build",
+    "build:desktop:release": "npm --prefix apps/desktop run tauri:build",
+    "install:all": "npm install --prefix apps/web && npm install --prefix apps/desktop",
+    "clean:web": "rimraf apps/web/.next apps/web/out",
+    "clean:desktop": "rimraf apps/desktop/dist apps/desktop/src-tauri/gen"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Barbudda/Terouva.git"
+  },
+  "license": "MIT"
+}

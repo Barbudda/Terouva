@@ -1,5 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/mcp-config.json",
+  "_comment": "Copy this file to .mcp.json (gitignored — may contain machine-specific paths) and adjust if needed. Claude Code reads .mcp.json at project root on launch.",
   "mcpServers": {
     "context7": {
       "command": "npx",
@@ -18,8 +19,9 @@
       "args": ["-y", "dotenv-cli", "-e", ".env.local", "--", "npx", "-y", "@modelcontextprotocol/server-github"]
     },
     "obsidian": {
+      "_comment": "Replace the path with your own Obsidian vault. Remove this entry if you don't use Obsidian.",
       "command": "npx",
-      "args": ["-y", "@bitbonsai/mcpvault", "C:/Users/hugo8/Documents/Obsidian"]
+      "args": ["-y", "@bitbonsai/mcpvault", "/absolute/path/to/your/Obsidian/vault"]
     }
   }
 }

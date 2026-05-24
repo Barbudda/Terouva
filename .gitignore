@@ -9,6 +9,12 @@
 .env.*.local
 !.env.example
 
+# --- Machine-specific Claude Code MCP config ---
+# Contains absolute paths (Obsidian vault, etc). Each dev should
+# copy .mcp.json.example → .mcp.json and adjust locally.
+.mcp.json
+mcp.config.json
+
 # --- Node ---
 node_modules/
 **/node_modules/

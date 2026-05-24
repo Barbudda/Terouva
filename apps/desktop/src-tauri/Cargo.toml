@@ -27,3 +27,13 @@ url = "2"
 anyhow = "1"
 thiserror = "1"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+
+# Release profile: optimize for small binary size + LTO.
+# Trade-off: slower release build (a few extra minutes), much smaller .msi.
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
+incremental = false

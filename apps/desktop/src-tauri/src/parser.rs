@@ -33,10 +33,27 @@ pub async fn parse_listing_url(url: String) -> Result<ParsedListing, String> {
         .map_err(|e| e.to_string())
 }
 
+/// Hosts the parser will fetch. Limits accidental misuse (typos, wrong URLs pasted in).
+/// Keep this tight — it's a UX guardrail, not a security feature.
+const ALLOWED_HOST_SUFFIXES: &[&str] = &["leboncoin.fr"];
+
+fn is_allowed_host(host: &str) -> bool {
+    let host = host.trim_start_matches("www.").to_ascii_lowercase();
+    ALLOWED_HOST_SUFFIXES
+        .iter()
+        .any(|suffix| host == *suffix || host.ends_with(&format!(".{suffix}")))
+}
+
 async fn parse_listing_internal(url: &str) -> Result<ParsedListing> {
     let parsed = url::Url::parse(url).map_err(|e| anyhow!("URL invalide: {e}"))?;
     if !matches!(parsed.scheme(), "http" | "https") {
         return Err(anyhow!("URL doit être http(s)"));
+    }
+    let host = parsed.host_str().unwrap_or("");
+    if !is_allowed_host(host) {
+        return Err(anyhow!(
+            "Host non autorisé: '{host}'. Le parser n'accepte que des URLs leboncoin.fr."
+        ));
     }
 
     let client = reqwest::Client::builder()
