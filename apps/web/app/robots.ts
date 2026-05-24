@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
+  const base = getSiteUrl();
   return {
     rules: [
       {
@@ -8,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://terouva.app/sitemap.xml",
-    host: "https://terouva.app",
+    sitemap: `${base}/sitemap.xml`,
+    host: base,
   };
 }
