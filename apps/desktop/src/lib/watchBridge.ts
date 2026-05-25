@@ -97,6 +97,50 @@ export async function getLocalServerPort(): Promise<number | null> {
   return (await invoke<number | null>("get_server_port")) ?? null;
 }
 
+// ────────────────────────────── polling targets ──────────────────────────────
+
+export interface PollingTarget {
+  id: number;
+  name: string;
+  url: string;
+  frequency_minutes: number;
+}
+
+export interface PollingStats {
+  enabled: boolean;
+  target_count: number;
+  total_fetches: number;
+  last_error: string | null;
+  last_target_id: number | null;
+  last_target_at: string | null;
+  per_target_last_check: Record<string, string>;
+}
+
+/**
+ * Push the current list of active search profiles to the Rust polling loop.
+ * Should be called at startup and after every search-profile mutation.
+ */
+export async function syncPollingTargets(): Promise<number> {
+  const searches = await listSearchProfiles();
+  const targets: PollingTarget[] = searches
+    .filter((s) => s.is_active === 1 && !!s.lbc_search_url)
+    .map((s) => ({
+      id: s.id,
+      name: s.name,
+      url: s.lbc_search_url as string,
+      frequency_minutes: Math.max(5, s.check_frequency_minutes || 30),
+    }));
+  await invoke("set_polling_targets", {
+    targets,
+    enabled: targets.length > 0,
+  });
+  return targets.length;
+}
+
+export async function getPollingStats(): Promise<PollingStats> {
+  return await invoke<PollingStats>("get_polling_stats");
+}
+
 /**
  * Idempotent — safe to call multiple times.
  * Starts the bridge once, then any further call is a no-op.

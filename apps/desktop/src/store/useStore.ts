@@ -5,6 +5,7 @@ import {
   listListings,
   listSearchProfiles,
 } from "@/lib/db";
+import { syncPollingTargets } from "@/lib/watchBridge";
 import type {
   DocumentItem,
   Listing,
@@ -42,6 +43,9 @@ export const useStore = create<AppState>((set) => ({
       listDocuments(),
     ]);
     set({ profile, searches, listings, documents, loading: false });
+    syncPollingTargets().catch((e) =>
+      console.warn("syncPollingTargets failed (initial):", e),
+    );
   },
   refreshProfile: async () => {
     const profile = await getUserProfile();
@@ -50,6 +54,9 @@ export const useStore = create<AppState>((set) => ({
   refreshSearches: async () => {
     const searches = await listSearchProfiles();
     set({ searches });
+    syncPollingTargets().catch((e) =>
+      console.warn("syncPollingTargets failed (post-refresh):", e),
+    );
   },
   refreshListings: async () => {
     const listings = await listListings();

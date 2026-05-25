@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-05-25T21:37:55.849Z",
+  "projectRoot": "c:\\Users\\hugo8\\OneDrive\\Desktop\\Terouva",
+  "structure": {
+    "hasPackageJson": true,
+    "hasTsConfig": false,
+    "hasClaudeConfig": true,
+    "hasClaudeFlow": true
+  },
+  "scannedAt": 1779745075849
+}

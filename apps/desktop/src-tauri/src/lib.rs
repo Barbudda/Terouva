@@ -4,18 +4,14 @@ use tauri::Manager;
 use tauri_plugin_sql::{Builder as SqlBuilder, Migration, MigrationKind};
 
 mod parser;
+mod polling;
 mod server;
 
 const MIGRATION_001: &str = include_str!("../migrations/0001_init.sql");
 
-/// Shared state holding the bearer token used by the local HTTP server.
-/// The frontend reads/initializes this from `app_settings.local_server_token`
-/// at startup and pushes it here via the `set_server_token` command.
 pub struct ServerToken(pub Arc<RwLock<Option<String>>>);
-
-/// Shared state for the port the local server actually bound to. The frontend
-/// reads it to display in Réglages.
 pub struct ServerPort(pub Arc<RwLock<Option<u16>>>);
+pub struct Polling(pub polling::PollingState);
 
 #[tauri::command]
 fn set_server_token(token: String, state: tauri::State<'_, ServerToken>) -> Result<(), String> {
@@ -34,13 +30,35 @@ fn generate_token() -> String {
     server::generate_token()
 }
 
+#[tauri::command]
+async fn set_polling_targets(
+    targets: Vec<polling::PollingTarget>,
+    enabled: bool,
+    state: tauri::State<'_, Polling>,
+) -> Result<(), String> {
+    let mut s = state.0.write().await;
+    s.targets = targets;
+    s.enabled = enabled;
+    s.stats.enabled = enabled;
+    s.stats.target_count = s.targets.len();
+    Ok(())
+}
+
+#[tauri::command]
+async fn get_polling_stats(state: tauri::State<'_, Polling>) -> Result<polling::PollingStats, String> {
+    let s = state.0.read().await;
+    Ok(s.stats.clone())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let token: Arc<RwLock<Option<String>>> = Arc::new(RwLock::new(None));
     let port: Arc<RwLock<Option<u16>>> = Arc::new(RwLock::new(None));
+    let polling_state = polling::new_state();
 
     let token_for_setup = token.clone();
     let port_for_setup = port.clone();
+    let polling_for_setup = polling_state.clone();
 
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
@@ -61,22 +79,34 @@ pub fn run() {
         )
         .manage(ServerToken(token.clone()))
         .manage(ServerPort(port.clone()))
+        .manage(Polling(polling_state.clone()))
         .invoke_handler(tauri::generate_handler![
             parser::parse_listing_url,
+            parser::parse_search_url,
             set_server_token,
             get_server_port,
             generate_token,
+            set_polling_targets,
+            get_polling_stats,
         ])
         .setup(move |app| {
             let app_handle = app.handle().clone();
             let token = token_for_setup.clone();
             let port = port_for_setup.clone();
+            let polling = polling_for_setup.clone();
+
+            // HTTP server for the Chrome extension.
+            let server_handle = app_handle.clone();
             tauri::async_runtime::spawn(async move {
-                let bound = server::spawn(app_handle, token).await;
+                let bound = server::spawn(server_handle, token).await;
                 if let Ok(mut p) = port.write() {
                     *p = bound;
                 }
             });
+
+            // Background polling loop.
+            polling::spawn_loop(polling, app_handle.clone());
+
             Ok(())
         })
         .run(tauri::generate_context!())

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { Badge, Card, CardBody, CardHeader, CardTitle, StatPill } from "@/components/ui/Card";
 import { Field } from "@/components/ui/Input";
 import { copyToClipboard, openExternal } from "@/lib/tauri";
 import { recommendationLabel } from "@/lib/scoring";
+import { getPollingStats, type PollingStats } from "@/lib/watchBridge";
 import { useStore } from "@/store/useStore";
 import { useWatchStore } from "@/store/useWatchStore";
 
@@ -23,7 +24,26 @@ export default function Surveillance() {
 
   const [tokenVisible, setTokenVisible] = useState(false);
   const [copiedTarget, setCopiedTarget] = useState<string | null>(null);
+  const [polling, setPolling] = useState<PollingStats | null>(null);
   const serverUrl = port ? `http://127.0.0.1:${port}` : null;
+
+  useEffect(() => {
+    let alive = true;
+    const fetchStats = async () => {
+      try {
+        const s = await getPollingStats();
+        if (alive) setPolling(s);
+      } catch (e) {
+        console.warn("getPollingStats failed:", e);
+      }
+    };
+    fetchStats();
+    const id = window.setInterval(fetchStats, 8000);
+    return () => {
+      alive = false;
+      window.clearInterval(id);
+    };
+  }, []);
 
   const handleCopy = async (label: string, value: string) => {
     await copyToClipboard(value);
@@ -142,6 +162,64 @@ export default function Surveillance() {
               Régénérer le token
             </Button>
           </div>
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader className="flex items-center justify-between">
+          <div>
+            <CardTitle>Polling background</CardTitle>
+            <p className="mt-1.5 text-xs text-zinc-500">
+              Quand Chrome est fermé, Terouva interroge tes URLs de recherche depuis ta
+              machine au rythme que tu as configuré dans chaque recherche (±30 % de jitter,
+              pause 23h-7h).
+            </p>
+          </div>
+          <Badge
+            className={
+              polling?.enabled
+                ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/40"
+                : "bg-zinc-700/40 text-zinc-400 border-zinc-600/40"
+            }
+          >
+            {polling?.enabled
+              ? `● ${polling.target_count} recherche${polling.target_count > 1 ? "s" : ""}`
+              : "● inactif"}
+          </Badge>
+        </CardHeader>
+        <CardBody className="space-y-3">
+          <div className="grid grid-cols-3 gap-3">
+            <StatPill
+              label="Fetches effectués"
+              value={polling?.total_fetches ?? 0}
+              hint="depuis le démarrage"
+            />
+            <StatPill
+              label="Cible surveillée"
+              value={polling?.target_count ?? 0}
+              hint="recherches avec URL"
+            />
+            <StatPill
+              label="Dernière passe"
+              value={
+                polling?.last_target_at
+                  ? new Date(polling.last_target_at).toLocaleTimeString("fr-FR")
+                  : "—"
+              }
+              hint={polling?.last_target_id ? `id ${polling.last_target_id}` : ""}
+            />
+          </div>
+          {polling?.last_error && (
+            <div className="text-xs text-red-400 rounded-md border border-red-500/30 bg-red-500/5 px-3 py-2">
+              {polling.last_error}
+            </div>
+          )}
+          {polling && polling.target_count === 0 && (
+            <p className="text-xs text-zinc-500">
+              Aucune recherche n'a d'URL Leboncoin sauvegardée + activée. Configure-en
+              une dans <strong>Recherches</strong> pour activer le polling background.
+            </p>
+          )}
         </CardBody>
       </Card>
 

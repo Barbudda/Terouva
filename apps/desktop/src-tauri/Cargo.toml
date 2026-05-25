@@ -30,6 +30,7 @@ tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "sync"]
 axum = "0.7"
 tower-http = { version = "0.5", features = ["cors"] }
 rand = "0.8"
+chrono = "0.4"
 
 # Release profile: optimize for small binary size + LTO.
 # Trade-off: slower release build (a few extra minutes), much smaller .msi.
