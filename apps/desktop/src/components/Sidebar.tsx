@@ -3,6 +3,7 @@ import { cn } from "@/lib/cn";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: "▦" },
+  { to: "/surveillance", label: "Surveillance", icon: "◉" },
   { to: "/recherches", label: "Recherches", icon: "◎" },
   { to: "/annonces", label: "Annonces", icon: "▤" },
   { to: "/candidatures", label: "Candidatures", icon: "✉" },

@@ -8,32 +8,103 @@
   <body>
     <header>
       <div class="logo">T</div>
-      <div>
+      <div class="header-text">
         <div class="title">Terouva</div>
-        <div class="subtitle">Capture LBC</div>
+        <div class="subtitle">Watch &amp; capture</div>
+      </div>
+      <div class="status" id="conn-status" title="État de la connexion à l'app Terouva">
+        <span class="dot dot-off" id="conn-dot"></span>
+        <span class="status-text" id="conn-text">…</span>
       </div>
     </header>
 
+    <nav class="tabs">
+      <button class="tab active" data-tab="watch">Surveillance</button>
+      <button class="tab" data-tab="capture">Capture URL</button>
+      <button class="tab" data-tab="settings">Réglages</button>
+    </nav>
+
     <main id="main">
-      <div id="loading" class="state">
-        <p>Lecture de la page…</p>
-      </div>
-      <div id="error" class="state hidden">
-        <p id="error-text"></p>
-        <p class="hint">Ouvre une annonce Leboncoin (URL <code>/ad/...</code>) puis clique l'icône.</p>
-      </div>
-      <div id="ready" class="state hidden">
+      <section class="panel" data-panel="watch">
         <div class="card">
-          <div id="title" class="card-title"></div>
-          <div id="meta" class="card-meta"></div>
+          <div class="card-title" id="watch-state">Surveillance — chargement…</div>
+          <div class="card-meta" id="watch-tip">
+            Garde une page <code>leboncoin.fr/recherche</code> ouverte.
+          </div>
         </div>
-        <button id="copy" class="btn-primary">Copier vers Terouva</button>
-        <div id="copied" class="copied hidden">✓ Copié — colle dans Terouva (Annonces → Importer depuis presse-papier)</div>
-      </div>
+        <p class="hint">
+          Chaque nouvelle annonce qui apparaît dans le DOM est envoyée à l'app
+          Terouva en local. L'app score selon tes critères et te notifie si ça matche.
+        </p>
+        <p class="hint small">
+          Si la pastille en haut à droite est rouge, configure l'URL et le
+          token dans l'onglet <strong>Réglages</strong>.
+        </p>
+      </section>
+
+      <section class="panel hidden" data-panel="capture">
+        <div id="capture-loading" class="state">
+          <p>Lecture de la page…</p>
+        </div>
+        <div id="capture-error" class="state hidden">
+          <p class="error-text" id="capture-error-text"></p>
+          <p class="hint">
+            Ouvre une <strong>annonce</strong> Leboncoin (URL <code>/ad/...</code>) puis reviens dans le popup.
+          </p>
+        </div>
+        <div id="capture-ready" class="state hidden">
+          <div class="card">
+            <div id="capture-title" class="card-title"></div>
+            <div id="capture-meta" class="card-meta"></div>
+          </div>
+          <div class="row">
+            <button id="capture-send" class="btn-primary">Envoyer à l'app</button>
+            <button id="capture-clipboard" class="btn-secondary">Copier JSON</button>
+          </div>
+          <div id="capture-feedback" class="feedback hidden"></div>
+        </div>
+      </section>
+
+      <section class="panel hidden" data-panel="settings">
+        <label class="field">
+          <span class="lbl">URL de l'app Terouva</span>
+          <input
+            type="text"
+            id="server-url"
+            placeholder="http://127.0.0.1:8765"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </label>
+        <label class="field">
+          <span class="lbl">Token de jumelage</span>
+          <input
+            type="password"
+            id="token"
+            placeholder="colle ici le token affiché dans l'app"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="watch-enabled" checked />
+          <span>Surveillance active</span>
+        </label>
+        <div class="row">
+          <button id="save-settings" class="btn-primary">Enregistrer</button>
+          <button id="test-conn" class="btn-secondary">Tester</button>
+        </div>
+        <div id="settings-feedback" class="feedback hidden"></div>
+        <div class="divider"></div>
+        <p class="hint small">
+          Le token est généré par l'app Terouva (page <strong>Surveillance</strong>). Tout
+          le trafic reste en local — rien ne sort de ta machine.
+        </p>
+      </section>
     </main>
 
     <footer>
-      <span>v0.1 · local-first</span>
+      <span>v0.2 · local-first</span>
     </footer>
 
     <script src="popup.js"></script>

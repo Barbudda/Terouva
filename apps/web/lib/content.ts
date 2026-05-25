@@ -1,6 +1,7 @@
 import {
   Activity,
   Bell,
+  Eye,
   FileJson,
   Gauge,
   Layers,
@@ -19,14 +20,14 @@ export const NAV_LINKS = [
 ];
 
 export const HERO = {
-  eyebrow: "Beta v0.1 · gratuite",
+  eyebrow: "Beta v0.2 · gratuite",
   titleLines: [
     "On ne trouve pas un appart",
     "en cherchant.",
   ],
   titleEmphasis: "On en trouve un en arrivant le premier.",
   subtitle:
-    "Terouva surveille Leboncoin, classe les annonces selon tes critères et te prépare ton message de candidature pendant que les autres lisent encore l'annonce.",
+    "Quand tu ouvres Leboncoin, Terouva regarde par-dessus ton épaule. Chaque nouvelle annonce qui matche tes critères déclenche une notif desktop instantanée, avec un message de candidature déjà prêt. Tu cliques, tu envoies. Pas de bot, pas d'évasion : c'est ton navigateur, ta session, ton IP.",
   ctaPrimary: { label: "Télécharger pour Windows", href: "#download" },
   ctaSecondary: { label: "Voir comment", href: "#how" },
   meta: "macOS & Linux bientôt · 100 % local · Aucun compte",
@@ -62,20 +63,20 @@ export const STEPS = [
   {
     n: "01",
     title: "Configure une fois.",
-    body: "Profil locataire, dossier, garant, message de présentation. Quatre minutes max. Tu ne le refais jamais.",
+    body: "Profil locataire, dossier, garant, message de présentation, critères de chaque recherche. Quatre minutes max. Tu ne le refais jamais.",
     detail: "→ Profil",
   },
   {
     n: "02",
-    title: "Capture une annonce.",
-    body: "Colle l'URL, ou clique l'extension Chrome depuis la page LBC ouverte. Terouva parse et score selon TES critères.",
-    detail: "→ Score expliqué",
+    title: "Garde Leboncoin ouvert.",
+    body: "L'extension Chrome observe ta page de résultats en temps réel — c'est ton navigateur, ta session, ton IP, indistinguable d'un user qui scroll. Chaque nouvelle annonce qui apparaît dans le DOM file directement vers Terouva.",
+    detail: "→ Surveillance",
   },
   {
     n: "03",
     title: "Frappe en premier.",
-    body: "Message déjà rédigé avec tes infos. Tu choisis le ton (direct, chaleureux, pro), tu copies, tu colles sur LBC. 20 secondes.",
-    detail: "→ Marquer envoyé",
+    body: "Notif desktop dès qu'une annonce franchit ton seuil de score. Message déjà rédigé en 3 tons au choix. Tu copies, tu colles sur LBC, tu envoies. 20 secondes après que l'annonce est sortie.",
+    detail: "→ Candidatures",
   },
 ];
 
@@ -87,6 +88,18 @@ type Feature = {
 };
 
 export const FEATURES: Feature[] = [
+  {
+    icon: Eye,
+    title: "Surveillance live LBC",
+    body: "L'extension Chrome observe les pages de résultats que tu ouvres. Chaque annonce qui apparaît dans le DOM est envoyée à Terouva en local. Zéro requête supplémentaire vers LBC, indistinguable d'un user qui refresh.",
+    accent: "signal",
+  },
+  {
+    icon: Bell,
+    title: "Notif desktop instantanée",
+    body: "Dès qu'une annonce détectée franchit ton seuil de score, ping natif Windows. Tu te jettes dessus en 5 secondes.",
+    accent: "urgent",
+  },
   {
     icon: Gauge,
     title: "Scoring transparent",
@@ -100,22 +113,16 @@ export const FEATURES: Feature[] = [
     accent: "neutral",
   },
   {
-    icon: Bell,
-    title: "Notif desktop immédiate",
-    body: "Score ≥ seuil → ping natif Windows. Tu te jettes dessus en 5 secondes, sans surveiller LBC en permanence.",
-    accent: "urgent",
+    icon: Puzzle,
+    title: "Pont Chrome ↔ desktop",
+    body: "Serveur HTTP local 127.0.0.1 + token bearer. L'extension parle à Terouva en local, le trafic ne quitte jamais ta machine.",
+    accent: "neutral",
   },
   {
     icon: Layers,
     title: "Import multi-URL",
-    body: "Colle 20 URLs d'un coup, Terouva parse + score chacune en série. Idéal après une session de scroll.",
+    body: "Colle 20 URLs d'un coup, Terouva parse + score chacune en série. Pour quand tu n'as pas LBC ouvert.",
     accent: "neutral",
-  },
-  {
-    icon: Puzzle,
-    title: "Extension Chrome",
-    body: "1 clic depuis n'importe quelle page LBC ouverte. Le parsing tourne dans TON navigateur, avec TES cookies.",
-    accent: "signal",
   },
   {
     icon: Activity,
@@ -176,8 +183,12 @@ export const STACK_ITEMS = [
 
 export const FAQ_ITEMS = [
   {
+    q: "Comment Terouva voit les annonces en temps réel ?",
+    a: "L'extension Chrome installe un observateur léger sur les pages de résultats Leboncoin que tu ouvres toi-même dans ton navigateur. Chaque nouvelle annonce qui apparaît dans le DOM (refresh manuel, scroll infini, ou re-fetch interne de LBC) est envoyée à l'app Terouva en local (127.0.0.1, token bearer). C'est ton navigateur, ta session, ton IP résidentielle. Aucun bot, aucune automation du browser, aucune signature à camoufler.",
+  },
+  {
     q: "Est-ce que c'est légal ?",
-    a: "Oui. Tu consultes Leboncoin dans ton navigateur, comme d'habitude. Terouva tourne sur ta machine et utilise les pages que TU ouvres. Aucun scraping serveur, aucun bot agressif, aucun envoi automatisé sans ton clic.",
+    a: "Oui. Tu consultes Leboncoin dans ton navigateur comme d'habitude. Terouva tourne sur ta machine et lit ce que TU as déjà chargé. Aucun scraping serveur, aucun bot agressif, aucune évasion de détection, aucun envoi automatisé sans ton clic.",
   },
   {
     q: "Combien ça coûte ?",
@@ -185,7 +196,11 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Ça remplace mon navigateur ?",
-    a: "Non. Terouva est un copilote, pas un agent autonome. Tu valides chaque action sensible : c'est toi qui copies le message, qui ouvres LBC, qui cliques Envoyer.",
+    a: "Non. Terouva est un copilote, pas un agent autonome. Le navigateur n'est jamais piloté. Tu valides chaque action sensible : c'est toi qui copies le message, c'est toi qui cliques Envoyer.",
+  },
+  {
+    q: "Et si je ferme Chrome ?",
+    a: "La surveillance live s'arrête naturellement (logique : l'extension a besoin que LBC soit ouvert). Tu peux toujours ingérer manuellement une URL dans l'app, ou par lot. Un mode polling background tournera bientôt côté Terouva avec un rythme humain quand Chrome est fermé.",
   },
   {
     q: "Mes données partent où ?",
