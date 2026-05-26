@@ -55,7 +55,7 @@ export function CTA() {
         <Reveal delay={0.3}>
           <div className="mt-10 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-[var(--color-text-faint)]">
             <span className="size-1.5 rounded-full bg-[var(--color-signal)] animate-pulse-dot" />
-            <span>Build Windows · 28 MB · MSI signé</span>
+            <span>Build Windows · 4 MB · MSI (non signé en beta v0.2)</span>
           </div>
         </Reveal>
       </div>

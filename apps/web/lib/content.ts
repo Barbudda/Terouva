@@ -19,6 +19,10 @@ export const NAV_LINKS = [
   { href: "#faq", label: "FAQ" },
 ];
 
+export const RELEASES_URL = "https://github.com/Barbudda/Terouva/releases/latest";
+export const RELEASES_DOWNLOAD_MSI =
+  "https://github.com/Barbudda/Terouva/releases/latest/download/Terouva_0.2.0_x64_en-US.msi";
+
 export const HERO = {
   eyebrow: "Beta v0.2 · gratuite",
   titleLines: [
@@ -28,7 +32,7 @@ export const HERO = {
   titleEmphasis: "On en trouve un en arrivant le premier.",
   subtitle:
     "Quand tu ouvres Leboncoin, Terouva regarde par-dessus ton épaule. Chaque nouvelle annonce qui matche tes critères déclenche une notif desktop instantanée, avec un message de candidature déjà prêt. Tu cliques, tu envoies. Pas de bot, pas d'évasion : c'est ton navigateur, ta session, ton IP.",
-  ctaPrimary: { label: "Télécharger pour Windows", href: "#download" },
+  ctaPrimary: { label: "Télécharger pour Windows", href: RELEASES_DOWNLOAD_MSI },
   ctaSecondary: { label: "Voir comment", href: "#how" },
   meta: "macOS & Linux bientôt · 100 % local · Aucun compte",
 };
@@ -216,8 +220,8 @@ export const CTA_FINAL = {
   title: "Arrête de scroll.",
   subtitle:
     "Télécharge, configure ton profil, branche tes recherches. Tu seras prêt pour la prochaine annonce.",
-  primary: { label: "Télécharger pour Windows", href: "#download" },
-  secondary: { label: "Lire la doc", href: "#how" },
+  primary: { label: "Télécharger pour Windows", href: RELEASES_DOWNLOAD_MSI },
+  secondary: { label: "Toutes les releases", href: RELEASES_URL },
 };
 
 export const FOOTER = {
