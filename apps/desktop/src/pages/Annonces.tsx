@@ -13,6 +13,12 @@ import {
   updateListingStatus,
   upsertApplication,
 } from "@/lib/db";
+import {
+  generateMessageAI,
+  getClaudeApiKey,
+  getClaudeEnabled,
+  setClaudeEnabled,
+} from "@/lib/ai";
 import { generateMessage, TONE_LABELS } from "@/lib/messageGen";
 import { recommendationLabel, scoreListing } from "@/lib/scoring";
 import {
@@ -753,20 +759,59 @@ function CandidaturePanel({
   );
   const [app, setApp] = useState<Application | undefined>(undefined);
   const [savedAt, setSavedAt] = useState<number | null>(null);
+  const [useAI, setUseAI] = useState(false);
+  const [hasApiKey, setHasApiKey] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
+  const [aiMeta, setAiMeta] = useState<{
+    model: string;
+    inTok: number;
+    outTok: number;
+  } | null>(null);
 
   useEffect(() => {
-    getApplicationByListing(listing.id).then((a) => {
-      if (a) {
-        setApp(a);
-        if (a.message) setMessage(a.message);
-        if (a.message_tone) setTone(a.message_tone);
-      }
-    });
+    Promise.all([getApplicationByListing(listing.id), getClaudeEnabled(), getClaudeApiKey()])
+      .then(([a, on, key]) => {
+        if (a) {
+          setApp(a);
+          if (a.message) setMessage(a.message);
+          if (a.message_tone) setTone(a.message_tone);
+        }
+        setHasApiKey(!!key);
+        setUseAI(on && !!key);
+      })
+      .catch(() => {});
   }, [listing.id]);
 
-  const regenerate = (newTone: MessageTone) => {
+  const regenerate = async (newTone: MessageTone) => {
     setTone(newTone);
-    setMessage(generateMessage(listing, profile, newTone));
+    setAiError(null);
+    if (useAI && hasApiKey) {
+      setAiLoading(true);
+      try {
+        const out = await generateMessageAI(listing, profile, newTone);
+        setMessage(out.text);
+        setAiMeta({
+          model: out.model,
+          inTok: out.input_tokens,
+          outTok: out.output_tokens,
+        });
+      } catch (e) {
+        setAiError(
+          String(e).replace(/^Error:\s*/, "") + " — fallback sur le template.",
+        );
+        setMessage(generateMessage(listing, profile, newTone));
+      } finally {
+        setAiLoading(false);
+      }
+    } else {
+      setMessage(generateMessage(listing, profile, newTone));
+    }
+  };
+
+  const toggleAI = async (on: boolean) => {
+    setUseAI(on);
+    await setClaudeEnabled(on);
   };
 
   const saveDraft = async () => {
@@ -798,18 +843,42 @@ function CandidaturePanel({
 
   return (
     <div className="rounded-md border border-zinc-800 bg-zinc-900/50 p-4 space-y-3">
-      <div className="flex items-center justify-between">
-        <div className="text-xs font-semibold text-zinc-300">Préparer la candidature</div>
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex items-center gap-3">
+          <div className="text-xs font-semibold text-zinc-300">
+            Préparer la candidature
+          </div>
+          {hasApiKey ? (
+            <label className="flex items-center gap-1.5 text-[11px] text-zinc-400 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={useAI}
+                onChange={(e) => toggleAI(e.target.checked)}
+                className="accent-violet-500"
+              />
+              <span>{useAI ? "AI Claude" : "Template"}</span>
+            </label>
+          ) : (
+            <span
+              className="text-[11px] text-zinc-500"
+              title="Configure ta clé API Claude dans Réglages → Génération AI pour activer la génération adaptative."
+            >
+              Template (AI désactivée)
+            </span>
+          )}
+        </div>
         <div className="flex gap-1">
           {(Object.keys(TONE_LABELS) as MessageTone[]).map((t) => (
             <button
               key={t}
               onClick={() => regenerate(t)}
+              disabled={aiLoading}
               className={
-                "px-2 py-1 rounded text-xs " +
+                "px-2 py-1 rounded text-xs transition-colors " +
                 (tone === t
                   ? "bg-violet-500 text-white"
-                  : "bg-zinc-800 text-zinc-400 hover:text-zinc-100")
+                  : "bg-zinc-800 text-zinc-400 hover:text-zinc-100") +
+                (aiLoading ? " opacity-60 cursor-wait" : "")
               }
             >
               {TONE_LABELS[t]}
@@ -817,6 +886,21 @@ function CandidaturePanel({
           ))}
         </div>
       </div>
+      {aiLoading && (
+        <div className="text-[11px] text-violet-300 animate-pulse">
+          Claude rédige le message…
+        </div>
+      )}
+      {aiError && (
+        <div className="text-[11px] text-red-400 border border-red-500/30 bg-red-500/5 rounded px-2 py-1">
+          {aiError}
+        </div>
+      )}
+      {aiMeta && !aiError && (
+        <div className="text-[10px] font-mono text-zinc-500">
+          {aiMeta.model} · {aiMeta.inTok}↑ / {aiMeta.outTok}↓ tokens
+        </div>
+      )}
       <Textarea
         rows={10}
         value={message}

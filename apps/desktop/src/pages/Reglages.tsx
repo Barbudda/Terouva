@@ -2,6 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardBody, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Field, Input, Select } from "@/components/ui/Input";
+import {
+  AVAILABLE_MODELS,
+  DEFAULT_MODEL,
+  getClaudeApiKey,
+  getClaudeEnabled,
+  getClaudeModel,
+  setClaudeApiKey,
+  setClaudeEnabled,
+  setClaudeModel,
+  testClaudeConnection,
+} from "@/lib/ai";
 import { downloadBackup, exportBackup, importBackup } from "@/lib/backup";
 import { getSetting, setDocumentAvailable, setSetting } from "@/lib/db";
 import { ensureNotificationPermission, notifyDesktop } from "@/lib/tauri";
@@ -18,14 +29,47 @@ export default function Reglages() {
   const [importMsg, setImportMsg] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  // ── AI settings ──
+  const [apiKey, setApiKey] = useState("");
+  const [aiModel, setAiModel] = useState(DEFAULT_MODEL);
+  const [aiOn, setAiOn] = useState(false);
+  const [aiTesting, setAiTesting] = useState(false);
+  const [aiFeedback, setAiFeedback] = useState<{ ok: boolean; msg: string } | null>(null);
+  const [keyVisible, setKeyVisible] = useState(false);
+
   useEffect(() => {
     void (async () => {
       const tone = (await getSetting("default_message_tone")) ?? "pro";
       const min = Number((await getSetting("notification_min_score")) ?? 70);
       setDefaultTone(tone);
       setMinScore(min);
+      setApiKey(await getClaudeApiKey());
+      setAiModel(await getClaudeModel());
+      setAiOn(await getClaudeEnabled());
     })();
   }, []);
+
+  const saveAi = async () => {
+    await setClaudeApiKey(apiKey);
+    await setClaudeModel(aiModel);
+    await setClaudeEnabled(aiOn);
+    setAiFeedback({ ok: true, msg: "Enregistré." });
+  };
+
+  const testAi = async () => {
+    setAiTesting(true);
+    setAiFeedback(null);
+    // Save first so the test uses the latest values.
+    await setClaudeApiKey(apiKey);
+    await setClaudeModel(aiModel);
+    const res = await testClaudeConnection();
+    setAiTesting(false);
+    if (res.ok) {
+      setAiFeedback({ ok: true, msg: `Connexion OK avec ${res.model}.` });
+    } else {
+      setAiFeedback({ ok: false, msg: res.error ?? "Échec inconnu" });
+    }
+  };
 
   const saveDefaults = async () => {
     await setSetting("default_message_tone", defaultTone);
@@ -108,6 +152,80 @@ export default function Reglages() {
           </Button>
           <Button onClick={saveDefaults}>Enregistrer</Button>
         </div>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Génération AI — Claude</CardTitle>
+        </CardHeader>
+        <CardBody className="space-y-4">
+          <p className="text-xs text-zinc-500">
+            Par défaut, Terouva génère les messages de candidature avec des templates locaux
+            (gratuit, hors-ligne). Configure une clé API Anthropic pour activer la génération
+            adaptative — Claude lit l'annonce + ton profil et écrit un message qui parle des
+            détails spécifiques. Coût typique : moins de 0,5 centime par message.
+          </p>
+          <div className="grid grid-cols-[1fr_180px] gap-4">
+            <Field label="Clé API Anthropic">
+              <div className="flex items-center gap-2">
+                <Input
+                  type={keyVisible ? "text" : "password"}
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder="sk-ant-…"
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  type="button"
+                  onClick={() => setKeyVisible((v) => !v)}
+                >
+                  {keyVisible ? "Masquer" : "Afficher"}
+                </Button>
+              </div>
+            </Field>
+            <Field label="Modèle">
+              <Select value={aiModel} onChange={(e) => setAiModel(e.target.value)}>
+                {AVAILABLE_MODELS.map((m) => (
+                  <option key={m.value} value={m.value}>
+                    {m.label}
+                  </option>
+                ))}
+              </Select>
+            </Field>
+          </div>
+          <label className="flex items-center gap-2 text-sm text-zinc-200 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={aiOn}
+              onChange={(e) => setAiOn(e.target.checked)}
+              className="accent-violet-500"
+            />
+            <span>Utiliser Claude par défaut (sinon templates locaux)</span>
+          </label>
+          {aiFeedback && (
+            <p
+              className={
+                "text-xs " +
+                (aiFeedback.ok ? "text-emerald-400" : "text-red-400")
+              }
+            >
+              {aiFeedback.msg}
+            </p>
+          )}
+          <div className="flex justify-end gap-2">
+            <Button variant="secondary" onClick={testAi} disabled={aiTesting || !apiKey}>
+              {aiTesting ? "Test…" : "Tester la connexion"}
+            </Button>
+            <Button onClick={saveAi}>Enregistrer</Button>
+          </div>
+          <p className="text-[11px] text-zinc-600">
+            La clé est stockée dans <code className="text-zinc-400">app_settings</code> (SQLite local) — elle ne
+            quitte ta machine qu'en allant chez api.anthropic.com pour générer un message.
+          </p>
+        </CardBody>
       </Card>
 
       <Card>

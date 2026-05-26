@@ -8,6 +8,7 @@ import {
   Lock,
   MessagesSquare,
   Puzzle,
+  Sparkles,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -113,8 +114,14 @@ export const FEATURES: Feature[] = [
   {
     icon: MessagesSquare,
     title: "Messages 3 tons",
-    body: "Direct, chaleureux, professionnel. Auto-rempli avec ton profil et les détails de l'annonce. Aucun copier-coller manuel.",
+    body: "Direct, chaleureux, professionnel. Templates locaux gratuits par défaut, auto-remplis avec ton profil et les détails de l'annonce.",
     accent: "neutral",
+  },
+  {
+    icon: Sparkles,
+    title: "Génération AI optionnelle",
+    body: "Branche ta clé API Claude (Anthropic) en 1 minute. Chaque message devient adapté à l'annonce lue : Claude relit la description, repère les détails, écrit un message qui parle vraiment du logement. ~0,5 centime par message.",
+    accent: "signal",
   },
   {
     icon: Puzzle,
@@ -208,7 +215,11 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Mes données partent où ?",
-    a: "Nulle part. Pas de cloud Terouva, pas de backup distant, pas d'analytics. Backup JSON manuel si tu veux migrer toi-même.",
+    a: "Nulle part — sauf si tu actives volontairement la génération AI : dans ce cas, l'annonce que tu sélectionnes et les champs de ton profil partent chez api.anthropic.com pour rédiger le message, puis la réponse revient. Aucun stockage chez nous (pas de serveur Terouva). Pas de cloud, pas de backup distant, pas d'analytics. Tant que tu n'actives pas l'AI, l'app fonctionne 100% hors-ligne.",
+  },
+  {
+    q: "C'est obligatoire d'avoir une clé Claude ?",
+    a: "Non. Les templates locaux (3 tons) sont activés par défaut et gratuits — ils marchent sans connexion. La clé Claude est une option pour avoir des messages adaptés à chaque annonce (Claude lit la description et le mentionne dans le texte). Coût typique : < 0,5 centime par message en Sonnet 4.6.",
   },
   {
     q: "Mac et Linux, c'est pour quand ?",
