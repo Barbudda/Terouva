@@ -79,6 +79,9 @@ export default function Annonces() {
 
   const [statusFilter, setStatusFilter] = useState<ListingStatus | "all">("all");
   const [searchFilter, setSearchFilter] = useState<number | "all">("all");
+  const [query, setQuery] = useState("");
+  const [minScore, setMinScore] = useState(0);
+  const [sortBy, setSortBy] = useState<"score" | "date" | "price">("score");
   const [openId, setOpenId] = useState<number | null>(null);
 
   useEffect(() => {
@@ -86,12 +89,33 @@ export default function Annonces() {
   }, [searches, searchId]);
 
   const filtered = useMemo(() => {
-    return listings.filter((l) => {
+    const q = query.trim().toLowerCase();
+    const base = listings.filter((l) => {
       if (statusFilter !== "all" && l.status !== statusFilter) return false;
       if (searchFilter !== "all" && l.search_profile_id !== searchFilter) return false;
+      if (minScore > 0 && (l.score ?? 0) < minScore) return false;
+      if (q) {
+        const hay = [l.title, l.description, l.city, l.publisher_name]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
       return true;
     });
-  }, [listings, statusFilter, searchFilter]);
+    const sorted = [...base].sort((a, b) => {
+      if (sortBy === "score") {
+        return (b.score ?? -1) - (a.score ?? -1);
+      }
+      if (sortBy === "price") {
+        return (a.price ?? Number.MAX_SAFE_INTEGER) - (b.price ?? Number.MAX_SAFE_INTEGER);
+      }
+      return (
+        new Date(b.discovered_at).getTime() - new Date(a.discovered_at).getTime()
+      );
+    });
+    return sorted;
+  }, [listings, statusFilter, searchFilter, query, minScore, sortBy]);
 
   const ingestOne = async (rawUrl: string): Promise<IngestResult> => {
     const u = rawUrl.trim();
@@ -361,6 +385,45 @@ export default function Annonces() {
         )}
       </Card>
 
+      <div className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-2">
+        <Input
+          data-shortcut-target="search"
+          placeholder="Recherche (titre, description, ville, annonceur)… —  '/' pour focus rapide"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <Input
+          type="number"
+          min={0}
+          max={100}
+          value={minScore || ""}
+          onChange={(e) => setMinScore(Number(e.target.value) || 0)}
+          placeholder="score min"
+          className="w-28"
+        />
+        <Select
+          className="w-44"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value as "score" | "date" | "price")}
+        >
+          <option value="score">Tri : score ↓</option>
+          <option value="date">Tri : date ↓</option>
+          <option value="price">Tri : prix ↑</option>
+        </Select>
+        {(query || minScore > 0) && (
+          <button
+            onClick={() => {
+              setQuery("");
+              setMinScore(0);
+            }}
+            className="text-xs text-zinc-400 hover:text-zinc-100 px-2 py-1"
+            title="Réinitialiser la recherche / score min"
+          >
+            Effacer
+          </button>
+        )}
+      </div>
+
       <div className="flex flex-wrap items-center gap-2">
         {(
           [
@@ -407,6 +470,10 @@ export default function Annonces() {
             </Button>
           )}
         </div>
+      </div>
+      <div className="text-xs text-zinc-500 font-mono">
+        {filtered.length} / {listings.length} annonce{listings.length > 1 ? "s" : ""} ·
+        appuie sur <kbd className="px-1.5 py-0.5 rounded border border-zinc-700 bg-zinc-950 text-[10px]">?</kbd> pour les raccourcis
       </div>
 
       <div className="space-y-4">

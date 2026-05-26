@@ -42,7 +42,7 @@ out/
 # --- Tauri / Rust ---
 **/target/
 **/src-tauri/gen/
-**/src-tauri/Cargo.lock
+# Cargo.lock is committed for the desktop app (binary, not library) — required by CI.
 
 # --- Cargo local config (machine-specific target-dir override) ---
 .cargo/config.toml

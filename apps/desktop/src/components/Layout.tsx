@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
+import { ShortcutHelp } from "./ShortcutHelp";
+import { useGlobalShortcuts } from "@/lib/shortcuts";
 import { useStore } from "@/store/useStore";
 import { useWatchStore } from "@/store/useWatchStore";
 
@@ -21,6 +23,7 @@ export function Layout() {
   const watchBootstrapped = useWatchStore((s) => s.bootstrapped);
   const initWatch = useWatchStore((s) => s.init);
   const title = TITLES[location.pathname] ?? "Terouva";
+  const { helpOpen, closeHelp } = useGlobalShortcuts();
 
   useEffect(() => {
     refreshAll().catch((e) => {
@@ -51,6 +54,7 @@ export function Layout() {
           <Outlet />
         </div>
       </main>
+      <ShortcutHelp open={helpOpen} onClose={closeHelp} />
     </div>
   );
 }
