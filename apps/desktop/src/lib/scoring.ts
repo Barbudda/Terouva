@@ -6,6 +6,82 @@ type Rule = {
   positive: boolean;
 };
 
+interface EquipmentSpec {
+  keywords: string[];
+  negators: string[];
+}
+
+const EQ_ELEVATOR: EquipmentSpec = {
+  keywords: ["ascenseur"],
+  negators: ["sans ascenseur", "pas d'ascenseur", "aucun ascenseur", "sans asc."],
+};
+const EQ_BALCONY: EquipmentSpec = {
+  keywords: ["balcon", "terrasse", "loggia"],
+  negators: ["sans balcon", "pas de balcon"],
+};
+const EQ_PARKING: EquipmentSpec = {
+  keywords: ["parking", "garage", "box auto", "stationnement", "place de parking"],
+  negators: ["sans parking", "pas de parking", "sans stationnement"],
+};
+const EQ_CAVE: EquipmentSpec = {
+  keywords: ["cave"],
+  negators: ["sans cave"],
+};
+
+function equipmentPresent(text: string, spec: EquipmentSpec): boolean {
+  const lower = text.toLowerCase();
+  if (spec.negators.some((n) => lower.includes(n))) return false;
+  return spec.keywords.some((k) => {
+    const idx = lower.indexOf(k);
+    if (idx === -1) return false;
+    // Avoid "cave" matching "cavet" or "cave-bières" false positives.
+    const after = lower[idx + k.length];
+    return !after || !/[a-zà-ÿ]/.test(after);
+  });
+}
+
+function applyEquipment(
+  rules: Rule[],
+  label: string,
+  required: boolean,
+  text: string,
+  spec: EquipmentSpec,
+): void {
+  if (!required) return;
+  const present = equipmentPresent(text, spec);
+  if (present) {
+    rules.push({ rule: `${label} demandé et présent`, delta: 8, positive: true });
+  } else {
+    rules.push({
+      rule: `${label} demandé mais non mentionné`,
+      delta: -12,
+      positive: false,
+    });
+  }
+}
+
+/**
+ * Extract a floor number from free-form FR text.
+ * Returns 0 for "RDC" / "rez-de-chaussée".
+ * Returns null if no floor is mentioned.
+ */
+export function extractFloor(text: string): number | null {
+  if (!text) return null;
+  const lower = text.toLowerCase();
+  if (/\b(rdc|rez[\s-]de[\s-]chauss[ée]e)\b/.test(lower)) return 0;
+  const m = lower.match(/(\d{1,2})\s*(?:e|er|ère|ème|ième)?\s*[ée]tage\b/);
+  if (m) {
+    const n = parseInt(m[1], 10);
+    if (!Number.isNaN(n) && n >= 0 && n < 50) return n;
+  }
+  return null;
+}
+
+function formatFloor(n: number): string {
+  if (n === 0) return "RDC";
+  return `${n}e étage`;
+}
+
 function hasAnyKeyword(text: string | null, keywords: string[]): string | null {
   if (!text || keywords.length === 0) return null;
   const lower = text.toLowerCase();
@@ -36,6 +112,8 @@ export function scoreListing(
   profile: SearchProfile,
 ): { score: number; reasons: ScoreReasons } {
   const rules: Rule[] = [];
+  /** When true, the score is forced to 0 regardless of other rules. */
+  let killed = false;
 
   // PRICE
   if (profile.price_max && listing.price) {
@@ -45,8 +123,25 @@ export function scoreListing(
       rules.push({ rule: `Prix dans le budget (${listing.price}€ ≤ ${profile.price_max}€)`, delta: bonus, positive: true });
     } else {
       const over = listing.price - profile.price_max;
-      const penalty = Math.min(50, Math.round((over / profile.price_max) * 100));
-      rules.push({ rule: `Prix au-dessus du budget (+${over}€)`, delta: -penalty, positive: false });
+      const ratio = over / profile.price_max;
+      // Tiered: small overshoot = small penalty, big overshoot = kill.
+      // < 10 % over: −15.
+      // 10-25 % over: −35.
+      // 25-50 % over: −60.
+      // > 50 % over: kill.
+      let penalty: number;
+      if (ratio < 0.1) penalty = 15;
+      else if (ratio < 0.25) penalty = 35;
+      else if (ratio < 0.5) penalty = 60;
+      else {
+        penalty = 100;
+        killed = true;
+      }
+      rules.push({
+        rule: `Prix au-dessus du budget (+${over}€, ${Math.round(ratio * 100)}%)`,
+        delta: -penalty,
+        positive: false,
+      });
     }
   }
 
@@ -105,13 +200,20 @@ export function scoreListing(
     }
   }
 
-  // KEYWORDS EXCLUDE
+  // KEYWORDS EXCLUDE — KILL SWITCH: if the user explicitly said "I don't want X"
+  // and X is in the listing, we force the score to 0. Surfacing it as a -100
+  // delta keeps the breakdown transparent in the UI.
   const excl = parseCsv(profile.keywords_exclude);
   if (excl.length > 0) {
     const text = `${listing.title ?? ""} ${listing.description ?? ""}`;
     const hit = hasAnyKeyword(text, excl);
     if (hit) {
-      rules.push({ rule: `Mot-clé exclu présent ("${hit}")`, delta: -50, positive: false });
+      rules.push({
+        rule: `Mot-clé exclu présent ("${hit}") — annonce écartée`,
+        delta: -100,
+        positive: false,
+      });
+      killed = true;
     }
   }
 
@@ -129,9 +231,61 @@ export function scoreListing(
     rules.push({ rule: `Particulier (souvent plus rapide)`, delta: 5, positive: true });
   }
 
+  // NEIGHBORHOODS — CSV list. Match if any token appears in title/desc/city/postcode.
+  const neighborhoods = parseCsv(profile.neighborhoods);
+  if (neighborhoods.length > 0) {
+    const hay = `${listing.title ?? ""} ${listing.description ?? ""} ${listing.city ?? ""} ${listing.postal_code ?? ""}`.toLowerCase();
+    const found = neighborhoods.filter((n) => hay.includes(n.toLowerCase()));
+    if (found.length > 0) {
+      rules.push({
+        rule: `Quartier ciblé (${found.join(", ")})`,
+        delta: 12,
+        positive: true,
+      });
+    } else {
+      rules.push({
+        rule: `Aucun quartier ciblé trouvé`,
+        delta: -8,
+        positive: false,
+      });
+    }
+  }
+
+  // EQUIPMENTS — only scored when the user marked them as must-have.
+  const descBag = `${listing.title ?? ""} ${listing.description ?? ""}`;
+  applyEquipment(rules, "Ascenseur", profile.must_have_elevator === 1, descBag, EQ_ELEVATOR);
+  applyEquipment(rules, "Balcon / terrasse", profile.must_have_balcony === 1, descBag, EQ_BALCONY);
+  applyEquipment(rules, "Parking", profile.must_have_parking === 1, descBag, EQ_PARKING);
+  applyEquipment(rules, "Cave", profile.must_have_cave === 1, descBag, EQ_CAVE);
+
+  // FLOOR — only matters if the user set a min or a max.
+  const floor = extractFloor(descBag);
+  if (floor !== null && (profile.floor_min !== null || profile.floor_max !== null)) {
+    if (profile.floor_min !== null && floor < profile.floor_min) {
+      rules.push({
+        rule: `Étage trop bas (${formatFloor(floor)}, min ${profile.floor_min})`,
+        delta: -15,
+        positive: false,
+      });
+    } else if (profile.floor_max !== null && floor > profile.floor_max) {
+      rules.push({
+        rule: `Étage trop haut (${formatFloor(floor)}, max ${profile.floor_max})`,
+        delta: -8,
+        positive: false,
+      });
+    } else {
+      rules.push({
+        rule: `Étage dans la fourchette (${formatFloor(floor)})`,
+        delta: 6,
+        positive: true,
+      });
+    }
+  }
+
   // Aggregate
   const total = rules.reduce((acc, r) => acc + r.delta, 0);
-  const score = Math.max(0, Math.min(100, 50 + total));
+  const aggregated = Math.max(0, Math.min(100, 50 + total));
+  const score = killed ? 0 : aggregated;
 
   let recommendation: ScoreReasons["recommendation"];
   if (score >= 80) recommendation = "to_contact_fast";
