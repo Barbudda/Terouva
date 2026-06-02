@@ -538,6 +538,68 @@ fn apply_og_meta(out: &mut ParsedListing, doc: &Html) {
     }
 }
 
+// ── Parser health monitoring ───────────────────────────────────────
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ParserHealth {
+    pub missing_fields: Vec<String>,
+    pub total_checked: usize,
+    pub degraded: bool,
+}
+
+const KEY_FIELDS: &[&str] = &[
+    "external_id",
+    "title",
+    "price",
+    "surface",
+    "city",
+    "postal_code",
+];
+
+const DEGRADED_THRESHOLD: usize = 3;
+
+pub fn check_listing_health(listing: &ParsedListing) -> ParserHealth {
+    let mut missing = Vec::new();
+    if listing.external_id.is_none() {
+        missing.push("external_id".into());
+    }
+    if listing.title.is_none() {
+        missing.push("title".into());
+    }
+    if listing.price.is_none() {
+        missing.push("price".into());
+    }
+    if listing.surface.is_none() {
+        missing.push("surface".into());
+    }
+    if listing.city.is_none() {
+        missing.push("city".into());
+    }
+    if listing.postal_code.is_none() {
+        missing.push("postal_code".into());
+    }
+    let degraded = missing.len() >= DEGRADED_THRESHOLD;
+    ParserHealth {
+        missing_fields: missing,
+        total_checked: KEY_FIELDS.len(),
+        degraded,
+    }
+}
+
+pub fn check_and_warn_listing_health(listing: &ParsedListing) -> ParserHealth {
+    let health = check_listing_health(listing);
+    if health.degraded {
+        eprintln!(
+            "[terouva] parser degraded: {}/{} key fields missing ({}) for url={}",
+            health.missing_fields.len(),
+            health.total_checked,
+            health.missing_fields.join(", "),
+            listing.url,
+        );
+    }
+    health
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -928,5 +990,108 @@ mod tests {
     #[test]
     fn test_regex_like_no_match() {
         assert_eq!(regex_like("aucun chiffre ici", "€"), None);
+    }
+
+    // ── check_listing_health ───────────────────────────────────────
+
+    fn full_listing() -> ParsedListing {
+        ParsedListing {
+            url: "https://www.leboncoin.fr/ad/123".into(),
+            external_id: Some("123".into()),
+            title: Some("T2 Lyon".into()),
+            price: Some(750),
+            city: Some("Lyon".into()),
+            postal_code: Some("69003".into()),
+            surface: Some(45),
+            rooms: Some(2),
+            furnished: Some(false),
+            property_type: Some("appartement".into()),
+            description: Some("Bel appart".into()),
+            images: vec!["https://img.lbc.fr/1.jpg".into()],
+            publisher_name: Some("AgenceImmo".into()),
+            publisher_type: Some("pro".into()),
+            published_at: Some("2026-01-01".into()),
+            raw_html_size: 5000,
+        }
+    }
+
+    #[test]
+    fn test_health_full_listing_healthy() {
+        let h = check_listing_health(&full_listing());
+        assert!(h.missing_fields.is_empty());
+        assert_eq!(h.total_checked, 6);
+        assert!(!h.degraded);
+    }
+
+    #[test]
+    fn test_health_one_missing_still_healthy() {
+        let mut l = full_listing();
+        l.surface = None;
+        let h = check_listing_health(&l);
+        assert_eq!(h.missing_fields, vec!["surface"]);
+        assert!(!h.degraded);
+    }
+
+    #[test]
+    fn test_health_two_missing_still_healthy() {
+        let mut l = full_listing();
+        l.surface = None;
+        l.postal_code = None;
+        let h = check_listing_health(&l);
+        assert_eq!(h.missing_fields.len(), 2);
+        assert!(!h.degraded);
+    }
+
+    #[test]
+    fn test_health_three_missing_degraded() {
+        let mut l = full_listing();
+        l.external_id = None;
+        l.price = None;
+        l.surface = None;
+        let h = check_listing_health(&l);
+        assert_eq!(h.missing_fields.len(), 3);
+        assert!(h.degraded);
+    }
+
+    #[test]
+    fn test_health_empty_listing_degraded() {
+        let l = ParsedListing::default();
+        let h = check_listing_health(&l);
+        assert_eq!(h.missing_fields.len(), 6);
+        assert!(h.degraded);
+    }
+
+    #[test]
+    fn test_health_dom_fallback_pattern() {
+        let l = ParsedListing {
+            url: "https://www.leboncoin.fr/ad/locations/foo/999".into(),
+            external_id: Some("999".into()),
+            title: Some("Studio".into()),
+            price: Some(400),
+            surface: None,
+            city: None,
+            postal_code: None,
+            ..Default::default()
+        };
+        let h = check_listing_health(&l);
+        assert_eq!(h.missing_fields.len(), 3);
+        assert!(h.degraded);
+    }
+
+    #[test]
+    fn test_health_missing_fields_names() {
+        let l = ParsedListing {
+            url: "https://example.com".into(),
+            title: Some("Test".into()),
+            price: Some(500),
+            ..Default::default()
+        };
+        let h = check_listing_health(&l);
+        assert!(h.missing_fields.contains(&"external_id".to_string()));
+        assert!(h.missing_fields.contains(&"surface".to_string()));
+        assert!(h.missing_fields.contains(&"city".to_string()));
+        assert!(h.missing_fields.contains(&"postal_code".to_string()));
+        assert!(!h.missing_fields.contains(&"title".to_string()));
+        assert!(!h.missing_fields.contains(&"price".to_string()));
     }
 }
