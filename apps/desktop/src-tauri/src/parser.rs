@@ -537,3 +537,396 @@ fn apply_og_meta(out: &mut ParsedListing, doc: &Html) {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_json::json;
+
+    // ── ad_object_to_parsed: full JSON → ParsedListing ──────────────
+
+    fn sample_ad_json() -> serde_json::Value {
+        json!({
+            "list_id": 2812345678_i64,
+            "subject": "Appartement 3 pièces lumineux",
+            "body": "Bel appartement rénové en centre-ville.",
+            "url": "https://www.leboncoin.fr/ad/locations/2812345678",
+            "first_publication_date": "2026-05-15T10:30:00.000+02:00",
+            "price": [850],
+            "location": {
+                "city": "Lyon",
+                "zipcode": "69003"
+            },
+            "owner": {
+                "name": "AgenceImmo",
+                "type": "pro"
+            },
+            "attributes": [
+                { "key": "square", "value": "65" },
+                { "key": "rooms", "value": "3" },
+                { "key": "real_estate_type", "value": "appartement" },
+                { "key": "furnished", "value": "1" }
+            ],
+            "images": {
+                "urls": [
+                    "https://img.lbc.fr/ad-image/1.jpg",
+                    "https://img.lbc.fr/ad-image/2.jpg"
+                ]
+            }
+        })
+    }
+
+    #[test]
+    fn test_ad_object_to_parsed_full() {
+        let ad = sample_ad_json();
+        let p = ad_object_to_parsed(&ad).expect("should parse");
+
+        assert_eq!(p.external_id.as_deref(), Some("2812345678"));
+        assert_eq!(p.title.as_deref(), Some("Appartement 3 pièces lumineux"));
+        assert_eq!(p.price, Some(850));
+        assert_eq!(p.city.as_deref(), Some("Lyon"));
+        assert_eq!(p.postal_code.as_deref(), Some("69003"));
+        assert_eq!(p.surface, Some(65));
+        assert_eq!(p.rooms, Some(3));
+        assert_eq!(p.furnished, Some(true));
+        assert_eq!(p.property_type.as_deref(), Some("appartement"));
+        assert_eq!(p.publisher_name.as_deref(), Some("AgenceImmo"));
+        assert_eq!(p.publisher_type.as_deref(), Some("pro"));
+        assert_eq!(p.images.len(), 2);
+        assert!(p.description.as_deref().unwrap().contains("rénové"));
+    }
+
+    #[test]
+    fn test_ad_object_to_parsed_price_scalar() {
+        let ad = json!({
+            "list_id": 100,
+            "price": 750
+        });
+        let p = ad_object_to_parsed(&ad).unwrap();
+        assert_eq!(p.price, Some(750));
+    }
+
+    #[test]
+    fn test_ad_object_to_parsed_missing_url_uses_list_id() {
+        let ad = json!({ "list_id": 42 });
+        let p = ad_object_to_parsed(&ad).unwrap();
+        assert_eq!(p.url, "https://www.leboncoin.fr/ad/42");
+    }
+
+    #[test]
+    fn test_ad_object_to_parsed_no_id_returns_none() {
+        let ad = json!({ "subject": "no id here" });
+        assert!(ad_object_to_parsed(&ad).is_none());
+    }
+
+    #[test]
+    fn test_ad_object_furnished_meuble_label() {
+        let ad = json!({
+            "list_id": 1,
+            "attributes": [{ "key": "furnished", "value_label": "Meublé" }]
+        });
+        let p = ad_object_to_parsed(&ad).unwrap();
+        assert_eq!(p.furnished, Some(true));
+    }
+
+    #[test]
+    fn test_ad_object_furnished_zero_is_false() {
+        let ad = json!({
+            "list_id": 1,
+            "attributes": [{ "key": "furnished", "value": "0" }]
+        });
+        let p = ad_object_to_parsed(&ad).unwrap();
+        assert_eq!(p.furnished, Some(false));
+    }
+
+    // ── parse_html: detail page via __NEXT_DATA__ ───────────────────
+
+    fn detail_page_html(ad_json: &serde_json::Value) -> String {
+        let next_data = json!({
+            "props": { "pageProps": { "ad": ad_json } }
+        });
+        format!(
+            r#"<html><head>
+            <meta property="og:title" content="OG Fallback Title" />
+            <meta property="og:image" content="https://img.lbc.fr/og.jpg" />
+            <script id="__NEXT_DATA__" type="application/json">{}</script>
+            </head><body></body></html>"#,
+            next_data
+        )
+    }
+
+    #[test]
+    fn test_parse_html_detail_with_next_data() {
+        let html = detail_page_html(&sample_ad_json());
+        let p = parse_html(&html);
+
+        assert_eq!(p.title.as_deref(), Some("Appartement 3 pièces lumineux"));
+        assert_eq!(p.price, Some(850));
+        assert_eq!(p.city.as_deref(), Some("Lyon"));
+        assert_eq!(p.surface, Some(65));
+        assert_eq!(p.rooms, Some(3));
+        assert!(p.images.contains(&"https://img.lbc.fr/ad-image/1.jpg".to_string()));
+        // OG image should also be collected (dedup)
+        assert!(p.images.contains(&"https://img.lbc.fr/og.jpg".to_string()));
+    }
+
+    #[test]
+    fn test_parse_html_detail_fallback_og_only() {
+        let html = r#"<html><head>
+            <meta property="og:title" content="Studio meublé Paris 11" />
+            <meta property="og:description" content="Joli studio" />
+            <meta property="og:image" content="https://img.lbc.fr/og.jpg" />
+            </head><body></body></html>"#;
+        let p = parse_html(html);
+
+        assert_eq!(p.title.as_deref(), Some("Studio meublé Paris 11"));
+        assert_eq!(p.description.as_deref(), Some("Joli studio"));
+        assert!(p.images.contains(&"https://img.lbc.fr/og.jpg".to_string()));
+        assert!(p.price.is_none());
+    }
+
+    #[test]
+    fn test_parse_html_next_data_alternate_path() {
+        let next_data = json!({
+            "props": { "pageProps": { "data": {
+                "list_id": 99,
+                "subject": "Via data path",
+                "price": [600]
+            }}}
+        });
+        let html = format!(
+            r#"<html><head>
+            <script id="__NEXT_DATA__" type="application/json">{}</script>
+            </head><body></body></html>"#,
+            next_data
+        );
+        let p = parse_html(&html);
+        assert_eq!(p.title.as_deref(), Some("Via data path"));
+        assert_eq!(p.price, Some(600));
+    }
+
+    // ── parse_search_html: search page ──────────────────────────────
+
+    #[test]
+    fn test_parse_search_html_from_json() {
+        let next_data = json!({
+            "props": { "pageProps": { "searchData": { "ads": [
+                {
+                    "list_id": 111,
+                    "subject": "T2 Bordeaux",
+                    "price": [520],
+                    "location": { "city": "Bordeaux", "zipcode": "33000" },
+                    "attributes": [{ "key": "square", "value": "40" }],
+                    "images": { "urls": [] }
+                },
+                {
+                    "list_id": 222,
+                    "subject": "Studio Nantes",
+                    "price": [380],
+                    "location": { "city": "Nantes", "zipcode": "44000" },
+                    "attributes": [],
+                    "images": { "urls": [] }
+                }
+            ]}}}
+        });
+        let html = format!(
+            r#"<html><head>
+            <script id="__NEXT_DATA__" type="application/json">{}</script>
+            </head><body></body></html>"#,
+            next_data
+        );
+        let results = parse_search_html(&html);
+        assert_eq!(results.len(), 2);
+        assert_eq!(results[0].title.as_deref(), Some("T2 Bordeaux"));
+        assert_eq!(results[0].price, Some(520));
+        assert_eq!(results[0].surface, Some(40));
+        assert_eq!(results[1].city.as_deref(), Some("Nantes"));
+    }
+
+    #[test]
+    fn test_parse_search_html_dom_fallback() {
+        let html = r#"<html><body>
+            <a href="/ad/locations/appartement/123456">
+                <p role="heading">Bel appartement</p>
+                <span>650 €</span>
+                <span>55m²</span>
+                <img src="https://img.lbc.fr/thumb.jpg" />
+            </a>
+            <a href="/ad/locations/studio/789012">
+                <p role="heading">Studio calme</p>
+                <span>400 €</span>
+            </a>
+        </body></html>"#;
+        let results = parse_search_html(html);
+        assert_eq!(results.len(), 2);
+
+        assert_eq!(results[0].external_id.as_deref(), Some("123456"));
+        assert_eq!(results[0].title.as_deref(), Some("Bel appartement"));
+        assert_eq!(results[0].price, Some(650));
+        assert_eq!(results[0].surface, Some(55));
+        assert!(results[0].images.contains(&"https://img.lbc.fr/thumb.jpg".to_string()));
+
+        assert_eq!(results[1].external_id.as_deref(), Some("789012"));
+        assert_eq!(results[1].price, Some(400));
+    }
+
+    #[test]
+    fn test_parse_search_html_dedup_json_and_dom() {
+        let next_data = json!({
+            "props": { "pageProps": { "searchData": { "ads": [
+                {
+                    "list_id": 123456,
+                    "url": "https://www.leboncoin.fr/ad/locations/appartement/123456",
+                    "subject": "From JSON",
+                    "price": [700],
+                    "attributes": [],
+                    "images": { "urls": [] }
+                }
+            ]}}}
+        });
+        let html = format!(
+            r#"<html><head>
+            <script id="__NEXT_DATA__" type="application/json">{}</script>
+            </head><body>
+            <a href="/ad/locations/appartement/123456">
+                <p role="heading">From DOM</p>
+                <span>700 €</span>
+            </a>
+            </body></html>"#,
+            next_data
+        );
+        let results = parse_search_html(&html);
+        assert_eq!(results.len(), 1, "duplicate should be deduped");
+        assert_eq!(results[0].title.as_deref(), Some("From JSON"));
+    }
+
+    #[test]
+    fn test_parse_search_html_empty() {
+        let html = "<html><body><p>No ads here</p></body></html>";
+        let results = parse_search_html(html);
+        assert!(results.is_empty());
+    }
+
+    // ── extract_external_id ─────────────────────────────────────────
+
+    #[test]
+    fn test_extract_id_ad_path() {
+        assert_eq!(
+            extract_external_id("/ad/locations/foo/2812345678"),
+            Some("2812345678".into())
+        );
+    }
+
+    #[test]
+    fn test_extract_id_item_id() {
+        assert_eq!(
+            extract_external_id("/something?itemId-9999&other"),
+            Some("9999".into())
+        );
+    }
+
+    #[test]
+    fn test_extract_id_no_match() {
+        assert_eq!(extract_external_id("/search?q=lyon"), None);
+    }
+
+    #[test]
+    fn test_extract_id_ad_path_no_digits() {
+        assert_eq!(extract_external_id("/ad/locations/foo/bar"), None);
+    }
+
+    // ── extract_price ───────────────────────────────────────────────
+
+    #[test]
+    fn test_extract_price_simple() {
+        assert_eq!(extract_price("Loyer : 850 €"), Some(850));
+    }
+
+    #[test]
+    fn test_extract_price_with_spaces() {
+        assert_eq!(extract_price("1 240 €/mois"), Some(1240));
+    }
+
+    #[test]
+    fn test_extract_price_none() {
+        assert_eq!(extract_price("Pas de prix"), None);
+    }
+
+    // ── extract_surface ─────────────────────────────────────────────
+
+    #[test]
+    fn test_extract_surface_m2() {
+        assert_eq!(extract_surface("65m²"), Some(65));
+    }
+
+    #[test]
+    fn test_extract_surface_m2_ascii() {
+        assert_eq!(extract_surface("55m2 - 3 pièces"), Some(55));
+    }
+
+    #[test]
+    fn test_extract_surface_none() {
+        assert_eq!(extract_surface("3 pièces à Lyon"), None);
+    }
+
+    // ── extract_rooms ───────────────────────────────────────────────
+
+    #[test]
+    fn test_extract_rooms_pieces() {
+        assert_eq!(extract_rooms("3 pièces"), Some(3));
+    }
+
+    #[test]
+    fn test_extract_rooms_piece_singular() {
+        assert_eq!(extract_rooms("1 pièce"), Some(1));
+    }
+
+    #[test]
+    fn test_extract_rooms_none() {
+        assert_eq!(extract_rooms("Studio lumineux"), None);
+    }
+
+    // ── is_allowed_host ─────────────────────────────────────────────
+
+    #[test]
+    fn test_allowed_host_www() {
+        assert!(is_allowed_host("www.leboncoin.fr"));
+    }
+
+    #[test]
+    fn test_allowed_host_bare() {
+        assert!(is_allowed_host("leboncoin.fr"));
+    }
+
+    #[test]
+    fn test_allowed_host_subdomain() {
+        assert!(is_allowed_host("api.leboncoin.fr"));
+    }
+
+    #[test]
+    fn test_disallowed_host() {
+        assert!(!is_allowed_host("evil.com"));
+    }
+
+    #[test]
+    fn test_disallowed_host_suffix_trick() {
+        assert!(!is_allowed_host("notleboncoin.fr"));
+    }
+
+    // ── regex_like helper ───────────────────────────────────────────
+
+    #[test]
+    fn test_regex_like_basic() {
+        assert_eq!(regex_like("850 €", "€"), Some("850".into()));
+    }
+
+    #[test]
+    fn test_regex_like_spaced_number() {
+        assert_eq!(regex_like("1 500 €", "€"), Some("1500".into()));
+    }
+
+    #[test]
+    fn test_regex_like_no_match() {
+        assert_eq!(regex_like("aucun chiffre ici", "€"), None);
+    }
+}

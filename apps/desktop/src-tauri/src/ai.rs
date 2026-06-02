@@ -103,6 +103,7 @@ async fn generate_internal(input: AiMessageInput) -> Result<AiMessageOutput> {
     }
     let model = input
         .model
+        .clone()
         .filter(|s| !s.trim().is_empty())
         .unwrap_or_else(|| DEFAULT_MODEL.to_string());
 
