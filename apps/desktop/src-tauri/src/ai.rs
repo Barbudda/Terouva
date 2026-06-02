@@ -262,3 +262,305 @@ fn push_kv(out: &mut String, key: &str, value: Option<&str>) {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn make_listing(overrides: impl FnOnce(&mut ListingFacts)) -> ListingFacts {
+        let mut l = ListingFacts {
+            title: None,
+            price: None,
+            surface: None,
+            rooms: None,
+            city: None,
+            postal_code: None,
+            furnished: None,
+            property_type: None,
+            description: None,
+            publisher_type: None,
+        };
+        overrides(&mut l);
+        l
+    }
+
+    fn make_profile(overrides: impl FnOnce(&mut ProfileFacts)) -> ProfileFacts {
+        let mut p = ProfileFacts {
+            first_name: None,
+            last_name: None,
+            email: None,
+            phone: None,
+            situation: None,
+            income_monthly: None,
+            guarantors: None,
+            contract_type: None,
+            intro_message: None,
+            preferred_contact: None,
+        };
+        overrides(&mut p);
+        p
+    }
+
+    fn make_input(
+        tone: &str,
+        listing: ListingFacts,
+        profile: ProfileFacts,
+    ) -> AiMessageInput {
+        AiMessageInput {
+            api_key: "sk-test".to_string(),
+            model: None,
+            tone: tone.to_string(),
+            listing,
+            profile,
+        }
+    }
+
+    // ── system_prompt ──
+
+    #[test]
+    fn system_prompt_not_empty() {
+        let sp = system_prompt();
+        assert!(!sp.is_empty());
+    }
+
+    #[test]
+    fn system_prompt_contains_key_rules() {
+        let sp = system_prompt();
+        assert!(sp.contains("Leboncoin"));
+        assert!(sp.contains("français"));
+        assert!(sp.contains("6 à 10 lignes"));
+        assert!(sp.contains("Pas d'émoji"));
+        assert!(sp.contains("copier-coller"));
+    }
+
+    // ── push_kv ──
+
+    #[test]
+    fn push_kv_basic() {
+        let mut buf = String::new();
+        push_kv(&mut buf, "Prix", Some("850€"));
+        assert_eq!(buf, "Prix: 850€\n");
+    }
+
+    #[test]
+    fn push_kv_trims_value() {
+        let mut buf = String::new();
+        push_kv(&mut buf, "Ville", Some("  Paris  "));
+        assert_eq!(buf, "Ville: Paris\n");
+    }
+
+    #[test]
+    fn push_kv_none_skipped() {
+        let mut buf = String::new();
+        push_kv(&mut buf, "Ville", None);
+        assert!(buf.is_empty());
+    }
+
+    #[test]
+    fn push_kv_empty_skipped() {
+        let mut buf = String::new();
+        push_kv(&mut buf, "Ville", Some(""));
+        assert!(buf.is_empty());
+    }
+
+    #[test]
+    fn push_kv_whitespace_only_skipped() {
+        let mut buf = String::new();
+        push_kv(&mut buf, "Ville", Some("   "));
+        assert!(buf.is_empty());
+    }
+
+    // ── tone mapping ──
+
+    #[test]
+    fn tone_direct() {
+        let input = make_input("direct", make_listing(|_| {}), make_profile(|_| {}));
+        let out = render_user_prompt(&input);
+        assert!(out.contains("DIRECT (court, factuel"));
+    }
+
+    #[test]
+    fn tone_warm() {
+        let input = make_input("warm", make_listing(|_| {}), make_profile(|_| {}));
+        let out = render_user_prompt(&input);
+        assert!(out.contains("CHALEUREUX"));
+    }
+
+    #[test]
+    fn tone_pro() {
+        let input = make_input("pro", make_listing(|_| {}), make_profile(|_| {}));
+        let out = render_user_prompt(&input);
+        assert!(out.contains("PROFESSIONNEL"));
+    }
+
+    #[test]
+    fn tone_custom_passthrough() {
+        let input = make_input("décontracté", make_listing(|_| {}), make_profile(|_| {}));
+        let out = render_user_prompt(&input);
+        assert!(out.contains("Ton demandé: décontracté"));
+    }
+
+    // ── render_user_prompt: listing fields ──
+
+    #[test]
+    fn render_full_listing() {
+        let input = make_input(
+            "direct",
+            make_listing(|l| {
+                l.title = Some("T3 lumineux centre".into());
+                l.price = Some(950);
+                l.surface = Some(65);
+                l.rooms = Some(3);
+                l.city = Some("Lyon".into());
+                l.postal_code = Some("69003".into());
+                l.furnished = Some(true);
+                l.property_type = Some("appartement".into());
+                l.publisher_type = Some("pro".into());
+                l.description = Some("Bel appartement rénové".into());
+            }),
+            make_profile(|_| {}),
+        );
+        let out = render_user_prompt(&input);
+        assert!(out.contains("== Annonce =="));
+        assert!(out.contains("Titre: T3 lumineux centre"));
+        assert!(out.contains("Prix: 950€ / mois"));
+        assert!(out.contains("Surface: 65m²"));
+        assert!(out.contains("Pièces: 3"));
+        assert!(out.contains("Ville: Lyon"));
+        assert!(out.contains("Code postal: 69003"));
+        assert!(out.contains("Meublé: oui"));
+        assert!(out.contains("Type de bien: appartement"));
+        assert!(out.contains("Annonceur: pro"));
+        assert!(out.contains("Description: Bel appartement rénové"));
+    }
+
+    #[test]
+    fn render_furnished_false() {
+        let input = make_input(
+            "direct",
+            make_listing(|l| { l.furnished = Some(false); }),
+            make_profile(|_| {}),
+        );
+        let out = render_user_prompt(&input);
+        assert!(out.contains("Meublé: non"));
+    }
+
+    #[test]
+    fn render_none_fields_omitted() {
+        let input = make_input("direct", make_listing(|_| {}), make_profile(|_| {}));
+        let out = render_user_prompt(&input);
+        assert!(!out.contains("Titre:"));
+        assert!(!out.contains("Prix:"));
+        assert!(!out.contains("Surface:"));
+        assert!(!out.contains("Meublé:"));
+        assert!(!out.contains("Nom complet:"));
+    }
+
+    #[test]
+    fn render_description_truncated_at_800_chars() {
+        let long_desc: String = "A".repeat(1200);
+        let input = make_input(
+            "direct",
+            make_listing(|l| { l.description = Some(long_desc); }),
+            make_profile(|_| {}),
+        );
+        let out = render_user_prompt(&input);
+        let desc_start = out.find("Description: ").unwrap();
+        let desc_line = out[desc_start..].lines().next().unwrap();
+        let value = desc_line.strip_prefix("Description: ").unwrap();
+        assert_eq!(value.len(), 800);
+    }
+
+    // ── render_user_prompt: profile fields ──
+
+    #[test]
+    fn render_full_profile() {
+        let input = make_input(
+            "warm",
+            make_listing(|_| {}),
+            make_profile(|p| {
+                p.first_name = Some("Hugo".into());
+                p.last_name = Some("Dupont".into());
+                p.situation = Some("CDI".into());
+                p.contract_type = Some("CDI temps plein".into());
+                p.income_monthly = Some(2800);
+                p.guarantors = Some("Parents".into());
+                p.phone = Some("06 12 34 56 78".into());
+                p.email = Some("hugo@test.fr".into());
+                p.preferred_contact = Some("email".into());
+            }),
+        );
+        let out = render_user_prompt(&input);
+        assert!(out.contains("== Profil du candidat =="));
+        assert!(out.contains("Nom complet: Hugo Dupont"));
+        assert!(out.contains("Situation pro: CDI"));
+        assert!(out.contains("Type de contrat recherché: CDI temps plein"));
+        assert!(out.contains("Revenu net mensuel: 2800€"));
+        assert!(out.contains("Garant: Parents"));
+        assert!(out.contains("Téléphone: 06 12 34 56 78"));
+        assert!(out.contains("Email: hugo@test.fr"));
+        assert!(out.contains("Mode de contact préféré: email"));
+    }
+
+    #[test]
+    fn render_name_first_only() {
+        let input = make_input(
+            "direct",
+            make_listing(|_| {}),
+            make_profile(|p| { p.first_name = Some("Hugo".into()); }),
+        );
+        let out = render_user_prompt(&input);
+        assert!(out.contains("Nom complet: Hugo"));
+    }
+
+    #[test]
+    fn render_intro_message_present() {
+        let input = make_input(
+            "direct",
+            make_listing(|_| {}),
+            make_profile(|p| {
+                p.intro_message = Some("Je suis passionné par l'architecture.".into());
+            }),
+        );
+        let out = render_user_prompt(&input);
+        assert!(out.contains("Présentation libre"));
+        assert!(out.contains("passionné par l'architecture"));
+    }
+
+    #[test]
+    fn render_intro_message_empty_skipped() {
+        let input = make_input(
+            "direct",
+            make_listing(|_| {}),
+            make_profile(|p| { p.intro_message = Some("   ".into()); }),
+        );
+        let out = render_user_prompt(&input);
+        assert!(!out.contains("Présentation libre"));
+    }
+
+    // ── structural checks ──
+
+    #[test]
+    fn render_ends_with_generation_instruction() {
+        let input = make_input("direct", make_listing(|_| {}), make_profile(|_| {}));
+        let out = render_user_prompt(&input);
+        assert!(out.ends_with("Génère le message maintenant. Uniquement le texte, prêt à coller dans Leboncoin."));
+    }
+
+    #[test]
+    fn render_sections_order() {
+        let input = make_input(
+            "direct",
+            make_listing(|l| { l.title = Some("T2".into()); }),
+            make_profile(|p| { p.first_name = Some("A".into()); }),
+        );
+        let out = render_user_prompt(&input);
+        let tone_pos = out.find("Ton demandé").unwrap();
+        let annonce_pos = out.find("== Annonce ==").unwrap();
+        let profil_pos = out.find("== Profil du candidat ==").unwrap();
+        let gen_pos = out.find("Génère le message").unwrap();
+        assert!(tone_pos < annonce_pos);
+        assert!(annonce_pos < profil_pos);
+        assert!(profil_pos < gen_pos);
+    }
+}
