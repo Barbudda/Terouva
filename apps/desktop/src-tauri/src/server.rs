@@ -30,6 +30,39 @@ pub const DEFAULT_PORT: u16 = 8765;
 pub struct ServerState {
     pub token: Arc<RwLock<Option<String>>>,
     pub app: AppHandle,
+    /// File d'attente de notifications « annonce chaude » que l'extension Chrome
+    /// vient drainer (GET /notifications/pending). Remplie par le frontend via la
+    /// commande Tauri `enqueue_chrome_notif` quand une annonce dépasse le seuil.
+    /// Permet d'alerter dans le navigateur même si la fenêtre de l'app n'est pas
+    /// au premier plan. NB : pas de pilotage du navigateur — juste une notif.
+    pub notifications: Arc<RwLock<Vec<ChromeNotif>>>,
+}
+
+/// Une notification « annonce chaude » destinée à l'extension Chrome.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct ChromeNotif {
+    pub id: String,
+    pub title: String,
+    pub body: String,
+    pub url: String,
+    pub score: i64,
+}
+
+/// Borne maximale de la file de notifications en attente (anti-croissance).
+pub const NOTIF_QUEUE_CAP: usize = 50;
+
+/// Empile une notif dans la file : ignore les doublons (même URL déjà en attente)
+/// et borne la file à `NOTIF_QUEUE_CAP` (on jette les plus anciennes). Logique pure
+/// (sans verrou) pour être testable et réutilisée par la commande Tauri.
+pub fn push_notif(queue: &mut Vec<ChromeNotif>, notif: ChromeNotif) {
+    if queue.iter().any(|n| n.url == notif.url) {
+        return;
+    }
+    queue.push(notif);
+    if queue.len() > NOTIF_QUEUE_CAP {
+        let overflow = queue.len() - NOTIF_QUEUE_CAP;
+        queue.drain(0..overflow);
+    }
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -151,6 +184,23 @@ async fn ingest_listing(
         .into_response()
 }
 
+/// L'extension Chrome poll cet endpoint (toutes les ~6 s) pour récupérer les
+/// notifications « annonce chaude » en attente, puis les affiche via
+/// `chrome.notifications`. On **draine** : chaque item n'est renvoyé qu'une fois.
+async fn notifications_pending(
+    State(state): State<ServerState>,
+    headers: HeaderMap,
+) -> impl IntoResponse {
+    if !auth_ok(&state, &headers) {
+        return (StatusCode::UNAUTHORIZED, Json(serde_json::json!([]))).into_response();
+    }
+    let drained: Vec<ChromeNotif> = match state.notifications.write() {
+        Ok(mut q) => std::mem::take(&mut *q),
+        Err(_) => Vec::new(),
+    };
+    (StatusCode::OK, Json(drained)).into_response()
+}
+
 async fn searches(State(state): State<ServerState>, headers: HeaderMap) -> impl IntoResponse {
     if !auth_ok(&state, &headers) {
         return (StatusCode::UNAUTHORIZED, Json(serde_json::json!([]))).into_response();
@@ -170,6 +220,7 @@ pub fn build_router(state: ServerState) -> Router {
     Router::new()
         .route("/health", get(health))
         .route("/ingest/listing", post(ingest_listing))
+        .route("/notifications/pending", get(notifications_pending))
         .route("/searches/active", get(searches))
         .layer(cors)
         .with_state(state)
@@ -177,8 +228,16 @@ pub fn build_router(state: ServerState) -> Router {
 
 /// Spawn the server on 127.0.0.1, trying DEFAULT_PORT first then the next few.
 /// Returns the actual port bound.
-pub async fn spawn(app: AppHandle, token: Arc<RwLock<Option<String>>>) -> Option<u16> {
-    let state = ServerState { token, app };
+pub async fn spawn(
+    app: AppHandle,
+    token: Arc<RwLock<Option<String>>>,
+    notifications: Arc<RwLock<Vec<ChromeNotif>>>,
+) -> Option<u16> {
+    let state = ServerState {
+        token,
+        app,
+        notifications,
+    };
     let router = build_router(state);
 
     for port in [DEFAULT_PORT, 8766, 8767, 8768, 8769] {
@@ -210,4 +269,47 @@ pub fn generate_token() -> String {
         .take(40)
         .map(char::from)
         .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn notif(url: &str, score: i64) -> ChromeNotif {
+        ChromeNotif {
+            id: url.to_string(),
+            title: format!("★ {score}"),
+            body: "test".into(),
+            url: url.to_string(),
+            score,
+        }
+    }
+
+    #[test]
+    fn push_notif_ajoute_un_item() {
+        let mut q = Vec::new();
+        push_notif(&mut q, notif("https://lbc/1", 90));
+        assert_eq!(q.len(), 1);
+        assert_eq!(q[0].url, "https://lbc/1");
+    }
+
+    #[test]
+    fn push_notif_ignore_les_doublons_par_url() {
+        let mut q = Vec::new();
+        push_notif(&mut q, notif("https://lbc/1", 90));
+        push_notif(&mut q, notif("https://lbc/1", 95)); // même URL → ignoré
+        assert_eq!(q.len(), 1);
+        assert_eq!(q[0].score, 90); // le premier est conservé
+    }
+
+    #[test]
+    fn push_notif_borne_la_file_et_jette_les_plus_anciennes() {
+        let mut q = Vec::new();
+        for i in 0..(NOTIF_QUEUE_CAP + 5) {
+            push_notif(&mut q, notif(&format!("https://lbc/{i}"), 80));
+        }
+        assert_eq!(q.len(), NOTIF_QUEUE_CAP);
+        // les 5 premières ont été jetées → la plus ancienne restante est l'index 5
+        assert_eq!(q[0].url, "https://lbc/5");
+    }
 }

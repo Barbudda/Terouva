@@ -896,6 +896,16 @@ function CandidaturePanel({
     await saveDraft();
   };
 
+  // 1-clic : rédige+copie le message, sauve le brouillon, et ouvre l'annonce LBC.
+  // L'envoi reste HUMAIN (coller + Envoyer) — principe non négociable de Terouva
+  // (pas d'envoi auto = pas de bot = pas de ban du compte LBC). Mais en 1 clic /
+  // ~1 s, pour rester le premier à candidater.
+  const prepareAndContact = async () => {
+    await copyToClipboard(message);
+    await saveDraft();
+    await openExternal(listing.url);
+  };
+
   const markSent = async () => {
     await upsertApplication({
       listing_id: listing.id,
@@ -974,7 +984,14 @@ function CandidaturePanel({
         onChange={(e) => setMessage(e.target.value)}
       />
       <div className="flex flex-wrap items-center gap-2">
-        <Button size="sm" onClick={copyMessage}>
+        <Button
+          size="sm"
+          onClick={prepareAndContact}
+          title="Copie le message + ouvre l'annonce LBC en 1 clic — il ne reste qu'à coller (Ctrl+V) et Envoyer"
+        >
+          ⚡ Préparer &amp; contacter
+        </Button>
+        <Button size="sm" variant="secondary" onClick={copyMessage}>
           Copier le message
         </Button>
         <Button size="sm" variant="secondary" onClick={() => openExternal(listing.url)}>

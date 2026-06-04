@@ -278,9 +278,18 @@ async function maybeNotifyHot(
   ]
     .filter(Boolean)
     .join(" • ");
-  await notifyDesktop({
-    title: `★ ${score}/100 — ${listing.title ?? "Annonce détectée"}`,
-    body: subtitle,
-  });
+  const title = `★ ${score}/100 — ${listing.title ?? "Annonce détectée"}`;
+  await notifyDesktop({ title, body: subtitle });
+  // En plus de la notif OS (Tauri), on empile une notif pour l'extension Chrome :
+  // elle l'affichera dans le navigateur (clic = ouvrir l'annonce), utile quand
+  // l'utilisateur est en train de naviguer sur LBC et l'app n'est pas au premier
+  // plan. Best-effort : un échec ici ne doit jamais casser l'ingestion.
+  try {
+    await invoke("enqueue_chrome_notif", {
+      notif: { id: String(listing.id), title, body: subtitle, url: listing.url, score },
+    });
+  } catch {
+    /* la commande peut être absente sur un vieux binaire — on ignore */
+  }
   return true;
 }

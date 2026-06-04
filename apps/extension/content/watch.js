@@ -184,6 +184,37 @@
     }
   }
 
+  // -------- notifications « annonce chaude » --------------------------------
+  //
+  // L'app locale score chaque annonce et, au-dessus du seuil, empile une notif
+  // dans sa file (GET /notifications/pending, qui draine). Ce content script est
+  // un contexte long (vit tant que l'onglet LBC est ouvert), donc il poll cette
+  // file toutes les ~6 s et transmet chaque item au service worker, qui l'affiche
+  // via chrome.notifications. Résultat : on est alerté dans le navigateur même si
+  // la fenêtre de l'app n'est pas au premier plan. On n'automatise rien sur LBC.
+
+  async function pollNotifications() {
+    if (!settings.enabled || !settings.token) return;
+    try {
+      const resp = await fetch(
+        `${settings.serverUrl.replace(/\/+$/, "")}/notifications/pending`,
+        { headers: { Authorization: `Bearer ${settings.token}` } },
+      );
+      if (!resp.ok) return;
+      const items = await resp.json();
+      if (!Array.isArray(items) || items.length === 0) return;
+      for (const notif of items) {
+        try {
+          chrome.runtime.sendMessage({ type: "terouva-notify", notif });
+        } catch (e) {
+          /* service worker indisponible : on ignore */
+        }
+      }
+    } catch (e) {
+      /* app injoignable : silencieux, postListing affiche déjà l'erreur */
+    }
+  }
+
   // -------- detection -------------------------------------------------------
 
   function indexExisting() {
@@ -303,5 +334,9 @@
     indexExisting();
     refreshOverlay();
     watchMutations();
+    // Poll des notifications « annonce chaude » toutes les 6 s tant que l'onglet
+    // LBC est ouvert (le content script reste vivant, contrairement au SW MV3).
+    pollNotifications();
+    setInterval(pollNotifications, 6000);
   });
 })();
