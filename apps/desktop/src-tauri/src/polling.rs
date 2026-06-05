@@ -61,7 +61,11 @@ pub fn new_state() -> PollingState {
 }
 
 pub fn spawn_loop(state: PollingState, app: AppHandle) {
-    tokio::spawn(async move {
+    // Use Tauri's managed async runtime rather than `tokio::spawn`. `.setup()`
+    // runs on the main thread *outside* any Tokio runtime context, so a bare
+    // `tokio::spawn` panics with "there is no reactor running". Tauri's runtime
+    // is Tokio under the hood and is always available here.
+    tauri::async_runtime::spawn(async move {
         // Tick every 30 s. Cheap — most ticks find nothing due.
         let mut interval = tokio::time::interval(Duration::from_secs(30));
         interval.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
