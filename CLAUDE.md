@@ -1,4 +1,25 @@
-# Ruflo — Claude Code Configuration
+# Terouva — Claude Code Configuration
+
+## ⚡ Coordination avec Second (À LIRE EN PREMIER, à chaque session)
+
+Ce projet est **piloté par Second**, un majordome IA (daemon séparé). Toi et Second
+travaillez **de pair** via un **bus de fichiers** dans `.claude/second/` :
+
+- `.claude/second/inbox.md` — **Second → toi** : les tâches qu'il t'assigne. **Tu le lis, tu n'y écris pas.**
+- `.claude/second/outbox.md` — **toi → Second** : tes comptes-rendus (append en bas).
+- `.claude/second/PROTOCOL.md` — les règles du bus.
+
+**Au début de chaque session, lance le skill `/second-sync`** : il lit l'inbox,
+te résume les tâches en attente et t'aide à en prendre une. Quand tu finis une
+tâche, rends compte dans l'outbox (le skill le fait). C'est ainsi que Second sait
+ce que tu fais et inversement.
+
+### 🚫 Lignes rouges Terouva (non négociables)
+- On **observe**, on ne **pilote pas** Leboncoin. Pas de bot, pas d'envoi
+  automatique, pas d'évasion anti-détection. **L'humain valide et envoie.**
+- Jamais de secret/credential commité. Jamais de fausses annonces sur LBC.
+
+---
 
 ## Rules
 
