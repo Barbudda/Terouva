@@ -10,7 +10,7 @@
 //!       from `app_settings.local_server_token`.
 
 use axum::{
-    extract::State,
+    extract::{Path, State},
     http::{HeaderMap, StatusCode},
     response::IntoResponse,
     routing::{get, post},
@@ -36,7 +36,28 @@ pub struct ServerState {
     /// Permet d'alerter dans le navigateur même si la fenêtre de l'app n'est pas
     /// au premier plan. NB : pas de pilotage du navigateur — juste une notif.
     pub notifications: Arc<RwLock<Vec<ChromeNotif>>>,
+    /// Demandes d'appairage en attente/résolues (style « Autoriser cette
+    /// extension »). L'extension POST /pair/request (sans token) → l'app affiche
+    /// une demande → l'utilisateur Autorise → l'extension récupère le token via
+    /// GET /pair/status/:id. Plus de copier-coller de token côté utilisateur.
+    pub pairings: Arc<RwLock<Vec<PairRequest>>>,
 }
+
+/// Une demande d'appairage d'une extension Chrome.
+#[derive(Debug, Clone, Serialize)]
+pub struct PairRequest {
+    pub id: String,
+    pub ext_id: String,
+    pub label: String,
+    /// "pending" | "approved" | "denied"
+    pub status: String,
+    /// Le token, fourni uniquement une fois la demande approuvée.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub token: Option<String>,
+}
+
+/// Borne de la file d'appairages conservés (anti-croissance).
+pub const PAIR_QUEUE_CAP: usize = 20;
 
 /// Une notification « annonce chaude » destinée à l'extension Chrome.
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -201,6 +222,69 @@ async fn notifications_pending(
     (StatusCode::OK, Json(drained)).into_response()
 }
 
+#[derive(Debug, Deserialize)]
+struct PairRequestBody {
+    ext_id: Option<String>,
+    label: Option<String>,
+}
+
+/// L'extension demande à s'appairer (aucun token requis : c'est le handshake).
+/// Crée une demande « pending » et notifie le frontend (event `pair:request`)
+/// qui affiche « Autoriser cette extension ? ». Renvoie l'id de la demande.
+async fn pair_request(
+    State(state): State<ServerState>,
+    Json(body): Json<PairRequestBody>,
+) -> impl IntoResponse {
+    let id = generate_token()[..12].to_string();
+    let ext_id = body.ext_id.unwrap_or_else(|| "inconnue".into());
+    let label = body.label.unwrap_or_else(|| "Extension Chrome".into());
+    let req = PairRequest {
+        id: id.clone(),
+        ext_id: ext_id.clone(),
+        label: label.clone(),
+        status: "pending".into(),
+        token: None,
+    };
+    if let Ok(mut q) = state.pairings.write() {
+        q.push(req);
+        if q.len() > PAIR_QUEUE_CAP {
+            let overflow = q.len() - PAIR_QUEUE_CAP;
+            q.drain(0..overflow);
+        }
+    }
+    let _ = state.app.emit(
+        "pair:request",
+        serde_json::json!({ "id": id, "ext_id": ext_id, "label": label }),
+    );
+    (
+        StatusCode::OK,
+        Json(serde_json::json!({ "request_id": id })),
+    )
+}
+
+/// L'extension poll cet endpoint jusqu'à ce que l'utilisateur réponde dans l'app.
+/// Renvoie { status, token? }. Le token n'apparaît qu'après approbation.
+async fn pair_status(
+    State(state): State<ServerState>,
+    Path(id): Path<String>,
+) -> impl IntoResponse {
+    let found = state
+        .pairings
+        .read()
+        .ok()
+        .and_then(|q| q.iter().find(|p| p.id == id).cloned());
+    match found {
+        Some(p) => (
+            StatusCode::OK,
+            Json(serde_json::json!({ "status": p.status, "token": p.token })),
+        ),
+        None => (
+            StatusCode::OK,
+            Json(serde_json::json!({ "status": "unknown" })),
+        ),
+    }
+}
+
 async fn searches(State(state): State<ServerState>, headers: HeaderMap) -> impl IntoResponse {
     if !auth_ok(&state, &headers) {
         return (StatusCode::UNAUTHORIZED, Json(serde_json::json!([]))).into_response();
@@ -222,6 +306,8 @@ pub fn build_router(state: ServerState) -> Router {
         .route("/ingest/listing", post(ingest_listing))
         .route("/notifications/pending", get(notifications_pending))
         .route("/searches/active", get(searches))
+        .route("/pair/request", post(pair_request))
+        .route("/pair/status/:id", get(pair_status))
         .layer(cors)
         .with_state(state)
 }
@@ -232,11 +318,13 @@ pub async fn spawn(
     app: AppHandle,
     token: Arc<RwLock<Option<String>>>,
     notifications: Arc<RwLock<Vec<ChromeNotif>>>,
+    pairings: Arc<RwLock<Vec<PairRequest>>>,
 ) -> Option<u16> {
     let state = ServerState {
         token,
         app,
         notifications,
+        pairings,
     };
     let router = build_router(state);
 

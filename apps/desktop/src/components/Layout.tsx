@@ -2,18 +2,19 @@ import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { ShortcutHelp } from "./ShortcutHelp";
+import { PairingModal } from "./PairingModal";
 import { useGlobalShortcuts } from "@/lib/shortcuts";
 import { useStore } from "@/store/useStore";
 import { useWatchStore } from "@/store/useWatchStore";
 
 const TITLES: Record<string, string> = {
-  "/": "Dashboard",
-  "/recherches": "Recherches",
-  "/annonces": "Annonces",
-  "/candidatures": "Candidatures",
-  "/surveillance": "Surveillance",
-  "/profil": "Profil locataire",
+  "/": "Mes annonces",
+  "/candidatures": "Mes candidatures",
+  "/dossier": "Mon dossier",
   "/reglages": "Réglages",
+  "/surveillance": "Connexion & diagnostics",
+  "/profil": "Profil",
+  "/recherches": "Recherches",
 };
 
 export function Layout() {
@@ -55,6 +56,7 @@ export function Layout() {
         </div>
       </main>
       <ShortcutHelp open={helpOpen} onClose={closeHelp} />
+      <PairingModal />
     </div>
   );
 }

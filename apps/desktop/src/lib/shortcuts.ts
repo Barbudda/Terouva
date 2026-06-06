@@ -20,12 +20,9 @@ export interface ShortcutDef {
 }
 
 export const SHORTCUTS: ShortcutDef[] = [
-  { combo: "g d", description: "Aller au Dashboard" },
-  { combo: "g s", description: "Aller à Surveillance" },
-  { combo: "g r", description: "Aller aux Recherches" },
-  { combo: "g a", description: "Aller aux Annonces" },
-  { combo: "g c", description: "Aller aux Candidatures" },
-  { combo: "g p", description: "Aller au Profil" },
+  { combo: "g a", description: "Aller à Mes annonces" },
+  { combo: "g c", description: "Aller à Mes candidatures" },
+  { combo: "g d", description: "Aller à Mon dossier" },
   { combo: "g ,", description: "Aller aux Réglages" },
   { combo: "/", description: "Focus de la recherche (page Annonces)" },
   { combo: "?", description: "Afficher / fermer cette aide" },
@@ -118,18 +115,12 @@ export function useGlobalShortcuts(): {
 
 function navTargetFor(key: string): string | null {
   switch (key.toLowerCase()) {
-    case "d":
-      return "/";
-    case "s":
-      return "/surveillance";
-    case "r":
-      return "/recherches";
     case "a":
-      return "/annonces";
+      return "/";
     case "c":
       return "/candidatures";
-    case "p":
-      return "/profil";
+    case "d":
+      return "/dossier";
     case ",":
       return "/reglages";
     default:

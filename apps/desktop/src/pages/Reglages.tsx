@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { Card, CardBody, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Field, Input, Select } from "@/components/ui/Input";
@@ -19,6 +20,7 @@ import { ensureNotificationPermission, notifyDesktop } from "@/lib/tauri";
 import { useStore } from "@/store/useStore";
 
 export default function Reglages() {
+  const navigate = useNavigate();
   const refreshAll = useStore((s) => s.refreshAll);
   const documents = useStore((s) => s.documents);
   const refreshDocs = useStore((s) => s.refreshDocuments);
@@ -124,6 +126,21 @@ export default function Reglages() {
 
   return (
     <div className="max-w-3xl space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Connexion & surveillance</CardTitle>
+        </CardHeader>
+        <CardBody className="flex items-center justify-between gap-4">
+          <p className="text-sm text-zinc-400">
+            État du pont avec l'extension Chrome, token de jumelage, polling
+            background et journal des détections.
+          </p>
+          <Button variant="secondary" onClick={() => navigate("/surveillance")}>
+            Ouvrir →
+          </Button>
+        </CardBody>
+      </Card>
+
       <Card>
         <CardHeader>
           <CardTitle>Préférences</CardTitle>

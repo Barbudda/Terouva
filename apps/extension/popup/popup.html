@@ -10,7 +10,7 @@
       <div class="logo">T</div>
       <div class="header-text">
         <div class="title">Terouva</div>
-        <div class="subtitle">Watch &amp; capture</div>
+        <div class="subtitle">Surveillance Leboncoin</div>
       </div>
       <div class="status" id="conn-status" title="État de la connexion à l'app Terouva">
         <span class="dot dot-off" id="conn-dot"></span>
@@ -19,26 +19,30 @@
     </header>
 
     <nav class="tabs">
-      <button class="tab active" data-tab="watch">Surveillance</button>
-      <button class="tab" data-tab="capture">Capture URL</button>
-      <button class="tab" data-tab="settings">Réglages</button>
+      <button class="tab active" data-tab="watch">Connexion</button>
+      <button class="tab" data-tab="capture">Capturer</button>
     </nav>
 
     <main id="main">
       <section class="panel" data-panel="watch">
         <div class="card">
-          <div class="card-title" id="watch-state">Surveillance — chargement…</div>
-          <div class="card-meta" id="watch-tip">
-            Garde une page <code>leboncoin.fr/recherche</code> ouverte.
-          </div>
+          <div class="card-title" id="watch-state">Connexion…</div>
+          <div class="card-meta" id="watch-tip">Recherche de l'app Terouva sur ta machine…</div>
         </div>
+        <button id="connect-btn" class="btn-primary hidden">Connecter à l'app</button>
+        <div id="connect-feedback" class="feedback hidden"></div>
+        <label class="toggle">
+          <input type="checkbox" id="watch-enabled" checked />
+          <span>Surveillance active</span>
+        </label>
         <p class="hint">
-          Chaque nouvelle annonce qui apparaît dans le DOM est envoyée à l'app
-          Terouva en local. L'app score selon tes critères et te notifie si ça matche.
+          Garde une page <code>leboncoin.fr</code> de recherche ouverte : chaque
+          nouvelle annonce part vers l'app, qui te notifie si elle matche tes critères.
         </p>
         <p class="hint small">
-          Si la pastille en haut à droite est rouge, configure l'URL et le
-          token dans l'onglet <strong>Réglages</strong>.
+          La connexion est automatique : à l'installation, l'app te demande
+          d'<strong>autoriser l'extension en un clic</strong>. Aucun token à copier,
+          tout reste en local.
         </p>
       </section>
 
@@ -64,47 +68,11 @@
           <div id="capture-feedback" class="feedback hidden"></div>
         </div>
       </section>
-
-      <section class="panel hidden" data-panel="settings">
-        <label class="field">
-          <span class="lbl">URL de l'app Terouva</span>
-          <input
-            type="text"
-            id="server-url"
-            placeholder="http://127.0.0.1:8765"
-            autocomplete="off"
-            spellcheck="false"
-          />
-        </label>
-        <label class="field">
-          <span class="lbl">Token de jumelage</span>
-          <input
-            type="password"
-            id="token"
-            placeholder="colle ici le token affiché dans l'app"
-            autocomplete="off"
-            spellcheck="false"
-          />
-        </label>
-        <label class="toggle">
-          <input type="checkbox" id="watch-enabled" checked />
-          <span>Surveillance active</span>
-        </label>
-        <div class="row">
-          <button id="save-settings" class="btn-primary">Enregistrer</button>
-          <button id="test-conn" class="btn-secondary">Tester</button>
-        </div>
-        <div id="settings-feedback" class="feedback hidden"></div>
-        <div class="divider"></div>
-        <p class="hint small">
-          Le token est généré par l'app Terouva (page <strong>Surveillance</strong>). Tout
-          le trafic reste en local — rien ne sort de ta machine.
-        </p>
-      </section>
     </main>
 
     <footer>
       <span>v0.2 · local-first</span>
+      <a id="reconnect-link" href="#">Reconnecter</a>
     </footer>
 
     <script src="popup.js"></script>

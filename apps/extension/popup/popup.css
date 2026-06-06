@@ -150,8 +150,15 @@ footer {
   padding: 8px 14px;
   border-top: 1px solid #232329;
   font-size: 10px; color: #52525b;
-  display: flex; justify-content: space-between;
+  display: flex; justify-content: space-between; align-items: center;
   text-transform: uppercase; letter-spacing: 0.05em;
 }
+footer a {
+  color: #7ee8c8; text-decoration: none;
+}
+footer a:hover { text-decoration: underline; }
+
+/* Bouton d'action seul dans un panel (hors .row) → pleine largeur. */
+.panel > .btn-primary { width: 100%; }
 
 .error-text { color: #ff6f6f; font-size: 12px; }
