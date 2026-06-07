@@ -82,6 +82,12 @@ export interface ScoreReasons {
   negative: string[];
   recommendation: "to_contact_fast" | "interesting" | "average" | "ignore";
   breakdown: { rule: string; delta: number }[];
+  /**
+   * Part des critères du profil réellement évaluables sur cette annonce (0–1).
+   * Bas = score calculé sur des données partielles (carte LBC) → recommandation
+   * prudente. Optionnel : absent des scores calculés avant l'ajout du champ.
+   */
+  confidence?: number;
 }
 
 export type ApplicationStatus =

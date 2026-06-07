@@ -15,6 +15,15 @@ recherches actives → alerte au-dessus du seuil). Ajouts mergés sur `second/au
   l'envoi reste **humain**).
 Vérifs : cargo 65/65, tsc 0, vitest 25/25, build prod OK.
 
+**MAJ 2026-06-05 — moteur de matching durci** (`scoring.ts`, fait par Second) :
+ajout du scoring **property_type**, **normalisation accents/casse** (ville/quartiers/
+mots-clés), **récence corrigée** (plus de +20 « très récente » bidon quand la date de
+pub est inconnue → flux temps réel), **score de confiance** exposé dans `ScoreReasons.
+confidence` + **garde-fous** (pas de « à contacter vite » sur données partielles ou
+prix inconnu ; équipement « non vérifiable » neutre s'il n'y a pas de description).
+tsc 0, vitest 44/44. → **TASK-003 (poids configurables) doit préserver ces garde-fous
+et le champ `confidence`.**
+
 ---
 
 ## TASK-001 — Test live de bout en bout (LBC réel)            [status: todo]

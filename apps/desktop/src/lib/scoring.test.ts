@@ -195,6 +195,101 @@ describe("scoreListing", () => {
   });
 });
 
+describe("scoreListing — robustesse (type, accents, récence, confiance)", () => {
+  it("scores property_type match (maison voulue, maison trouvée)", () => {
+    const r = scoreListing(
+      buildListing({ property_type: "maison" }),
+      buildProfile({ property_type: "house" }),
+    );
+    expect(r.reasons.positive.some((s) => s.includes("Type de bien correspondant"))).toBe(true);
+  });
+
+  it("penalizes property_type mismatch (appartement voulu, maison trouvée)", () => {
+    const r = scoreListing(
+      buildListing({ property_type: "maison" }),
+      buildProfile({ property_type: "apartment" }),
+    );
+    expect(r.reasons.negative.some((s) => s.includes("Type de bien différent"))).toBe(true);
+    expect(r.reasons.breakdown.find((b) => b.rule.includes("Type de bien différent"))?.delta).toBe(-30);
+  });
+
+  it("matches a city despite accents/case (Périgueux ≈ perigueux)", () => {
+    const r = scoreListing(
+      buildListing({ city: "Périgueux", title: "Maison", description: "Belle maison" }),
+      buildProfile({ city: "perigueux" }),
+    );
+    expect(r.reasons.positive.some((s) => s.includes("Ville correspondante"))).toBe(true);
+  });
+
+  it("matches keywords ignoring accents (meublé ≈ meuble)", () => {
+    const r = scoreListing(
+      buildListing({ description: "Bel appartement meuble et lumineux" }),
+      buildProfile({ keywords_must: "meublé" }),
+    );
+    expect(r.reasons.positive.some((s) => s.toLowerCase().includes("meubl"))).toBe(true);
+  });
+
+  it("does NOT assume a watch listing is fresh when published_at is unknown", () => {
+    const r = scoreListing(
+      buildListing({ published_at: null, discovered_at: new Date().toISOString() }),
+      buildProfile(),
+    );
+    expect(r.reasons.positive.some((s) => s.includes("très récente"))).toBe(false);
+    expect(r.reasons.positive.some((s) => s.includes("Fraîchement détectée"))).toBe(true);
+  });
+
+  it("keeps the strong recency bonus when published_at IS recent", () => {
+    const r = scoreListing(
+      buildListing({ published_at: new Date(Date.now() - 20 * 60 * 1000).toISOString() }),
+      buildProfile(),
+    );
+    expect(r.reasons.positive.some((s) => s.includes("très récente"))).toBe(true);
+  });
+
+  it("downgrades 'à contacter vite' → 'intéressant' on partial data (low confidence)", () => {
+    const r = scoreListing(
+      buildListing({
+        city: null,
+        rooms: null,
+        description: null,
+        published_at: null,
+        discovered_at: new Date().toISOString(),
+        title: "Studio",
+      }),
+      buildProfile({ keywords_exclude: "colocation", must_have_elevator: 1 }),
+    );
+    expect(r.score).toBeGreaterThanOrEqual(80);
+    expect(r.reasons.recommendation).toBe("interesting");
+    expect(r.reasons.confidence).toBeLessThan(0.5);
+    expect(r.reasons.negative.some((s) => s.includes("données partielles"))).toBe(true);
+  });
+
+  it("never recommends fast-contact when the price is unknown", () => {
+    const r = scoreListing(
+      buildListing({ price: null }),
+      buildProfile({ price_max: 1200 }),
+    );
+    expect(r.reasons.recommendation).not.toBe("to_contact_fast");
+    expect(r.reasons.negative.some((s) => s.includes("prix inconnu"))).toBe(true);
+  });
+
+  it("reports full confidence when every set criterion is evaluable", () => {
+    const r = scoreListing(buildListing(), buildProfile());
+    expect(r.reasons.confidence).toBe(1);
+    expect(r.reasons.recommendation).toBe("to_contact_fast");
+  });
+
+  it("does not penalize a must-have equipment as absent when there is no description", () => {
+    const r = scoreListing(
+      buildListing({ description: null }),
+      buildProfile({ must_have_parking: 1 }),
+    );
+    const entry = r.reasons.breakdown.find((b) => b.rule.includes("non vérifiable"));
+    expect(entry).toBeDefined();
+    expect(entry?.delta).toBe(0);
+  });
+});
+
 describe("extractFloor", () => {
   it("returns 0 for RDC", () => {
     expect(extractFloor("Studio en RDC")).toBe(0);
