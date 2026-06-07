@@ -171,7 +171,10 @@ async fn ingest_listing(
         )
             .into_response();
     }
-    if !matches!(payload.r#type.as_str(), "listing-watch" | "listing-clipboard") {
+    if !matches!(
+        payload.r#type.as_str(),
+        "listing-watch" | "listing-clipboard" | "listing-detail"
+    ) {
         return (
             StatusCode::BAD_REQUEST,
             Json(ErrorBody {

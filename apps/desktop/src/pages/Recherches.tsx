@@ -46,10 +46,21 @@ export default function Recherches() {
 
   const save = async () => {
     if (!editing) return;
-    if (editing.id) {
-      await updateSearchProfile(editing.id, editing);
+    // Cohérence : si l'utilisateur n'a pas d'URL mais a une ville, on la construit
+    // automatiquement depuis ses critères (plus aucune URL à coller à la main).
+    let toSave = editing;
+    if (!editing.lbc_search_url && editing.city) {
+      try {
+        const url = await buildLbcSearchUrlAsync(editing as never);
+        toSave = { ...editing, lbc_search_url: url };
+      } catch {
+        /* géocodage indisponible → on enregistre sans URL */
+      }
+    }
+    if (toSave.id) {
+      await updateSearchProfile(toSave.id, toSave);
     } else {
-      await createSearchProfile(editing);
+      await createSearchProfile(toSave);
     }
     await refresh();
     setEditing(null);

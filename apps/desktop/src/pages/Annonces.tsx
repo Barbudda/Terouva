@@ -88,6 +88,12 @@ export default function Annonces() {
     if (!searchId && searches.length > 0) setSearchId(searches[0].id);
   }, [searches, searchId]);
 
+  // URL de recherche à proposer dans l'état vide : 1re recherche active qui en a une.
+  const firstSearchUrl =
+    searches.find((s) => s.is_active === 1 && s.lbc_search_url)?.lbc_search_url ??
+    searches.find((s) => s.lbc_search_url)?.lbc_search_url ??
+    null;
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const base = listings.filter((l) => {
@@ -506,10 +512,29 @@ export default function Annonces() {
         ))}
         {filtered.length === 0 && (
           <Card>
-            <CardBody className="text-center py-10 text-zinc-500">
-              {listings.length === 0
-                ? "Aucune annonce. Colle une URL Leboncoin ci-dessus pour commencer."
-                : "Aucune annonce dans ce filtre."}
+            <CardBody className="text-center py-12 text-zinc-400 space-y-4">
+              {listings.length === 0 ? (
+                <>
+                  <div className="text-base text-zinc-300">
+                    Aucune annonce pour l'instant.
+                  </div>
+                  <p className="text-sm text-zinc-500 max-w-md mx-auto">
+                    Ouvre ta recherche sur Leboncoin : Terouva capte les nouvelles
+                    annonces en direct dès qu'elles apparaissent.
+                  </p>
+                  {firstSearchUrl ? (
+                    <Button onClick={() => openExternal(firstSearchUrl)}>
+                      Ouvrir ma recherche sur Leboncoin ↗
+                    </Button>
+                  ) : (
+                    <p className="text-xs text-zinc-600">
+                      Crée d'abord une recherche dans « Mon dossier ».
+                    </p>
+                  )}
+                </>
+              ) : (
+                "Aucune annonce dans ce filtre."
+              )}
             </CardBody>
           </Card>
         )}
@@ -642,6 +667,13 @@ function ListingCard({
               </Badge>
             )}
             {rec && <Badge className={rec.className}>{rec.text}</Badge>}
+            {reasons && reasons.confidence !== undefined && reasons.confidence < 0.5 && (
+              <span title="Score provisoire : peu d'infos sur la carte LBC. Ouvre l'annonce pour le confirmer.">
+                <Badge className="bg-amber-500/10 text-amber-300/90 border-amber-500/30">
+                  provisoire
+                </Badge>
+              </span>
+            )}
             <StatusBadge status={listing.status} />
           </div>
         </div>

@@ -20,6 +20,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen, type UnlistenFn } from "@tauri-apps/api/event";
 import {
+  enrichListing,
   getListing,
   getListingByUrl,
   getSetting,
@@ -58,11 +59,46 @@ export interface WatchEventPayload {
 
 export interface WatchIngestResult {
   listingId: number;
-  status: "new" | "duplicate";
+  status: "new" | "duplicate" | "enriched" | "ignored";
   score: number | null;
   matchedSearchId: number | null;
   matchedSearchName: string | null;
   notified: boolean;
+}
+
+/** Construit un ParsedListing depuis le payload reçu (extension / polling). */
+function payloadToParsed(d: WatchEventPayload["data"]): ParsedListing {
+  return {
+    url: d.url,
+    external_id: d.external_id,
+    title: d.title,
+    price: d.price,
+    city: d.city,
+    postal_code: d.postal_code,
+    surface: d.surface,
+    rooms: d.rooms,
+    furnished: d.furnished,
+    property_type: d.property_type,
+    description: d.description,
+    images: d.images ?? [],
+    publisher_name: d.publisher_name,
+    publisher_type: d.publisher_type,
+    published_at: d.published_at,
+    raw_html_size: 0,
+  };
+}
+
+/** Re-score une annonce contre la meilleure recherche active. */
+async function scoreAgainstActive(
+  listing: Listing,
+): Promise<{ score: number; reasons: unknown; profile: SearchProfile } | null> {
+  const active = (await listSearchProfiles()).filter((s) => s.is_active === 1);
+  let best: { score: number; reasons: unknown; profile: SearchProfile } | null = null;
+  for (const sp of active) {
+    const r = scoreListing(listing, sp);
+    if (!best || r.score > best.score) best = { score: r.score, reasons: r.reasons, profile: sp };
+  }
+  return best;
 }
 
 type WatchHandler = (result: WatchIngestResult, payload: WatchEventPayload) => void;
@@ -180,43 +216,72 @@ async function handleWatchPayload(
 ): Promise<WatchIngestResult> {
   const d = payload.data;
   if (!d?.url) throw new Error("payload missing url");
+  const parsed = payloadToParsed(d);
+  // Un payload "listing-detail" vient d'une page d'annonce ouverte par l'utilisateur :
+  // il sert à ENRICHIR une fiche existante, jamais à en créer une nouvelle (sinon
+  // chaque annonce consultée au hasard polluerait le feed).
+  const detailOnly = payload.type === "listing-detail";
 
-  // Dedupe by URL — UNIQUE constraint on listings.url anyway, but we want to
-  // produce a stable result and not noise the UI with duplicates.
   const existing = await getListingByUrl(d.url);
   if (existing) {
+    // Enrichissement : on complète les champs vides avec les nouvelles données,
+    // puis on re-score (la confiance monte quand la description arrive).
+    const changed = await enrichListing(existing.id, parsed);
+    if (!changed) {
+      return {
+        listingId: existing.id,
+        status: "duplicate",
+        score: existing.score,
+        matchedSearchId: existing.search_profile_id,
+        matchedSearchName: null,
+        notified: false,
+      };
+    }
+    const reloaded = await getListing(existing.id);
+    if (!reloaded) {
+      return { listingId: existing.id, status: "duplicate", score: existing.score, matchedSearchId: null, matchedSearchName: null, notified: false };
+    }
+    const best = await scoreAgainstActive(reloaded);
+    let newScore: number | null = existing.score;
+    let matchedName: string | null = null;
+    let matchedId: number | null = existing.search_profile_id;
+    if (best) {
+      await updateListingScore(existing.id, best.score, best.reasons);
+      newScore = best.score;
+      matchedName = best.profile.name;
+      matchedId = best.profile.id;
+    }
+    // Notif seulement si l'enrichissement fait FRANCHIR le seuil (évite le re-spam) :
+    // une annonce "moyenne" sur carte pauvre qui devient "chaude" une fois enrichie.
+    let notified = false;
+    const threshold = Number((await getSetting("notification_min_score")) ?? 70);
+    if (newScore !== null && newScore >= threshold && (existing.score ?? 0) < threshold) {
+      notified = await maybeNotifyHot(reloaded, newScore, matchedName);
+    }
     return {
       listingId: existing.id,
-      status: "duplicate",
-      score: existing.score,
-      matchedSearchId: existing.search_profile_id,
+      status: "enriched",
+      score: newScore,
+      matchedSearchId: matchedId,
+      matchedSearchName: matchedName,
+      notified,
+    };
+  }
+
+  // Annonce inconnue : si c'est un payload "détail" (consultation au hasard), on
+  // n'ingère pas — on évite de polluer le feed avec des annonces hors recherche.
+  if (detailOnly) {
+    return {
+      listingId: -1,
+      status: "ignored",
+      score: null,
+      matchedSearchId: null,
       matchedSearchName: null,
       notified: false,
     };
   }
 
-  const parsed: ParsedListing = {
-    url: d.url,
-    external_id: d.external_id,
-    title: d.title,
-    price: d.price,
-    city: d.city,
-    postal_code: d.postal_code,
-    surface: d.surface,
-    rooms: d.rooms,
-    furnished: d.furnished,
-    property_type: d.property_type,
-    description: d.description,
-    images: d.images ?? [],
-    publisher_name: d.publisher_name,
-    publisher_type: d.publisher_type,
-    published_at: d.published_at,
-    raw_html_size: 0,
-  };
-
   // Choose the best-matching active search profile (highest score), if any.
-  const searches = await listSearchProfiles();
-  const active = searches.filter((s) => s.is_active === 1);
   const id = await insertListingFromParsed(parsed, null);
   const listing = await getListing(id);
   if (!listing) {
@@ -230,13 +295,7 @@ async function handleWatchPayload(
     };
   }
 
-  let best: { score: number; reasons: unknown; profile: SearchProfile } | null = null;
-  for (const sp of active) {
-    const r = scoreListing(listing, sp);
-    if (!best || r.score > best.score) {
-      best = { score: r.score, reasons: r.reasons, profile: sp };
-    }
-  }
+  const best = await scoreAgainstActive(listing);
 
   let finalScore: number | null = null;
   let matchedId: number | null = null;

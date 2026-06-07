@@ -99,4 +99,48 @@
       data,
     };
   };
+
+  // ── Auto-enrichissement on-thesis ─────────────────────────────────────────
+  // Quand l'utilisateur OUVRE une annonce (sa propre navigation), on envoie le
+  // détail complet à l'app en type "listing-detail". L'app ENRICHIT la fiche
+  // déjà détectée (description, ville, pièces…) et re-score en pleine confiance.
+  // Si l'annonce n'est pas connue (consultation au hasard), l'app l'ignore.
+  // Aucune requête vers LBC : on lit la page que l'utilisateur regarde déjà.
+  function autoSendDetail() {
+    try {
+      chrome.storage.sync.get(
+        ["terouva.serverUrl", "terouva.token", "terouva.watchEnabled"],
+        (out) => {
+          const serverUrl = out["terouva.serverUrl"];
+          const token = out["terouva.token"];
+          const enabled = out["terouva.watchEnabled"] !== false;
+          if (!serverUrl || !token || !enabled) return;
+          const data = extractFromNextData() ?? extractFromMeta();
+          if (!data?.url) return;
+          fetch(`${serverUrl.replace(/\/+$/, "")}/ingest/listing`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              app: "terouva",
+              type: "listing-detail",
+              version: 1,
+              captured_at: new Date().toISOString(),
+              data,
+            }),
+          }).catch(() => {
+            /* app fermée → best-effort, on ignore */
+          });
+        },
+      );
+    } catch {
+      /* hors contexte extension → ignore */
+    }
+  }
+
+  // Laisse le temps au __NEXT_DATA__ d'être présent (document_idle suffit en général).
+  if (document.readyState === "complete") autoSendDetail();
+  else window.addEventListener("load", autoSendDetail, { once: true });
 })();

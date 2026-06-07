@@ -227,6 +227,51 @@ export async function deleteListing(id: number): Promise<void> {
   await db.execute("DELETE FROM listings WHERE id = ?", [id]);
 }
 
+/**
+ * Enrichit une annonce existante avec des champs plus complets (ex. quand
+ * l'utilisateur ouvre l'annonce et que l'extension capte le détail complet).
+ * On ne remplit QUE les champs vides — on n'écrase jamais une donnée déjà là.
+ * Retourne true si quelque chose a changé (→ re-scorer en amont).
+ */
+export async function enrichListing(
+  id: number,
+  p: ParsedListing,
+): Promise<boolean> {
+  const cur = await getListing(id);
+  if (!cur) return false;
+  const sets: string[] = [];
+  const vals: unknown[] = [];
+  const fill = (col: string, curVal: unknown, newVal: unknown) => {
+    const empty = curVal === null || curVal === undefined || curVal === "";
+    const has = newVal !== null && newVal !== undefined && newVal !== "";
+    if (empty && has) {
+      sets.push(`${col} = ?`);
+      vals.push(newVal);
+    }
+  };
+  fill("title", cur.title, p.title);
+  fill("price", cur.price, p.price);
+  fill("city", cur.city, p.city);
+  fill("postal_code", cur.postal_code, p.postal_code);
+  fill("surface", cur.surface, p.surface);
+  fill("rooms", cur.rooms, p.rooms);
+  fill("furnished", cur.furnished, p.furnished === null ? null : p.furnished ? 1 : 0);
+  fill("property_type", cur.property_type, p.property_type);
+  fill("description", cur.description, p.description);
+  fill("publisher_name", cur.publisher_name, p.publisher_name);
+  fill("publisher_type", cur.publisher_type, p.publisher_type);
+  fill("published_at", cur.published_at, p.published_at);
+  const curImagesEmpty = !cur.images || cur.images === "[]";
+  if (curImagesEmpty && p.images && p.images.length > 0) {
+    sets.push("images = ?");
+    vals.push(JSON.stringify(p.images));
+  }
+  if (sets.length === 0) return false;
+  const db = await getDb();
+  await db.execute(`UPDATE listings SET ${sets.join(", ")} WHERE id = ?`, [...vals, id]);
+  return true;
+}
+
 // ────────────────────────────── applications ──────────────────────────────
 
 export async function listApplications(): Promise<Application[]> {
