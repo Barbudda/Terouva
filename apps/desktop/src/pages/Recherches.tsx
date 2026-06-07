@@ -8,6 +8,7 @@ import {
   updateSearchProfile,
 } from "@/lib/db";
 import { openExternal } from "@/lib/tauri";
+import { buildLbcSearchUrlAsync } from "@/lib/lbcUrl";
 import { useStore } from "@/store/useStore";
 import type { SearchProfile } from "@/types";
 
@@ -38,6 +39,7 @@ export default function Recherches() {
   const searches = useStore((s) => s.searches);
   const refresh = useStore((s) => s.refreshSearches);
   const [editing, setEditing] = useState<(Partial<SearchProfile> & { id?: number; name: string }) | null>(null);
+  const [genBusy, setGenBusy] = useState(false);
 
   const startNew = () => setEditing({ ...EMPTY });
   const startEdit = (s: SearchProfile) => setEditing({ ...s });
@@ -264,12 +266,42 @@ export default function Recherches() {
                 onChange={(e) => setEditing({ ...editing, keywords_exclude: e.target.value })}
               />
             </Field>
-            <Field label="URL de recherche Leboncoin" hint="Colle l'URL de ta recherche LBC">
+            <Field
+              label="URL de recherche Leboncoin"
+              hint="Générée automatiquement depuis tes critères — modifiable, et vérifiable en 1 clic."
+            >
               <Textarea
                 rows={2}
+                placeholder="Clique « Générer depuis mes critères »…"
                 value={editing.lbc_search_url ?? ""}
                 onChange={(e) => setEditing({ ...editing, lbc_search_url: e.target.value })}
               />
+              <div className="mt-2 flex items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  disabled={genBusy}
+                  onClick={async () => {
+                    setGenBusy(true);
+                    try {
+                      const url = await buildLbcSearchUrlAsync(editing as never);
+                      setEditing({ ...editing, lbc_search_url: url });
+                    } finally {
+                      setGenBusy(false);
+                    }
+                  }}
+                >
+                  {genBusy ? "Génération…" : "Générer depuis mes critères"}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  disabled={!editing.lbc_search_url}
+                  onClick={() => editing.lbc_search_url && openExternal(editing.lbc_search_url)}
+                >
+                  Ouvrir sur Leboncoin ↗
+                </Button>
+              </div>
             </Field>
             <div className="grid grid-cols-2 gap-2 col-span-2">
               {(

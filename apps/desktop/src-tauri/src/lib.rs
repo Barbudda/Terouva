@@ -3,6 +3,7 @@ use std::sync::{Arc, RwLock};
 use tauri_plugin_sql::{Builder as SqlBuilder, Migration, MigrationKind};
 
 mod ai;
+mod geo;
 mod parser;
 mod polling;
 mod server;
@@ -154,6 +155,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             parser::parse_listing_url,
             parser::parse_search_url,
+            geo::geocode_city,
             ai::generate_message_ai,
             set_server_token,
             get_server_port,

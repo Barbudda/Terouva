@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Field, Input } from "@/components/ui/Input";
 import { createSearchProfile, setSetting, updateUserProfile } from "@/lib/db";
+import { buildLbcSearchUrlAsync } from "@/lib/lbcUrl";
 
 /**
  * Assistant de premier lancement (3 écrans). Objectif : passer de « installé »
@@ -38,12 +39,31 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
         guarantors: guarantors || null,
       });
       if (city || priceMax || surfaceMin || lbcUrl) {
+        // Si l'utilisateur n'a pas collé d'URL, on la construit depuis ses critères
+        // (géocodage de la ville inclus). Plus besoin de coller quoi que ce soit.
+        let url = lbcUrl || null;
+        if (!url && city) {
+          try {
+            url = await buildLbcSearchUrlAsync({
+              city,
+              radius_km: null,
+              price_max: priceMax ? Number(priceMax) : null,
+              surface_min: surfaceMin ? Number(surfaceMin) : null,
+              rooms_min: null,
+              furnished: "any",
+              property_type: "any",
+              keywords_must: null,
+            });
+          } catch {
+            /* géocodage indisponible → on crée la recherche sans URL */
+          }
+        }
         await createSearchProfile({
           name: city ? `Recherche ${city}` : "Ma recherche",
           city: city || null,
           price_max: priceMax ? Number(priceMax) : null,
           surface_min: surfaceMin ? Number(surfaceMin) : null,
-          lbc_search_url: lbcUrl || null,
+          lbc_search_url: url,
           is_active: 1,
         });
       }
@@ -155,7 +175,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
               </div>
               <Field
                 label="URL de ta recherche Leboncoin (optionnel)"
-                hint="Colle l'URL de ta page de résultats LBC pour la surveillance automatique."
+                hint="Laisse vide : Terouva construit la recherche depuis ta ville et ton budget. Colle une URL seulement si tu en as déjà une précise."
               >
                 <Input
                   placeholder="https://www.leboncoin.fr/recherche?..."
