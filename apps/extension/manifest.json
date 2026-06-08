@@ -19,7 +19,7 @@
       "48": "icons/48.png"
     }
   },
-  "permissions": ["activeTab", "scripting", "clipboardWrite", "storage", "notifications", "tabs"],
+  "permissions": ["activeTab", "scripting", "clipboardWrite", "clipboardRead", "storage", "notifications", "tabs"],
   "background": {
     "service_worker": "background/service-worker.js"
   },

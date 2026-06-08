@@ -140,7 +140,113 @@
     }
   }
 
+  // ── Option « réactivité » : pré-remplir le message de candidature ──────────
+  // L'utilisateur a préparé son message dans Terouva (« Préparer & contacter » →
+  // message copié). Ici, sur la page d'annonce, un bouton Terouva remplit le champ
+  // de contact LBC avec ce message. L'ENVOI reste 100% HUMAIN : l'utilisateur clique
+  // lui-même sur « Envoyer » de LBC. On n'automatise JAMAIS la soumission (ligne rouge).
+
+  function tvSetNativeValue(el, value) {
+    // Passe par le setter natif pour que le React de LBC voie le changement.
+    const proto = Object.getPrototypeOf(el);
+    const desc = Object.getOwnPropertyDescriptor(proto, "value");
+    if (desc && desc.set) desc.set.call(el, value);
+    else el.value = value;
+  }
+
+  function tvFindContactTextarea() {
+    const sels = [
+      "textarea[name*='message' i]",
+      "textarea[placeholder*='message' i]",
+      "textarea[id*='message' i]",
+      "form textarea",
+      "textarea",
+    ];
+    for (const s of sels) {
+      for (const el of document.querySelectorAll(s)) {
+        const r = el.getBoundingClientRect();
+        if (r.width > 0 && r.height > 0 && !el.disabled && !el.readOnly) return el;
+      }
+    }
+    return null;
+  }
+
+  function tvHint(btn, msg, ok) {
+    const h = btn.querySelector(".tv-hint");
+    if (h) {
+      h.textContent = msg;
+      h.style.color = ok ? "#7EE8C8" : "#FFB84D";
+    }
+  }
+
+  async function tvFill(btn) {
+    let text = "";
+    try {
+      text = await navigator.clipboard.readText();
+    } catch {
+      text = "";
+    }
+    if (!text || !text.trim()) {
+      tvHint(btn, "Copie d'abord ton message (Terouva → « Préparer & contacter »).", false);
+      return;
+    }
+    const ta = tvFindContactTextarea();
+    if (!ta) {
+      tvHint(btn, "Ouvre le formulaire « Contacter » de LBC, puis reclique.", false);
+      return;
+    }
+    tvSetNativeValue(ta, text);
+    ta.dispatchEvent(new Event("input", { bubbles: true }));
+    ta.dispatchEvent(new Event("change", { bubbles: true }));
+    ta.focus();
+    ta.scrollIntoView({ behavior: "smooth", block: "center" });
+    tvHint(btn, "Message rempli ✓ Vérifie et clique sur « Envoyer ».", true);
+  }
+
+  function tvInjectButton() {
+    if (document.getElementById("terouva-fill")) return;
+    const btn = document.createElement("div");
+    btn.id = "terouva-fill";
+    btn.style.cssText = [
+      "position:fixed", "right:16px", "bottom:16px", "z-index:2147483647",
+      "background:#0a0a0b", "color:#ededee", "border:1px solid #2c2c33",
+      "border-radius:10px", "padding:10px 14px", "cursor:pointer",
+      "font:13px/1.4 ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif",
+      "box-shadow:0 8px 32px -8px rgba(0,0,0,0.5)", "max-width:280px", "user-select:none",
+    ].join(";");
+    const label = document.createElement("div");
+    label.textContent = "📋 Remplir mon message Terouva";
+    btn.appendChild(label);
+    const hint = document.createElement("div");
+    hint.className = "tv-hint";
+    hint.style.cssText = "margin-top:4px;font-size:11px;color:#a3a3aa";
+    hint.textContent = "Message déjà copié ? Clique pour remplir le champ.";
+    btn.appendChild(hint);
+    btn.addEventListener("dblclick", () => btn.remove());
+    btn.addEventListener("click", (e) => {
+      if (e.detail === 2) return; // ignore le 1er clic d'un double-clic (= fermer)
+      tvFill(btn);
+    });
+    btn.title = "Terouva — l'envoi reste manuel : tu cliques « Envoyer » toi-même. Double-clic pour cacher.";
+    document.body.appendChild(btn);
+  }
+
+  function tvInit() {
+    try {
+      chrome.storage.sync.get(["terouva.watchEnabled"], (out) => {
+        if (out["terouva.watchEnabled"] === false) return;
+        tvInjectButton();
+      });
+    } catch {
+      tvInjectButton();
+    }
+  }
+
   // Laisse le temps au __NEXT_DATA__ d'être présent (document_idle suffit en général).
-  if (document.readyState === "complete") autoSendDetail();
-  else window.addEventListener("load", autoSendDetail, { once: true });
+  if (document.readyState === "complete") {
+    autoSendDetail();
+    tvInit();
+  } else {
+    window.addEventListener("load", () => { autoSendDetail(); tvInit(); }, { once: true });
+  }
 })();
