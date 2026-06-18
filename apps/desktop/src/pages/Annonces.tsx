@@ -13,12 +13,7 @@ import {
   updateListingStatus,
   upsertApplication,
 } from "@/lib/db";
-import {
-  generateMessageAI,
-  getClaudeApiKey,
-  getClaudeEnabled,
-  setClaudeEnabled,
-} from "@/lib/ai";
+import { generateMessageAI, getAiEnabled, setAiEnabled } from "@/lib/ai";
 import { generateMessage, TONE_LABELS } from "@/lib/messageGen";
 import { recommendationLabel, scoreListing } from "@/lib/scoring";
 import {
@@ -858,26 +853,20 @@ function CandidaturePanel({
   );
   const [app, setApp] = useState<Application | undefined>(undefined);
   const [savedAt, setSavedAt] = useState<number | null>(null);
-  const [useAI, setUseAI] = useState(false);
-  const [hasApiKey, setHasApiKey] = useState(false);
+  const [useAI, setUseAI] = useState(true);
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState<string | null>(null);
-  const [aiMeta, setAiMeta] = useState<{
-    model: string;
-    inTok: number;
-    outTok: number;
-  } | null>(null);
+  const [aiMeta, setAiMeta] = useState<{ model: string } | null>(null);
 
   useEffect(() => {
-    Promise.all([getApplicationByListing(listing.id), getClaudeEnabled(), getClaudeApiKey()])
-      .then(([a, on, key]) => {
+    Promise.all([getApplicationByListing(listing.id), getAiEnabled()])
+      .then(([a, on]) => {
         if (a) {
           setApp(a);
           if (a.message) setMessage(a.message);
           if (a.message_tone) setTone(a.message_tone);
         }
-        setHasApiKey(!!key);
-        setUseAI(on && !!key);
+        setUseAI(on);
       })
       .catch(() => {});
   }, [listing.id]);
@@ -885,19 +874,15 @@ function CandidaturePanel({
   const regenerate = async (newTone: MessageTone) => {
     setTone(newTone);
     setAiError(null);
-    if (useAI && hasApiKey) {
+    if (useAI) {
       setAiLoading(true);
       try {
         const out = await generateMessageAI(listing, profile, newTone);
         setMessage(out.text);
-        setAiMeta({
-          model: out.model,
-          inTok: out.input_tokens,
-          outTok: out.output_tokens,
-        });
+        setAiMeta({ model: out.model });
       } catch (e) {
         setAiError(
-          String(e).replace(/^Error:\s*/, "") + " — fallback sur le template.",
+          String(e).replace(/^Error:\s*/, "") + " — message standard utilisé.",
         );
         setMessage(generateMessage(listing, profile, newTone));
       } finally {
@@ -910,7 +895,7 @@ function CandidaturePanel({
 
   const toggleAI = async (on: boolean) => {
     setUseAI(on);
-    await setClaudeEnabled(on);
+    await setAiEnabled(on);
   };
 
   const saveDraft = async () => {
@@ -957,24 +942,15 @@ function CandidaturePanel({
           <div className="text-xs font-semibold text-zinc-300">
             Préparer la candidature
           </div>
-          {hasApiKey ? (
-            <label className="flex items-center gap-1.5 text-[11px] text-zinc-400 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={useAI}
-                onChange={(e) => toggleAI(e.target.checked)}
-                className="accent-violet-500"
-              />
-              <span>{useAI ? "AI Claude" : "Template"}</span>
-            </label>
-          ) : (
-            <span
-              className="text-[11px] text-zinc-500"
-              title="Configure ta clé API Claude dans Réglages → Génération AI pour activer la génération adaptative."
-            >
-              Template (AI désactivée)
-            </span>
-          )}
+          <label className="flex items-center gap-1.5 text-[11px] text-zinc-400 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={useAI}
+              onChange={(e) => toggleAI(e.target.checked)}
+              className="accent-violet-500"
+            />
+            <span>{useAI ? "Message intelligent" : "Message standard"}</span>
+          </label>
         </div>
         <div className="flex gap-1">
           {(Object.keys(TONE_LABELS) as MessageTone[]).map((t) => (
@@ -997,7 +973,7 @@ function CandidaturePanel({
       </div>
       {aiLoading && (
         <div className="text-[11px] text-violet-300 animate-pulse">
-          Claude rédige le message…
+          Terouva rédige le message…
         </div>
       )}
       {aiError && (
@@ -1007,7 +983,7 @@ function CandidaturePanel({
       )}
       {aiMeta && !aiError && (
         <div className="text-[10px] font-mono text-zinc-500">
-          {aiMeta.model} · {aiMeta.inTok}↑ / {aiMeta.outTok}↓ tokens
+          message généré par Terouva
         </div>
       )}
       <Textarea
