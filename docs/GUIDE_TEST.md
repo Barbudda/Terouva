@@ -86,6 +86,23 @@ curl http://127.0.0.1:8765/health
 
 ---
 
+## 5 bis. Détection par email d'alerte LBC (sans Chrome)
+
+> Voie alternative : tu laisses Leboncoin t'envoyer ses **emails d'alerte** (recherche
+> sauvegardée), et tu colles l'email dans Terouva. **Aucune requête vers LBC** (c'est LBC
+> qui envoie le mail) → zéro risque de flag. Idéal quand Chrome est fermé.
+
+- [ ] Sur Leboncoin, crée une **recherche sauvegardée** avec alerte email (si pas déjà fait).
+- [ ] Quand tu reçois un email **« Nouvelles annonces pour votre recherche »** :
+  - [ ] Ouvre-le, **sélectionne tout + copie** (dans Gmail : « ⋮ → Afficher l'original » donne le HTML brut, encore mieux).
+- [ ] Dans l'app → **Mes annonces** → **Ajouter une annonce** → onglet **« ✉ Email d'alerte »**.
+  - [ ] Colle le contenu → **Importer les annonces**.
+  - [ ] Un récap s'affiche : `N annonce(s) trouvée(s) : X nouvelle(s)…`.
+  - [ ] Les annonces apparaissent dans le feed en **« provisoire »** (URL seule) → tu les enrichis à l'étape 6.
+- [ ] Si le récap dit **« 0 annonce trouvée »** : colle l'**email complet** (HTML d'origine). Le format LBC n'étant pas public, **envoie-moi un vrai email d'alerte** pour caler le parser au cas par cas.
+
+---
+
 ## 6. Enrichissement (le score se précise quand tu ouvres une annonce)
 
 - [ ] Dans le feed, repère une annonce avec badge **« provisoire »**.

@@ -29,6 +29,7 @@ import {
   setSetting,
   updateListingScore,
 } from "@/lib/db";
+import { lbcAlertEmailToListings } from "@/lib/lbcEmail";
 import { scoreListing } from "@/lib/scoring";
 import { notifyDesktop } from "@/lib/tauri";
 import type { Listing, ParsedListing, SearchProfile } from "@/types";
@@ -221,8 +222,26 @@ async function handleWatchPayload(
   // il sert à ENRICHIR une fiche existante, jamais à en créer une nouvelle (sinon
   // chaque annonce consultée au hasard polluerait le feed).
   const detailOnly = payload.type === "listing-detail";
+  return ingestParsedListing(parsed, { detailOnly });
+}
 
-  const existing = await getListingByUrl(d.url);
+/**
+ * Ingestion d'une annonce déjà parsée — point d'entrée partagé par l'extension
+ * (watch:listing) ET l'import d'emails d'alerte LBC. Dédup par URL, enrichit si
+ * connue, sinon insère, score contre la meilleure recherche active, notifie si
+ * le seuil est franchi.
+ *
+ * `detailOnly` : si l'annonce est inconnue, ne pas l'insérer (cas d'une page
+ * d'annonce ouverte au hasard — sert seulement à enrichir une fiche existante).
+ */
+export async function ingestParsedListing(
+  parsed: ParsedListing,
+  opts: { detailOnly: boolean } = { detailOnly: false },
+): Promise<WatchIngestResult> {
+  const { detailOnly } = opts;
+  if (!parsed.url) throw new Error("listing missing url");
+
+  const existing = await getListingByUrl(parsed.url);
   if (existing) {
     // Enrichissement : on complète les champs vides avec les nouvelles données,
     // puis on re-score (la confiance monte quand la description arrive).
@@ -320,6 +339,52 @@ async function handleWatchPayload(
     matchedSearchName: matchedName,
     notified,
   };
+}
+
+export interface EmailImportSummary {
+  /** Nombre d'annonces trouvées dans l'email. */
+  found: number;
+  /** Nouvelles annonces insérées dans le feed. */
+  added: number;
+  /** Déjà présentes (dédup par URL). */
+  duplicates: number;
+  /** Fiches existantes enrichies par l'email. */
+  enriched: number;
+  /** Annonces ayant déclenché une notif (score ≥ seuil). */
+  notified: number;
+}
+
+/**
+ * Importe les annonces d'un **email d'alerte Leboncoin** collé par l'utilisateur.
+ * Aucune requête vers LBC (c'est LBC qui a envoyé le mail) ; l'envoi de
+ * candidature reste 100 % humain. Chaque lien d'annonce est passé dans le même
+ * pipeline d'ingestion que l'extension (dédup → score → notif). Les fiches sont
+ * volontairement « provisoires » (URL seule) : elles s'enrichissent quand
+ * l'utilisateur ouvre l'annonce.
+ */
+export async function importLbcAlertEmail(
+  content: string,
+): Promise<EmailImportSummary> {
+  const parsedListings = lbcAlertEmailToListings(content);
+  const summary: EmailImportSummary = {
+    found: parsedListings.length,
+    added: 0,
+    duplicates: 0,
+    enriched: 0,
+    notified: 0,
+  };
+  for (const parsed of parsedListings) {
+    try {
+      const r = await ingestParsedListing(parsed, { detailOnly: false });
+      if (r.status === "new") summary.added++;
+      else if (r.status === "duplicate") summary.duplicates++;
+      else if (r.status === "enriched") summary.enriched++;
+      if (r.notified) summary.notified++;
+    } catch (e) {
+      console.error("[watchBridge] email listing ingest failed:", e);
+    }
+  }
+  return summary;
 }
 
 async function maybeNotifyHot(

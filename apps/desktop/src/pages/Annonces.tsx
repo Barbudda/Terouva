@@ -21,6 +21,10 @@ import {
   openExternal,
   parseListingUrl,
 } from "@/lib/tauri";
+import {
+  type EmailImportSummary,
+  importLbcAlertEmail,
+} from "@/lib/watchBridge";
 import { useStore } from "@/store/useStore";
 import type {
   Application,
@@ -63,9 +67,11 @@ export default function Annonces() {
   const profile = useStore((s) => s.profile);
   const refresh = useStore((s) => s.refreshListings);
 
-  const [mode, setMode] = useState<"single" | "bulk">("single");
+  const [mode, setMode] = useState<"single" | "bulk" | "email">("single");
   const [url, setUrl] = useState("");
   const [bulk, setBulk] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailReport, setEmailReport] = useState<EmailImportSummary | null>(null);
   const [searchId, setSearchId] = useState<number | null>(null);
   const [adding, setAdding] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -246,6 +252,32 @@ export default function Annonces() {
     setBulk("");
   };
 
+  const addFromEmail = async () => {
+    setError(null);
+    setEmailReport(null);
+    if (!email.trim()) {
+      setError("Colle le contenu d'un email d'alerte Leboncoin");
+      return;
+    }
+    setAdding(true);
+    try {
+      const summary = await importLbcAlertEmail(email);
+      await refresh();
+      setEmailReport(summary);
+      if (summary.found === 0) {
+        setError(
+          "Aucun lien d'annonce détecté dans cet email. Colle l'email d'alerte LBC en entier (HTML d'origine de préférence).",
+        );
+      } else {
+        setEmail("");
+      }
+    } catch (e) {
+      setError(`Import échoué : ${e}`);
+    } finally {
+      setAdding(false);
+    }
+  };
+
   const rescoreAll = async () => {
     if (!searches.length) return;
     if (!confirm("Re-scorer toutes les annonces selon leur recherche associée ?")) return;
@@ -296,10 +328,17 @@ export default function Annonces() {
               >
                 Multi-URL
               </button>
+              <button
+                onClick={() => setMode("email")}
+                className={tabClass(mode === "email")}
+                title="Colle un email d'alerte Leboncoin : Terouva en extrait les annonces"
+              >
+                ✉ Email d'alerte
+              </button>
             </div>
           </div>
         </CardHeader>
-        {mode === "single" ? (
+        {mode === "single" && (
           <CardBody className="grid grid-cols-[1fr_240px_auto] gap-3 items-end">
             <Field label="URL Leboncoin">
               <Input
@@ -328,7 +367,8 @@ export default function Annonces() {
               {adding ? "Récup…" : "Ajouter & scorer"}
             </Button>
           </CardBody>
-        ) : (
+        )}
+        {mode === "bulk" && (
           <CardBody className="space-y-3">
             <Field
               label="URLs Leboncoin (une par ligne)"
@@ -374,6 +414,48 @@ export default function Annonces() {
                       ✗ {truncate(r.url, 60)} — {r.error}
                     </div>
                   ))}
+              </div>
+            )}
+          </CardBody>
+        )}
+        {mode === "email" && (
+          <CardBody className="space-y-3">
+            <Field
+              label="Email d'alerte Leboncoin"
+              hint="Ouvre l'email d'alerte LBC, copie-le entièrement (ou « Afficher l'original » dans Gmail) et colle-le ici. Terouva en extrait les annonces — aucune requête vers LBC."
+            >
+              <Textarea
+                rows={7}
+                placeholder="Colle ici le contenu de l'email d'alerte « Nouvelles annonces pour votre recherche »…"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Field>
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-[11px] text-zinc-500 max-w-md">
+                Chaque annonce de l'email arrive en « provisoire » : ouvre-la pour
+                l'enrichir et préciser son score. L'envoi de candidature reste 100 %
+                toi.
+              </p>
+              <Button onClick={addFromEmail} disabled={adding}>
+                {adding ? "Extraction…" : "Importer les annonces"}
+              </Button>
+            </div>
+            {emailReport && (
+              <div className="text-xs space-y-1 pt-2 border-t border-zinc-800 text-zinc-400">
+                <div>
+                  {emailReport.found} annonce(s) trouvée(s) :{" "}
+                  <span className="text-emerald-400">{emailReport.added} nouvelle(s)</span>
+                  {emailReport.enriched > 0 && (
+                    <span className="text-sky-400"> · {emailReport.enriched} enrichie(s)</span>
+                  )}
+                  {emailReport.duplicates > 0 && (
+                    <span className="text-zinc-500"> · {emailReport.duplicates} déjà présente(s)</span>
+                  )}
+                  {emailReport.notified > 0 && (
+                    <span className="text-violet-300"> · {emailReport.notified} alerte(s) ★</span>
+                  )}
+                </div>
               </div>
             )}
           </CardBody>
