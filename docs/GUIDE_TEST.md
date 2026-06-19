@@ -104,8 +104,9 @@ curl http://127.0.0.1:8765/health
 - [ ] Dans **Mes annonces**, clique une annonce pour la déplier.
   - [ ] Tu vois le **détail du score** : raisons **+ pour** / **− contre**, règle par règle.
 - [ ] Section **« Préparer la candidature »** :
-  - [ ] Choisis un **ton** : Direct / Chaleureux / Professionnel → le message se génère.
-  - [ ] (Optionnel) Active **Claude AI** si tu as mis une clé (Réglages) → message adapté à l'annonce.
+  - [ ] Choisis un **ton** : Direct / Chaleureux / Professionnel → le message se génère **instantanément** (100 % local, aucune clé, aucune API).
+  - [ ] Vérifie qu'il **cite des détails de l'annonce** (type de bien, surface, ville, parfois une caractéristique repérée dans la description).
+  - [ ] **Reclique le même ton** → tu obtiens **une autre formulation** (variantes).
   - [ ] **Copier le message**, puis **Ouvrir LBC** → tu colles et tu envoies **toi-même**.
   - [ ] **Marquer envoyé**.
 
@@ -140,7 +141,7 @@ curl http://127.0.0.1:8765/health
 
 ## 11. Réglages avancés (optionnel)
 
-- [ ] **Génération AI — Claude** : colle une clé API Anthropic → **Tester la connexion** → OK.
+- [ ] **Messages de candidature** : vérifie le texte « 100 % local, rien à configurer, aucune clé ». Choisis ton **ton par défaut**.
 - [ ] **Sauvegarde** : **Exporter en JSON** (télécharge un backup) puis **Importer** pour vérifier.
 - [ ] **Dossier locataire** : coche les pièces que tu as (CNI, bulletins…). Le Dashboard reflète la complétude.
 

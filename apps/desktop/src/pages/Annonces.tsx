@@ -13,7 +13,6 @@ import {
   updateListingStatus,
   upsertApplication,
 } from "@/lib/db";
-import { generateMessageAI, getAiEnabled, setAiEnabled } from "@/lib/ai";
 import { generateMessage, TONE_LABELS } from "@/lib/messageGen";
 import { recommendationLabel, scoreListing } from "@/lib/scoring";
 import {
@@ -853,49 +852,24 @@ function CandidaturePanel({
   );
   const [app, setApp] = useState<Application | undefined>(undefined);
   const [savedAt, setSavedAt] = useState<number | null>(null);
-  const [useAI, setUseAI] = useState(true);
-  const [aiLoading, setAiLoading] = useState(false);
-  const [aiError, setAiError] = useState<string | null>(null);
-  const [aiMeta, setAiMeta] = useState<{ model: string } | null>(null);
 
   useEffect(() => {
-    Promise.all([getApplicationByListing(listing.id), getAiEnabled()])
-      .then(([a, on]) => {
+    getApplicationByListing(listing.id)
+      .then((a) => {
         if (a) {
           setApp(a);
           if (a.message) setMessage(a.message);
           if (a.message_tone) setTone(a.message_tone);
         }
-        setUseAI(on);
       })
       .catch(() => {});
   }, [listing.id]);
 
-  const regenerate = async (newTone: MessageTone) => {
+  // Clic sur un ton = (re)génère le message ; recliquer le même ton donne une
+  // autre variante de formulation. 100 % local, instantané.
+  const regenerate = (newTone: MessageTone) => {
     setTone(newTone);
-    setAiError(null);
-    if (useAI) {
-      setAiLoading(true);
-      try {
-        const out = await generateMessageAI(listing, profile, newTone);
-        setMessage(out.text);
-        setAiMeta({ model: out.model });
-      } catch (e) {
-        setAiError(
-          String(e).replace(/^Error:\s*/, "") + " — message standard utilisé.",
-        );
-        setMessage(generateMessage(listing, profile, newTone));
-      } finally {
-        setAiLoading(false);
-      }
-    } else {
-      setMessage(generateMessage(listing, profile, newTone));
-    }
-  };
-
-  const toggleAI = async (on: boolean) => {
-    setUseAI(on);
-    await setAiEnabled(on);
+    setMessage(generateMessage(listing, profile, newTone));
   };
 
   const saveDraft = async () => {
@@ -938,32 +912,22 @@ function CandidaturePanel({
   return (
     <div className="rounded-md border border-zinc-800 bg-zinc-900/50 p-4 space-y-3">
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <div className="flex items-center gap-3">
-          <div className="text-xs font-semibold text-zinc-300">
-            Préparer la candidature
-          </div>
-          <label className="flex items-center gap-1.5 text-[11px] text-zinc-400 cursor-pointer select-none">
-            <input
-              type="checkbox"
-              checked={useAI}
-              onChange={(e) => toggleAI(e.target.checked)}
-              className="accent-violet-500"
-            />
-            <span>{useAI ? "Message intelligent" : "Message standard"}</span>
-          </label>
+        <div className="text-xs font-semibold text-zinc-300">
+          Préparer la candidature
+          <span className="ml-2 font-normal text-[10px] text-zinc-500">
+            reclique un ton pour une autre version
+          </span>
         </div>
         <div className="flex gap-1">
           {(Object.keys(TONE_LABELS) as MessageTone[]).map((t) => (
             <button
               key={t}
               onClick={() => regenerate(t)}
-              disabled={aiLoading}
               className={
                 "px-2 py-1 rounded text-xs transition-colors " +
                 (tone === t
                   ? "bg-violet-500 text-white"
-                  : "bg-zinc-800 text-zinc-400 hover:text-zinc-100") +
-                (aiLoading ? " opacity-60 cursor-wait" : "")
+                  : "bg-zinc-800 text-zinc-400 hover:text-zinc-100")
               }
             >
               {TONE_LABELS[t]}
@@ -971,21 +935,6 @@ function CandidaturePanel({
           ))}
         </div>
       </div>
-      {aiLoading && (
-        <div className="text-[11px] text-violet-300 animate-pulse">
-          Terouva rédige le message…
-        </div>
-      )}
-      {aiError && (
-        <div className="text-[11px] text-red-400 border border-red-500/30 bg-red-500/5 rounded px-2 py-1">
-          {aiError}
-        </div>
-      )}
-      {aiMeta && !aiError && (
-        <div className="text-[10px] font-mono text-zinc-500">
-          message généré par Terouva
-        </div>
-      )}
       <Textarea
         rows={10}
         value={message}

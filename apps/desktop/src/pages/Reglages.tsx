@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { Card, CardBody, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Field, Input, Select } from "@/components/ui/Input";
-import { getAiEnabled, setAiEnabled } from "@/lib/ai";
 import { downloadBackup, exportBackup, importBackup } from "@/lib/backup";
 import { getSetting, setDocumentAvailable, setSetting } from "@/lib/db";
 import { ensureNotificationPermission, notifyDesktop } from "@/lib/tauri";
@@ -21,23 +20,14 @@ export default function Reglages() {
   const [importMsg, setImportMsg] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  // ── Messages intelligents (bot interne, aucune clé requise) ──
-  const [aiOn, setAiOn] = useState(true);
-
   useEffect(() => {
     void (async () => {
       const tone = (await getSetting("default_message_tone")) ?? "pro";
       const min = Number((await getSetting("notification_min_score")) ?? 70);
       setDefaultTone(tone);
       setMinScore(min);
-      setAiOn(await getAiEnabled());
     })();
   }, []);
-
-  const toggleAi = async (on: boolean) => {
-    setAiOn(on);
-    await setAiEnabled(on);
-  };
 
   const saveDefaults = async () => {
     await setSetting("default_message_tone", defaultTone);
@@ -139,29 +129,15 @@ export default function Reglages() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Messages intelligents</CardTitle>
+          <CardTitle>Messages de candidature</CardTitle>
         </CardHeader>
-        <CardBody className="space-y-4">
+        <CardBody>
           <p className="text-sm text-zinc-400">
-            Terouva rédige automatiquement un message de candidature adapté à chaque
-            annonce, à partir de ton profil. <strong>Rien à configurer</strong> : c'est
-            inclus, aucune clé ni compte technique à gérer.
-          </p>
-          <label className="flex items-center gap-2 text-sm text-zinc-200 cursor-pointer select-none">
-            <input
-              type="checkbox"
-              checked={aiOn}
-              onChange={(e) => toggleAi(e.target.checked)}
-              className="accent-violet-500"
-            />
-            <span>
-              Messages intelligents activés
-              <span className="text-zinc-500"> (sinon, messages standard hors-ligne)</span>
-            </span>
-          </label>
-          <p className="text-[11px] text-zinc-600">
-            La génération se fait via le service Terouva. L'annonce sélectionnée et ton
-            profil sont envoyés au moment où tu génères un message, uniquement pour l'écrire.
+            Terouva rédige automatiquement un message adapté à chaque annonce (il en
+            cite les détails) à partir de ton profil, en 3 tons.{" "}
+            <strong>Rien à configurer</strong> : tout est local, aucune clé, aucun
+            compte, aucune donnée envoyée à un serveur. Tu choisis le ton au moment de
+            candidater.
           </p>
         </CardBody>
       </Card>

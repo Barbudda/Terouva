@@ -113,14 +113,14 @@ export const FEATURES: Feature[] = [
   },
   {
     icon: MessagesSquare,
-    title: "Messages 3 tons",
-    body: "Direct, chaleureux, professionnel. Templates locaux gratuits par défaut, auto-remplis avec ton profil et les détails de l'annonce.",
+    title: "Messages personnalisés",
+    body: "Direct, chaleureux ou professionnel. Terouva cite les détails de l'annonce (type de bien, surface, quartier, ce qui ressort de la description) et remplit ton profil. Reclique un ton pour une autre version.",
     accent: "neutral",
   },
   {
     icon: Sparkles,
-    title: "Génération AI optionnelle",
-    body: "Branche ta clé API Claude (Anthropic) en 1 minute. Chaque message devient adapté à l'annonce lue : Claude relit la description, repère les détails, écrit un message qui parle vraiment du logement. ~0,5 centime par message.",
+    title: "Zéro configuration",
+    body: "Rien à brancher : pas de clé API, pas de compte, pas de carte bancaire. Les messages sont générés sur ta machine, instantanément et gratuitement. Ce qui ne sort pas de chez toi ne peut pas fuiter.",
     accent: "signal",
   },
   {
@@ -215,11 +215,11 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Mes données partent où ?",
-    a: "Nulle part — sauf si tu actives volontairement la génération AI : dans ce cas, l'annonce que tu sélectionnes et les champs de ton profil partent chez api.anthropic.com pour rédiger le message, puis la réponse revient. Aucun stockage chez nous (pas de serveur Terouva). Pas de cloud, pas de backup distant, pas d'analytics. Tant que tu n'actives pas l'AI, l'app fonctionne 100% hors-ligne.",
+    a: "Nulle part. Tout vit dans terouva.db sur ton disque. Aucun serveur Terouva, aucune API externe, aucun cloud, aucun backup distant, aucun analytics. Même la rédaction des messages se fait sur ta machine : rien à envoyer pour générer un message.",
   },
   {
-    q: "C'est obligatoire d'avoir une clé Claude ?",
-    a: "Non. Les templates locaux (3 tons) sont activés par défaut et gratuits — ils marchent sans connexion. La clé Claude est une option pour avoir des messages adaptés à chaque annonce (Claude lit la description et le mentionne dans le texte). Coût typique : < 0,5 centime par message en Sonnet 4.6.",
+    q: "Faut-il une clé API ou un compte pour les messages ?",
+    a: "Non, rien du tout. Terouva rédige les messages localement à partir de ton profil et des détails de l'annonce, en 3 tons (direct, chaleureux, professionnel). Pas de clé, pas de compte, pas de carte bancaire, c'est gratuit et instantané. Tu n'as pas besoin d'être informaticien.",
   },
   {
     q: "Mac et Linux, c'est pour quand ?",

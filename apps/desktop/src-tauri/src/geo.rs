@@ -4,7 +4,7 @@
 //! Sert à construire le token de localisation des URLs de recherche Leboncoin
 //! (qui attend lat/lon/rayon, pas un simple nom de ville). Fait en Rust pour
 //! ne pas élargir le CSP de la webview et rester cohérent avec les autres
-//! appels réseau (parser, ai).
+//! appels réseau (parser).
 
 use anyhow::{anyhow, Result};
 use serde::{Deserialize, Serialize};
