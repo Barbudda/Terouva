@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Listing, SearchProfile } from "@/types";
+import type { Listing, SearchProfile } from "./types";
 import { extractFloor, scoreListing } from "./scoring";
 
 // ────────────────────────────── fixtures ──────────────────────────────

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Listing, UserProfile } from "@/types";
+import type { Listing, UserProfile } from "./types";
 import { generateMessage, TONE_LABELS } from "./messageGen";
 
 function buildListing(): Listing {

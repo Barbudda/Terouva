@@ -9,7 +9,9 @@
     "build:web": "npm --prefix apps/web run build",
     "build:desktop": "npm --prefix apps/desktop run build",
     "build:desktop:release": "npm --prefix apps/desktop run tauri:build",
-    "install:all": "npm install --prefix apps/web && npm install --prefix apps/desktop",
+    "test:core": "npm --prefix packages/core test",
+    "check:redlines": "node scripts/check-redlines.mjs",
+    "install:all": "npm install --prefix packages/core && npm install --prefix apps/web && npm install --prefix apps/desktop",
     "clean:web": "rimraf apps/web/.next apps/web/out",
     "clean:desktop": "rimraf apps/desktop/dist apps/desktop/src-tauri/gen"
   },

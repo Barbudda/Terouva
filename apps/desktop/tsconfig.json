@@ -18,7 +18,9 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@terouva/core": ["../../packages/core/src/index.ts"],
+      "@terouva/core/*": ["../../packages/core/src/*.ts"]
     }
   },
   "include": ["src"],
