@@ -16,6 +16,7 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"],
+      "@app/*": ["./components/app/*"],
       "@terouva/core": ["../../packages/core/src/index.ts"],
       "@terouva/core/*": ["../../packages/core/src/*.ts"]
     }

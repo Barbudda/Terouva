@@ -11,6 +11,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      "@app": path.resolve(__dirname, "./components/app"),
       "@": path.resolve(__dirname, "."),
       "@terouva/core": path.resolve(__dirname, "../../packages/core/src"),
     },
