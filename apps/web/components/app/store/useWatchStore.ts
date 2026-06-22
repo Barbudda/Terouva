@@ -1,10 +1,6 @@
 import { create } from "zustand";
 import {
-  getLocalServerPort,
-  getLocalServerToken,
   onWatchIngest,
-  regenerateLocalServerToken,
-  startWatchBridge,
   type WatchEventPayload,
   type WatchIngestResult,
 } from "@app/lib/watchBridge";
@@ -17,8 +13,6 @@ export interface WatchLogEntry {
 }
 
 interface WatchState {
-  port: number | null;
-  token: string | null;
   bootstrapped: boolean;
   recent: WatchLogEntry[];
   totalDetected: number;
@@ -26,15 +20,17 @@ interface WatchState {
   duplicateCount: number;
 
   init: () => Promise<void>;
-  rotateToken: () => Promise<void>;
   clearLog: () => void;
 }
 
 const MAX_LOG = 50;
 
+/**
+ * Journal des annonces reçues de l'extension. La connexion réelle au pont est
+ * gérée par `extBridge` (cf. AppRoot) ; ce store ne fait qu'enregistrer chaque
+ * détection pour l'afficher (page « État extension ») et rafraîchir le feed.
+ */
 export const useWatchStore = create<WatchState>((set, get) => ({
-  port: null,
-  token: null,
   bootstrapped: false,
   recent: [],
   totalDetected: 0,
@@ -43,11 +39,6 @@ export const useWatchStore = create<WatchState>((set, get) => ({
 
   init: async () => {
     if (get().bootstrapped) return;
-    const [token, port] = await Promise.all([
-      getLocalServerToken(),
-      getLocalServerPort(),
-    ]);
-    await startWatchBridge();
     onWatchIngest((result, payload) => {
       set((s) => {
         const entry: WatchLogEntry = { at: Date.now(), result, payload };
@@ -59,15 +50,10 @@ export const useWatchStore = create<WatchState>((set, get) => ({
           notifiedCount: s.notifiedCount + (result.notified ? 1 : 0),
         };
       });
-      // Trigger a global refresh so the Annonces page sees the new row.
+      // Rafraîchit le feed pour que la page Annonces voie la nouvelle ligne.
       useStore.getState().refreshListings().catch(() => {});
     });
-    set({ token, port, bootstrapped: true });
-  },
-
-  rotateToken: async () => {
-    const fresh = await regenerateLocalServerToken();
-    set({ token: fresh });
+    set({ bootstrapped: true });
   },
 
   clearLog: () => {

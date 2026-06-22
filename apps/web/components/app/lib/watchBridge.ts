@@ -227,50 +227,6 @@ export function emitWatchIngest(result: WatchIngestResult, payload: WatchEventPa
   }
 }
 
-// ────────────────────────────── stubs serveur / polling (ex-Tauri) ──────────────────────────────
-// Remplacés au LOT 5 par le pont extension `externally_connectable` + handshake.
-
-export interface PollingTarget {
-  id: number;
-  name: string;
-  url: string;
-  frequency_minutes: number;
-}
-
-export interface PollingStats {
-  enabled: boolean;
-  target_count: number;
-  total_fetches: number;
-  last_error: string | null;
-  last_target_id: number | null;
-  last_target_at: string | null;
-  per_target_last_check: Record<string, string>;
-}
-
-export async function getLocalServerToken(): Promise<string> {
-  return "";
-}
-export async function regenerateLocalServerToken(): Promise<string> {
-  return "";
-}
-export async function getLocalServerPort(): Promise<number | null> {
-  return null;
-}
-/** Plus de polling background sur le web (cf. plan, FAQ « Et si je ferme Chrome ? »). */
-export async function syncPollingTargets(): Promise<number> {
-  return 0;
-}
-export async function getPollingStats(): Promise<PollingStats> {
-  return {
-    enabled: false,
-    target_count: 0,
-    total_fetches: 0,
-    last_error: null,
-    last_target_id: null,
-    last_target_at: null,
-    per_target_last_check: {},
-  };
-}
-/** Le pont extension est branché au LOT 5 ; ici no-op. */
-export async function startWatchBridge(): Promise<void> {}
-export async function stopWatchBridge(): Promise<void> {}
+// (Les anciens stubs « serveur local / polling » hérités de l'app Tauri ont été
+// retirés au LOT 7 : le pont extension `externally_connectable` les remplace
+// entièrement. Plus aucune notion de serveur 127.0.0.1 côté web.)
