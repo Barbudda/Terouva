@@ -17,7 +17,7 @@ export default function Profil() {
     setForm(profile ? { ...profile } : null);
   }, [profile]);
 
-  if (!form) return <div className="text-zinc-500">Chargement…</div>;
+  if (!form) return <div className="text-[var(--color-text-faint)]">Chargement…</div>;
 
   const update = (patch: Partial<UserProfile>) => {
     setForm({ ...form, ...patch });
@@ -42,16 +42,16 @@ export default function Profil() {
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Complétude du dossier</CardTitle>
-          <span className="text-sm text-zinc-400">{completeness}%</span>
+          <span className="text-sm text-[var(--color-text-muted)]">{completeness}%</span>
         </CardHeader>
         <CardBody>
-          <div className="h-2 bg-zinc-800 rounded">
+          <div className="h-2 bg-[var(--color-panel-2)] rounded">
             <div
-              className="h-full rounded bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-all"
+              className="h-full rounded bg-gradient-to-r from-[var(--color-signal)] to-[var(--color-signal)] transition-all"
               style={{ width: `${completeness}%` }}
             />
           </div>
-          <p className="mt-3 text-xs text-zinc-500">
+          <p className="mt-3 text-xs text-[var(--color-text-faint)]">
             Plus ton profil est complet, plus les messages générés seront convaincants.
           </p>
         </CardBody>
@@ -154,7 +154,7 @@ export default function Profil() {
           </Field>
         </CardBody>
         <CardFooter>
-          {saved && <span className="text-xs text-emerald-400 mr-auto">Enregistré ✓</span>}
+          {saved && <span className="text-xs text-[var(--color-signal)] mr-auto">Enregistré ✓</span>}
           <Button onClick={save} disabled={saving}>
             {saving ? "Enregistrement…" : "Enregistrer"}
           </Button>

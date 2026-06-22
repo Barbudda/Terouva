@@ -66,13 +66,13 @@ export default function Dashboard() {
         <Card>
           <CardHeader className="flex items-center justify-between">
             <CardTitle>Top annonces à traiter</CardTitle>
-            <Link to="/annonces" className="text-xs text-violet-300 hover:text-violet-200">
+            <Link to="/annonces" className="text-xs text-[var(--color-signal)] hover:text-[var(--color-signal)]">
               voir tout →
             </Link>
           </CardHeader>
           <CardBody className="space-y-2">
             {top.length === 0 && (
-              <div className="text-sm text-zinc-500 py-6 text-center">
+              <div className="text-sm text-[var(--color-text-faint)] py-6 text-center">
                 Aucune annonce prioritaire pour l'instant.
               </div>
             )}
@@ -82,14 +82,14 @@ export default function Dashboard() {
               return (
                 <div
                   key={l.id}
-                  className="flex items-center gap-3 p-3 rounded-md border border-zinc-800 bg-zinc-900/40"
+                  className="flex items-center gap-3 p-3 rounded-md border border-[var(--color-border)] bg-[var(--color-panel)]/40"
                 >
-                  <div className="text-2xl font-semibold text-zinc-100 w-12 text-center shrink-0">
+                  <div className="text-2xl font-semibold text-[var(--color-text)] w-12 text-center shrink-0">
                     {l.score ?? "—"}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm text-zinc-100 truncate">{l.title ?? "Sans titre"}</div>
-                    <div className="text-xs text-zinc-500 flex flex-wrap gap-x-3">
+                    <div className="text-sm text-[var(--color-text)] truncate">{l.title ?? "Sans titre"}</div>
+                    <div className="text-xs text-[var(--color-text-faint)] flex flex-wrap gap-x-3">
                       {l.price !== null && <span>{l.price}€</span>}
                       {l.surface !== null && <span>{l.surface}m²</span>}
                       {l.rooms !== null && <span>{l.rooms}p</span>}
@@ -113,23 +113,23 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-300">
+                <span className="text-[var(--color-text-muted)]">
                   {docsReady}/{documents.length} documents prêts
                 </span>
                 {dossierComplete ? (
-                  <Badge className="bg-emerald-500/15 text-emerald-300 border-emerald-500/40">
+                  <Badge className="bg-[var(--color-signal-soft)] text-[var(--color-signal)] border-[var(--color-signal)]/40">
                     complet
                   </Badge>
                 ) : (
-                  <Badge className="bg-amber-500/15 text-amber-300 border-amber-500/40">
+                  <Badge className="bg-[var(--color-urgent-soft)] text-[var(--color-urgent)] border-[var(--color-urgent)]/40">
                     {docsRequired - docsRequiredReady} requis manquant
                     {docsRequired - docsRequiredReady > 1 ? "s" : ""}
                   </Badge>
                 )}
               </div>
-              <div className="mt-3 h-2 bg-zinc-800 rounded">
+              <div className="mt-3 h-2 bg-[var(--color-panel-2)] rounded">
                 <div
-                  className="h-full rounded bg-gradient-to-r from-emerald-500 to-teal-500"
+                  className="h-full rounded bg-gradient-to-r from-[var(--color-signal)] to-[var(--color-signal)]"
                   style={{
                     width: `${documents.length > 0 ? (docsReady / documents.length) * 100 : 0}%`,
                   }}
@@ -137,7 +137,7 @@ export default function Dashboard() {
               </div>
               <Link
                 to="/reglages"
-                className="block mt-3 text-xs text-violet-300 hover:text-violet-200"
+                className="block mt-3 text-xs text-[var(--color-signal)] hover:text-[var(--color-signal)]"
               >
                 Gérer les pièces →
               </Link>
@@ -151,19 +151,19 @@ export default function Dashboard() {
             <CardBody className="flex flex-col gap-2">
               <Link
                 to="/annonces"
-                className="text-sm text-zinc-300 hover:text-violet-200 transition-colors"
+                className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-signal)] transition-colors"
               >
                 + Ajouter une annonce par URL
               </Link>
               <Link
                 to="/recherches"
-                className="text-sm text-zinc-300 hover:text-violet-200 transition-colors"
+                className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-signal)] transition-colors"
               >
                 + Créer une recherche
               </Link>
               <Link
                 to="/profil"
-                className="text-sm text-zinc-300 hover:text-violet-200 transition-colors"
+                className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-signal)] transition-colors"
               >
                 ★ Compléter mon profil
               </Link>

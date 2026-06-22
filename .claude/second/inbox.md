@@ -104,3 +104,83 @@ Aujourd'hui le moteur de score a des poids en dur. Exposer dans Réglages des
 pondérations ajustables (prix, surface, fraîcheur, équipements…) persistées en DB,
 sans casser les kill switches (mot-clé exclu / prix > 50% → 0 restent absolus).
 Mettre à jour/ajouter les tests vitest de `scoring.ts`.
+
+---
+
+## TASK-004 — MISSION LOOK : faire passer Terouva de « bon » à « sublime »  [status: todo]
+- from: Second
+- created: 2026-06-22
+- priority: **HIGH (mission prioritaire — on met le paquet)**
+- périmètre: `apps/web/` UNIQUEMENT (présentation). **Aucune** modif de scoring/db/
+  ingestion/extension/Tauri. Zéro changement de logique métier.
+
+> ⚠️ LIS ET EXÉCUTE CE FICHIER. Ne pars pas hors-sujet en silence. Rends compte
+> dans `.claude/second/outbox.md` à la fin (5 vérifs + ce qui a changé + captures décrites).
+
+### Le constat (vérifié par Second dans le code)
+Terouva a **deux surfaces qui ne parlent pas la même langue visuelle** :
+- **Landing** (`components/sections/*`, `app/globals.css`) : palette « signal »
+  teal `#7ee8c8` + urgent amber `#ffb84d`, grille, grain, glow, motion soignée,
+  tout sur variables CSS `--color-*`. **Distinctive, premium.**
+- **App `/app`** (`components/app/**`) : zinc brut + accents **violet** (`text-violet-300`)
+  + dégradés emerald/teal, header `border-zinc-800`, cards `bg-zinc-900/60`. **N'utilise
+  AUCUN token de la landing** → ressemble à un admin générique. C'est le maillon faible.
+
+**La thèse de la mission** : Terouva doit être **une seule marque, sublime de bout en
+bout**. On hisse le produit (`/app`) au niveau de la vitrine, autour de sa **signature
+identitaire** : « arriver à temps » → univers **live / radar / signal** (le LiveCounter,
+le ListingTicker, le « Watch ON » qui pulse en sont déjà les germes). C'est le fil rouge.
+
+### Volet A — Direction artistique (AVANT de coder)
+Agent **`creative-director`** (+ `frontend-architect` pour la faisabilité) : poser une
+**direction unique** écrite (1 page) — signature, échelle typo, rythme d'espacement,
+système d'élévation, usage du signal vs urgent, état « live ». Cap visé : niveau Awwwards,
+mais **sobre et crédible** (c'est un outil sérieux, pas une démo de gadgets). Pas de 3D
+lourde, pas d'effet qui dessert la lisibilité.
+
+### Volet B — Landing : élever, ne pas refaire
+Garder la structure (Hero → Problem → HowItWorks → Features → Privacy → FAQ → CTA).
+- **Hero** : faire du **signal live** la pièce maîtresse (le ticker d'annonces aujourd'hui
+  en fond/déco mérite d'être un vrai élément de preuve, pas du bruit). Tension typo plus forte.
+- **Choréographie scroll** (agent **`motion-designer`**) : rythme de reveal cohérent,
+  micro-interactions (agent **`interaction-designer`**), transitions premium. `motion/react`
+  est déjà là. **Respecter `prefers-reduced-motion`** (déjà câblé — ne pas le casser).
+- Cohérence fine : densité, contrastes, focus states, états vides.
+
+### Volet C — App `/app` : le gros du chantier
+Hisser le produit au niveau de la landing **sans toucher la logique** :
+- **Unifier les tokens** : remplacer zinc/violet/emerald en dur par les `--color-*`
+  (signal/urgent/panel/border…). Étendre `@theme` dans `globals.css` si besoin (tokens
+  app : surfaces de cartes, états de score). **Une seule palette pour tout Terouva.**
+- **Composants** : `Card`/`StatPill`/`Badge`/`Button`/`Input` (`components/app/components/ui/*`)
+  refondus sur les tokens, élévation cohérente, hover/focus premium.
+- **Shell** : Sidebar + header (`Layout.tsx`) au niveau de la marque ; soigner le
+  `WatchStatusBadge` (l'état live est un atout identitaire — qu'il respire la confiance).
+- **Dashboard & pages clés** (Dashboard, Annonces, Surveillance en priorité) : hiérarchie
+  visuelle, **ScoreBadge** valorisé (le score est le cœur du produit), états vides soignés,
+  listes d'annonces lisibles et désirables. Candidatures/Recherches/Profil/Réglages
+  alignés ensuite.
+
+### Lignes rouges (non négociables)
+- **Présentation seulement.** Zéro modif de `scoring.ts`, `db`, ingestion, types métier,
+  extension, Tauri. Si une refonte visuelle exige un changement de structure de données → STOP,
+  note-le dans l'outbox, ne le fais pas.
+- **Ton** : vouvoiement, simple, bienveillant, sans jargon. **N'invente aucune promesse
+  commerciale** ni chiffre marketing. On reste honnête (lignes rouges produit : on observe,
+  l'humain valide et envoie — rien dans l'UI ne doit suggérer un envoi automatique).
+- **Local-first** : pas de nouveau backend, pas de compte, pas de dépendance lourde.
+  Garder le bundle raisonnable (pas de grosse lib d'animation en plus de `motion`).
+- **Accessibilité AA** : contrastes vérifiés (le signal teal sur fond clair/foncé),
+  focus visibles, navigation clavier, `prefers-reduced-motion` préservé.
+
+### Ressources (impératif)
+Agents `creative-director`, `frontend-architect`, `motion-designer`, `interaction-designer`,
+puis **`visual-qa`** pour la revue (screenshots desktop + mobile 375px). `context7` pour la
+doc à jour de `motion` / Tailwind v4 si besoin. Token-economy/CODEMAP à jour.
+
+### Definition of Done
+- Landing + `/app` partagent **une seule palette** (plus de violet/zinc en dur).
+- 5 vérifs vertes : **lint, typecheck, build, vitest, et build prod web**.
+- Revue **`visual-qa`** : desktop + mobile 375px, **0 erreur console**, pas de débordement.
+- CODEMAP à jour. Compte-rendu dans `outbox.md` (avant/après, captures décrites, points
+  remontés à Second). **Aucune** ligne métier modifiée (le diff ne touche que la présentation).

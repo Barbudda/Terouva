@@ -42,12 +42,12 @@ export function Layout() {
     <div className="h-full flex">
       <Sidebar />
       <main className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-14 border-b border-zinc-800 flex items-center justify-between px-6 bg-zinc-950/80 backdrop-blur">
+        <header className="h-14 border-b border-[var(--color-border)] flex items-center justify-between px-6 bg-[var(--color-bg)]/80 backdrop-blur">
           <h1 className="text-base font-semibold tracking-tight">{title}</h1>
           <div className="flex items-center gap-4">
             <WatchStatusBadge online={watchBootstrapped} />
             {loading && (
-              <span className="text-xs text-zinc-500 animate-pulse">chargement…</span>
+              <span className="text-xs text-[var(--color-text-faint)] animate-pulse">chargement…</span>
             )}
           </div>
         </header>
@@ -67,8 +67,8 @@ function WatchStatusBadge({ online }: { online: boolean }) {
       className={
         "inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider " +
         (online
-          ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
-          : "border-zinc-700 bg-zinc-900 text-zinc-500")
+          ? "border-[var(--color-signal)]/40 bg-[var(--color-signal-soft)] text-[var(--color-signal)]"
+          : "border-[var(--color-border-2)] bg-[var(--color-bg-2)] text-[var(--color-text-faint)]")
       }
       title={
         online
@@ -79,7 +79,7 @@ function WatchStatusBadge({ online }: { online: boolean }) {
       <span
         className={
           "size-1.5 rounded-full " +
-          (online ? "bg-emerald-400 animate-pulse" : "bg-zinc-600")
+          (online ? "bg-[var(--color-signal)] animate-pulse" : "bg-[var(--color-border-2)]")
         }
       />
       Watch {online ? "ON" : "OFF"}

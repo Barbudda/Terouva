@@ -5,7 +5,7 @@ export function Card({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
-        "rounded-lg border border-zinc-800 bg-zinc-900/60 backdrop-blur",
+        "rounded-lg border border-[var(--color-border)] bg-[var(--color-panel)]/60 backdrop-blur",
         className,
       )}
       {...rest}
@@ -20,7 +20,7 @@ export function CardHeader({ className, ...rest }: HTMLAttributes<HTMLDivElement
 export function CardTitle({ className, ...rest }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn("text-sm font-semibold text-zinc-100", className)}
+      className={cn("text-sm font-semibold text-[var(--color-text)]", className)}
       {...rest}
     />
   );
@@ -34,7 +34,7 @@ export function CardFooter({ className, ...rest }: HTMLAttributes<HTMLDivElement
   return (
     <div
       className={cn(
-        "px-5 py-3 border-t border-zinc-800 flex items-center justify-end gap-2",
+        "px-5 py-3 border-t border-[var(--color-border)] flex items-center justify-end gap-2",
         className,
       )}
       {...rest}
@@ -72,9 +72,9 @@ export function StatPill({
 }) {
   return (
     <Card className="px-5 py-4">
-      <div className="text-xs uppercase tracking-wider text-zinc-500">{label}</div>
-      <div className="text-2xl font-semibold text-zinc-100 mt-1">{value}</div>
-      {hint && <div className="text-xs text-zinc-500 mt-1">{hint}</div>}
+      <div className="text-xs uppercase tracking-wider text-[var(--color-text-faint)]">{label}</div>
+      <div className="text-2xl font-semibold text-[var(--color-text)] mt-1">{value}</div>
+      {hint && <div className="text-xs text-[var(--color-text-faint)] mt-1">{hint}</div>}
     </Card>
   );
 }

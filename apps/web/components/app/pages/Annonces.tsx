@@ -402,15 +402,15 @@ export default function Annonces() {
               </Button>
             </div>
             {bulkReport && (
-              <div className="text-xs space-y-1 pt-2 border-t border-zinc-800">
-                <div className="text-zinc-400">
+              <div className="text-xs space-y-1 pt-2 border-t border-[var(--color-border)]">
+                <div className="text-[var(--color-text-muted)]">
                   {bulkReport.filter((r) => r.ok).length}/{bulkReport.length}{" "}
                   importées
                 </div>
                 {bulkReport
                   .filter((r) => !r.ok)
                   .map((r, i) => (
-                    <div key={i} className="text-red-400">
+                    <div key={i} className="text-[var(--color-danger)]">
                       ✗ {truncate(r.url, 60)} — {r.error}
                     </div>
                   ))}
@@ -432,7 +432,7 @@ export default function Annonces() {
               />
             </Field>
             <div className="flex items-center justify-between gap-3">
-              <p className="text-[11px] text-zinc-500 max-w-md">
+              <p className="text-[11px] text-[var(--color-text-faint)] max-w-md">
                 Chaque annonce de l'email arrive en « provisoire » : ouvre-la pour
                 l'enrichir et préciser son score. L'envoi de candidature reste 100 %
                 toi.
@@ -442,18 +442,18 @@ export default function Annonces() {
               </Button>
             </div>
             {emailReport && (
-              <div className="text-xs space-y-1 pt-2 border-t border-zinc-800 text-zinc-400">
+              <div className="text-xs space-y-1 pt-2 border-t border-[var(--color-border)] text-[var(--color-text-muted)]">
                 <div>
                   {emailReport.found} annonce(s) trouvée(s) :{" "}
-                  <span className="text-emerald-400">{emailReport.added} nouvelle(s)</span>
+                  <span className="text-[var(--color-signal)]">{emailReport.added} nouvelle(s)</span>
                   {emailReport.enriched > 0 && (
-                    <span className="text-sky-400"> · {emailReport.enriched} enrichie(s)</span>
+                    <span className="text-[var(--color-signal)]"> · {emailReport.enriched} enrichie(s)</span>
                   )}
                   {emailReport.duplicates > 0 && (
-                    <span className="text-zinc-500"> · {emailReport.duplicates} déjà présente(s)</span>
+                    <span className="text-[var(--color-text-faint)]"> · {emailReport.duplicates} déjà présente(s)</span>
                   )}
                   {emailReport.notified > 0 && (
-                    <span className="text-violet-300"> · {emailReport.notified} alerte(s) ★</span>
+                    <span className="text-[var(--color-signal)]"> · {emailReport.notified} alerte(s) ★</span>
                   )}
                 </div>
               </div>
@@ -462,7 +462,7 @@ export default function Annonces() {
         )}
         {error && (
           <CardFooter>
-            <span className="text-xs text-red-400">{error}</span>
+            <span className="text-xs text-[var(--color-danger)]">{error}</span>
           </CardFooter>
         )}
       </Card>
@@ -498,7 +498,7 @@ export default function Annonces() {
               setQuery("");
               setMinScore(0);
             }}
-            className="text-xs text-zinc-400 hover:text-zinc-100 px-2 py-1"
+            className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text)] px-2 py-1"
             title="Réinitialiser la recherche / score min"
           >
             Effacer
@@ -553,9 +553,9 @@ export default function Annonces() {
           )}
         </div>
       </div>
-      <div className="text-xs text-zinc-500 font-mono">
+      <div className="text-xs text-[var(--color-text-faint)] font-mono">
         {filtered.length} / {listings.length} annonce{listings.length > 1 ? "s" : ""} ·
-        appuie sur <kbd className="px-1.5 py-0.5 rounded border border-zinc-700 bg-zinc-950 text-[10px]">?</kbd> pour les raccourcis
+        appuie sur <kbd className="px-1.5 py-0.5 rounded border border-[var(--color-border-2)] bg-[var(--color-bg)] text-[10px]">?</kbd> pour les raccourcis
       </div>
 
       <div className="space-y-4">
@@ -588,13 +588,13 @@ export default function Annonces() {
         ))}
         {filtered.length === 0 && (
           <Card>
-            <CardBody className="text-center py-12 text-zinc-400 space-y-4">
+            <CardBody className="text-center py-12 text-[var(--color-text-muted)] space-y-4">
               {listings.length === 0 ? (
                 <>
-                  <div className="text-base text-zinc-300">
+                  <div className="text-base text-[var(--color-text-muted)]">
                     Aucune annonce pour l'instant.
                   </div>
-                  <p className="text-sm text-zinc-500 max-w-md mx-auto">
+                  <p className="text-sm text-[var(--color-text-faint)] max-w-md mx-auto">
                     Ouvre ta recherche sur Leboncoin : Terouva capte les nouvelles
                     annonces en direct dès qu'elles apparaissent.
                   </p>
@@ -603,7 +603,7 @@ export default function Annonces() {
                       Ouvrir ma recherche sur Leboncoin ↗
                     </Button>
                   ) : (
-                    <p className="text-xs text-zinc-600">
+                    <p className="text-xs text-[var(--color-text-faint)]">
                       Crée d'abord une recherche dans « Mon dossier ».
                     </p>
                   )}
@@ -648,8 +648,8 @@ function tabClass(active: boolean) {
   return (
     "px-3 py-1 rounded text-xs border " +
     (active
-      ? "bg-violet-500 border-violet-400 text-white"
-      : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-200")
+      ? "bg-[var(--color-signal)] border-[var(--color-signal)] text-white"
+      : "bg-[var(--color-bg-2)] border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]")
   );
 }
 
@@ -657,8 +657,8 @@ function pillClass(active: boolean) {
   return (
     "px-3 py-1 rounded-md text-xs border transition-colors " +
     (active
-      ? "bg-violet-500 border-violet-400 text-white"
-      : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-200")
+      ? "bg-[var(--color-signal)] border-[var(--color-signal)] text-white"
+      : "bg-[var(--color-bg-2)] border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]")
   );
 }
 
@@ -708,7 +708,7 @@ function ListingCard({
           {images[0] && (
             <button
               onClick={onToggle}
-              className="w-24 h-20 shrink-0 rounded-md overflow-hidden bg-zinc-900 border border-zinc-800"
+              className="w-24 h-20 shrink-0 rounded-md overflow-hidden bg-[var(--color-bg-2)] border border-[var(--color-border)]"
             >
               <img
                 src={images[0]}
@@ -721,31 +721,31 @@ function ListingCard({
           <div className="flex-1 min-w-0">
             <button
               onClick={onToggle}
-              className="text-left w-full hover:text-violet-300 transition-colors"
+              className="text-left w-full hover:text-[var(--color-signal)] transition-colors"
             >
               <CardTitle className="truncate">{listing.title ?? "Sans titre"}</CardTitle>
             </button>
-            <div className="mt-1 text-xs text-zinc-400 flex flex-wrap gap-x-3 gap-y-1">
+            <div className="mt-1 text-xs text-[var(--color-text-muted)] flex flex-wrap gap-x-3 gap-y-1">
               {listing.price !== null && <span>{listing.price}€/mois</span>}
               {listing.surface !== null && <span>{listing.surface}m²</span>}
               {listing.rooms !== null && <span>{listing.rooms} pièces</span>}
               {listing.city && <span>{listing.city}</span>}
               {listing.publisher_type && <span>{listing.publisher_type}</span>}
-              <span className="text-zinc-600">
+              <span className="text-[var(--color-text-faint)]">
                 vu {new Date(listing.discovered_at).toLocaleString("fr-FR")}
               </span>
             </div>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             {listing.score !== null && (
-              <Badge className="bg-zinc-800 border-zinc-700 text-zinc-200 text-base px-3">
+              <Badge className="bg-[var(--color-panel-2)] border-[var(--color-border-2)] text-[var(--color-text)] text-base px-3">
                 {listing.score}
               </Badge>
             )}
             {rec && <Badge className={rec.className}>{rec.text}</Badge>}
             {reasons && reasons.confidence !== undefined && reasons.confidence < 0.5 && (
               <span title="Score provisoire : peu d'infos sur la carte LBC. Ouvre l'annonce pour le confirmer.">
-                <Badge className="bg-amber-500/10 text-amber-300/90 border-amber-500/30">
+                <Badge className="bg-[var(--color-urgent-soft)] text-[var(--color-urgent)]/90 border-[var(--color-urgent)]/30">
                   provisoire
                 </Badge>
               </span>
@@ -756,7 +756,7 @@ function ListingCard({
       </CardHeader>
 
       {isOpen && (
-        <CardBody className="space-y-4 border-t border-zinc-800 pt-4">
+        <CardBody className="space-y-4 border-t border-[var(--color-border)] pt-4">
           {images.length > 1 && (
             <div className="flex gap-2 overflow-x-auto pb-1">
               {images.slice(0, 8).map((src, i) => (
@@ -764,7 +764,7 @@ function ListingCard({
                   key={i}
                   src={src}
                   alt=""
-                  className="h-24 w-32 object-cover rounded-md border border-zinc-800 shrink-0"
+                  className="h-24 w-32 object-cover rounded-md border border-[var(--color-border)] shrink-0"
                   loading="lazy"
                 />
               ))}
@@ -774,24 +774,24 @@ function ListingCard({
           {reasons && (
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <div className="text-xs text-emerald-400 font-semibold mb-2">+ Pour</div>
-                <ul className="text-xs text-zinc-300 space-y-1">
+                <div className="text-xs text-[var(--color-signal)] font-semibold mb-2">+ Pour</div>
+                <ul className="text-xs text-[var(--color-text-muted)] space-y-1">
                   {reasons.positive.map((r, i) => (
                     <li key={i}>· {r}</li>
                   ))}
                   {reasons.positive.length === 0 && (
-                    <li className="text-zinc-600">aucun</li>
+                    <li className="text-[var(--color-text-faint)]">aucun</li>
                   )}
                 </ul>
               </div>
               <div>
-                <div className="text-xs text-red-400 font-semibold mb-2">- Contre</div>
-                <ul className="text-xs text-zinc-300 space-y-1">
+                <div className="text-xs text-[var(--color-danger)] font-semibold mb-2">- Contre</div>
+                <ul className="text-xs text-[var(--color-text-muted)] space-y-1">
                   {reasons.negative.map((r, i) => (
                     <li key={i}>· {r}</li>
                   ))}
                   {reasons.negative.length === 0 && (
-                    <li className="text-zinc-600">aucun</li>
+                    <li className="text-[var(--color-text-faint)]">aucun</li>
                   )}
                 </ul>
               </div>
@@ -799,11 +799,11 @@ function ListingCard({
           )}
 
           {listing.description && (
-            <details className="text-sm text-zinc-300">
-              <summary className="cursor-pointer text-xs text-zinc-400">
+            <details className="text-sm text-[var(--color-text-muted)]">
+              <summary className="cursor-pointer text-xs text-[var(--color-text-muted)]">
                 Description
               </summary>
-              <p className="mt-2 whitespace-pre-wrap text-zinc-300 text-xs leading-relaxed">
+              <p className="mt-2 whitespace-pre-wrap text-[var(--color-text-muted)] text-xs leading-relaxed">
                 {listing.description}
               </p>
             </details>
@@ -869,12 +869,12 @@ function ListingCard({
 
 function StatusBadge({ status }: { status: ListingStatus }) {
   const map: Record<ListingStatus, string> = {
-    new: "bg-blue-500/15 text-blue-300 border-blue-500/40",
-    to_review: "bg-amber-500/15 text-amber-300 border-amber-500/40",
-    favorite: "bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-500/40",
-    applied: "bg-emerald-500/15 text-emerald-300 border-emerald-500/40",
-    ignored: "bg-zinc-700/40 text-zinc-400 border-zinc-600/40",
-    expired: "bg-zinc-800 text-zinc-500 border-zinc-700",
+    new: "bg-[var(--color-panel-2)] text-[var(--color-text)] border-[var(--color-border-2)]",
+    to_review: "bg-[var(--color-urgent)]/15 text-[var(--color-urgent)] border-[var(--color-urgent)]/40",
+    favorite: "bg-[var(--color-signal)]/15 text-[var(--color-signal)] border-[var(--color-signal)]/40",
+    applied: "bg-[var(--color-signal)]/15 text-[var(--color-signal)] border-[var(--color-signal)]/40",
+    ignored: "bg-[var(--color-border-2)]/40 text-[var(--color-text-muted)] border-[var(--color-border-2)]/40",
+    expired: "bg-[var(--color-panel-2)] text-[var(--color-text-faint)] border-[var(--color-border-2)]",
   };
   const label: Record<ListingStatus, string> = {
     new: "nouvelle",
@@ -992,11 +992,11 @@ function CandidaturePanel({
   };
 
   return (
-    <div className="rounded-md border border-zinc-800 bg-zinc-900/50 p-4 space-y-3">
+    <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-panel)]/50 p-4 space-y-3">
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <div className="text-xs font-semibold text-zinc-300">
+        <div className="text-xs font-semibold text-[var(--color-text-muted)]">
           Préparer la candidature
-          <span className="ml-2 font-normal text-[10px] text-zinc-500">
+          <span className="ml-2 font-normal text-[10px] text-[var(--color-text-faint)]">
             reclique un ton pour une autre version
           </span>
         </div>
@@ -1008,8 +1008,8 @@ function CandidaturePanel({
               className={
                 "px-2 py-1 rounded text-xs transition-colors " +
                 (tone === t
-                  ? "bg-violet-500 text-white"
-                  : "bg-zinc-800 text-zinc-400 hover:text-zinc-100")
+                  ? "bg-[var(--color-signal)] text-white"
+                  : "bg-[var(--color-panel-2)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]")
               }
             >
               {TONE_LABELS[t]}
@@ -1043,7 +1043,7 @@ function CandidaturePanel({
           Marquer envoyé
         </Button>
         {savedAt && (
-          <span className="text-xs text-emerald-400 ml-auto">
+          <span className="text-xs text-[var(--color-signal)] ml-auto">
             Sauvé {new Date(savedAt).toLocaleTimeString("fr-FR")}
           </span>
         )}

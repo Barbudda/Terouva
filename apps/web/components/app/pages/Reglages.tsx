@@ -87,7 +87,7 @@ export default function Reglages() {
           <CardTitle>Connexion & surveillance</CardTitle>
         </CardHeader>
         <CardBody className="flex items-center justify-between gap-4">
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-[var(--color-text-muted)]">
             État du pont avec l'extension Chrome, token de jumelage, polling
             background et journal des détections.
           </p>
@@ -132,7 +132,7 @@ export default function Reglages() {
           <CardTitle>Messages de candidature</CardTitle>
         </CardHeader>
         <CardBody>
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-[var(--color-text-muted)]">
             Terouva rédige automatiquement un message adapté à chaque annonce (il en
             cite les détails) à partir de ton profil, en 3 tons.{" "}
             <strong>Rien à configurer</strong> : tout est local, aucune clé, aucun
@@ -150,7 +150,7 @@ export default function Reglages() {
           {documents.map((d) => (
             <label
               key={d.id}
-              className="flex items-center gap-3 py-2 border-b border-zinc-800/50 last:border-b-0"
+              className="flex items-center gap-3 py-2 border-b border-[var(--color-border)]/50 last:border-b-0"
             >
               <input
                 type="checkbox"
@@ -161,15 +161,15 @@ export default function Reglages() {
                 }}
               />
               <div className="flex-1">
-                <div className="text-sm text-zinc-200">{d.name}</div>
-                <div className="text-xs text-zinc-500">
+                <div className="text-sm text-[var(--color-text)]">{d.name}</div>
+                <div className="text-xs text-[var(--color-text-faint)]">
                   {d.category} {d.required ? "• obligatoire" : "• optionnel"}
                 </div>
               </div>
               <span
                 className={
                   "text-xs " +
-                  (d.available ? "text-emerald-400" : "text-zinc-600")
+                  (d.available ? "text-[var(--color-signal)]" : "text-[var(--color-text-faint)]")
                 }
               >
                 {d.available ? "✓ prêt" : "—"}
@@ -188,13 +188,13 @@ export default function Reglages() {
             <Button variant="secondary" onClick={doExport}>
               Exporter en JSON
             </Button>
-            <span className="text-xs text-zinc-500">
+            <span className="text-xs text-[var(--color-text-faint)]">
               Télécharge un fichier contenant profil, recherches, annonces et candidatures.
             </span>
           </div>
-          <div className="space-y-2 pt-3 border-t border-zinc-800">
+          <div className="space-y-2 pt-3 border-t border-[var(--color-border)]">
             <div className="flex items-center gap-3">
-              <span className="text-sm text-zinc-300">Importer depuis JSON</span>
+              <span className="text-sm text-[var(--color-text-muted)]">Importer depuis JSON</span>
               <Select
                 className="w-40"
                 value={importMode}
@@ -225,7 +225,7 @@ export default function Reglages() {
               <p
                 className={
                   "text-xs " +
-                  (importMsg.startsWith("Erreur") ? "text-red-400" : "text-emerald-400")
+                  (importMsg.startsWith("Erreur") ? "text-[var(--color-danger)]" : "text-[var(--color-signal)]")
                 }
               >
                 {importMsg}
@@ -239,10 +239,10 @@ export default function Reglages() {
         <CardHeader>
           <CardTitle>À propos</CardTitle>
         </CardHeader>
-        <CardBody className="text-sm text-zinc-400 space-y-2">
+        <CardBody className="text-sm text-[var(--color-text-muted)] space-y-2">
           <p>Terouva v0.1 — copilote local de recherche d'appartement.</p>
-          <p className="text-xs text-zinc-500">
-            Les données sont stockées localement dans <code className="text-zinc-300">terouva.db</code>.
+          <p className="text-xs text-[var(--color-text-faint)]">
+            Les données sont stockées localement dans <code className="text-[var(--color-text-muted)]">terouva.db</code>.
             Aucune donnée n'est envoyée à un serveur tiers.
           </p>
         </CardBody>

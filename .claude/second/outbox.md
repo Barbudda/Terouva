@@ -36,3 +36,21 @@
 - reste TASK-002:
   1. **Transport** non démarré (transfert mail dédié OU OAuth Gmail lecture seule) — c'est la seule partie qui toucherait à un service externe ; à arbitrer avec l'utilisateur vu la contrainte « sans API externe ». L'import manuel (collage) marche dès maintenant et ne dépend de rien.
   2. **Tuner le parser sur un VRAI email d'alerte LBC** (format non public) — **besoin d'un échantillon de l'utilisateur**. Tant qu'on n'en a pas, l'extraction reste générique (toutes URL d'annonce + liens de tracking).
+
+## REPORT TASK-004 — 2026-06-22   [MISSION LOOK — palette unifiée]   [status: done (vague 1)]
+- objectif: une seule langue visuelle landing + `/app` autour de la signature signal/live. **Présentation only** — zéro ligne métier touchée (scoring/db/ingestion/extension/Tauri intacts).
+- **constat avant**: `/app` avait son PROPRE thème (`components/app/index.css`) — accent **violet** (`--color-accent:#a78bfa`), succès **emerald**, surfaces **zinc** — + ~234 classes Tailwind de couleur **en dur** (zinc/violet/emerald/amber). Résultat : un « admin générique » déconnecté de la landing premium teal.
+- **après**:
+  1. `components/app/index.css` réécrit → tokens = **palette de la landing** (`globals.css`) : surfaces bg/panel, texte 3 niveaux, **signal** teal, **urgent** ambre, **danger**. Anciens noms (`accent`/`good`/`warn`/`bad`/`muted`) gardés en **alias** → tout l'existant token-based bascule d'un coup. + `glow-signal`, `.tabular`, `animate-pulse-dot`, **`prefers-reduced-motion`**, focus/scrollbar de marque, **police Geist** partagée.
+  2. **234 classes en dur → tokens** sur 17 fichiers (`components/app/**`) : zinc→surfaces/bordures/texte, violet/emerald/teal→**signal**, amber→**urgent**, red→**danger** ; opacités `/NN` + variantes `hover:/focus:` conservées.
+  3. **Status badges** ramenés sur la marque (plus de blue/sky/fuchsia) : `new`/`sent` = neutre-clair (en transit), `to_review` = urgent, `favorite`/`applied`/`replied` = signal, `rejected` = danger, `ignored`/`expired`/`no_answer` = neutres.
+- **DESIGN.md** créé (`apps/web/DESIGN.md`) : direction artistique unifiée (Volet A).
+- **5 vérifs**: tsc --noEmit **0** · vitest **24/24** · `next build` (prod) **OK** (compile + types + 7 pages) · build web prod **OK** · lint = `next lint` non configuré dans le projet (prompt interactif — **pré-existant** ; le lint interne du `next build` passe).
+- **visual-qa (Playwright)**: desktop ✓ — onboarding + shell `/app` (sidebar, header **Watch ON**, tabs, boutons, empty states) **tout en teal signal, zéro violet** ; **0 erreur console**. Captures : `terouva-app-after.png`, `terouva-dashboard.png`, `terouva-mobile.png`.
+- 0 littéral de couleur en dur restant dans `components/app` (grep).
+
+### Points remontés à Second / à l'utilisateur
+1. ⚠️ **Mobile (375px)** : la **sidebar n'est jamais repliée** → débordement horizontal (Watch ON + contenu coupés). **Manque structurel pré-existant** du shell (`Layout.tsx`/`Sidebar.tsx` jamais responsives) — la mission couleur ne l'a pas introduit. **Reco** : vague 2 « shell responsive » (drawer mobile + header compact). Changement de layout → à valider.
+2. **Badges** : `favorite`≡`applied` partagent le signal (différenciés par label) faute d'un 3e accent de marque — ajustable si tu veux une teinte dédiée « favori ».
+3. **CODEMAP** : pas de `.claude/CODEMAP.md` dans Terouva (token-economy non installé) → rien à mettre à jour.
+4. **Volet B (élever la landing) & polish par page** : non faits cette vague — landing déjà premium ; priorité donnée au maillon faible (`/app`). À enchaîner si tu valides la direction.

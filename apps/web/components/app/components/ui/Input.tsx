@@ -2,7 +2,7 @@ import { forwardRef, type InputHTMLAttributes, type TextareaHTMLAttributes, type
 import { cn } from "@app/lib/cn";
 
 const base =
-  "w-full rounded-md bg-zinc-900 border border-zinc-700 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 disabled:opacity-50";
+  "w-full rounded-md bg-[var(--color-bg-2)] border border-[var(--color-border-2)] px-3 py-2 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] focus:outline-none focus:border-[var(--color-signal)] focus:ring-1 focus:ring-[var(--color-signal)] disabled:opacity-50";
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(
   function Input({ className, ...rest }, ref) {
@@ -38,7 +38,7 @@ export function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className={cn("block text-xs font-medium text-zinc-400 mb-1.5", className)}
+      className={cn("block text-xs font-medium text-[var(--color-text-muted)] mb-1.5", className)}
     >
       {children}
     </label>
@@ -60,7 +60,7 @@ export function Field({
     <div>
       <Label htmlFor={htmlFor}>{label}</Label>
       {children}
-      {hint && <p className="text-xs text-zinc-500 mt-1">{hint}</p>}
+      {hint && <p className="text-xs text-[var(--color-text-faint)] mt-1">{hint}</p>}
     </div>
   );
 }

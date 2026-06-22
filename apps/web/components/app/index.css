@@ -1,17 +1,56 @@
 @import "tailwindcss";
 
+/*
+ * Thème de l'app `/app` — UNIFIÉ avec la landing (TASK-004, mission LOOK).
+ * Source unique de la palette = les tokens de la landing (`app/globals.css`).
+ * Les anciens noms de l'app (`accent`, `good`, `warn`, `bad`, `muted`) sont
+ * conservés comme ALIAS pointant vers la palette de marque, pour que tout
+ * l'existant qui les utilise (utilitaires `text-accent`, `text-good`…) se
+ * re-marque instantanément sans changer chaque composant. Plus de violet/zinc.
+ */
 @theme {
-  --color-bg: #09090b;
-  --color-panel: #18181b;
-  --color-panel-2: #27272a;
-  --color-border: #3f3f46;
-  --color-text: #fafafa;
-  --color-muted: #a1a1aa;
-  --color-accent: #a78bfa;
-  --color-accent-strong: #8b5cf6;
-  --color-good: #34d399;
-  --color-warn: #fbbf24;
-  --color-bad: #f87171;
+  /* Surfaces */
+  --color-bg: #0a0a0b;
+  --color-bg-2: #111114;
+  --color-panel: #15151a;
+  --color-panel-2: #1c1c22;
+  --color-border: #232329;
+  --color-border-2: #2c2c33;
+
+  /* Texte */
+  --color-text: #ededee;
+  --color-text-muted: #a3a3aa;
+  --color-text-faint: #6f6f78;
+
+  /* Accents de marque */
+  --color-signal: #7ee8c8;
+  --color-signal-soft: rgba(126, 232, 200, 0.12);
+  --color-signal-strong: #5fd4b1;
+
+  --color-urgent: #ffb84d;
+  --color-urgent-soft: rgba(255, 184, 77, 0.12);
+
+  --color-danger: #ff6f6f;
+  --color-danger-soft: rgba(255, 111, 111, 0.12);
+
+  /* ── Alias rétro-compatibles (anciens noms app → palette de marque) ──
+     Permet à tout `text-accent`, `bg-panel`, `text-good`, `text-warn`,
+     `text-bad`, `text-muted` existant de basculer sur la marque d'un coup. */
+  --color-muted: #a3a3aa;            /* = text-muted */
+  --color-accent: #7ee8c8;           /* violet → signal */
+  --color-accent-strong: #5fd4b1;
+  --color-good: #7ee8c8;             /* emerald → signal */
+  --color-warn: #ffb84d;             /* amber → urgent */
+  --color-bad: #ff6f6f;              /* red → danger */
+
+  /* Fonts (Geist, fournies par le layout racine — partagées avec la landing) */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html, body, #root {
@@ -20,11 +59,68 @@ html, body, #root {
 }
 
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-feature-settings: "cv11", "ss01";
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
 }
 
+::selection {
+  background: var(--color-signal);
+  color: #0a0a0b;
+}
+
+/* Scrollbar discrète (alignée landing) */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 8px; }
-::-webkit-scrollbar-thumb:hover { background: #52525b; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-2);
+  border-radius: 8px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: #3c3c44; }
+
+/* Focus de marque */
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Chiffres tabulaires (scores, compteurs, montants) */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Halo signal — réservé aux éléments vivants (Watch ON, score élevé, CTA) */
+.glow-signal {
+  box-shadow:
+    0 0 0 1px rgba(126, 232, 200, 0.20),
+    0 8px 32px -6px rgba(126, 232, 200, 0.18),
+    0 0 60px -10px rgba(126, 232, 200, 0.12);
+}
+.glow-urgent {
+  box-shadow:
+    0 0 0 1px rgba(255, 184, 77, 0.20),
+    0 8px 32px -6px rgba(255, 184, 77, 0.16);
+}
+
+/* Pulse du point « live » */
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.7); opacity: 0.6; }
+}
+.animate-pulse-dot { animation: pulse-dot 1.6s ease-in-out infinite; }
+
+/* Accessibilité : mouvement réduit (repli statique partout) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-pulse-dot { animation: none; }
+}

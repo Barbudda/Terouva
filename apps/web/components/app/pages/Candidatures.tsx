@@ -20,11 +20,11 @@ const STATUS_LABELS: Record<ApplicationStatus, string> = {
 };
 
 const STATUS_CLASS: Record<ApplicationStatus, string> = {
-  prepared: "bg-amber-500/15 text-amber-300 border-amber-500/40",
-  sent: "bg-blue-500/15 text-blue-300 border-blue-500/40",
-  replied: "bg-emerald-500/15 text-emerald-300 border-emerald-500/40",
-  rejected: "bg-red-500/15 text-red-300 border-red-500/40",
-  no_answer: "bg-zinc-700/40 text-zinc-400 border-zinc-600/40",
+  prepared: "bg-[var(--color-urgent-soft)] text-[var(--color-urgent)] border-[var(--color-urgent)]/40",
+  sent: "bg-[var(--color-panel-2)] text-[var(--color-text)] border-[var(--color-border-2)]",
+  replied: "bg-[var(--color-signal-soft)] text-[var(--color-signal)] border-[var(--color-signal)]/40",
+  rejected: "bg-[var(--color-danger-soft)] text-[var(--color-danger)] border-[var(--color-danger)]/40",
+  no_answer: "bg-[var(--color-border-2)]/40 text-[var(--color-text-muted)] border-[var(--color-border-2)]/40",
 };
 
 export default function Candidatures() {
@@ -73,8 +73,8 @@ export default function Candidatures() {
             className={
               "px-3 py-1 rounded-md text-xs border transition-colors " +
               (filter === s
-                ? "bg-violet-500 border-violet-400 text-white"
-                : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-200")
+                ? "bg-[var(--color-signal)] border-[var(--color-signal)] text-white"
+                : "bg-[var(--color-bg-2)] border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]")
             }
           >
             {s === "all" ? "Toutes" : STATUS_LABELS[s]}{" "}
@@ -85,7 +85,7 @@ export default function Candidatures() {
 
       {filtered.length === 0 && (
         <Card>
-          <CardBody className="text-center py-10 text-zinc-500">
+          <CardBody className="text-center py-10 text-[var(--color-text-faint)]">
             Aucune candidature. Va sur la page Annonces pour en préparer une.
           </CardBody>
         </Card>
@@ -100,7 +100,7 @@ export default function Candidatures() {
                   <CardTitle className="truncate">
                     {listing?.title ?? `Annonce #${app.listing_id}`}
                   </CardTitle>
-                  <div className="mt-1 text-xs text-zinc-400 flex flex-wrap gap-x-3">
+                  <div className="mt-1 text-xs text-[var(--color-text-muted)] flex flex-wrap gap-x-3">
                     {listing?.price !== undefined && listing?.price !== null && (
                       <span>{listing.price}€</span>
                     )}
@@ -117,10 +117,10 @@ export default function Candidatures() {
             <CardBody className="space-y-3">
               {app.message && (
                 <details>
-                  <summary className="cursor-pointer text-xs text-zinc-400">
+                  <summary className="cursor-pointer text-xs text-[var(--color-text-muted)]">
                     Voir le message
                   </summary>
-                  <pre className="mt-2 whitespace-pre-wrap text-xs text-zinc-200 bg-zinc-950 border border-zinc-800 rounded p-3">
+                  <pre className="mt-2 whitespace-pre-wrap text-xs text-[var(--color-text)] bg-[var(--color-bg)] border border-[var(--color-border)] rounded p-3">
                     {app.message}
                   </pre>
                 </details>

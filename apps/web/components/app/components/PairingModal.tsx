@@ -40,46 +40,46 @@ export function PairingModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-[60] grid place-items-center bg-zinc-950/75 backdrop-blur-sm">
-      <div className="w-[420px] max-w-[92vw] rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-[60] grid place-items-center bg-[var(--color-bg)]/75 backdrop-blur-sm">
+      <div className="w-[420px] max-w-[92vw] rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-2)] shadow-2xl overflow-hidden">
         <div className="p-6 text-center">
-          <div className="mx-auto mb-4 grid size-12 place-items-center rounded-full bg-emerald-500/15 text-emerald-300 text-2xl">
+          <div className="mx-auto mb-4 grid size-12 place-items-center rounded-full bg-[var(--color-signal-soft)] text-[var(--color-signal)] text-2xl">
             🔗
           </div>
-          <h2 className="text-lg font-semibold text-zinc-100">
+          <h2 className="text-lg font-semibold text-[var(--color-text)]">
             Connecter l'extension Chrome ?
           </h2>
-          <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
+          <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-relaxed">
             Une extension navigateur demande à se connecter à Terouva pour
             surveiller tes recherches Leboncoin. Autorise-la une seule fois.
           </p>
-          <div className="mt-4 rounded-lg border border-zinc-800 bg-zinc-950/60 px-4 py-3 text-left">
-            <div className="text-sm text-zinc-200">{current.label}</div>
-            <div className="mt-0.5 font-mono text-[11px] text-zinc-500 truncate">
+          <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/60 px-4 py-3 text-left">
+            <div className="text-sm text-[var(--color-text)]">{current.label}</div>
+            <div className="mt-0.5 font-mono text-[11px] text-[var(--color-text-faint)] truncate">
               id : {current.ext_id}
             </div>
           </div>
-          <p className="mt-3 text-[11px] text-zinc-500">
+          <p className="mt-3 text-[11px] text-[var(--color-text-faint)]">
             N'autorise que si tu viens d'installer l'extension Terouva.
           </p>
         </div>
-        <div className="flex border-t border-zinc-800">
+        <div className="flex border-t border-[var(--color-border)]">
           <button
             onClick={() => respond(false)}
-            className="flex-1 py-3 text-sm text-zinc-400 hover:bg-zinc-800/60 transition-colors"
+            className="flex-1 py-3 text-sm text-[var(--color-text-muted)] hover:bg-[var(--color-panel-2)]/60 transition-colors"
           >
             Refuser
           </button>
-          <div className="w-px bg-zinc-800" />
+          <div className="w-px bg-[var(--color-panel-2)]" />
           <button
             onClick={() => respond(true)}
-            className="flex-1 py-3 text-sm font-semibold text-emerald-300 hover:bg-emerald-500/10 transition-colors"
+            className="flex-1 py-3 text-sm font-semibold text-[var(--color-signal)] hover:bg-[var(--color-signal-soft)] transition-colors"
           >
             Autoriser
           </button>
         </div>
         {queue.length > 1 && (
-          <div className="px-6 py-2 text-center text-[11px] text-zinc-600 border-t border-zinc-800">
+          <div className="px-6 py-2 text-center text-[11px] text-[var(--color-text-faint)] border-t border-[var(--color-border)]">
             {queue.length - 1} autre(s) demande(s) en attente
           </div>
         )}

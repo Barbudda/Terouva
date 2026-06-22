@@ -75,18 +75,18 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
   };
 
   return (
-    <div className="min-h-screen grid place-items-center p-6 bg-zinc-950">
+    <div className="min-h-screen grid place-items-center p-6 bg-[var(--color-bg)]">
       <div className="w-full max-w-lg">
         {/* En-tête + progression */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="size-9 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 grid place-items-center text-zinc-950 font-bold">
+          <div className="size-9 rounded-lg bg-gradient-to-br from-[var(--color-signal)] to-[var(--color-signal)] grid place-items-center text-[var(--color-bg)] font-bold">
             T
           </div>
           <div className="flex-1">
-            <div className="text-sm font-semibold tracking-tight text-zinc-100">
+            <div className="text-sm font-semibold tracking-tight text-[var(--color-text)]">
               Bienvenue sur Terouva
             </div>
-            <div className="text-xs text-zinc-500">Configuration en 2 minutes</div>
+            <div className="text-xs text-[var(--color-text-faint)]">Configuration en 2 minutes</div>
           </div>
           <div className="flex gap-1.5">
             {[0, 1, 2].map((i) => (
@@ -94,19 +94,19 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
                 key={i}
                 className={
                   "h-1.5 w-6 rounded-full " +
-                  (i <= step ? "bg-emerald-400" : "bg-zinc-800")
+                  (i <= step ? "bg-[var(--color-signal)]" : "bg-[var(--color-panel-2)]")
                 }
               />
             ))}
           </div>
         </div>
 
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+        <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-panel)]/60 p-6">
           {step === 0 && (
             <div className="space-y-4">
               <div>
-                <h2 className="text-lg font-semibold text-zinc-100">Qui es-tu ?</h2>
-                <p className="text-sm text-zinc-400 mt-1">
+                <h2 className="text-lg font-semibold text-[var(--color-text)]">Qui es-tu ?</h2>
+                <p className="text-sm text-[var(--color-text-muted)] mt-1">
                   Ces infos servent à pré-remplir tes messages de candidature.
                 </p>
               </div>
@@ -148,8 +148,8 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
           {step === 1 && (
             <div className="space-y-4">
               <div>
-                <h2 className="text-lg font-semibold text-zinc-100">Tu cherches quoi ?</h2>
-                <p className="text-sm text-zinc-400 mt-1">
+                <h2 className="text-lg font-semibold text-[var(--color-text)]">Tu cherches quoi ?</h2>
+                <p className="text-sm text-[var(--color-text-muted)] mt-1">
                   Une première recherche. Tu pourras en ajouter d'autres ensuite.
                 </p>
               </div>
@@ -189,30 +189,30 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
           {step === 2 && (
             <div className="space-y-4">
               <div>
-                <h2 className="text-lg font-semibold text-zinc-100">
+                <h2 className="text-lg font-semibold text-[var(--color-text)]">
                   Connecte ton navigateur
                 </h2>
-                <p className="text-sm text-zinc-400 mt-1">
+                <p className="text-sm text-[var(--color-text-muted)] mt-1">
                   L'extension Chrome surveille tes recherches Leboncoin et envoie les
                   nouvelles annonces à Terouva, en temps réel.
                 </p>
               </div>
-              <ol className="space-y-2 text-sm text-zinc-300">
+              <ol className="space-y-2 text-sm text-[var(--color-text-muted)]">
                 <li className="flex gap-2">
-                  <span className="text-emerald-400 font-mono">1.</span>
+                  <span className="text-[var(--color-signal)] font-mono">1.</span>
                   Installe l'extension Terouva pour Chrome.
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-emerald-400 font-mono">2.</span>
+                  <span className="text-[var(--color-signal)] font-mono">2.</span>
                   Quand elle te le demande, une fenêtre Terouva s'ouvrira :
                   clique <strong>« Autoriser cette extension »</strong>.
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-emerald-400 font-mono">3.</span>
+                  <span className="text-[var(--color-signal)] font-mono">3.</span>
                   Ouvre une page de recherche Leboncoin. C'est tout.
                 </li>
               </ol>
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-[var(--color-text-faint)]">
                 Pas besoin de copier de code : la connexion se fait en un clic.
                 Tu peux faire cette étape plus tard, depuis Réglages.
               </p>
@@ -221,7 +221,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
 
           <div className="mt-6 flex items-center justify-between">
             <button
-              className="text-sm text-zinc-500 hover:text-zinc-300 disabled:opacity-40"
+              className="text-sm text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] disabled:opacity-40"
               onClick={() => setStep((s) => Math.max(0, s - 1))}
               disabled={step === 0}
             >
@@ -238,7 +238,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
         </div>
 
         {step === 0 && (
-          <p className="text-center text-xs text-zinc-600 mt-4">
+          <p className="text-center text-xs text-[var(--color-text-faint)] mt-4">
             Tu peux passer des champs et les compléter plus tard.
           </p>
         )}

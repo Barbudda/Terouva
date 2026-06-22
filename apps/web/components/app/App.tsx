@@ -22,7 +22,7 @@ export default function App() {
   }, []);
 
   if (onboarded === null) {
-    return <div className="h-full grid place-items-center text-zinc-500">…</div>;
+    return <div className="h-full grid place-items-center text-[var(--color-text-faint)]">…</div>;
   }
 
   if (!onboarded) {

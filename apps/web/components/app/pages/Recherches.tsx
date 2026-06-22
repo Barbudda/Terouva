@@ -80,7 +80,7 @@ export default function Recherches() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-[var(--color-text-muted)]">
           {searches.length} recherche{searches.length > 1 ? "s" : ""} —{" "}
           {searches.filter((s) => s.is_active).length} active
           {searches.filter((s) => s.is_active).length > 1 ? "s" : ""}
@@ -95,29 +95,29 @@ export default function Recherches() {
               <div className="flex items-center gap-2">
                 <CardTitle>{s.name}</CardTitle>
                 {s.is_active ? (
-                  <Badge className="bg-emerald-500/15 text-emerald-300 border-emerald-500/40">
+                  <Badge className="bg-[var(--color-signal-soft)] text-[var(--color-signal)] border-[var(--color-signal)]/40">
                     active
                   </Badge>
                 ) : (
-                  <Badge className="bg-zinc-700/40 text-zinc-400 border-zinc-600/40">
+                  <Badge className="bg-[var(--color-border-2)]/40 text-[var(--color-text-muted)] border-[var(--color-border-2)]/40">
                     pause
                   </Badge>
                 )}
               </div>
             </CardHeader>
-            <CardBody className="text-sm text-zinc-400 space-y-1">
+            <CardBody className="text-sm text-[var(--color-text-muted)] space-y-1">
               <div>
                 {s.city ?? "—"} • ≤ {s.price_max ?? "—"}€ • ≥ {s.surface_min ?? "—"}m² • ≥{" "}
                 {s.rooms_min ?? "—"} pièces
               </div>
               {s.keywords_must && (
                 <div className="text-xs">
-                  <span className="text-emerald-400">must :</span> {s.keywords_must}
+                  <span className="text-[var(--color-signal)]">must :</span> {s.keywords_must}
                 </div>
               )}
               {s.keywords_exclude && (
                 <div className="text-xs">
-                  <span className="text-red-400">exclus :</span> {s.keywords_exclude}
+                  <span className="text-[var(--color-danger)]">exclus :</span> {s.keywords_exclude}
                 </div>
               )}
             </CardBody>
@@ -141,7 +141,7 @@ export default function Recherches() {
         ))}
         {searches.length === 0 && (
           <Card className="md:col-span-2">
-            <CardBody className="text-center py-10 text-zinc-500">
+            <CardBody className="text-center py-10 text-[var(--color-text-faint)]">
               Aucune recherche. Crée-en une pour commencer.
             </CardBody>
           </Card>
@@ -323,7 +323,7 @@ export default function Recherches() {
                   ["must_have_cave", "Cave"],
                 ] as const
               ).map(([key, label]) => (
-                <label key={key} className="flex items-center gap-2 text-sm text-zinc-300">
+                <label key={key} className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
                   <input
                     type="checkbox"
                     checked={!!editing[key]}

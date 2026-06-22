@@ -11,15 +11,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-violet-500 hover:bg-violet-400 text-white border border-violet-400 shadow-sm shadow-violet-500/20",
+    "bg-[var(--color-signal)] hover:bg-[var(--color-signal)] text-white border border-[var(--color-signal)] shadow-sm shadow-[var(--color-signal)]/20",
   secondary:
-    "bg-zinc-800 hover:bg-zinc-700 text-zinc-100 border border-zinc-700",
+    "bg-[var(--color-panel-2)] hover:bg-[var(--color-border-2)] text-[var(--color-text)] border border-[var(--color-border-2)]",
   ghost:
-    "bg-transparent hover:bg-zinc-800 text-zinc-200 border border-transparent",
+    "bg-transparent hover:bg-[var(--color-panel-2)] text-[var(--color-text)] border border-transparent",
   danger:
-    "bg-red-500/90 hover:bg-red-500 text-white border border-red-500/70",
+    "bg-[var(--color-danger)]/90 hover:bg-[var(--color-danger)] text-white border border-[var(--color-danger)]/70",
   success:
-    "bg-emerald-500/90 hover:bg-emerald-500 text-white border border-emerald-500/70",
+    "bg-[var(--color-signal)]/90 hover:bg-[var(--color-signal)] text-white border border-[var(--color-signal)]/70",
 };
 
 const sizes: Record<Size, string> = {
@@ -38,7 +38,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       type={type}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/60",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-signal)]/60",
         "disabled:opacity-50 disabled:cursor-not-allowed",
         variants[variant],
         sizes[size],
