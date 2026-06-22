@@ -19,30 +19,30 @@
     </header>
 
     <nav class="tabs">
-      <button class="tab active" data-tab="watch">Connexion</button>
+      <button class="tab active" data-tab="watch">Surveillance</button>
       <button class="tab" data-tab="capture">Capturer</button>
     </nav>
 
     <main id="main">
       <section class="panel" data-panel="watch">
         <div class="card">
-          <div class="card-title" id="watch-state">Connexion…</div>
-          <div class="card-meta" id="watch-tip">Recherche de l'app Terouva sur ta machine…</div>
+          <div class="card-title" id="watch-state">Surveillance active</div>
+          <div class="card-meta" id="watch-tip">Gardez une page de recherche Leboncoin ouverte.</div>
         </div>
-        <button id="connect-btn" class="btn-primary hidden">Connecter à l'app</button>
+        <button id="connect-btn" class="btn-primary hidden">Ouvrir l'application Terouva</button>
         <div id="connect-feedback" class="feedback hidden"></div>
         <label class="toggle">
           <input type="checkbox" id="watch-enabled" checked />
           <span>Surveillance active</span>
         </label>
         <p class="hint">
-          Garde une page <code>leboncoin.fr</code> de recherche ouverte : chaque
-          nouvelle annonce part vers l'app, qui te notifie si elle matche tes critères.
+          Gardez une page de recherche <code>leboncoin.fr</code> ouverte : chaque
+          nouvelle annonce est envoyée à l'application, qui vous prévient si elle
+          correspond à vos critères.
         </p>
         <p class="hint small">
-          La connexion est automatique : à l'installation, l'app te demande
-          d'<strong>autoriser l'extension en un clic</strong>. Aucun token à copier,
-          tout reste en local.
+          Tout reste sur votre ordinateur. Vous n'avez rien à configurer : ouvrez
+          l'application Terouva et c'est parti.
         </p>
       </section>
 
@@ -53,7 +53,7 @@
         <div id="capture-error" class="state hidden">
           <p class="error-text" id="capture-error-text"></p>
           <p class="hint">
-            Ouvre une <strong>annonce</strong> Leboncoin (URL <code>/ad/...</code>) puis reviens dans le popup.
+            Ouvrez une <strong>annonce</strong> Leboncoin, puis revenez sur ce menu.
           </p>
         </div>
         <div id="capture-ready" class="state hidden">
@@ -71,8 +71,8 @@
     </main>
 
     <footer>
-      <span>v0.2 · local-first</span>
-      <a id="reconnect-link" href="#">Reconnecter</a>
+      <span>Tout reste sur votre ordinateur</span>
+      <a id="reconnect-link" href="#">Ouvrir l'application</a>
     </footer>
 
     <script src="popup.js"></script>

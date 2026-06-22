@@ -108,33 +108,28 @@
   // Aucune requête vers LBC : on lit la page que l'utilisateur regarde déjà.
   function autoSendDetail() {
     try {
-      chrome.storage.sync.get(
-        ["terouva.serverUrl", "terouva.token", "terouva.watchEnabled"],
-        (out) => {
-          const serverUrl = out["terouva.serverUrl"];
-          const token = out["terouva.token"];
-          const enabled = out["terouva.watchEnabled"] !== false;
-          if (!serverUrl || !token || !enabled) return;
-          const data = extractFromNextData() ?? extractFromMeta();
-          if (!data?.url) return;
-          fetch(`${serverUrl.replace(/\/+$/, "")}/ingest/listing`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
+      chrome.storage.sync.get(["terouva.watchEnabled"], (out) => {
+        if (out["terouva.watchEnabled"] === false) return;
+        const data = extractFromNextData() ?? extractFromMeta();
+        if (!data?.url) return;
+        // On envoie le détail au service worker, qui le relaie à l'app (/app)
+        // pour ENRICHIR la fiche déjà détectée et re-scorer en pleine confiance.
+        // Aucune requête vers Leboncoin : on lit la page que l'utilisateur regarde.
+        try {
+          chrome.runtime.sendMessage({
+            type: "terouva.detected",
+            payload: {
               app: "terouva",
               type: "listing-detail",
               version: 1,
               captured_at: new Date().toISOString(),
               data,
-            }),
-          }).catch(() => {
-            /* app fermée → best-effort, on ignore */
+            },
           });
-        },
-      );
+        } catch {
+          /* SW indisponible → best-effort, on ignore */
+        }
+      });
     } catch {
       /* hors contexte extension → ignore */
     }

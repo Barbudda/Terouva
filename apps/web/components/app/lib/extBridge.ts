@@ -133,12 +133,49 @@ async function handleDetected(payload: WatchEventPayload) {
   try {
     const parsed = payloadToParsed(payload.data);
     const detailOnly = payload.type === "listing-detail";
-    const result = await ingestParsedListing(parsed, { detailOnly });
+    // pageNotif:false → c'est l'extension qui affichera la notif système
+    // (visible même quand l'utilisateur est sur Leboncoin, pas sur l'app).
+    const result = await ingestParsedListing(parsed, { detailOnly, pageNotif: false });
     emitWatchIngest(result, payload);
     setState({ received: state.received + 1, lastSyncAt: Date.now() });
+    if (result.notified && result.score !== null) {
+      notifyExtension(payload.data, result.score, result.matchedSearchName);
+    }
   } catch (e) {
     console.error("[extBridge] ingestion échouée:", e);
   }
+}
+
+/** Demande à l'extension d'afficher une notification système « annonce chaude ». */
+function notifyExtension(
+  d: WatchEventPayload["data"],
+  score: number,
+  searchName: string | null,
+): void {
+  const runtime = chromeRuntime();
+  if (!runtime) return;
+  const body = [
+    d.price ? `${d.price}€` : null,
+    d.surface ? `${d.surface}m²` : null,
+    d.city,
+    searchName ? `correspond à : ${searchName}` : null,
+  ]
+    .filter(Boolean)
+    .join(" • ");
+  const notif = {
+    title: `★ ${score}/100 — ${d.title ?? "Annonce détectée"}`,
+    body,
+    url: d.url,
+    score,
+  };
+  void getExtId().then((extId) => {
+    if (!extId) return;
+    try {
+      runtime.sendMessage(extId, { type: "terouva.notify", notif });
+    } catch {
+      /* extension momentanément indisponible — best-effort */
+    }
+  });
 }
 
 /** (Re)connecte la page à l'extension. Best-effort : no-op si absente. */

@@ -75,19 +75,25 @@ async function maybeNotifyHot(
   listing: Listing,
   score: number,
   searchName: string | null,
+  show = true,
 ): Promise<boolean> {
   const threshold = Number((await getSetting("notification_min_score")) ?? 70);
   if (score < threshold) return false;
-  const subtitle = [
-    listing.price ? `${listing.price}€` : null,
-    listing.surface ? `${listing.surface}m²` : null,
-    listing.city,
-    searchName ? `match: ${searchName}` : null,
-  ]
-    .filter(Boolean)
-    .join(" • ");
-  const title = `★ ${score}/100 — ${listing.title ?? "Annonce détectée"}`;
-  await notifyDesktop({ title, body: subtitle });
+  // `show=false` : l'annonce vient de l'extension → c'est elle qui affichera la
+  // notif système (visible même quand on est sur Leboncoin). On évite le doublon
+  // avec la notification du navigateur.
+  if (show) {
+    const subtitle = [
+      listing.price ? `${listing.price}€` : null,
+      listing.surface ? `${listing.surface}m²` : null,
+      listing.city,
+      searchName ? `match: ${searchName}` : null,
+    ]
+      .filter(Boolean)
+      .join(" • ");
+    const title = `★ ${score}/100 — ${listing.title ?? "Annonce détectée"}`;
+    await notifyDesktop({ title, body: subtitle });
+  }
   return true;
 }
 
@@ -98,9 +104,9 @@ async function maybeNotifyHot(
  */
 export async function ingestParsedListing(
   parsed: ParsedListing,
-  opts: { detailOnly: boolean } = { detailOnly: false },
+  opts: { detailOnly?: boolean; pageNotif?: boolean } = {},
 ): Promise<WatchIngestResult> {
-  const { detailOnly } = opts;
+  const { detailOnly = false, pageNotif = true } = opts;
   if (!parsed.url) throw new Error("listing missing url");
 
   const existing = await getListingByUrl(parsed.url);
@@ -133,7 +139,7 @@ export async function ingestParsedListing(
     let notified = false;
     const threshold = Number((await getSetting("notification_min_score")) ?? 70);
     if (newScore !== null && newScore >= threshold && (existing.score ?? 0) < threshold) {
-      notified = await maybeNotifyHot(reloaded, newScore, matchedName);
+      notified = await maybeNotifyHot(reloaded, newScore, matchedName, pageNotif);
     }
     return {
       listingId: existing.id,
@@ -166,7 +172,7 @@ export async function ingestParsedListing(
   }
   let notified = false;
   if (finalScore !== null) {
-    notified = await maybeNotifyHot(listing, finalScore, matchedName);
+    notified = await maybeNotifyHot(listing, finalScore, matchedName, pageNotif);
   }
   return { listingId: id, status: "new", score: finalScore, matchedSearchId: matchedId, matchedSearchName: matchedName, notified };
 }

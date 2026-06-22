@@ -1,92 +1,66 @@
 // Watch content script — runs on LBC search-result pages.
 //
-// What it does:
-//  1. Indexes every ad card already visible on initial load (so we don't
-//     spam the app with the existing list).
-//  2. Installs a MutationObserver on the document body. Each time a new
-//     ad link appears (LBC re-renders the list on infinite scroll / refresh /
-//     internal fetch), we extract minimal data and POST it to the Terouva
-//     desktop app's local HTTP server at 127.0.0.1:8765 (or whatever the
-//     user configured in the popup).
-//  3. Shows a small unobtrusive overlay at the bottom-right of the page
-//     so the user knows it's working ("Terouva: 5 envoyées").
+// Ce qu'il fait :
+//  1. Indexe les annonces déjà visibles au chargement (pour ne pas renvoyer
+//     toute la liste existante).
+//  2. Installe un MutationObserver. Chaque nouvelle annonce qui apparaît est
+//     extraite et envoyée au SERVICE WORKER de l'extension via
+//     chrome.runtime.sendMessage({type:"terouva.detected", payload}). Le SW la
+//     relaie à l'app web (/app) si elle est ouverte, sinon la met en file.
+//  3. Affiche un petit overlay discret en bas à droite ("Terouva : N détectées").
 //
-// What it doesn't do:
-//  - No automation of the browser (no auto-click, no auto-scroll, no
-//    auto-message). The browser is the user's, we just observe.
-//  - No requests to LBC beyond what the page itself loads.
+// Ce qu'il NE fait PAS :
+//  - Aucune automation du navigateur (pas d'auto-clic, d'auto-scroll, d'auto-
+//    message). Le navigateur est celui de l'utilisateur, on observe.
+//  - Aucune requête vers Leboncoin au-delà de ce que la page charge déjà.
 
 (function () {
   if (window.__TEROUVA_WATCH_INJECTED__) return;
   window.__TEROUVA_WATCH_INJECTED__ = true;
 
-  const STORAGE_KEYS = {
-    serverUrl: "terouva.serverUrl",
-    token: "terouva.token",
-    enabled: "terouva.watchEnabled",
-  };
-  const DEFAULT_SERVER = "http://127.0.0.1:8765";
+  const ENABLED_KEY = "terouva.watchEnabled";
 
-  const sentUrls = new Set(); // canonicalized LBC ad URLs we already POSTed
-  let settings = { serverUrl: DEFAULT_SERVER, token: "", enabled: true };
-  let stats = { sent: 0, errors: 0, last: null };
+  const sentUrls = new Set(); // URLs d'annonces déjà envoyées
+  let enabled = true;
+  let stats = { sent: 0, last: null };
   let overlay = null;
 
-  // -------- settings ---------------------------------------------------------
+  // -------- réglages ---------------------------------------------------------
 
-  function loadSettings() {
+  function loadEnabled() {
     return new Promise((resolve) => {
-      chrome.storage.sync.get(
-        [STORAGE_KEYS.serverUrl, STORAGE_KEYS.token, STORAGE_KEYS.enabled],
-        (out) => {
-          settings = {
-            serverUrl: out[STORAGE_KEYS.serverUrl] || DEFAULT_SERVER,
-            token: out[STORAGE_KEYS.token] || "",
-            enabled:
-              typeof out[STORAGE_KEYS.enabled] === "boolean"
-                ? out[STORAGE_KEYS.enabled]
-                : true,
-          };
-          resolve(settings);
-        },
-      );
+      chrome.storage.sync.get([ENABLED_KEY], (out) => {
+        enabled = out[ENABLED_KEY] !== false;
+        resolve(enabled);
+      });
     });
   }
 
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area !== "sync") return;
-    if (STORAGE_KEYS.serverUrl in changes) {
-      settings.serverUrl = changes[STORAGE_KEYS.serverUrl].newValue || DEFAULT_SERVER;
-    }
-    if (STORAGE_KEYS.token in changes) {
-      settings.token = changes[STORAGE_KEYS.token].newValue || "";
-    }
-    if (STORAGE_KEYS.enabled in changes) {
-      settings.enabled = changes[STORAGE_KEYS.enabled].newValue !== false;
+    if (ENABLED_KEY in changes) {
+      enabled = changes[ENABLED_KEY].newValue !== false;
       refreshOverlay();
     }
   });
 
-  // -------- DOM extraction --------------------------------------------------
+  // -------- extraction DOM --------------------------------------------------
 
   /**
-   * Each LBC ad in a results page is rendered as <a href="/ad/...">.
-   * We don't try to read every detail (we'd be brittle to layout changes).
-   * Just enough so the app has a usable preview, full data comes from the
-   * detail-page parser when the user clicks open.
+   * Chaque annonce LBC dans une page de résultats est un <a href="/ad/...">.
+   * On ne lit pas tous les détails (trop fragile aux changements de gabarit) :
+   * juste de quoi avoir un aperçu utilisable ; le détail complet vient quand
+   * l'utilisateur ouvre l'annonce (content.js).
    */
   function extractFromAnchor(a) {
     try {
       const href = a.getAttribute("href") || "";
-      if (!href || !/^\/ad\//i.test(href) && !/itemId-/i.test(href)) return null;
+      if (!href || (!/^\/ad\//i.test(href) && !/itemId-/i.test(href))) return null;
       const url = new URL(href, location.origin).toString();
 
-      // External id
       const idMatch = href.match(/itemId-(\d+)|\/ad\/[a-z0-9_-]+\/(\d+)/i);
       const externalId = idMatch ? idMatch[1] || idMatch[2] : null;
 
-      // Best-effort: pull text bits. LBC frequently changes class names but
-      // ad cards usually have: title, price, location, surface as visible text.
       const text = (a.textContent || "").replace(/\s+/g, " ").trim();
       const priceMatch = text.match(/([\d\s]+)\s*€/);
       const price = priceMatch
@@ -95,9 +69,6 @@
       const surfaceMatch = text.match(/(\d+)\s*m²/);
       const surface = surfaceMatch ? parseInt(surfaceMatch[1], 10) || null : null;
 
-      // Title is the first visible non-empty title-like element in the anchor,
-      // commonly an <p> with role/heading or a <span> with a high font-weight.
-      // Fallback to first 80 chars of textContent.
       const titleEl =
         a.querySelector("[data-test-id='adcard-title']") ||
         a.querySelector("p[role='heading']") ||
@@ -105,10 +76,8 @@
         null;
       const title = (titleEl ? titleEl.textContent : text).trim().slice(0, 200);
 
-      // Image (thumbnail) when available
       const img = a.querySelector("img");
-      const imageSrc =
-        img && (img.getAttribute("src") || img.getAttribute("data-src"));
+      const imageSrc = img && (img.getAttribute("src") || img.getAttribute("data-src"));
       const images = imageSrc ? [imageSrc] : [];
 
       return {
@@ -128,13 +97,12 @@
         publisher_type: null,
         published_at: null,
       };
-    } catch (e) {
+    } catch {
       return null;
     }
   }
 
   function findAdAnchors(root) {
-    // Be tolerant: anything that looks like an ad link on LBC.
     return Array.from(
       root.querySelectorAll(
         "a[href^='/ad/'], a[href*='/itemId-'], a[data-test-id='ad']",
@@ -142,96 +110,44 @@
     );
   }
 
-  // -------- network ---------------------------------------------------------
+  // -------- envoi au service worker -----------------------------------------
 
-  async function postListing(data) {
-    if (!settings.token) {
-      stats.errors++;
-      refreshOverlay("Token Terouva manquant — ouvre le popup pour le configurer.");
-      return false;
-    }
+  function sendDetected(data) {
     try {
-      const resp = await fetch(
-        `${settings.serverUrl.replace(/\/+$/, "")}/ingest/listing`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${settings.token}`,
-          },
-          body: JSON.stringify({
-            app: "terouva",
-            type: "listing-watch",
-            version: 1,
-            captured_at: new Date().toISOString(),
-            data,
-          }),
+      chrome.runtime.sendMessage({
+        type: "terouva.detected",
+        payload: {
+          app: "terouva",
+          type: "listing-watch",
+          version: 1,
+          captured_at: new Date().toISOString(),
+          data,
         },
-      );
-      if (!resp.ok) {
-        stats.errors++;
-        refreshOverlay(`Terouva a refusé : HTTP ${resp.status}`);
-        return false;
-      }
+      });
       stats.sent++;
       stats.last = data.title || data.url;
       refreshOverlay();
-      return true;
-    } catch (e) {
-      stats.errors++;
-      refreshOverlay("App Terouva injoignable. Lance-la puis recharge la page.");
-      return false;
+    } catch {
+      /* SW momentanément indisponible : l'annonce sera revue au prochain refresh */
     }
   }
 
-  // -------- notifications « annonce chaude » --------------------------------
-  //
-  // L'app locale score chaque annonce et, au-dessus du seuil, empile une notif
-  // dans sa file (GET /notifications/pending, qui draine). Ce content script est
-  // un contexte long (vit tant que l'onglet LBC est ouvert), donc il poll cette
-  // file toutes les ~6 s et transmet chaque item au service worker, qui l'affiche
-  // via chrome.notifications. Résultat : on est alerté dans le navigateur même si
-  // la fenêtre de l'app n'est pas au premier plan. On n'automatise rien sur LBC.
-
-  async function pollNotifications() {
-    if (!settings.enabled || !settings.token) return;
-    try {
-      const resp = await fetch(
-        `${settings.serverUrl.replace(/\/+$/, "")}/notifications/pending`,
-        { headers: { Authorization: `Bearer ${settings.token}` } },
-      );
-      if (!resp.ok) return;
-      const items = await resp.json();
-      if (!Array.isArray(items) || items.length === 0) return;
-      for (const notif of items) {
-        try {
-          chrome.runtime.sendMessage({ type: "terouva-notify", notif });
-        } catch (e) {
-          /* service worker indisponible : on ignore */
-        }
-      }
-    } catch (e) {
-      /* app injoignable : silencieux, postListing affiche déjà l'erreur */
-    }
-  }
-
-  // -------- detection -------------------------------------------------------
+  // -------- détection -------------------------------------------------------
 
   function indexExisting() {
-    const anchors = findAdAnchors(document);
-    for (const a of anchors) {
+    for (const a of findAdAnchors(document)) {
       const data = extractFromAnchor(a);
       if (data?.url) sentUrls.add(data.url);
     }
   }
 
-  async function dispatchNew(a) {
-    if (!settings.enabled) return;
+  function dispatchNew(a) {
+    if (!enabled) return;
     const data = extractFromAnchor(a);
     if (!data?.url) return;
     if (sentUrls.has(data.url)) return;
     sentUrls.add(data.url);
-    await postListing(data);
+    sendDetected(data);
   }
 
   function watchMutations() {
@@ -240,18 +156,14 @@
         if (m.type !== "childList") continue;
         for (const node of m.addedNodes) {
           if (node.nodeType !== Node.ELEMENT_NODE) continue;
-          // The added node may itself be an anchor or contain anchors.
           if (
             node.matches &&
-            (node.matches("a[href^='/ad/']") ||
-              node.matches("a[href*='/itemId-']"))
+            (node.matches("a[href^='/ad/']") || node.matches("a[href*='/itemId-']"))
           ) {
             dispatchNew(node);
           }
           if (node.querySelectorAll) {
-            for (const a of findAdAnchors(node)) {
-              dispatchNew(a);
-            }
+            for (const a of findAdAnchors(node)) dispatchNew(a);
           }
         }
       }
@@ -265,20 +177,12 @@
     const el = document.createElement("div");
     el.id = "terouva-overlay";
     el.style.cssText = [
-      "position:fixed",
-      "right:16px",
-      "bottom:16px",
-      "z-index:2147483647",
-      "background:#0a0a0b",
-      "color:#ededee",
-      "border:1px solid #2c2c33",
-      "border-radius:10px",
-      "padding:10px 14px",
+      "position:fixed", "right:16px", "bottom:16px", "z-index:2147483647",
+      "background:#0a0a0b", "color:#ededee", "border:1px solid #2c2c33",
+      "border-radius:10px", "padding:10px 14px",
       "font:13px/1.4 ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif",
-      "box-shadow:0 8px 32px -8px rgba(0,0,0,0.5)",
-      "max-width:280px",
-      "pointer-events:auto",
-      "user-select:none",
+      "box-shadow:0 8px 32px -8px rgba(0,0,0,0.5)", "max-width:280px",
+      "pointer-events:auto", "user-select:none",
     ].join(";");
 
     const dot = document.createElement("span");
@@ -297,7 +201,7 @@
     el.appendChild(hint);
 
     el.addEventListener("dblclick", () => el.remove());
-    el.title = "Double-clique pour cacher.";
+    el.title = "Double-cliquez pour masquer.";
     return el;
   }
 
@@ -309,14 +213,11 @@
     const txt = overlay.querySelector("#terouva-overlay-text");
     const hintEl = overlay.querySelector("#terouva-overlay-hint");
     const dot = overlay.firstChild;
-    if (!settings.enabled) {
-      txt.textContent = "Terouva : surveillance désactivée";
+    if (!enabled) {
+      txt.textContent = "Terouva : surveillance en pause";
       if (dot) dot.style.background = "#6f6f78";
-    } else if (!settings.token) {
-      txt.textContent = "Terouva : token non configuré";
-      if (dot) dot.style.background = "#FFB84D";
     } else {
-      txt.textContent = `Terouva : ${stats.sent} annonce${stats.sent > 1 ? "s" : ""} envoyée${stats.sent > 1 ? "s" : ""}`;
+      txt.textContent = `Terouva : ${stats.sent} annonce${stats.sent > 1 ? "s" : ""} détectée${stats.sent > 1 ? "s" : ""}`;
       if (dot) dot.style.background = "#7EE8C8";
     }
     if (hint) {
@@ -324,19 +225,15 @@
     } else if (stats.last) {
       hintEl.textContent = `dernière : ${stats.last.slice(0, 60)}${stats.last.length > 60 ? "…" : ""}`;
     } else {
-      hintEl.textContent = "garde cette page ouverte pour la surveillance live.";
+      hintEl.textContent = "gardez cette page ouverte pour la détection en direct.";
     }
   }
 
-  // -------- boot ------------------------------------------------------------
+  // -------- démarrage -------------------------------------------------------
 
-  loadSettings().then(() => {
+  loadEnabled().then(() => {
     indexExisting();
     refreshOverlay();
     watchMutations();
-    // Poll des notifications « annonce chaude » toutes les 6 s tant que l'onglet
-    // LBC est ouvert (le content script reste vivant, contrairement au SW MV3).
-    pollNotifications();
-    setInterval(pollNotifications, 6000);
   });
 })();
