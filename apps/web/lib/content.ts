@@ -27,12 +27,12 @@ export const RELEASES_DOWNLOAD_MSI =
 export const HERO = {
   eyebrow: "Version d'essai · gratuite",
   titleLines: [
-    "Trouvez votre logement",
-    "sans y passer vos journées.",
+    "Trouvez,",
+    "sans chercher.",
   ],
-  titleEmphasis: "Terouva vous prévient dès qu'une annonce pour vous arrive.",
+  titleEmphasis: "Terouva surveille Leboncoin pour vous.",
   subtitle:
-    "Quand vous consultez Leboncoin, Terouva surveille les annonces pour vous. Dès qu'une nouvelle annonce correspond à ce que vous cherchez, vous recevez une alerte, avec un message de candidature déjà préparé. Vous n'avez plus qu'à l'envoyer. Tout se passe sur votre ordinateur, et c'est vous qui gardez la main.",
+    "Dès qu'une annonce correspond à ce que vous cherchez, vous êtes prévenu, avec un message de candidature déjà prêt à envoyer. Tout reste sur votre ordinateur, et c'est vous qui gardez la main.",
   ctaPrimary: { label: "Télécharger pour Windows", href: RELEASES_DOWNLOAD_MSI },
   ctaSecondary: { label: "Voir comment ça marche", href: "#how" },
   meta: "Versions Mac et Linux à venir · Tout reste chez vous · Sans inscription",
