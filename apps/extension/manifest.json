@@ -25,10 +25,14 @@
   },
   "host_permissions": [
     "https://www.leboncoin.fr/*",
-    "https://leboncoin.fr/*",
-    "http://127.0.0.1/*",
-    "http://localhost/*"
+    "https://leboncoin.fr/*"
   ],
+  "externally_connectable": {
+    "matches": [
+      "https://terouva.vercel.app/*",
+      "http://localhost:3000/*"
+    ]
+  },
   "content_scripts": [
     {
       "matches": [
