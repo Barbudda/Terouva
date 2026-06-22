@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import { HashRouter } from "react-router-dom";
 import App from "@app/App";
+import { ensurePersistentStorage, registerAppServiceWorker } from "@app/lib/pwa";
 
 /**
  * Racine de l'application web Terouva (local-first). Montée uniquement côté client
@@ -10,6 +12,12 @@ import App from "@app/App";
  * cohérent avec la promesse « zéro serveur ».
  */
 export default function AppRoot() {
+  useEffect(() => {
+    registerAppServiceWorker();
+    // Protège IndexedDB de l'éviction (best-effort, non bloquant).
+    void ensurePersistentStorage();
+  }, []);
+
   return (
     <HashRouter>
       <App />
