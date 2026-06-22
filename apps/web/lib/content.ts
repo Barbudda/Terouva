@@ -33,9 +33,9 @@ export const HERO = {
   titleEmphasis: "Terouva surveille Leboncoin pour vous.",
   subtitle:
     "Dès qu'une annonce correspond à ce que vous cherchez, vous êtes prévenu, avec un message de candidature déjà prêt à envoyer. Tout reste sur votre ordinateur, et c'est vous qui gardez la main.",
-  ctaPrimary: { label: "Télécharger pour Windows", href: RELEASES_DOWNLOAD_MSI },
+  ctaPrimary: { label: "Ouvrir Terouva", href: "/app" },
   ctaSecondary: { label: "Voir comment ça marche", href: "#how" },
-  meta: "Versions Mac et Linux à venir · Tout reste chez vous · Sans inscription",
+  meta: "Fonctionne sur Mac, Windows et Linux · dans votre navigateur · sans inscription",
 };
 
 export const PROBLEM_STATS = [
@@ -213,17 +213,25 @@ export const FAQ_ITEMS = [
     a: "Non, rien du tout. Terouva écrit les messages sur votre ordinateur, à partir de votre profil et des détails de l'annonce, dans trois tons au choix. C'est gratuit, immédiat, et sans aucune connaissance technique.",
   },
   {
-    q: "Mac et Linux, c'est pour quand ?",
-    a: "L'application fonctionne d'abord sur Windows. Les versions pour Mac et Linux arriveront dans les semaines qui viennent.",
+    q: "Est-ce que ça marche sur Mac ?",
+    a: "Oui. Terouva est une application web : elle s'ouvre dans votre navigateur, sur Mac comme sur Windows ou Linux. Il n'y a rien à télécharger. Pour la détection en direct, vous ajoutez l'extension Chrome (gratuite, et Chrome existe sur Mac). Et même sans extension, vous pouvez recevoir vos annonces en transférant à Terouva les e-mails d'alerte de Leboncoin.",
+  },
+  {
+    q: "Faut-il installer quelque chose ?",
+    a: "Pour commencer, non : vous ouvrez le site et vous renseignez votre profil. Pour suivre les annonces en direct pendant que vous êtes sur Leboncoin, vous ajoutez une petite extension à votre navigateur Chrome (un clic, gratuit). C'est tout.",
+  },
+  {
+    q: "Une application à installer existe-t-elle ?",
+    a: "Une version Windows à installer existe aussi, en option, pour celles et ceux qui préfèrent une application classique. Mais l'application web suffit, et elle fonctionne sur tous les systèmes.",
   },
 ];
 
 export const CTA_FINAL = {
   title: "Prêt à essayer ?",
   subtitle:
-    "Installez Terouva, renseignez votre profil et vos recherches. Vous serez prêt pour la prochaine annonce.",
-  primary: { label: "Télécharger pour Windows", href: RELEASES_DOWNLOAD_MSI },
-  secondary: { label: "Voir toutes les versions", href: RELEASES_URL },
+    "Ouvrez Terouva dans votre navigateur, renseignez votre profil et vos recherches. Vous serez prêt pour la prochaine annonce.",
+  primary: { label: "Ouvrir Terouva", href: "/app" },
+  secondary: { label: "Version Windows (optionnelle)", href: RELEASES_DOWNLOAD_MSI },
 };
 
 export const FOOTER = {

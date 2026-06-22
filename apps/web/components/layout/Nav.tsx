@@ -59,8 +59,8 @@ export function Nav() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <MagneticButton href="#download" variant="primary" size="md" pull={6}>
-            Télécharger
+          <MagneticButton href="/app" variant="primary" size="md" pull={6}>
+            Ouvrir Terouva
           </MagneticButton>
         </div>
       </div>

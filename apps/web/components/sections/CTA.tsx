@@ -55,7 +55,7 @@ export function CTA() {
         <Reveal delay={0.3}>
           <div className="mt-10 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-[var(--color-text-faint)]">
             <span className="size-1.5 rounded-full bg-[var(--color-signal)] animate-pulse-dot" />
-            <span>Pour Windows · environ 4 Mo · version d'essai gratuite</span>
+            <span>Mac, Windows et Linux · directement dans votre navigateur</span>
           </div>
         </Reveal>
       </div>
