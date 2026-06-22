@@ -50,8 +50,8 @@ export const PROBLEM_STATS = [
     label: "par le propriétaire, dans l'ordre d'arrivée. Les suivants sont rarement consultés.",
   },
   {
-    value: "quelques minutes",
-    unit: "d'avance",
+    value: "3 min",
+    unit: "minutes d'avance",
     label: "suffisent souvent à faire la différence pour décrocher une visite.",
   },
 ];
