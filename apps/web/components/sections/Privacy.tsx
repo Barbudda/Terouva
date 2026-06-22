@@ -51,32 +51,26 @@ export function Privacy() {
 function ServerErrorCard() {
   return (
     <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-panel)]/40 overflow-hidden">
-      <div className="border-b border-[var(--color-border)] bg-[var(--color-bg-2)]/60 px-4 py-2 flex items-center gap-2">
-        <span className="size-2 rounded-full bg-[var(--color-danger)] animate-pulse-dot" />
-        <span className="text-[11px] font-mono text-[var(--color-text-faint)] uppercase tracking-wider">
-          Request log
+      <div className="border-b border-[var(--color-border)] bg-[var(--color-bg-2)]/60 px-4 py-3 flex items-center gap-2">
+        <Lock size={14} className="text-[var(--color-signal)]" />
+        <span className="text-sm font-medium text-[var(--color-text)]">
+          Une promesse simple
         </span>
       </div>
-      <div className="p-6 font-mono text-sm space-y-2">
-        <div className="text-[var(--color-text-faint)]">
-          <span className="text-[var(--color-text-muted)]">$</span> curl -X POST{" "}
-          <span className="text-[var(--color-text)]">api.terouva.app/sync</span>
-        </div>
-        <div className="text-[var(--color-danger)] pl-3 border-l-2 border-[var(--color-danger)]/40 py-2">
-          <div className="text-xs uppercase tracking-wider mb-1 opacity-80">Error</div>
-          <div className="text-sm">404 — no such server exists</div>
-        </div>
-        <div className="text-[var(--color-text-faint)] text-xs leading-relaxed pt-3">
-          Il n'y a pas d'API Terouva. Pas par éthique seulement —{" "}
-          <span className="text-[var(--color-text)]">par construction</span>.
-          L'app n'envoie rien dehors parce qu'il n'y a personne pour la recevoir.
-        </div>
-        <div className="mt-4 flex items-center gap-2 pt-3 border-t border-[var(--color-border)] text-xs">
-          <Lock size={12} className="text-[var(--color-signal)]" />
-          <span className="text-[var(--color-text-muted)]">
-            Données stockées dans <span className="text-[var(--color-text)]">terouva.db</span> uniquement.
-          </span>
-        </div>
+      <div className="p-6 text-sm space-y-4 leading-relaxed text-[var(--color-text-muted)]">
+        <p className="text-[var(--color-text)]">
+          Terouva n'a pas de serveur. Il n'y a aucun endroit où vos informations
+          pourraient être envoyées.
+        </p>
+        <p>
+          Vos recherches, vos annonces, votre profil et vos messages sont
+          enregistrés uniquement sur votre ordinateur. Vous restez seul à y avoir
+          accès.
+        </p>
+        <p className="text-[var(--color-text)]">
+          Pas de compte, pas de mot de passe, pas de publicité. Rien à régler pour
+          que ce soit privé : ça l'est dès le départ.
+        </p>
       </div>
     </div>
   );

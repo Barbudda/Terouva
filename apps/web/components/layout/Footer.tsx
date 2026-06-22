@@ -14,7 +14,7 @@ export function Footer() {
               Terouva
             </div>
             <div className="text-xs text-[var(--color-text-faint)] font-mono">
-              v0.1 · local-first
+              Gratuit · sans inscription
             </div>
           </div>
         </div>

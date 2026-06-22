@@ -25,16 +25,16 @@ export function Features() {
     >
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
-          eyebrow="Features"
+          eyebrow="Ce que fait Terouva"
           title={
             <>
-              Tout pour gagner la course.{" "}
+              L'essentiel pour ne pas rater une annonce.{" "}
               <span className="text-[var(--color-text-muted)]">
-                Rien pour t'encombrer.
+                Sans superflu.
               </span>
             </>
           }
-          subtitle="L'objectif n'est pas de faire 200 features. C'est de faire les 8 qui comptent vraiment, et de les rendre rapides."
+          subtitle="Terouva ne cherche pas à tout faire. Il fait bien les quelques choses qui comptent vraiment, et il les fait vite."
         />
 
         <Stagger

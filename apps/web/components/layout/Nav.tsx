@@ -40,8 +40,8 @@ export function Nav() {
             T
           </span>
           <span className="font-semibold tracking-tight">Terouva</span>
-          <span className="hidden sm:inline-block text-[10px] font-mono uppercase tracking-wider text-[var(--color-text-faint)] border border-[var(--color-border)] rounded px-1.5 py-0.5 ml-1">
-            v0.1
+          <span className="hidden sm:inline-block text-[10px] uppercase tracking-wider text-[var(--color-text-faint)] border border-[var(--color-border)] rounded px-1.5 py-0.5 ml-1">
+            essai gratuit
           </span>
         </Link>
 

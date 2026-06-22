@@ -7,25 +7,24 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: "Terouva — Le premier dossier reçu, c'est le seul qui sera lu.",
+    default: "Terouva — trouvez votre logement sans y passer vos journées",
     template: "%s · Terouva",
   },
   description:
-    "Terouva surveille Leboncoin, classe les annonces selon tes critères et te prépare ton message de candidature pendant que les autres lisent encore l'annonce. App desktop local-first.",
+    "Terouva surveille Leboncoin pour vous, classe les annonces selon vos critères et prépare votre message de candidature. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste sur votre ordinateur.",
   keywords: [
     "leboncoin",
     "recherche appartement",
     "location",
-    "copilote",
-    "desktop app",
-    "local-first",
+    "alerte annonce",
+    "logement",
     "Terouva",
   ],
   authors: [{ name: "Terouva" }],
   openGraph: {
-    title: "Terouva — Le premier dossier reçu, c'est le seul qui sera lu.",
+    title: "Terouva — trouvez votre logement sans y passer vos journées",
     description:
-      "Copilote desktop local-first pour Leboncoin. Surveille, score, prépare ton message. Tu cliques. C'est parti.",
+      "Terouva surveille Leboncoin pour vous et prépare votre message de candidature. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste chez vous.",
     type: "website",
     locale: "fr_FR",
     siteName: "Terouva",
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Terouva",
     description:
-      "Le copilote local qui te fait répondre en premier sur Leboncoin.",
+      "Soyez prévenu dès qu'une annonce Leboncoin vous correspond, avec un message déjà prêt.",
   },
   robots: {
     index: true,

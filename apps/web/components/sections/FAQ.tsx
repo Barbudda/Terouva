@@ -18,8 +18,8 @@ export function FAQ() {
     >
       <div className="max-w-4xl mx-auto px-6">
         <SectionHeader
-          eyebrow="FAQ"
-          title="Les questions qu'on pose en vrai."
+          eyebrow="Questions"
+          title="Vos questions les plus fréquentes."
         />
 
         <Stagger className="mt-16 space-y-2" staggerChildren={0.06}>

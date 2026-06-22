@@ -13,11 +13,11 @@ import {
 import type { ComponentType } from "react";
 
 export const NAV_LINKS = [
-  { href: "#problem", label: "Le problème" },
+  { href: "#problem", label: "Pourquoi" },
   { href: "#how", label: "Comment ça marche" },
-  { href: "#features", label: "Features" },
+  { href: "#features", label: "Fonctionnalités" },
   { href: "#privacy", label: "Confidentialité" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#faq", label: "Questions" },
 ];
 
 export const RELEASES_URL = "https://github.com/Barbudda/Terouva/releases/latest";
@@ -25,63 +25,63 @@ export const RELEASES_DOWNLOAD_MSI =
   "https://github.com/Barbudda/Terouva/releases/latest/download/Terouva_0.2.0_x64_en-US.msi";
 
 export const HERO = {
-  eyebrow: "Beta v0.2 · gratuite",
+  eyebrow: "Version d'essai · gratuite",
   titleLines: [
-    "On ne trouve pas un appart",
-    "en cherchant.",
+    "Trouvez votre logement",
+    "sans y passer vos journées.",
   ],
-  titleEmphasis: "On en trouve un en arrivant le premier.",
+  titleEmphasis: "Terouva vous prévient dès qu'une annonce pour vous arrive.",
   subtitle:
-    "Quand tu ouvres Leboncoin, Terouva regarde par-dessus ton épaule. Chaque nouvelle annonce qui matche tes critères déclenche une notif desktop instantanée, avec un message de candidature déjà prêt. Tu cliques, tu envoies. Pas de bot, pas d'évasion : c'est ton navigateur, ta session, ton IP.",
+    "Quand vous consultez Leboncoin, Terouva surveille les annonces pour vous. Dès qu'une nouvelle annonce correspond à ce que vous cherchez, vous recevez une alerte, avec un message de candidature déjà préparé. Vous n'avez plus qu'à l'envoyer. Tout se passe sur votre ordinateur, et c'est vous qui gardez la main.",
   ctaPrimary: { label: "Télécharger pour Windows", href: RELEASES_DOWNLOAD_MSI },
-  ctaSecondary: { label: "Voir comment", href: "#how" },
-  meta: "macOS & Linux bientôt · 100 % local · Aucun compte",
+  ctaSecondary: { label: "Voir comment ça marche", href: "#how" },
+  meta: "Versions Mac et Linux à venir · Tout reste chez vous · Sans inscription",
 };
 
 export const PROBLEM_STATS = [
   {
     value: "47",
     unit: "candidatures",
-    label: "en moyenne sur une annonce LBC à Paris dans les 2 premières heures.",
+    label: "reçues en moyenne pour un appartement à Paris, dans les deux premières heures.",
   },
   {
     value: "8",
     unit: "messages lus",
-    label: "par le propriétaire, dans l'ordre d'arrivée. Les 39 autres sont ignorés.",
+    label: "par le propriétaire, dans l'ordre d'arrivée. Les suivants sont rarement consultés.",
   },
   {
-    value: "~3 min",
-    unit: "de réactivité",
-    label: "c'est le délai gagnant moyen. Plus tu attends, plus tu disparais.",
+    value: "quelques minutes",
+    unit: "d'avance",
+    label: "suffisent souvent à faire la différence pour décrocher une visite.",
   },
 ];
 
 export const PROBLEM = {
-  eyebrow: "Le problème",
-  title: "50 candidatures en 2 heures.",
-  titleAccent: "Le proprio en lit 8.",
-  body: "Dans toutes les grandes villes françaises, la location est devenue une course. Refresh entre deux réunions, annonce vue 30 min trop tard, 5 min à rédiger, et au moment où tu cliques « Envoyer », c'est déjà plié.",
-  punch: "Le délai qui te tue, c'est ces 30 min + 5 min. Pas ton dossier.",
+  eyebrow: "Pourquoi Terouva",
+  title: "Louer est devenu une course.",
+  titleAccent: "Arriver à temps compte autant que le dossier.",
+  body: "Dans beaucoup de villes, les bonnes annonces partent en quelques heures. Entre le moment où vous voyez une annonce et celui où vous écrivez votre message, d'autres candidats sont souvent déjà passés.",
+  punch: "Ce qui vous fait perdre une annonce, ce n'est pas votre dossier : c'est le temps que vous mettez à répondre.",
 };
 
 export const STEPS = [
   {
     n: "01",
-    title: "Configure une fois.",
-    body: "Profil locataire, dossier, garant, message de présentation, critères de chaque recherche. Quatre minutes max. Tu ne le refais jamais.",
-    detail: "→ Profil",
+    title: "Préparez votre profil, une seule fois.",
+    body: "Vos informations, votre dossier, votre garant, votre message de présentation, et les critères de chaque recherche. Quelques minutes, et c'est fait pour de bon.",
+    detail: "→ Votre profil",
   },
   {
     n: "02",
-    title: "Garde Leboncoin ouvert.",
-    body: "L'extension Chrome observe ta page de résultats en temps réel — c'est ton navigateur, ta session, ton IP, indistinguable d'un user qui scroll. Chaque nouvelle annonce qui apparaît dans le DOM file directement vers Terouva.",
-    detail: "→ Surveillance",
+    title: "Laissez Leboncoin ouvert.",
+    body: "Une petite extension pour votre navigateur Chrome regarde les annonces qui s'affichent sur vos pages de recherche, exactement comme si vous les parcouriez vous-même. Chaque nouvelle annonce est transmise à Terouva, sur votre ordinateur.",
+    detail: "→ Vos annonces",
   },
   {
     n: "03",
-    title: "Frappe en premier.",
-    body: "Notif desktop dès qu'une annonce franchit ton seuil de score. Message déjà rédigé en 3 tons au choix. Tu copies, tu colles sur LBC, tu envoies. 20 secondes après que l'annonce est sortie.",
-    detail: "→ Candidatures",
+    title: "Répondez sans attendre.",
+    body: "Vous êtes prévenu dès qu'une annonce correspond à vos critères. Le message de candidature est déjà écrit, dans le ton de votre choix. Vous le copiez, vous le collez sur Leboncoin, et vous l'envoyez.",
+    detail: "→ Vos candidatures",
   },
 ];
 
@@ -95,153 +95,144 @@ type Feature = {
 export const FEATURES: Feature[] = [
   {
     icon: Eye,
-    title: "Surveillance live LBC",
-    body: "L'extension Chrome observe les pages de résultats que tu ouvres. Chaque annonce qui apparaît dans le DOM est envoyée à Terouva en local. Zéro requête supplémentaire vers LBC, indistinguable d'un user qui refresh.",
+    title: "Des annonces repérées en direct",
+    body: "L'extension pour Chrome regarde les pages de recherche que vous ouvrez. Dès qu'une annonce apparaît, elle est transmise à Terouva sur votre ordinateur. Rien de plus que ce que vous consultez déjà.",
     accent: "signal",
   },
   {
     icon: Bell,
-    title: "Notif desktop instantanée",
-    body: "Dès qu'une annonce détectée franchit ton seuil de score, ping natif Windows. Tu te jettes dessus en 5 secondes.",
+    title: "Une alerte au bon moment",
+    body: "Dès qu'une annonce correspond vraiment à votre recherche, vous recevez une notification sur votre ordinateur. Vous pouvez réagir tout de suite.",
     accent: "urgent",
   },
   {
     icon: Gauge,
-    title: "Scoring transparent",
-    body: "Chaque score s'explique règle par règle. Tu sais pourquoi une annonce est à 92, pas à 60. Pas une boîte noire.",
+    title: "Un classement que vous comprenez",
+    body: "Chaque annonce reçoit une note, et Terouva vous explique pourquoi, critère par critère. Vous voyez en un coup d'œil si elle vous convient.",
     accent: "signal",
   },
   {
     icon: MessagesSquare,
-    title: "Messages personnalisés",
-    body: "Direct, chaleureux ou professionnel. Terouva cite les détails de l'annonce (type de bien, surface, quartier, ce qui ressort de la description) et remplit ton profil. Reclique un ton pour une autre version.",
+    title: "Des messages tout prêts",
+    body: "Terouva rédige pour vous un message de candidature adapté à l'annonce (type de logement, surface, quartier...) et à votre profil, dans le ton que vous préférez : direct, chaleureux ou professionnel.",
     accent: "neutral",
   },
   {
     icon: Sparkles,
-    title: "Zéro configuration",
-    body: "Rien à brancher : pas de clé API, pas de compte, pas de carte bancaire. Les messages sont générés sur ta machine, instantanément et gratuitement. Ce qui ne sort pas de chez toi ne peut pas fuiter.",
+    title: "Rien à configurer",
+    body: "Pas de compte, pas de carte bancaire, aucun réglage compliqué. Les messages sont créés directement sur votre ordinateur, gratuitement et en un instant.",
     accent: "signal",
   },
   {
     icon: Puzzle,
-    title: "Pont Chrome ↔ desktop",
-    body: "Serveur HTTP local 127.0.0.1 + token bearer. L'extension parle à Terouva en local, le trafic ne quitte jamais ta machine.",
+    title: "L'extension et l'application sur votre machine",
+    body: "L'extension Chrome communique avec l'application directement sur votre ordinateur. Rien ne passe par internet.",
     accent: "neutral",
   },
   {
     icon: Layers,
-    title: "Import multi-URL",
-    body: "Colle 20 URLs d'un coup, Terouva parse + score chacune en série. Pour quand tu n'as pas LBC ouvert.",
+    title: "Ajouter plusieurs annonces d'un coup",
+    body: "Vous pouvez aussi coller plusieurs liens d'annonces à la fois : Terouva les ajoute et les classe pour vous.",
     accent: "neutral",
   },
   {
     icon: Activity,
-    title: "Dashboard cockpit",
-    body: "Top annonces du jour, dossier prêt ou non, candidatures en attente. Tu sais quoi faire en 5 secondes.",
+    title: "Un tableau de bord clair",
+    body: "Les meilleures annonces du jour, l'état de votre dossier, vos candidatures en attente : tout est réuni au même endroit.",
     accent: "neutral",
   },
   {
     icon: FileJson,
-    title: "Backup JSON",
-    body: "Export/import complet. Tu changes d'ordi, tu réimportes, tout est là. Tes données t'appartiennent.",
+    title: "Vos données vous suivent",
+    body: "Vous pouvez enregistrer toutes vos informations dans un fichier et les retrouver sur un autre ordinateur. Elles vous appartiennent.",
     accent: "neutral",
   },
   {
     icon: Lock,
-    title: "100 % local SQLite",
-    body: "Tout vit dans terouva.db sur ton disque. Zéro serveur Terouva. Ce qu'on n'a pas, on ne peut pas le perdre.",
+    title: "Tout reste chez vous",
+    body: "Vos informations sont enregistrées uniquement sur votre ordinateur. Il n'y a pas de serveur Terouva : ce que nous n'avons pas, nous ne pouvons pas le perdre.",
     accent: "signal",
   },
 ];
 
 export const PRIVACY = {
   eyebrow: "Confidentialité",
-  title: "Tes données ne sortent pas de chez toi.",
-  body: "Pas de serveur Terouva. Pas de compte. Pas de tracker. Pas d'analytics tiers. Pas de cloud. Pas de bullshit.",
+  title: "Vos données restent chez vous.",
+  body: "Pas de serveur, pas de compte, pas de publicité, pas de suivi. Vos informations ne quittent pas votre ordinateur.",
   points: [
     {
-      label: "Stockage",
-      value: "terouva.db sur ton disque",
-      mono: "~/AppData/.../terouva.db",
+      label: "Où sont vos données",
+      value: "Uniquement sur votre ordinateur.",
+      mono: "rien en ligne",
     },
     {
       label: "Synchronisation",
       value: "Aucune.",
-      mono: "POST /sync · 404 Not Found",
+      mono: "rien n'est envoyé",
     },
     {
-      label: "Compte requis",
+      label: "Compte à créer",
       value: "Aucun.",
-      mono: "auth.required = false",
+      mono: "ni e-mail ni mot de passe",
     },
     {
-      label: "Tracker analytics",
+      label: "Publicité et suivi",
       value: "Aucun.",
-      mono: "window.analytics === undefined",
+      mono: "pas de pisteur",
     },
   ],
 };
 
-export const STACK_ITEMS = [
-  { name: "Tauri 2", role: "Shell desktop natif (Rust)" },
-  { name: "React 19 + TS", role: "UI cockpit" },
-  { name: "Tailwind v4", role: "Design system" },
-  { name: "SQLite", role: "Base locale, via tauri-plugin-sql" },
-  { name: "scraper (Rust)", role: "Parse HTML LBC en local" },
-  { name: "Chrome MV3", role: "Extension capture LBC" },
-];
-
 export const FAQ_ITEMS = [
   {
-    q: "Comment Terouva voit les annonces en temps réel ?",
-    a: "L'extension Chrome installe un observateur léger sur les pages de résultats Leboncoin que tu ouvres toi-même dans ton navigateur. Chaque nouvelle annonce qui apparaît dans le DOM (refresh manuel, scroll infini, ou re-fetch interne de LBC) est envoyée à l'app Terouva en local (127.0.0.1, token bearer). C'est ton navigateur, ta session, ton IP résidentielle. Aucun bot, aucune automation du browser, aucune signature à camoufler.",
+    q: "Comment Terouva voit-il les annonces en temps réel ?",
+    a: "L'extension Chrome regarde les pages de recherche Leboncoin que vous ouvrez vous-même. Chaque nouvelle annonce qui s'affiche est transmise à l'application Terouva, sur votre ordinateur. C'est votre navigateur, votre session, votre connexion : Terouva lit seulement ce que vous consultez déjà.",
   },
   {
     q: "Est-ce que c'est légal ?",
-    a: "Oui. Tu consultes Leboncoin dans ton navigateur comme d'habitude. Terouva tourne sur ta machine et lit ce que TU as déjà chargé. Aucun scraping serveur, aucun bot agressif, aucune évasion de détection, aucun envoi automatisé sans ton clic.",
+    a: "Oui. Vous consultez Leboncoin normalement, dans votre navigateur. Terouva fonctionne sur votre ordinateur et lit uniquement ce que vous avez déjà ouvert. Il n'envoie jamais de message à votre place : c'est toujours vous qui décidez.",
   },
   {
     q: "Combien ça coûte ?",
-    a: "Gratuit en beta v0.1. Un modèle freemium pourra arriver plus tard, sans surprise et sans casser la version qui marche.",
+    a: "C'est gratuit pendant la période d'essai. Si une offre payante arrive un jour, ce sera annoncé clairement, et la version qui fonctionne aujourd'hui ne sera pas retirée.",
   },
   {
-    q: "Ça remplace mon navigateur ?",
-    a: "Non. Terouva est un copilote, pas un agent autonome. Le navigateur n'est jamais piloté. Tu valides chaque action sensible : c'est toi qui copies le message, c'est toi qui cliques Envoyer.",
+    q: "Est-ce que ça agit à ma place ?",
+    a: "Non. Terouva vous aide, mais ne fait rien tout seul. C'est vous qui copiez le message et qui cliquez sur « Envoyer ». Vous gardez la main à chaque étape.",
   },
   {
-    q: "Et si je ferme Chrome ?",
-    a: "La surveillance live s'arrête naturellement (logique : l'extension a besoin que LBC soit ouvert). Tu peux toujours ingérer manuellement une URL dans l'app, ou par lot. Un mode polling background tournera bientôt côté Terouva avec un rythme humain quand Chrome est fermé.",
+    q: "Et si je ferme mon navigateur ?",
+    a: "La surveillance en direct s'arrête, car l'extension a besoin que Leboncoin soit ouvert. Vous pouvez aussi recevoir les annonces autrement : en transférant à Terouva les e-mails d'alerte que Leboncoin vous envoie, vos nouvelles annonces sont ajoutées à votre liste.",
   },
   {
-    q: "Mes données partent où ?",
-    a: "Nulle part. Tout vit dans terouva.db sur ton disque. Aucun serveur Terouva, aucune API externe, aucun cloud, aucun backup distant, aucun analytics. Même la rédaction des messages se fait sur ta machine : rien à envoyer pour générer un message.",
+    q: "Où vont mes données ?",
+    a: "Nulle part. Tout est enregistré sur votre ordinateur. Pas de serveur, pas de cloud, pas de sauvegarde à distance, pas de suivi. Même les messages de candidature sont écrits sur votre machine.",
   },
   {
-    q: "Faut-il une clé API ou un compte pour les messages ?",
-    a: "Non, rien du tout. Terouva rédige les messages localement à partir de ton profil et des détails de l'annonce, en 3 tons (direct, chaleureux, professionnel). Pas de clé, pas de compte, pas de carte bancaire, c'est gratuit et instantané. Tu n'as pas besoin d'être informaticien.",
+    q: "Faut-il un compte ou payer pour les messages ?",
+    a: "Non, rien du tout. Terouva écrit les messages sur votre ordinateur, à partir de votre profil et des détails de l'annonce, dans trois tons au choix. C'est gratuit, immédiat, et sans aucune connaissance technique.",
   },
   {
     q: "Mac et Linux, c'est pour quand ?",
-    a: "L'app est codée avec Tauri 2, donc cross-platform par construction. Windows en premier (priorité Beta). Builds Mac & Linux dans les semaines qui viennent.",
+    a: "L'application fonctionne d'abord sur Windows. Les versions pour Mac et Linux arriveront dans les semaines qui viennent.",
   },
 ];
 
 export const CTA_FINAL = {
-  title: "Arrête de scroll.",
+  title: "Prêt à essayer ?",
   subtitle:
-    "Télécharge, configure ton profil, branche tes recherches. Tu seras prêt pour la prochaine annonce.",
+    "Installez Terouva, renseignez votre profil et vos recherches. Vous serez prêt pour la prochaine annonce.",
   primary: { label: "Télécharger pour Windows", href: RELEASES_DOWNLOAD_MSI },
-  secondary: { label: "Toutes les releases", href: RELEASES_URL },
+  secondary: { label: "Voir toutes les versions", href: RELEASES_URL },
 };
 
 export const FOOTER = {
   signature:
-    "Fait par un dev qui en a marre de perdre des appartements à 5 minutes près.",
-  disclaimer: "Pas affilié à Leboncoin.",
+    "Conçu pour vous aider à trouver votre logement plus sereinement.",
+  disclaimer: "Sans lien avec Leboncoin.",
 };
 
-/** Listings used in the hero ticker (decorative, plausible fake data). */
+/** Annonces décoratives affichées en fond du hero (données d'exemple). */
 export const TICKER_LISTINGS = [
   { title: "Studio lumineux 28m² · Paris 11e", price: 1240, score: 92 },
   { title: "2 pièces refait à neuf · Lyon 3e", price: 980, score: 87 },

@@ -5,7 +5,6 @@ import { Problem } from "@/components/sections/Problem";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Features } from "@/components/sections/Features";
 import { Privacy } from "@/components/sections/Privacy";
-import { Stack } from "@/components/sections/Stack";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTA } from "@/components/sections/CTA";
 
@@ -19,7 +18,6 @@ export default function Home() {
         <HowItWorks />
         <Features />
         <Privacy />
-        <Stack />
         <FAQ />
         <CTA />
       </main>

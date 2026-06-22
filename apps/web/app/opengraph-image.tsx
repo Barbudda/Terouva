@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Terouva — Le premier dossier reçu, c'est le seul qui sera lu.";
+export const alt = "Terouva — trouvez votre logement sans y passer vos journées";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -91,7 +91,7 @@ export default async function OG() {
               display: "flex",
             }}
           >
-            beta v0.1
+            essai gratuit
           </div>
         </div>
 
@@ -113,7 +113,7 @@ export default async function OG() {
               maxWidth: "1000px",
             }}
           >
-            Le premier dossier reçu,
+            Trouvez votre logement
           </div>
           <div
             style={{
@@ -129,7 +129,7 @@ export default async function OG() {
               maxWidth: "1000px",
             }}
           >
-            c'est le seul qui sera lu.
+            sans y passer vos journées.
           </div>
           <div
             style={{
@@ -140,7 +140,7 @@ export default async function OG() {
               lineHeight: 1.3,
             }}
           >
-            Copilote desktop local-first pour Leboncoin. Surveille, score, prépare ton message. Tu cliques. C'est parti.
+            Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond.
           </div>
         </div>
 

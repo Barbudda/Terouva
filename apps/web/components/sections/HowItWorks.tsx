@@ -14,10 +14,10 @@ export function HowItWorks() {
           title={
             <>
               Trois étapes.{" "}
-              <span className="text-[var(--color-text-muted)]">Zéro friction.</span>
+              <span className="text-[var(--color-text-muted)]">Tout simplement.</span>
             </>
           }
-          subtitle="Configuration en 4 minutes. Ensuite tu n'y penses plus jamais."
+          subtitle="Quelques minutes pour tout préparer. Ensuite, Terouva s'occupe de vous prévenir."
         />
 
         <div className="mt-20 relative">
