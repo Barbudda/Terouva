@@ -149,7 +149,7 @@ export default function Annonces() {
   const addUrl = async () => {
     setError(null);
     if (!url.trim()) {
-      setError("Colle une URL Leboncoin");
+      setError("Collez une URL Leboncoin");
       return;
     }
     setAdding(true);
@@ -169,25 +169,25 @@ export default function Annonces() {
     try {
       const text = await navigator.clipboard.readText();
       if (!text.trim()) {
-        setError("Presse-papier vide");
+        setError("Presse-papiers vide");
         return;
       }
       let payload: ClipboardPayload;
       try {
         payload = JSON.parse(text);
       } catch {
-        setError("Le presse-papier ne contient pas un payload JSON Terouva valide");
+        setError("Le presse-papiers ne contient pas de données copiées depuis l'extension Terouva");
         return;
       }
       if (payload?.app !== "terouva" || payload?.type !== "listing-clipboard") {
         setError(
-          "Payload non reconnu. Capture une annonce avec l'extension Terouva avant.",
+          "Données non reconnues. Capturez une annonce avec l'extension Terouva avant.",
         );
         return;
       }
       const d = payload.data;
       if (!d?.url) {
-        setError("Payload sans URL");
+        setError("Données copiées sans URL d'annonce");
         return;
       }
       setAdding(true);
@@ -228,7 +228,7 @@ export default function Annonces() {
         setAdding(false);
       }
     } catch (e) {
-      setError(`Lecture presse-papier impossible : ${e}`);
+      setError(`Lecture du presse-papiers impossible : ${e}`);
     }
   };
 
@@ -258,7 +258,7 @@ export default function Annonces() {
     setError(null);
     setEmailReport(null);
     if (!email.trim()) {
-      setError("Colle le contenu d'un email d'alerte Leboncoin");
+      setError("Collez le contenu d'un email d'alerte Leboncoin");
       return;
     }
     setAdding(true);
@@ -268,7 +268,7 @@ export default function Annonces() {
       setEmailReport(summary);
       if (summary.found === 0) {
         setError(
-          "Aucun lien d'annonce détecté dans cet email. Colle l'email d'alerte LBC en entier (HTML d'origine de préférence).",
+          "Aucun lien d'annonce détecté dans cet email. Collez l'email d'alerte Leboncoin en entier (HTML d'origine de préférence).",
         );
       } else {
         setEmail("");
@@ -329,9 +329,9 @@ export default function Annonces() {
               size="sm"
               onClick={addFromClipboard}
               disabled={adding}
-              title="Importe le payload JSON copié depuis l'extension Chrome Terouva"
+              title="Importe les données copiées depuis l'extension Chrome Terouva"
             >
-              📋 Depuis presse-papier
+              📋 Depuis le presse-papiers
             </Button>
             <div className="flex gap-1">
               <button
@@ -349,7 +349,7 @@ export default function Annonces() {
               <button
                 onClick={() => setMode("email")}
                 className={tabClass(mode === "email")}
-                title="Colle un email d'alerte Leboncoin : Terouva en extrait les annonces"
+                title="Collez un email d'alerte Leboncoin : Terouva en extrait les annonces"
               >
                 ✉ Email d'alerte
               </button>
@@ -440,20 +440,20 @@ export default function Annonces() {
           <CardBody className="space-y-3">
             <Field
               label="Email d'alerte Leboncoin"
-              hint="Ouvre l'email d'alerte LBC, copie-le entièrement (ou « Afficher l'original » dans Gmail) et colle-le ici. Terouva en extrait les annonces — aucune requête vers LBC."
+              hint="Ouvrez l'email d'alerte Leboncoin, copiez-le entièrement (ou « Afficher l'original » dans Gmail) et collez-le ici. Terouva en extrait les annonces — aucune requête vers Leboncoin."
             >
               <Textarea
                 rows={7}
-                placeholder="Colle ici le contenu de l'email d'alerte « Nouvelles annonces pour votre recherche »…"
+                placeholder="Collez ici le contenu de l'email d'alerte « Nouvelles annonces pour votre recherche »…"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Field>
             <div className="flex items-center justify-between gap-3">
               <p className="text-[11px] text-[var(--color-text-faint)] max-w-md">
-                Chaque annonce de l'email arrive en « provisoire » : ouvre-la pour
+                Chaque annonce de l'email arrive en « provisoire » : ouvrez-la pour
                 l'enrichir et préciser son score. L'envoi de candidature reste 100 %
-                toi.
+                vous.
               </p>
               <Button onClick={addFromEmail} disabled={adding}>
                 {adding ? "Extraction…" : "Importer les annonces"}
@@ -573,7 +573,7 @@ export default function Annonces() {
       </div>
       <div className="text-xs text-[var(--color-text-faint)] font-mono">
         {filtered.length} / {listings.length} annonce{listings.length > 1 ? "s" : ""} ·
-        appuie sur <kbd className="px-1.5 py-0.5 rounded border border-[var(--color-border-2)] bg-[var(--color-bg)] text-[10px]">?</kbd> pour les raccourcis
+        appuyez sur <kbd className="px-1.5 py-0.5 rounded border border-[var(--color-border-2)] bg-[var(--color-bg)] text-[10px]">?</kbd> pour les raccourcis
       </div>
 
       <div className="space-y-4">
@@ -768,7 +768,7 @@ function ListingCard({
             )}
             {rec && <Badge className={rec.className}>{rec.text}</Badge>}
             {reasons && reasons.confidence !== undefined && reasons.confidence < 0.5 && (
-              <span title="Score provisoire : peu d'infos sur la carte LBC. Ouvre l'annonce pour le confirmer.">
+              <span title="Score provisoire : peu d'infos sur la carte Leboncoin. Ouvrez l'annonce pour le confirmer.">
                 <Badge className="bg-[var(--color-urgent-soft)] text-[var(--color-urgent)]/90 border-[var(--color-urgent)]/30">
                   provisoire
                 </Badge>
@@ -922,7 +922,7 @@ function NotesEditor({ listing }: { listing: Listing }) {
         rows={2}
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
-        placeholder="Tes remarques perso sur cette annonce…"
+        placeholder="Vos remarques perso sur cette annonce…"
       />
       {dirty && (
         <div className="mt-2 flex justify-end">
@@ -1021,7 +1021,7 @@ function CandidaturePanel({
         <div className="text-xs font-semibold text-[var(--color-text-muted)]">
           Préparer la candidature
           <span className="ml-2 font-normal text-[10px] text-[var(--color-text-faint)]">
-            reclique un ton pour une autre version
+            recliquez un ton pour une autre version
           </span>
         </div>
         <div className="flex gap-1">
@@ -1050,7 +1050,7 @@ function CandidaturePanel({
         <Button
           size="sm"
           onClick={prepareAndContact}
-          title="Copie le message + ouvre l'annonce LBC en 1 clic — il ne reste qu'à coller (Ctrl+V) et Envoyer"
+          title="Copie le message + ouvre l'annonce Leboncoin en 1 clic — il ne reste qu'à coller (Ctrl+V) et Envoyer"
         >
           ⚡ Préparer &amp; contacter
         </Button>
@@ -1058,7 +1058,7 @@ function CandidaturePanel({
           Copier le message
         </Button>
         <Button size="sm" variant="secondary" onClick={() => openExternal(listing.url)}>
-          Ouvrir LBC
+          Ouvrir sur Leboncoin
         </Button>
         <Button size="sm" variant="ghost" onClick={saveDraft}>
           Sauver brouillon

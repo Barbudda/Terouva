@@ -15,7 +15,7 @@ export default function Dossier() {
             Mon profil
           </h2>
           <p className="text-sm text-[var(--color-text-faint)]">
-            Tes infos locataire — elles pré-remplissent tes messages de candidature.
+            Vos informations — elles pré-remplissent vos messages de candidature.
           </p>
         </div>
         <Profil />

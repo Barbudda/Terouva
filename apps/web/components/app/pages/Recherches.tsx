@@ -124,7 +124,7 @@ export default function Recherches() {
             <CardFooter>
               {s.lbc_search_url && (
                 <Button variant="ghost" size="sm" onClick={() => openExternal(s.lbc_search_url!)}>
-                  Ouvrir LBC
+                  Ouvrir sur Leboncoin
                 </Button>
               )}
               <Button variant="secondary" size="sm" onClick={() => toggleActive(s)}>
@@ -142,7 +142,7 @@ export default function Recherches() {
         {searches.length === 0 && (
           <Card className="md:col-span-2">
             <CardBody className="text-center py-10 text-[var(--color-text-faint)]">
-              Aucune recherche. Crée-en une pour commencer.
+              Aucune recherche. Créez-en une pour commencer.
             </CardBody>
           </Card>
         )}
@@ -279,11 +279,11 @@ export default function Recherches() {
             </Field>
             <Field
               label="URL de recherche Leboncoin"
-              hint="Générée automatiquement depuis tes critères — modifiable, et vérifiable en 1 clic."
+              hint="Générée automatiquement depuis vos critères — modifiable, et vérifiable en 1 clic."
             >
               <Textarea
                 rows={2}
-                placeholder="Clique « Générer depuis mes critères »…"
+                placeholder="Cliquez « Générer depuis mes critères »…"
                 value={editing.lbc_search_url ?? ""}
                 onChange={(e) => setEditing({ ...editing, lbc_search_url: e.target.value })}
               />

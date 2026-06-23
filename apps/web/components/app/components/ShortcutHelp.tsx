@@ -46,7 +46,7 @@ export function ShortcutHelp({
           ))}
         </ul>
         <div className="px-5 py-3 border-t border-[var(--color-border)] text-[11px] text-[var(--color-text-faint)]">
-          Les raccourcis ne se déclenchent pas quand tu tapes dans un champ.
+          Les raccourcis ne se déclenchent pas quand vous tapez dans un champ.
         </div>
       </div>
     </div>

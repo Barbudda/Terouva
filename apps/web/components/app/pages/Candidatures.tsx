@@ -86,7 +86,7 @@ export default function Candidatures() {
       {filtered.length === 0 && (
         <Card>
           <CardBody className="text-center py-10 text-[var(--color-text-faint)]">
-            Aucune candidature. Va sur la page Annonces pour en préparer une.
+            Aucune candidature. Allez sur la page Annonces pour en préparer une.
           </CardBody>
         </Card>
       )}

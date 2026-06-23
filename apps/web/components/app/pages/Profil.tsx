@@ -52,7 +52,7 @@ export default function Profil() {
             />
           </div>
           <p className="mt-3 text-xs text-[var(--color-text-faint)]">
-            Plus ton profil est complet, plus les messages générés seront convaincants.
+            Plus votre profil est complet, plus les messages générés seront convaincants.
           </p>
         </CardBody>
       </Card>
@@ -127,7 +127,7 @@ export default function Profil() {
               <option value="">—</option>
               <option value="phone">Téléphone</option>
               <option value="email">Email</option>
-              <option value="lbc-message">Message LBC</option>
+              <option value="lbc-message">Message Leboncoin</option>
             </Select>
           </Field>
         </CardBody>

@@ -42,7 +42,7 @@ export default function Reglages() {
     }
     await notifyDesktop({
       title: "Terouva — test",
-      body: "Si tu vois ça, les notifications fonctionnent.",
+      body: "Si vous voyez ceci, les notifications fonctionnent.",
     });
   };
 
@@ -88,8 +88,8 @@ export default function Reglages() {
         </CardHeader>
         <CardBody className="flex items-center justify-between gap-4">
           <p className="text-sm text-[var(--color-text-muted)]">
-            État du pont avec l'extension Chrome, token de jumelage, polling
-            background et journal des détections.
+            État de la connexion avec l'extension Chrome et journal des annonces
+            détectées.
           </p>
           <Button variant="secondary" onClick={() => navigate("/surveillance")}>
             Ouvrir →
@@ -134,9 +134,9 @@ export default function Reglages() {
         <CardBody>
           <p className="text-sm text-[var(--color-text-muted)]">
             Terouva rédige automatiquement un message adapté à chaque annonce (il en
-            cite les détails) à partir de ton profil, en 3 tons.{" "}
+            cite les détails) à partir de votre profil, en 3 tons.{" "}
             <strong>Rien à configurer</strong> : tout est local, aucune clé, aucun
-            compte, aucune donnée envoyée à un serveur. Tu choisis le ton au moment de
+            compte, aucune donnée envoyée à un serveur. Vous choisissez le ton au moment de
             candidater.
           </p>
         </CardBody>

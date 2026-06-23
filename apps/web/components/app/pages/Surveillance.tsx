@@ -71,8 +71,8 @@ export default function Surveillance() {
           <div>
             <CardTitle>Connexion à l'extension Chrome</CardTitle>
             <p className="mt-1.5 text-xs text-[var(--color-text-faint)]">
-              L'extension détecte les annonces sur tes onglets Leboncoin et te les envoie
-              ici, en direct. Tout reste sur ta machine — aucun serveur, aucun trafic vers
+              L'extension détecte les annonces sur vos onglets Leboncoin et vous les envoie
+              ici, en direct. Tout reste sur votre ordinateur — aucun serveur, aucun trafic vers
               un service tiers.
             </p>
           </div>
@@ -84,10 +84,10 @@ export default function Surveillance() {
               <div className="text-[var(--color-text-muted)] font-medium">Installer l'extension</div>
               <ol className="list-decimal pl-5 space-y-1">
                 <li>
-                  Charge le dossier <code className="text-[var(--color-text)]">apps/extension/</code> dans{" "}
+                  Chargez le dossier <code className="text-[var(--color-text)]">apps/extension/</code> dans{" "}
                   <code className="text-[var(--color-text)]">chrome://extensions</code> (mode développeur).
                 </li>
-                <li>Épingle l'icône Terouva, puis reviens ici : la connexion se fait toute seule.</li>
+                <li>Épinglez l'icône Terouva, puis revenez ici : la connexion se fait toute seule.</li>
               </ol>
             </div>
           )}
@@ -114,9 +114,9 @@ export default function Surveillance() {
           <div className="flex items-center justify-between gap-3">
             <div className="text-xs text-[var(--color-text-faint)]">
               {bridge?.error === "ext-id-manquant"
-                ? "ID d'extension manquant — renseigne-le ci-dessus (dev) ou installe l'extension publiée."
+                ? "ID d'extension manquant — renseignez-le ci-dessus (dev) ou installez l'extension publiée."
                 : bridge?.error === "connexion-refusée"
-                ? "Connexion refusée — vérifie l'ID et que l'extension est bien chargée."
+                ? "Connexion refusée — vérifiez l'ID et que l'extension est bien chargée."
                 : connected
                 ? "Pont actif : les nouvelles annonces arrivent automatiquement."
                 : available
@@ -147,7 +147,7 @@ export default function Surveillance() {
         <CardBody>
           {recent.length === 0 ? (
             <div className="text-center py-10 text-sm text-[var(--color-text-faint)]">
-              Aucune annonce détectée pour l'instant. Garde une page de résultats Leboncoin
+              Aucune annonce détectée pour l'instant. Gardez une page de résultats Leboncoin
               ouverte dans Chrome — les nouvelles annonces apparaîtront ici à mesure qu'elles
               sortent.
             </div>

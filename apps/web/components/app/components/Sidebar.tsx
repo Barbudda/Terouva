@@ -19,7 +19,7 @@ export function Sidebar() {
           <div>
             <div className="text-sm font-semibold tracking-tight">Terouva</div>
             <div className="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider">
-              local copilot
+              copilote local
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@ export function Sidebar() {
           <span>⚙</span>
           <span>Réglages</span>
         </NavLink>
-        <div className="px-3 pt-2 text-[10px] text-[var(--color-text-faint)]">v0.2 • local-first</div>
+        <div className="px-3 pt-2 text-[10px] text-[var(--color-text-faint)]">v0.2 · 100 % local</div>
       </div>
     </aside>
   );

@@ -51,7 +51,7 @@ export function PairingModal() {
           </h2>
           <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-relaxed">
             Une extension navigateur demande à se connecter à Terouva pour
-            surveiller tes recherches Leboncoin. Autorise-la une seule fois.
+            surveiller vos recherches Leboncoin. Autorisez-la une seule fois.
           </p>
           <div className="mt-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/60 px-4 py-3 text-left">
             <div className="text-sm text-[var(--color-text)]">{current.label}</div>
@@ -60,7 +60,7 @@ export function PairingModal() {
             </div>
           </div>
           <p className="mt-3 text-[11px] text-[var(--color-text-faint)]">
-            N'autorise que si tu viens d'installer l'extension Terouva.
+            N'autorisez que si vous venez d'installer l'extension Terouva.
           </p>
         </div>
         <div className="flex border-t border-[var(--color-border)]">

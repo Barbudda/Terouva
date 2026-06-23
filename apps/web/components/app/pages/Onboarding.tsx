@@ -105,9 +105,9 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
           {step === 0 && (
             <div className="space-y-4">
               <div>
-                <h2 className="text-lg font-semibold text-[var(--color-text)]">Qui es-tu ?</h2>
+                <h2 className="text-lg font-semibold text-[var(--color-text)]">Qui êtes-vous ?</h2>
                 <p className="text-sm text-[var(--color-text-muted)] mt-1">
-                  Ces infos servent à pré-remplir tes messages de candidature.
+                  Ces informations servent à pré-remplir vos messages de candidature.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -148,9 +148,9 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
           {step === 1 && (
             <div className="space-y-4">
               <div>
-                <h2 className="text-lg font-semibold text-[var(--color-text)]">Tu cherches quoi ?</h2>
+                <h2 className="text-lg font-semibold text-[var(--color-text)]">Que cherchez-vous ?</h2>
                 <p className="text-sm text-[var(--color-text-muted)] mt-1">
-                  Une première recherche. Tu pourras en ajouter d'autres ensuite.
+                  Une première recherche. Vous pourrez en ajouter d'autres ensuite.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -174,8 +174,8 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
                 <div />
               </div>
               <Field
-                label="URL de ta recherche Leboncoin (optionnel)"
-                hint="Laisse vide : Terouva construit la recherche depuis ta ville et ton budget. Colle une URL seulement si tu en as déjà une précise."
+                label="URL de votre recherche Leboncoin (optionnel)"
+                hint="Laissez vide : Terouva construit la recherche depuis votre ville et votre budget. Collez une URL seulement si vous en avez déjà une précise."
               >
                 <Input
                   placeholder="https://www.leboncoin.fr/recherche?..."
@@ -190,31 +190,31 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
             <div className="space-y-4">
               <div>
                 <h2 className="text-lg font-semibold text-[var(--color-text)]">
-                  Connecte ton navigateur
+                  Connectez votre navigateur
                 </h2>
                 <p className="text-sm text-[var(--color-text-muted)] mt-1">
-                  L'extension Chrome surveille tes recherches Leboncoin et envoie les
+                  L'extension Chrome surveille vos recherches Leboncoin et envoie les
                   nouvelles annonces à Terouva, en temps réel.
                 </p>
               </div>
               <ol className="space-y-2 text-sm text-[var(--color-text-muted)]">
                 <li className="flex gap-2">
                   <span className="text-[var(--color-signal)] font-mono">1.</span>
-                  Installe l'extension Terouva pour Chrome.
+                  Installez l'extension Terouva pour Chrome.
                 </li>
                 <li className="flex gap-2">
                   <span className="text-[var(--color-signal)] font-mono">2.</span>
-                  Quand elle te le demande, une fenêtre Terouva s'ouvrira :
-                  clique <strong>« Autoriser cette extension »</strong>.
+                  Quand elle vous le demande, une fenêtre Terouva s'ouvrira :
+                  cliquez <strong>« Autoriser cette extension »</strong>.
                 </li>
                 <li className="flex gap-2">
                   <span className="text-[var(--color-signal)] font-mono">3.</span>
-                  Ouvre une page de recherche Leboncoin. C'est tout.
+                  Ouvrez une page de recherche Leboncoin. C'est tout.
                 </li>
               </ol>
               <p className="text-xs text-[var(--color-text-faint)]">
                 Pas besoin de copier de code : la connexion se fait en un clic.
-                Tu peux faire cette étape plus tard, depuis Réglages.
+                Vous pouvez faire cette étape plus tard, depuis Réglages.
               </p>
             </div>
           )}
@@ -239,7 +239,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
 
         {step === 0 && (
           <p className="text-center text-xs text-[var(--color-text-faint)] mt-4">
-            Tu peux passer des champs et les compléter plus tard.
+            Vous pouvez passer des champs et les compléter plus tard.
           </p>
         )}
       </div>
