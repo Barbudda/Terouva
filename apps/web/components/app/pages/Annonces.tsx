@@ -24,7 +24,9 @@ import {
 import {
   type EmailImportSummary,
   importLbcAlertEmail,
+  ingestParsedListing,
 } from "@app/lib/watchBridge";
+import { DEMO_LISTINGS } from "@app/lib/demoListings";
 import { useStore } from "@app/store/useStore";
 import type {
   Application,
@@ -273,6 +275,22 @@ export default function Annonces() {
       }
     } catch (e) {
       setError(`Import échoué : ${e}`);
+    } finally {
+      setAdding(false);
+    }
+  };
+
+  // Démo : charge des annonces d'exemple (riches) pour découvrir Terouva en un clic.
+  const loadDemo = async () => {
+    setError(null);
+    setAdding(true);
+    try {
+      for (const parsed of DEMO_LISTINGS) {
+        await ingestParsedListing(parsed, { pageNotif: false });
+      }
+      await refresh();
+    } catch (e) {
+      setError(`Chargement des exemples échoué : ${e}`);
     } finally {
       setAdding(false);
     }
@@ -595,18 +613,24 @@ export default function Annonces() {
                     Aucune annonce pour l'instant.
                   </div>
                   <p className="text-sm text-[var(--color-text-faint)] max-w-md mx-auto">
-                    Ouvre ta recherche sur Leboncoin : Terouva capte les nouvelles
-                    annonces en direct dès qu'elles apparaissent.
+                    Pour découvrir Terouva tout de suite, chargez quelques annonces
+                    d'exemple : vous pourrez voir les scores, générer des messages et
+                    tester toutes les fonctions, sans rien installer.
                   </p>
-                  {firstSearchUrl ? (
-                    <Button onClick={() => openExternal(firstSearchUrl)}>
-                      Ouvrir ma recherche sur Leboncoin ↗
+                  <div className="flex items-center justify-center gap-2 flex-wrap">
+                    <Button onClick={loadDemo} disabled={adding}>
+                      {adding ? "Chargement…" : "Charger des annonces d'exemple"}
                     </Button>
-                  ) : (
-                    <p className="text-xs text-[var(--color-text-faint)]">
-                      Crée d'abord une recherche dans « Mon dossier ».
-                    </p>
-                  )}
+                    {firstSearchUrl && (
+                      <Button variant="secondary" onClick={() => openExternal(firstSearchUrl)}>
+                        Ouvrir ma recherche sur Leboncoin ↗
+                      </Button>
+                    )}
+                  </div>
+                  <p className="text-xs text-[var(--color-text-faint)] max-w-md mx-auto">
+                    En vrai, vos annonces arrivent toutes seules quand vous gardez une
+                    page de recherche Leboncoin ouverte.
+                  </p>
                 </>
               ) : (
                 "Aucune annonce dans ce filtre."

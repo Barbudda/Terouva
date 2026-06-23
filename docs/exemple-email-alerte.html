@@ -1,0 +1,59 @@
+<!--
+  Exemple d'e-mail d'alerte Leboncoin (fictif), pour tester l'import « ✉ Email
+  d'alerte » de Terouva.
+
+  Comment l'utiliser :
+   1. Ouvrez ce fichier (ou copiez tout son contenu, Ctrl+A puis Ctrl+C).
+   2. Dans Terouva → « Mes annonces » → « Ajouter une annonce » → onglet « ✉ Email
+      d'alerte » → collez → « Importer les annonces ».
+   3. Quatre annonces apparaissent dans le feed (provisoires : elles s'enrichissent
+      quand on ouvre l'annonce).
+
+  Il contient volontairement : des liens directs ET des liens de « tracking »
+  (l'URL réelle est encodée dans un paramètre), comme dans un vrai e-mail LBC,
+  plus un lien de désinscription qui NE doit PAS être pris pour une annonce.
+-->
+<!doctype html>
+<html lang="fr">
+  <body style="font-family: Arial, sans-serif; color: #333;">
+    <h2>Nouvelles annonces pour votre recherche « Appartement à louer »</h2>
+    <p>4 nouvelles annonces correspondent à vos critères :</p>
+
+    <table>
+      <tr>
+        <td>
+          <a href="https://www.leboncoin.fr/ad/locations/2901234567">
+            Studio meublé 26 m² avec balcon — Paris 10e — 1 150 €
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://clic.leboncoin.fr/c?url=https%3A%2F%2Fwww.leboncoin.fr%2Fad%2Flocations%2F2901234568&amp;utm_source=alerte">
+            2 pièces lumineux 44 m² — Lyon 7e — 910 €
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://www.leboncoin.fr/ad/locations/2901234569">
+            T1 rénové 24 m² au calme — Bordeaux — 700 €
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://trk.leboncoin.fr/redirect?u=https%3A%2F%2Fwww.leboncoin.fr%2Fad%2Flocations%2F2901234570">
+            3 pièces 70 m² avec ascenseur — Lille — 860 €
+          </a>
+        </td>
+      </tr>
+    </table>
+
+    <hr />
+    <p style="font-size: 12px; color: #999;">
+      Vous recevez cet e-mail car vous avez créé une alerte sur Leboncoin.
+      <a href="https://www.leboncoin.fr/account/email/unsubscribe?id=abcdef">Se désabonner</a>
+    </p>
+  </body>
+</html>
