@@ -95,8 +95,44 @@
         images,
         publisher_name: null,
         publisher_type: null,
-        published_at: null,
+        published_at: extractFreshness(text),
       };
+    } catch {
+      return null;
+    }
+  }
+
+  // Estime la date de publication depuis le texte de la carte LBC (« il y a 5
+  // minutes », « Aujourd'hui 14:32 », « Hier »…). Sert à n'ALERTER que pour les
+  // annonces fraîches. Best-effort : renvoie null si on ne sait pas (dans ce cas
+  // on n'empêche pas l'alerte — on ne bloque que les annonces visiblement vieilles).
+  function extractFreshness(text) {
+    try {
+      const t = (text || "").toLowerCase();
+      const now = Date.now();
+      let m;
+      if (/à l'instant|il y a quelques secondes|il y a moins d'une minute/.test(t)) {
+        return new Date(now).toISOString();
+      }
+      if ((m = t.match(/il y a (\d+)\s*min/))) {
+        return new Date(now - parseInt(m[1], 10) * 60000).toISOString();
+      }
+      if ((m = t.match(/il y a (?:environ )?(\d+)\s*(?:h|heure)/))) {
+        return new Date(now - parseInt(m[1], 10) * 3600000).toISOString();
+      }
+      if ((m = t.match(/aujourd'hui[,\s]*(\d{1,2})[:h](\d{2})/))) {
+        const d = new Date();
+        d.setHours(parseInt(m[1], 10), parseInt(m[2], 10), 0, 0);
+        return d.toISOString();
+      }
+      if ((m = t.match(/il y a (\d+)\s*jour/))) {
+        return new Date(now - parseInt(m[1], 10) * 86400000).toISOString();
+      }
+      if (/\bhier\b/.test(t)) {
+        return new Date(now - 86400000).toISOString();
+      }
+      // Date absolue ou rien de reconnaissable → indéterminé.
+      return null;
     } catch {
       return null;
     }

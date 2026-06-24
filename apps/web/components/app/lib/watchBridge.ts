@@ -79,6 +79,18 @@ async function maybeNotifyHot(
 ): Promise<boolean> {
   const threshold = Number((await getSetting("notification_min_score")) ?? 70);
   if (score < threshold) return false;
+  // On ALERTE surtout pour les annonces FRAÎCHES, pas pour les anciennes : si on
+  // connaît la date de publication et qu'elle dépasse la fenêtre choisie, on ne
+  // notifie pas (l'annonce reste visible dans le feed, mais sans alerte). Si la
+  // date est inconnue, on alerte quand même (pour ne jamais rater une vraie
+  // nouveauté). 0 = pas de limite d'âge.
+  const maxAgeMin = Number((await getSetting("alert_max_age_minutes")) ?? 60);
+  if (maxAgeMin > 0 && listing.published_at) {
+    const published = Date.parse(listing.published_at);
+    if (!Number.isNaN(published) && (Date.now() - published) / 60000 > maxAgeMin) {
+      return false;
+    }
+  }
   // `show=false` : l'annonce vient de l'extension → c'est elle qui affichera la
   // notif système (visible même quand on est sur Leboncoin). On évite le doublon
   // avec la notification du navigateur.

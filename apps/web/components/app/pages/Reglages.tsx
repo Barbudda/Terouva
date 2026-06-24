@@ -15,6 +15,7 @@ export default function Reglages() {
   const refreshDocs = useStore((s) => s.refreshDocuments);
   const [defaultTone, setDefaultTone] = useState<string>("pro");
   const [minScore, setMinScore] = useState<number>(70);
+  const [alertMaxAge, setAlertMaxAge] = useState<number>(60);
   const [importBusy, setImportBusy] = useState(false);
   const [importMode, setImportMode] = useState<"merge" | "replace">("merge");
   const [importMsg, setImportMsg] = useState<string | null>(null);
@@ -24,14 +25,17 @@ export default function Reglages() {
     void (async () => {
       const tone = (await getSetting("default_message_tone")) ?? "pro";
       const min = Number((await getSetting("notification_min_score")) ?? 70);
+      const age = Number((await getSetting("alert_max_age_minutes")) ?? 60);
       setDefaultTone(tone);
       setMinScore(min);
+      setAlertMaxAge(age);
     })();
   }, []);
 
   const saveDefaults = async () => {
     await setSetting("default_message_tone", defaultTone);
     await setSetting("notification_min_score", String(minScore));
+    await setSetting("alert_max_age_minutes", String(alertMaxAge));
   };
 
   const testNotif = async () => {
@@ -116,6 +120,18 @@ export default function Reglages() {
               max={100}
               value={minScore}
               onChange={(e) => setMinScore(Number(e.target.value))}
+            />
+          </Field>
+          <Field
+            label="Alerter seulement pour les annonces récentes (minutes)"
+            hint="On vous prévient surtout pour les nouvelles annonces. Au-delà de cette ancienneté, l'annonce reste dans la liste mais ne déclenche pas d'alerte. 0 = pas de limite."
+          >
+            <Input
+              type="number"
+              min={0}
+              max={1440}
+              value={alertMaxAge}
+              onChange={(e) => setAlertMaxAge(Number(e.target.value))}
             />
           </Field>
         </CardBody>
