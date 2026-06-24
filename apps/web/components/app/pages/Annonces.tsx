@@ -123,6 +123,17 @@ export default function Annonces() {
     return sorted;
   }, [listings, statusFilter, searchFilter, query, minScore, sortBy]);
 
+  // Les annonces « à contacter en priorité » (alertes) pas encore traitées.
+  const hotListings = useMemo(
+    () =>
+      listings.filter((l) => {
+        if (l.status !== "new" && l.status !== "to_review") return false;
+        const r = l.score_reasons ? safeParse<ScoreReasons>(l.score_reasons) : null;
+        return r?.recommendation === "to_contact_fast";
+      }),
+    [listings],
+  );
+
   const ingestOne = async (rawUrl: string): Promise<IngestResult> => {
     const u = rawUrl.trim();
     if (!u) return { url: u, ok: false, error: "URL vide" };
@@ -302,6 +313,37 @@ export default function Annonces() {
 
   return (
     <div className="space-y-6">
+      {hotListings.length > 0 && (
+        <div className="glow-signal rounded-lg border border-[var(--color-signal)]/45 bg-[var(--color-signal-soft)] px-5 py-4 flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-3">
+            <span className="relative flex size-2.5">
+              <span className="absolute inset-0 rounded-full bg-[var(--color-signal)] animate-pulse-dot" />
+              <span className="relative inline-flex size-2.5 rounded-full bg-[var(--color-signal)]" />
+            </span>
+            <div>
+              <div className="text-sm font-semibold text-[var(--color-text)]">
+                {hotListings.length} annonce{hotListings.length > 1 ? "s" : ""} à contacter en priorité
+              </div>
+              <div className="text-xs text-[var(--color-text-muted)]">
+                Le message est déjà prêt — il ne reste qu'à l'envoyer.
+              </div>
+            </div>
+          </div>
+          {statusFilter !== "favorite" && (
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={() => {
+                setSortBy("score");
+                setMinScore(0);
+                setQuery("");
+              }}
+            >
+              Voir en haut du feed ↑
+            </Button>
+          )}
+        </div>
+      )}
       <Card>
         <CardHeader className="flex items-center justify-between">
           <CardTitle>Ajouter une annonce</CardTitle>
