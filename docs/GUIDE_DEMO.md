@@ -18,38 +18,33 @@ Ce guide propose trois niveaux de test, du plus rapide au plus complet. Comptez
    - votre **prénom** et votre **téléphone** ;
    - puis votre **ville** et votre **budget**.
    - (Vous pourrez tout modifier plus tard. Les autres champs sont facultatifs.)
-3. Vous arrivez sur **« Mes annonces »**. Cliquez sur le bouton
-   **« Charger des annonces d'exemple »**.
-   → Six annonces apparaissent, **déjà notées** selon vos critères.
+3. **Faites entrer quelques annonces** sans extension, grâce à un e-mail d'alerte
+   d'exemple :
+   - ouvrez le fichier **`docs/exemple-email-alerte.html`** du projet, sélectionnez
+     tout son contenu (**Ctrl + A**) puis copiez (**Ctrl + C**) ;
+   - dans Terouva → **« Mes annonces »** → **« Ajouter une annonce »** → onglet
+     **« ✉ Email d'alerte »** → collez → **« Importer les annonces »**.
+   - → Quatre annonces s'ajoutent. Ouvrez-en une pour la voir se compléter et se noter.
+   > Dans la vraie vie, vous transférez simplement à Terouva les e-mails d'alerte que
+   > Leboncoin vous envoie — ça fonctionne **même sans extension**.
 4. **Cliquez une annonce** pour la déplier. Vous voyez :
    - le **détail de la note** (pourquoi cette annonce obtient ce score) ;
    - la section **« Préparer la candidature »** : choisissez un ton
      (**Direct**, **Chaleureux** ou **Professionnel**) et un message s'écrit tout
      seul, adapté à l'annonce et à votre profil. Recliquez un ton pour une autre
-     version, puis **« Copier »**.
+     version.
+   - le bouton **« ⚡ Préparer & envoyer »** : en un clic, votre message est copié
+     et l'annonce s'ouvre sur Leboncoin. Il ne reste qu'à **coller (Ctrl + V) et
+     cliquer « Envoyer »**. *(Terouva ne clique jamais « Envoyer » à votre place.)*
 5. Explorez le reste : **Mes candidatures**, **Mon dossier** (les pièces de votre
    dossier), **Réglages** (sauvegarde / export de vos données).
 
-> 👉 À ce stade, vous avez déjà vu l'essentiel : détection, classement, messages.
+> 👉 À ce stade, vous avez déjà vu l'essentiel : détection, classement, message
+> prêt en un clic.
 
 ---
 
-## 2. Tester l'import par e-mail d'alerte (≈ 1 min)
-
-Dans la vraie vie, vous pouvez aussi **transférer à Terouva les e-mails d'alerte
-que Leboncoin vous envoie** (ça fonctionne **même sans extension**). Pour le tester
-avec un exemple :
-
-1. Ouvrez le fichier **`docs/exemple-email-alerte.html`** du projet, sélectionnez
-   tout son contenu (**Ctrl + A**) et copiez (**Ctrl + C**).
-2. Dans Terouva → **« Mes annonces »** → **« Ajouter une annonce »** → onglet
-   **« ✉ Email d'alerte »** → collez dans la zone de texte → **« Importer les
-   annonces »**.
-   → Quatre nouvelles annonces s'ajoutent au feed.
-
----
-
-## 3. La détection EN DIRECT, avec l'extension Chrome (≈ 5 min) — optionnel
+## 2. La détection EN DIRECT, avec l'extension Chrome (≈ 5 min) — optionnel
 
 C'est le cœur de Terouva : capter les annonces **à la seconde où elles sortent**,
 pendant que vous parcourez Leboncoin.

@@ -24,9 +24,7 @@ import {
 import {
   type EmailImportSummary,
   importLbcAlertEmail,
-  ingestParsedListing,
 } from "@app/lib/watchBridge";
-import { DEMO_LISTINGS } from "@app/lib/demoListings";
 import { useStore } from "@app/store/useStore";
 import type {
   Application,
@@ -275,22 +273,6 @@ export default function Annonces() {
       }
     } catch (e) {
       setError(`Import échoué : ${e}`);
-    } finally {
-      setAdding(false);
-    }
-  };
-
-  // Démo : charge des annonces d'exemple (riches) pour découvrir Terouva en un clic.
-  const loadDemo = async () => {
-    setError(null);
-    setAdding(true);
-    try {
-      for (const parsed of DEMO_LISTINGS) {
-        await ingestParsedListing(parsed, { pageNotif: false });
-      }
-      await refresh();
-    } catch (e) {
-      setError(`Chargement des exemples échoué : ${e}`);
     } finally {
       setAdding(false);
     }
@@ -613,24 +595,17 @@ export default function Annonces() {
                     Aucune annonce pour l'instant.
                   </div>
                   <p className="text-sm text-[var(--color-text-faint)] max-w-md mx-auto">
-                    Pour découvrir Terouva tout de suite, chargez quelques annonces
-                    d'exemple : vous pourrez voir les scores, générer des messages et
-                    tester toutes les fonctions, sans rien installer.
+                    Gardez une page de recherche Leboncoin ouverte avec l'extension
+                    Terouva : les nouvelles annonces arrivent ici toutes seules, dès
+                    qu'elles sortent. Vous pouvez aussi importer vos e-mails d'alerte.
                   </p>
-                  <div className="flex items-center justify-center gap-2 flex-wrap">
-                    <Button onClick={loadDemo} disabled={adding}>
-                      {adding ? "Chargement…" : "Charger des annonces d'exemple"}
-                    </Button>
-                    {firstSearchUrl && (
-                      <Button variant="secondary" onClick={() => openExternal(firstSearchUrl)}>
+                  {firstSearchUrl && (
+                    <div className="flex items-center justify-center">
+                      <Button onClick={() => openExternal(firstSearchUrl)}>
                         Ouvrir ma recherche sur Leboncoin ↗
                       </Button>
-                    )}
-                  </div>
-                  <p className="text-xs text-[var(--color-text-faint)] max-w-md mx-auto">
-                    En vrai, vos annonces arrivent toutes seules quand vous gardez une
-                    page de recherche Leboncoin ouverte.
-                  </p>
+                    </div>
+                  )}
                 </>
               ) : (
                 "Aucune annonce dans ce filtre."
@@ -724,9 +699,36 @@ function ListingCard({
     : null;
   const rec = reasons ? recommendationLabel(reasons.recommendation) : null;
   const images = parseImages(listing.images);
+  // Une annonce « chaude » (à contacter vite) et pas encore traitée = une alerte :
+  // on la met en avant et on propose l'envoi en un seul geste.
+  const isHot =
+    reasons?.recommendation === "to_contact_fast" &&
+    (listing.status === "new" || listing.status === "to_review");
+  const [quickDone, setQuickDone] = useState(false);
+
+  // 1 tap depuis le feed : le message prêt est copié et l'annonce s'ouvre sur
+  // Leboncoin. L'envoi reste 100 % humain (coller + cliquer « Envoyer ») — mais en
+  // quelques secondes, pour rester parmi les premiers à candidater.
+  const quickContact = async () => {
+    if (!profile) return;
+    const tone = ((await getSetting("default_message_tone")) as MessageTone) || "pro";
+    const msg = generateMessage(listing, profile, tone);
+    await copyToClipboard(msg);
+    await upsertApplication({
+      listing_id: listing.id,
+      message: msg,
+      message_tone: tone,
+      status: "prepared",
+    });
+    await openExternal(listing.url);
+    setQuickDone(true);
+    setTimeout(() => setQuickDone(false), 4000);
+  };
 
   return (
-    <Card>
+    <Card
+      className={isHot ? "border-[var(--color-signal)]/45 glow-signal" : undefined}
+    >
       <CardHeader>
         <div className="flex items-start gap-4">
           {images[0] && (
@@ -759,6 +761,20 @@ function ListingCard({
                 vu {new Date(listing.discovered_at).toLocaleString("fr-FR")}
               </span>
             </div>
+            {isHot && (
+              <div className="mt-2.5 flex items-center gap-2 flex-wrap">
+                <Button
+                  size="sm"
+                  onClick={() => void quickContact()}
+                  title="Copie le message déjà prêt et ouvre l'annonce sur Leboncoin — il ne reste qu'à coller (Ctrl+V) et cliquer « Envoyer »."
+                >
+                  {quickDone ? "✓ Message copié — collez sur Leboncoin" : "⚡ Préparer & envoyer"}
+                </Button>
+                <span className="text-[11px] text-[var(--color-text-faint)]">
+                  message déjà prêt · l'envoi reste votre clic
+                </span>
+              </div>
+            )}
           </div>
           <div className="flex items-center gap-2 shrink-0">
             {listing.score !== null && (
