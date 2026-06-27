@@ -9,6 +9,9 @@ import "../../components/app/index.css";
 export const metadata: Metadata = {
   title: "Terouva",
   manifest: "/app/manifest.webmanifest",
+  // Défense en profondeur : la zone privée /app ne doit jamais être indexée,
+  // même si une URL était découverte autrement que par le robots.txt.
+  robots: { index: false, follow: false },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",

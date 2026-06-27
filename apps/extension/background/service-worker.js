@@ -18,7 +18,7 @@
 // on relaie. L'humain valide et envoie.
 
 // Origines autorisées à parler à l'extension (doit matcher externally_connectable).
-const PAGE_ORIGINS = ["https://terouva.vercel.app", "http://localhost:3000"];
+const PAGE_ORIGINS = ["https://terouva.vercel.app", "http://localhost:3030"];
 
 const BUFFER_KEY = "terouva.buffer"; // file FIFO d'annonces en attente (storage.local)
 const SECRET_KEY = "terouva.bridgeSecret"; // secret de handshake partagé avec /app

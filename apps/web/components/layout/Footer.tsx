@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FOOTER } from "@/lib/content";
 
 export function Footer() {
@@ -19,10 +20,18 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="max-w-md text-xs text-[var(--color-text-muted)] leading-relaxed">
-          {FOOTER.signature}{" "}
-          <span className="text-[var(--color-text-faint)]">{FOOTER.disclaimer}</span>
-        </p>
+        <div className="flex flex-col gap-3 md:items-end">
+          <p className="max-w-md text-xs text-[var(--color-text-muted)] leading-relaxed">
+            {FOOTER.signature}{" "}
+            <span className="text-[var(--color-text-faint)]">{FOOTER.disclaimer}</span>
+          </p>
+          <Link
+            href="/confidentialite"
+            className="text-xs text-[var(--color-text-faint)] underline-offset-4 transition-colors hover:text-[var(--color-text-muted)] hover:underline"
+          >
+            Confidentialité
+          </Link>
+        </div>
       </div>
     </footer>
   );

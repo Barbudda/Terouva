@@ -11,29 +11,42 @@ export const metadata: Metadata = {
     template: "%s · Terouva",
   },
   description:
-    "Terouva surveille Leboncoin pour vous, classe les annonces selon vos critères et prépare votre message de candidature. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste sur votre ordinateur.",
+    "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste sur votre ordinateur.",
   keywords: [
-    "leboncoin",
+    "Leboncoin",
+    "alerte Leboncoin",
+    "recherche logement",
     "recherche appartement",
     "location",
-    "alerte annonce",
-    "logement",
     "Terouva",
   ],
   authors: [{ name: "Terouva" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Terouva — trouvez votre logement sans y passer vos journées",
     description:
-      "Terouva surveille Leboncoin pour vous et prépare votre message de candidature. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste chez vous.",
+      "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste chez vous.",
     type: "website",
     locale: "fr_FR",
     siteName: "Terouva",
+    url: "/",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Terouva — trouvez votre logement sans y passer vos journées",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terouva",
+    title: "Terouva — trouvez votre logement sans y passer vos journées",
     description:
-      "Soyez prévenu dès qu'une annonce Leboncoin vous correspond, avec un message déjà prêt.",
+      "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste chez vous.",
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -51,9 +64,39 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const siteUrl = getSiteUrl();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        url: `${siteUrl}/`,
+        name: "Terouva",
+        description:
+          "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste sur votre ordinateur.",
+        inLanguage: "fr-FR",
+        publisher: { "@id": `${siteUrl}/#organization` },
+      },
+      {
+        "@type": "Organization",
+        "@id": `${siteUrl}/#organization`,
+        name: "Terouva",
+        url: `${siteUrl}/`,
+        logo: `${siteUrl}/icon.svg`,
+      },
+    ],
+  };
+
   return (
     <html lang="fr" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="bg-noise">{children}</body>
+      <body className="bg-noise">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

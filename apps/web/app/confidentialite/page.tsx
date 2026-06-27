@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description:
     "La politique de confidentialité de Terouva : vos données restent sur votre ordinateur. Aucun serveur, aucun compte, aucun suivi.",
+  alternates: {
+    canonical: "/confidentialite",
+  },
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
