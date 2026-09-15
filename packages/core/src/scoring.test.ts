@@ -182,6 +182,46 @@ describe("scoreListing", () => {
     ).toBe(true);
   });
 
+  it("does not saturate at 100 when several criteria are missed", () => {
+    // Recherche détaillée : les bonus cumulés dépassent largement +50. Avant, la
+    // note plafonnait à 100 et les points faibles ne comptaient plus.
+    const profile = buildProfile({
+      city: "Lyon",
+      price_max: 950,
+      surface_min: 30,
+      rooms_min: 2,
+      keywords_must: "balcon, lumineux",
+      must_have_elevator: 1,
+    });
+    const studio = scoreListing(
+      buildListing({
+        title: "Studio meublé refait à neuf",
+        description: "Studio meublé entièrement rénové, cuisine équipée, calme, sur cour.",
+        price: 640,
+        surface: 31,
+        rooms: 1,
+        city: "Lyon 7e",
+      }),
+      profile,
+    );
+    const perfect = scoreListing(
+      buildListing({
+        title: "T2 lumineux avec balcon",
+        description: "Deux pièces lumineux au 3e étage avec ascenseur et balcon.",
+        price: 890,
+        surface: 42,
+        rooms: 2,
+        city: "Lyon 4e",
+      }),
+      profile,
+    );
+    expect(studio.score).toBeLessThan(65);
+    expect(studio.reasons.recommendation).not.toBe("to_contact_fast");
+    expect(perfect.score).toBeGreaterThanOrEqual(90);
+    expect(perfect.reasons.recommendation).toBe("to_contact_fast");
+    expect(perfect.score).toBeGreaterThan(studio.score);
+  });
+
   it("clamps the score to [0, 100]", () => {
     const r1 = scoreListing(
       buildListing({ price: 99999 }),

@@ -71,7 +71,7 @@ function applyEquipment(
   } else {
     // Pas de description (carte LBC) → inconnu, pas absent : on ne pénalise pas.
     rules.push({
-      rule: `${label} demandé — non vérifiable (pas de description)`,
+      rule: `${label} demandé, non vérifiable (pas de description)`,
       delta: 0,
       positive: false,
     });
@@ -163,6 +163,15 @@ export function scoreListing(
   // Sur le flux temps réel, la carte LBC ne fournit que url/titre/prix/surface ;
   // ville/description/etc. sont nuls → beaucoup de critères ne peuvent pas être
   // vérifiés. On le mesure pour ne pas présenter un score « sûr » sur peu de data.
+  /**
+   * Gain maximal atteignable sur les critères réellement évalués. Sert à ramener
+   * les bonus à l'échelle (voir l'agrégation) pour que les points faibles
+   * continuent de compter sur une recherche détaillée.
+   */
+  let maxGain = 0;
+  const gain = (n: number) => {
+    maxGain += n;
+  };
   let criteriaSet = 0;
   let criteriaEval = 0;
   const consider = (isSet: boolean, canEval: boolean): boolean => {
@@ -183,6 +192,7 @@ export function scoreListing(
   if (profile.price_max) {
     const evaluable = consider(true, listing.price != null);
     if (evaluable && listing.price != null) {
+      gain(wd(35, "price"));
       if (listing.price <= profile.price_max) {
         const margin = (profile.price_max - listing.price) / profile.price_max;
         const bonus = wd(25 + Math.round(margin * 10), "price");
@@ -211,6 +221,7 @@ export function scoreListing(
   if (profile.surface_min) {
     const evaluable = consider(true, listing.surface != null);
     if (evaluable && listing.surface != null) {
+      gain(wd(20, "surface"));
       if (listing.surface >= profile.surface_min) {
         rules.push({ rule: `Surface ≥ ${profile.surface_min}m² (${listing.surface}m²)`, delta: wd(20, "surface"), positive: true });
       } else {
@@ -227,6 +238,7 @@ export function scoreListing(
   if (profile.rooms_min) {
     const evaluable = consider(true, listing.rooms != null);
     if (evaluable && listing.rooms != null) {
+      gain(wd(10, "rooms"));
       if (listing.rooms >= profile.rooms_min) {
         rules.push({ rule: `Pièces ≥ ${profile.rooms_min} (${listing.rooms})`, delta: wd(10, "rooms"), positive: true });
       } else {
@@ -239,6 +251,7 @@ export function scoreListing(
   if (profile.city) {
     const evaluable = consider(true, listing.city != null);
     if (evaluable && listing.city) {
+      gain(wd(20, "location"));
       if (norm(listing.city).includes(norm(profile.city))) {
         rules.push({ rule: `Ville correspondante (${listing.city})`, delta: wd(20, "location"), positive: true });
       } else {
@@ -252,6 +265,7 @@ export function scoreListing(
   if (profile.property_type && profile.property_type !== "any") {
     const evaluable = consider(true, listing.property_type != null);
     if (evaluable && listing.property_type) {
+      gain(wd(12, "property_type"));
       const label = profile.property_type === "house" ? "maison" : "appartement";
       if (matchesPropertyType(profile.property_type, listing.property_type)) {
         rules.push({ rule: `Type de bien correspondant (${label})`, delta: wd(12, "property_type"), positive: true });
@@ -265,6 +279,7 @@ export function scoreListing(
   if (profile.furnished && profile.furnished !== "any") {
     const evaluable = consider(true, listing.furnished !== null);
     if (evaluable && listing.furnished !== null) {
+      gain(wd(5, "furnished"));
       const want = profile.furnished === "yes" ? 1 : 0;
       if (listing.furnished === want) {
         rules.push({ rule: `Type meublé correspondant`, delta: wd(5, "furnished"), positive: true });
@@ -278,6 +293,7 @@ export function scoreListing(
   const must = parseCsv(profile.keywords_must);
   if (must.length > 0) {
     consider(true, hasDesc);
+    gain(wd(5, "keywords") * must.length);
     const text = `${listing.title ?? ""} ${listing.description ?? ""}`;
     const lower = norm(text);
     const found = must.filter((k) => lower.includes(norm(k)));
@@ -300,7 +316,7 @@ export function scoreListing(
     const hit = hasAnyKeyword(text, excl);
     if (hit) {
       rules.push({
-        rule: `Mot-clé exclu présent ("${hit}") — annonce écartée`,
+        rule: `Mot-clé exclu présent ("${hit}") : annonce écartée`,
         delta: -100,
         positive: false,
       });
@@ -313,6 +329,7 @@ export function scoreListing(
   // +20 systématique trompeur). On crédite juste une détection fraîche, modérément.
   const pubH = hoursSince(listing.published_at);
   if (pubH !== null) {
+    gain(20);
     if (pubH < 2) rules.push({ rule: `Annonce très récente (<2h)`, delta: 20, positive: true });
     else if (pubH < 12) rules.push({ rule: `Annonce récente (<12h)`, delta: 15, positive: true });
     else if (pubH < 48) rules.push({ rule: `Annonce <48h`, delta: 8, positive: true });
@@ -320,6 +337,7 @@ export function scoreListing(
   } else {
     const discH = hoursSince(listing.discovered_at);
     if (discH !== null && discH < 6) {
+      gain(8);
       rules.push({ rule: `Fraîchement détectée`, delta: 8, positive: true });
     }
   }
@@ -333,6 +351,7 @@ export function scoreListing(
   const neighborhoods = parseCsv(profile.neighborhoods);
   if (neighborhoods.length > 0) {
     consider(true, hasGeoText);
+    gain(12);
     const hay = norm(
       `${listing.title ?? ""} ${listing.description ?? ""} ${listing.city ?? ""} ${listing.postal_code ?? ""}`,
     );
@@ -354,10 +373,15 @@ export function scoreListing(
 
   // EQUIPMENTS — only scored when the user marked them as must-have.
   const descBag = `${listing.title ?? ""} ${listing.description ?? ""}`;
-  if (profile.must_have_elevator === 1) consider(true, hasDesc);
-  if (profile.must_have_balcony === 1) consider(true, hasDesc);
-  if (profile.must_have_parking === 1) consider(true, hasDesc);
-  if (profile.must_have_cave === 1) consider(true, hasDesc);
+  for (const required of [
+    profile.must_have_elevator,
+    profile.must_have_balcony,
+    profile.must_have_parking,
+    profile.must_have_cave,
+  ]) {
+    if (required !== 1) continue;
+    if (consider(true, hasDesc)) gain(8);
+  }
   applyEquipment(rules, "Ascenseur", profile.must_have_elevator === 1, descBag, hasDesc, EQ_ELEVATOR);
   applyEquipment(rules, "Balcon / terrasse", profile.must_have_balcony === 1, descBag, hasDesc, EQ_BALCONY);
   applyEquipment(rules, "Parking", profile.must_have_parking === 1, descBag, hasDesc, EQ_PARKING);
@@ -367,6 +391,7 @@ export function scoreListing(
   if (profile.floor_min !== null || profile.floor_max !== null) consider(true, hasDesc);
   const floor = extractFloor(descBag);
   if (floor !== null && (profile.floor_min !== null || profile.floor_max !== null)) {
+    gain(6);
     if (profile.floor_min !== null && floor < profile.floor_min) {
       rules.push({
         rule: `Étage trop bas (${formatFloor(floor)}, min ${profile.floor_min})`,
@@ -389,8 +414,14 @@ export function scoreListing(
   }
 
   // Aggregate
-  const total = rules.reduce((acc, r) => acc + r.delta, 0);
-  const aggregated = Math.max(0, Math.min(100, 50 + total));
+  // Les bonus sont ramenés à l'échelle du gain maximal possible (au moins 50) :
+  // une annonce qui coche tout monte vers 100, et les pénalités, elles, gardent
+  // leur poids plein. Sans cela, une recherche détaillée faisait dépasser +50 de
+  // bonus et saturait la note à 100 malgré plusieurs points faibles.
+  const positives = rules.reduce((acc, r) => acc + Math.max(0, r.delta), 0);
+  const negatives = rules.reduce((acc, r) => acc + Math.min(0, r.delta), 0);
+  const scaledPositives = (positives * 50) / Math.max(50, maxGain);
+  const aggregated = Math.max(0, Math.min(100, Math.round(50 + scaledPositives + negatives)));
   const score = killed ? 0 : aggregated;
 
   // Confiance ∈ [0,1] : 1 si aucun critère posé, sinon part des critères évaluables.
@@ -410,8 +441,8 @@ export function scoreListing(
     recommendation = "interesting";
     rules.push({
       rule: priceUnknown
-        ? `Prudence : prix inconnu — ouvrir l'annonce pour confirmer`
-        : `Prudence : données partielles (carte LBC) — ouvrir l'annonce pour confirmer`,
+        ? `Prudence : prix inconnu, ouvrez l'annonce pour confirmer`
+        : `Prudence : données partielles, ouvrez l'annonce pour confirmer`,
       delta: 0,
       positive: false,
     });
