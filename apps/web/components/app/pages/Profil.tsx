@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardFooter, CardHeader, CardTitle } from "@app/components/ui/Card";
+import { Card } from "@app/components/ui/Card";
 import { Field, Input, Select, Textarea } from "@app/components/ui/Input";
 import { Button } from "@app/components/ui/Button";
 import { updateUserProfile } from "@app/lib/db";
@@ -17,7 +17,13 @@ export default function Profil() {
     setForm(profile ? { ...profile } : null);
   }, [profile]);
 
-  if (!form) return <div className="text-[var(--color-text-faint)]">Chargement…</div>;
+  if (!form) {
+    return (
+      <p role="status" className="text-[15px] text-ink-3">
+        Chargement de votre profil…
+      </p>
+    );
+  }
 
   const update = (patch: Partial<UserProfile>) => {
     setForm({ ...form, ...patch });
@@ -38,129 +44,110 @@ export default function Profil() {
   const completeness = computeCompleteness(form);
 
   return (
-    <div className="max-w-3xl space-y-6">
-      <Card>
-        <CardHeader className="flex items-center justify-between">
-          <CardTitle>Complétude du dossier</CardTitle>
-          <span className="text-sm text-[var(--color-text-muted)]">{completeness}%</span>
-        </CardHeader>
-        <CardBody>
-          <div className="h-2 bg-[var(--color-panel-2)] rounded">
-            <div
-              className="h-full rounded bg-gradient-to-r from-[var(--color-signal)] to-[var(--color-signal)] transition-all"
-              style={{ width: `${completeness}%` }}
-            />
-          </div>
-          <p className="mt-3 text-xs text-[var(--color-text-faint)]">
-            Plus votre profil est complet, plus les messages générés seront convaincants.
+    <Card>
+      <div className="border-b border-rule px-4 py-4 sm:px-5">
+        <div className="flex items-baseline justify-between gap-3">
+          <p className="text-[15px] font-medium text-ink">Profil complété à {completeness} %</p>
+          <p className="hidden text-[13px] text-ink-3 sm:block">
+            Plus il est complet, plus vos messages sont convaincants.
           </p>
-        </CardBody>
-      </Card>
+        </div>
+        <div
+          className="mt-2 h-1.5 overflow-hidden rounded-full bg-paper-2"
+          role="progressbar"
+          aria-valuenow={completeness}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Profil complété"
+        >
+          <div className="h-full rounded-full bg-good transition-[width]" style={{ width: `${completeness}%` }} />
+        </div>
+      </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Identité</CardTitle>
-        </CardHeader>
-        <CardBody className="grid grid-cols-2 gap-4">
-          <Field label="Prénom">
-            <Input
-              value={form.first_name ?? ""}
-              onChange={(e) => update({ first_name: e.target.value })}
-            />
-          </Field>
-          <Field label="Nom">
-            <Input
-              value={form.last_name ?? ""}
-              onChange={(e) => update({ last_name: e.target.value })}
-            />
-          </Field>
-          <Field label="Email">
-            <Input
-              type="email"
-              value={form.email ?? ""}
-              onChange={(e) => update({ email: e.target.value })}
-            />
-          </Field>
-          <Field label="Téléphone">
-            <Input
-              value={form.phone ?? ""}
-              onChange={(e) => update({ phone: e.target.value })}
-            />
-          </Field>
-        </CardBody>
-      </Card>
+      <FormGroup title="Identité">
+        <Field label="Prénom">
+          <Input autoComplete="given-name" value={form.first_name ?? ""} onChange={(e) => update({ first_name: e.target.value })} />
+        </Field>
+        <Field label="Nom">
+          <Input autoComplete="family-name" value={form.last_name ?? ""} onChange={(e) => update({ last_name: e.target.value })} />
+        </Field>
+        <Field label="E-mail">
+          <Input type="email" autoComplete="email" value={form.email ?? ""} onChange={(e) => update({ email: e.target.value })} />
+        </Field>
+        <Field label="Téléphone">
+          <Input type="tel" autoComplete="tel" value={form.phone ?? ""} onChange={(e) => update({ phone: e.target.value })} />
+        </Field>
+      </FormGroup>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Situation</CardTitle>
-        </CardHeader>
-        <CardBody className="grid grid-cols-2 gap-4">
-          <Field label="Situation actuelle" hint="ex: salarié CDI, étudiant, freelance…">
-            <Input
-              value={form.situation ?? ""}
-              onChange={(e) => update({ situation: e.target.value })}
-            />
-          </Field>
-          <Field label="Revenus mensuels nets (€)">
-            <Input
-              type="number"
-              min={0}
-              value={form.income_monthly ?? ""}
-              onChange={(e) =>
-                update({
-                  income_monthly: e.target.value ? Number(e.target.value) : null,
-                })
-              }
-            />
-          </Field>
-          <Field label="Type de contrat" hint="recherche: meublé, vide, indifférent…">
-            <Input
-              value={form.contract_type ?? ""}
-              onChange={(e) => update({ contract_type: e.target.value })}
-            />
-          </Field>
-          <Field label="Contact préféré">
-            <Select
-              value={form.preferred_contact ?? ""}
-              onChange={(e) => update({ preferred_contact: e.target.value || null })}
-            >
-              <option value="">—</option>
-              <option value="phone">Téléphone</option>
-              <option value="email">Email</option>
-              <option value="lbc-message">Message Leboncoin</option>
-            </Select>
-          </Field>
-        </CardBody>
-      </Card>
+      <FormGroup title="Situation">
+        <Field label="Situation actuelle" hint="Par exemple : salarié, étudiant, indépendant">
+          <Input value={form.situation ?? ""} onChange={(e) => update({ situation: e.target.value })} />
+        </Field>
+        <Field label="Revenus nets par mois (€)">
+          <Input
+            type="number"
+            inputMode="numeric"
+            min={0}
+            value={form.income_monthly ?? ""}
+            onChange={(e) => update({ income_monthly: e.target.value ? Number(e.target.value) : null })}
+          />
+        </Field>
+        <Field label="Contrat de travail" hint="Par exemple : CDI, CDD, intérim">
+          <Input value={form.contract_type ?? ""} onChange={(e) => update({ contract_type: e.target.value })} />
+        </Field>
+        <Field label="Comment préférez-vous être contacté ?">
+          <Select
+            value={form.preferred_contact ?? ""}
+            onChange={(e) => update({ preferred_contact: e.target.value || null })}
+          >
+            <option value="">Sans préférence</option>
+            <option value="phone">Par téléphone</option>
+            <option value="email">Par e-mail</option>
+            <option value="lbc-message">Par la messagerie Leboncoin</option>
+          </Select>
+        </Field>
+      </FormGroup>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Garants & dossier</CardTitle>
-        </CardHeader>
-        <CardBody className="space-y-4">
-          <Field label="Garant(s)" hint="ex: Parents, garantie Visale, GarantMe…">
-            <Textarea
-              rows={2}
-              value={form.guarantors ?? ""}
-              onChange={(e) => update({ guarantors: e.target.value })}
-            />
-          </Field>
-          <Field label="Message de présentation" hint="Sera utilisé dans le ton 'chaleureux'">
-            <Textarea
-              rows={4}
-              value={form.intro_message ?? ""}
-              onChange={(e) => update({ intro_message: e.target.value })}
-            />
-          </Field>
-        </CardBody>
-        <CardFooter>
-          {saved && <span className="text-xs text-[var(--color-signal)] mr-auto">Enregistré ✓</span>}
-          <Button onClick={save} disabled={saving}>
-            {saving ? "Enregistrement…" : "Enregistrer"}
-          </Button>
-        </CardFooter>
-      </Card>
-    </div>
+      <FormGroup title="Garant et présentation" single>
+        <Field label="Garant" hint="Par exemple : parents, garantie Visale">
+          <Textarea rows={2} value={form.guarantors ?? ""} onChange={(e) => update({ guarantors: e.target.value })} />
+        </Field>
+        <Field
+          label="Quelques mots sur vous"
+          hint="Repris dans les messages au ton chaleureux. Laissez vide pour une présentation simple."
+        >
+          <Textarea rows={4} value={form.intro_message ?? ""} onChange={(e) => update({ intro_message: e.target.value })} />
+        </Field>
+      </FormGroup>
+
+      <div className="flex flex-wrap items-center justify-end gap-3 border-t border-rule px-4 py-3 sm:px-5">
+        {saved && (
+          <span role="status" className="mr-auto text-[15px] text-good">
+            Profil enregistré
+          </span>
+        )}
+        <Button onClick={save} disabled={saving}>
+          {saving ? "Enregistrement…" : "Enregistrer le profil"}
+        </Button>
+      </div>
+    </Card>
+  );
+}
+
+function FormGroup({
+  title,
+  single = false,
+  children,
+}: {
+  title: string;
+  single?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <fieldset className="border-b border-rule px-4 py-5 last:border-b-0 sm:px-5">
+      <legend className="float-left mb-4 w-full text-[15px] font-semibold text-ink">{title}</legend>
+      <div className={single ? "clear-both space-y-4" : "clear-both grid gap-4 sm:grid-cols-2"}>{children}</div>
+    </fieldset>
   );
 }
 

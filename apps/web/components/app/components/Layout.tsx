@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { Sidebar } from "./Sidebar";
+import { MobileNav, Sidebar } from "./Sidebar";
 import { ShortcutHelp } from "./ShortcutHelp";
 import { PairingModal } from "./PairingModal";
 import { useGlobalShortcuts } from "@app/lib/shortcuts";
@@ -12,7 +12,7 @@ const TITLES: Record<string, string> = {
   "/candidatures": "Mes candidatures",
   "/dossier": "Mon dossier",
   "/reglages": "Réglages",
-  "/surveillance": "Connexion & diagnostics",
+  "/surveillance": "Connexion avec l'extension",
   "/profil": "Profil",
   "/recherches": "Recherches",
 };
@@ -21,9 +21,8 @@ export function Layout() {
   const location = useLocation();
   const refreshAll = useStore((s) => s.refreshAll);
   const loading = useStore((s) => s.loading);
-  const watchBootstrapped = useWatchStore((s) => s.bootstrapped);
   const initWatch = useWatchStore((s) => s.init);
-  const title = TITLES[location.pathname] ?? "Terouva";
+  const title = TITLES[location.pathname] ?? (location.pathname.startsWith("/annonces") ? "Mes annonces" : "Terouva");
   const { helpOpen, closeHelp } = useGlobalShortcuts();
 
   useEffect(() => {
@@ -38,51 +37,31 @@ export function Layout() {
     });
   }, [initWatch]);
 
+  useEffect(() => {
+    document.title = `${title} · Terouva`;
+  }, [title]);
+
   return (
-    <div className="h-full flex">
+    <div className="app-root flex h-dvh flex-col bg-paper text-ink md:flex-row">
       <Sidebar />
-      <main className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-14 border-b border-[var(--color-border)] flex items-center justify-between px-6 bg-[var(--color-bg)]/80 backdrop-blur">
-          <h1 className="text-base font-semibold tracking-tight">{title}</h1>
-          <div className="flex items-center gap-4">
-            <WatchStatusBadge online={watchBootstrapped} />
+      <MobileNav />
+      <main className="app-scroll flex-1 overflow-y-auto">
+        <div className="mx-auto max-w-5xl px-4 pt-6 pb-16 sm:px-6 md:pt-10 lg:px-10">
+          <header className="mb-6 flex items-baseline justify-between gap-4 md:mb-8">
+            <h1 className="font-serif text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
+              {title}
+            </h1>
             {loading && (
-              <span className="text-xs text-[var(--color-text-faint)] animate-pulse">chargement…</span>
+              <span role="status" className="text-sm text-ink-3">
+                Chargement…
+              </span>
             )}
-          </div>
-        </header>
-        <div className="flex-1 overflow-auto p-6">
+          </header>
           <Outlet />
         </div>
       </main>
       <ShortcutHelp open={helpOpen} onClose={closeHelp} />
       <PairingModal />
     </div>
-  );
-}
-
-function WatchStatusBadge({ online }: { online: boolean }) {
-  return (
-    <span
-      className={
-        "inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider " +
-        (online
-          ? "border-[var(--color-signal)]/40 bg-[var(--color-signal-soft)] text-[var(--color-signal)]"
-          : "border-[var(--color-border-2)] bg-[var(--color-bg-2)] text-[var(--color-text-faint)]")
-      }
-      title={
-        online
-          ? "Le serveur local d'écoute est actif. L'extension peut envoyer des annonces."
-          : "Le serveur local n'est pas encore prêt."
-      }
-    >
-      <span
-        className={
-          "size-1.5 rounded-full " +
-          (online ? "bg-[var(--color-signal)] animate-pulse" : "bg-[var(--color-border-2)]")
-        }
-      />
-      Watch {online ? "ON" : "OFF"}
-    </span>
   );
 }

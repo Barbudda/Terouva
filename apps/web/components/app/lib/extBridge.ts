@@ -163,7 +163,7 @@ function notifyExtension(
     .filter(Boolean)
     .join(" • ");
   const notif = {
-    title: `★ ${score}/100 — ${d.title ?? "Annonce détectée"}`,
+    title: `${score}/100 · ${d.title ?? "Annonce détectée"}`,
     body,
     url: d.url,
     score,

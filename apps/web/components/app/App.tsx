@@ -22,7 +22,11 @@ export default function App() {
   }, []);
 
   if (onboarded === null) {
-    return <div className="h-full grid place-items-center text-[var(--color-text-faint)]">…</div>;
+    return (
+      <div role="status" className="grid h-dvh place-items-center bg-paper text-[15px] text-ink-3">
+        Ouverture de Terouva…
+      </div>
+    );
   }
 
   if (!onboarded) {

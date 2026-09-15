@@ -76,3 +76,6 @@ desktop.ini
 .vercel/
 
 .vercel
+
+# --- Captures et journaux du navigateur de test (Playwright MCP) ---
+.playwright-mcp/

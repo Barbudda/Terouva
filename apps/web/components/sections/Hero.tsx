@@ -1,98 +1,53 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { HERO } from "@/lib/content";
-import { MagneticButton } from "@/components/ui/MagneticButton";
-import { LiveCounter } from "@/components/ui/LiveCounter";
-import { ListingTicker } from "@/components/ui/ListingTicker";
-import { DashboardMockup } from "@/components/ui/DashboardMockup";
+import { LinkButton } from "@/components/ui/LinkButton";
 
 export function Hero() {
-  const reduce = useReducedMotion();
-
   return (
-    <section className="relative pt-32 md:pt-40 pb-20 md:pb-28 overflow-hidden">
-      {/* Background grid + halo */}
-      <div className="bg-grid bg-grid-fade absolute inset-0 -z-20" />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-[700px] -z-20"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 50% 0%, rgba(126,232,200,0.12) 0%, transparent 60%)",
-        }}
-      />
+    <section className="pt-14 pb-16 md:pt-24 md:pb-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-8">
+          <div className="md:col-span-7">
+            <p className="text-[15px] text-ink-2">{HERO.kicker}</p>
+            <h1 className="mt-5 font-serif text-[2.9rem] font-medium leading-[1.02] tracking-[-0.02em] text-ink sm:text-6xl lg:text-[5.25rem]">
+              {HERO.title}
+            </h1>
+            <p className="mt-4 font-serif text-2xl italic leading-snug text-ink-2 sm:text-3xl lg:text-[2.35rem]">
+              {HERO.titleSecond}
+            </p>
+          </div>
 
-      {/* Subtle ticker behind */}
-      <ListingTicker />
+          <div className="md:col-span-5 md:self-end">
+            <p className="text-lg leading-relaxed text-ink-2">{HERO.subtitle}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <LinkButton href={HERO.ctaPrimary.href} size="lg">
+                {HERO.ctaPrimary.label}
+              </LinkButton>
+              <a
+                href={HERO.ctaSecondary.href}
+                className="text-base text-ink underline decoration-field underline-offset-[6px] transition-colors hover:decoration-ink"
+              >
+                {HERO.ctaSecondary.label}
+              </a>
+            </div>
+            <p className="mt-6 text-sm leading-relaxed text-ink-3">{HERO.meta}</p>
+          </div>
+        </div>
 
-      <div className="max-w-6xl mx-auto px-6 text-center relative">
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <LiveCounter />
-        </motion.div>
-
-        <motion.h1
-          initial={reduce ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 text-[44px] sm:text-6xl md:text-[78px] font-semibold tracking-[-0.03em] leading-[0.98]"
-        >
-          {HERO.titleLines.map((line, i) => (
-            <span key={i} className="block">
-              {line}
-            </span>
-          ))}
-          <span className="block mt-2 bg-gradient-to-r from-[var(--color-signal)] via-[#d2f8e8] to-[var(--color-urgent)] bg-clip-text text-transparent">
-            {HERO.titleEmphasis}
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-7 max-w-2xl text-base md:text-lg text-[var(--color-text-muted)] leading-relaxed"
-        >
-          {HERO.subtitle}
-        </motion.p>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-10 flex items-center justify-center gap-3 flex-wrap"
-        >
-          <MagneticButton href={HERO.ctaPrimary.href} variant="primary" size="lg">
-            {HERO.ctaPrimary.label}
-            <ArrowRight size={16} />
-          </MagneticButton>
-          <MagneticButton href={HERO.ctaSecondary.href} variant="secondary" size="lg">
-            {HERO.ctaSecondary.label}
-          </MagneticButton>
-        </motion.div>
-
-        <motion.p
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-5 text-xs text-[var(--color-text-faint)] font-mono"
-        >
-          {HERO.meta}
-        </motion.p>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-24"
-        >
-          <DashboardMockup />
-        </motion.div>
+        <figure className="mt-14 md:mt-20">
+          <div className="overflow-hidden rounded-md border border-rule bg-card">
+            <Image
+              src="/apercu-annonces.png"
+              alt="Aperçu de l'application Terouva : une liste d'annonces de location notées sur 100, la mieux notée étant signalée comme à contacter en priorité."
+              width={1440}
+              height={900}
+              priority
+              sizes="(min-width: 1152px) 1104px, 100vw"
+              className="h-auto w-full"
+            />
+          </div>
+          <figcaption className="mt-3 text-sm text-ink-3">{HERO.caption}</figcaption>
+        </figure>
       </div>
     </section>
   );

@@ -103,7 +103,7 @@ async function maybeNotifyHot(
     ]
       .filter(Boolean)
       .join(" • ");
-    const title = `★ ${score}/100 — ${listing.title ?? "Annonce détectée"}`;
+    const title = `${score}/100 · ${listing.title ?? "Annonce détectée"}`;
     await notifyDesktop({ title, body: subtitle });
   }
   return true;

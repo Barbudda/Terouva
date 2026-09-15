@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import { SHORTCUTS } from "@app/lib/shortcuts";
 
 export function ShortcutHelp({
@@ -10,44 +11,44 @@ export function ShortcutHelp({
   if (!open) return null;
   return (
     <div
-      className="fixed inset-0 z-50 grid place-items-center bg-[var(--color-bg)]/70 backdrop-blur-sm"
+      className="fixed inset-0 z-50 grid place-items-center bg-ink/30 p-4"
       onClick={onClose}
     >
       <div
-        className="w-[480px] max-w-[92vw] rounded-xl border border-[var(--color-border)] bg-[var(--color-panel)]/95 shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="shortcut-help-title"
+        className="w-[460px] max-w-full rounded-md border border-rule bg-card shadow-[0_12px_40px_-12px_rgb(31_29_26/0.35)]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-5 py-4 border-b border-[var(--color-border)] flex items-center justify-between">
+        <div className="flex items-start justify-between gap-4 border-b border-rule px-5 py-4">
           <div>
-            <div className="text-sm font-semibold text-[var(--color-text)]">Raccourcis clavier</div>
-            <div className="text-[11px] text-[var(--color-text-faint)] font-mono">
-              fermer avec Échap ou ?
-            </div>
+            <h2 id="shortcut-help-title" className="font-serif text-xl font-medium text-ink">
+              Raccourcis clavier
+            </h2>
+            <p className="mt-0.5 text-[13px] text-ink-3">Fermer avec Échap ou la touche ?</p>
           </div>
           <button
             onClick={onClose}
-            className="text-[var(--color-text-faint)] hover:text-[var(--color-text)] text-sm"
+            className="rounded-md p-1 text-ink-3 transition-colors hover:bg-paper-2 hover:text-ink"
             aria-label="Fermer"
           >
-            ✕
+            <X size={16} strokeWidth={1.75} />
           </button>
         </div>
-        <ul className="px-5 py-4 space-y-2 text-sm">
+        <ul className="space-y-1 px-5 py-4 text-[15px]">
           {SHORTCUTS.map((s) => (
-            <li
-              key={s.combo}
-              className="flex items-center justify-between gap-3 py-1"
-            >
-              <span className="text-[var(--color-text-muted)]">{s.description}</span>
-              <kbd className="inline-flex items-center gap-1 rounded border border-[var(--color-border-2)] bg-[var(--color-bg)] px-2 py-0.5 font-mono text-[11px] text-[var(--color-text)]">
+            <li key={s.combo} className="flex items-center justify-between gap-3 py-1">
+              <span className="text-ink-2">{s.description}</span>
+              <kbd className="rounded border border-field bg-paper px-2 py-0.5 font-mono text-[13px] text-ink">
                 {s.combo}
               </kbd>
             </li>
           ))}
         </ul>
-        <div className="px-5 py-3 border-t border-[var(--color-border)] text-[11px] text-[var(--color-text-faint)]">
-          Les raccourcis ne se déclenchent pas quand vous tapez dans un champ.
-        </div>
+        <p className="border-t border-rule px-5 py-3 text-[13px] text-ink-3">
+          Les raccourcis ne se déclenchent pas quand vous écrivez dans un champ.
+        </p>
       </div>
     </div>
   );

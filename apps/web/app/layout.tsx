@@ -1,13 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Newsreader, Schibsted_Grotesk } from "next/font/google";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
+
+const serif = Newsreader({
+  subsets: ["latin"],
+  axes: ["opsz"],
+  style: ["normal", "italic"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
+
+const sans = Schibsted_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-schibsted",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: "Terouva — trouvez votre logement sans y passer vos journées",
+    default: "Terouva · Trouvez votre logement sans y passer vos journées",
     template: "%s · Terouva",
   },
   description:
@@ -25,7 +38,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Terouva — trouvez votre logement sans y passer vos journées",
+    title: "Terouva · Trouvez votre logement sans y passer vos journées",
     description:
       "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste chez vous.",
     type: "website",
@@ -37,13 +50,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Terouva — trouvez votre logement sans y passer vos journées",
+        alt: "Terouva · Trouvez votre logement sans y passer vos journées",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terouva — trouvez votre logement sans y passer vos journées",
+    title: "Terouva · Trouvez votre logement sans y passer vos journées",
     description:
       "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste chez vous.",
     images: ["/opengraph-image"],
@@ -55,8 +68,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0b",
-  colorScheme: "dark",
+  themeColor: "#f5f1e8",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -89,8 +102,8 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="bg-noise">
+    <html lang="fr" className={`${serif.variable} ${sans.variable}`}>
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

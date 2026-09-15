@@ -10,21 +10,16 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-[var(--color-signal)] hover:bg-[var(--color-signal)] text-white border border-[var(--color-signal)] shadow-sm shadow-[var(--color-signal)]/20",
-  secondary:
-    "bg-[var(--color-panel-2)] hover:bg-[var(--color-border-2)] text-[var(--color-text)] border border-[var(--color-border-2)]",
-  ghost:
-    "bg-transparent hover:bg-[var(--color-panel-2)] text-[var(--color-text)] border border-transparent",
-  danger:
-    "bg-[var(--color-danger)]/90 hover:bg-[var(--color-danger)] text-white border border-[var(--color-danger)]/70",
-  success:
-    "bg-[var(--color-signal)]/90 hover:bg-[var(--color-signal)] text-white border border-[var(--color-signal)]/70",
+  primary: "bg-accent text-card border border-accent hover:bg-accent-ink hover:border-accent-ink",
+  secondary: "bg-card text-ink border border-field hover:border-ink",
+  ghost: "bg-transparent text-ink-2 border border-transparent hover:bg-paper-2 hover:text-ink",
+  danger: "bg-transparent text-bad border border-transparent hover:bg-bad-wash hover:border-bad/30",
+  success: "bg-good text-card border border-good hover:bg-good/90",
 };
 
 const sizes: Record<Size, string> = {
   sm: "h-8 px-3 text-sm",
-  md: "h-9 px-4 text-sm",
+  md: "h-9 px-4 text-[15px]",
   lg: "h-11 px-5 text-base",
 };
 
@@ -37,9 +32,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       ref={ref}
       type={type}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-signal)]/60",
-        "disabled:opacity-50 disabled:cursor-not-allowed",
+        "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors duration-150",
+        "disabled:cursor-not-allowed disabled:opacity-50",
         variants[variant],
         sizes[size],
         className,

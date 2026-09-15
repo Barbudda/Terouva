@@ -1,14 +1,13 @@
 {
   "name": "Terouva",
   "short_name": "Terouva",
-  "description": "Ton copilote local de recherche d'appartement. 100 % privé : tes données restent dans ton navigateur.",
+  "description": "Votre aide pour trouver une location sur Leboncoin. Vos données restent dans votre navigateur.",
   "lang": "fr",
   "start_url": "/app",
   "scope": "/app",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "background_color": "#09090b",
-  "theme_color": "#09090b",
+  "background_color": "#f5f1e8",
+  "theme_color": "#f5f1e8",
   "icons": [
     {
       "src": "/app/icon.svg",

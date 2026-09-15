@@ -1,68 +1,118 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { FolderOpen, List, Send, Settings } from "lucide-react";
+import { LogoMark } from "@/components/ui/Logo";
 import { cn } from "@app/lib/cn";
+import { type BridgeState, getBridgeState, onBridgeState } from "@app/lib/extBridge";
 
-// Navigation grand public : 3 entrées principales + Réglages (avancé) en bas.
-const NAV = [
-  { to: "/", label: "Mes annonces", icon: "▤" },
-  { to: "/candidatures", label: "Mes candidatures", icon: "✉" },
-  { to: "/dossier", label: "Mon dossier", icon: "◔" },
+export const NAV = [
+  { to: "/", label: "Mes annonces", short: "Annonces", icon: List },
+  { to: "/candidatures", label: "Mes candidatures", short: "Candidatures", icon: Send },
+  { to: "/dossier", label: "Mon dossier", short: "Dossier", icon: FolderOpen },
+  { to: "/reglages", label: "Réglages", short: "Réglages", icon: Settings },
 ];
+
+/** État réel de la connexion avec l'extension Chrome (et non un simple « prêt »). */
+export function useBridgeState(): BridgeState {
+  const [state, setState] = useState<BridgeState>(getBridgeState);
+  useEffect(() => onBridgeState(setState), []);
+  return state;
+}
+
+export function ExtensionStatus({ compact = false }: { compact?: boolean }) {
+  const { connected, available: detected, error } = useBridgeState();
+  // « En cours » seulement si l'extension est là et qu'aucune erreur n'est remontée.
+  const available = detected && !error;
+  const label = connected
+    ? "Extension connectée"
+    : available
+      ? "Connexion en cours"
+      : "Extension non connectée";
+  return (
+    <NavLink
+      to="/surveillance"
+      title="Voir l'état de la connexion avec l'extension Chrome"
+      className={cn(
+        "flex items-center gap-2 rounded-md text-sm transition-colors hover:bg-card",
+        compact ? "px-2 py-1.5" : "px-3 py-2.5",
+      )}
+    >
+      <span
+        aria-hidden
+        className={cn(
+          "size-2 shrink-0 rounded-full",
+          connected ? "animate-breathe bg-good" : available ? "bg-warn" : "bg-field",
+        )}
+      />
+      <span className={cn(compact && "text-[13px]", connected ? "text-good" : "text-ink-2")}>{label}</span>
+    </NavLink>
+  );
+}
+
+function navClass(isActive: boolean) {
+  return cn(
+    "flex items-center gap-3 rounded-md px-3 py-2 text-[15px] transition-colors",
+    isActive ? "bg-card font-medium text-ink ring-1 ring-rule" : "text-ink-2 hover:bg-card/60 hover:text-ink",
+  );
+}
 
 export function Sidebar() {
   return (
-    <aside className="w-56 shrink-0 border-r border-[var(--color-border)] bg-[var(--color-bg)] flex flex-col">
-      <div className="px-5 py-5 border-b border-[var(--color-border)]">
-        <div className="flex items-center gap-2">
-          <div className="size-7 rounded-md bg-gradient-to-br from-[var(--color-signal)] to-[var(--color-signal)] grid place-items-center text-[var(--color-bg)] text-sm font-bold">
-            T
-          </div>
-          <div>
-            <div className="text-sm font-semibold tracking-tight">Terouva</div>
-            <div className="text-[10px] text-[var(--color-text-faint)] uppercase tracking-wider">
-              copilote local
-            </div>
-          </div>
-        </div>
-      </div>
+    <aside className="hidden w-60 shrink-0 flex-col border-r border-rule bg-paper-2 md:flex">
+      <a href="/" className="flex items-center gap-2.5 px-6 pt-5 pb-6" title="Retour au site Terouva">
+        <LogoMark />
+        <span className="font-serif text-[1.35rem] font-semibold leading-none tracking-tight text-ink">
+          Terouva
+        </span>
+      </a>
 
-      <nav className="flex-1 p-2 space-y-1">
-        {NAV.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.to === "/"}
-            className={({ isActive }) =>
-              cn(
-                "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors",
-                isActive
-                  ? "bg-[var(--color-panel-2)] text-[var(--color-text)]"
-                  : "text-[var(--color-text-muted)] hover:bg-[var(--color-bg-2)] hover:text-[var(--color-text)]",
-              )
-            }
-          >
-            <span className="text-[var(--color-text-faint)]">{item.icon}</span>
-            <span>{item.label}</span>
+      <nav aria-label="Navigation principale" className="flex-1 space-y-0.5 px-3">
+        {NAV.map(({ to, label, icon: Icon }) => (
+          <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => navClass(isActive)}>
+            <Icon size={18} strokeWidth={1.75} aria-hidden />
+            <span>{label}</span>
           </NavLink>
         ))}
       </nav>
 
-      <div className="p-2 border-t border-[var(--color-border)]">
-        <NavLink
-          to="/reglages"
-          className={({ isActive }) =>
-            cn(
-              "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors",
-              isActive
-                ? "bg-[var(--color-panel-2)] text-[var(--color-text)]"
-                : "text-[var(--color-text-faint)] hover:bg-[var(--color-bg-2)] hover:text-[var(--color-text)]",
-            )
-          }
-        >
-          <span>⚙</span>
-          <span>Réglages</span>
-        </NavLink>
-        <div className="px-3 pt-2 text-[10px] text-[var(--color-text-faint)]">v0.2 · 100 % local</div>
+      <div className="space-y-2 border-t border-rule px-3 py-3">
+        <ExtensionStatus />
+        <p className="px-3 pb-1 text-[13px] leading-snug text-ink-3">
+          Vos données restent sur cet ordinateur.
+        </p>
       </div>
     </aside>
+  );
+}
+
+/** Navigation mobile : barre du haut + onglets défilants. */
+export function MobileNav() {
+  return (
+    <div className="border-b border-rule bg-paper-2 md:hidden">
+      <div className="flex h-14 items-center justify-between px-4">
+        <a href="/" className="flex items-center gap-2" title="Retour au site Terouva">
+          <LogoMark className="size-6" />
+          <span className="font-serif text-xl font-semibold leading-none text-ink">Terouva</span>
+        </a>
+        <ExtensionStatus compact />
+      </div>
+      <nav aria-label="Navigation principale" className="-mb-px flex overflow-x-auto overflow-y-hidden no-scrollbar px-2">
+        {NAV.map(({ to, short }) => (
+          <NavLink
+            key={to}
+            to={to}
+            end={to === "/"}
+            className={({ isActive }) =>
+              cn(
+                "whitespace-nowrap border-b-2 px-3 py-2.5 text-[15px] transition-colors",
+                isActive ? "border-accent font-medium text-ink" : "border-transparent text-ink-2",
+              )
+            }
+          >
+            {short}
+          </NavLink>
+        ))}
+      </nav>
+    </div>
   );
 }

@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-10">
-      <h2 className="text-xl font-semibold tracking-tight text-[var(--color-text)]">
+    <section className="mt-10 border-t border-rule pt-8">
+      <h2 className="font-serif text-2xl font-medium tracking-tight text-ink">
         {title}
       </h2>
-      <div className="mt-3 space-y-3 text-[var(--color-text-muted)] leading-relaxed">
+      <div className="mt-3 space-y-3 text-base leading-relaxed text-ink-2">
         {children}
       </div>
     </section>
@@ -27,19 +27,19 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 export default function Confidentialite() {
   return (
     <>
-      <Nav />
-      <main className="max-w-3xl mx-auto px-6 pt-32 pb-24">
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-[var(--color-text)]">
+      <Nav home={false} />
+      <main className="mx-auto max-w-3xl px-4 pt-14 pb-24 sm:px-6 md:pt-20">
+        <h1 className="font-serif text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
           Politique de confidentialité
         </h1>
-        <p className="mt-3 text-sm text-[var(--color-text-faint)]">
+        <p className="mt-3 text-sm text-ink-3">
           En vigueur en juin 2026. Elle s'applique au site Terouva, à l'application
           web et à l'extension de navigateur.
         </p>
 
-        <p className="mt-8 text-[var(--color-text-muted)] leading-relaxed">
+        <p className="mt-8 text-lg leading-relaxed text-ink-2">
           Terouva est conçu pour respecter votre vie privée par construction.
-          En résumé : <strong className="text-[var(--color-text)]">vos données
+          En résumé : <strong className="text-ink">vos données
           restent sur votre ordinateur</strong>, il n'y a ni compte, ni serveur,
           ni publicité, ni suivi.
         </p>
@@ -65,7 +65,7 @@ export default function Confidentialite() {
         <Section title="L'extension de navigateur">
           <p>
             L'extension lit le contenu des pages de recherche et d'annonces
-            Leboncoin que <strong className="text-[var(--color-text)]">vous
+            Leboncoin que <strong className="text-ink">vous
             ouvrez vous-même</strong>, afin de repérer les nouvelles annonces et
             de les transmettre à votre application Terouva, sur votre appareil.
           </p>
@@ -89,7 +89,7 @@ export default function Confidentialite() {
         <Section title="La seule connexion sortante">
           <p>
             Pour construire un lien de recherche Leboncoin à partir de vos
-            critères, le <strong className="text-[var(--color-text)]">nom de votre
+            critères, le <strong className="text-ink">nom de votre
             ville</strong> est envoyé à l'annuaire d'adresses public de l'État
             français (api-adresse.data.gouv.fr), afin d'obtenir des coordonnées.
             Aucune autre information n'est transmise, et cet appel ne contient rien

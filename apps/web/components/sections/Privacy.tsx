@@ -1,77 +1,37 @@
-"use client";
-
+import Link from "next/link";
 import { PRIVACY } from "@/lib/content";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
-import { Lock } from "lucide-react";
 
 export function Privacy() {
   return (
-    <section
-      id="privacy"
-      className="relative py-32 md:py-40 border-t border-[var(--color-border)]"
-    >
-      <div className="max-w-6xl mx-auto px-6">
-        <SectionHeader
-          eyebrow={PRIVACY.eyebrow}
-          title={PRIVACY.title}
-          subtitle={PRIVACY.body}
-        />
+    <section id="donnees" className="border-t border-rule py-16 md:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid gap-10 rounded-md border border-rule bg-card p-6 sm:p-10 md:grid-cols-12 md:gap-8">
+          <div className="md:col-span-5">
+            <h2 className="font-serif text-3xl font-medium leading-tight tracking-tight text-ink md:text-[2.5rem]">
+              {PRIVACY.title}
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-ink-2">{PRIVACY.body}</p>
+            <Link
+              href="/confidentialite"
+              className="mt-6 inline-block text-base text-ink underline decoration-field underline-offset-[6px] hover:decoration-ink"
+            >
+              Lire la politique de confidentialité
+            </Link>
+          </div>
 
-        <div className="mt-20 grid lg:grid-cols-[1.1fr_1fr] gap-10 items-start">
-          <Reveal>
-            <ServerErrorCard />
-          </Reveal>
-
-          <Stagger
-            className="space-y-px rounded-xl border border-[var(--color-border)] overflow-hidden"
-            staggerChildren={0.06}
-          >
+          <dl className="md:col-span-6 md:col-start-7">
             {PRIVACY.points.map((p) => (
-              <StaggerItem
+              <div
                 key={p.label}
-                className="grid grid-cols-[120px_1fr_auto] items-center gap-4 px-5 py-4 bg-[var(--color-panel)]/50 hover:bg-[var(--color-panel)]/80 transition-colors"
+                className="grid gap-1 border-t border-rule py-4 first:border-t-0 first:pt-0 sm:grid-cols-[11rem_1fr] sm:gap-6"
               >
-                <div className="text-xs uppercase tracking-wider text-[var(--color-text-faint)]">
-                  {p.label}
-                </div>
-                <div className="text-sm text-[var(--color-text)]">{p.value}</div>
-                <div className="text-[11px] font-mono text-[var(--color-text-faint)] text-right">
-                  {p.mono}
-                </div>
-              </StaggerItem>
+                <dt className="text-[15px] text-ink-3">{p.label}</dt>
+                <dd className="text-base text-ink">{p.value}</dd>
+              </div>
             ))}
-          </Stagger>
+          </dl>
         </div>
       </div>
     </section>
-  );
-}
-
-function ServerErrorCard() {
-  return (
-    <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-panel)]/40 overflow-hidden">
-      <div className="border-b border-[var(--color-border)] bg-[var(--color-bg-2)]/60 px-4 py-3 flex items-center gap-2">
-        <Lock size={14} className="text-[var(--color-signal)]" />
-        <span className="text-sm font-medium text-[var(--color-text)]">
-          Une promesse simple
-        </span>
-      </div>
-      <div className="p-6 text-sm space-y-4 leading-relaxed text-[var(--color-text-muted)]">
-        <p className="text-[var(--color-text)]">
-          Terouva n'a pas de serveur. Il n'y a aucun endroit où vos informations
-          pourraient être envoyées.
-        </p>
-        <p>
-          Vos recherches, vos annonces, votre profil et vos messages sont
-          enregistrés uniquement sur votre ordinateur. Vous restez seul à y avoir
-          accès.
-        </p>
-        <p className="text-[var(--color-text)]">
-          Pas de compte, pas de mot de passe, pas de publicité. Rien à régler pour
-          que ce soit privé : ça l'est dès le départ.
-        </p>
-      </div>
-    </div>
   );
 }

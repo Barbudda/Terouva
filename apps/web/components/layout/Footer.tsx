@@ -1,37 +1,31 @@
 import Link from "next/link";
 import { FOOTER } from "@/lib/content";
+import { Logo } from "@/components/ui/Logo";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-[var(--color-border)] mt-32">
-      <div className="bg-grid bg-grid-fade absolute inset-0 -z-10 opacity-50" />
-      <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-sm">
-        <div className="flex items-center gap-3">
-          <span className="grid size-7 place-items-center rounded-md bg-gradient-to-br from-[var(--color-signal)] to-[var(--color-signal-strong)] text-[var(--color-bg)] text-sm font-bold">
-            T
-          </span>
-          <div className="leading-tight">
-            <div className="text-[var(--color-text)] font-semibold tracking-tight">
-              Terouva
-            </div>
-            <div className="text-xs text-[var(--color-text-faint)] font-mono">
-              Gratuit · sans inscription
-            </div>
-          </div>
+    <footer className="border-t border-rule bg-paper-2">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-[1fr_auto] md:items-end">
+        <div className="space-y-3">
+          <Logo />
+          <p className="max-w-md text-[15px] leading-relaxed text-ink-2">{FOOTER.signature}</p>
+          <p className="text-sm text-ink-3">{FOOTER.disclaimer}</p>
         </div>
-
-        <div className="flex flex-col gap-3 md:items-end">
-          <p className="max-w-md text-xs text-[var(--color-text-muted)] leading-relaxed">
-            {FOOTER.signature}{" "}
-            <span className="text-[var(--color-text-faint)]">{FOOTER.disclaimer}</span>
-          </p>
-          <Link
-            href="/confidentialite"
-            className="text-xs text-[var(--color-text-faint)] underline-offset-4 transition-colors hover:text-[var(--color-text-muted)] hover:underline"
-          >
-            Confidentialité
-          </Link>
-        </div>
+        <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
+          <li>
+            <Link href="/app" className="text-ink-2 underline-offset-4 hover:text-ink hover:underline">
+              Ouvrir Terouva
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/confidentialite"
+              className="text-ink-2 underline-offset-4 hover:text-ink hover:underline"
+            >
+              Politique de confidentialité
+            </Link>
+          </li>
+        </ul>
       </div>
     </footer>
   );

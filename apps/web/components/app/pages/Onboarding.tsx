@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { LogoMark } from "@/components/ui/Logo";
 import { Button } from "@app/components/ui/Button";
 import { Field, Input } from "@app/components/ui/Input";
 import { createSearchProfile, setSetting, updateUserProfile } from "@app/lib/db";
 import { buildLbcSearchUrlAsync } from "@app/lib/lbcUrl";
+
+const STEP_TITLES = ["Votre profil", "Votre recherche", "Votre navigateur"];
 
 /**
  * Assistant de premier lancement (3 écrans). Objectif : passer de « installé »
@@ -13,7 +16,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
   const [step, setStep] = useState(0);
   const [saving, setSaving] = useState(false);
 
-  // Étape 1 — profil express
+  // Étape 1 : profil express
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
@@ -21,7 +24,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
   const [income, setIncome] = useState("");
   const [guarantors, setGuarantors] = useState("");
 
-  // Étape 2 — première recherche
+  // Étape 2 : première recherche
   const [city, setCity] = useState("");
   const [priceMax, setPriceMax] = useState("");
   const [surfaceMin, setSurfaceMin] = useState("");
@@ -75,110 +78,139 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
   };
 
   return (
-    <div className="min-h-screen grid place-items-center p-6 bg-[var(--color-bg)]">
-      <div className="w-full max-w-lg">
-        {/* En-tête + progression */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="size-9 rounded-lg bg-gradient-to-br from-[var(--color-signal)] to-[var(--color-signal)] grid place-items-center text-[var(--color-bg)] font-bold">
-            T
-          </div>
-          <div className="flex-1">
-            <div className="text-sm font-semibold tracking-tight text-[var(--color-text)]">
-              Bienvenue sur Terouva
-            </div>
-            <div className="text-xs text-[var(--color-text-faint)]">Configuration en 2 minutes</div>
-          </div>
-          <div className="flex gap-1.5">
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                className={
-                  "h-1.5 w-6 rounded-full " +
-                  (i <= step ? "bg-[var(--color-signal)]" : "bg-[var(--color-panel-2)]")
-                }
-              />
-            ))}
-          </div>
-        </div>
+    <div className="app-root app-scroll h-dvh overflow-y-auto bg-paper text-ink">
+      <div className="mx-auto w-full max-w-xl px-4 py-10 sm:py-16">
+        <a href="/" className="inline-flex items-center gap-2.5" title="Retour au site Terouva">
+          <LogoMark />
+          <span className="font-serif text-[1.35rem] font-semibold leading-none tracking-tight">
+            Terouva
+          </span>
+        </a>
 
-        <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-panel)]/60 p-6">
+        <ol className="mt-10 grid grid-cols-3 gap-2" aria-label="Étapes">
+          {STEP_TITLES.map((t, i) => (
+            <li key={t} aria-current={i === step ? "step" : undefined}>
+              <span className={"block h-1 rounded-full " + (i <= step ? "bg-accent" : "bg-rule")} />
+              <span
+                className={
+                  "mt-2 block text-[13px] " + (i === step ? "font-medium text-ink" : "text-ink-3")
+                }
+              >
+                {i + 1}. {t}
+              </span>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-6 rounded-md border border-rule bg-card p-5 sm:p-7">
           {step === 0 && (
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <h2 className="text-lg font-semibold text-[var(--color-text)]">Qui êtes-vous ?</h2>
-                <p className="text-sm text-[var(--color-text-muted)] mt-1">
-                  Ces informations servent à pré-remplir vos messages de candidature.
+                <h1 className="font-serif text-3xl font-medium leading-tight">
+                  Bienvenue. Qui êtes-vous ?
+                </h1>
+                <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
+                  Ces informations servent à préparer vos messages de candidature. Elles restent
+                  sur cet ordinateur.
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Prénom">
-                  <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                  <Input
+                    autoComplete="given-name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
                 </Field>
                 <Field label="Nom">
-                  <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                  <Input
+                    autoComplete="family-name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
                 </Field>
                 <Field label="Téléphone">
-                  <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
+                  <Input
+                    type="tel"
+                    autoComplete="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
                 </Field>
-                <Field label="Revenus nets / mois (€)">
+                <Field label="Revenus nets par mois (€)">
                   <Input
                     type="number"
+                    inputMode="numeric"
+                    min={0}
                     value={income}
                     onChange={(e) => setIncome(e.target.value)}
                   />
                 </Field>
                 <Field label="Situation">
                   <Input
-                    placeholder="ex: salarié CDI, étudiant…"
+                    placeholder="Par exemple : salarié en CDI"
                     value={situation}
                     onChange={(e) => setSituation(e.target.value)}
                   />
                 </Field>
                 <Field label="Garant">
                   <Input
-                    placeholder="ex: parents, Visale…"
+                    placeholder="Par exemple : parents, Visale"
                     value={guarantors}
                     onChange={(e) => setGuarantors(e.target.value)}
                   />
                 </Field>
               </div>
+              <p className="text-[13px] text-ink-3">
+                Vous pouvez laisser des champs vides et les compléter plus tard.
+              </p>
             </div>
           )}
 
           {step === 1 && (
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <h2 className="text-lg font-semibold text-[var(--color-text)]">Que cherchez-vous ?</h2>
-                <p className="text-sm text-[var(--color-text-muted)] mt-1">
+                <h1 className="font-serif text-3xl font-medium leading-tight">
+                  Que cherchez-vous ?
+                </h1>
+                <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
                   Une première recherche. Vous pourrez en ajouter d'autres ensuite.
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid gap-4 sm:grid-cols-3">
                 <Field label="Ville">
-                  <Input value={city} onChange={(e) => setCity(e.target.value)} />
+                  <Input
+                    autoComplete="address-level2"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
                 </Field>
-                <Field label="Budget max (€)">
+                <Field label="Loyer maximum (€)">
                   <Input
                     type="number"
+                    inputMode="numeric"
+                    min={0}
                     value={priceMax}
                     onChange={(e) => setPriceMax(e.target.value)}
                   />
                 </Field>
-                <Field label="Surface min (m²)">
+                <Field label="Surface minimum (m²)">
                   <Input
                     type="number"
+                    inputMode="numeric"
+                    min={0}
                     value={surfaceMin}
                     onChange={(e) => setSurfaceMin(e.target.value)}
                   />
                 </Field>
-                <div />
               </div>
               <Field
-                label="URL de votre recherche Leboncoin (optionnel)"
-                hint="Laissez vide : Terouva construit la recherche depuis votre ville et votre budget. Collez une URL seulement si vous en avez déjà une précise."
+                label="Adresse de votre recherche Leboncoin (facultatif)"
+                hint="Vous pouvez laisser vide : Terouva prépare la recherche à partir de la ville et du loyer. Collez une adresse seulement si vous avez déjà une recherche précise sur Leboncoin."
               >
                 <Input
-                  placeholder="https://www.leboncoin.fr/recherche?..."
+                  type="url"
+                  placeholder="https://www.leboncoin.fr/recherche?…"
                   value={lbcUrl}
                   onChange={(e) => setLbcUrl(e.target.value)}
                 />
@@ -187,61 +219,53 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
           )}
 
           {step === 2 && (
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <h2 className="text-lg font-semibold text-[var(--color-text)]">
+                <h1 className="font-serif text-3xl font-medium leading-tight">
                   Connectez votre navigateur
-                </h2>
-                <p className="text-sm text-[var(--color-text-muted)] mt-1">
-                  L'extension Chrome surveille vos recherches Leboncoin et envoie les
-                  nouvelles annonces à Terouva, en temps réel.
+                </h1>
+                <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
+                  L'extension Terouva pour Chrome repère les nouvelles annonces sur vos pages de
+                  recherche Leboncoin et les transmet ici, au fil de l'eau.
                 </p>
               </div>
-              <ol className="space-y-2 text-sm text-[var(--color-text-muted)]">
-                <li className="flex gap-2">
-                  <span className="text-[var(--color-signal)] font-mono">1.</span>
-                  Installez l'extension Terouva pour Chrome.
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-[var(--color-signal)] font-mono">2.</span>
-                  Quand elle vous le demande, une fenêtre Terouva s'ouvrira :
-                  cliquez <strong>« Autoriser cette extension »</strong>.
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-[var(--color-signal)] font-mono">3.</span>
-                  Ouvrez une page de recherche Leboncoin. C'est tout.
-                </li>
+              <ol className="space-y-3 text-[15px] leading-relaxed text-ink-2">
+                {[
+                  "Installez l'extension Terouva pour Chrome.",
+                  "Quand une fenêtre Terouva vous le demande, cliquez sur « Autoriser ».",
+                  "Ouvrez une page de recherche Leboncoin. C'est tout.",
+                ].map((line, i) => (
+                  <li key={line} className="flex gap-3">
+                    <span className="font-serif text-xl leading-6 text-accent tabular">{i + 1}</span>
+                    <span>{line}</span>
+                  </li>
+                ))}
               </ol>
-              <p className="text-xs text-[var(--color-text-faint)]">
-                Pas besoin de copier de code : la connexion se fait en un clic.
-                Vous pouvez faire cette étape plus tard, depuis Réglages.
+              <p className="border-t border-rule pt-4 text-[13px] leading-relaxed text-ink-3">
+                Pas d'extension pour l'instant ? Vous pourrez aussi coller vos e-mails d'alerte
+                Leboncoin dans « Mes annonces ». Cette étape reste disponible dans les Réglages.
               </p>
             </div>
           )}
 
-          <div className="mt-6 flex items-center justify-between">
-            <button
-              className="text-sm text-[var(--color-text-faint)] hover:text-[var(--color-text-muted)] disabled:opacity-40"
+          <div className="mt-8 flex items-center justify-between gap-3 border-t border-rule pt-5">
+            <Button
+              variant="ghost"
               onClick={() => setStep((s) => Math.max(0, s - 1))}
               disabled={step === 0}
+              className={step === 0 ? "invisible" : undefined}
             >
               Retour
-            </button>
+            </Button>
             {step < 2 ? (
               <Button onClick={() => setStep((s) => s + 1)}>Continuer</Button>
             ) : (
               <Button onClick={finish} disabled={saving}>
-                {saving ? "…" : "C'est parti"}
+                {saving ? "Enregistrement…" : "Commencer"}
               </Button>
             )}
           </div>
         </div>
-
-        {step === 0 && (
-          <p className="text-center text-xs text-[var(--color-text-faint)] mt-4">
-            Vous pouvez passer des champs et les compléter plus tard.
-          </p>
-        )}
       </div>
     </div>
   );
