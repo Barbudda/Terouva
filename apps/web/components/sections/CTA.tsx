@@ -13,12 +13,9 @@ export function CTA() {
           <LinkButton href={CTA_FINAL.primary.href} size="lg">
             {CTA_FINAL.primary.label}
           </LinkButton>
-          <a
-            href={CTA_FINAL.secondary.href}
-            className="text-base text-ink-2 underline decoration-field underline-offset-[6px] hover:text-ink hover:decoration-ink"
-          >
+          <LinkButton href={CTA_FINAL.secondary.href} variant="secondary" size="lg">
             {CTA_FINAL.secondary.label}
-          </a>
+          </LinkButton>
         </div>
       </div>
     </section>

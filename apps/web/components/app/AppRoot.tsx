@@ -5,6 +5,7 @@ import { HashRouter } from "react-router-dom";
 import App from "@app/App";
 import { connectExtension } from "@app/lib/extBridge";
 import { ensurePersistentStorage, registerAppServiceWorker } from "@app/lib/pwa";
+import { useDemoStore } from "@app/store/useDemoStore";
 import { useWatchStore } from "@app/store/useWatchStore";
 
 /**
@@ -22,6 +23,16 @@ export default function AppRoot() {
     // de se connecter à l'extension (no-op si absente).
     void useWatchStore.getState().init();
     void connectExtension();
+    // Le site peut ouvrir directement la démonstration : /app?demo=1
+    void (async () => {
+      const demo = useDemoStore.getState();
+      await demo.init();
+      const wanted = new URLSearchParams(window.location.search).get("demo") === "1";
+      if (wanted && !useDemoStore.getState().active) await demo.start();
+      if (wanted) {
+        window.history.replaceState(null, "", `/app${window.location.hash || "#/"}`);
+      }
+    })();
   }, []);
 
   return (

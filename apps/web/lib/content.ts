@@ -5,18 +5,15 @@ export const NAV_LINKS = [
   { href: "#questions", label: "Questions" },
 ];
 
-export const RELEASES_DOWNLOAD_MSI =
-  "https://github.com/Barbudda/Terouva/releases/latest/download/Terouva_0.2.0_x64_en-US.msi";
-
 export const HERO = {
   kicker: "Pour votre recherche de location sur Leboncoin",
   title: "Trouvez, sans chercher.",
-  titleSecond: "Terouva surveille Leboncoin pour vous.",
+  titleSecond: "Terouva trie vos alertes Leboncoin et prépare vos messages.",
   subtitle:
-    "Dès qu'une annonce correspond à ce que vous cherchez, vous êtes prévenu, avec un message de candidature déjà prêt à envoyer. Tout reste sur votre ordinateur, et c'est vous qui gardez la main.",
+    "Leboncoin vous envoie déjà des alertes. Terouva en fait une liste claire : chaque annonce est notée selon vos critères, avec un message de candidature prêt à relire et à envoyer. Tout reste sur votre ordinateur, et c'est vous qui envoyez.",
   ctaPrimary: { label: "Ouvrir Terouva", href: "/app" },
-  ctaSecondary: { label: "Comment ça marche", href: "#comment" },
-  meta: "Gratuit et sans inscription. Fonctionne dans votre navigateur, sur Mac, Windows et Linux.",
+  ctaSecondary: { label: "Voir la démonstration", href: "/app?demo=1" },
+  meta: "Gratuit, sans inscription et sans rien installer. Fonctionne dans votre navigateur, sur Mac, Windows et Linux.",
   caption: "L'écran « Mes annonces », rempli avec des annonces d'exemple.",
 };
 
@@ -31,26 +28,26 @@ export const PROBLEM = {
 export const STEPS = [
   {
     title: "Préparez votre dossier, une seule fois.",
-    body: "Vos informations, votre situation, votre garant et les critères de chaque recherche. Quelques minutes, et c'est fait pour de bon.",
+    body: "Vos informations, votre situation, votre garant et ce que vous cherchez. Quelques minutes, et c'est fait pour de bon.",
   },
   {
-    title: "Laissez Leboncoin ouvert.",
-    body: "Une petite extension pour Chrome regarde les annonces qui s'affichent sur vos pages de recherche, exactement comme si vous les parcouriez vous-même. Chaque nouvelle annonce est transmise à Terouva, sur votre ordinateur.",
+    title: "Créez votre alerte sur Leboncoin.",
+    body: "Terouva prépare la recherche à partir de vos critères et vous emmène dessus. Vous l'enregistrez sur Leboncoin et activez l'alerte par e-mail : Leboncoin vous préviendra à chaque nouvelle annonce.",
   },
   {
-    title: "Répondez sans attendre.",
-    body: "Vous êtes prévenu dès qu'une annonce correspond à vos critères. Le message est déjà écrit, dans le ton de votre choix. Vous le collez sur Leboncoin et vous l'envoyez vous-même.",
+    title: "Collez l'e-mail, répondez tout de suite.",
+    body: "Un collage suffit. Terouva en sort les annonces, les note, met en avant celles qui méritent une réponse rapide et rédige votre message. Vous le relisez, vous le collez sur Leboncoin, vous envoyez.",
   },
 ];
 
 export const FEATURES = [
   {
-    title: "Les annonces arrivent toutes seules",
-    body: "L'extension regarde les pages de recherche que vous ouvrez. Dès qu'une annonce apparaît, elle rejoint votre liste. Rien de plus que ce que vous consultez déjà.",
+    title: "Vos alertes deviennent une liste",
+    body: "Collez l'e-mail d'alerte envoyé par Leboncoin : Terouva en extrait les annonces et les range dans une liste à vous, qui se garde d'une fois sur l'autre.",
   },
   {
-    title: "Une alerte au bon moment",
-    body: "Quand une annonce récente correspond vraiment à votre recherche, une notification s'affiche sur votre ordinateur. Vous choisissez à partir de quelle note être prévenu.",
+    title: "Les bonnes annonces remontent",
+    body: "Celles qui méritent une réponse rapide sont signalées en haut de la liste, et une notification s'affiche sur votre ordinateur quand Terouva est ouvert.",
   },
   {
     title: "Une note que vous comprenez",
@@ -61,12 +58,12 @@ export const FEATURES = [
     body: "Terouva écrit un message adapté à l'annonce et à votre profil, dans le ton que vous préférez : direct, chaleureux ou professionnel. Vous le relisez et le modifiez si besoin.",
   },
   {
-    title: "Vos e-mails d'alerte aussi",
-    body: "Sans extension, ou quand votre navigateur est fermé, collez l'e-mail d'alerte envoyé par Leboncoin : les annonces qu'il contient sont ajoutées à votre liste.",
-  },
-  {
     title: "Vos candidatures suivies",
     body: "Brouillon, envoyée, réponse reçue : vous savez où vous en êtes pour chaque logement, sans tableau à tenir à côté.",
+  },
+  {
+    title: "Vos données vous suivent",
+    body: "Vous enregistrez tout dans un fichier, et vous le rouvrez sur un autre ordinateur. Vos données vous appartiennent.",
   },
 ];
 
@@ -83,8 +80,12 @@ export const PRIVACY = {
 
 export const FAQ_ITEMS = [
   {
-    q: "Comment Terouva voit-il les annonces ?",
-    a: "L'extension Chrome regarde les pages de recherche Leboncoin que vous ouvrez vous-même. Chaque nouvelle annonce qui s'affiche est transmise à Terouva, sur votre ordinateur. C'est votre navigateur et votre connexion : Terouva lit seulement ce que vous consultez déjà.",
+    q: "Puis-je essayer avant de créer une alerte ?",
+    a: "Oui. Le bouton « Voir la démonstration » remplit Terouva avec des annonces d'exemple qui arrivent au fil de l'eau, comme en vrai : la note, le message préparé et le geste d'envoi. Vous effacez la démonstration en un clic quand vous avez fini.",
+  },
+  {
+    q: "Comment Terouva reçoit-il les annonces ?",
+    a: "Par les alertes que Leboncoin vous envoie par e-mail. Vous enregistrez votre recherche sur Leboncoin, vous activez l'alerte, puis vous collez l'e-mail reçu dans Terouva : il en sort les annonces, les note et prépare vos messages. Terouva ne se connecte jamais à Leboncoin lui-même.",
   },
   {
     q: "Est-ce que Terouva envoie des messages à ma place ?",
@@ -92,27 +93,23 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Est-ce que c'est légal ?",
-    a: "Oui. Vous consultez Leboncoin normalement, dans votre navigateur. Terouva lit uniquement ce que vous avez déjà ouvert et n'envoie jamais rien à votre place.",
+    a: "Oui. Terouva lit les e-mails que Leboncoin vous envoie, à vous. Il ne consulte pas le site à votre place, ne contourne rien et n'envoie jamais rien tout seul.",
   },
   {
     q: "Combien ça coûte ?",
     a: "C'est gratuit pendant la période d'essai. Si une offre payante arrive un jour, elle sera annoncée clairement, et la version qui fonctionne aujourd'hui ne sera pas retirée.",
   },
   {
-    q: "Et si je ferme mon navigateur ?",
-    a: "La surveillance en direct s'arrête, car l'extension a besoin que Leboncoin soit ouvert. Vous pouvez aussi coller dans Terouva les e-mails d'alerte que Leboncoin vous envoie : les annonces qu'ils contiennent sont ajoutées à votre liste.",
+    q: "Faut-il installer quelque chose ?",
+    a: "Non. Terouva s'ouvre dans votre navigateur, sur Mac, Windows ou Linux. Une extension Chrome existe en option, pour faire entrer les annonces toutes seules pendant que vous parcourez Leboncoin.",
   },
   {
     q: "Où vont mes données ?",
     a: "Nulle part. Tout est enregistré dans votre navigateur, sur votre ordinateur. Pas de serveur, pas de sauvegarde à distance, pas de suivi. Même les messages de candidature sont écrits sur votre machine.",
   },
   {
-    q: "Est-ce que ça marche sur Mac ?",
-    a: "Oui. Terouva s'ouvre dans votre navigateur, sur Mac comme sur Windows ou Linux. Pour la détection en direct, il faut Chrome (qui existe aussi sur Mac). Sans extension, l'import des e-mails d'alerte fonctionne partout.",
-  },
-  {
-    q: "Faut-il installer quelque chose ?",
-    a: "Pour commencer, non : vous ouvrez Terouva et vous remplissez votre dossier. Pour suivre les annonces en direct, vous ajoutez l'extension Terouva à Chrome. Une version Windows à installer existe aussi, en option.",
+    q: "Et si je change d'ordinateur ?",
+    a: "Vous enregistrez vos données dans un fichier depuis les réglages, puis vous le rouvrez sur l'autre ordinateur. Rien ne transite par internet.",
   },
 ];
 
@@ -121,7 +118,7 @@ export const CTA_FINAL = {
   subtitle:
     "Ouvrez Terouva dans votre navigateur, remplissez votre dossier et votre première recherche. Cela prend quelques minutes.",
   primary: { label: "Ouvrir Terouva", href: "/app" },
-  secondary: { label: "Version Windows à installer (optionnelle)", href: RELEASES_DOWNLOAD_MSI },
+  secondary: { label: "Voir la démonstration", href: "/app?demo=1" },
 };
 
 export const FOOTER = {

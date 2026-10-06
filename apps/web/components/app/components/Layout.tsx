@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { MobileNav, Sidebar } from "./Sidebar";
+import { DemoBanner } from "./DemoMode";
 import { ShortcutHelp } from "./ShortcutHelp";
 import { PairingModal } from "./PairingModal";
 import { useGlobalShortcuts } from "@app/lib/shortcuts";
@@ -57,6 +58,7 @@ export function Layout() {
               </span>
             )}
           </header>
+          <DemoBanner />
           <Outlet />
         </div>
       </main>

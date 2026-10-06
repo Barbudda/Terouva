@@ -23,12 +23,9 @@ export function Hero() {
               <LinkButton href={HERO.ctaPrimary.href} size="lg">
                 {HERO.ctaPrimary.label}
               </LinkButton>
-              <a
-                href={HERO.ctaSecondary.href}
-                className="text-base text-ink underline decoration-field underline-offset-[6px] transition-colors hover:decoration-ink"
-              >
+              <LinkButton href={HERO.ctaSecondary.href} variant="secondary" size="lg">
                 {HERO.ctaSecondary.label}
-              </a>
+              </LinkButton>
             </div>
             <p className="mt-6 text-sm leading-relaxed text-ink-3">{HERO.meta}</p>
           </div>

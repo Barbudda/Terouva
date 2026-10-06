@@ -1,15 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import { Plus, Search } from "lucide-react";
 import { Button } from "@app/components/ui/Button";
 import { EmptyState } from "@app/components/ui/Card";
-import { Input, Select } from "@app/components/ui/Input";
 import {
   AddListingPanel,
   type AddMode,
   type IngestResult,
 } from "@app/components/listing/AddListingPanel";
 import { ListingCard, PriorityBanner } from "@app/components/listing/ListingCard";
-import { LISTING_FILTERS, safeParse } from "@app/components/listing/format";
+import { ListingToolbar } from "@app/components/listing/ListingToolbar";
+import { safeParse } from "@app/components/listing/format";
 import { type ClipboardPayload, maybeNotifyHot } from "@app/components/listing/ingest";
 import {
   deleteListing,
@@ -21,11 +20,9 @@ import {
 import { scoreListing } from "@app/lib/scoring";
 import { openExternal, parseListingUrl } from "@app/lib/tauri";
 import { type EmailImportSummary, importLbcAlertEmail } from "@app/lib/watchBridge";
-import { cn } from "@app/lib/cn";
+import { useDemoStore } from "@app/store/useDemoStore";
 import { useStore } from "@app/store/useStore";
 import type { ListingStatus, ScoreReasons } from "@app/types";
-
-const FILTERS = ["all", "new", "to_review", "favorite", "applied", "ignored", "expired"] as const;
 
 export default function Annonces() {
   const listings = useStore((s) => s.listings);
@@ -54,6 +51,26 @@ export default function Annonces() {
   useEffect(() => {
     if (!searchId && searches.length > 0) setSearchId(searches[0].id);
   }, [searches, searchId]);
+
+  // Coller un e-mail d'alerte n'importe où dans la page suffit : pas besoin
+  // d'ouvrir le panneau ni de viser un champ. On ne touche à rien si la
+  // personne colle dans un champ de saisie.
+  useEffect(() => {
+    const onPaste = (e: ClipboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const tag = target?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || target?.isContentEditable) return;
+      const text = e.clipboardData?.getData("text") ?? "";
+      if (text.length < 200 || !/leboncoin.fr/i.test(text)) return;
+      e.preventDefault();
+      setMode("email");
+      setAddOpen(true);
+      setEmail(text);
+      void importPastedEmail(text);
+    };
+    document.addEventListener("paste", onPaste);
+    return () => document.removeEventListener("paste", onPaste);
+  });
 
   // URL de recherche à proposer dans l'état vide : 1re recherche active qui en a une.
   const firstSearchUrl =
@@ -227,15 +244,19 @@ export default function Annonces() {
   };
 
   const addFromEmail = async () => {
-    setError(null);
-    setEmailReport(null);
     if (!email.trim()) {
       setError("Collez le contenu d'un e-mail d'alerte Leboncoin.");
       return;
     }
+    await importPastedEmail(email);
+  };
+
+  const importPastedEmail = async (content: string) => {
+    setError(null);
+    setEmailReport(null);
     setAdding(true);
     try {
-      const summary = await importLbcAlertEmail(email);
+      const summary = await importLbcAlertEmail(content);
       await refresh();
       setEmailReport(summary);
       if (summary.found === 0) {
@@ -274,7 +295,19 @@ export default function Annonces() {
     return byStatus;
   }, [listings]);
 
-  const showAdd = addOpen || listings.length === 0;
+  const demoActive = useDemoStore((s) => s.active);
+  const demoStart = useDemoStore((s) => s.start);
+  const [demoStarting, setDemoStarting] = useState(false);
+  const startDemo = async () => {
+    setDemoStarting(true);
+    try {
+      await demoStart();
+    } finally {
+      setDemoStarting(false);
+    }
+  };
+
+  const showAdd = (addOpen || listings.length === 0) && !demoActive;
   const filtersActive = query !== "" || minScore > 0 || statusFilter !== "all" || searchFilter !== "all";
 
   return (
@@ -316,110 +349,31 @@ export default function Annonces() {
           onAddEmail={addFromEmail}
           emailReport={emailReport}
           onAddClipboard={addFromClipboard}
+          searchUrl={firstSearchUrl}
         />
       ) : null}
 
       {listings.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="relative min-w-0 flex-1 basis-64">
-              <Search
-                size={16}
-                strokeWidth={1.75}
-                aria-hidden
-                className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-ink-3"
-              />
-              <Input
-                data-shortcut-target="search"
-                aria-label="Chercher dans vos annonces"
-                placeholder="Chercher un titre, une ville, un annonceur…"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="pl-9"
-              />
-            </div>
-            <Select
-              className="w-auto"
-              aria-label="Trier les annonces"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as "score" | "date" | "price")}
-            >
-              <option value="score">Meilleure note d'abord</option>
-              <option value="date">Plus récentes d'abord</option>
-              <option value="price">Loyer le plus bas d'abord</option>
-            </Select>
-            <Input
-              type="number"
-              min={0}
-              max={100}
-              aria-label="Note minimum"
-              value={minScore || ""}
-              onChange={(e) => setMinScore(Number(e.target.value) || 0)}
-              placeholder="Note min."
-              className="w-28"
-            />
-            {!addOpen && (
-              <Button variant="secondary" onClick={() => setAddOpen(true)} className="h-10">
-                <Plus size={16} strokeWidth={1.75} aria-hidden />
-                Ajouter
-              </Button>
-            )}
-          </div>
-
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-rule">
-            <div role="tablist" aria-label="Filtrer par état" className="-mb-px flex flex-1 gap-1 overflow-x-auto overflow-y-hidden no-scrollbar">
-              {FILTERS.filter((s) => s === "all" || counts[s] || statusFilter === s).map((s) => (
-                <button
-                  key={s}
-                  role="tab"
-                  aria-selected={statusFilter === s}
-                  onClick={() => setStatusFilter(s)}
-                  className={cn(
-                    "whitespace-nowrap border-b-2 px-2.5 py-2 text-[15px] transition-colors",
-                    statusFilter === s
-                      ? "border-accent font-medium text-ink"
-                      : "border-transparent text-ink-2 hover:text-ink",
-                  )}
-                >
-                  {LISTING_FILTERS[s]}
-                  <span className="ml-1.5 text-[13px] text-ink-3 tabular">
-                    {s === "all" ? listings.length : counts[s]}
-                  </span>
-                </button>
-              ))}
-            </div>
-            <div className="flex items-center gap-2 pb-2">
-              {searches.length > 1 && (
-                <Select
-                  className="h-8 w-48 text-sm"
-                  aria-label="Filtrer par recherche"
-                  value={searchFilter}
-                  onChange={(e) => setSearchFilter(e.target.value === "all" ? "all" : Number(e.target.value))}
-                >
-                  <option value="all">Toutes les recherches</option>
-                  {searches.map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.name}
-                    </option>
-                  ))}
-                </Select>
-              )}
-              <Button variant="ghost" size="sm" onClick={rescoreAll} disabled={adding || !searches.length}>
-                Recalculer les notes
-              </Button>
-            </div>
-          </div>
-
-          <p className="text-[13px] text-ink-3">
-            {filtered.length === listings.length
-              ? `${listings.length} annonce${listings.length > 1 ? "s" : ""}`
-              : `${filtered.length} sur ${listings.length} annonces`}
-            <span className="hidden md:inline">
-              {" "}· touche <kbd className="rounded border border-field bg-card px-1.5 font-mono text-[12px]">?</kbd>{" "}
-              pour les raccourcis clavier
-            </span>
-          </p>
-        </div>
+        <ListingToolbar
+          total={listings.length}
+          shown={filtered.length}
+          counts={counts}
+          statusFilter={statusFilter}
+          onStatusFilter={setStatusFilter}
+          query={query}
+          onQuery={setQuery}
+          minScore={minScore}
+          onMinScore={setMinScore}
+          sortBy={sortBy}
+          onSortBy={setSortBy}
+          searches={searches}
+          searchFilter={searchFilter}
+          onSearchFilter={setSearchFilter}
+          onRescoreAll={rescoreAll}
+          busy={adding}
+          showAddButton={!addOpen}
+          onAdd={() => setAddOpen(true)}
+        />
       )}
 
       <div className="space-y-3">
@@ -453,18 +407,23 @@ export default function Annonces() {
 
         {listings.length === 0 && (
           <EmptyState
-            title="Aucune annonce pour l'instant"
+            title="Votre liste est vide"
             action={
-              firstSearchUrl ? (
-                <Button variant="secondary" onClick={() => openExternal(firstSearchUrl)}>
-                  Ouvrir ma recherche sur Leboncoin
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Button onClick={() => void startDemo()} disabled={demoStarting}>
+                  {demoStarting ? "Préparation…" : "Voir la démonstration"}
                 </Button>
-              ) : undefined
+                {firstSearchUrl && (
+                  <Button variant="secondary" onClick={() => openExternal(firstSearchUrl)}>
+                    Créer mon alerte sur Leboncoin
+                  </Button>
+                )}
+              </div>
             }
           >
-            Gardez une page de recherche Leboncoin ouverte avec l'extension Terouva : les nouvelles
-            annonces arrivent ici dès leur publication. Vous pouvez aussi coller un e-mail d'alerte
-            ci-dessus.
+            La démonstration fait arriver des annonces d'exemple, comme en vrai, et s'efface ensuite.
+            Pour de vraies annonces, créez une alerte sur Leboncoin puis collez l'e-mail reçu : le
+            collage fonctionne partout sur cette page.
           </EmptyState>
         )}
 

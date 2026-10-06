@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { ExternalLink, X } from "lucide-react";
 import { Button } from "@app/components/ui/Button";
 import { Card } from "@app/components/ui/Card";
 import { Field, Input, Select, Textarea } from "@app/components/ui/Input";
@@ -6,6 +6,7 @@ import type { EmailImportSummary } from "@app/lib/watchBridge";
 import type { SearchProfile } from "@app/types";
 import { cn } from "@app/lib/cn";
 import { truncate } from "./format";
+import { openExternal } from "@app/lib/tauri";
 
 export type AddMode = "email" | "single" | "bulk" | "clipboard";
 export type IngestResult = { url: string; ok: boolean; error?: string; id?: number };
@@ -38,6 +39,8 @@ interface Props {
   onAddEmail: () => void;
   emailReport: EmailImportSummary | null;
   onAddClipboard: () => void;
+  /** Recherche Leboncoin préparée depuis les critères, pour créer l'alerte. */
+  searchUrl?: string | null;
 }
 
 export function AddListingPanel(p: Props) {
@@ -63,7 +66,8 @@ export function AddListingPanel(p: Props) {
         <div>
           <h2 className="font-serif text-2xl font-medium text-ink">Ajouter des annonces</h2>
           <p className="mt-1 text-[15px] text-ink-2">
-            Les annonces repérées par l'extension arrivent seules. Vous pouvez aussi les ajouter ici.
+            Collez l'e-mail d'alerte envoyé par Leboncoin : Terouva en sort les annonces, les note et
+            prépare vos messages.
           </p>
         </div>
         {p.onClose && (
@@ -97,6 +101,25 @@ export function AddListingPanel(p: Props) {
       <div className="space-y-4 px-4 py-5 sm:px-5">
         {p.mode === "email" && (
           <>
+            <div className="rounded-md bg-paper p-4">
+              <p className="text-[15px] font-medium text-ink">Recevoir ces e-mails</p>
+              <ol className="mt-2 space-y-1.5 text-[15px] leading-snug text-ink-2">
+                <li>1. Ouvrez votre recherche sur Leboncoin.</li>
+                <li>2. Enregistrez-la, puis activez l'alerte par e-mail.</li>
+                <li>3. À chaque e-mail reçu, copiez-le entièrement et collez-le ici.</li>
+              </ol>
+              {p.searchUrl && (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="mt-3"
+                  onClick={() => openExternal(p.searchUrl!)}
+                >
+                  <ExternalLink size={16} strokeWidth={1.75} aria-hidden />
+                  Ouvrir ma recherche sur Leboncoin
+                </Button>
+              )}
+            </div>
             <Field
               label="Contenu de l'e-mail d'alerte Leboncoin"
               hint="Ouvrez l'e-mail « Nouvelles annonces pour votre recherche », copiez tout son contenu et collez-le ici. Terouva retrouve les annonces qu'il contient."

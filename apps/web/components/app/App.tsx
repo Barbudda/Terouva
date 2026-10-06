@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "@app/components/Layout";
 import { getSetting } from "@app/lib/db";
+import { useDemoStore } from "@app/store/useDemoStore";
 import { Onboarding } from "@app/pages/Onboarding";
 import Annonces from "@app/pages/Annonces";
+import ExempleAnnonce from "@app/pages/ExempleAnnonce";
 import Candidatures from "@app/pages/Candidatures";
 import Dossier from "@app/pages/Dossier";
 import Surveillance from "@app/pages/Surveillance";
@@ -15,11 +17,16 @@ export default function App() {
   // null = en cours de vérification, false = à onboarder, true = prêt.
   const [onboarded, setOnboarded] = useState<boolean | null>(null);
 
+  // La démonstration pose puis retire le drapeau « onboarded » : on le relit à
+  // chaque bascule, pour entrer directement dans l'app au lancement et
+  // reproposer la configuration à la sortie.
+  const demoActive = useDemoStore((s) => s.active);
+
   useEffect(() => {
     getSetting("onboarded")
       .then((v) => setOnboarded(v === "1"))
       .catch(() => setOnboarded(true)); // en cas d'erreur DB, ne bloque pas l'app
-  }, []);
+  }, [demoActive]);
 
   if (onboarded === null) {
     return (
@@ -35,6 +42,8 @@ export default function App() {
 
   return (
     <Routes>
+      {/* Annonce d'exemple de la démonstration : plein écran, hors coque. */}
+      <Route path="/exemple/:n" element={<ExempleAnnonce />} />
       <Route element={<Layout />}>
         {/* Feed-first : l'écran principal = les annonces. */}
         <Route path="/" element={<Annonces />} />

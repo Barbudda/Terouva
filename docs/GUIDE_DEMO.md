@@ -1,164 +1,125 @@
-# Bienvenue sur Terouva — le guide pour tout essayer
+# Terouva, le guide pour tout essayer
 
-> **Terouva vous prévient dès qu'une annonce Leboncoin correspond à votre recherche,
-> avec un message de candidature déjà prêt à envoyer.** Le but : être parmi les
-> premiers à répondre, sans y passer vos journées.
+> **Terouva vous aide à répondre vite aux annonces de location Leboncoin.**
+> Il trie les annonces, les note selon vos critères et prépare votre message.
 >
 > Deux promesses, tout au long de ce guide :
-> - **Tout reste sur votre ordinateur.** Pas de compte, pas de serveur, pas de pub.
+> - **Tout reste sur votre ordinateur.** Pas de compte, pas de serveur, pas de publicité.
 > - **Vous gardez la main.** Terouva prépare tout, mais c'est **toujours vous** qui
->   cliquez « Envoyer » sur Leboncoin.
+>   cliquez sur « Envoyer ».
 
-Comptez **5 minutes** pour faire le tour. Aucune connaissance technique requise.
-
----
-
-## Avant de commencer
-
-- Ouvrez **https://terouva.vercel.app/app** dans votre navigateur.
-- Ça marche sur **Mac, Windows et Linux**. **Google Chrome** est conseillé
-  (c'est lui qui permet la détection en direct, un peu plus loin).
-- C'est **gratuit** et **sans inscription**.
+Comptez **5 minutes**. Aucune connaissance technique nécessaire.
 
 ---
 
-## Étape 1 — Vous présenter (1 min)
+## Le plus rapide : la démonstration
 
-Au premier lancement, un petit écran de configuration apparaît :
+Ouvrez **https://terouva.vercel.app** et cliquez sur **« Voir la démonstration »**.
 
-1. Votre **prénom** et votre **téléphone**.
-2. Votre **ville** et votre **budget** (loyer max).
-3. (Le reste est facultatif et modifiable à tout moment.)
+Des annonces d'exemple arrivent une par une, comme en vrai. Vous voyez la note, les
+points forts et faibles, le message déjà rédigé, et vous pouvez aller jusqu'au bout du
+geste : copier le message, ouvrir l'annonce, le coller et l'envoyer sur une page
+d'exemple. Rien n'est envoyé à personne.
 
-> À quoi ça sert ? Vos infos **pré-remplissent automatiquement** vos messages de
-> candidature, et votre ville + budget servent à **noter** chaque annonce selon
-> qu'elle vous correspond ou non.
-
----
-
-## Étape 2 — Faire entrer des annonces
-
-Pour découvrir l'expérience tout de suite, **sans rien installer** :
-
-1. Ouvrez le fichier **`exemple-email-alerte.html`** (dans le dossier `docs/` du
-   projet), sélectionnez tout (**Ctrl + A**) et copiez (**Ctrl + C**).
-2. Dans Terouva → **« Mes annonces »** → **« Ajouter une annonce »** → onglet
-   **« ✉ Email d'alerte »** → collez → **« Importer les annonces »**.
-3. Quelques annonces s'ajoutent à votre liste.
-
-> 💡 Dans la vraie vie, vous **transférez simplement à Terouva les e-mails d'alerte
-> que Leboncoin vous envoie** — ça marche même sans extension. Et avec l'extension
-> (Étape 6), les annonces arrivent **toutes seules, en direct**.
-
-Vous pouvez aussi coller un **lien d'annonce** Leboncoin (onglet « URL simple »).
+Un bandeau rappelle en permanence que ce sont des exemples. Le bouton
+**« Quitter et tout effacer »** remet Terouva à zéro. Si vous aviez déjà vos propres
+annonces, elles ne sont pas touchées.
 
 ---
 
-## Étape 3 — Lire votre liste d'annonces
+## Ensuite : vos vraies annonces
 
-Chaque annonce affiche un **score sur 100** (à quel point elle vous correspond) et
-quelques infos (prix, surface, ville…).
+### 1. Votre dossier (2 min)
 
-- En haut, un **bandeau vert** apparaît quand des annonces sont **« à contacter en
-  priorité »** : ce sont vos alertes, le message est déjà prêt.
-- Ces annonces prioritaires sont **entourées d'un halo** pour ressortir.
-- Vous pouvez **trier** (par score, date ou prix), **filtrer** (nouvelles, favoris,
-  candidatées…) et **chercher**.
+Au premier lancement, Terouva demande votre prénom, votre téléphone, votre situation,
+vos revenus et votre garant, puis ce que vous cherchez (ville, loyer, surface).
 
----
+Ces informations servent à deux choses : **noter** les annonces et **pré-remplir** vos
+messages. Vous pouvez tout laisser vide et compléter plus tard, dans « Mon dossier ».
 
-## Étape 4 — Répondre à une annonce (le cœur de Terouva)
+### 2. Votre alerte Leboncoin (2 min, une seule fois)
 
-C'est ici que vous gagnez du temps.
+C'est Leboncoin qui vous prévient, par e-mail, à chaque nouvelle annonce :
 
-**Le plus rapide — en un clic, directement dans la liste :**
-- Sur une annonce prioritaire, cliquez **« ⚡ Préparer & envoyer »**.
-- Votre message est **copié** et l'annonce **s'ouvre sur Leboncoin**.
-- Sur Leboncoin, ouvrez « Contacter », **collez (Ctrl + V)** et cliquez **« Envoyer »**.
-  *(Terouva ne clique jamais « Envoyer » à votre place.)*
+1. Dans Terouva, ouvrez **« Mes annonces »** puis l'onglet **« E-mail d'alerte »**.
+2. Cliquez sur **« Ouvrir ma recherche sur Leboncoin »** : votre recherche est déjà
+   préparée à partir de vos critères.
+3. Sur Leboncoin, **enregistrez la recherche** et **activez l'alerte par e-mail**.
 
-**Pour voir le détail / personnaliser :**
-- Cliquez sur l'annonce pour la **déplier**. Vous voyez :
-  - le **détail de la note** (« + Pour » / « − Contre », règle par règle) ;
-  - la **description** et les photos ;
-  - la section **« Préparer la candidature »** : choisissez un **ton**
-    (**Direct**, **Chaleureux**, **Professionnel**). Le message s'écrit tout seul,
-    en citant l'annonce et votre profil. **Recliquez** un ton pour une autre version.
-  - les boutons : **⚡ Préparer & contacter**, **Copier le message**,
-    **Ouvrir sur Leboncoin**, **Sauver brouillon**, **Marquer envoyé**.
-- Vous pouvez aussi marquer l'annonce **★ Favori**, **Ignorer**, ou ajouter des
-  **notes** perso.
+### 3. À chaque e-mail reçu (10 secondes)
+
+Ouvrez l'e-mail d'alerte, sélectionnez tout **(Ctrl + A)**, copiez **(Ctrl + C)**, puis
+collez **(Ctrl + V)** dans Terouva, sur la page « Mes annonces ». Le collage fonctionne
+n'importe où sur la page : pas besoin de viser un champ.
+
+Terouva en sort les annonces, les note et met en avant celles qui méritent une réponse
+rapide.
 
 ---
 
-## Étape 5 — Suivre vos candidatures
+## Lire votre liste
 
-Onglet **« Mes candidatures »** : retrouvez tout ce que vous avez préparé ou envoyé,
-avec le statut (préparée, envoyée, réponse reçue, refusée, sans réponse). Pratique
-pour savoir où vous en êtes.
+Chaque annonce affiche une **note sur 100** et ce qui la justifie. Dépliez une annonce
+pour voir les **points forts** et les **points faibles**, critère par critère.
 
----
+- **À contacter vite** : elle correspond bien, et elle est récente.
+- **Note provisoire** : l'annonce contient peu d'informations. Ouvrez-la pour confirmer.
 
-## Étape 6 — La détection EN DIRECT (extension Chrome) — le moment « waouh »
-
-C'est le cœur de Terouva : capter les annonces **à la seconde où elles sortent**,
-pendant que vous parcourez Leboncoin normalement.
-
-> ℹ️ L'extension n'est pas encore sur le Chrome Web Store, on la charge donc
-> « à la main » pour la démo. Une fois publiée, ce sera un simple clic.
-
-1. Récupérez le dossier **`apps/extension`** du projet.
-2. Dans Chrome, ouvrez **`chrome://extensions`**.
-3. En haut à droite, activez le **Mode développeur**.
-4. Cliquez **« Charger l'extension non empaquetée »** et choisissez le dossier
-   **`apps/extension`**.
-5. Sous l'extension **« Terouva »**, copiez son **ID** (une longue suite de lettres).
-6. Dans Terouva → **Réglages → Connexion & surveillance** → collez l'**ID** →
-   **« Connecter »**. Le voyant passe au **vert**.
-7. Ouvrez une **vraie page de recherche Leboncoin** (vos critères habituels).
-   - Un petit cadre **« Terouva : N détectées »** apparaît en bas à droite.
-   - Les nouvelles annonces remontent **toutes seules** dans Terouva, notées en direct.
-8. Quand une annonce dépasse votre seuil, vous recevez une **notification** (pensez à
-   les autoriser : Réglages → « Tester une notification »).
-
-**Astuce sur la page d'une annonce** : un bouton **« Remplir mon message »**
-(en bas à droite) colle pour vous votre message dans le formulaire de contact
-Leboncoin. Vous relisez et vous cliquez « Envoyer ». Toujours vous, jamais un robot.
+Vous pouvez trier (meilleure note, plus récentes, loyer le plus bas), filtrer et
+chercher. Les annonces écartées restent accessibles par l'onglet « Écartées ».
 
 ---
 
-## Étape 7 — Régler à votre goût
+## Répondre à une annonce
 
-Onglet **« Mon dossier »** : votre **profil** complet et vos **recherches** (vous
-pouvez en créer plusieurs ; Terouva génère même le lien Leboncoin depuis vos critères).
+Dépliez l'annonce : le message est déjà écrit, dans le ton de votre choix
+(direct, chaleureux, professionnel). Recliquez sur un ton pour une autre formulation.
+Vous pouvez le modifier librement.
 
-Onglet **« Réglages »** :
-- le **ton par défaut** des messages ;
-- le **score minimum** pour être alerté ;
-- **« Tester une notification »** (pour autoriser les alertes) ;
-- vos **pièces justificatives** (cochez ce que vous avez : pièce d'identité,
-  bulletins de salaire… le tableau de bord suit votre progression) ;
-- **Sauvegarde** : exportez toutes vos données dans un fichier, et réimportez-les
-  sur un autre ordinateur quand vous voulez. Elles vous appartiennent.
+Puis **« Copier et ouvrir l'annonce »** : le message est copié et l'annonce s'ouvre sur
+Leboncoin. Vous collez **(Ctrl + V)** dans le formulaire de contact, vous relisez, et
+**c'est vous qui cliquez sur « Envoyer »**. Terouva n'envoie jamais rien tout seul.
+
+De retour dans Terouva, marquez la candidature comme envoyée : elle rejoint
+« Mes candidatures », où vous suivez les réponses.
+
+---
+
+## Les réglages utiles
+
+Dans **« Réglages »** :
+
+- le **ton par défaut** de vos messages ;
+- la **note à partir de laquelle être prévenu** (70 par défaut) ;
+- l'**ancienneté maximale** d'une annonce pour déclencher une alerte ;
+- la **sauvegarde** : enregistrez vos données dans un fichier, et rouvrez-le sur un
+  autre ordinateur. C'est le seul moyen de les transporter, puisque rien n'est en ligne.
+
+---
+
+## Option avancée : l'extension Chrome
+
+Une extension existe pour faire entrer les annonces **toutes seules** pendant que vous
+parcourez Leboncoin, sans attendre l'e-mail d'alerte. Elle n'est pas encore publiée sur
+le Chrome Web Store : elle s'installe en mode développeur, depuis le dossier
+`apps/extension/`. L'état de la connexion se voit dans « Réglages », puis
+« Détails et journal ».
+
+Terouva fonctionne très bien sans elle.
 
 ---
 
 ## Si quelque chose cloche
 
-| Souci | Solution |
-|---|---|
-| La page ne s'ouvre pas | Utilisez **Google Chrome**. |
-| Pas de note sur les annonces | Vérifiez que vous avez créé une recherche (Mon dossier → Mes recherches). |
-| L'extension reste « non détectée » | Revérifiez l'**ID** collé et que l'extension est bien chargée (mode développeur activé). |
-| Pas de notification | Autorisez-les (Réglages → « Tester une notification »). |
-| L'e-mail d'alerte n'importe rien | Collez **tout** le contenu du fichier d'exemple. |
+- **Rien ne s'ajoute après un collage** : copiez l'e-mail **en entier**. Dans Gmail,
+  « Afficher l'original » donne la version la plus complète.
+- **Aucune notification** : votre navigateur doit les autoriser pour ce site. Le bouton
+  « Tester une notification » dans les Réglages vous le dira.
+- **Vos données ont disparu** : elles sont rangées dans ce navigateur, sur cet
+  ordinateur. Vider les données du site les efface. Pensez à la sauvegarde.
 
 ---
 
 ## En une phrase
 
-**Ouvrez le site → présentez-vous → vos annonces arrivent et sont notées → un clic
-« ⚡ Préparer & envoyer » → vous collez sur Leboncoin et vous envoyez.** Le tout sans
-que rien ne quitte votre ordinateur.
-
-Bonne visite ! 🏡
+Leboncoin vous prévient, Terouva trie et prépare, vous décidez et vous envoyez.
