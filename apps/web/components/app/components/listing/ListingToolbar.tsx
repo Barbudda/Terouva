@@ -92,7 +92,7 @@ export function ListingToolbar(p: Props) {
         <div
           role="tablist"
           aria-label="Filtrer par état"
-          className="no-scrollbar -mb-px flex flex-1 gap-1 overflow-x-auto overflow-y-hidden"
+          className="no-scrollbar -mb-px flex w-full gap-1 overflow-x-auto overflow-y-hidden sm:w-auto sm:flex-1"
         >
           {FILTERS.filter((s) => s === "all" || p.counts[s] || p.statusFilter === s).map((s) => (
             <button
@@ -114,7 +114,7 @@ export function ListingToolbar(p: Props) {
             </button>
           ))}
         </div>
-        <div className="flex items-center gap-2 pb-2">
+        <div className="flex w-full items-center gap-2 pb-2 sm:ml-auto sm:w-auto">
           {p.searches.length > 1 && (
             <Select
               className="h-8 w-48 text-sm"
