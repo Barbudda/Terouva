@@ -9,7 +9,7 @@ import {
 import { ListingCard, PriorityBanner } from "@app/components/listing/ListingCard";
 import { ListingToolbar } from "@app/components/listing/ListingToolbar";
 import { safeParse } from "@app/components/listing/format";
-import { type ClipboardPayload, maybeNotifyHot } from "@app/components/listing/ingest";
+import { maybeNotifyHot } from "@app/components/listing/ingest";
 import {
   deleteListing,
   getListing,
@@ -20,6 +20,7 @@ import {
 import { scoreListing } from "@app/lib/scoring";
 import { openExternal, parseListingUrl } from "@app/lib/tauri";
 import { type EmailImportSummary, importLbcAlertEmail } from "@app/lib/watchBridge";
+import { CaptureError, importCapture, looksLikeCapture } from "@app/lib/lbcCapture";
 import { useDemoStore } from "@app/store/useDemoStore";
 import { useStore } from "@app/store/useStore";
 import type { ListingStatus, ScoreReasons } from "@app/types";
@@ -61,6 +62,13 @@ export default function Annonces() {
       const tag = target?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || target?.isContentEditable) return;
       const text = e.clipboardData?.getData("text") ?? "";
+      if (looksLikeCapture(text)) {
+        e.preventDefault();
+        setMode("clipboard");
+        setAddOpen(true);
+        void addFromCapture(text);
+        return;
+      }
       if (text.length < 200 || !/leboncoin.fr/i.test(text)) return;
       e.preventDefault();
       setMode("email");
@@ -155,69 +163,30 @@ export default function Annonces() {
     if (r.id) setOpenId(r.id);
   };
 
-  const addFromClipboard = async () => {
+  /** Colle ce que le marque-page (ou l'extension) a copié. */
+  const addFromCapture = async (text?: string) => {
     setError(null);
-    try {
-      const text = await navigator.clipboard.readText();
-      if (!text.trim()) {
-        setError("Rien n'a été copié pour l'instant.");
-        return;
-      }
-      let payload: ClipboardPayload;
+    setEmailReport(null);
+    let content = text;
+    if (content === undefined) {
       try {
-        payload = JSON.parse(text);
+        content = await navigator.clipboard.readText();
       } catch {
-        setError("Ce que vous avez copié ne vient pas de l'extension Terouva.");
+        setError(
+          "Votre navigateur n'a pas autorisé la lecture du presse-papiers. Collez directement avec Ctrl+V.",
+        );
         return;
       }
-      if (payload?.app !== "terouva" || payload?.type !== "listing-clipboard") {
-        setError("Ce que vous avez copié n'est pas reconnu. Copiez d'abord une annonce avec l'extension Terouva.");
-        return;
-      }
-      const d = payload.data;
-      if (!d?.url) {
-        setError("L'annonce copiée ne contient pas de lien.");
-        return;
-      }
-      setAdding(true);
-      const parsed = {
-        url: d.url,
-        external_id: d.external_id,
-        title: d.title,
-        price: d.price,
-        city: d.city,
-        postal_code: d.postal_code,
-        surface: d.surface,
-        rooms: d.rooms,
-        furnished: d.furnished,
-        property_type: d.property_type,
-        description: d.description,
-        images: d.images ?? [],
-        publisher_name: d.publisher_name,
-        publisher_type: d.publisher_type,
-        published_at: d.published_at,
-        raw_html_size: 0,
-      };
-      try {
-        const id = await insertListingFromParsed(parsed, searchId);
-        const search = searchId ? searches.find((s) => s.id === searchId) : null;
-        if (search) {
-          const listing = await getListing(id);
-          if (listing) {
-            const { score, reasons } = scoreListing(listing, search);
-            await updateListingScore(id, score, reasons);
-            await maybeNotifyHot(listing, score);
-          }
-        }
-        await refresh();
-        setOpenId(id);
-      } catch (e) {
-        setError(`L'annonce n'a pas pu être ajoutée : ${e}`);
-      } finally {
-        setAdding(false);
-      }
-    } catch {
-      setError("Votre navigateur n'a pas autorisé la lecture de ce que vous avez copié.");
+    }
+    setAdding(true);
+    try {
+      const summary = await importCapture(content);
+      await refresh();
+      setEmailReport(summary);
+    } catch (e) {
+      setError(e instanceof CaptureError ? e.message : `Import impossible : ${e}`);
+    } finally {
+      setAdding(false);
     }
   };
 
@@ -359,7 +328,7 @@ export default function Annonces() {
           onEmailChange={setEmail}
           onAddEmail={addFromEmail}
           emailReport={emailReport}
-          onAddClipboard={addFromClipboard}
+          onAddClipboard={() => void addFromCapture()}
           searchUrl={firstSearchUrl}
         />
       ) : null}
@@ -433,8 +402,9 @@ export default function Annonces() {
             }
           >
             La démonstration fait arriver des annonces d'exemple, comme en vrai, et s'efface ensuite.
-            Pour de vraies annonces, créez une alerte sur Leboncoin puis collez l'e-mail reçu : le
-            collage fonctionne partout sur cette page.
+            Pour de vraies annonces, deux façons : le bouton « Capter les annonces » à glisser dans
+            vos favoris (onglet « Depuis Leboncoin »), ou l'e-mail d'alerte Leboncoin, qui se colle
+            n'importe où sur cette page.
           </EmptyState>
         )}
 

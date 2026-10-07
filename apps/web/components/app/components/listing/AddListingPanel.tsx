@@ -6,6 +6,7 @@ import type { EmailImportSummary } from "@app/lib/watchBridge";
 import type { SearchProfile } from "@app/types";
 import { cn } from "@app/lib/cn";
 import { truncate } from "./format";
+import { CaptureTab } from "./CaptureTab";
 import { openExternal } from "@app/lib/tauri";
 
 export type AddMode = "email" | "single" | "bulk" | "clipboard";
@@ -15,7 +16,7 @@ const MODES: { id: AddMode; label: string }[] = [
   { id: "email", label: "E-mail d'alerte" },
   { id: "single", label: "Lien d'annonce" },
   { id: "bulk", label: "Plusieurs liens" },
-  { id: "clipboard", label: "Depuis l'extension" },
+  { id: "clipboard", label: "Depuis Leboncoin" },
 ];
 
 interface Props {
@@ -212,18 +213,12 @@ export function AddListingPanel(p: Props) {
         )}
 
         {p.mode === "clipboard" && (
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <p className="max-w-lg text-[15px] leading-relaxed text-ink-2">
-              Sur une annonce Leboncoin, cliquez sur l'icône Terouva puis sur « Copier JSON ».
-              Revenez ensuite ici pour l'ajouter.
-            </p>
-            <div className="flex flex-wrap items-end gap-3">
-              <div className="w-60">{searchSelect}</div>
-              <Button onClick={p.onAddClipboard} disabled={p.adding} className="h-10">
-                Coller l'annonce copiée
-              </Button>
-            </div>
-          </div>
+          <CaptureTab
+            onPaste={p.onAddClipboard}
+            busy={p.adding}
+            searchUrl={p.searchUrl}
+            report={p.emailReport}
+          />
         )}
 
         {p.error && (

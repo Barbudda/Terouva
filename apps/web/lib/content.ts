@@ -85,7 +85,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Comment Terouva reçoit-il les annonces ?",
-    a: "Par les alertes que Leboncoin vous envoie par e-mail. Vous enregistrez votre recherche sur Leboncoin, vous activez l'alerte, puis vous collez l'e-mail reçu dans Terouva : il en sort les annonces, les note et prépare vos messages. Terouva ne se connecte jamais à Leboncoin lui-même.",
+    a: "De deux façons, au choix. Soit vous collez l'e-mail d'alerte que Leboncoin vous envoie. Soit vous ajoutez le bouton « Capter les annonces » à vos favoris : sur votre page de résultats Leboncoin, un clic suffit pour envoyer les annonces affichées dans Terouva. Dans les deux cas, Terouva ne se connecte jamais à Leboncoin lui-même : il lit ce que vous avez reçu ou ce que vous avez sous les yeux.",
   },
   {
     q: "Est-ce que Terouva envoie des messages à ma place ?",

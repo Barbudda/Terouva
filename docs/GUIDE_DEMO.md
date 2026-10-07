@@ -37,7 +37,17 @@ vos revenus et votre garant, puis ce que vous cherchez (ville, loyer, surface).
 Ces informations servent à deux choses : **noter** les annonces et **pré-remplir** vos
 messages. Vous pouvez tout laisser vide et compléter plus tard, dans « Mon dossier ».
 
-### 2. Votre alerte Leboncoin (2 min, une seule fois)
+### 2a. Le bouton « Capter les annonces » (le plus rapide)
+
+Dans Terouva, ouvrez **« Mes annonces »** puis l'onglet **« Depuis Leboncoin »**, et glissez le
+bouton **« Capter les annonces »** dans votre barre de favoris. Ensuite, sur n'importe quelle page
+de résultats Leboncoin, un clic sur ce bouton copie les annonces affichées ; vous revenez dans
+Terouva et vous collez avec Ctrl + V.
+
+Le bouton lit seulement la page que vous avez sous les yeux. Il n'interroge jamais Leboncoin et ne
+fait rien tout seul.
+
+### 2b. Votre alerte Leboncoin (2 min, une seule fois)
 
 C'est Leboncoin qui vous prévient, par e-mail, à chaque nouvelle annonce :
 
