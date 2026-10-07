@@ -73,3 +73,12 @@
 - tests : tsc 0 · vitest web 24/24 · core 43/43 · `next build` OK · redlines OK · parcours complet rejoué en navigateur (démo, geste d'envoi, sortie, et cas « utilisateur avec ses vraies données »).
 - ⚠️ **bloquant** : tous les déploiements Vercel échouent depuis ~18h00 (preview ET production), alors que le commit déployé se construit proprement depuis un clone neuf + `npm ci` et que la casse des imports est correcte pour Linux. La CLI Vercel n'est plus connectée → pas de logs. La production sert donc encore l'ancien design. Besoin de `vercel login` ou du message d'erreur du tableau de bord.
 - **déblocage (même soirée)** : Hugo a relancé `vercel login`. Cause des échecs = `engines: node 20.x` dans `apps/web/package.json`, or **Vercel a supprimé Node 20**. Passé en `24.x` → production en ligne. Méthode de secours qui marche : `npx vercel deploy --prod --yes` **depuis la racine du dépôt** (embarque `packages/core`). Démo rejouée et validée **en production** (desktop et mobile 375 px).
+
+## REPORT — 2026-10-07   [démo partageable : couverture complète]   [status: done]
+- demande : « envoyer un lien à n'importe qui pour qu'il teste tout l'outil », en codant la recherche et la veille en interne, ou en liant le compte LBC du testeur.
+- **refusé et expliqué** : interroger Leboncoin depuis notre code = CGU + ligne rouge projet + bannissement des comptes testeurs ; « lier son compte LBC » n'existe pas (aucune connexion officielle particulier) et impliquerait de stocker des identifiants. Seule veille légitime = l'extension, qui observe les pages ouvertes par la personne.
+- **arbitrage Hugo** : rester sur démonstration + collage (publication de l'extension et serveur d'e-mails écartés pour l'instant).
+- **livré** : la démonstration couvre désormais l'outil entier — 2 candidatures d'exemple (envoyée, réponse reçue) rédigées par le vrai moteur, 3 pièces du dossier cochées, bouton d'activation des notifications, et « Passer à mes vraies annonces » qui efface la démo puis ouvre la marche à suivre de l'alerte Leboncoin. Envoyer depuis la page d'exemple marque réellement la candidature comme envoyée.
+- sortie toujours sûre : pièces décochées et candidatures supprimées à l'identique, données utilisateur intactes (rejoué en navigateur).
+- tests : tsc 0 · vitest 24/24 et 43/43 · build prod OK · redlines OK · démo rejouée **en production**.
+- ⚠️ reste ouvert : sans extension publiée, un testeur n'a pas la veille automatique — il colle son e-mail d'alerte.
