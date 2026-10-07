@@ -5,6 +5,7 @@ import { Button } from "@app/components/ui/Button";
 import { Textarea } from "@app/components/ui/Input";
 import { formatPrice } from "@app/components/listing/format";
 import { getDemoListing } from "@app/lib/demo";
+import { getApplicationByListing, updateListingStatus, upsertApplication } from "@app/lib/db";
 import type { Listing } from "@app/types";
 
 /**
@@ -115,12 +116,23 @@ export default function ExempleAnnonce() {
                   />
                   <div className="mt-3 flex flex-wrap items-center gap-3">
                     <Button
-                      onClick={() => {
+                      onClick={async () => {
                         if (!message.trim()) {
                           setHint("Collez d'abord votre message avec Ctrl + V (Cmd + V sur Mac).");
                           return;
                         }
                         setSent(true);
+                        // Comme dans la vraie vie : la candidature passe en
+                        // « envoyée » et se retrouve dans « Mes candidatures ».
+                        const existing = await getApplicationByListing(listing.id);
+                        await upsertApplication({
+                          listing_id: listing.id,
+                          message,
+                          message_tone: existing?.message_tone ?? "pro",
+                          status: "sent",
+                          sent_at: new Date().toISOString(),
+                        });
+                        await updateListingStatus(listing.id, "applied");
                       }}
                     >
                       Envoyer le message

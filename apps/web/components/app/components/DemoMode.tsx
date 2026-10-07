@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@app/components/ui/Button";
 import { maybeNotifyHot } from "@app/components/listing/ingest";
 import { DEMO_TOTAL } from "@app/lib/demo";
+import { ensureNotificationPermission } from "@app/lib/tauri";
 import { useDemoStore } from "@app/store/useDemoStore";
 
 /** Intervalle entre deux arrivées d'annonces pendant la démonstration. */
@@ -22,12 +23,18 @@ export function DemoBanner() {
   const next = useDemoStore((s) => s.next);
   const stop = useDemoStore((s) => s.stop);
   const [leaving, setLeaving] = useState(false);
+  const [notifState, setNotifState] = useState<"unknown" | "askable" | "done">("unknown");
 
   // Le bandeau est le garde-fou de la démonstration : il doit apparaître même
   // si l'état n'a pas encore été lu ailleurs, sinon plus moyen d'en sortir.
   useEffect(() => {
     if (!ready) void init();
   }, [ready, init]);
+
+  useEffect(() => {
+    if (typeof Notification === "undefined") return;
+    setNotifState(Notification.permission === "default" ? "askable" : "done");
+  }, [active]);
 
   useEffect(() => {
     if (!active || step >= DEMO_TOTAL) return;
@@ -42,33 +49,64 @@ export function DemoBanner() {
 
   const done = step >= DEMO_TOTAL;
 
+  const leave = async (thenSetUpReal: boolean) => {
+    setLeaving(true);
+    try {
+      await stop({ thenSetUpReal });
+      navigate("/");
+    } finally {
+      setLeaving(false);
+    }
+  };
+
   return (
-    <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-md border border-warn/40 bg-warn-wash px-4 py-3">
-      <div>
-        <p className="text-[15px] font-semibold text-warn">Démonstration en cours</p>
-        <p className="text-[15px] text-ink-2">
-          Ces annonces sont des exemples, elles ne viennent pas de Leboncoin.{" "}
-          {done
-            ? "Les six annonces sont arrivées."
-            : `${step} annonce${step > 1 ? "s" : ""} sur ${DEMO_TOTAL} pour l'instant, les suivantes arrivent toutes seules.`}
-        </p>
+    <div className="mb-6 rounded-md border border-warn/40 bg-warn-wash px-4 py-3.5">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p className="text-[15px] font-semibold text-warn">Démonstration en cours</p>
+          <p className="text-[15px] text-ink-2">
+            Ces annonces sont des exemples, elles ne viennent pas de Leboncoin.{" "}
+            {done
+              ? "Les six annonces sont arrivées."
+              : `${step} annonce${step > 1 ? "s" : ""} sur ${DEMO_TOTAL} pour l'instant, les suivantes arrivent toutes seules.`}
+          </p>
+          {done && (
+            <p className="mt-1 text-[15px] text-ink-2">
+              Vous avez vu l'essentiel : les notes, le message préparé, l'envoi, et le suivi dans
+              « Mes candidatures ».
+            </p>
+          )}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          {notifState === "askable" && !done && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={async () => {
+                await ensureNotificationPermission();
+                setNotifState("done");
+              }}
+            >
+              Activer les notifications
+            </Button>
+          )}
+          {done ? (
+            <>
+              <Button size="sm" disabled={leaving} onClick={() => void leave(true)}>
+                {leaving ? "Effacement…" : "Passer à mes vraies annonces"}
+              </Button>
+              <Button variant="ghost" size="sm" disabled={leaving} onClick={() => void leave(false)}>
+                Quitter
+              </Button>
+            </>
+          ) : (
+            <Button variant="secondary" size="sm" disabled={leaving} onClick={() => void leave(false)}>
+              {leaving ? "Effacement…" : "Quitter et tout effacer"}
+            </Button>
+          )}
+        </div>
       </div>
-      <Button
-        variant="secondary"
-        size="sm"
-        disabled={leaving}
-        onClick={async () => {
-          setLeaving(true);
-          try {
-            await stop();
-            navigate("/");
-          } finally {
-            setLeaving(false);
-          }
-        }}
-      >
-        {leaving ? "Effacement…" : "Quitter et tout effacer"}
-      </Button>
     </div>
   );
 }

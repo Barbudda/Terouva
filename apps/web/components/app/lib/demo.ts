@@ -14,9 +14,14 @@ import {
   createSearchProfile,
   getSetting,
   getUserProfile,
+  listDocuments,
+  setDocumentAvailable,
   setSetting,
+  updateListingStatus,
   updateUserProfile,
+  upsertApplication,
 } from "@app/lib/db";
+import { generateMessage } from "@app/lib/messageGen";
 import { scoreListing } from "@app/lib/scoring";
 import type { Listing, SearchProfile, UserProfile } from "@app/types";
 
@@ -25,6 +30,7 @@ const KEY_ACTIVE = "demo_active";
 const KEY_SEARCH_ID = "demo_search_id";
 const KEY_PROFILE_SEEDED = "demo_profile_seeded";
 const KEY_ONBOARD_SEEDED = "demo_onboarded_seeded";
+const KEY_DOCS_SEEDED = "demo_docs_seeded";
 const KEY_STEP = "demo_step";
 
 /** Profil d'exemple, posé seulement si le dossier de l'utilisateur est vide. */
@@ -215,8 +221,42 @@ async function doStartDemo(): Promise<void> {
   await setSetting(KEY_ACTIVE, "1");
 
   // Deux annonces déjà présentes : la liste ne doit jamais s'ouvrir vide.
-  await addNextDemoListing();
-  await addNextDemoListing();
+  const first = await addNextDemoListing();
+  const second = await addNextDemoListing();
+
+  // Une candidature envoyée et une qui a reçu une réponse : « Mes candidatures »
+  // doit montrer le suivi, pas une page vide.
+  const who = await getUserProfile();
+  const twoDaysAgo = sqlDate(new Date(Date.now() - 2 * 24 * 60 * 60_000));
+  if (first) {
+    await upsertApplication({
+      listing_id: first.id,
+      message: generateMessage(first, who, "pro"),
+      message_tone: "pro",
+      status: "sent",
+      sent_at: twoDaysAgo,
+    });
+    await updateListingStatus(first.id, "applied");
+  }
+  if (second) {
+    await upsertApplication({
+      listing_id: second.id,
+      message: generateMessage(second, who, "warm"),
+      message_tone: "warm",
+      status: "replied",
+      sent_at: twoDaysAgo,
+    });
+    await updateListingStatus(second.id, "applied");
+  }
+
+  // Quelques pièces du dossier déjà cochées, pour montrer l'avancement. On ne
+  // touche à rien si l'utilisateur en avait déjà coché.
+  const docs = await listDocuments();
+  if (docs.length > 0 && docs.every((d) => !d.available)) {
+    const toCheck = docs.filter((d) => d.required).slice(0, 3);
+    for (const d of toCheck) await setDocumentAvailable(d.id, true);
+    await setSetting(KEY_DOCS_SEEDED, JSON.stringify(toCheck.map((d) => d.id)));
+  }
 }
 
 /**
@@ -305,6 +345,14 @@ export async function stopDemo(): Promise<void> {
     }
   }
 
+  // Pièces cochées par la démonstration : on décoche exactement celles-là.
+  const seededDocs = await getSetting(KEY_DOCS_SEEDED);
+  if (seededDocs) {
+    const ids: number[] = safeIds(seededDocs);
+    for (const id of ids) await setDocumentAvailable(id, false);
+    await setSetting(KEY_DOCS_SEEDED, "");
+  }
+
   if ((await getSetting(KEY_ONBOARD_SEEDED)) === "1") {
     await setSetting("onboarded", "");
     await setSetting(KEY_ONBOARD_SEEDED, "");
@@ -314,6 +362,15 @@ export async function stopDemo(): Promise<void> {
   await setSetting(KEY_SEARCH_ID, "");
   await setSetting(KEY_STEP, "0");
   await setSetting(KEY_ACTIVE, "");
+}
+
+function safeIds(raw: string): number[] {
+  try {
+    const v = JSON.parse(raw);
+    return Array.isArray(v) ? v.filter((n) => typeof n === "number") : [];
+  } catch {
+    return [];
+  }
 }
 
 /** Retrouve une annonce de démonstration par son numéro (page d'exemple). */

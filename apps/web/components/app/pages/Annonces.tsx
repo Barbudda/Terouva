@@ -297,6 +297,17 @@ export default function Annonces() {
 
   const demoActive = useDemoStore((s) => s.active);
   const demoStart = useDemoStore((s) => s.start);
+  const wantsRealSetup = useDemoStore((s) => s.wantsRealSetup);
+  const clearRealSetup = useDemoStore((s) => s.clearRealSetup);
+
+  // Sortie de démonstration « je passe au réel » : on ouvre directement la
+  // marche à suivre pour l'e-mail d'alerte Leboncoin.
+  useEffect(() => {
+    if (!wantsRealSetup) return;
+    setMode("email");
+    setAddOpen(true);
+    clearRealSetup();
+  }, [wantsRealSetup, clearRealSetup]);
   const [demoStarting, setDemoStarting] = useState(false);
   const startDemo = async () => {
     setDemoStarting(true);
