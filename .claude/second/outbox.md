@@ -82,3 +82,12 @@
 - sortie toujours sûre : pièces décochées et candidatures supprimées à l'identique, données utilisateur intactes (rejoué en navigateur).
 - tests : tsc 0 · vitest 24/24 et 43/43 · build prod OK · redlines OK · démo rejouée **en production**.
 - ⚠️ reste ouvert : sans extension publiée, un testeur n'a pas la veille automatique — il colle son e-mail d'alerte.
+
+## REPORT — 2026-10-07   [vraies annonces sans extension : marque-page]   [status: done, à valider sur le vrai site]
+- besoin : « le cœur du système, c'est qu'il trouve de VRAIES annonces ; on ne peut pas le faire sans extension pour la démo ? »
+- **réponse trouvée : si.** Un marque-page (bookmarklet) « Capter les annonces » : la personne le glisse dans ses favoris, ouvre SA page de résultats Leboncoin, clique, et colle dans Terouva (Ctrl+V). Même posture que l'extension, en moins automatique (aucune requête vers LBC, rien d'observé en continu, c'est l'humain qui clique) — et sans magasin ni validation Google, y compris Firefox/Safari.
+- **vérification préalable** : la CSP de leboncoin.fr n'impose que `frame-ancestors` (pas de `script-src`) → les marque-pages n'y sont pas bloqués. Point important car Chrome les bloque silencieusement sur les sites à CSP stricte.
+- livré : `bookmarklet.ts` (extraction reprise de watch.js), `lbcCapture.ts` (validation + ingestion par le pipeline existant, 9 tests), onglet « Depuis Leboncoin », collage global qui reconnaît une capture, FAQ + guide mis à jour.
+- deux défauts corrigés pendant le test : textes de cartes collés sans espace (« 69004il y a 7 minutes ») qui cassaient code postal et fraîcheur, et « Aujourd'hui » majuscule non reconnu.
+- tests : tsc 0 · vitest web 33/33 · core 43/43 · build OK · redlines OK · bout en bout rejoué **en production** (capture → collage → annonces notées).
+- ⚠️ **à valider par Hugo** : je ne peux pas aller sur leboncoin.fr (ligne rouge + anti-robot), donc le test s'est fait sur une page de résultats reconstituée. Les sélecteurs viennent de l'extension. Si le gabarit réel a changé, le marque-page le dit clairement (« aucune annonce sur cette page ») : il suffit d'un clic pour le savoir.
