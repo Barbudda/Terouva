@@ -115,6 +115,10 @@ export async function importBackup(
       contract_type: p.contract_type,
       intro_message: p.intro_message,
       preferred_contact: p.preferred_contact,
+      occupants: p.occupants ?? null,
+      move_in_date: p.move_in_date ?? null,
+      intended_stay: p.intended_stay ?? null,
+      visit_availability: p.visit_availability ?? null,
       created_at: cur?.created_at ?? p.created_at,
       updated_at: new Date().toISOString().slice(0, 19).replace("T", " "),
     });

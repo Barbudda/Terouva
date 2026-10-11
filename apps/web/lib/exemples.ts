@@ -103,13 +103,15 @@ export type MessageExemple = {
 };
 
 /**
- * Six brouillons produits par `generateMessage`, un par annonce, dans les trois
- * tons et six variantes différentes.
+ * Six brouillons produits par `generateMessage`, pour six situations
+ * différentes : salariée, couple, ingénieure, alternant, fonctionnaire,
+ * indépendant. Six profils et non un seul, parce qu'un même profil donnerait
+ * six messages au milieu identique — ce que le ruban rendrait visible.
  *
  * Aucun ne récite l'annonce : ni surface, ni prix, ni quartier, ni code postal.
- * La personne qui reçoit le message a écrit l'annonce ; lui répéter sa fiche ne
- * prouve rien et sent le texte fabriqué. Ce sont des brouillons : c'est
- * toujours l'utilisateur qui relit, qui colle et qui envoie.
+ * Chacun donne en revanche ce avec quoi un bailleur trie avant la visite : la
+ * situation, les ressources, le garant, le nombre d'occupants, la date
+ * d'emménagement, la durée envisagée et des créneaux de visite précis.
  */
 export const MESSAGES: MessageExemple[] = [
   {
@@ -119,7 +121,7 @@ export const MESSAGES: MessageExemple[] = [
     note: 96,
     ton: "Direct",
     texte:
-      "Bonjour,\n\nVotre annonce m'intéresse beaucoup, en particulier pour le balcon.\n\nJe suis infirmière en CDI. Mon revenu net est de 2 400 € par mois et je bénéficie de la garantie Visale. Mon dossier est complet.\n\nJe peux visiter dès que vous le souhaitez.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
+      "Bonjour,\n\nVotre annonce m'intéresse beaucoup, en particulier pour le balcon.\n\nJe suis infirmière en CDI. Mon revenu net est de 2 400 € par mois et je bénéficie de la garantie Visale. Mon dossier est complet.\n\nJe serais la seule personne à y vivre, et je peux emménager à partir du 1er décembre. Je cherche à m'installer durablement.\n\nPour la visite, je suis disponible en semaine après 18 h ou le samedi.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
   },
   {
     annonce: "2 pièces rénové",
@@ -128,7 +130,7 @@ export const MESSAGES: MessageExemple[] = [
     note: 96,
     ton: "Chaleureux",
     texte:
-      "Bonjour,\n\nJe viens de voir votre annonce et elle me plaît beaucoup, en particulier pour le balcon.\n\nJe suis Camille Martin, infirmière en CDI, avec un revenu net de 2 400 € par mois. Je bénéficie de la garantie Visale et tous mes justificatifs sont prêts.\n\nJe peux me rendre disponible facilement pour une visite, dites-moi ce qui vous convient.\n\nBien à vous,\nCamille Martin\n06 12 34 56 78",
+      "Bonjour,\n\nJe viens de voir votre annonce et elle me plaît beaucoup, en particulier pour le calme.\n\nJe suis Yanis Benali, développeur en CDI, avec un revenu net de 3 100 € par mois. J'ai un garant : mes parents. Tous mes justificatifs sont prêts.\n\nNous serions 2 à y vivre, et nous pouvons emménager à partir du 15 novembre. Nous cherchons à nous installer pour au moins trois ans.\n\nPour la visite, je suis disponible le soir et le week-end.\n\nBien à vous,\nYanis Benali\n07 55 21 09 44",
   },
   {
     annonce: "2 pièces proche Part-Dieu",
@@ -137,7 +139,7 @@ export const MESSAGES: MessageExemple[] = [
     note: 66,
     ton: "Professionnel",
     texte:
-      "Madame, Monsieur,\n\nJe me permets de vous contacter au sujet de votre annonce.\n\nJe suis Camille Martin, infirmière en CDI. Mon revenu net mensuel est de 2 400 €. Je bénéficie de la garantie Visale. L'ensemble des justificatifs (pièce d'identité, contrat de travail, bulletins de salaire, avis d'imposition) est prêt à vous être transmis.\n\nJe me tiens à votre disposition pour organiser une visite.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
+      "Madame, Monsieur,\n\nJe me permets de vous contacter au sujet de votre annonce, en particulier pour la rénovation.\n\nJe suis Awa Diop, ingénieure en CDI. Mon revenu net mensuel est de 3 600 €. Je bénéficie de la garantie Visale. L'ensemble des justificatifs (pièce d'identité, contrat de travail, bulletins de salaire, avis d'imposition) est prêt à vous être transmis.\n\nJe serais la seule personne à y vivre, et je peux emménager à partir du 5 janvier. Je cherche à m'installer durablement.\n\nPour la visite, je suis disponible en journée, du lundi au vendredi.\n\nCordialement,\nAwa Diop\n06 78 90 12 34\nawa.diop@exemple.fr",
   },
   {
     annonce: "T3 au dernier étage",
@@ -146,7 +148,7 @@ export const MESSAGES: MessageExemple[] = [
     note: 1,
     ton: "Direct",
     texte:
-      "Bonjour,\n\nVotre annonce m'intéresse beaucoup.\n\nJe suis infirmière en CDI, avec un revenu net de 2 400 € par mois. Je bénéficie de la garantie Visale et tous mes justificatifs sont prêts.\n\nJe peux visiter dès que vous le souhaitez.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
+      "Bonjour,\n\nVotre annonce m'intéresse beaucoup, en particulier pour la terrasse.\n\nJe suis étudiant en alternance, avec un revenu net de 1 250 € par mois. J'ai un garant : mes parents. Tous mes justificatifs sont prêts.\n\nJe serais la seule personne à y vivre, et je peux emménager à partir du 2 novembre. Je cherche à m'installer pour au moins deux ans.\n\nPour la visite, je suis disponible le mercredi et le week-end.\n\nCordialement,\nLucas Deniel\n06 44 33 22 11",
   },
   {
     annonce: "Grand studio avec cave",
@@ -155,7 +157,7 @@ export const MESSAGES: MessageExemple[] = [
     note: 47,
     ton: "Chaleureux",
     texte:
-      "Bonjour,\n\nJe viens de voir votre annonce et elle me plaît beaucoup.\n\nJe suis Camille Martin, infirmière en CDI. Je gagne 2 400 € net par mois. Je bénéficie de la garantie Visale, et mon dossier est prêt à vous être envoyé.\n\nJe peux me rendre disponible facilement pour une visite, dites-moi ce qui vous convient.\n\nBien à vous,\nCamille Martin\n06 12 34 56 78",
+      "Bonjour,\n\nJe viens de voir votre annonce et elle me plaît beaucoup, en particulier pour le cachet.\n\nJe cherche un logement calme pour préparer l'agrégation.\n\nJe suis Inès Mercier, professeure, fonctionnaire. Je gagne 2 250 € net par mois. Je bénéficie de la garantie Visale, et mon dossier est prêt à vous être envoyé.\n\nJe serais la seule personne à y vivre, et je peux emménager à partir du 15 décembre. Je cherche à m'installer durablement.\n\nPour la visite, je suis disponible en semaine après 17 h.\n\nBien à vous,\nInès Mercier\n07 11 22 33 44",
   },
   {
     annonce: "Studio meublé",
@@ -164,6 +166,6 @@ export const MESSAGES: MessageExemple[] = [
     note: 14,
     ton: "Professionnel",
     texte:
-      "Bonjour,\n\nVotre annonce a retenu toute mon attention, en particulier pour le calme.\n\nJe suis Camille Martin, infirmière en CDI. Mon revenu net est de 2 400 € par mois et je bénéficie de la garantie Visale. L'ensemble des justificatifs (pièce d'identité, contrat de travail, bulletins de salaire, avis d'imposition) est prêt à vous être transmis.\n\nJe me tiens à votre disposition pour organiser une visite.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
+      "Bonjour,\n\nVotre annonce a retenu toute mon attention, en particulier pour la vue.\n\nJe suis Thomas Bastien, graphiste, indépendant. Mon revenu net est de 2 800 € par mois. J'ai un garant : une caution solidaire. L'ensemble des justificatifs (pièce d'identité, avis d'imposition, deux derniers bilans) est prêt à vous être transmis.\n\nNous serions 2 à y vivre, et nous pouvons emménager à partir du 1er décembre. Nous cherchons à nous installer pour au moins trois ans.\n\nPour la visite, je suis disponible en semaine, en fin de journée.\n\nCordialement,\nThomas Bastien\n06 90 80 70 60\nt.bastien@exemple.fr",
   },
 ];

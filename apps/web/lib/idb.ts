@@ -75,6 +75,10 @@ const EMPTY_PROFILE: Omit<UserProfile, "created_at" | "updated_at"> = {
   contract_type: null,
   intro_message: null,
   preferred_contact: null,
+  occupants: null,
+  move_in_date: null,
+  intended_stay: null,
+  visit_availability: null,
 };
 
 // ────────────────────────────── Dexie ──────────────────────────────

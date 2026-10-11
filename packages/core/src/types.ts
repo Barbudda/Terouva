@@ -12,6 +12,20 @@ export interface UserProfile {
   contract_type: string | null;
   intro_message: string | null;
   preferred_contact: string | null;
+  /**
+   * Les quatre informations avec lesquelles un bailleur trie les candidatures
+   * avant même d'accorder une visite, en plus de la situation, des ressources
+   * et du garant. Les omettre oblige le propriétaire à poser la question, ou à
+   * passer au candidat suivant.
+   */
+  /** Nombre de personnes qui occuperont le logement, vous compris. */
+  occupants: number | null;
+  /** Date d'emménagement souhaitée, au format AAAA-MM-JJ. */
+  move_in_date: string | null;
+  /** Durée envisagée, en texte libre : « au moins trois ans ». */
+  intended_stay: string | null;
+  /** Créneaux de visite : « en semaine après 18 h, ou le samedi ». */
+  visit_availability: string | null;
   created_at: string;
   updated_at: string;
 }

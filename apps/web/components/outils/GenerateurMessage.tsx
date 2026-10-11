@@ -35,6 +35,10 @@ type Champs = {
   contrat: string;
   revenu: string;
   garant: string;
+  occupants: string;
+  emmenagement: string;
+  duree: string;
+  creneaux: string;
   aPlu: string;
 };
 
@@ -47,6 +51,10 @@ const VIDE: Champs = {
   contrat: "",
   revenu: "",
   garant: "",
+  occupants: "",
+  emmenagement: "",
+  duree: "",
+  creneaux: "",
   aPlu: "",
 };
 
@@ -92,6 +100,10 @@ export function GenerateurMessage() {
       contract_type: champs.contrat.trim() || null,
       intro_message: null,
       preferred_contact: null,
+      occupants: Number(champs.occupants) || null,
+      move_in_date: champs.emmenagement.trim() || null,
+      intended_stay: champs.duree.trim() || null,
+      visit_availability: champs.creneaux.trim() || null,
       created_at: "",
       updated_at: "",
     };
@@ -198,7 +210,49 @@ export function GenerateurMessage() {
           />
         </div>
 
-        <div className="mt-5">
+        {/* Les quatre informations avec lesquelles un bailleur trie avant même
+            d'accorder une visite. Les omettre l'oblige à poser la question, ou
+            à passer au candidat suivant. */}
+        <p className="eyebrow mt-8">Ce qu&apos;on vous demandera de toute façon</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <Champ
+            label="Nombre d'occupants"
+            value={champs.occupants}
+            onChange={set("occupants")}
+            placeholder="1"
+            inputMode="numeric"
+            aide="Vous compris."
+          />
+          <Champ
+            label="Emménagement souhaité"
+            value={champs.emmenagement}
+            onChange={set("emmenagement")}
+            type="date"
+            aide="Le propriétaire a souvent une date en tête."
+          />
+          <Liste
+            label="Durée envisagée"
+            value={champs.duree}
+            onChange={set("duree")}
+            options={["durablement", "pour au moins deux ans", "pour au moins trois ans", "pour un an"]}
+            placeholder="durablement"
+            aide="Rassure sur la stabilité."
+          />
+          <Liste
+            label="Disponibilités de visite"
+            value={champs.creneaux}
+            onChange={set("creneaux")}
+            options={[
+              "en semaine après 18 h ou le samedi",
+              "en journée, du lundi au vendredi",
+              "le soir et le week-end",
+            ]}
+            placeholder="en semaine après 18 h ou le samedi"
+            aide="Des créneaux précis valent mieux que « quand vous voulez »."
+          />
+        </div>
+
+        <div className="mt-8">
           <label className="block">
             <span className="text-[13px] font-semibold text-ink-2">
               Ce qui vous a plu dans l&apos;annonce
@@ -317,8 +371,9 @@ function Champ({
 function Liste({
   label,
   options,
+  aide,
   ...props
-}: { label: string; options: string[] } & React.InputHTMLAttributes<HTMLInputElement>) {
+}: { label: string; options: string[]; aide?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   const id = `liste-${label.replace(/\s/g, "-")}`;
   return (
     <label className="block">
@@ -333,6 +388,7 @@ function Liste({
           <option key={o} value={o} />
         ))}
       </datalist>
+      {aide && <span className="mt-1.5 block text-[13px] text-ink-3">{aide}</span>}
     </label>
   );
 }

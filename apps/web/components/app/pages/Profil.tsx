@@ -108,6 +108,42 @@ export default function Profil() {
         </Field>
       </FormGroup>
 
+      {/* Ce que les bailleurs demandent systématiquement avant d'accorder une
+          visite. Rempli ici une fois, c'est repris dans chaque message. */}
+      <FormGroup title="Votre projet">
+        <Field label="Nombre d'occupants" hint="Vous compris.">
+          <Input
+            type="number"
+            inputMode="numeric"
+            min={1}
+            value={form.occupants ?? ""}
+            onChange={(e) => update({ occupants: e.target.value ? Number(e.target.value) : null })}
+          />
+        </Field>
+        <Field label="Emménagement souhaité" hint="Le propriétaire a souvent une date en tête.">
+          <Input
+            type="date"
+            value={form.move_in_date ?? ""}
+            onChange={(e) => update({ move_in_date: e.target.value || null })}
+          />
+        </Field>
+        <Field label="Durée envisagée" hint="Par exemple : durablement, pour au moins deux ans">
+          <Input
+            value={form.intended_stay ?? ""}
+            onChange={(e) => update({ intended_stay: e.target.value || null })}
+          />
+        </Field>
+        <Field
+          label="Disponibilités de visite"
+          hint="Des créneaux précis valent mieux que « quand vous voulez »."
+        >
+          <Input
+            value={form.visit_availability ?? ""}
+            onChange={(e) => update({ visit_availability: e.target.value || null })}
+          />
+        </Field>
+      </FormGroup>
+
       <FormGroup title="Garant et présentation" single>
         <Field label="Garant" hint="Par exemple : parents, garantie Visale">
           <Textarea rows={2} value={form.guarantors ?? ""} onChange={(e) => update({ guarantors: e.target.value })} />

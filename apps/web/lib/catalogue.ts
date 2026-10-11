@@ -110,13 +110,18 @@ export const GUIDES: Guide[] = [
   {
     chemin: "/guides/repondre-a-une-annonce-de-location",
     sommaire: [
-      { id: "ordre", titre: "L'ordre qui marche" },
-      { id: "modele", titre: "Un modèle en six lignes" },
+      { id: "ordre", titre: "Les six informations qui comptent" },
+      { id: "modele", titre: "Un modèle complet" },
       { id: "ne-pas-faire", titre: "Ce qui vous dessert" },
       { id: "rapidite", titre: "L'heure d'envoi" },
       { id: "apres", titre: "Après l'envoi" },
     ],
     titre: "Répondre à une annonce de location : ce qui fait la différence",
+    sources: [
+      { nom: "PAP.fr · Comment convaincre un propriétaire de vous choisir", url: "https://www.pap.fr/locataire/constituer-dossier/locataire-comment-convaincre-un-proprietaire-de-vous-choisir/a19746" },
+      { nom: "Vestae · Sélectionner un locataire : critères légaux et bons réflexes", url: "https://vestae.fr/selectionner-locataire-criteres-legaux-bons-reflexes/" },
+      { nom: "La Parisienne Immobilière · Sélection du locataire", url: "https://laparisienneimmobiliere.fr/selection-locataire/" },
+    ],
     titreSeo: "Répondre à une annonce de location",
     resume:
       "Sur un marché tendu, ce n'est pas toujours le meilleur dossier qui obtient la visite, c'est celui qui arrive tôt et qui se lit en dix secondes. Voici ce qui se joue vraiment dans un premier message.",

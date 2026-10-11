@@ -23,31 +23,56 @@ export default function GuideRepondre() {
         convaincre, il a à <strong>survivre au tri</strong>.
       </p>
 
-      <h2 id="ordre">L&apos;ordre qui marche</h2>
+      <h2 id="ordre">Les six informations qui servent à vous trier</h2>
       <p>
-        Un bon message de candidature répond, dans cet ordre, aux trois questions que le
-        propriétaire se pose :
+        Les guides destinés aux propriétaires sont d&apos;accord entre eux sur ce qu&apos;ils
+        regardent avant d&apos;accorder une visite. Ce ne sont pas six questions de curiosité :
+        ce sont les six champs d&apos;une grille de tri.
       </p>
       <ol>
         <li>
-          <strong>Qui êtes-vous ?</strong> Votre métier et votre type de contrat. Deux mots
-          suffisent.
+          <strong>Votre situation professionnelle.</strong> Votre métier et votre type de contrat.
+          Deux mots suffisent.
         </li>
         <li>
-          <strong>Pouvez-vous payer ?</strong> Votre revenu net mensuel, et votre garant ou votre
-          garantie.
+          <strong>Vos ressources.</strong> Votre revenu net mensuel. C&apos;est la première
+          question, avant toutes les autres.
         </li>
         <li>
-          <strong>Quand pouvez-vous visiter ?</strong> Une phrase qui ouvre, pas une question qui
-          attend.
+          <strong>Votre garant.</strong> Un garant physique, ou une garantie comme Visale.
+          L&apos;annoncer dès le premier message vous évite l&apos;aller-retour qui vous fait
+          perdre le logement.
+        </li>
+        <li>
+          <strong>Le nombre d&apos;occupants.</strong> Le propriétaire en a besoin pour estimer
+          les charges et vérifier que la surface convient.
+        </li>
+        <li>
+          <strong>Votre date d&apos;emménagement.</strong> Il a presque toujours une date en tête,
+          et un candidat qui ne peut arriver que dans trois mois passe après.
+        </li>
+        <li>
+          <strong>La durée envisagée.</strong> Un changement de locataire coûte cher.
+          « Durablement » ou « au moins trois ans » vous distingue de qui cherche un pied-à-terre.
         </li>
       </ol>
       <p>
-        Le reste, c&apos;est de l&apos;emballage. Une phrase de politesse au début, une signature
-        avec votre numéro à la fin, et c&apos;est tout.
+        Ajoutez-y des <strong>créneaux de visite précis</strong> plutôt qu&apos;un « quand vous
+        voulez » qui oblige votre interlocuteur à proposer, et vous avez tout ce qu&apos;on vous
+        demanderait de toute façon. Le reste, c&apos;est de l&apos;emballage : une politesse au
+        début, votre numéro à la fin.
       </p>
 
-      <h2 id="modele">Un modèle qui tient en six lignes</h2>
+      <div className="note">
+        <p>
+          <strong>Court, oui. Vide, non.</strong> Les mêmes guides déconseillent le message de
+          deux lignes — « bonjour, je suis intéressé, merci » — qui ne donne rien à décider, et le
+          récit personnel qui noie l&apos;information. Un message complet sur ces six points tient
+          en une dizaine de lignes. C&apos;est la bonne longueur.
+        </p>
+      </div>
+
+      <h2 id="modele">Un modèle complet, qui reste court</h2>
       <div className="note">
         <p>Bonjour,</p>
         <p>Votre annonce m&apos;intéresse beaucoup, en particulier pour le balcon.</p>
@@ -55,7 +80,11 @@ export default function GuideRepondre() {
           Je suis infirmière en CDI. Mon revenu net est de 2 400 € par mois et je bénéficie de la
           garantie Visale. Mon dossier est complet.
         </p>
-        <p>Je peux visiter dès que vous le souhaitez.</p>
+        <p>
+          Je serais la seule personne à y vivre, et je peux emménager à partir du 1er décembre. Je
+          cherche à m&apos;installer durablement.
+        </p>
+        <p>Pour la visite, je suis disponible en semaine après 18 h ou le samedi.</p>
         <p>
           Cordialement,
           <br />

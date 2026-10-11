@@ -27,8 +27,9 @@ export function Messages() {
           align="center"
           className="monte max-w-3xl"
         >
-          Il ne récite pas l&apos;annonce à celui qui l&apos;a écrite : il dit qui vous êtes, ce que
-          vaut votre dossier et quand vous pouvez visiter. Trois tons au choix, et vous gardez la
+          Il ne récite pas l&apos;annonce à celui qui l&apos;a écrite. Il donne ce avec quoi un
+          propriétaire trie vraiment : qui vous êtes, ce que vaut votre dossier, combien vous serez,
+          à partir de quand, et quand vous pouvez visiter. Trois tons au choix, et vous gardez la
           main sur le texte.
         </SectionHeading>
       </div>

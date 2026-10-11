@@ -43,6 +43,10 @@ function buildProfile(over: Partial<UserProfile> = {}): UserProfile {
     guarantors: "Parents (cadres CDI)",
     contract_type: "non meublé",
     intro_message: "Locataire sérieux, calme, non fumeur.",
+    occupants: null,
+    move_in_date: null,
+    intended_stay: null,
+    visit_availability: null,
     preferred_contact: "phone",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
@@ -219,5 +223,111 @@ describe('accords et tournures libres', () => {
   it("ignore un champ contrat qui n'en est pas un", () => {
     const p = buildProfile({ situation: 'infirmière', contract_type: 'non meublé' });
     expect(generateMessage(buildListing(), p, 'direct', 0)).not.toContain('non meublé');
+  });
+});
+
+describe("informations pratiques", () => {
+  const TOUS_LES_TONS = ["direct", "warm", "pro"] as const;
+  const complet = () =>
+    buildProfile({
+      occupants: 2,
+      move_in_date: "2026-12-01",
+      intended_stay: "durablement",
+      visit_availability: "en semaine après 18 h",
+    });
+
+  it("dit combien de personnes, à partir de quand, et pour combien de temps", () => {
+    const msg = generateMessage(buildListing(), complet(), "direct", 0);
+    expect(msg).toContain("Nous serions 2 à y vivre");
+    expect(msg).toContain("1er décembre");
+    expect(msg).toContain("installer durablement");
+    expect(msg).toContain("en semaine après 18 h");
+  });
+
+  it("accorde le pluriel quand on est plusieurs", () => {
+    const msg = generateMessage(buildListing(), complet(), "direct", 0);
+    expect(msg).toContain("nous pouvons emménager");
+    expect(msg).not.toContain("je peux emménager");
+    expect(msg).toContain("Nous cherchons à nous installer");
+  });
+
+  it("reste au singulier à une seule personne", () => {
+    const msg = generateMessage(buildListing(), buildProfile({ occupants: 1 }), "direct", 0);
+    expect(msg).toContain("Je serais la seule personne à y vivre");
+    expect(msg).not.toContain("Nous serions");
+  });
+
+  it("ne laisse aucun trou quand les champs sont vides", () => {
+    const vide = buildProfile({
+      occupants: null,
+      move_in_date: null,
+      intended_stay: null,
+      visit_availability: null,
+    });
+    for (const ton of TOUS_LES_TONS) {
+      for (let v = 0; v < 6; v += 1) {
+        const msg = generateMessage(buildListing(), vide, ton, v);
+        expect(msg).not.toContain("à y vivre");
+        expect(msg).not.toContain("à partir du");
+        expect(msg).not.toMatch(/\bnull\b|undefined|NaN/);
+      }
+    }
+  });
+
+  it("ignore une date illisible plutôt que de l'afficher", () => {
+    const msg = generateMessage(buildListing(), buildProfile({ move_in_date: "dès que possible" }), "direct", 0);
+    expect(msg).not.toContain("dès que possible");
+    expect(msg).not.toContain("à partir du");
+  });
+
+  it("écrit « 1er » et non « 1 » pour le premier du mois", () => {
+    const msg = generateMessage(buildListing(), buildProfile({ move_in_date: "2026-03-01" }), "direct", 0);
+    expect(msg).toContain("1er mars");
+    const quinze = generateMessage(buildListing(), buildProfile({ move_in_date: "2026-03-15" }), "direct", 0);
+    expect(quinze).toContain("15 mars");
+  });
+
+  it("ne répète pas le même verbe dans la phrase pratique", () => {
+    for (let v = 0; v < 6; v += 1) {
+      const msg = generateMessage(buildListing(), buildProfile({ occupants: 1, move_in_date: "2026-12-01" }), "warm", v);
+      expect(msg).not.toMatch(/je serais[^.]*je serais/);
+    }
+  });
+
+  it("préfère des créneaux réels à une formule vague", () => {
+    const avec = generateMessage(buildListing(), complet(), "direct", 0);
+    expect(avec).toContain("Pour la visite, je suis disponible");
+    const sans = generateMessage(buildListing(), buildProfile({ visit_availability: null }), "direct", 0);
+    expect(sans).not.toContain("Pour la visite");
+  });
+});
+
+describe("justificatifs annoncés", () => {
+  it("ne promet pas de bulletins de salaire à un indépendant", () => {
+    const p = buildProfile({ situation: "graphiste", contract_type: "indépendant" });
+    const msg = generateMessage(buildListing(), p, "pro", 0);
+    expect(msg).not.toContain("contrat de travail");
+    expect(msg).not.toContain("bulletins de salaire");
+    expect(msg).toContain("bilans");
+  });
+
+  it("cite le certificat de scolarité pour un étudiant", () => {
+    const p = buildProfile({ situation: "étudiant", contract_type: null });
+    expect(generateMessage(buildListing(), p, "pro", 0)).toContain("certificat de scolarité");
+  });
+
+  it("garde contrat et bulletins pour un salarié, alternance comprise", () => {
+    for (const c of ["CDI", "CDD", "alternance"]) {
+      const p = buildProfile({ situation: "étudiant", contract_type: c });
+      expect(generateMessage(buildListing(), p, "pro", 0)).toContain("bulletins de salaire");
+    }
+  });
+
+  it("n'enchaîne pas « et » après une clause à deux points", () => {
+    const p = buildProfile({ guarantors: "mes parents", income_monthly: 2000 });
+    for (let v = 0; v < 6; v += 1) {
+      const msg = generateMessage(buildListing(), p, "direct", v);
+      expect(msg).not.toMatch(/garant : [^.]*\bet\b/);
+    }
   });
 });

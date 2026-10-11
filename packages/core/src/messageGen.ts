@@ -159,15 +159,22 @@ function dossier(
   switch (v % 3) {
     case 0:
       phrases.push(qui());
-      if (revenu) phrases.push(`Mon revenu net est de ${revenu} par mois${g ? ` et ${g}` : ""}.`);
-      else if (g) phrases.push(`${cap(g)}.`);
+      if (revenu && g && !g.includes(" : ")) phrases.push(`Mon revenu net est de ${revenu} par mois et ${g}.`);
+      else {
+        if (revenu) phrases.push(`Mon revenu net est de ${revenu} par mois.`);
+        if (g) phrases.push(`${cap(g)}.`);
+      }
       if (cloture) phrases.push("Mon dossier est complet.");
       break;
 
     case 1:
       phrases.push(qui(revenu ? `, avec un revenu net de ${revenu} par mois` : ""));
       if (cloture) {
-        phrases.push(g ? `${cap(g)} et tous mes justificatifs sont prêts.` : "Tous mes justificatifs sont prêts.");
+        if (g && !g.includes(" : ")) phrases.push(`${cap(g)} et tous mes justificatifs sont prêts.`);
+        else {
+          if (g) phrases.push(`${cap(g)}.`);
+          phrases.push("Tous mes justificatifs sont prêts.");
+        }
       } else if (g) {
         phrases.push(`${cap(g)}.`);
       }
@@ -182,9 +189,11 @@ function dossier(
         );
       }
       if (cloture) {
-        phrases.push(
-          g ? `${cap(g)}, et mon dossier est prêt à vous être envoyé.` : "Mon dossier est prêt à vous être envoyé.",
-        );
+        if (g && !g.includes(" : ")) phrases.push(`${cap(g)}, et mon dossier est prêt à vous être envoyé.`);
+        else {
+          if (g) phrases.push(`${cap(g)}.`);
+          phrases.push("Mon dossier est prêt à vous être envoyé.");
+        }
       } else if (g) {
         phrases.push(`${cap(g)}.`);
       }
@@ -197,6 +206,77 @@ function dossier(
 
 function cap(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+const MOIS = [
+  "janvier", "février", "mars", "avril", "mai", "juin",
+  "juillet", "août", "septembre", "octobre", "novembre", "décembre",
+];
+
+/** « 1er décembre », « 15 mars ». Sans l'année : on emménage dans l'année. */
+function dateFr(iso: string): string | null {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso.trim());
+  if (!m) return null;
+  const jour = Number(m[3]);
+  const mois = MOIS[Number(m[2]) - 1];
+  if (!mois || jour < 1 || jour > 31) return null;
+  return `${jour === 1 ? "1er" : jour} ${mois}`;
+}
+
+/**
+ * Le paragraphe pratique : combien de personnes, à partir de quand, pour
+ * combien de temps.
+ *
+ * Ce sont, avec les ressources et le garant, les informations que les guides
+ * destinés aux bailleurs citent comme servant à trier avant la visite. Les
+ * omettre oblige le propriétaire à poser la question, c'est-à-dire à faire un
+ * aller-retour de plus là où il a dix autres candidats.
+ *
+ * Chaque phrase n'apparaît que si le champ est rempli : un message sur un
+ * profil incomplet ne doit pas afficher de trous.
+ */
+function pratique(p: UserProfile, v: number): string | null {
+  const n = p.occupants;
+  // Sans l'information, on parle au singulier : c'est le cas le plus fréquent
+  // et ça évite un « nous » qui sonnerait faux.
+  const pluriel = Boolean(n && n > 1);
+
+  const qui = n && n > 0 ? (n === 1 ? "je serais la seule personne à y vivre" : `nous serions ${n} à y vivre`) : null;
+
+  const quand = p.move_in_date ? dateFr(p.move_in_date) : null;
+  // Quand la phrase commence déjà par « je serais », la variante « je serais
+  // disponible » répéterait le verbe : on prend l'autre.
+  const variante = qui ? 0 : v % 2;
+  const date = quand
+    ? [
+        pluriel ? `nous pouvons emménager à partir du ${quand}` : `je peux emménager à partir du ${quand}`,
+        pluriel
+          ? `nous serions disponibles à partir du ${quand}`
+          : `je serais disponible à partir du ${quand}`,
+      ][variante]
+    : null;
+
+  const phrases: string[] = [];
+  // Liées plutôt qu'enfilées : trois phrases qui commencent toutes par « je »
+  // se lisent comme un formulaire, pas comme quelqu'un qui écrit.
+  if (qui && date) phrases.push(cap(`${qui}, et ${date}.`));
+  else if (qui) phrases.push(cap(`${qui}.`));
+  else if (date) phrases.push(cap(`${date}.`));
+
+  const duree = p.intended_stay?.trim();
+  if (duree) {
+    phrases.push(
+      pluriel ? `Nous cherchons à nous installer ${duree}.` : `Je cherche à m'installer ${duree}.`,
+    );
+  }
+
+  return phrases.length ? phrases.join(" ") : null;
+}
+
+/** Créneaux de visite réels s'ils sont connus, formule vague sinon. */
+function disponibilite(p: UserProfile, parDefaut: string): string {
+  const creneaux = p.visit_availability?.trim();
+  return creneaux ? `Pour la visite, je suis disponible ${creneaux}.` : parDefaut;
 }
 
 function telephone(p: UserProfile): string {
@@ -231,7 +311,8 @@ function generateDirect({ listing, profile, v }: Ctx): string {
       "Votre annonce a retenu mon attention.",
     ]),
     dossier(profile, null, v),
-    dispo,
+    pratique(profile, v),
+    disponibilite(profile, dispo),
     signature(profile, "Cordialement,"),
   ]);
 }
@@ -253,15 +334,40 @@ function generateWarm({ listing, profile, v }: Ctx): string {
     ]),
     presentation,
     dossier(profile, fullName(profile), v),
-    dispo,
+    pratique(profile, v),
+    disponibilite(profile, dispo),
     signature(profile, "Bien à vous,"),
   ]);
 }
 
+/**
+ * Les pièces citées doivent exister pour la personne qui écrit : promettre un
+ * contrat de travail et des bulletins de salaire à un indépendant se voit tout
+ * de suite, et décrédibilise le reste du message. La liste suit celle du décret
+ * du 5 novembre 2015, catégorie par catégorie.
+ */
+function justificatifs(p: UserProfile): string {
+  const quoi = norm(`${p.situation ?? ""} ${p.contract_type ?? ""}`);
+  // Un contrat de travail prime sur tout le reste : un étudiant en alternance
+  // ou en CDI a bien des bulletins de salaire.
+  if (/\b(cdi|cdd|interim|alternance|apprenti)\b/.test(quoi)) {
+    return "pièce d'identité, contrat de travail, bulletins de salaire, avis d'imposition";
+  }
+  if (/independant|freelance|liberal|auto ?entrepreneur|gerant/.test(quoi)) {
+    return "pièce d'identité, avis d'imposition, deux derniers bilans";
+  }
+  if (/retraite/.test(quoi)) {
+    return "pièce d'identité, avis d'imposition, justificatifs de pension";
+  }
+  if (/etudiant/.test(quoi)) {
+    return "pièce d'identité, certificat de scolarité, avis d'imposition et justificatifs du garant";
+  }
+  return "pièce d'identité, contrat de travail, bulletins de salaire, avis d'imposition";
+}
+
 function generatePro({ listing, profile, v }: Ctx): string {
   const ouverture = ["Madame, Monsieur,", "Bonjour,"][v % 2];
-  const pieces =
-    "L'ensemble des justificatifs (pièce d'identité, contrat de travail, bulletins de salaire, avis d'imposition) est prêt à vous être transmis.";
+  const pieces = `L'ensemble des justificatifs (${justificatifs(profile)}) est prêt à vous être transmis.`;
 
   return assemble([
     ouverture,
@@ -270,7 +376,8 @@ function generatePro({ listing, profile, v }: Ctx): string {
       "Votre annonce a retenu toute mon attention.",
     ]),
     `${dossier(profile, fullName(profile), v, { cloture: false, formel: true })} ${pieces}`,
-    "Je me tiens à votre disposition pour organiser une visite.",
+    pratique(profile, v),
+    disponibilite(profile, "Je me tiens à votre disposition pour organiser une visite."),
     signature(profile, "Cordialement,", true),
   ]);
 }
