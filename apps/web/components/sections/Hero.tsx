@@ -14,7 +14,8 @@ export function Hero() {
           </p>
 
           <h1 className="display mt-6 text-[2.6rem] text-ink sm:text-6xl lg:text-[4.6rem]">
-            {HERO.titleLead} <span className="text-accent">{HERO.titleTail}</span>
+            {HERO.titleLead}{" "}
+            <span className="block text-accent">{HERO.titleTail}</span>
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-2">

@@ -8,8 +8,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // /app est l'application local-first (zone privée, non indexable).
-        disallow: "/app",
+        // Zones privées : l'application local-first et la liste d'attente.
+        disallow: ["/app", "/liste"],
       },
     ],
     sitemap: `${base}/sitemap.xml`,

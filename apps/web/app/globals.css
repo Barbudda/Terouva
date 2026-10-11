@@ -83,6 +83,8 @@ body {
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 0.98;
+  /* Evite les lignes orphelines : le navigateur repartit les mots. */
+  text-wrap: balance;
 }
 
 /* Sur-titre de section : « POURQUOI TEROUVA », petites capitales espacées. */

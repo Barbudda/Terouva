@@ -30,6 +30,9 @@ const violations = [];
 // d'annonce ou de candidature ne doit passer par un serveur. La seule exception
 // autorisée est le formulaire d'inscription du site vitrine, qui transmet une
 // adresse e-mail à Resend. Toute autre route est une violation.
+// La page privée /liste (voir qui a réservé) est rendue côté serveur elle aussi,
+// mais elle appartient au site vitrine, pas à l'application : elle relit la liste
+// chez Resend et ne touche jamais aux données de recherche de l'utilisateur.
 const ALLOWED_API_ROUTES = ["waitlist/route.ts"];
 const apiDir = join(ROOT, "apps", "web", "app", "api");
 if (existsSync(apiDir)) {

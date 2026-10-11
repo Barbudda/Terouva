@@ -65,8 +65,9 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
     <form onSubmit={submit} className={cn("w-full", className)} noValidate>
       <div
         className={cn(
-          "flex flex-col gap-2 rounded-full p-2 sm:flex-row",
-          dark ? "bg-night-2" : "card-soft !rounded-full",
+          // Empilee sur mobile, la pilule deviendrait un ovale : rayon fixe en dessous de sm.
+          "flex flex-col gap-2 rounded-[1.75rem] p-2 sm:flex-row sm:rounded-full",
+          dark ? "bg-night-2" : "card-soft !rounded-[1.75rem] sm:!rounded-full",
         )}
       >
         <label className="flex-1">
