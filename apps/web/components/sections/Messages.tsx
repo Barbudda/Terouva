@@ -26,8 +26,9 @@ export function Messages() {
           align="center"
           className="monte max-w-3xl"
         >
-          Chaque brouillon cite l&apos;annonce : la surface, le quartier, ce qui vous a plu.
-          Trois tons au choix. Vous corrigez si vous voulez, puis vous l&apos;envoyez vous-même.
+          Il ne récite pas l&apos;annonce à celui qui l&apos;a écrite : il dit qui vous êtes, ce que
+          vaut votre dossier et quand vous pouvez visiter. Trois tons au choix, et vous gardez la
+          main sur le texte.
         </SectionHeading>
       </div>
 

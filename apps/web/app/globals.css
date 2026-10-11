@@ -202,8 +202,9 @@ details > summary::-webkit-details-marker {
   display: flex;
 }
 .ruban-fiche {
-  width: 20rem;
-  height: 22rem;
+  /* Assez large pour que le message respire, jamais plus large que l'écran. */
+  width: min(26rem, 84vw);
+  height: 29rem;
   margin-right: 1rem;
   flex: none;
 }

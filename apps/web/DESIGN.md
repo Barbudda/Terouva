@@ -96,6 +96,15 @@ clients** : le produit n'est pas sorti, en inventer tromperait les visiteurs qui
 leur adresse (et c'est le signal vibecodé n° 12). Montrer le travail convainc mieux qu'un
 compliment fabriqué. Si le moteur change, régénérer ces valeurs.
 
+**Un message ne récite jamais l'annonce** : ni surface, ni prix, ni nombre de pièces, ni
+ville, ni code postal. La personne qui le reçoit a écrit l'annonce ; lui réciter sa fiche
+ne prouve rien, allonge le message et se reconnaît d'un texte à l'autre. Le message
+commence par ce que le propriétaire ne sait pas : qui écrit, quel dossier, quelle
+disponibilité. Une seule phrase peut dire ce qui a plu (le balcon, la lumière, le calme) :
+c'est une réaction de lecteur, pas une fiche technique. Trois tournures de dossier et six
+variantes par ton, pour que deux messages ne se ressemblent pas. Règle tenue par les tests
+de `packages/core`.
+
 ## Texte
 
 Vouvoiement, mots simples, ton calme. Pas d'emoji, pas de tiret cadratin, pas de

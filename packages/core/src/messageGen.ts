@@ -1,17 +1,26 @@
 import type { Listing, MessageTone, UserProfile } from "./types";
 
 /**
- * Moteur de messages Terouva — 100 % local, aucune API externe.
+ * Moteur de messages Terouva, 100 % local, aucune API externe.
  *
- * Produit un message de candidature qui **cite des détails concrets de l'annonce**
- * (type de bien, surface, quartier, une caractéristique repérée dans la
- * description) pour montrer qu'elle a été lue, décliné en 3 tons, avec des
- * variantes de formulation (un nouveau clic = une nouvelle version).
+ * Écrit un message de candidature court, dans l'un des trois tons, avec des
+ * variantes de formulation (un nouveau clic donne une autre version).
  *
- * Invariants (garantis dans toutes les variantes, pour la fiabilité) :
- * - le nom et le téléphone (ou un placeholder) apparaissent toujours ;
- * - le ton « pro » mentionne le revenu si renseigné ;
- * - le ton « chaleureux » réutilise le message de présentation s'il existe.
+ * **Le message ne récite jamais l'annonce.** Pas de surface, pas de prix, pas
+ * de nombre de pièces, pas de ville ni de code postal : la personne qui reçoit
+ * le message a écrit l'annonce et sait de laquelle il s'agit. Les lui répéter
+ * ne prouve rien, allonge le message et sent le texte fabriqué. On commence
+ * donc par ce que le propriétaire ne sait pas encore : qui écrit, et quel
+ * dossier. Seule exception, une phrase courte sur ce qui a plu dans l'annonce
+ * (le balcon, la lumière, le calme) : ça, c'est une réaction de lecteur, pas
+ * une fiche technique.
+ *
+ * Invariants (garantis dans toutes les variantes) :
+ * - le nom et le téléphone (ou un repère à compléter) apparaissent toujours ;
+ * - le ton « pro » mentionne le revenu s'il est renseigné ;
+ * - le ton « chaleureux » réutilise le message de présentation s'il existe ;
+ * - aucune forme entre parenthèses du type « intéressé(e) » : on ne connaît pas
+ *   le genre de l'utilisateur, et ces parenthèses signent un texte à trous.
  */
 
 interface Ctx {
@@ -28,131 +37,229 @@ function norm(s: string): string {
   return s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 }
 
-/** « ce studio de 28m² », « ce 2 pièces de 45m² », « cet appartement »… */
-function propertyDescriptor(l: Listing): string {
-  const t = norm(`${l.title ?? ""}`);
-  let base: string;
-  if (l.rooms === 1 || /\bstudio\b/.test(t)) base = "ce studio";
-  else if (l.rooms && l.rooms > 1) base = `ce ${l.rooms} pièces`;
-  else if (l.property_type === "house" || /maison|villa|pavillon/.test(t))
-    base = "cette maison";
-  else base = "cet appartement";
-  return l.surface ? `${base} de ${l.surface}m²` : base;
+/**
+ * Montant à la française : « 2 400 € ». Espace ordinaire et non insécable fine,
+ * parce que le message finit collé dans un formulaire quelconque, où les
+ * espaces exotiques s'affichent parfois en carré.
+ */
+function montant(n: number): string {
+  return `${Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} €`;
 }
 
-/** « à Paris (75011) », « à Lyon », ou « ». */
-function locationPhrase(l: Listing): string {
-  if (!l.city) return "";
-  return l.postal_code ? ` à ${l.city} (${l.postal_code})` : ` à ${l.city}`;
-}
-
-/** Repère une caractéristique notable dans le titre + description. */
-function notableFeature(l: Listing): string | null {
+/**
+ * Ce qu'on remarque dans une annonce et qu'on a envie de commenter.
+ *
+ * Volontairement restreint aux agréments : on dit « le balcon m'a plu », jamais
+ * « l'ascenseur m'a plu ». L'ascenseur, la cave ou le parking comptent dans la
+ * note, pas dans le compliment.
+ */
+function agrement(l: Listing): string | null {
   const text = norm(`${l.title ?? ""} ${l.description ?? ""}`);
   const map: Array<[RegExp, string]> = [
-    [/\bbalcon\b|terrasse|loggia/, "l'espace extérieur"],
-    [/lumineux|lumineuse|ensoleill|plein sud|clair\b/, "la luminosité"],
+    [/terrasse/, "la terrasse"],
+    [/\bjardin\b/, "le jardin"],
+    [/\bbalcon\b|loggia/, "le balcon"],
+    [/lumineux|lumineuse|ensoleill|plein sud/, "la lumière"],
     [/\bcalme\b|au calme|tranquille/, "le calme"],
-    [/renov|refait|refait a neuf|neuf\b|moderne/, "la rénovation récente"],
-    [/parquet|cheminee|moulures|cachet|charme|ancien/, "le cachet"],
+    [/parquet|cheminee|moulures|cachet|charme/, "le cachet"],
     [/\bvue\b|degagee|panoram/, "la vue"],
-    [/ascenseur/, "l'ascenseur"],
-    [/cave\b|parking|garage|box\b/, "la cave ou le parking"],
+    [/renov|refait a neuf|refait\b/, "la rénovation"],
   ];
   for (const [re, label] of map) if (re.test(text)) return label;
   return null;
 }
 
-/** Phrase d'accroche personnalisée, qui prouve qu'on a lu l'annonce. */
-function hook(l: Listing, v: number): string {
-  const what = propertyDescriptor(l);
-  const where = locationPhrase(l);
-  const feat = notableFeature(l);
-  const price = l.price ? `${where ? ", " : " "}${l.price}€ par mois` : "";
-  const featClause = feat ? `, et ${feat} en particulier,` : "";
-  const variants = [
-    `${cap(what)}${where}${price}${featClause} correspond exactement à ce que je recherche.`,
-    `Je suis très intéressé(e) par ${what}${where}${price}${feat ? ` : j'ai particulièrement noté ${feat}` : ""}.`,
-    `${cap(what)}${where} me plaît beaucoup${feat ? `, notamment pour ${feat}` : ""}.`,
-  ];
-  return variants[v % variants.length];
+/** « Votre annonce m'intéresse beaucoup, en particulier pour le balcon. » */
+function accroche(l: Listing, v: number, variantes: string[]): string {
+  const quoi = agrement(l);
+  const base = variantes[v % variantes.length];
+  return quoi ? `${base.replace(/\.$/, "")}, en particulier pour ${quoi}.` : base;
+}
+
+/**
+ * Le contrat de travail n'est repris que s'il ressemble à un contrat : le champ
+ * est libre, et certains y rangent tout autre chose (« non meublé »…). Mieux
+ * vaut l'omettre qu'écrire « infirmière en non meublé ».
+ */
+function contrat(p: UserProfile): string | null {
+  const c = p.contract_type?.trim();
+  if (!c) return null;
+  const connu = /^(cdi|cdd|interim|intérim|alternance|apprentissage|stage|fonctionnaire|titulaire|independant|indépendant|freelance|liberal|libéral|retraite|retraité|etudiant|étudiant)\b/i;
+  if (!connu.test(norm(c))) return null;
+  // Déjà présent dans la situation (« Salarié CDI ») : ne pas le répéter.
+  if (p.situation && norm(p.situation).includes(norm(c))) return null;
+  return c;
+}
+
+/** « infirmière en CDI », « infirmière », « en CDI », ou « ». */
+function qualite(p: UserProfile): string {
+  const situation = p.situation?.trim();
+  const c = contrat(p);
+  if (situation && c) return `${situation} en ${c}`;
+  return situation || (c ? `en ${c}` : "");
+}
+
+/**
+ * La garantie, dite comme on la dit à l'oral. Le champ est libre : « garantie
+ * Visale » se tourne autrement que « mes parents ».
+ */
+function garantie(p: UserProfile): string | null {
+  const g = p.guarantors?.trim();
+  if (!g) return null;
+  if (/^(garantie|visale|caution|loca ?pass)/i.test(norm(g))) {
+    return `je bénéficie de la ${g}`;
+  }
+  return `mon garant est ${g}`;
+}
+
+/**
+ * Le paragraphe qui compte : qui écrit, ce qu'il gagne, qui se porte garant.
+ * C'est la seule chose que le propriétaire ne sait pas encore.
+ *
+ * Trois tournures, pas une seule : un dossier toujours annoncé dans le même
+ * ordre et la même phrase se reconnaît d'un message à l'autre, et c'est
+ * exactement ce qui fait « texte à trous ». `cloture` est désactivée au ton
+ * professionnel, où la phrase sur les justificatifs dit déjà la même chose.
+ */
+function dossier(
+  p: UserProfile,
+  avecNom: string | null,
+  variante: number,
+  { cloture = true, formel = false }: { cloture?: boolean; formel?: boolean } = {},
+): string {
+  const q = qualite(p);
+  const revenu = p.income_monthly ? montant(p.income_monthly) : null;
+  const g = garantie(p);
+  // Décalé d'un cran tous les trois : sinon les variantes 0 et 3 (puis 1 et 4…)
+  // rendraient exactement le même message, et « régénérer » ne servirait à rien.
+  const v = variante + Math.floor(variante / 3);
+
+  const qui = (suite = "") =>
+    avecNom
+      ? `Je suis ${avecNom}${q ? `, ${q}` : ""}${suite}.`
+      : q
+        ? `Je suis ${q}${suite}.`
+        : null;
+
+  const phrases: Array<string | null> = [];
+
+  switch (v % 3) {
+    case 0:
+      phrases.push(qui());
+      if (revenu) phrases.push(`Mon revenu net est de ${revenu} par mois${g ? ` et ${g}` : ""}.`);
+      else if (g) phrases.push(`${cap(g)}.`);
+      if (cloture) phrases.push("Mon dossier est complet.");
+      break;
+
+    case 1:
+      phrases.push(qui(revenu ? `, avec un revenu net de ${revenu} par mois` : ""));
+      if (cloture) {
+        phrases.push(g ? `${cap(g)} et tous mes justificatifs sont prêts.` : "Tous mes justificatifs sont prêts.");
+      } else if (g) {
+        phrases.push(`${cap(g)}.`);
+      }
+      break;
+
+    default:
+      phrases.push(qui());
+      if (revenu) {
+        // « Je gagne » sonne juste à l'oral, pas dans une lettre formelle.
+        phrases.push(
+          formel ? `Mon revenu net mensuel est de ${revenu}.` : `Je gagne ${revenu} net par mois.`,
+        );
+      }
+      if (cloture) {
+        phrases.push(
+          g ? `${cap(g)}, et mon dossier est prêt à vous être envoyé.` : "Mon dossier est prêt à vous être envoyé.",
+        );
+      } else if (g) {
+        phrases.push(`${cap(g)}.`);
+      }
+  }
+
+  const texte = phrases.filter(Boolean).join(" ");
+  // Profil vide : mieux vaut une phrase honnête que rien du tout.
+  return texte || "Je vous écris au sujet de votre annonce. Mon dossier est prêt.";
 }
 
 function cap(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-/** Éléments forts du dossier, en phrase naturelle (pas une fiche). */
-function dossierSentence(p: UserProfile): string {
-  const parts: string[] = [];
-  if (p.situation) parts.push(p.situation.trim());
-  if (p.contract_type) parts.push(p.contract_type.trim());
-  if (p.income_monthly) parts.push(`revenu net de ${p.income_monthly}€/mois`);
-  if (p.guarantors) parts.push(`garant : ${p.guarantors.trim()}`);
-  if (parts.length === 0) return "";
-  return parts.join(", ");
-}
-
-function phoneClause(p: UserProfile): string {
+function telephone(p: UserProfile): string {
   return p.phone?.trim() || "[téléphone]";
 }
 
-function pick<T>(arr: T[], v: number): T {
-  return arr[v % arr.length];
+/** Nom, puis téléphone (et courriel au ton pro) : comme on signe un e-mail. */
+function signature(p: UserProfile, formule: string, avecEmail = false): string {
+  const lignes = [formule, fullName(p), telephone(p)];
+  if (avecEmail && p.email?.trim()) lignes.push(p.email.trim());
+  return lignes.join("\n");
+}
+
+function assemble(blocs: Array<string | null>): string {
+  return blocs.filter((b): b is string => Boolean(b)).join("\n\n");
 }
 
 // ────────────────────────────── tons ──────────────────────────────
 
 function generateDirect({ listing, profile, v }: Ctx): string {
-  const name = fullName(profile);
-  const intro = pick(["Bonjour,", "Bonjour,"], v);
-  const me = `Je suis ${name}${profile.situation ? `, ${profile.situation}` : ""}.`;
-  const dossier = dossierSentence(profile);
-  const dossierLine = dossier ? `Mon dossier : ${dossier}. Tout est prêt à être transmis.` : `Dossier complet disponible immédiatement.`;
-  const close = pick(
-    [
-      `Disponible pour visiter très vite. Joignable au ${phoneClause(profile)}.`,
-      `Je peux visiter dès que possible. Vous pouvez me joindre au ${phoneClause(profile)}.`,
-    ],
-    v,
-  );
-  return [intro, "", hook(listing, v), me, dossierLine, "", close, "", `Cordialement,\n${name}`].join("\n");
+  const dispo = [
+    "Je peux visiter dès que vous le souhaitez.",
+    "Je suis disponible pour visiter rapidement, en semaine comme le week-end.",
+    "Dites-moi quand vous faites visiter, je m'organise.",
+  ][v % 3];
+
+  return assemble([
+    "Bonjour,",
+    accroche(listing, v, [
+      "Votre annonce m'intéresse beaucoup.",
+      "Votre annonce correspond à ce que je cherche.",
+      "Votre annonce a retenu mon attention.",
+    ]),
+    dossier(profile, null, v),
+    dispo,
+    signature(profile, "Cordialement,"),
+  ]);
 }
 
 function generateWarm({ listing, profile, v }: Ctx): string {
-  const name = fullName(profile);
-  const intro = pick(["Bonjour,", "Bonjour et merci pour votre annonce,"], v);
-  const me = profile.intro_message?.trim()
-    ? profile.intro_message.trim()
-    : `Je m'appelle ${name}${profile.situation ? `, actuellement ${profile.situation}` : ""}.`;
-  const dossier = dossierSentence(profile);
-  const dossierLine = dossier
-    ? `Côté dossier : ${dossier}. Tous les justificatifs sont prêts.`
-    : `Mon dossier locataire est prêt à être transmis.`;
-  const close = pick(
-    [
-      `Je serais ravi(e) d'échanger et de visiter dès que vous le pouvez. Vous pouvez me joindre au ${phoneClause(profile)}.`,
-      `Ce serait un plaisir d'en discuter et de visiter rapidement. Mon numéro : ${phoneClause(profile)}.`,
-    ],
-    v,
-  );
-  return [intro, "", hook(listing, v), "", me, "", dossierLine, "", close, "", `Bien à vous,\n${name}`].join("\n");
+  const presentation = profile.intro_message?.trim() || null;
+  const dispo = [
+    "Je serais disponible pour visiter quand cela vous arrange.",
+    "Je peux me rendre disponible facilement pour une visite, dites-moi ce qui vous convient.",
+    "Si le logement est toujours libre, j'aimerais beaucoup en discuter avec vous.",
+  ][v % 3];
+
+  return assemble([
+    "Bonjour,",
+    accroche(listing, v, [
+      "Votre annonce m'a tout de suite plu.",
+      "Je viens de voir votre annonce et elle me plaît beaucoup.",
+      "Votre annonce est exactement le genre de logement que je cherche.",
+    ]),
+    presentation,
+    dossier(profile, fullName(profile), v),
+    dispo,
+    signature(profile, "Bien à vous,"),
+  ]);
 }
 
 function generatePro({ listing, profile, v }: Ctx): string {
-  const name = fullName(profile);
-  const intro = pick(["Madame, Monsieur,", "Bonjour,"], v);
-  const me = `Je m'appelle ${name}${profile.situation ? `, ${profile.situation}` : ""}${
-    profile.contract_type ? ` en ${profile.contract_type}` : ""
-  }${profile.income_monthly ? `, avec un revenu net mensuel de ${profile.income_monthly}€` : ""}.`;
-  const garant = profile.guarantors
-    ? `Je dispose d'un garant : ${profile.guarantors}.`
-    : `Je peux fournir un garant si nécessaire.`;
-  const docs = `L'ensemble des pièces (identité, contrat, bulletins de salaire, avis d'imposition) sont disponibles sur demande.`;
-  const close = `Je reste à votre disposition pour convenir d'une visite. Vous pouvez me joindre au ${phoneClause(profile)}${
-    profile.email ? ` ou par e-mail à ${profile.email}` : ""
-  }.`;
-  return [intro, "", hook(listing, v), "", me, garant, docs, "", close, "", `Cordialement,\n${name}`].join("\n");
+  const ouverture = ["Madame, Monsieur,", "Bonjour,"][v % 2];
+  const pieces =
+    "L'ensemble des justificatifs (pièce d'identité, contrat de travail, bulletins de salaire, avis d'imposition) est prêt à vous être transmis.";
+
+  return assemble([
+    ouverture,
+    accroche(listing, v, [
+      "Je me permets de vous contacter au sujet de votre annonce.",
+      "Votre annonce a retenu toute mon attention.",
+    ]),
+    `${dossier(profile, fullName(profile), v, { cloture: false, formel: true })} ${pieces}`,
+    "Je me tiens à votre disposition pour organiser une visite.",
+    signature(profile, "Cordialement,", true),
+  ]);
 }
 
 /**

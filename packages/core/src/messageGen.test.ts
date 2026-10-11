@@ -72,10 +72,10 @@ describe("generateMessage", () => {
     }
   });
 
-  it("includes the income when set, with the right unit", () => {
+  it("includes the income when set, formatted the French way", () => {
     const msg = generateMessage(buildListing(), buildProfile(), "pro");
-    expect(msg).toContain("3200");
-    expect(msg.toLowerCase()).toContain("€");
+    expect(msg).toContain("3 200 €");
+    expect(msg).not.toContain("3200€");
   });
 
   it("falls back gracefully on an empty profile (no crash, still has structure)", () => {
@@ -124,12 +124,57 @@ describe('écriture des messages', () => {
     }
   });
 
-  it('accorde la caractéristique citée, même au pluriel', () => {
-    const avecCave = { ...buildListing(), description: 'Deux pièces avec cave et parking.' };
-    for (let v = 0; v < 6; v += 1) {
-      const msg = generateMessage(avecCave, buildProfile(), 'warm', v);
-      expect(msg).not.toContain('retient mon attention');
-      expect(msg).not.toContain('annexes');
+  it("ne récite jamais l'annonce à qui l'a écrite", () => {
+    // Surface, prix, nombre de pièces, ville, code postal : la personne qui
+    // reçoit le message les connaît déjà. Les répéter sent le texte fabriqué.
+    const l = buildListing(); // T2 lumineux, 42 m², 1100 €, Lyon 69003
+    for (const ton of TONS) {
+      for (let v = 0; v < 6; v += 1) {
+        const msg = generateMessage(l, buildProfile(), ton, v);
+        expect(msg).not.toContain("42");
+        expect(msg).not.toContain("m²");
+        expect(msg).not.toContain("1100");
+        expect(msg).not.toContain("1 100");
+        expect(msg).not.toContain("69003");
+        expect(msg).not.toContain("Lyon");
+        expect(msg).not.toMatch(/\b2 pièces\b|\bT2\b/);
+      }
+    }
+  });
+
+  it("ne laisse jamais d'accord entre parenthèses", () => {
+    // « intéressé(e) » : on ne connaît pas le genre de l'utilisateur, et ces
+    // parenthèses signent un texte à trous.
+    for (const ton of TONS) {
+      for (let v = 0; v < 6; v += 1) {
+        expect(generateMessage(buildListing(), buildProfile(), ton, v)).not.toMatch(/\(e\)|\(se\)|\(ve\)/);
+      }
+    }
+  });
+
+  it("cite ce qui a plu dans l'annonce, sans en faire une fiche", () => {
+    const avecBalcon = { ...buildListing(), description: "Bel appartement avec balcon." };
+    const sansRien = { ...buildListing(), title: "Appartement", description: "Libre de suite." };
+    expect(generateMessage(avecBalcon, buildProfile(), "direct", 0)).toContain("le balcon");
+    // Rien à signaler : on n'invente pas d'agrément.
+    expect(generateMessage(sansRien, buildProfile(), "direct", 0)).not.toContain("en particulier pour");
+  });
+
+  it("donne six versions distinctes par ton", () => {
+    for (const ton of TONS) {
+      const versions = new Set(
+        Array.from({ length: 6 }, (_, v) => generateMessage(buildListing(), buildProfile(), ton, v)),
+      );
+      expect(versions.size).toBeGreaterThanOrEqual(4);
+    }
+  });
+
+  it("reste court : une candidature, pas une lettre", () => {
+    for (const ton of TONS) {
+      for (let v = 0; v < 6; v += 1) {
+        const msg = generateMessage(buildListing(), buildProfile(), ton, v);
+        expect(msg.split("\n").filter((l) => l.trim()).length).toBeLessThanOrEqual(9);
+      }
     }
   });
 

@@ -103,9 +103,13 @@ export type MessageExemple = {
 };
 
 /**
- * Six messages produits par `generateMessage`, un par annonce, dans les trois
- * tons. Ce sont des brouillons : c'est toujours l'utilisateur qui relit, qui
- * colle et qui envoie.
+ * Six brouillons produits par `generateMessage`, un par annonce, dans les trois
+ * tons et six variantes différentes.
+ *
+ * Aucun ne récite l'annonce : ni surface, ni prix, ni quartier, ni code postal.
+ * La personne qui reçoit le message a écrit l'annonce ; lui répéter sa fiche ne
+ * prouve rien et sent le texte fabriqué. Ce sont des brouillons : c'est
+ * toujours l'utilisateur qui relit, qui colle et qui envoie.
  */
 export const MESSAGES: MessageExemple[] = [
   {
@@ -115,7 +119,7 @@ export const MESSAGES: MessageExemple[] = [
     note: 96,
     ton: "Direct",
     texte:
-      "Bonjour,\n\nCe 2 pièces de 42m² à Lyon 4e (69004), 890€ par mois, et l'espace extérieur en particulier, correspond exactement à ce que je recherche.\nJe suis Camille Martin, infirmière.\nMon dossier : infirmière, CDI, revenu net de 2400€/mois, garant : garantie Visale. Tout est prêt à être transmis.\n\nDisponible pour visiter très vite. Joignable au 06 12 34 56 78.\n\nCordialement,\nCamille Martin",
+      "Bonjour,\n\nVotre annonce m'intéresse beaucoup, en particulier pour le balcon.\n\nJe suis infirmière en CDI. Mon revenu net est de 2 400 € par mois et je bénéficie de la garantie Visale. Mon dossier est complet.\n\nJe peux visiter dès que vous le souhaitez.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
   },
   {
     annonce: "2 pièces rénové",
@@ -124,7 +128,7 @@ export const MESSAGES: MessageExemple[] = [
     note: 96,
     ton: "Chaleureux",
     texte:
-      "Bonjour et merci pour votre annonce,\n\nJe suis très intéressé(e) par ce 2 pièces de 40m² à Lyon 7e (69007), 845€ par mois : j'ai particulièrement noté l'espace extérieur.\n\nJe m'appelle Camille Martin, actuellement infirmière.\n\nCôté dossier : infirmière, CDI, revenu net de 2400€/mois, garant : garantie Visale. Tous les justificatifs sont prêts.\n\nCe serait un plaisir d'en discuter et de visiter rapidement. Mon numéro : 06 12 34 56 78.\n\nBien à vous,\nCamille Martin",
+      "Bonjour,\n\nJe viens de voir votre annonce et elle me plaît beaucoup, en particulier pour le balcon.\n\nJe suis Camille Martin, infirmière en CDI, avec un revenu net de 2 400 € par mois. Je bénéficie de la garantie Visale et tous mes justificatifs sont prêts.\n\nJe peux me rendre disponible facilement pour une visite, dites-moi ce qui vous convient.\n\nBien à vous,\nCamille Martin\n06 12 34 56 78",
   },
   {
     annonce: "2 pièces proche Part-Dieu",
@@ -133,25 +137,7 @@ export const MESSAGES: MessageExemple[] = [
     note: 66,
     ton: "Professionnel",
     texte:
-      "Madame, Monsieur,\n\nCe 2 pièces de 38m² à Lyon 3e (69003) me plaît beaucoup.\n\nJe m'appelle Camille Martin, infirmière en CDI, avec un revenu net mensuel de 2400€.\nJe dispose d'un garant : garantie Visale.\nL'ensemble des pièces (identité, contrat, bulletins de salaire, avis d'imposition) sont disponibles sur demande.\n\nJe reste à votre disposition pour convenir d'une visite. Vous pouvez me joindre au 06 12 34 56 78.\n\nCordialement,\nCamille Martin",
-  },
-  {
-    annonce: "Grand studio avec cave",
-    lieu: "Monplaisir",
-    prix: 760,
-    note: 47,
-    ton: "Chaleureux",
-    texte:
-      "Bonjour,\n\nJe suis très intéressé(e) par ce studio de 34m² à Lyon 8e (69008), 760€ par mois : j'ai particulièrement noté la cave ou le parking.\n\nJe m'appelle Camille Martin, actuellement infirmière.\n\nCôté dossier : infirmière, CDI, revenu net de 2400€/mois, garant : garantie Visale. Tous les justificatifs sont prêts.\n\nJe serais ravi(e) d'échanger et de visiter dès que vous le pouvez. Vous pouvez me joindre au 06 12 34 56 78.\n\nBien à vous,\nCamille Martin",
-  },
-  {
-    annonce: "Studio meublé",
-    lieu: "Jean Macé",
-    prix: 640,
-    note: 14,
-    ton: "Professionnel",
-    texte:
-      "Bonjour,\n\nCe studio de 28m² à Lyon 7e (69007) me plaît beaucoup, notamment pour le calme.\n\nJe m'appelle Camille Martin, infirmière en CDI, avec un revenu net mensuel de 2400€.\nJe dispose d'un garant : garantie Visale.\nL'ensemble des pièces (identité, contrat, bulletins de salaire, avis d'imposition) sont disponibles sur demande.\n\nJe reste à votre disposition pour convenir d'une visite. Vous pouvez me joindre au 06 12 34 56 78.\n\nCordialement,\nCamille Martin",
+      "Madame, Monsieur,\n\nJe me permets de vous contacter au sujet de votre annonce.\n\nJe suis Camille Martin, infirmière en CDI. Mon revenu net mensuel est de 2 400 €. Je bénéficie de la garantie Visale. L'ensemble des justificatifs (pièce d'identité, contrat de travail, bulletins de salaire, avis d'imposition) est prêt à vous être transmis.\n\nJe me tiens à votre disposition pour organiser une visite.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
   },
   {
     annonce: "T3 au dernier étage",
@@ -160,6 +146,24 @@ export const MESSAGES: MessageExemple[] = [
     note: 1,
     ton: "Direct",
     texte:
-      "Bonjour,\n\nCe 3 pièces de 61m² à Villeurbanne (69100), 1080€ par mois, et la cave ou le parking en particulier, correspond exactement à ce que je recherche.\nJe suis Camille Martin, infirmière.\nMon dossier : infirmière, CDI, revenu net de 2400€/mois, garant : garantie Visale. Tout est prêt à être transmis.\n\nJe peux visiter dès que possible. Vous pouvez me joindre au 06 12 34 56 78.\n\nCordialement,\nCamille Martin",
+      "Bonjour,\n\nVotre annonce m'intéresse beaucoup.\n\nJe suis infirmière en CDI, avec un revenu net de 2 400 € par mois. Je bénéficie de la garantie Visale et tous mes justificatifs sont prêts.\n\nJe peux visiter dès que vous le souhaitez.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
+  },
+  {
+    annonce: "Grand studio avec cave",
+    lieu: "Monplaisir",
+    prix: 760,
+    note: 47,
+    ton: "Chaleureux",
+    texte:
+      "Bonjour,\n\nJe viens de voir votre annonce et elle me plaît beaucoup.\n\nJe suis Camille Martin, infirmière en CDI. Je gagne 2 400 € net par mois. Je bénéficie de la garantie Visale, et mon dossier est prêt à vous être envoyé.\n\nJe peux me rendre disponible facilement pour une visite, dites-moi ce qui vous convient.\n\nBien à vous,\nCamille Martin\n06 12 34 56 78",
+  },
+  {
+    annonce: "Studio meublé",
+    lieu: "Jean Macé",
+    prix: 640,
+    note: 14,
+    ton: "Professionnel",
+    texte:
+      "Bonjour,\n\nVotre annonce a retenu toute mon attention, en particulier pour le calme.\n\nJe suis Camille Martin, infirmière en CDI. Mon revenu net est de 2 400 € par mois et je bénéficie de la garantie Visale. L'ensemble des justificatifs (pièce d'identité, contrat de travail, bulletins de salaire, avis d'imposition) est prêt à vous être transmis.\n\nJe me tiens à votre disposition pour organiser une visite.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
   },
 ];
