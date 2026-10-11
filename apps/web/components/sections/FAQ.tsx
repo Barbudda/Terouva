@@ -15,9 +15,14 @@ export function FAQ() {
                 <svg
                   viewBox="0 0 16 16"
                   aria-hidden
-                  className="mt-1.5 size-4 shrink-0 text-accent transition-transform duration-200 group-open:rotate-45"
+                  className="mt-1.5 size-4 shrink-0 text-accent transition-transform duration-200 group-open:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <path d="M8 2v12M2 8h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <path d="m3.5 6 4.5 4.5L12.5 6" />
                 </svg>
               </summary>
               <p className="max-w-2xl pb-5 leading-relaxed text-ink-2">{item.a}</p>

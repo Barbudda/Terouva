@@ -12,12 +12,12 @@ export function Nav({ home = true }: { home?: boolean }) {
 
   return (
     <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 rounded-full border border-rule bg-card/92 px-4 shadow-[0_8px_30px_-18px_rgb(27_29_30/0.35)] backdrop-blur-sm sm:px-6">
+      <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 rounded-lg border border-rule bg-card/92 px-4 shadow-[0_8px_30px_-20px_rgb(27_29_30/0.3)] backdrop-blur-sm sm:px-6">
         <Link href="/" aria-label="Terouva, accueil">
           <Logo />
         </Link>
 
-        <nav aria-label="Sections" className="hidden lg:block">
+        <nav aria-label="Sections" className="absolute left-1/2 hidden -translate-x-1/2 lg:block">
           <ul className="flex items-center gap-7">
             {NAV_LINKS.map((l) => (
               <li key={l.href}>

@@ -1,6 +1,7 @@
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { Chiffres } from "@/components/sections/Chiffres";
 import { Problem } from "@/components/sections/Problem";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Features } from "@/components/sections/Features";
@@ -54,6 +55,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <Chiffres />
         <Problem />
         <HowItWorks />
         <Features />

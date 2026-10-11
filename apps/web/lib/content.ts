@@ -35,6 +35,18 @@ export const SIGNUP = {
   ],
 };
 
+/**
+ * Chiffres clés. Aucun n'est une statistique d'usage inventée : ce sont des
+ * faits sur le produit, vérifiables en l'ouvrant. Deux valent zéro, et c'est
+ * justement l'argument.
+ */
+export const CHIFFRES = [
+  { valeur: "0", legende: "Compte à créer. Ni e-mail, ni mot de passe." },
+  { valeur: "0", legende: "Serveur. Vos données ne quittent pas votre machine." },
+  { valeur: "3", legende: "Tons de message, six formulations chacun." },
+  { valeur: "100", legende: "Points : la note qui classe chaque annonce." },
+];
+
 export const PROBLEM = {
   eyebrow: "Pourquoi Terouva",
   titleLead: "Louer est devenu",

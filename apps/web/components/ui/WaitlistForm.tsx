@@ -51,7 +51,7 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
       <p
         role="status"
         className={cn(
-          "rounded-full px-6 py-4 text-center font-semibold",
+          "rounded-lg px-6 py-4 text-center font-semibold",
           dark ? "bg-night-2 text-night-ink" : "bg-good-wash text-good",
           className,
         )}
@@ -65,9 +65,8 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
     <form onSubmit={submit} className={cn("w-full", className)} noValidate>
       <div
         className={cn(
-          // Empilee sur mobile, la pilule deviendrait un ovale : rayon fixe en dessous de sm.
-          "flex flex-col gap-2 rounded-[1.75rem] p-2 sm:flex-row sm:rounded-full",
-          dark ? "bg-night-2" : "card-soft !rounded-[1.75rem] sm:!rounded-full",
+          "flex flex-col gap-2 rounded-lg p-2 sm:flex-row",
+          dark ? "bg-night-2" : "border border-rule bg-card",
         )}
       >
         <label className="flex-1">
@@ -84,7 +83,7 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
               if (state.kind === "error") setState({ kind: "idle" });
             }}
             className={cn(
-              "h-12 w-full rounded-full bg-transparent px-5 text-base outline-none",
+              "h-12 w-full rounded-md bg-transparent px-4 text-base outline-none",
               dark ? "text-night-ink placeholder:text-night-ink-2" : "text-ink placeholder:text-ink-3",
             )}
           />
@@ -108,7 +107,7 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
         <button
           type="submit"
           disabled={state.kind === "sending"}
-          className="h-12 shrink-0 rounded-full bg-accent px-6 font-semibold text-white transition-colors hover:bg-accent-ink disabled:opacity-60"
+          className="h-12 shrink-0 rounded-md bg-accent px-6 font-semibold text-white shadow-accent transition-colors hover:bg-accent-ink disabled:opacity-60"
         >
           {state.kind === "sending" ? "Enregistrement…" : "Me prévenir"}
         </button>

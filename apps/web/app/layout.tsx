@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Montserrat } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
-const montserrat = Montserrat({
+// DM Sans : compacte, très lisible en gras serré. Inter et Geist sont exclues
+// par les règles du projet ; DM Sans tient le même rôle sans le déjà-vu.
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
@@ -94,7 +96,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={montserrat.variable}>
+    <html lang="fr" className={dmSans.variable}>
       <body>
         <script
           type="application/ld+json"

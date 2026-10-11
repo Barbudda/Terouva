@@ -5,6 +5,8 @@
   /* Surfaces claires */
   --color-paper: #fdfdfd;
   --color-paper-2: #fbf7f8;
+  /* Gris très clair, neutre : fond des blocs de chiffres clés. */
+  --color-ash: #f6f6f7;
   --color-card: #ffffff;
   --color-muted: #f5f5f5;
 
@@ -38,12 +40,15 @@
   --color-bad: #c62f33;
   --color-bad-wash: #fde4e4;
 
-  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  /* Rayon du thème : 1,4 rem. Les grands panneaux montent à 2 rem. */
-  --radius-md: 0.7rem;
-  --radius-lg: 1.4rem;
+  /* Rectangles légèrement arrondis, pas des pilules : une pilule partout est
+     la forme par défaut de toutes les pages de produit. Les grandes images et
+     les panneaux gardent un arrondi plus généreux. */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
   --radius-xl: 2rem;
 }
 
@@ -81,8 +86,8 @@ body {
 /* Titres de la landing : très gras, serrés, la fin passe en accent. */
 .display {
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 0.98;
+  letter-spacing: -0.035em;
+  line-height: 0.97;
   /* Evite les lignes orphelines : le navigateur repartit les mots. */
   text-wrap: balance;
 }
@@ -94,6 +99,28 @@ body {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-accent);
+}
+
+/* Ombre colorée très douce, réservée à l'action principale de la page. */
+.shadow-accent {
+  box-shadow: 0 10px 26px -12px rgb(201 45 106 / 0.55);
+}
+
+/* Commande circulaire à flèche, posée au coin d'une carte. */
+.pastille {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-rule);
+  color: var(--color-ink);
+  transition: background-color 150ms, color 150ms, border-color 150ms;
+}
+.groupe-carte:hover .pastille {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
 }
 
 /* Carte claire posée sur le fond, ombre douce vers le bas. */

@@ -7,11 +7,15 @@ Une seule langue visuelle pour le site d'avant-lancement et l'application.
 Terouva aide des particuliers à trouver une location. Le site doit donner envie d'essayer
 et de laisser son adresse ; l'application doit rester lisible pendant des heures.
 
-Deux références, demandées par Hugo le 11/10/2026 :
-- **[fanclaw.ai](https://fanclaw.ai/fr)** pour le rythme de la page : fond clair, grands
-  panneaux très arrondis, sur-titre en capitales, titre très gras dont la fin passe en
-  couleur, grilles de cartes à tuile d'icône, bloc sombre pour l'appel final.
-- Le thème **Rose Quartz** (shadcn/ui) pour la palette, la typographie et les rayons.
+Trois références, demandées par Hugo le 11/10/2026 :
+- Le thème **Rose Quartz** (shadcn/ui) pour la palette. Hugo l'a choisi sur image : on le
+  garde, y compris quand une référence ultérieure propose autre chose.
+- **[fanclaw.ai](https://fanclaw.ai/fr)** pour la stratégie : outils gratuits, guides,
+  présence hors site. C'est de là que vient la rubrique `/outils`.
+- Un **brief dérivé d'un gabarit Framer** pour la composition : blanc dominant, un seul
+  accent vif, typographie imposante, grille éditoriale, rectangles arrondis. Le brief parlait
+  de rouge ; `#C92D6A` est déjà un rouge profond et tient ce rôle, sans faire ressembler le
+  site au gabarit. C'est un seul token si l'arbitrage change.
 
 ## Palette (tokens `@theme` dans `app/globals.css`)
 
@@ -19,6 +23,7 @@ Deux références, demandées par Hugo le 11/10/2026 :
 |---|---|---|
 | `paper` | `#FDFDFD` | fond de page |
 | `paper-2` | `#FBF7F8` | sections en retrait, panneaux clairs |
+| `ash` | `#F6F6F7` | gris neutre des blocs de chiffres clés |
 | `card` | `#FFFFFF` | cartes et champs |
 | `muted` | `#F5F5F5` | surfaces neutres |
 | `ink` | `#1B1D1E` | texte principal (15,8:1 sur `paper`) |
@@ -41,23 +46,67 @@ l'effet « tout noir ».
 
 ## Typographie
 
-**Montserrat** partout (variable, via `next/font`). Pas de serif.
+**DM Sans** partout (variable, via `next/font`). Pas de serif.
 
-- `.display` : graisse 800, interlettrage −0,03 em, interligne 0,98. Tous les titres.
-- Titre principal : 2,6 rem à 4,6 rem. Titres de section : 2 rem à 3 rem.
+Le brief du 11/10/2026 demandait « DM Sans ou Inter » ; les règles du projet excluent
+Inter, Geist et Space Grotesk. DM Sans tient le même rôle — compacte, très lisible en gras
+serré — sans le déjà-vu. Elle remplace Montserrat, trop large pour des titres de 80 px.
+
+- `.display` : graisse 800, interlettrage −0,035 em, interligne 0,97. Tous les titres.
+- Titre principal : 2,6 rem à **4,9 rem** (78 px). Titres de section : 2 rem à 3 rem.
 - `.eyebrow` : 12 px, capitales, interlettrage 0,16 em, en rose. Au-dessus de chaque titre.
 - Texte courant : 16 à 18 px, `ink-2`. Chiffres en `tabular`.
 
 ## Formes
 
-Rayon du thème : **1,4 rem**.
-- `--radius-md` 0,7 rem : champs et petits éléments de l'application.
-- `--radius-lg` 1,4 rem : cartes, tuiles d'icône.
-- `--radius-xl` 2 rem : grands panneaux de section.
-- **Boutons et champs du site : pilule** (rayon plein).
+**Des rectangles légèrement arrondis, pas des pilules.** La pilule partout est la forme par
+défaut de toutes les pages de produit ; le rectangle tient mieux à côté d'une typographie
+serrée et de grandes surfaces.
+
+- `--radius-sm` 0,5 rem : petits éléments.
+- `--radius-md` 0,75 rem : **boutons et champs**.
+- `--radius-lg` 1,25 rem : cartes.
+- `--radius-xl` 2 rem : grands panneaux et images.
+- La pilule reste pour ce qui est vraiment une étiquette : badge « bientôt disponible »,
+  pastille à flèche, points d'état.
 
 `.card-soft` : fond blanc, filet `rule`, ombre douce portée vers le bas, jamais plus.
+À utiliser avec parcimonie : tout enfermer dans une boîte à ombre alourdit la page.
+`.shadow-accent` : ombre rose très douce, **réservée à l'action principale**.
 `.night-glow` : halo rose à 22 % au sommet du bloc sombre. C'est le seul dégradé du site.
+`.pastille` : commande circulaire à flèche, qui se remplit de rose au survol de sa carte.
+
+## Rythme de la page
+
+Le brief du 11/10/2026 (dérivé d'un gabarit Framer) fixe la composition :
+
+1. **Navigation** blanche et droite : identité à gauche, liens au centre, bouton sombre à droite.
+2. **Introduction en deux colonnes** : badge, titre sur plusieurs lignes dont la fin passe en
+   rose, description, inscription, lien secondaire à flèche fine, réassurances. À droite, un
+   visuel fort — chez nous **le produit en HTML**, jamais une photographie de banque d'images.
+3. **Chiffres clés** sur `ash`, en rose, avec légendes grises. Aucun n'est une statistique
+   d'usage : le produit n'est pas sorti, deux de nos chiffres valent zéro et c'est l'argument.
+4. Alternance de blocs : deux colonnes texte, liste éditoriale à filets, ruban de messages.
+5. **Un seul aplat rose** dans toute la page, pour l'appel à l'action le plus important.
+   Un deuxième lui ferait perdre son poids. Blanc sur `accent` : 5,16:1, au-dessus du minimum.
+6. **Un seul bloc sombre**, l'inscription finale.
+7. **Questions** en lignes blanches arrondies, filet gris, chevron rose.
+8. **Pied de page** blanc, en colonnes.
+
+### Pas de photographie
+
+Le brief s'appuie beaucoup sur l'image. Terouva n'en a pas, et des photographies
+d'appartements en banque d'images sont un marqueur de site généré, en plus d'une question de
+licence. Les emplacements « image » sont donc tenus par des surfaces du produit : la scène
+d'annonces, les cartes de messages, les tableaux de données. C'est plus convaincant qu'une
+photo d'inconnu souriant dans un salon.
+
+### Un piège de mise en page, déjà rencontré
+
+Un élément de grille a `min-width: auto` : il ne descend pas sous la largeur minimale de son
+contenu. Le titre d'une carte en `truncate` (donc `nowrap`) imposait 394 px à toute la page,
+et le mobile débordait. **Toute colonne de grille contenant une surface produit prend
+`min-w-0`.**
 
 ## Icônes
 
