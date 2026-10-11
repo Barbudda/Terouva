@@ -25,13 +25,31 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(fileURLToPath(import.meta.url), "..", "..");
 const violations = [];
 
-// ── Règle 1 : pas de route API côté web ──────────────────────────────────────
+// ── Règle 1 : une seule route API côté web, et c'est la liste d'attente ───────
+// L'application reste 100 % locale (IndexedDB) : aucune donnée de recherche,
+// d'annonce ou de candidature ne doit passer par un serveur. La seule exception
+// autorisée est le formulaire d'inscription du site vitrine, qui transmet une
+// adresse e-mail à Resend. Toute autre route est une violation.
+const ALLOWED_API_ROUTES = ["waitlist/route.ts"];
 const apiDir = join(ROOT, "apps", "web", "app", "api");
 if (existsSync(apiDir)) {
-  violations.push(
-    `apps/web/app/api existe → une route serveur casse la promesse « zéro serveur ». ` +
-      `Supprime-la : l'app est 100 % local-first (IndexedDB), aucune API Terouva.`,
-  );
+  const found = [];
+  const walkApi = (dir) => {
+    for (const entry of readdirSync(dir)) {
+      const p = join(dir, entry);
+      if (statSync(p).isDirectory()) walkApi(p);
+      else found.push(relative(apiDir, p).split(sep).join("/"));
+    }
+  };
+  walkApi(apiDir);
+  for (const file of found) {
+    if (!ALLOWED_API_ROUTES.includes(file)) {
+      violations.push(
+        `apps/web/app/api/${file} → route serveur non autorisée. L'app est local-first : ` +
+          `seule ${ALLOWED_API_ROUTES.join(", ")} (inscription à la liste d'attente) est admise.`,
+      );
+    }
+  }
 }
 
 // ── Règle 2 : aucun fetch/XHR vers leboncoin.fr dans notre code ───────────────
@@ -87,4 +105,6 @@ if (violations.length > 0) {
   for (const v of violations) console.error("  • " + v + "\n");
   process.exit(1);
 }
-console.log("✓ Lignes rouges OK : aucun app/api/*, aucune requête vers leboncoin.fr.");
+console.log(
+  "✓ Lignes rouges OK : aucune route serveur hors liste d'attente, aucune requête vers leboncoin.fr.",
+);

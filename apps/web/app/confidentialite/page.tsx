@@ -33,22 +33,43 @@ export default function Confidentialite() {
           Politique de confidentialité
         </h1>
         <p className="mt-3 text-sm text-ink-3">
-          En vigueur en juin 2026. Elle s'applique au site Terouva, à l'application
-          web et à l'extension de navigateur.
+          Mise à jour en octobre 2026. Elle s'applique au site Terouva, à
+          l'application et à l'extension de navigateur.
         </p>
 
         <p className="mt-8 text-lg leading-relaxed text-ink-2">
           Terouva est conçu pour respecter votre vie privée par construction.
-          En résumé : <strong className="text-ink">vos données
-          restent sur votre ordinateur</strong>, il n'y a ni compte, ni serveur,
-          ni publicité, ni suivi.
+          En résumé : <strong className="text-ink">vos données restent sur votre
+          ordinateur</strong>, il n'y a ni compte, ni publicité, ni suivi. La
+          seule information qui nous parvient est votre adresse e-mail, et
+          uniquement si vous demandez à être prévenu du lancement.
         </p>
 
-        <Section title="Aucune collecte de données">
+        <Section title="L'application ne collecte rien">
           <p>
-            Nous ne collectons aucune donnée vous concernant. L'application et
-            l'extension fonctionnent localement, dans votre navigateur. Aucune de
-            vos informations n'est transmise à un serveur Terouva ni à un tiers.
+            L'application et l'extension fonctionnent localement, sur votre
+            appareil. Vos recherches, les annonces, votre dossier et vos messages
+            de candidature ne sont transmis ni à nous, ni à un tiers.
+          </p>
+        </Section>
+
+        <Section title="Si vous demandez à être prévenu du lancement">
+          <p>
+            Dans ce cas précis, et seulement si vous remplissez le formulaire,
+            votre <strong className="text-ink">adresse e-mail</strong> nous est
+            transmise. Elle sert uniquement à vous envoyer un message le jour où
+            Terouva devient téléchargeable. Pas de publicité, pas de revente,
+            aucun autre envoi.
+          </p>
+          <p>
+            La liste est conservée chez <strong className="text-ink">Resend</strong>,
+            notre prestataire d'envoi d'e-mails, qui agit pour notre compte. Nous
+            gardons votre adresse jusqu'au lancement, puis au maximum un an.
+          </p>
+          <p>
+            Vous pouvez à tout moment demander à consulter ou à supprimer votre
+            adresse : répondez à l'un de nos e-mails, ou écrivez-nous via la page
+            du projet. Chaque message contient aussi un lien de désinscription.
           </p>
         </Section>
 
