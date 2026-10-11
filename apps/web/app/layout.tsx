@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Terouva" }],
   alternates: {
     canonical: "/",
+    // Déclare le flux : les lecteurs et les robots le découvrent sans qu'il
+    // faille connaître son adresse.
+    types: { "application/rss+xml": "/flux.xml" },
   },
   openGraph: {
     title: "Terouva · Trouvez votre logement sans y passer vos journées",
