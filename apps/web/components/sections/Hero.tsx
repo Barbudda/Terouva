@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { HERO } from "@/lib/content";
 import { Assurances } from "@/components/ui/SectionHeading";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
@@ -25,6 +26,19 @@ export function Hero() {
           <div className="mx-auto mt-8 max-w-xl">
             <WaitlistForm />
           </div>
+
+          {/* Quelque chose à faire tout de suite : sans ça, un visiteur qui ne
+              laisse pas son adresse repart sans rien, et ne revient jamais. */}
+          <p className="mt-6 text-[15px] text-ink-2">
+            En attendant, écrivez votre message de candidature avec{" "}
+            <Link
+              href="/outils/message-de-candidature"
+              className="font-semibold text-accent underline decoration-accent/30 underline-offset-[5px] transition-colors hover:decoration-accent"
+            >
+              notre outil gratuit
+            </Link>
+            .
+          </p>
 
           <div className="mt-8 flex justify-center">
             <Assurances items={HERO.assurances} />

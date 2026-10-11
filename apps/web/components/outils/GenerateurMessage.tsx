@@ -235,8 +235,8 @@ export function GenerateurMessage() {
               aria-pressed={ton === t}
               className={
                 ton === t
-                  ? "h-10 rounded-full bg-accent px-4 text-[15px] font-semibold text-white"
-                  : "h-10 rounded-full border border-rule bg-card px-4 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink"
+                  ? "h-11 rounded-full bg-accent px-4 text-[15px] font-semibold text-white"
+                  : "h-11 rounded-full border border-rule bg-card px-4 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink"
               }
             >
               {TONE_LABELS[t]}
@@ -249,7 +249,7 @@ export function GenerateurMessage() {
               setVariante((v) => (v + 1) % 6);
               setCopie(false);
             }}
-            className="ml-auto inline-flex h-10 items-center gap-2 rounded-full border border-rule bg-card px-4 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink"
+            className="ml-auto inline-flex h-11 items-center gap-2 rounded-full border border-rule bg-card px-4 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink"
           >
             <Rejouer />
             Autre version

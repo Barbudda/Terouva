@@ -15,10 +15,13 @@ export function Footer() {
         {FOOTER.columns.map((col) => (
           <nav key={col.title} aria-label={col.title}>
             <p className="text-[13px] font-bold tracking-wider text-ink uppercase">{col.title}</p>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-3 space-y-0.5">
               {col.links.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-ink-2 transition-colors hover:text-accent">
+                  <Link
+                    href={l.href}
+                    className="inline-block py-1.5 text-ink-2 transition-colors hover:text-accent"
+                  >
                     {l.label}
                   </Link>
                 </li>

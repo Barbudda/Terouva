@@ -15,7 +15,7 @@ export function Ariane({ etapes }: { etapes: Array<{ nom: string; chemin: string
             {i === etapes.length - 1 ? (
               <span aria-current="page">{e.nom}</span>
             ) : (
-              <Link href={e.chemin} className="transition-colors hover:text-accent">
+              <Link href={e.chemin} className="inline-block py-1 transition-colors hover:text-accent">
                 {e.nom}
               </Link>
             )}

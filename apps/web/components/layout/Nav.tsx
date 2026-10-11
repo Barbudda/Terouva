@@ -23,7 +23,7 @@ export function Nav({ home = true }: { home?: boolean }) {
               <li key={l.href}>
                 <a
                   href={href(l.href)}
-                  className="text-[15px] font-medium text-ink-2 transition-colors hover:text-ink"
+                  className="inline-flex h-11 items-center text-[15px] font-medium text-ink-2 transition-colors hover:text-ink"
                 >
                   {l.label}
                 </a>
