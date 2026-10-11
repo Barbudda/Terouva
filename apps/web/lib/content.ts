@@ -145,7 +145,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Combien ça coûte ?",
-    a: "L'essai est gratuit. Si une offre payante arrive un jour, elle sera annoncée clairement, et la version qui fonctionne alors ne sera pas retirée.",
+    a: "L'application sera payante, par abonnement, autour de 12 € par mois, avec un essai gratuit pour voir si elle vous sert. Le prix définitif sera annoncé au lancement, et les outils de ce site resteront gratuits.",
   },
   {
     q: "Où vont mes données ?",

@@ -28,6 +28,10 @@ export function GET() {
 L'application n'est pas encore téléchargeable (octobre 2026). Une démonstration
 fonctionne dans le navigateur, et une liste d'attente prévient du lancement.
 
+Elle sera payante par abonnement, autour de 12 € par mois, avec un essai gratuit.
+Le prix définitif sera annoncé au lancement. Les outils de ce site (générateur de
+message, checklist de dossier) restent gratuits et sans inscription.
+
 ## Ce que Terouva ne fait pas
 
 - Il ne consulte pas les sites d'annonces à la place de l'utilisateur et ne les requête jamais.

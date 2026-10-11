@@ -6,3 +6,4 @@ export * from "./types";
 export * from "./scoring";
 export * from "./messageGen";
 export * from "./lbcEmail";
+export * from "./dossier";

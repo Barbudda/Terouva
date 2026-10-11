@@ -60,11 +60,29 @@ describe("seed (≡ INSERT du schéma 0001)", () => {
     expect(p.first_name).toBeNull();
   });
 
-  it("seed 10 documents, triés required DESC", async () => {
+  it("seed 9 documents, triés required DESC", async () => {
     const docs = await listDocuments();
-    expect(docs).toHaveLength(10);
+    expect(docs).toHaveLength(9);
     expect(docs[0].required).toBe(1);
     expect(docs[docs.length - 1].required).toBe(0);
+  });
+
+  it("ne suggère aucune pièce qu'un bailleur n'a pas le droit d'exiger", async () => {
+    // Le RIB, les relevés de compte et la carte Vitale ne figurent pas dans la
+    // liste du décret du 5 novembre 2015 : les proposer reviendrait à conseiller
+    // de fournir ce qu'on peut refuser.
+    const noms = (await listDocuments()).map((d) => d.name.toLowerCase()).join(" | ");
+    expect(noms).not.toMatch(/\brib\b/);
+    expect(noms).not.toContain("relevé de compte");
+    expect(noms).not.toContain("vitale");
+  });
+
+  it("ne présume pas que l'utilisateur est salarié", async () => {
+    // Un étudiant ou un indépendant n'a ni contrat de travail ni bulletins de
+    // salaire : la liste de départ reste neutre.
+    const noms = (await listDocuments()).map((d) => d.name.toLowerCase()).join(" | ");
+    expect(noms).not.toContain("contrat de travail");
+    expect(noms).not.toContain("bulletins de salaire");
   });
 
   it("seed les réglages par défaut", async () => {

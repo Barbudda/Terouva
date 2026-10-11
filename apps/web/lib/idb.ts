@@ -44,17 +44,30 @@ function nowSql(): string {
 
 // ────────────────────────────── seeds (≡ INSERT du 0001_init.sql) ──────────────────────────────
 
+/**
+ * Liste de départ du dossier, posée à la création de la base.
+ *
+ * Elle suit les quatre catégories du décret du 5 novembre 2015 et reste
+ * **neutre** : on ne sait pas encore si la personne est salariée, étudiante ou
+ * indépendante, donc on ne réclame ni contrat de travail ni bulletins de
+ * salaire, que beaucoup n'auront jamais. Chacun précise ensuite ses propres
+ * pièces ; la checklist de terouva.com/outils/dossier-de-location donne la
+ * liste exacte selon la situation.
+ *
+ * Le RIB a été retiré : il ne figure pas dans la liste autorisée avant la
+ * signature du bail, et le suggérer revenait à conseiller de fournir une pièce
+ * qu'un propriétaire n'a pas le droit d'exiger.
+ */
 const SEED_DOCUMENTS: Omit<DocumentItem, "id" | "created_at">[] = [
   { name: "Pièce d'identité", category: "identité", file_path: null, required: 1, available: 0, notes: null },
-  { name: "3 derniers bulletins de salaire", category: "revenus", file_path: null, required: 1, available: 0, notes: null },
-  { name: "Contrat de travail", category: "pro", file_path: null, required: 1, available: 0, notes: null },
-  { name: "Dernier avis d'imposition", category: "fiscal", file_path: null, required: 1, available: 0, notes: null },
   { name: "Justificatif de domicile", category: "logement", file_path: null, required: 1, available: 0, notes: null },
-  { name: "Quittance de loyer (3 derniers mois)", category: "logement", file_path: null, required: 0, available: 0, notes: null },
+  { name: "Justificatif d'activité", category: "pro", file_path: null, required: 1, available: 0, notes: null },
+  { name: "Dernier avis d'imposition", category: "fiscal", file_path: null, required: 1, available: 0, notes: null },
+  { name: "Justificatif de ressources", category: "revenus", file_path: null, required: 1, available: 0, notes: null },
+  { name: "Attestation de simulation d'aide au logement", category: "revenus", file_path: null, required: 0, available: 0, notes: null },
   { name: "Pièce d'identité du garant", category: "garant", file_path: null, required: 0, available: 0, notes: null },
-  { name: "3 derniers bulletins de salaire du garant", category: "garant", file_path: null, required: 0, available: 0, notes: null },
+  { name: "Justificatif de ressources du garant", category: "garant", file_path: null, required: 0, available: 0, notes: null },
   { name: "Dernier avis d'imposition du garant", category: "garant", file_path: null, required: 0, available: 0, notes: null },
-  { name: "RIB", category: "autre", file_path: null, required: 0, available: 0, notes: null },
 ];
 
 const SEED_SETTINGS: { key: string; value: string }[] = [

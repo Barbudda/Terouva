@@ -7,6 +7,7 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Features } from "@/components/sections/Features";
 import { Messages } from "@/components/sections/Messages";
 import { Demo } from "@/components/sections/Demo";
+import { Outils } from "@/components/sections/Outils";
 import { Privacy } from "@/components/sections/Privacy";
 import { FAQ } from "@/components/sections/FAQ";
 import { Signup } from "@/components/sections/Signup";
@@ -41,11 +42,9 @@ export default function Home() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "macOS, Windows",
     inLanguage: "fr-FR",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "EUR",
-    },
+    // Pas de bloc `offers` : l'application n'est pas encore en vente et son prix
+    // n'est pas arrêté. Annoncer « 0 € » serait faux, annoncer un prix qui peut
+    // bouger le serait aussi, et un balisage inexact se paie en référencement.
   };
 
   return (
@@ -61,6 +60,7 @@ export default function Home() {
         <Features />
         <Messages />
         <Demo />
+        <Outils />
         <Privacy />
         <FAQ />
         <Signup />

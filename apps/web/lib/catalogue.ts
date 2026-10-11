@@ -169,6 +169,16 @@ export type Outil = {
 
 export const OUTILS: Outil[] = [
   {
+    chemin: "/outils/dossier-de-location",
+    titre: "Checklist de dossier de location, selon votre situation",
+    titreSeo: "Checklist de dossier de location",
+    court: "Checklist de dossier",
+    resume:
+      "La liste exacte des pièces à réunir pour votre situation, et celles qu'on n'a pas le droit de vous demander.",
+    description:
+      "Trois questions, et vous obtenez la liste des pièces de votre dossier de location, plus celles qui sont interdites. Gratuit, sans inscription.",
+  },
+  {
     chemin: "/outils/message-de-candidature",
     titre: "Générateur de message de candidature pour une location",
     titreSeo: "Générateur de message de candidature",
