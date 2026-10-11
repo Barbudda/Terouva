@@ -6,7 +6,7 @@ export function Privacy() {
   return (
     <section id="donnees" className="px-4 pb-16 sm:px-6 md:pb-24">
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-12">
-        <div className="md:col-span-5">
+        <div className="monte md:col-span-5">
           <SectionHeading eyebrow={PRIVACY.eyebrow} lead={PRIVACY.titleLead} tail={PRIVACY.titleTail}>
             {PRIVACY.body}
           </SectionHeading>
@@ -18,7 +18,7 @@ export function Privacy() {
           </Link>
         </div>
 
-        <dl className="card-soft divide-y divide-rule px-6 md:col-span-6 md:col-start-7">
+        <dl className="monte card-soft divide-y divide-rule px-6 md:col-span-6 md:col-start-7">
           {PRIVACY.points.map((p) => (
             <div key={p.label} className="grid gap-1 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
               <dt className="text-[15px] text-ink-3">{p.label}</dt>

@@ -111,3 +111,33 @@ describe("generateMessage", () => {
     expect(TONE_LABELS.pro).toBeDefined();
   });
 });
+
+describe('écriture des messages', () => {
+  const TONS = ['direct', 'warm', 'pro'] as const;
+
+  it("n'écrit jamais de tiret cadratin", () => {
+    // Signal « vibecodé » n° 9 : ces messages partent chez de vrais propriétaires.
+    for (const ton of TONS) {
+      for (let v = 0; v < 6; v += 1) {
+        expect(generateMessage(buildListing(), buildProfile(), ton, v)).not.toContain('—');
+      }
+    }
+  });
+
+  it('accorde la caractéristique citée, même au pluriel', () => {
+    const avecCave = { ...buildListing(), description: 'Deux pièces avec cave et parking.' };
+    for (let v = 0; v < 6; v += 1) {
+      const msg = generateMessage(avecCave, buildProfile(), 'warm', v);
+      expect(msg).not.toContain('retient mon attention');
+      expect(msg).not.toContain('annexes');
+    }
+  });
+
+  it('ne colle pas deux parenthèses de suite', () => {
+    for (const ton of TONS) {
+      for (let v = 0; v < 6; v += 1) {
+        expect(generateMessage(buildListing(), buildProfile(), ton, v)).not.toMatch(/\)\s*\(/);
+      }
+    }
+  });
+});

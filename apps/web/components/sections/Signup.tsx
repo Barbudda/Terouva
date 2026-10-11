@@ -9,7 +9,7 @@ import { WaitlistForm } from "@/components/ui/WaitlistForm";
 export function Signup() {
   return (
     <section id="inscription" className="px-4 pb-16 sm:px-6 md:pb-24">
-      <div className="night-glow mx-auto max-w-6xl rounded-xl px-5 py-14 text-center sm:px-10 md:py-20">
+      <div className="monte night-glow mx-auto max-w-6xl rounded-xl px-5 py-14 text-center sm:px-10 md:py-20">
         <SectionHeading
           eyebrow={SIGNUP.eyebrow}
           lead={SIGNUP.titleLead}

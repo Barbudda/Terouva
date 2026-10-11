@@ -20,7 +20,7 @@ export const HERO = {
     "Rien à créer, aucun compte",
     "Vos données restent chez vous",
   ],
-  caption: "L'écran « Mes annonces », rempli avec des annonces d'exemple.",
+  caption: "Quatre annonces d'exemple, notées sur 100 pour une recherche de 2 pièces à Lyon sous 950 €.",
 };
 
 export const SIGNUP = {

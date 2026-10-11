@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { HERO } from "@/lib/content";
 import { Assurances } from "@/components/ui/SectionHeading";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
+import { SceneAnnonces } from "@/components/sections/SceneAnnonces";
 
 export function Hero() {
   return (
@@ -31,18 +31,8 @@ export function Hero() {
           </div>
         </div>
 
-        <figure className="mt-14 md:mt-20">
-          <div className="card-soft overflow-hidden rounded-xl p-2 sm:p-3">
-            <Image
-              src="/apercu-annonces.png"
-              alt="Aperçu de Terouva : une liste d'annonces de location notées sur 100, la mieux notée étant signalée comme à contacter en priorité."
-              width={1440}
-              height={900}
-              priority
-              sizes="(min-width: 1152px) 1104px, 100vw"
-              className="h-auto w-full rounded-lg"
-            />
-          </div>
+        <figure className="mx-auto mt-14 max-w-3xl md:mt-20">
+          <SceneAnnonces />
           <figcaption className="mt-3 text-center text-sm text-ink-3">{HERO.caption}</figcaption>
         </figure>
       </div>

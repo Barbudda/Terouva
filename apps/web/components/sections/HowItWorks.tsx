@@ -5,14 +5,14 @@ export function HowItWorks() {
   return (
     <section id="comment" className="px-4 py-16 sm:px-6 md:py-24">
       <div className="mx-auto max-w-6xl rounded-xl bg-paper-2 px-5 py-12 sm:px-10 md:py-16">
-        <SectionHeading eyebrow="Comment ça marche" lead="Trois étapes," tail="et c'est tout.">
+        <SectionHeading eyebrow="Comment ça marche" lead="Trois étapes," tail="et c'est tout." className="monte">
           Quelques minutes pour tout préparer. Ensuite, Terouva travaille pendant que vous faites
           autre chose.
         </SectionHeading>
 
         <ol className="mt-12 grid gap-5 md:grid-cols-3">
           {STEPS.map((step, i) => (
-            <li key={step.title} className="card-soft p-6">
+            <li key={step.title} className="monte card-soft p-6">
               <span className="display grid size-11 place-items-center rounded-full bg-accent-wash text-xl text-accent-ink tabular">
                 {i + 1}
               </span>

@@ -21,7 +21,7 @@ interface Ctx {
 }
 
 function fullName(p: UserProfile): string {
-  return [p.first_name, p.last_name].filter(Boolean).join(" ").trim() || "—";
+  return [p.first_name, p.last_name].filter(Boolean).join(" ").trim() || "[votre nom]";
 }
 
 function norm(s: string): string {
@@ -57,7 +57,7 @@ function notableFeature(l: Listing): string | null {
     [/parquet|cheminee|moulures|cachet|charme|ancien/, "le cachet"],
     [/\bvue\b|degagee|panoram/, "la vue"],
     [/ascenseur/, "l'ascenseur"],
-    [/cave\b|parking|garage|box\b/, "les annexes (cave/parking)"],
+    [/cave\b|parking|garage|box\b/, "la cave ou le parking"],
   ];
   for (const [re, label] of map) if (re.test(text)) return label;
   return null;
@@ -68,11 +68,11 @@ function hook(l: Listing, v: number): string {
   const what = propertyDescriptor(l);
   const where = locationPhrase(l);
   const feat = notableFeature(l);
-  const price = l.price ? ` (${l.price}€/mois)` : "";
+  const price = l.price ? `${where ? ", " : " "}${l.price}€ par mois` : "";
   const featClause = feat ? `, et ${feat} en particulier,` : "";
   const variants = [
     `${cap(what)}${where}${price}${featClause} correspond exactement à ce que je recherche.`,
-    `Je suis très intéressé(e) par ${what}${where}${price}${feat ? ` — ${feat} retient mon attention` : ""}.`,
+    `Je suis très intéressé(e) par ${what}${where}${price}${feat ? ` : j'ai particulièrement noté ${feat}` : ""}.`,
     `${cap(what)}${where} me plaît beaucoup${feat ? `, notamment pour ${feat}` : ""}.`,
   ];
   return variants[v % variants.length];
@@ -112,7 +112,7 @@ function generateDirect({ listing, profile, v }: Ctx): string {
   const close = pick(
     [
       `Disponible pour visiter très vite. Joignable au ${phoneClause(profile)}.`,
-      `Je peux visiter dès que possible — ${phoneClause(profile)}.`,
+      `Je peux visiter dès que possible. Vous pouvez me joindre au ${phoneClause(profile)}.`,
     ],
     v,
   );
@@ -127,12 +127,12 @@ function generateWarm({ listing, profile, v }: Ctx): string {
     : `Je m'appelle ${name}${profile.situation ? `, actuellement ${profile.situation}` : ""}.`;
   const dossier = dossierSentence(profile);
   const dossierLine = dossier
-    ? `Côté dossier : ${dossier} — tous les justificatifs sont prêts.`
+    ? `Côté dossier : ${dossier}. Tous les justificatifs sont prêts.`
     : `Mon dossier locataire est prêt à être transmis.`;
   const close = pick(
     [
       `Je serais ravi(e) d'échanger et de visiter dès que vous le pouvez. Vous pouvez me joindre au ${phoneClause(profile)}.`,
-      `Ce serait un plaisir d'en discuter et de visiter rapidement — ${phoneClause(profile)}.`,
+      `Ce serait un plaisir d'en discuter et de visiter rapidement. Mon numéro : ${phoneClause(profile)}.`,
     ],
     v,
   );

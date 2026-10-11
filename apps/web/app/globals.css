@@ -126,6 +126,125 @@ details > summary::-webkit-details-marker {
   animation: breathe 2.4s ease-in-out infinite;
 }
 
+/* ───────────────────────── Mouvement ─────────────────────────
+   Trois gestes, pas un de plus : un bloc qui monte à son arrivée, la scène
+   d'accueil qui se remplit une fois, et le ruban de messages qui défile.
+   Tout passe par `transform` et `opacity` (pas de reflow), et tout s'éteint
+   sous `prefers-reduced-motion`. */
+
+/* Courbe maison : départ franc, arrivée posée. */
+@keyframes monte {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Révélation au défilement, sans JavaScript, là où le navigateur sait le faire.
+   Ailleurs, le bloc est simplement visible : rien ne se perd. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .monte {
+      animation: monte linear both;
+      animation-timeline: view();
+      animation-range: entry 8% cover 26%;
+    }
+  }
+}
+
+/* ── Scène d'accueil ── */
+@keyframes carte-arrive {
+  from { opacity: 0; transform: translateY(22px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes jauge-remplit {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes sceau-apparait {
+  from { opacity: 0; transform: translateY(-6px) scale(0.9); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Les cartes arrivent les unes après les autres, la meilleure en dernier
+     signalée : l'ordre raconte ce que fait l'outil. */
+  .scene[data-joue="oui"] .scene-carte {
+    animation: carte-arrive 620ms cubic-bezier(0.22, 0.75, 0.3, 1) both;
+    animation-delay: calc(var(--rang) * 150ms);
+  }
+  .scene[data-joue="non"] .scene-carte {
+    opacity: 0;
+  }
+  .scene[data-joue="oui"] .scene-jauge {
+    animation: jauge-remplit 700ms cubic-bezier(0.22, 0.75, 0.3, 1) both;
+    animation-delay: calc(var(--rang) * 150ms + 260ms);
+  }
+  .scene[data-joue="oui"] .scene-sceau {
+    animation: sceau-apparait 420ms cubic-bezier(0.22, 0.75, 0.3, 1) both;
+    animation-delay: 900ms;
+  }
+  .scene[data-joue="oui"] .scene-pied {
+    animation: monte 520ms cubic-bezier(0.22, 0.75, 0.3, 1) both;
+    animation-delay: 1050ms;
+  }
+}
+
+/* ── Ruban de messages ── */
+.ruban {
+  overflow: hidden;
+  /* Les fiches s'effacent sur les bords au lieu d'être coupées net. */
+  mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
+}
+.ruban-piste {
+  display: flex;
+  width: max-content;
+}
+.ruban-jeu {
+  display: flex;
+}
+.ruban-fiche {
+  width: 20rem;
+  height: 22rem;
+  margin-right: 1rem;
+  flex: none;
+}
+/* Le message est long : il s'estompe en bas plutôt que de s'arrêter net. */
+.ruban-texte {
+  overflow: hidden;
+  flex: 1;
+  mask-image: linear-gradient(180deg, #000 72%, transparent);
+}
+
+@keyframes defile {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ruban-piste {
+    animation: defile 55s linear infinite;
+  }
+  /* On s'arrête quand on lit (survol, tabulation) et quand on ne regarde pas. */
+  .ruban:hover .ruban-piste,
+  .ruban:focus-within .ruban-piste,
+  .ruban[data-joue="non"] .ruban-piste {
+    animation-play-state: paused;
+  }
+}
+
+/* Sans mouvement : un seul jeu de fiches, qu'on fait défiler au doigt. */
+@media (prefers-reduced-motion: reduce) {
+  .ruban {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-inline: 1rem;
+  }
+  .ruban-double {
+    display: none;
+  }
+  .ruban-fiche {
+    scroll-snap-align: center;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;

@@ -11,6 +11,12 @@ const ICONS = {
   lock: Lock,
 };
 
+/**
+ * Liste éditoriale, pas grille de cartes : des filets fins, l'icône dans la
+ * ligne du titre. Une grille de six cartes blanches à tuile d'icône est le
+ * réflexe par défaut de toutes les pages de produit ; celle-ci se lit comme un
+ * sommaire.
+ */
 export function Features() {
   return (
     <section id="fonctions" className="px-4 py-16 sm:px-6 md:py-24">
@@ -19,26 +25,34 @@ export function Features() {
           eyebrow="Ce que fait Terouva"
           lead="Peu de choses,"
           tail="celles qui font gagner du temps."
-          align="center"
+          className="monte max-w-2xl"
         >
           Pas une usine à gaz : la poignée de gestes qui comptent vraiment quand on cherche un
           logement.
         </SectionHeading>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid gap-x-14 sm:grid-cols-2">
           {FEATURES.map((f) => {
             const Icon = ICONS[f.icon];
             return (
-              <article key={f.title} className="card-soft p-6">
-                <span className="grid size-11 place-items-center rounded-lg bg-accent-wash text-accent-ink">
-                  <Icon size={20} strokeWidth={1.75} aria-hidden />
-                </span>
-                <h3 className="mt-5 text-lg font-bold leading-snug text-ink">{f.title}</h3>
-                <p className="mt-2.5 leading-relaxed text-ink-2">{f.body}</p>
-              </article>
+              <li
+                key={f.title}
+                className="monte border-t border-rule py-7 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
+              >
+                <h3 className="flex items-start gap-3 text-lg leading-snug font-bold text-ink">
+                  <Icon
+                    size={19}
+                    strokeWidth={1.75}
+                    aria-hidden
+                    className="mt-[3px] shrink-0 text-accent"
+                  />
+                  {f.title}
+                </h3>
+                <p className="mt-2 pl-[31px] leading-relaxed text-ink-2">{f.body}</p>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
   );

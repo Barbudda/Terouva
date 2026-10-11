@@ -9,9 +9,9 @@ export function Problem() {
           eyebrow={PROBLEM.eyebrow}
           lead={PROBLEM.titleLead}
           tail={PROBLEM.titleTail}
-          className="md:col-span-5"
+          className="monte md:col-span-5"
         />
-        <div className="space-y-5 text-lg leading-relaxed text-ink-2 md:col-span-6 md:col-start-7">
+        <div className="monte space-y-5 text-lg leading-relaxed text-ink-2 md:col-span-6 md:col-start-7">
           {PROBLEM.body.map((p) => (
             <p key={p}>{p}</p>
           ))}

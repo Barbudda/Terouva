@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function Demo() {
   return (
     <section className="px-4 pb-16 sm:px-6 md:pb-24">
-      <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 rounded-xl border border-accent/25 bg-accent-wash/45 px-5 py-12 sm:px-10 md:flex-row md:items-center md:justify-between md:py-14">
+      <div className="monte mx-auto flex max-w-6xl flex-col items-start gap-8 rounded-xl border border-accent/25 bg-accent-wash/45 px-5 py-12 sm:px-10 md:flex-row md:items-center md:justify-between md:py-14">
         <SectionHeading
           eyebrow={DEMO.eyebrow}
           lead={DEMO.titleLead}
