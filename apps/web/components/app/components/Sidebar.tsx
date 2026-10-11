@@ -61,7 +61,7 @@ export function Sidebar() {
     <aside className="hidden w-60 shrink-0 flex-col border-r border-rule bg-paper-2 md:flex">
       <a href="/" className="flex items-center gap-2.5 px-6 pt-5 pb-6" title="Retour au site Terouva">
         <LogoMark />
-        <span className="font-serif text-[1.35rem] font-semibold leading-none tracking-tight text-ink">
+        <span className="display text-[1.35rem] font-semibold leading-none tracking-tight text-ink">
           Terouva
         </span>
       </a>
@@ -92,7 +92,7 @@ export function MobileNav() {
       <div className="flex h-14 items-center justify-between px-4">
         <a href="/" className="flex items-center gap-2" title="Retour au site Terouva">
           <LogoMark className="size-6" />
-          <span className="font-serif text-xl font-semibold leading-none text-ink">Terouva</span>
+          <span className="display text-xl font-semibold leading-none text-ink">Terouva</span>
         </a>
         <ExtensionStatus compact />
       </div>

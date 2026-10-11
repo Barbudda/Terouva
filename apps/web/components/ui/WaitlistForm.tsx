@@ -9,11 +9,11 @@ type State = { kind: "idle" | "sending" | "done" } | { kind: "error"; message: s
 /**
  * Inscription pour être prévenu du lancement.
  *
- * La seule donnée qui quitte le navigateur sur tout le site, et elle part vers
- * notre route `/api/waitlist`, qui la confie à Resend. Le champ « website » est
- * un piège à robots : invisible, il doit rester vide.
+ * La seule donnée qui quitte le navigateur sur tout le site. Elle part vers
+ * `/api/waitlist`, qui la confie à Resend. Le champ « website » est un piège à
+ * robots : invisible, il doit rester vide.
  */
-export function WaitlistForm({ className }: { className?: string }) {
+export function WaitlistForm({ className, dark = false }: { className?: string; dark?: boolean }) {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [state, setState] = useState<State>({ kind: "idle" });
@@ -48,15 +48,27 @@ export function WaitlistForm({ className }: { className?: string }) {
 
   if (state.kind === "done") {
     return (
-      <p role="status" className={cn("rounded-md bg-good-wash px-4 py-3 text-base text-good", className)}>
-        C'est noté. Vous recevrez un e-mail dès que Terouva sera téléchargeable.
+      <p
+        role="status"
+        className={cn(
+          "rounded-full px-6 py-4 text-center font-semibold",
+          dark ? "bg-night-2 text-night-ink" : "bg-good-wash text-good",
+          className,
+        )}
+      >
+        C'est noté. Vous recevrez un e-mail le jour du lancement.
       </p>
     );
   }
 
   return (
     <form onSubmit={submit} className={cn("w-full", className)} noValidate>
-      <div className="flex flex-col gap-3 sm:flex-row">
+      <div
+        className={cn(
+          "flex flex-col gap-2 rounded-full p-2 sm:flex-row",
+          dark ? "bg-night-2" : "card-soft !rounded-full",
+        )}
+      >
         <label className="flex-1">
           <span className="sr-only">Votre adresse e-mail</span>
           <input
@@ -70,7 +82,10 @@ export function WaitlistForm({ className }: { className?: string }) {
               setEmail(e.target.value);
               if (state.kind === "error") setState({ kind: "idle" });
             }}
-            className="h-12 w-full rounded-md border border-field bg-card px-4 text-base text-ink placeholder:text-ink-3 transition-colors focus:border-accent focus:ring-2 focus:ring-accent/25 focus:outline-none"
+            className={cn(
+              "h-12 w-full rounded-full bg-transparent px-5 text-base outline-none",
+              dark ? "text-night-ink placeholder:text-night-ink-2" : "text-ink placeholder:text-ink-3",
+            )}
           />
         </label>
 
@@ -92,22 +107,24 @@ export function WaitlistForm({ className }: { className?: string }) {
         <button
           type="submit"
           disabled={state.kind === "sending"}
-          className="h-12 shrink-0 rounded-md bg-accent px-6 text-base font-medium text-card transition-colors hover:bg-accent-ink disabled:opacity-60"
+          className="h-12 shrink-0 rounded-full bg-accent px-6 font-semibold text-white transition-colors hover:bg-accent-ink disabled:opacity-60"
         >
-          {state.kind === "sending" ? "Enregistrement…" : "Me prévenir du lancement"}
+          {state.kind === "sending" ? "Enregistrement…" : "Me prévenir"}
         </button>
       </div>
 
       {state.kind === "error" && (
-        <p role="alert" className="mt-2 text-[15px] text-bad">
+        <p role="alert" className={cn("mt-3 text-[15px]", dark ? "text-accent-wash" : "text-bad")}>
           {state.message}
         </p>
       )}
 
-      <p className="mt-3 text-sm leading-relaxed text-ink-3">
-        Votre adresse sert uniquement à vous prévenir du lancement. Pas de publicité, et vous
-        pouvez demander sa suppression à tout moment.{" "}
-        <Link href="/confidentialite" className="underline decoration-field underline-offset-4 hover:text-ink-2">
+      <p className={cn("mt-3 text-sm leading-relaxed", dark ? "text-night-ink-2" : "text-ink-3")}>
+        Un seul e-mail, au lancement. Pas de publicité.{" "}
+        <Link
+          href="/confidentialite"
+          className="underline underline-offset-4 hover:opacity-80"
+        >
           Politique de confidentialité
         </Link>
       </p>

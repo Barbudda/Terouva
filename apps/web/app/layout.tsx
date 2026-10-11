@@ -1,19 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Schibsted_Grotesk } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
-const serif = Newsreader({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  axes: ["opsz"],
-  style: ["normal", "italic"],
-  variable: "--font-newsreader",
-  display: "swap",
-});
-
-const sans = Schibsted_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-schibsted",
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -68,7 +60,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f5f1e8",
+  themeColor: "#fdfdfd",
   colorScheme: "light",
 };
 
@@ -102,7 +94,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="fr" className={montserrat.variable}>
       <body>
         <script
           type="application/ld+json"

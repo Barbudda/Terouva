@@ -22,7 +22,7 @@ function Section({
   return (
     <section className="grid gap-4 border-t border-rule pt-6 md:grid-cols-[16rem_1fr] md:gap-8">
       <div>
-        <h2 className="font-serif text-2xl font-medium text-ink">{title}</h2>
+        <h2 className="display text-2xl font-medium text-ink">{title}</h2>
         {description && <p className="mt-1 text-[15px] leading-relaxed text-ink-2">{description}</p>}
       </div>
       <div>{children}</div>

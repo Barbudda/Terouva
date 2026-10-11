@@ -57,7 +57,7 @@ export default function ExempleAnnonce() {
 
         {loaded && !listing && (
           <div className="rounded-md border border-dashed border-field px-6 py-12 text-center">
-            <p className="font-serif text-2xl font-medium">Cette annonce d'exemple n'existe plus</p>
+            <p className="display text-2xl font-medium">Cette annonce d'exemple n'existe plus</p>
             <p className="mt-2 text-[15px] text-ink-2">
               La démonstration a sans doute été effacée.
             </p>
@@ -73,7 +73,7 @@ export default function ExempleAnnonce() {
         {listing && (
           <>
             <article className="rounded-md border border-rule bg-card p-5 sm:p-7">
-              <h1 className="font-serif text-3xl font-medium leading-tight">{listing.title}</h1>
+              <h1 className="display text-3xl font-medium leading-tight">{listing.title}</h1>
               <p className="mt-2 text-lg text-ink-2 tabular">{facts.join(" · ")}</p>
               <p className="mt-1 text-[15px] text-ink-3">{listing.publisher_type}</p>
               {listing.description && (
@@ -82,7 +82,7 @@ export default function ExempleAnnonce() {
             </article>
 
             <section className="mt-6 rounded-md border border-rule bg-card p-5 sm:p-7">
-              <h2 className="font-serif text-2xl font-medium">Contacter l'annonceur</h2>
+              <h2 className="display text-2xl font-medium">Contacter l'annonceur</h2>
               {sent ? (
                 <div className="mt-4 rounded-md bg-good-wash px-4 py-5 text-center">
                   <p className="text-[17px] font-semibold text-good">Message envoyé, pour de faux.</p>

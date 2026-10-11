@@ -59,7 +59,7 @@ export default function Surveillance() {
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-3 px-4 pt-5 sm:px-5">
           <div className="max-w-xl">
-            <h2 className="font-serif text-2xl font-medium text-ink">Extension Chrome</h2>
+            <h2 className="display text-2xl font-medium text-ink">Extension Chrome</h2>
             <p className="mt-1 text-[15px] leading-relaxed text-ink-2">{status.detail}</p>
           </div>
           <Badge tone={status.tone} className="text-[15px]">
@@ -149,7 +149,7 @@ export default function Surveillance() {
       </div>
 
       <section aria-labelledby="journal-title">
-        <h2 id="journal-title" className="mb-3 font-serif text-2xl font-medium text-ink">
+        <h2 id="journal-title" className="mb-3 display text-2xl font-medium text-ink">
           Dernières annonces reçues
         </h2>
         {recent.length === 0 ? (
@@ -166,7 +166,7 @@ export default function Surveillance() {
                 const reco = r.score === null ? null : RECOMMENDATION[recommendationFromScore(r.score)];
                 return (
                   <li key={`${r.listingId}-${entry.at}-${i}`} className="flex flex-wrap items-center gap-3 px-4 py-3 sm:px-5">
-                    <div className="w-10 font-serif text-2xl font-medium text-ink tabular">{r.score ?? ""}</div>
+                    <div className="w-10 display text-2xl font-medium text-ink tabular">{r.score ?? ""}</div>
                     <div className="min-w-0 flex-1">
                       <div className="truncate text-[15px] font-medium text-ink">{d.title ?? "Annonce sans titre"}</div>
                       <div className="text-[13px] text-ink-3">

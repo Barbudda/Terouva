@@ -12,7 +12,7 @@ export default function Dossier() {
     <div className="space-y-12">
       <section aria-labelledby="dossier-profil">
         <div className="mb-5 border-b border-rule pb-3">
-          <h2 id="dossier-profil" className="font-serif text-2xl font-medium text-ink">
+          <h2 id="dossier-profil" className="display text-2xl font-medium text-ink">
             Mon profil
           </h2>
           <p className="mt-1 text-[15px] text-ink-2">
@@ -24,7 +24,7 @@ export default function Dossier() {
 
       <section aria-labelledby="dossier-recherches">
         <div className="mb-5 border-b border-rule pb-3">
-          <h2 id="dossier-recherches" className="font-serif text-2xl font-medium text-ink">
+          <h2 id="dossier-recherches" className="display text-2xl font-medium text-ink">
             Mes recherches
           </h2>
           <p className="mt-1 text-[15px] text-ink-2">
@@ -36,7 +36,7 @@ export default function Dossier() {
 
       <section aria-labelledby="dossier-pieces">
         <div className="mb-5 border-b border-rule pb-3">
-          <h2 id="dossier-pieces" className="font-serif text-2xl font-medium text-ink">
+          <h2 id="dossier-pieces" className="display text-2xl font-medium text-ink">
             Pièces du dossier
           </h2>
           <p className="mt-1 text-[15px] text-ink-2">

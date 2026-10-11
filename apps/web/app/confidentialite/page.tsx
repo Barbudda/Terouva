@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-10 border-t border-rule pt-8">
-      <h2 className="font-serif text-2xl font-medium tracking-tight text-ink">
+      <h2 className="display text-2xl font-medium tracking-tight text-ink">
         {title}
       </h2>
       <div className="mt-3 space-y-3 text-base leading-relaxed text-ink-2">
@@ -29,7 +29,7 @@ export default function Confidentialite() {
     <>
       <Nav home={false} />
       <main className="mx-auto max-w-3xl px-4 pt-14 pb-24 sm:px-6 md:pt-20">
-        <h1 className="font-serif text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
+        <h1 className="display text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
           Politique de confidentialité
         </h1>
         <p className="mt-3 text-sm text-ink-3">

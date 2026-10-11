@@ -1,49 +1,48 @@
 import Image from "next/image";
 import { HERO } from "@/lib/content";
-import { LinkButton } from "@/components/ui/LinkButton";
+import { Assurances } from "@/components/ui/SectionHeading";
+import { WaitlistForm } from "@/components/ui/WaitlistForm";
 
 export function Hero() {
   return (
-    <section className="pt-14 pb-16 md:pt-24 md:pb-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-7">
-            <p className="text-[15px] text-ink-2">{HERO.kicker}</p>
-            <h1 className="mt-5 font-serif text-[2.9rem] font-medium leading-[1.02] tracking-[-0.02em] text-ink sm:text-6xl lg:text-[5.25rem]">
-              {HERO.title}
-            </h1>
-            <p className="mt-4 font-serif text-2xl italic leading-snug text-ink-2 sm:text-3xl lg:text-[2.35rem]">
-              {HERO.titleSecond}
-            </p>
+    <section className="px-4 pt-10 pb-14 sm:px-6 md:pt-16 md:pb-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="inline-flex items-center gap-2 rounded-full bg-accent-wash px-4 py-1.5 text-[13px] font-bold tracking-[0.12em] text-accent-ink uppercase">
+            <span aria-hidden className="size-1.5 animate-breathe rounded-full bg-accent" />
+            {HERO.eyebrow}
+          </p>
+
+          <h1 className="display mt-6 text-[2.6rem] text-ink sm:text-6xl lg:text-[4.6rem]">
+            {HERO.titleLead} <span className="text-accent">{HERO.titleTail}</span>
+          </h1>
+
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-2">
+            {HERO.subtitle}
+          </p>
+
+          <div className="mx-auto mt-8 max-w-xl">
+            <WaitlistForm />
           </div>
 
-          <div className="md:col-span-5 md:self-end">
-            <p className="text-lg leading-relaxed text-ink-2">{HERO.subtitle}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <LinkButton href={HERO.ctaPrimary.href} size="lg">
-                {HERO.ctaPrimary.label}
-              </LinkButton>
-              <LinkButton href={HERO.ctaSecondary.href} variant="secondary" size="lg">
-                {HERO.ctaSecondary.label}
-              </LinkButton>
-            </div>
-            <p className="mt-6 text-sm leading-relaxed text-ink-3">{HERO.meta}</p>
+          <div className="mt-8 flex justify-center">
+            <Assurances items={HERO.assurances} />
           </div>
         </div>
 
         <figure className="mt-14 md:mt-20">
-          <div className="overflow-hidden rounded-md border border-rule bg-card">
+          <div className="card-soft overflow-hidden rounded-xl p-2 sm:p-3">
             <Image
               src="/apercu-annonces.png"
-              alt="Aperçu de l'application Terouva : une liste d'annonces de location notées sur 100, la mieux notée étant signalée comme à contacter en priorité."
+              alt="Aperçu de Terouva : une liste d'annonces de location notées sur 100, la mieux notée étant signalée comme à contacter en priorité."
               width={1440}
               height={900}
               priority
               sizes="(min-width: 1152px) 1104px, 100vw"
-              className="h-auto w-full"
+              className="h-auto w-full rounded-lg"
             />
           </div>
-          <figcaption className="mt-3 text-sm text-ink-3">{HERO.caption}</figcaption>
+          <figcaption className="mt-3 text-center text-sm text-ink-3">{HERO.caption}</figcaption>
         </figure>
       </div>
     </section>

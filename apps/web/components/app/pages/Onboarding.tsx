@@ -82,7 +82,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
       <div className="mx-auto w-full max-w-xl px-4 py-10 sm:py-16">
         <a href="/" className="inline-flex items-center gap-2.5" title="Retour au site Terouva">
           <LogoMark />
-          <span className="font-serif text-[1.35rem] font-semibold leading-none tracking-tight">
+          <span className="display text-[1.35rem] font-semibold leading-none tracking-tight">
             Terouva
           </span>
         </a>
@@ -106,7 +106,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
           {step === 0 && (
             <div className="space-y-5">
               <div>
-                <h1 className="font-serif text-3xl font-medium leading-tight">
+                <h1 className="display text-3xl font-medium leading-tight">
                   Bienvenue. Qui êtes-vous ?
                 </h1>
                 <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
@@ -170,7 +170,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
           {step === 1 && (
             <div className="space-y-5">
               <div>
-                <h1 className="font-serif text-3xl font-medium leading-tight">
+                <h1 className="display text-3xl font-medium leading-tight">
                   Que cherchez-vous ?
                 </h1>
                 <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
@@ -221,7 +221,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
           {step === 2 && (
             <div className="space-y-5">
               <div>
-                <h1 className="font-serif text-3xl font-medium leading-tight">
+                <h1 className="display text-3xl font-medium leading-tight">
                   Connectez votre navigateur
                 </h1>
                 <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
@@ -236,7 +236,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
                   "Ouvrez une page de recherche Leboncoin. C'est tout.",
                 ].map((line, i) => (
                   <li key={line} className="flex gap-3">
-                    <span className="font-serif text-xl leading-6 text-accent tabular">{i + 1}</span>
+                    <span className="display text-xl leading-6 text-accent tabular">{i + 1}</span>
                     <span>{line}</span>
                   </li>
                 ))}

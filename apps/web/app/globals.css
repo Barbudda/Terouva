@@ -2,31 +2,49 @@
 
 /* Palette et typographie Terouva. Référence : DESIGN.md. */
 @theme {
-  --color-paper: #f5f1e8;
-  --color-paper-2: #ece6d9;
-  --color-card: #fbf9f4;
+  /* Surfaces claires */
+  --color-paper: #fdfdfd;
+  --color-paper-2: #fbf7f8;
+  --color-card: #ffffff;
+  --color-muted: #f5f5f5;
 
-  --color-ink: #1f1d1a;
-  --color-ink-2: #595448;
-  --color-ink-3: #6b6558;
+  /* Encre */
+  --color-ink: #1b1d1e;
+  --color-ink-2: #55595c;
+  --color-ink-3: #6e7376;
 
-  --color-rule: #dcd4c4;
-  --color-field: #978d79;
+  /* Filets et champs */
+  --color-rule: #e7e7ee;
+  --color-field: #c9cad3;
 
-  --color-accent: #a9482a;
-  --color-accent-ink: #8c3a1f;
-  --color-accent-wash: #f2e1d6;
+  /* Accent de marque */
+  --color-accent: #c92d6a;
+  --color-accent-ink: #a52254;
+  --color-accent-wash: #fbdae7;
 
-  --color-good: #2d6149;
-  --color-good-wash: #dfeae2;
-  --color-warn: #7a520c;
-  --color-warn-wash: #f1e6cc;
-  --color-bad: #9c2f2b;
-  --color-bad-wash: #f3dedb;
+  /* Bloc sombre (hero secondaire, appel final) */
+  --color-night: #1b1d1e;
+  --color-night-2: #26292b;
+  --color-night-ink: #f6f6f7;
+  --color-night-ink-2: #aeb2b5;
+  --color-night-rule: #34383a;
 
-  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  /* États */
+  --color-good: #11785a;
+  --color-good-wash: #d9f0e7;
+  --color-warn: #8a5a08;
+  --color-warn-wash: #fdeccd;
+  /* Rouge du thème (#e54b4f) assombri : il ne passait pas 4,5:1 sur blanc. */
+  --color-bad: #c62f33;
+  --color-bad-wash: #fde4e4;
+
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Rayon du thème : 1,4 rem. Les grands panneaux montent à 2 rem. */
+  --radius-md: 0.7rem;
+  --radius-lg: 1.4rem;
+  --radius-xl: 2rem;
 }
 
 html {
@@ -37,7 +55,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -60,7 +78,37 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Questions fréquentes : élément details natif, marqueur maison. */
+/* Titres de la landing : très gras, serrés, la fin passe en accent. */
+.display {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+}
+
+/* Sur-titre de section : « POURQUOI TEROUVA », petites capitales espacées. */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* Carte claire posée sur le fond, ombre douce vers le bas. */
+.card-soft {
+  background: var(--color-card);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px rgb(27 29 30 / 0.04), 0 8px 24px -12px rgb(27 29 30 / 0.08);
+}
+
+/* Halo rose très discret au sommet des blocs sombres. */
+.night-glow {
+  background:
+    radial-gradient(60% 55% at 50% 0%, rgb(201 45 106 / 0.22) 0%, transparent 70%),
+    var(--color-night);
+}
+
 details > summary {
   list-style: none;
 }

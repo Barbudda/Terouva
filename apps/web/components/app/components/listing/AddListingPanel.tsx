@@ -65,7 +65,7 @@ export function AddListingPanel(p: Props) {
     <Card>
       <div className="flex items-start justify-between gap-4 px-4 pt-4 sm:px-5">
         <div>
-          <h2 className="font-serif text-2xl font-medium text-ink">Ajouter des annonces</h2>
+          <h2 className="display text-2xl font-medium text-ink">Ajouter des annonces</h2>
           <p className="mt-1 text-[15px] text-ink-2">
             Collez l'e-mail d'alerte envoyé par Leboncoin : Terouva en sort les annonces, les note et
             prépare vos messages.

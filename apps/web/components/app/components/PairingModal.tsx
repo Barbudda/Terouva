@@ -48,7 +48,7 @@ export function PairingModal() {
         className="w-[420px] max-w-full overflow-hidden rounded-md border border-rule bg-card shadow-[0_12px_40px_-12px_rgb(31_29_26/0.35)]"
       >
         <div className="p-6">
-          <h2 id="pairing-title" className="font-serif text-2xl font-medium text-ink">
+          <h2 id="pairing-title" className="display text-2xl font-medium text-ink">
             Connecter l'extension Chrome ?
           </h2>
           <p className="mt-2 text-[15px] leading-relaxed text-ink-2">

@@ -4,9 +4,10 @@ import { Hero } from "@/components/sections/Hero";
 import { Problem } from "@/components/sections/Problem";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Features } from "@/components/sections/Features";
+import { Demo } from "@/components/sections/Demo";
 import { Privacy } from "@/components/sections/Privacy";
 import { FAQ } from "@/components/sections/FAQ";
-import { CTA } from "@/components/sections/CTA";
+import { Signup } from "@/components/sections/Signup";
 import { getSiteUrl } from "@/lib/site";
 
 export default function Home() {
@@ -17,9 +18,9 @@ export default function Home() {
     name: "Terouva",
     url: `${siteUrl}/`,
     description:
-      "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste sur votre ordinateur.",
+      "Terouva repère les annonces de location qui vous correspondent, les classe et prépare votre message de candidature. Tout reste sur votre ordinateur.",
     applicationCategory: "UtilitiesApplication",
-    operatingSystem: "macOS, Windows, Linux",
+    operatingSystem: "macOS, Windows",
     inLanguage: "fr-FR",
     offers: {
       "@type": "Offer",
@@ -40,9 +41,10 @@ export default function Home() {
         <Problem />
         <HowItWorks />
         <Features />
+        <Demo />
         <Privacy />
         <FAQ />
-        <CTA />
+        <Signup />
       </main>
       <Footer />
     </>

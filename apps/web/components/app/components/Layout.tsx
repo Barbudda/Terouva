@@ -49,7 +49,7 @@ export function Layout() {
       <main className="app-scroll flex-1 overflow-y-auto">
         <div className="mx-auto max-w-5xl px-4 pt-6 pb-16 sm:px-6 md:pt-10 lg:px-10">
           <header className="mb-6 flex items-baseline justify-between gap-4 md:mb-8">
-            <h1 className="font-serif text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
+            <h1 className="display text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
               {title}
             </h1>
             {loading && (

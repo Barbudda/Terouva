@@ -77,7 +77,7 @@ export function StatPill({
   return (
     <Card className="px-4 py-3">
       <div className="text-sm text-ink-3">{label}</div>
-      <div className="mt-1 font-serif text-3xl font-medium leading-none text-ink tabular">{value}</div>
+      <div className="mt-1 display text-3xl font-medium leading-none text-ink tabular">{value}</div>
       {hint && <div className="mt-1.5 text-[13px] text-ink-3">{hint}</div>}
     </Card>
   );
@@ -95,7 +95,7 @@ export function EmptyState({
 }) {
   return (
     <div className="rounded-md border border-dashed border-field px-6 py-12 text-center">
-      <p className="font-serif text-2xl font-medium text-ink">{title}</p>
+      <p className="display text-2xl font-medium text-ink">{title}</p>
       {children && (
         <div className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-2">{children}</div>
       )}

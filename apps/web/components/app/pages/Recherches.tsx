@@ -124,7 +124,7 @@ export default function Recherches() {
         <div ref={formRef} className="scroll-mt-4">
           <Card>
             <div className="border-b border-rule px-4 py-4 sm:px-5">
-              <h3 className="font-serif text-xl font-medium text-ink">
+              <h3 className="display text-xl font-medium text-ink">
                 {editing.id ? `Modifier « ${editing.name} »` : "Nouvelle recherche"}
               </h3>
             </div>

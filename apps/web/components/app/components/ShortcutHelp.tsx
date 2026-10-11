@@ -23,7 +23,7 @@ export function ShortcutHelp({
       >
         <div className="flex items-start justify-between gap-4 border-b border-rule px-5 py-4">
           <div>
-            <h2 id="shortcut-help-title" className="font-serif text-xl font-medium text-ink">
+            <h2 id="shortcut-help-title" className="display text-xl font-medium text-ink">
               Raccourcis clavier
             </h2>
             <p className="mt-0.5 text-[13px] text-ink-3">Fermer avec Échap ou la touche ?</p>

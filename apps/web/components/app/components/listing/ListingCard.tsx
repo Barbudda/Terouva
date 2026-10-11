@@ -164,7 +164,7 @@ export function ListingCard({
 
         {listing.score !== null && (
           <div className="shrink-0 text-right" aria-label={`Note : ${listing.score} sur 100`}>
-            <div className={cn("font-serif text-4xl font-medium leading-none tabular", scoreColor(listing.score))}>
+            <div className={cn("display text-4xl font-medium leading-none tabular", scoreColor(listing.score))}>
               {listing.score}
             </div>
             <div className="mt-1 text-[13px] text-ink-3">sur 100</div>
@@ -416,7 +416,7 @@ function CandidaturePanel({
     <section className="rounded-md border border-rule bg-paper p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h4 className="font-serif text-xl font-medium text-ink">Votre message de candidature</h4>
+          <h4 className="display text-xl font-medium text-ink">Votre message de candidature</h4>
           <p className="text-[13px] text-ink-3">Recliquez sur un ton pour obtenir une autre formulation.</p>
         </div>
         <div role="group" aria-label="Ton du message" className="flex rounded-md border border-field bg-card p-0.5">
