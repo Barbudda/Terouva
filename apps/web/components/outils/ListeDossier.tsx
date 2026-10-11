@@ -82,7 +82,9 @@ export function ListeDossier() {
       <div>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow">Votre dossier</p>
+            {/* Vrai titre de niveau 2 : sans lui la page sautait de H1 à H3,
+                ce qui désoriente un lecteur d'écran. */}
+            <h2 className="eyebrow">Votre dossier</h2>
             <p className="display mt-2 text-[2rem] text-ink">
               {total} <span className="text-accent">{total > 1 ? "pièces" : "pièce"}</span>
             </p>
