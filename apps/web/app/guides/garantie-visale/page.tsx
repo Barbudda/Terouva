@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/seo";
 const GUIDE = guide("/guides/garantie-visale");
 
 export const metadata = pageMetadata({
-  titre: GUIDE.titre,
+  titre: GUIDE.titreSeo,
   description: GUIDE.description,
   chemin: GUIDE.chemin,
   type: "article",

@@ -8,6 +8,8 @@ import { getSiteUrl } from "@/lib/site";
 export type Guide = {
   chemin: string;
   titre: string;
+  /** Titre pour les moteurs : 60 signes maximum, suffixe « · Terouva » compris. */
+  titreSeo: string;
   /** Ce que la personne gagne à lire la page, en une phrase. */
   resume: string;
   description: string;

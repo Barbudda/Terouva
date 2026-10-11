@@ -19,10 +19,11 @@ export const GUIDES: Guide[] = [
       { id: "apres-refus", titre: "Après un refus" },
     ],
     titre: "Dossier de location : la liste exacte des pièces qu'on peut vous demander",
+    titreSeo: "Dossier de location : les pièces autorisées",
     resume:
       "Un propriétaire n'a pas le droit de demander ce qu'il veut. La liste est fixée par décret, elle est limitative, et tout ce qui n'y figure pas peut être refusé sans que votre candidature en souffre légalement.",
     description:
-      "La liste officielle des justificatifs qu'un propriétaire peut exiger pour une location, les documents interdits, et la sanction encourue. Sources : service-public.gouv.fr et Légifrance.",
+      "La liste officielle des justificatifs qu'un propriétaire peut exiger, ceux qui sont interdits, et la sanction. Sources : service-public et Légifrance.",
     publieLe: "2026-10-11",
     lecture: 7,
     sources: [
@@ -69,10 +70,11 @@ export const GUIDES: Guide[] = [
       { id: "utiliser", titre: "S'en servir dans une candidature" },
     ],
     titre: "Garantie Visale : qui peut l'avoir, et comment l'obtenir avant de visiter",
+    titreSeo: "Garantie Visale : conditions et démarche",
     resume:
       "C'est une caution gratuite, accordée par Action Logement, qui remplace un garant physique. Elle se demande avant d'avoir trouvé le logement, et c'est précisément ce qui la rend utile.",
     description:
-      "Qui peut obtenir la garantie Visale, les plafonds de loyer, ce qu'elle couvre, et la démarche pour recevoir son visa avant de visiter. Source : service-public.gouv.fr.",
+      "Qui peut obtenir la garantie Visale, les plafonds de loyer, ce qu'elle couvre, et comment recevoir son visa avant même de visiter.",
     publieLe: "2026-10-11",
     lecture: 6,
     sources: [
@@ -115,6 +117,7 @@ export const GUIDES: Guide[] = [
       { id: "apres", titre: "Après l'envoi" },
     ],
     titre: "Répondre à une annonce de location : ce qui fait la différence",
+    titreSeo: "Répondre à une annonce de location",
     resume:
       "Sur un marché tendu, ce n'est pas toujours le meilleur dossier qui obtient la visite, c'est celui qui arrive tôt et qui se lit en dix secondes. Voici ce qui se joue vraiment dans un premier message.",
     description:
@@ -151,6 +154,8 @@ export function guide(chemin: string): Guide {
 export type Outil = {
   chemin: string;
   titre: string;
+  /** Titre pour les moteurs : 60 signes maximum, suffixe « · Terouva » compris. */
+  titreSeo: string;
   /** Titre court, pour les listes et la navigation. */
   court: string;
   resume: string;
@@ -161,10 +166,11 @@ export const OUTILS: Outil[] = [
   {
     chemin: "/outils/message-de-candidature",
     titre: "Générateur de message de candidature pour une location",
+    titreSeo: "Générateur de message de candidature",
     court: "Message de candidature",
     resume:
       "Le message qui accompagne votre dossier, écrit en une minute. Trois tons, six formulations, rien d'envoyé nulle part.",
     description:
-      "Écrivez en une minute le message qui accompagne votre dossier de location. Gratuit, sans inscription, trois tons au choix. Rien n'est envoyé : tout se passe dans votre navigateur.",
+      "Écrivez le message qui accompagne votre dossier de location. Gratuit, sans inscription, trois tons. Rien n'est envoyé : tout reste dans votre navigateur.",
   },
 ];

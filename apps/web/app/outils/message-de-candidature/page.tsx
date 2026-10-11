@@ -5,14 +5,15 @@ import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { GenerateurMessage } from "@/components/outils/GenerateurMessage";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
+import { OUTILS } from "@/lib/catalogue";
 import { getSiteUrl } from "@/lib/site";
 
 const CHEMIN = "/outils/message-de-candidature";
+const OUTIL = OUTILS.find((o) => o.chemin === CHEMIN)!;
 
 export const metadata = pageMetadata({
-  titre: "Générateur de message de candidature pour une location",
-  description:
-    "Écrivez en une minute le message qui accompagne votre dossier de location. Gratuit, sans inscription, trois tons au choix. Rien n'est envoyé : tout se passe dans votre navigateur.",
+  titre: OUTIL.titreSeo,
+  description: OUTIL.description,
   chemin: CHEMIN,
 });
 

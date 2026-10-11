@@ -12,7 +12,7 @@ const CHEMIN = "/guides";
 export const metadata = pageMetadata({
   titre: "Guides pour trouver une location",
   description:
-    "Le dossier, le garant, le message de candidature : ce qu'il faut savoir pour chercher un logement sans perdre de temps. Des pages courtes, vérifiées, avec leurs sources.",
+    "Le dossier, le garant, le message : ce qu'il faut savoir pour chercher un logement. Des pages courtes, vérifiées, avec leurs sources.",
   chemin: CHEMIN,
 });
 
