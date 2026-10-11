@@ -76,27 +76,38 @@ function accroche(l: Listing, v: number, variantes: string[]): string {
   return quoi ? `${base.replace(/\.$/, "")}, en particulier pour ${quoi}.` : base;
 }
 
+/** Ce qui se dit « en » : un type de contrat. « professeure en CDD ». */
+const CONTRATS = /^(cdi|cdd|interim|alternance|apprentissage|stage|contrat)\b/;
+/** Ce qui se dit en apposition : un statut. « professeure, fonctionnaire ». */
+const STATUTS = /^(fonctionnaire|titulaire|independant|freelance|liberal|auto ?entrepreneur|retraite|etudiant|apprenti|interimaire)\b/;
+
 /**
- * Le contrat de travail n'est repris que s'il ressemble à un contrat : le champ
- * est libre, et certains y rangent tout autre chose (« non meublé »…). Mieux
- * vaut l'omettre qu'écrire « infirmière en non meublé ».
+ * Le champ « contrat » est libre. On ne le reprend que s'il est reconnu, et la
+ * façon de l'accrocher dépend de sa nature : « en CDI » se dit, « en
+ * fonctionnaire » ne se dit pas. Un champ non reconnu est omis plutôt que de
+ * produire « infirmière en non meublé ».
  */
-function contrat(p: UserProfile): string | null {
+function contrat(p: UserProfile): { texte: string; liaison: "en" | "apposition" } | null {
   const c = p.contract_type?.trim();
   if (!c) return null;
-  const connu = /^(cdi|cdd|interim|intérim|alternance|apprentissage|stage|fonctionnaire|titulaire|independant|indépendant|freelance|liberal|libéral|retraite|retraité|etudiant|étudiant)\b/i;
-  if (!connu.test(norm(c))) return null;
+  const n = norm(c);
+  const liaison = CONTRATS.test(n) ? "en" : STATUTS.test(n) ? "apposition" : null;
+  if (!liaison) return null;
   // Déjà présent dans la situation (« Salarié CDI ») : ne pas le répéter.
-  if (p.situation && norm(p.situation).includes(norm(c))) return null;
-  return c;
+  if (p.situation && norm(p.situation).includes(n)) return null;
+  return { texte: c, liaison };
 }
 
-/** « infirmière en CDI », « infirmière », « en CDI », ou « ». */
+/** « infirmière en CDI », « professeure, fonctionnaire », « en CDI », ou « ». */
 function qualite(p: UserProfile): string {
   const situation = p.situation?.trim();
   const c = contrat(p);
-  if (situation && c) return `${situation} en ${c}`;
-  return situation || (c ? `en ${c}` : "");
+  if (situation && c) {
+    return c.liaison === "en" ? `${situation} en ${c.texte}` : `${situation}, ${c.texte}`;
+  }
+  if (situation) return situation;
+  if (!c) return "";
+  return c.liaison === "en" ? `en ${c.texte}` : c.texte;
 }
 
 /**
@@ -109,7 +120,9 @@ function garantie(p: UserProfile): string | null {
   if (/^(garantie|visale|caution|loca ?pass)/i.test(norm(g))) {
     return `je bénéficie de la ${g}`;
   }
-  return `mon garant est ${g}`;
+  // « j'ai un garant : X » plutôt que « mon garant est X » : le champ est libre,
+  // et « mon garant est mes parents » ne s'accorde pas.
+  return `j'ai un garant : ${g}`;
 }
 
 /**

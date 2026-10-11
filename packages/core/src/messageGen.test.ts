@@ -186,3 +186,38 @@ describe('écriture des messages', () => {
     }
   });
 });
+
+describe('accords et tournures libres', () => {
+  it("n'écrit pas « en fonctionnaire »", () => {
+    const p = buildProfile({ situation: 'professeure', contract_type: 'fonctionnaire' });
+    for (let v = 0; v < 6; v += 1) {
+      const msg = generateMessage(buildListing(), p, 'direct', v);
+      expect(msg).not.toContain('en fonctionnaire');
+      expect(msg).toContain('professeure, fonctionnaire');
+    }
+  });
+
+  it('garde « en CDI », qui se dit', () => {
+    const p = buildProfile({ situation: 'infirmière', contract_type: 'CDI' });
+    expect(generateMessage(buildListing(), p, 'direct', 0)).toContain('infirmière en CDI');
+  });
+
+  it('accorde un garant au pluriel', () => {
+    const p = buildProfile({ guarantors: 'mes parents' });
+    for (let v = 0; v < 6; v += 1) {
+      const msg = generateMessage(buildListing(), p, 'warm', v);
+      expect(msg).not.toContain('mon garant est mes parents');
+      expect(msg.toLowerCase()).toContain('garant : mes parents');
+    }
+  });
+
+  it('tourne autrement une garantie nommée', () => {
+    const p = buildProfile({ guarantors: 'garantie Visale' });
+    expect(generateMessage(buildListing(), p, 'direct', 0)).toContain('la garantie Visale');
+  });
+
+  it("ignore un champ contrat qui n'en est pas un", () => {
+    const p = buildProfile({ situation: 'infirmière', contract_type: 'non meublé' });
+    expect(generateMessage(buildListing(), p, 'direct', 0)).not.toContain('non meublé');
+  });
+});
