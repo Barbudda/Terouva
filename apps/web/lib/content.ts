@@ -1,8 +1,8 @@
 export const NAV_LINKS = [
   { href: "#comment", label: "Comment ça marche" },
   { href: "#fonctions", label: "Ce que fait Terouva" },
-  { href: "#donnees", label: "Vos données" },
-  { href: "#questions", label: "Questions" },
+  { href: "/outils", label: "Outils gratuits" },
+  { href: "/guides", label: "Guides" },
 ];
 
 /**
@@ -153,21 +153,34 @@ export const FOOTER = {
     {
       title: "Produit",
       links: [
-        { label: "Comment ça marche", href: "#comment" },
-        { label: "Ce que fait Terouva", href: "#fonctions" },
+        { label: "Comment ça marche", href: "/#comment" },
+        { label: "Ce que fait Terouva", href: "/#fonctions" },
         { label: "Voir la démonstration", href: "/app?demo=1" },
+        { label: "Vos données", href: "/#donnees" },
       ],
     },
     {
-      title: "En savoir plus",
+      title: "Outils gratuits",
       links: [
-        { label: "Vos données", href: "#donnees" },
-        { label: "Questions fréquentes", href: "#questions" },
+        { label: "Message de candidature", href: "/outils/message-de-candidature" },
+        { label: "Tous les outils", href: "/outils" },
+      ],
+    },
+    {
+      title: "Guides",
+      links: [
+        { label: "Le dossier de location", href: "/guides/dossier-de-location" },
+        { label: "La garantie Visale", href: "/guides/garantie-visale" },
+        { label: "Répondre à une annonce", href: "/guides/repondre-a-une-annonce-de-location" },
+        { label: "Tous les guides", href: "/guides" },
       ],
     },
     {
       title: "Mentions légales",
-      links: [{ label: "Confidentialité", href: "/confidentialite" }],
+      links: [
+        { label: "Confidentialité", href: "/confidentialite" },
+        { label: "Questions fréquentes", href: "/#questions" },
+      ],
     },
   ],
 };

@@ -5,7 +5,7 @@ import { Logo } from "@/components/ui/Logo";
 export function Footer() {
   return (
     <footer className="border-t border-rule px-4 py-12 sm:px-6 md:py-16">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+      <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
         <div className="space-y-4">
           <Logo />
           <p className="max-w-xs leading-relaxed text-ink-2">{FOOTER.signature}</p>

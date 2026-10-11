@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { MESSAGES, type MessageExemple } from "@/lib/exemples";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useEnVue } from "@/components/ui/useEnVue";
@@ -54,10 +55,18 @@ export function Messages() {
         </div>
       </div>
 
-      <p className="mx-auto mt-8 max-w-6xl px-4 text-center text-sm text-ink-3 sm:px-6">
-        Six brouillons, écrits par Terouva pour les annonces d&apos;exemple. Aucun n&apos;est
-        envoyé sans vous.
-      </p>
+      <div className="mx-auto mt-8 max-w-6xl px-4 text-center sm:px-6">
+        <p className="text-sm text-ink-3">
+          Six brouillons, écrits par Terouva pour les annonces d&apos;exemple. Aucun n&apos;est
+          envoyé sans vous.
+        </p>
+        <Link
+          href="/outils/message-de-candidature"
+          className="mt-4 inline-block font-semibold text-accent underline decoration-accent/30 underline-offset-[6px] transition-colors hover:decoration-accent"
+        >
+          Écrire le vôtre maintenant, gratuitement
+        </Link>
+      </div>
     </section>
   );
 }

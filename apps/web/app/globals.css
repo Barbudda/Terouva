@@ -254,3 +254,68 @@ details > summary::-webkit-details-marker {
     scroll-behavior: auto !important;
   }
 }
+
+/* ───────────────────── Articles et guides ─────────────────────
+   Les pages de guide sont de la prose longue : on la style une fois ici
+   plutôt que d'habiller chaque balise dans le JSX. Mesure de ligne limitée
+   (environ 70 signes), pour que ça se lise vraiment. */
+.article {
+  max-width: 44rem;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-ink-2);
+}
+.article > * + * {
+  margin-top: 1.25rem;
+}
+.article h2 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-size: 1.75rem;
+  color: var(--color-ink);
+  margin-top: 3rem;
+  scroll-margin-top: 6rem;
+}
+.article h3 {
+  font-weight: 700;
+  font-size: 1.1875rem;
+  color: var(--color-ink);
+  margin-top: 2rem;
+}
+.article strong {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.article a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in oklch, var(--color-accent) 35%, transparent);
+}
+.article a:hover {
+  text-decoration-color: var(--color-accent);
+}
+.article ul,
+.article ol {
+  padding-left: 1.5rem;
+}
+.article ul { list-style: disc; }
+.article ol { list-style: decimal; }
+.article li + li {
+  margin-top: 0.5rem;
+}
+.article li::marker {
+  color: var(--color-accent);
+}
+/* Encadré de source ou de mise en garde. */
+.article .note {
+  border-left: 3px solid var(--color-accent-wash);
+  background: var(--color-paper-2);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1rem 1.25rem;
+  font-size: 0.9375rem;
+}
+.article .note > * + * {
+  margin-top: 0.5rem;
+}

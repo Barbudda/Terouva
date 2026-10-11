@@ -10,9 +10,26 @@ import { Privacy } from "@/components/sections/Privacy";
 import { FAQ } from "@/components/sections/FAQ";
 import { Signup } from "@/components/sections/Signup";
 import { getSiteUrl } from "@/lib/site";
+import { FAQ_ITEMS } from "@/lib/content";
+import { DonneesStructurees } from "@/lib/seo";
 
 export default function Home() {
   const siteUrl = getSiteUrl();
+
+  // Les questions fréquentes balisées remontent parfois directement dans les
+  // résultats de recherche, sous le lien du site. C'est le balisage qui rapporte
+  // le plus pour le moins d'effort, à condition que les réponses soient les
+  // mêmes que celles affichées sur la page.
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+
   const appJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -32,10 +49,8 @@ export default function Home() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }}
-      />
+      <DonneesStructurees data={appJsonLd} />
+      <DonneesStructurees data={faqJsonLd} />
       <Nav />
       <main>
         <Hero />

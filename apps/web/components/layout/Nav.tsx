@@ -5,7 +5,10 @@ import { LinkButton } from "@/components/ui/LinkButton";
 
 /** Barre flottante en pilule, posée au-dessus du contenu. */
 export function Nav({ home = true }: { home?: boolean }) {
-  const href = (anchor: string) => (home ? anchor : `/${anchor}`);
+  // Les ancres (#comment) ne mènent nulle part hors de l'accueil : on les
+  // préfixe. Les chemins absolus (/guides) sont laissés tels quels.
+  const href = (lien: string) =>
+    lien.startsWith("#") && !home ? `/${lien}` : lien;
 
   return (
     <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6">
