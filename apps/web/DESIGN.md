@@ -67,9 +67,34 @@ Jamais d'emoji.
 
 ## Mouvement
 
-Le mouvement sert un état, jamais l'ambiance : transitions de couleur au survol (150 ms),
-ouverture des questions (`details` natif), point qui respire sur l'étiquette « bientôt
-disponible » et sur l'extension réellement connectée. `prefers-reduced-motion` coupe tout.
+Trois gestes, pas un de plus, et chacun dit quelque chose :
+
+1. **Le bloc qui monte** à son arrivée à l'écran (`.monte`, 18 px et un fondu). Piloté par
+   `animation-timeline: view()` : aucun JavaScript, donc pas de bloc coincé invisible si un
+   script échoue. Les navigateurs qui ne savent pas faire affichent simplement le bloc.
+2. **La scène d'accueil** se remplit une fois : les quatre annonces arrivent décalées de
+   150 ms, leur jauge de note se remplit, la meilleure reçoit son sceau. C'est ce que fait
+   l'outil, joué plutôt que raconté. Elle ne démarre qu'une fois à l'écran.
+3. **Le ruban de messages** défile en continu (55 s par tour), s'arrête au survol, au
+   clavier et quand on ne le regarde pas.
+
+Plus les transitions de couleur au survol (150 ms), l'ouverture des questions (`details`
+natif) et le point qui respire sur « bientôt disponible ».
+
+Tout passe par `transform` et `opacity`, jamais par une propriété qui provoque un recalcul
+de mise en page. `prefers-reduced-motion` éteint les trois : rien ne bouge, rien ne manque,
+et le ruban devient un défilement horizontal au doigt.
+
+**Pas de capture d'écran dans le hero.** Une image du produit périme à chaque changement de
+l'application ; la scène est du HTML, donc elle suit, elle se lit et elle s'indexe.
+
+## Exemples montrés
+
+Les annonces, les notes et les messages de la page viennent des vrais moteurs
+(`scoreListing`, `generateMessage`), recopiés dans `lib/exemples.ts`. **Pas de témoignages
+clients** : le produit n'est pas sorti, en inventer tromperait les visiteurs qui laissent
+leur adresse (et c'est le signal vibecodé n° 12). Montrer le travail convainc mieux qu'un
+compliment fabriqué. Si le moteur change, régénérer ces valeurs.
 
 ## Texte
 
