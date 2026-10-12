@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>Terouva — animation de promotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=block" rel="stylesheet" />
+<style>
+/*
+  Animation de promotion Terouva, muette.
+
+  Elle est **déterministe** : rien ne dépend de l'horloge du navigateur. Une
+  seule fonction `rendre(t)` place chaque élément en fonction du temps, et le
+  script de rendu l'appelle image par image. Deux lectures au même instant
+  donnent donc exactement la même image, ce qui est indispensable pour fabriquer
+  un fichier vidéo propre.
+
+  La direction artistique est celle du site (DESIGN.md) : fond clair, un seul
+  accent rose, DM Sans très gras et serré, rectangles légèrement arrondis.
+*/
+:root {
+  --paper: #fdfdfd;
+  --ash: #f6f6f7;
+  --card: #ffffff;
+  --ink: #1b1d1e;
+  --ink-2: #55595c;
+  --ink-3: #6e7376;
+  --rule: #e7e7ee;
+  --accent: #c92d6a;
+  --accent-ink: #a52254;
+  --wash: #fbdae7;
+  --good: #11785a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--paper);
+  font-family: "DM Sans", system-ui, sans-serif;
+  color: var(--ink);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* La scène mesure exactement la taille de la vidéo. */
+#scene {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--paper);
+}
+body.carre #scene { width: 1080px; height: 1080px; }
+
+.plan {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 110px;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+body.carre .plan { padding: 80px; }
+
+/* ─────────── Typographie ─────────── */
+.titre {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  font-size: 104px;
+  max-width: 1500px;
+  text-align: center;
+}
+body.carre .titre { font-size: 76px; max-width: 920px; }
+.titre .rose { color: var(--accent); }
+
+.sous {
+  margin-top: 34px;
+  font-size: 36px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  text-align: center;
+  max-width: 1100px;
+}
+body.carre .sous { font-size: 30px; max-width: 820px; }
+
+.surtitre {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* ─────────── Cartes d'annonce ─────────── */
+.pile { display: flex; flex-direction: column; gap: 18px; width: 1180px; }
+body.carre .pile { width: 900px; gap: 14px; }
+
+.annonce {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  background: var(--card);
+  border: 2px solid var(--rule);
+  border-radius: 20px;
+  padding: 26px 32px;
+  will-change: transform, opacity;
+}
+.annonce.prioritaire { border-color: var(--wash); }
+
+.annonce .titre-a { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; }
+.annonce .meta { margin-top: 8px; font-size: 24px; color: var(--ink-2); }
+body.carre .annonce .titre-a { font-size: 27px; }
+body.carre .annonce .meta { font-size: 21px; }
+
+.note {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  min-width: 120px;
+  text-align: right;
+}
+.note.haute { color: var(--good); }
+.note.moyenne { color: var(--ink); }
+.note.basse { color: var(--ink-3); }
+
+/* Jauge de note, sous la carte. */
+.jauge {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: 14px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--ash);
+  overflow: hidden;
+}
+.jauge i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--good);
+  transform-origin: left;
+}
+
+.sceau {
+  position: absolute;
+  top: -18px;
+  left: 28px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+  border-radius: 10px;
+  will-change: transform, opacity;
+}
+
+.loue {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(27 29 30 / 0.93);
+  border-radius: 18px;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ─────────── Fenêtre de message ─────────── */
+.message {
+  width: 1080px;
+  background: var(--card);
+  border: 2px solid var(--rule);
+  border-radius: 24px;
+  padding: 44px 48px 36px;
+  text-align: left;
+}
+body.carre .message { width: 880px; padding: 34px 38px 30px; }
+
+.message .entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--rule);
+  padding-bottom: 20px;
+  margin-bottom: 26px;
+}
+.message .entete b { font-size: 28px; font-weight: 700; }
+.message .entete span { font-size: 22px; color: var(--ink-3); }
+
+.message p {
+  font-size: 27px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  min-height: 300px;
+}
+body.carre .message p { font-size: 23px; min-height: 250px; }
+
+.curseur {
+  display: inline-block;
+  width: 3px;
+  height: 1.05em;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+.bouton {
+  margin-top: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 18px 30px;
+  border-radius: 12px;
+  box-shadow: 0 14px 34px -14px rgb(201 45 106 / 0.6);
+  will-change: transform;
+}
+
+/* ─────────── Marque ─────────── */
+.marque { display: flex; align-items: center; gap: 24px; }
+.marque .carre {
+  width: 96px; height: 96px; border-radius: 26px; background: var(--accent);
+  display: grid; place-items: center;
+}
+.marque .nom { font-size: 78px; font-weight: 800; letter-spacing: -0.035em; }
+body.carre .marque .carre { width: 76px; height: 76px; border-radius: 21px; }
+body.carre .marque .nom { font-size: 60px; }
+
+.adresse {
+  margin-top: 46px;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+.assurances {
+  margin-top: 54px;
+  display: flex;
+  gap: 46px;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 28px;
+  color: var(--ink-2);
+}
+body.carre .assurances { font-size: 24px; gap: 30px; }
+.assurances span { display: inline-flex; align-items: center; gap: 12px; }
+.coche { width: 24px; height: 24px; flex: none; }
+
+/* Barre de progression discrète, qui donne le rythme. */
+#progres {
+  position: absolute;
+  left: 0; bottom: 0; height: 6px;
+  background: var(--accent);
+  width: 0;
+}
+</style>
+</head>
+<body>
+<div id="scene">
+
+  <!-- 1 · Le problème -->
+  <section class="plan" id="p1">
+    <div>
+      <div class="pile" id="pile-rapide">
+        <div class="annonce"><div><div class="titre-a">T2 lumineux avec balcon, Croix-Rousse</div><div class="meta">890 € · 42 m² · Lyon 4e</div></div><div class="loue">Loué</div></div>
+        <div class="annonce"><div><div class="titre-a">2 pièces rénové, Guillotière</div><div class="meta">845 € · 40 m² · Lyon 7e</div></div><div class="loue">Loué</div></div>
+        <div class="annonce"><div><div class="titre-a">Studio avec cave, Monplaisir</div><div class="meta">760 € · 34 m² · Lyon 8e</div></div><div class="loue">Loué</div></div>
+      </div>
+      <h1 class="titre" id="t1" style="margin-top:70px">Les bonnes annonces partent<br /><span class="rose">en quelques heures.</span></h1>
+    </div>
+  </section>
+
+  <!-- 2 · L'impossible -->
+  <section class="plan" id="p2">
+    <div>
+      <h1 class="titre" id="t2">Vous ne pouvez pas rester<br />devant l'écran <span class="rose">toute la journée.</span></h1>
+      <p class="sous" id="s2">Et pendant que vous travaillez, quelqu'un d'autre a répondu.</p>
+    </div>
+  </section>
+
+  <!-- 3 · Ce que fait Terouva -->
+  <section class="plan" id="p3">
+    <div>
+      <p class="surtitre" id="st3">Terouva regarde pour vous</p>
+      <h1 class="titre" id="t3" style="margin-top:26px;font-size:76px">Les annonces qui vous correspondent,<br /><span class="rose">notées et classées.</span></h1>
+      <div class="pile" id="pile-notes" style="margin-top:58px"></div>
+    </div>
+  </section>
+
+  <!-- 4 · Le message -->
+  <section class="plan" id="p4">
+    <div style="display:grid;place-items:center">
+      <h1 class="titre" id="t4" style="font-size:80px">Et le message est <span class="rose">déjà écrit.</span></h1>
+      <div class="message" id="msg" style="margin-top:50px">
+        <div class="entete"><b>T2 lumineux avec balcon</b><span>Croix-Rousse · 890 €</span></div>
+        <p id="msg-texte"></p>
+        <div class="bouton" id="btn">Copier le message</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Le garde-fou -->
+  <section class="plan" id="p5">
+    <div>
+      <h1 class="titre" id="t5">Vous relisez.<br /><span class="rose">Vous envoyez.</span></h1>
+      <p class="sous" id="s5">Terouva ne contacte jamais personne à votre place.</p>
+    </div>
+  </section>
+
+  <!-- 6 · La marque -->
+  <section class="plan" id="p6">
+    <div style="display:grid;place-items:center">
+      <div class="marque" id="m6">
+        <div class="carre">
+          <svg width="56" height="56" viewBox="0 0 32 32" fill="none">
+            <path d="M8.5 16.5 16 9.5l7.5 7" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="21.5" r="2.6" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="nom">Terouva</div>
+      </div>
+      <div class="assurances" id="a6">
+        <span><svg class="coche" viewBox="0 0 16 16" fill="none" stroke="#c92d6a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Sur votre ordinateur</span>
+        <span><svg class="coche" viewBox="0 0 16 16" fill="none" stroke="#c92d6a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Aucun compte</span>
+        <span><svg class="coche" viewBox="0 0 16 16" fill="none" stroke="#c92d6a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Aucun serveur</span>
+      </div>
+      <div class="adresse" id="url6">terouva.com</div>
+    </div>
+  </section>
+
+  <div id="progres"></div>
+</div>
+
+<script>
+/* ───────────────────────── Moteur de rendu ─────────────────────────
+   Tout est une fonction du temps. Aucun setTimeout, aucune animation CSS :
+   le script de capture appelle `rendre(t)` pour chaque image. */
+
+const DUREE = 24; // secondes
+
+/** Interpolation bornée entre deux instants, avec amorti. */
+const lissage = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : 1 - Math.pow(1 - x, 3));
+function entre(t, debut, fin) {
+  if (fin <= debut) return t >= fin ? 1 : 0;
+  return lissage((t - debut) / (fin - debut));
+}
+/** 0 → 1 → 0 : une apparition suivie d'une sortie. */
+function fenetre(t, entreeD, entreeF, sortieD, sortieF) {
+  return entre(t, entreeD, entreeF) * (1 - entre(t, sortieD, sortieF));
+}
+
+const $ = (s) => document.querySelector(s);
+const plans = ["p1", "p2", "p3", "p4", "p5", "p6"].map((id) => $("#" + id));
+
+/** Chaque plan : [apparition, fin d'apparition, début de sortie, fin de sortie] */
+const MINUTAGE = [
+  [0.0, 0.7, 3.6, 4.1],
+  [4.0, 4.7, 7.0, 7.5],
+  [7.4, 8.1, 13.2, 13.7],
+  [13.6, 14.3, 18.2, 18.7],
+  [18.6, 19.3, 20.8, 21.3],
+  [21.2, 22.0, 24.0, 24.0],
+];
+
+/* ── Plan 3 : les annonces notées ── */
+const ANNONCES = [
+  { titre: "T2 lumineux avec balcon, Croix-Rousse", meta: "890 € · 42 m² · Lyon 4e · il y a 3 min", note: 96, rang: "haute", prio: true },
+  { titre: "2 pièces rénové, Guillotière", meta: "845 € · 40 m² · Lyon 7e · il y a 2 min", note: 96, rang: "haute" },
+  { titre: "2 pièces proche Part-Dieu", meta: "930 € · 38 m² · Lyon 3e · il y a 1 h", note: 66, rang: "moyenne" },
+  { titre: "Studio meublé, Jean Macé", meta: "640 € · 28 m² · Lyon 7e · il y a 8 min", note: 14, rang: "basse" },
+];
+
+const pile = $("#pile-notes");
+ANNONCES.forEach((a) => {
+  const el = document.createElement("div");
+  el.className = "annonce" + (a.prio ? " prioritaire" : "");
+  el.innerHTML =
+    (a.prio ? '<div class="sceau">À contacter en priorité</div>' : "") +
+    '<div><div class="titre-a">' + a.titre + '</div><div class="meta">' + a.meta + "</div></div>" +
+    '<div class="note ' + a.rang + '">0</div>' +
+    '<div class="jauge"><i></i></div>';
+  pile.appendChild(el);
+});
+const cartesNotes = [...pile.children];
+
+const MESSAGE =
+  "Bonjour,\n\nVotre annonce m'intéresse beaucoup, en particulier pour le balcon.\n\n" +
+  "Je suis infirmière en CDI. Mon revenu net est de 2 400 € par mois et je bénéficie " +
+  "de la garantie Visale. Mon dossier est complet.\n\n" +
+  "Je peux visiter dès que vous le souhaitez.";
+
+function rendre(t) {
+  // Plans : opacité et léger déplacement.
+  plans.forEach((plan, i) => {
+    const [a, b, c, d] = MINUTAGE[i];
+    const v = fenetre(t, a, b, c, d);
+    plan.style.opacity = v;
+    const monte = (1 - entre(t, a, b)) * 26 - entre(t, c, d) * 18;
+    plan.style.transform = "translateY(" + monte.toFixed(2) + "px)";
+    plan.style.visibility = v < 0.004 ? "hidden" : "visible";
+  });
+
+  /* ── Plan 1 : les annonces défilent et se font prendre ── */
+  const rapide = $("#pile-rapide").children;
+  for (let i = 0; i < rapide.length; i++) {
+    const depart = 0.45 + i * 0.22;
+    const arrive = entre(t, depart, depart + 0.55);
+    const loue = entre(t, 1.75 + i * 0.3, 2.15 + i * 0.3);
+    rapide[i].style.transform = "translateY(" + ((1 - arrive) * 44).toFixed(2) + "px)";
+    rapide[i].style.opacity = arrive;
+    rapide[i].querySelector(".loue").style.opacity = loue;
+  }
+  $("#t1").style.opacity = entre(t, 2.5, 3.1);
+
+  /* ── Plan 2 ── */
+  $("#t2").style.opacity = entre(t, 4.3, 4.9);
+  $("#s2").style.opacity = entre(t, 5.3, 5.9);
+
+  /* ── Plan 3 : arrivée, notes qui montent, sceau ── */
+  $("#st3").style.opacity = entre(t, 7.7, 8.2);
+  $("#t3").style.opacity = entre(t, 7.95, 8.5);
+  cartesNotes.forEach((el, i) => {
+    const depart = 8.9 + i * 0.42;
+    const arrive = entre(t, depart, depart + 0.6);
+    el.style.opacity = arrive;
+    el.style.transform = "translateY(" + ((1 - arrive) * 34).toFixed(2) + "px)";
+
+    const progression = entre(t, depart + 0.35, depart + 1.25);
+    const cible = ANNONCES[i].note;
+    el.querySelector(".note").textContent = Math.round(cible * progression);
+    const jauge = el.querySelector(".jauge i");
+    jauge.style.transform = "scaleX(" + ((cible / 100) * progression).toFixed(3) + ")";
+    jauge.style.background =
+      cible >= 80 ? "var(--good)" : cible >= 65 ? "var(--ink-3)" : "var(--rule)";
+
+    const sceau = el.querySelector(".sceau");
+    if (sceau) {
+      const s = entre(t, 11.5, 11.9);
+      sceau.style.opacity = s;
+      sceau.style.transform = "scale(" + (0.86 + 0.14 * s).toFixed(3) + ")";
+    }
+  });
+
+  /* ── Plan 4 : le message s'écrit ── */
+  $("#t4").style.opacity = entre(t, 13.9, 14.5);
+  $("#msg").style.opacity = entre(t, 14.3, 14.9);
+  const frappe = entre(t, 14.8, 17.2);
+  const n = Math.floor(MESSAGE.length * frappe);
+  $("#msg-texte").textContent = MESSAGE.slice(0, n);
+  if (frappe > 0 && frappe < 1) {
+    const c = document.createElement("i");
+    c.className = "curseur";
+    $("#msg-texte").appendChild(c);
+  }
+  const clic = entre(t, 17.5, 17.7) * (1 - entre(t, 17.7, 17.95));
+  $("#btn").style.transform = "scale(" + (1 - 0.05 * clic).toFixed(3) + ")";
+  $("#btn").style.opacity = entre(t, 17.3, 17.6) * 0.35 + 0.65;
+
+  /* ── Plan 5 ── */
+  $("#t5").style.opacity = entre(t, 18.9, 19.5);
+  $("#s5").style.opacity = entre(t, 19.6, 20.2);
+
+  /* ── Plan 6 ── */
+  const m = entre(t, 21.5, 22.2);
+  $("#m6").style.opacity = m;
+  $("#m6").style.transform = "scale(" + (0.94 + 0.06 * m).toFixed(3) + ")";
+  $("#a6").style.opacity = entre(t, 22.2, 22.8);
+  $("#url6").style.opacity = entre(t, 22.6, 23.2);
+
+  $("#progres").style.width = (100 * Math.min(t / DUREE, 1)).toFixed(3) + "%";
+}
+
+window.rendre = rendre;
+window.DUREE = DUREE;
+rendre(0);
+
+/* Lecture libre dans un navigateur, pour vérifier à l'œil. */
+if (!location.search.includes("capture")) {
+  const t0 = performance.now();
+  const boucle = () => {
+    rendre(((performance.now() - t0) / 1000) % DUREE);
+    requestAnimationFrame(boucle);
+  };
+  boucle();
+}
+if (location.search.includes("carre")) document.body.classList.add("carre");
+</script>
+</body>
+</html>

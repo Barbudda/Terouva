@@ -79,3 +79,7 @@ desktop.ini
 
 # --- Captures et journaux du navigateur de test (Playwright MCP) ---
 .playwright-mcp/
+
+# Vidéos de promotion : regénérables avec « npm run promo ».
+# Le source (scripts/promo/) est versionné, pas les fichiers de sortie.
+/promo/*.mp4

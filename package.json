@@ -14,7 +14,9 @@
     "install:all": "npm install --prefix packages/core && npm install --prefix apps/web && npm install --prefix apps/desktop",
     "clean:web": "rimraf apps/web/.next apps/web/out",
     "clean:desktop": "rimraf apps/desktop/dist apps/desktop/src-tauri/gen",
-    "seo:indexnow": "node scripts/indexnow.mjs"
+    "seo:indexnow": "node scripts/indexnow.mjs",
+    "promo": "node scripts/promo/rendre.mjs",
+    "promo:carre": "node scripts/promo/rendre.mjs --carre"
   },
   "engines": {
     "node": ">=20"
@@ -23,5 +25,8 @@
     "type": "git",
     "url": "git+https://github.com/Barbudda/Terouva.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "playwright-core": "^1.56.0"
+  }
 }
