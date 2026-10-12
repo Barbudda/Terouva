@@ -346,19 +346,3 @@ details > summary::-webkit-details-marker {
 .article .note > * + * {
   margin-top: 0.5rem;
 }
-
-/* La vignette de la vidéo grandit jusqu'au plein écran en un seul mouvement,
-   là où le navigateur sait animer une transition de vue. Courbe lente au
-   départ, posée à l'arrivée : c'est ce qui donne l'impression d'un volume qui
-   s'installe plutôt que d'un panneau qui apparaît. */
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(promo),
-  ::view-transition-new(promo) {
-    animation-duration: 420ms;
-    animation-timing-function: cubic-bezier(0.32, 0.72, 0.2, 1);
-  }
-  ::view-transition-group(promo) {
-    animation-duration: 420ms;
-    animation-timing-function: cubic-bezier(0.32, 0.72, 0.2, 1);
-  }
-}
