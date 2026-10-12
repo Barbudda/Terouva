@@ -234,6 +234,40 @@ body.carre .message p { font-size: 23px; min-height: 250px; }
   will-change: transform;
 }
 
+/* ─────────── Pièces du dossier ─────────── */
+.dossier {
+  list-style: none;
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 48px;
+  width: 1180px;
+}
+body.carre .dossier { grid-template-columns: 1fr; width: 860px; gap: 12px; }
+
+.dossier li {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 30px;
+  color: var(--ink-2);
+  padding: 14px 22px;
+  border: 2px solid var(--rule);
+  border-radius: 14px;
+  background: var(--card);
+  will-change: opacity, transform;
+}
+body.carre .dossier li { font-size: 25px; padding: 11px 18px; }
+
+.case {
+  width: 34px; height: 34px; flex: none;
+  border: 2px solid var(--rule);
+  border-radius: 9px;
+  display: grid; place-items: center;
+  position: relative;
+}
+.case svg { width: 22px; height: 22px; }
+
 /* ─────────── Marque ─────────── */
 .marque { display: flex; align-items: center; gap: 24px; }
 .marque .carre {
@@ -306,7 +340,17 @@ body.carre .assurances { font-size: 24px; gap: 30px; }
     </div>
   </section>
 
-  <!-- 4 · Le message -->
+  <!-- 4 · Le dossier -->
+  <section class="plan" id="pd">
+    <div style="display:grid;place-items:center">
+      <p class="surtitre" id="std">Votre dossier</p>
+      <h1 class="titre" id="td" style="margin-top:26px;font-size:80px">Rassemblé une fois.<br /><span class="rose">Complet à chaque fois.</span></h1>
+      <ul class="dossier" id="liste-dossier"></ul>
+      <p class="sous" id="sd" style="margin-top:34px">Terouva sait ce qu'il vous manque. Vous envoyez tout d'un coup.</p>
+    </div>
+  </section>
+
+  <!-- 5 · Le message -->
   <section class="plan" id="p4">
     <div style="display:grid;place-items:center">
       <h1 class="titre" id="t4" style="font-size:80px">Et le message est <span class="rose">déjà écrit.</span></h1>
@@ -355,7 +399,7 @@ body.carre .assurances { font-size: 24px; gap: 30px; }
    Tout est une fonction du temps. Aucun setTimeout, aucune animation CSS :
    le script de capture appelle `rendre(t)` pour chaque image. */
 
-const DUREE = 24; // secondes
+const DUREE = 29; // secondes
 
 /** Interpolation bornée entre deux instants, avec amorti. */
 const lissage = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : 1 - Math.pow(1 - x, 3));
@@ -369,16 +413,17 @@ function fenetre(t, entreeD, entreeF, sortieD, sortieF) {
 }
 
 const $ = (s) => document.querySelector(s);
-const plans = ["p1", "p2", "p3", "p4", "p5", "p6"].map((id) => $("#" + id));
+const plans = ["p1", "p2", "p3", "pd", "p4", "p5", "p6"].map((id) => $("#" + id));
 
 /** Chaque plan : [apparition, fin d'apparition, début de sortie, fin de sortie] */
 const MINUTAGE = [
-  [0.0, 0.7, 3.6, 4.1],
-  [4.0, 4.7, 7.0, 7.5],
-  [7.4, 8.1, 13.2, 13.7],
-  [13.6, 14.3, 18.2, 18.7],
-  [18.6, 19.3, 20.8, 21.3],
-  [21.2, 22.0, 24.0, 24.0],
+  [0.0, 0.7, 3.6, 4.1],   // le problème
+  [4.0, 4.7, 7.0, 7.5],   // l impossible
+  [7.4, 8.1, 13.2, 13.7], // les annonces notées
+  [13.6, 14.3, 18.4, 18.9], // le dossier
+  [18.8, 19.5, 23.9, 24.4], // le message
+  [24.3, 25.0, 26.5, 27.0], // vous relisez, vous envoyez
+  [26.9, 27.7, 29.0, 29.0], // la marque
 ];
 
 /* ── Plan 3 : les annonces notées ── */
@@ -401,6 +446,30 @@ ANNONCES.forEach((a) => {
   pile.appendChild(el);
 });
 const cartesNotes = [...pile.children];
+
+/* ── Plan 4 : les pièces du dossier ──
+   Les six pièces d'un salarié, dans l'ordre des catégories du décret du
+   5 novembre 2015. Elles se cochent une à une : ce que montre l'outil, c'est
+   un dossier qu'on rassemble une fois et qui reste prêt. */
+const PIECES = [
+  "Pièce d'identité",
+  "Justificatif de domicile",
+  "Contrat de travail",
+  "Trois bulletins de salaire",
+  "Avis d'imposition",
+  "Garantie Visale",
+];
+
+const listeDossier = $("#liste-dossier");
+PIECES.forEach((nom) => {
+  const li = document.createElement("li");
+  li.innerHTML =
+    '<span class="case"><svg viewBox="0 0 24 24" fill="none" stroke="#11785a" stroke-width="3.4" ' +
+    'stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.2 5.2L20 7"/></svg></span>' +
+    "<span>" + nom + "</span>";
+  listeDossier.appendChild(li);
+});
+const lignesDossier = [...listeDossier.children];
 
 const MESSAGE =
   "Bonjour,\n\nVotre annonce m'intéresse beaucoup, en particulier pour le balcon.\n\n" +
@@ -460,10 +529,26 @@ function rendre(t) {
     }
   });
 
-  /* ── Plan 4 : le message s'écrit ── */
-  $("#t4").style.opacity = entre(t, 13.9, 14.5);
-  $("#msg").style.opacity = entre(t, 14.3, 14.9);
-  const frappe = entre(t, 14.8, 17.2);
+  /* ── Plan 4 : le dossier se coche ── */
+  $("#std").style.opacity = entre(t, 13.9, 14.4);
+  $("#td").style.opacity = entre(t, 14.1, 14.7);
+  lignesDossier.forEach((li, i) => {
+    const depart = 14.9 + i * 0.34;
+    const arrive = entre(t, depart, depart + 0.45);
+    li.style.opacity = arrive;
+    li.style.transform = "translateY(" + ((1 - arrive) * 18).toFixed(2) + "px)";
+    // La coche apparaît un instant après la ligne : on voit le dossier se remplir.
+    const coche = entre(t, depart + 0.22, depart + 0.5);
+    const c = li.querySelector(".case");
+    c.querySelector("svg").style.opacity = coche;
+    c.style.borderColor = coche > 0.5 ? "var(--good)" : "var(--rule)";
+  });
+  $("#sd").style.opacity = entre(t, 17.4, 18.0);
+
+  /* ── Plan 5 : le message s'écrit ── */
+  $("#t4").style.opacity = entre(t, 19.1, 19.7);
+  $("#msg").style.opacity = entre(t, 19.5, 20.1);
+  const frappe = entre(t, 20.0, 22.4);
   const n = Math.floor(MESSAGE.length * frappe);
   $("#msg-texte").textContent = MESSAGE.slice(0, n);
   if (frappe > 0 && frappe < 1) {
@@ -471,20 +556,20 @@ function rendre(t) {
     c.className = "curseur";
     $("#msg-texte").appendChild(c);
   }
-  const clic = entre(t, 17.5, 17.7) * (1 - entre(t, 17.7, 17.95));
+  const clic = entre(t, 22.7, 22.9) * (1 - entre(t, 22.9, 23.15));
   $("#btn").style.transform = "scale(" + (1 - 0.05 * clic).toFixed(3) + ")";
-  $("#btn").style.opacity = entre(t, 17.3, 17.6) * 0.35 + 0.65;
-
-  /* ── Plan 5 ── */
-  $("#t5").style.opacity = entre(t, 18.9, 19.5);
-  $("#s5").style.opacity = entre(t, 19.6, 20.2);
+  $("#btn").style.opacity = entre(t, 22.5, 22.8) * 0.35 + 0.65;
 
   /* ── Plan 6 ── */
-  const m = entre(t, 21.5, 22.2);
+  $("#t5").style.opacity = entre(t, 24.6, 25.2);
+  $("#s5").style.opacity = entre(t, 25.3, 25.9);
+
+  /* ── Plan 7 ── */
+  const m = entre(t, 27.2, 27.9);
   $("#m6").style.opacity = m;
   $("#m6").style.transform = "scale(" + (0.94 + 0.06 * m).toFixed(3) + ")";
-  $("#a6").style.opacity = entre(t, 22.2, 22.8);
-  $("#url6").style.opacity = entre(t, 22.6, 23.2);
+  $("#a6").style.opacity = entre(t, 27.9, 28.4);
+  $("#url6").style.opacity = entre(t, 28.2, 28.7);
 
   $("#progres").style.width = (100 * Math.min(t / DUREE, 1)).toFixed(3) + "%";
 }

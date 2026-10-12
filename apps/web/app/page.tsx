@@ -34,17 +34,17 @@ export default function Home() {
   };
 
   // Une vidéo balisée peut ressortir dans les résultats de recherche avec sa
-  // vignette. La durée suit la norme ISO 8601 : PT24S, vingt-quatre secondes.
+  // vignette. La durée suit la norme ISO 8601 : PT29S, vingt-neuf secondes.
   const videoJsonLd = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    name: "Terouva en 24 secondes",
+    name: "Terouva en 29 secondes",
     description:
       "Comment Terouva repère les annonces de location qui vous correspondent, les note, et prépare votre message de candidature. Animation sans son.",
     thumbnailUrl: [`${siteUrl}/promo/affiche.jpg`],
     contentUrl: `${siteUrl}/promo/terouva.mp4`,
     uploadDate: "2026-10-12",
-    duration: "PT24S",
+    duration: "PT29S",
     inLanguage: "fr-FR",
     isFamilyFriendly: true,
     publisher: { "@id": `${siteUrl}/#organization` },
