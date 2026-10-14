@@ -1,6 +1,5 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { domaineAffiche, polices } from "@/lib/og";
 
 export const alt = "Terouva · Trouvez votre logement sans y passer vos journées";
 export const size = { width: 1200, height: 630 };
@@ -15,10 +14,7 @@ const ACCENT = "#C92D6A";
 const WASH = "#FBDAE7";
 
 export default async function OG() {
-  const [bold, regular] = await Promise.all([
-    readFile(join(process.cwd(), "assets/og/montserrat-800.woff")),
-    readFile(join(process.cwd(), "assets/og/montserrat-400.woff")),
-  ]);
+  const [bold, regular] = await polices();
 
   return new ImageResponse(
     (
@@ -31,7 +27,7 @@ export default async function OG() {
           background: PAPER,
           color: INK,
           padding: "72px 80px",
-          fontFamily: "Montserrat",
+          fontFamily: "DM Sans",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
@@ -47,7 +43,7 @@ export default async function OG() {
             />
             <circle cx="16" cy="21.5" r="2.4" fill="#FFFFFF" />
           </svg>
-          <div style={{ fontSize: "40px", fontWeight: 800, letterSpacing: "-0.02em" }}>Terouva</div>
+          <div style={{ fontSize: "40px", fontWeight: 700, letterSpacing: "-0.02em" }}>Terouva</div>
           <div
             style={{
               marginLeft: "12px",
@@ -56,7 +52,7 @@ export default async function OG() {
               borderRadius: "999px",
               padding: "8px 18px",
               fontSize: "20px",
-              fontWeight: 800,
+              fontWeight: 700,
               letterSpacing: "0.12em",
               display: "flex",
             }}
@@ -69,7 +65,7 @@ export default async function OG() {
           <div
             style={{
               fontSize: "82px",
-              fontWeight: 800,
+              fontWeight: 700,
               lineHeight: 1,
               letterSpacing: "-0.03em",
               maxWidth: "1000px",
@@ -104,15 +100,15 @@ export default async function OG() {
             color: INK_2,
           }}
         >
-          terouva.vercel.app
+          {domaineAffiche()}
         </div>
       </div>
     ),
     {
       ...size,
       fonts: [
-        { name: "Montserrat", data: bold, weight: 800, style: "normal" },
-        { name: "Montserrat", data: regular, weight: 400, style: "normal" },
+        { name: "DM Sans", data: bold, weight: 700, style: "normal" },
+        { name: "DM Sans", data: regular, weight: 400, style: "normal" },
       ],
     },
   );
