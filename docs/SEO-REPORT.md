@@ -60,6 +60,40 @@ Elle expose maintenant les trois voies réelles, dont celle que presque personne
 **un propriétaire déjà assuré contre les loyers impayés ne peut plus exiger de caution**, sauf
 d'un étudiant ou d'un apprenti.
 
+### Trois guides sur les champs vides
+
+Écrits après le premier jet de ce rapport, sur les trois sujets qu'il désignait comme
+prioritaires. Chacun est sourcé sur service-public.gouv.fr, avec sa date de vérification.
+
+| Guide | Requête visée | Vol./mois | Diff. |
+|---|---|---|---|
+| `/guides/louer-sans-garant` | louer sans garant | 480 | **12** |
+| | location sans garant | 320 | **18** |
+| | comment louer sans garant | 140 | **18** |
+| `/guides/etat-des-lieux` | état des lieux location | 1 900 | **25** |
+| | état des lieux sortie | 720 | 28 |
+| | état des lieux appartement | 320 | 32 |
+| `/guides/preavis-location` | préavis location | 2 900 | 31 |
+| | congé locataire | 480 | 26 |
+| | lettre préavis location | 480 | **20** |
+| | préavis zone tendue | 210 | **14** |
+
+Environ **7 900 recherches mensuelles** nouvellement adressées, la plupart à difficulté basse.
+
+Deux précautions prises en les écrivant :
+
+- La **liste des communes en zone tendue a changé fin 2025**. La page ne la recopie pas, elle
+  renvoie au simulateur officiel. Une liste périmée coûte deux mois de loyer à qui la croit, et
+  c'est précisément ce que font la plupart des pages concurrentes.
+- **Aucune référence Légifrance n'est citée** dans ces trois guides : je n'ai pas pu vérifier les
+  identifiants d'article (le site renvoie un 403 aux requêtes automatiques). Les décrets sont
+  nommés en toutes lettres dans le texte, les liens pointent vers service-public, vérifié page
+  par page.
+
+La section « louer sans garant » du guide du garant, qui traitait le sujet en passant, a été
+réduite à trois lignes et renvoie à la nouvelle page. **Deux pages qui visent la même requête se
+nuisent** : c'est la seule raison de cette coupe.
+
 ### Divers
 
 - Image de fond du ruban vidéo : 76 ko → **13 ko** en WebP, chargement différé. L'affiche pleine
@@ -86,6 +120,9 @@ page, vérifié sur les douze.
 | `/guides/garantie-visale` | `app/guides/garantie-visale/` | Autorité | garantie visale | 135 000 | 52 |
 | `/guides/repondre-a-une-annonce-de-location` | `app/guides/repondre-a-une-annonce.../` | Autorité → outil | répondre à une annonce de location | 10 | 0 |
 | `/guides/refus-de-dossier` | `app/guides/refus-de-dossier/` | Autorité | refus dossier location | 20 | 0 |
+| `/guides/louer-sans-garant` | `app/guides/louer-sans-garant/` | Autorité → outil | louer sans garant | 480 | **12** |
+| `/guides/etat-des-lieux` | `app/guides/etat-des-lieux/` | Autorité | état des lieux location | 1 900 | **25** |
+| `/guides/preavis-location` | `app/guides/preavis-location/` | Autorité → outil | préavis location | 2 900 | 31 |
 
 ### Secondaires par page
 
@@ -135,18 +172,15 @@ Relevé SERP sur `garant location` et `dossier locataire`.
 
 ---
 
-## 4. Idées d'articles — à valider avant rédaction
+## 4. Idées d'articles
 
-Je n'ai rien écrit. Chaque idée renvoie vers une landing précise.
+**Trois sont faites** et vivent maintenant comme guides à part entière : « Louer sans garant »,
+« État des lieux » et « Préavis de location » (voir §1). Les cinq qui suivent restent à valider.
+Chacune renvoie vers une landing précise.
 
 ### Vers `/guides/garant-caution` et `/outils/dossier-de-location`
 
-1. **« Louer sans garant : les trois solutions, et ce qu'elles coûtent vraiment »**
-   mot-clé `location sans garant` (320, diff. **18**)
-   Plan : la loi n'impose pas de garant · Visale, conditions et délai réel · le propriétaire déjà
-   assuré ne peut plus exiger de caution · les sociétés privées, grille de coût sur un bail de
-   3 ans · que répondre à « il me faut un garant » en visite.
-   **C'est l'article à faire en premier : meilleure difficulté du corpus.**
+1. ~~« Louer sans garant »~~ — **fait**, publié comme guide : `/guides/louer-sans-garant`.
 
 2. **« Combien doit gagner un garant ? Ce que la loi dit, et ce que les agences demandent »**
    mot-clé `combien doit gagner un garant pour une location` (30) + `garant logement` (880, diff. 40)
@@ -166,11 +200,9 @@ Je n'ai rien écrit. Chaque idée renvoie vers une landing précise.
    Plan : le calcul de la majoration de 10 % avec trois exemples chiffrés · le modèle de lettre
    recommandée · la conciliation obligatoire sous 5 000 € · le tribunal · les trois ans de délai.
 
-5. **« État des lieux d'entrée : la demi-heure qui vous rend votre dépôt de garantie »**
-   mot-clé `état des lieux` (6 600, diff. 36)
-   Plan : ce qui s'y joue financièrement · la liste de ce qu'on oublie de noter · photos datées ·
-   l'absence d'état des lieux et la présomption de bon état · la comparaison à la sortie.
-   **Ouvre un champ à 6 600 recherches où nous n'avons rien.**
+5. ~~« État des lieux d'entrée »~~ — **fait**, publié comme guide : `/guides/etat-des-lieux`.
+   Également **« Préavis de location »**, non prévu au premier jet et pourtant le plus gros champ
+   libre du corpus : `/guides/preavis-location`.
 
 ### Vers `/guides/dossier-de-location` et l'outil
 
@@ -203,7 +235,10 @@ Je n'ai rien écrit. Chaque idée renvoie vers une landing précise.
 1. **Fusionner et déployer.** Je n'ai rien poussé. `git log main..seo-boost` donne les quatre
    commits ; aucun n'est risqué, tous les tests passent (93 côté web, 82 côté cœur).
 2. **Search Console** : resoumettre `https://terouva.com/sitemap.xml`, puis demander
-   l'indexation des trois URL dont le contenu a changé le plus :
+   l'indexation des trois nouvelles pages en priorité, puis des trois modifiées :
+   `https://terouva.com/guides/louer-sans-garant`,
+   `https://terouva.com/guides/etat-des-lieux`,
+   `https://terouva.com/guides/preavis-location`,
    `https://terouva.com/guides/garant-caution`,
    `https://terouva.com/outils/dossier-de-location`,
    `https://terouva.com/guides/depot-de-garantie`.
@@ -241,7 +276,13 @@ seul. À faire si vous voulez le bundle le plus léger possible, à laisser sino
 
 ## 6. Mesures
 
-Audit Lighthouse mobile sur `/guides/garant-caution`, build de production local :
+Site complet : **15 pages**, 9 guides, 70 nœuds de données structurées, **aucun champ manquant**,
+**aucune page orpheline**. Chaque nouveau guide a 17 à 18 liens entrants dès sa publication, grâce
+au pied de page. Toutes les pages sont au-dessus de 10 % de ratio texte/HTML, rendues côté
+serveur, avec un seul `h1`.
+
+Audit Lighthouse mobile sur `/guides/louer-sans-garant` et `/guides/garant-caution`, build de
+production local :
 
 | Catégorie | Score |
 |---|---|
@@ -250,7 +291,8 @@ Audit Lighthouse mobile sur `/guides/garant-caution`, build de production local 
 | SEO | 100 |
 | Agentic Browsing | 100 |
 
-54 audits passés, **0 échec**. Trace de performance sur l'accueil : **LCP 204 ms, CLS 0,00**
+54 audits passés, **0 échec**, sur les deux pages. **105 tests** côté web, 82 côté cœur, lignes
+rouges vertes. Trace de performance sur l'accueil : **LCP 204 ms, CLS 0,00**
 (localhost sans bridage : à relire en production après déploiement, avec bridage 4G et processeur
 4×, avant d'en tirer une conclusion).
 
@@ -287,6 +329,17 @@ Audit Lighthouse mobile sur `/guides/garant-caution`, build de production local 
    les délais, non. Comptez plusieurs mois avant un classement stable, et des liens entrants pour
    que ça bouge vraiment.
 
-7. **Le numéro de téléphone du Défenseur des droits n'est pas publié** dans le guide sur le refus
+7. **Les trois nouveaux guides ne citent pas Légifrance.** Le site renvoie un 403 aux requêtes
+   automatiques, je n'ai donc pas pu vérifier les identifiants d'article, et je refuse de publier
+   un lien juridique que je n'ai pas ouvert. Les décrets et articles sont nommés en toutes lettres
+   dans le texte. À compléter si vous voulez l'alignement avec les six guides plus anciens, qui en
+   citent.
+
+8. **La zone tendue est le point le plus périssable du corpus.** La liste des communes a changé
+   fin 2025 et changera encore. La page renvoie au simulateur officiel plutôt que de recopier une
+   liste, ce qui la met à l'abri, mais la phrase « elle a encore été revue fin 2025 » devra être
+   relue au prochain décret.
+
+9. **Le numéro de téléphone du Défenseur des droits n'est pas publié** dans le guide sur le refus
    de dossier : la source secondaire qui le donnait ne m'a pas paru fiable, et je n'ai pas pu le
    confirmer. La page renvoie au site officiel. À compléter si vous le vérifiez.
