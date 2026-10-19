@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { ListeDossier } from "@/components/outils/ListeDossier";
+import { Questions } from "@/components/ui/Questions";
 import { OUTILS } from "@/lib/catalogue";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
@@ -133,31 +134,7 @@ export default function OutilDossier() {
             </div>
           </section>
 
-          <section className="mt-16 max-w-3xl">
-            <h2 className="display text-2xl text-ink">Questions fréquentes</h2>
-            <div className="mt-6 space-y-3">
-              {QUESTIONS.map((item) => (
-                <details key={item.q} className="group card-soft px-6">
-                  <summary className="flex cursor-pointer items-start justify-between gap-6 py-5 text-[17px] font-bold text-ink transition-colors hover:text-accent">
-                    <span>{item.q}</span>
-                    <svg
-                      viewBox="0 0 16 16"
-                      aria-hidden
-                      className="mt-1.5 size-4 shrink-0 text-accent transition-transform duration-200 group-open:rotate-180"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="m3.5 6 4.5 4.5L12.5 6" />
-                    </svg>
-                  </summary>
-                  <p className="max-w-2xl pb-5 leading-relaxed text-ink-2">{item.a}</p>
-                </details>
-              ))}
-            </div>
-          </section>
+          <Questions questions={QUESTIONS} className="mt-16 max-w-3xl" />
 
           <div className="max-w-3xl">
             <FinDePage

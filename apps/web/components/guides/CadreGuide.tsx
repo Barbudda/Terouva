@@ -2,6 +2,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
+import { Questions } from "@/components/ui/Questions";
 import { DonneesStructurees, filAriane } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
@@ -148,6 +149,12 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
               </ul>
             </section>
           )}
+
+          {/* Affichées, et pas seulement balisées : c'est la condition posée
+              par Google pour un bloc `FAQPage`, et c'est aussi ce qu'un
+              assistant cite le plus volontiers, parce qu'une réponse courte
+              sous sa question se reprend telle quelle. */}
+          <Questions questions={guide.questions ?? []} className="mt-16 max-w-[44rem]" />
 
           <div className="max-w-[44rem]">
             <FinDePage />
