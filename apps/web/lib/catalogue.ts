@@ -361,6 +361,198 @@ export const GUIDES: Guide[] = [
       },
     ],
   },
+  {
+    chemin: "/guides/louer-sans-garant",
+    sommaire: [
+      { id: "pas-obligatoire", titre: "Ce n'est pas obligatoire" },
+      { id: "visale", titre: "Visale, en premier" },
+      { id: "assurance", titre: "Le propriétaire déjà assuré" },
+      { id: "societes", titre: "Les sociétés de cautionnement" },
+      { id: "etudiant", titre: "Le cas des étudiants" },
+      { id: "dire", titre: "Quoi répondre en visite" },
+    ],
+    titre: "Louer sans garant : les trois solutions, et ce qu'elles coûtent",
+    titreSeo: "Louer sans garant : les trois solutions",
+    resume:
+      "Aucun texte n'oblige un locataire à présenter un garant. C'est une exigence du propriétaire, pas une condition légale, et trois dispositifs permettent d'y répondre sans mobiliser un proche.",
+    description:
+      "Aucune loi n'oblige à fournir un garant. Visale, l'assurance du propriétaire, les sociétés de cautionnement : les trois voies, et leur coût réel.",
+    publieLe: "2026-10-19",
+    lecture: 7,
+    sources: [
+      {
+        nom: "Service-public.gouv.fr · Caution d'un locataire ou d'un colocataire",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31267",
+      },
+      {
+        nom: "Service-public.gouv.fr · Quels documents le propriétaire peut-il demander ?",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F1169",
+      },
+      {
+        nom: "Légifrance · Décret n° 2015-1437 du 5 novembre 2015",
+        url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031444493",
+      },
+    ],
+    questions: [
+      {
+        q: "Peut-on louer sans garant ?",
+        a: "Oui. Aucun texte n'impose au locataire de présenter une caution : c'est le propriétaire qui décide d'en exiger une. Trois voies permettent d'y répondre sans mobiliser un proche : la garantie Visale d'Action Logement, une assurance souscrite par le propriétaire lui-même, ou une société de cautionnement privée.",
+      },
+      {
+        q: "Comment louer sans garant ?",
+        a: "Demandez la garantie Visale avant de commencer à visiter : elle est gratuite et le visa s'obtient en ligne, ce qui vous permet d'arriver avec la réponse déjà en main. Si vous n'y êtes pas éligible, demandez au propriétaire s'il est assuré contre les loyers impayés, puis regardez les sociétés de cautionnement en dernier, parce qu'elles sont payantes.",
+      },
+      {
+        q: "Un propriétaire peut-il refuser un dossier parce qu'il n'y a pas de garant ?",
+        a: "Oui, il choisit librement son locataire et n'a pas à motiver son refus. Ce qui lui est interdit, c'est de fonder sa décision sur un critère discriminatoire, et le lieu de résidence du garant en est un : écarter un dossier parce que la caution habite une autre région est illégal.",
+      },
+      {
+        q: "Un étudiant peut-il louer sans garant ?",
+        a: "Oui, et c'est le cas le mieux couvert. La garantie Visale s'adresse en priorité aux étudiants et alternants de moins de 30 ans, sous conditions de loyer et de ressources. Par ailleurs, un bailleur personne morale ne peut pas exiger de caution d'un étudiant boursier de l'enseignement supérieur.",
+      },
+      {
+        q: "Combien coûte une société de cautionnement ?",
+        a: "Ces sociétés se rémunèrent par un pourcentage du loyer annuel, prélevé chaque année du bail. Les grilles varient d'une société à l'autre et changent souvent : demandez le coût total sur la durée du bail, pas le tarif mensuel, qui donne une idée fausse de la dépense.",
+      },
+      {
+        q: "La garantie Visale suffit-elle pour être accepté ?",
+        a: "Elle remplace le garant, pas le dossier. Le propriétaire regarde toujours vos ressources, votre contrat et la cohérence de l'ensemble. Visale retire la question du garant de la conversation, ce qui est souvent le point de blocage, mais elle ne compense pas un dossier incomplet.",
+      },
+    ],
+  },
+  {
+    chemin: "/guides/etat-des-lieux",
+    sommaire: [
+      { id: "pourquoi", titre: "Ce qui se joue" },
+      { id: "entree", titre: "L'état des lieux d'entrée" },
+      { id: "contenu", titre: "Ce qu'il doit contenir" },
+      { id: "cout", titre: "Qui paie" },
+      { id: "corriger", titre: "Les dix jours pour corriger" },
+      { id: "sortie", titre: "L'état des lieux de sortie" },
+      { id: "vetuste", titre: "La vétusté" },
+      { id: "absence", titre: "S'il n'y en a pas" },
+    ],
+    titre: "État des lieux de location : la demi-heure qui décide de votre dépôt de garantie",
+    titreSeo: "État des lieux de location : entrée et sortie",
+    resume:
+      "C'est le document le plus sous-estimé de toute la location, et le seul qui protège votre dépôt de garantie. Ce qu'il doit contenir, qui le paie, et les dix jours pendant lesquels on peut encore le corriger.",
+    description:
+      "Ce que l'état des lieux doit contenir, qui le paie, les dix jours pour le corriger, et pourquoi la vétusté ne peut pas être retenue sur votre dépôt.",
+    publieLe: "2026-10-19",
+    lecture: 8,
+    sources: [
+      {
+        nom: "Service-public.gouv.fr · État des lieux d'entrée d'un bail d'habitation",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31270",
+      },
+      {
+        nom: "Service-public.gouv.fr · État des lieux de sortie d'un bail d'habitation",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F33671",
+      },
+    ],
+    questions: [
+      {
+        q: "Comment faire un état des lieux ?",
+        a: "À deux, propriétaire et locataire présents, au moment de la remise des clés et en pleine lumière. Le document décrit pièce par pièce l'état des sols, des murs, des plafonds et des équipements, relève les compteurs et liste les clés remises. Les photos datées sont autorisées et vivement conseillées : elles tranchent les désaccords mieux qu'un adjectif.",
+      },
+      {
+        q: "Combien coûte un état des lieux ?",
+        a: "Rien, quand il est fait directement entre le propriétaire et le locataire. Si un professionnel représente le propriétaire à l'entrée, le locataire paie une part plafonnée à la moitié des honoraires de l'agence et à 3,03 € TTC par mètre carré habitable. À la sortie, le locataire ne paie rien : une clause du bail qui le prévoirait est réputée non écrite.",
+      },
+      {
+        q: "Combien de temps dure un état des lieux ?",
+        a: "Aucun texte ne fixe de durée. Comptez trente minutes à une heure pour un deux-pièces si vous le faites sérieusement. Un état des lieux expédié en dix minutes est celui qui coûte cher à la sortie, parce que tout ce qui n'a pas été noté à l'entrée sera réputé en bon état.",
+      },
+      {
+        q: "Peut-on modifier un état des lieux après l'avoir signé ?",
+        a: "Oui. Le locataire dispose de dix jours à compter de sa date pour demander une modification. Pour les équipements de chauffage, la demande peut aussi être faite pendant le premier mois de la saison de chauffe. Si le propriétaire refuse, la commission départementale de conciliation peut être saisie, gratuitement.",
+      },
+      {
+        q: "Que faire si le propriétaire ne vient pas à l'état des lieux de sortie ?",
+        a: "Restituez les clés par lettre recommandée avec accusé de réception. En l'absence d'état des lieux de sortie, vous êtes considéré comme ayant rendu le logement en bon état, et le délai de restitution du dépôt de garantie court à partir de la remise des clés.",
+      },
+      {
+        q: "Qu'est-ce que la vétusté, et que change-t-elle ?",
+        a: "C'est l'usure normale due au temps et à un usage normal : une moquette fatiguée après huit ans, une peinture ternie. Elle ne peut donner lieu à aucune retenue sur le dépôt de garantie. Le bail peut prévoir une grille de vétusté, qui fixe à l'avance la durée de vie des équipements et évite la discussion au départ.",
+      },
+      {
+        q: "Que se passe-t-il s'il n'y a pas d'état des lieux d'entrée ?",
+        a: "Cela dépend de qui l'a empêché. Si le propriétaire a refusé malgré une mise en demeure, c'est à lui de prouver qu'il vous a remis un logement en bon état pour retenir quoi que ce soit. Si c'est vous qui avez refusé, ou si les deux parties ont négligé de le faire, vous êtes présumé avoir reçu le logement en bon état de réparations locatives.",
+      },
+    ],
+  },
+  {
+    chemin: "/guides/preavis-location",
+    sommaire: [
+      { id: "duree", titre: "La durée du préavis" },
+      { id: "reduit", titre: "Passer à un mois" },
+      { id: "zone-tendue", titre: "La zone tendue" },
+      { id: "lettre", titre: "La lettre de congé" },
+      { id: "depart", titre: "Quand le préavis commence" },
+      { id: "loyer", titre: "Le loyer pendant le préavis" },
+      { id: "erreurs", titre: "Les erreurs qui coûtent deux mois" },
+    ],
+    titre: "Préavis de location : combien de temps, et ce que la lettre doit dire",
+    titreSeo: "Préavis de location : durée et lettre",
+    resume:
+      "Trois mois en logement vide, un mois en meublé. Entre les deux, une dizaine de situations font tomber le préavis à un mois, à condition de les invoquer dans la lettre et de joindre le justificatif. Oublier cette phrase coûte deux mois de loyer.",
+    description:
+      "Trois mois en logement vide, un mois en meublé ou en zone tendue. Ce que la lettre doit contenir, et pourquoi le préavis part à la réception.",
+    publieLe: "2026-10-19",
+    lecture: 7,
+    sources: [
+      {
+        nom: "Service-public.gouv.fr · Préavis et formalités du congé donné par le locataire",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F1168",
+      },
+      {
+        nom: "Service-public.gouv.fr · Comment calculer le délai de préavis ?",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F32360",
+      },
+      {
+        nom: "Service-public.gouv.fr · Simulateur : savoir si un logement est en zone tendue",
+        url: "https://www.service-public.gouv.fr/simulateur/calcul/zones-tendues",
+      },
+      {
+        nom: "Service-public.gouv.fr · Simulateur : délai de préavis du locataire",
+        url: "https://www.service-public.gouv.fr/simulateur/calcul/delaiPreavisLocataire",
+      },
+    ],
+    questions: [
+      {
+        q: "Quelle est la durée du préavis pour quitter un logement ?",
+        a: "Trois mois pour un logement vide, un mois pour un meublé, quel que soit le motif et sans justificatif à fournir. En logement vide, une dizaine de situations font tomber le préavis à un mois, dont la zone tendue, une mutation, une perte d'emploi, un premier emploi, le RSA ou l'AAH.",
+      },
+      {
+        q: "Comment passer d'un préavis de trois mois à un mois ?",
+        a: "En l'invoquant dans la lettre de congé et en joignant le justificatif correspondant. Le délai réduit n'est jamais automatique : une lettre qui ne mentionne pas le motif vaut préavis de trois mois, même si vous remplissiez la condition. C'est l'erreur la plus coûteuse du sujet.",
+      },
+      {
+        q: "Comment savoir si mon logement est en zone tendue ?",
+        a: "Par le simulateur officiel de service-public.gouv.fr, en saisissant la commune. La liste des communes concernées est fixée par décret et elle a changé fin 2025 : une page qui recopie une ancienne liste peut vous faire perdre deux mois de loyer. Vérifiez à la date de signature ou de renouvellement de votre bail.",
+      },
+      {
+        q: "Que doit contenir la lettre de préavis ?",
+        a: "Votre identité, l'adresse du logement quitté, la date de départ souhaitée et, si vous demandez le délai réduit, le motif invoqué avec le renvoi à l'article 15 de la loi du 6 juillet 1989, justificatif joint. Aucun motif n'est à donner si vous acceptez le préavis de trois mois.",
+      },
+      {
+        q: "Le préavis commence-t-il à l'envoi ou à la réception de la lettre ?",
+        a: "À la réception. Pour une lettre recommandée, le délai court du jour où le propriétaire la reçoit, pas du jour où vous la postez. Si le courrier revient sans avoir été remis, le congé n'est pas valable du tout. Comptez quelques jours d'acheminement dans votre calendrier.",
+      },
+      {
+        q: "Peut-on donner son préavis par mail ?",
+        a: "Non, un simple courriel n'est pas valable. Trois formes seulement : la lettre recommandée avec avis de réception, l'acte de commissaire de justice, ou la remise en main propre contre émargement. La lettre recommandée électronique est possible uniquement si le propriétaire particulier a donné son accord préalable.",
+      },
+      {
+        q: "Doit-on payer le loyer pendant le préavis ?",
+        a: "Oui, loyer et charges sont dus pendant toute sa durée, même si vous avez déjà déménagé. Ils cessent si un nouveau locataire entre dans les lieux avant la fin. Un mois entamé se paie au prorata des jours d'occupation. Le dépôt de garantie ne peut pas servir à régler ce dernier loyer.",
+      },
+      {
+        q: "Peut-on annuler un préavis déjà envoyé ?",
+        a: "Non. Le congé est irrévocable une fois reçu, sauf si le propriétaire accepte de revenir dessus. C'est une raison de ne pas l'envoyer avant d'avoir une solution de relogement ferme.",
+      },
+    ],
+  },
 ];
 
 export function guide(chemin: string): Guide {

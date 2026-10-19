@@ -180,27 +180,24 @@ export default function GuideGarantCaution() {
         garant</strong>. C&apos;est le propriétaire qui décide d&apos;en demander un, et trois
         voies permettent de répondre à sa place.
       </p>
-      <h3>La garantie Visale</h3>
+      <ul>
+        <li>
+          <strong>La garantie Visale</strong>, gratuite, portée par Action Logement, et la seule
+          qui se demande avant d&apos;avoir trouvé le logement.
+        </li>
+        <li>
+          <strong>L&apos;assurance du propriétaire</strong> : s&apos;il est déjà couvert contre
+          les loyers impayés, il ne peut plus exiger de caution, sauf d&apos;un étudiant ou
+          d&apos;un apprenti.
+        </li>
+        <li>
+          <strong>Une société de cautionnement</strong>, payante, qui se porte garant à la place
+          d&apos;un proche.
+        </li>
+      </ul>
       <p>
-        Gratuite, portée par Action Logement, et c&apos;est la seule qui se demande{" "}
-        <strong>avant</strong> d&apos;avoir trouvé le logement : vous arrivez à la visite avec le
-        visa en main, ce qui change l&apos;ordre de la conversation. Les conditions dépendent de
-        l&apos;âge, du statut et du loyer ; le détail est dans le guide de la{" "}
-        <Link href="/guides/garantie-visale">garantie Visale</Link>.
-      </p>
-      <h3>L&apos;assurance du propriétaire</h3>
-      <p>
-        Un propriétaire particulier qui souscrit une assurance contre les loyers impayés{" "}
-        <strong>ne peut plus exiger de caution</strong>, sauf d&apos;un étudiant ou d&apos;un
-        apprenti. Cela se dit : « si vous êtes assuré contre les impayés, mon dossier tient sans
-        garant ». Beaucoup de bailleurs demandent les deux par habitude, sans savoir que le cumul
-        leur est interdit.
-      </p>
-      <h3>Une société de cautionnement</h3>
-      <p>
-        Des sociétés privées se portent garant à la place d&apos;un proche, contre un pourcentage
-        du loyer annuel. C&apos;est payant et le coût court sur toute la durée du bail : à
-        regarder quand Visale ne s&apos;applique pas, pas en premier réflexe.
+        Les conditions de chacune, leur coût réel et quoi répondre en visite sont détaillés dans
+        le guide <Link href="/guides/louer-sans-garant">louer sans garant</Link>.
       </p>
       <div className="note">
         <p>
