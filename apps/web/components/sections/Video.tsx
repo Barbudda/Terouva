@@ -37,11 +37,18 @@ export function Video() {
           {/* L'image de l'animation, en filigrane : on devine le produit sans
               que la bande devienne un écran. */}
           <img
-            src="/promo/affiche.jpg"
+            // Version légère et réduite de l'affiche : 13 ko au lieu de 76.
+            // L'image est floutée et à 30 % d'opacité, la définition d'origine
+            // n'y survivrait pas de toute façon. L'affiche pleine taille reste
+            // servie là où elle compte : la vignette déclarée aux moteurs et
+            // l'affiche du lecteur.
+            src="/promo/ruban.webp"
             alt=""
             aria-hidden
             width={1280}
             height={720}
+            loading="lazy"
+            decoding="async"
             // Léger flou : sans lui, les titres des annonces restent lisibles et
             // concurrencent le libellé du ruban. Flouté, c'est une matière.
             className="absolute inset-0 size-full scale-110 object-cover opacity-[0.3] blur-[3px] transition-opacity duration-300 group-hover:opacity-40"
