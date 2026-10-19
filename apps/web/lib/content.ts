@@ -175,15 +175,22 @@ export const FOOTER = {
       title: "Outils gratuits",
       links: [
         { label: "Message de candidature", href: "/outils/message-de-candidature" },
+        { label: "Checklist de dossier", href: "/outils/dossier-de-location" },
         { label: "Tous les outils", href: "/outils" },
       ],
     },
     {
+      // Les six guides sont listés ici volontairement : un lien présent sur
+      // toutes les pages est ce qui sort un guide récent de l'isolement, et un
+      // guide sans lien entrant n'est lu par personne, moteurs compris.
       title: "Guides",
       links: [
         { label: "Le dossier de location", href: "/guides/dossier-de-location" },
+        { label: "Le garant et la caution", href: "/guides/garant-caution" },
         { label: "La garantie Visale", href: "/guides/garantie-visale" },
         { label: "Répondre à une annonce", href: "/guides/repondre-a-une-annonce-de-location" },
+        { label: "Le dépôt de garantie", href: "/guides/depot-de-garantie" },
+        { label: "Un refus de dossier", href: "/guides/refus-de-dossier" },
         { label: "Tous les guides", href: "/guides" },
       ],
     },

@@ -124,7 +124,7 @@ export const GUIDES: Guide[] = [
     ],
     titreSeo: "Répondre à une annonce de location",
     resume:
-      "Sur un marché tendu, ce n'est pas toujours le meilleur dossier qui obtient la visite, c'est celui qui arrive tôt et qui se lit en dix secondes. Voici ce qui se joue vraiment dans un premier message.",
+      "Sur un marché tendu, la visite va souvent au dossier qui arrive tôt et se lit en dix secondes, pas au meilleur dossier. Voici ce qui se joue vraiment dans un premier message.",
     description:
       "Comment écrire un message de candidature pour une location : quoi mettre, dans quel ordre, ce qui dessert, et un modèle gratuit à copier.",
     publieLe: "2026-10-11",
@@ -145,6 +145,168 @@ export const GUIDES: Guide[] = [
       {
         q: "Combien de temps après la publication faut-il répondre ?",
         a: "Le plus tôt possible. Sur les annonces de particuliers dans les zones tendues, les premières réponses sont lues avec attention et les suivantes en diagonale. C'est le seul facteur sur lequel vous pouvez agir sans changer de dossier.",
+      },
+    ],
+  },
+  {
+    chemin: "/guides/depot-de-garantie",
+    sommaire: [
+      { id: "montant", titre: "Le montant maximum" },
+      { id: "versement", titre: "Quand on le verse" },
+      { id: "retenues", titre: "Ce qui peut être retenu" },
+      { id: "restitution", titre: "Le délai de restitution" },
+      { id: "retard", titre: "Si le propriétaire tarde" },
+      { id: "recuperer", titre: "Le récupérer" },
+    ],
+    titre: "Dépôt de garantie : le montant, les retenues, et le délai pour le récupérer",
+    titreSeo: "Dépôt de garantie : montant et restitution",
+    resume:
+      "C'est la somme la plus souvent mal rendue de toute la location. Le montant est plafonné, les retenues doivent être justifiées pièce par pièce, et le retard du propriétaire se paie. Les trois règles qui comptent tiennent en une page.",
+    description:
+      "Un mois de loyer en vide, deux en meublé, rendu sous un mois si l'état des lieux est conforme. Les retenues autorisées, et la pénalité en cas de retard.",
+    publieLe: "2026-10-19",
+    lecture: 6,
+    sources: [
+      {
+        nom: "Service-public.gouv.fr · Dépôt de garantie d'un logement loué",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31269",
+      },
+      {
+        nom: "Légifrance · Article 22 de la loi n° 89-462 du 6 juillet 1989",
+        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000031012092",
+      },
+      {
+        nom: "Légifrance · Article 25-6 de la loi n° 89-462 (logements meublés)",
+        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000029105417",
+      },
+    ],
+    questions: [
+      {
+        q: "Quel est le montant maximum d'un dépôt de garantie ?",
+        a: "Un mois de loyer hors charges pour un logement vide, deux mois pour un meublé. Aucun dépôt ne peut être demandé si le loyer est payé par trimestre d'avance, ni pour un bail mobilité.",
+      },
+      {
+        q: "Quel est le délai pour récupérer son dépôt de garantie ?",
+        a: "Un mois après la remise des clés si l'état des lieux de sortie est conforme à celui d'entrée, deux mois s'il ne l'est pas. Le délai court à partir de la remise des clés, en main propre ou par lettre recommandée.",
+      },
+      {
+        q: "Que se passe-t-il si le propriétaire ne rend pas le dépôt à temps ?",
+        a: "La somme due augmente de 10 % du loyer mensuel hors charges par mois de retard commencé. Cette majoration ne s'applique pas si vous n'avez pas communiqué votre nouvelle adresse.",
+      },
+      {
+        q: "Le dépôt de garantie peut-il servir à payer le dernier mois de loyer ?",
+        a: "Non. Le dépôt ne peut pas être utilisé pour régler le dernier loyer : il doit être payé normalement, et le dépôt vous est restitué ensuite, après l'état des lieux de sortie.",
+      },
+    ],
+  },
+  {
+    chemin: "/guides/garant-caution",
+    sommaire: [
+      { id: "qui", titre: "Qui peut se porter garant" },
+      { id: "simple-ou-solidaire", titre: "Caution simple ou solidaire" },
+      { id: "acte", titre: "L'acte de cautionnement" },
+      { id: "justificatifs", titre: "Les justificatifs du garant" },
+      { id: "cumul", titre: "Garant et assurance" },
+      { id: "fin", titre: "Jusqu'à quand il s'engage" },
+      { id: "sans-garant", titre: "Si vous n'avez personne" },
+    ],
+    titre: "Garant de location : qui peut s'engager, pour combien, et jusqu'à quand",
+    titreSeo: "Garant : qui peut l'être, et jusqu'à quand",
+    resume:
+      "Un garant ne signe pas une formalité : il s'engage sur une dette qui peut courir des années après votre départ. Ce que l'acte doit contenir, ce qu'on peut lui demander, et quand son engagement s'arrête vraiment.",
+    description:
+      "Qui peut se porter caution, les mentions obligatoires de l'acte, caution simple ou solidaire, les justificatifs demandés au garant, et la fin de l'engagement.",
+    publieLe: "2026-10-19",
+    lecture: 8,
+    sources: [
+      {
+        nom: "Service-public.gouv.fr · Caution d'un locataire ou d'un colocataire",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31267",
+      },
+      {
+        nom: "Service-public.gouv.fr · Quels documents le propriétaire peut-il demander ?",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F1169",
+      },
+      {
+        nom: "Légifrance · Article 22-1 de la loi n° 89-462 du 6 juillet 1989",
+        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037670636",
+      },
+      {
+        nom: "Légifrance · Décret n° 2015-1437 du 5 novembre 2015",
+        url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031444493",
+      },
+    ],
+    questions: [
+      {
+        q: "Qui peut se porter garant pour une location ?",
+        a: "N'importe quelle personne physique, parent, proche ou ami, sans condition de lien de famille. Une personne morale aussi : Action Logement avec la garantie Visale, un employeur, une banque.",
+      },
+      {
+        q: "Un propriétaire peut-il demander un garant s'il a déjà une assurance loyers impayés ?",
+        a: "Un propriétaire particulier qui a souscrit une assurance contre les risques locatifs ne peut demander une caution que si le locataire est étudiant ou apprenti. Un bailleur personne morale ne peut pas demander de caution à un étudiant boursier de l'enseignement supérieur.",
+      },
+      {
+        q: "Quels justificatifs peut-on demander à un garant ?",
+        a: "Une pièce d'identité, un justificatif de domicile, un justificatif de situation professionnelle et un justificatif de ressources. La liste est fixée par le décret du 5 novembre 2015 et elle est limitative : elle n'est pas la même que celle du locataire.",
+      },
+      {
+        q: "Jusqu'à quand un garant est-il engagé ?",
+        a: "Jusqu'à l'expiration du préavis du locataire s'il part, ou à la fin du bail si c'est le propriétaire qui donne congé. En colocation avec clause de solidarité, l'engagement se prolonge six mois après la fin du préavis du colocataire concerné.",
+      },
+    ],
+  },
+  {
+    chemin: "/guides/refus-de-dossier",
+    sommaire: [
+      { id: "principe", titre: "Le principe" },
+      { id: "interdits", titre: "Les critères interdits" },
+      { id: "legitimes", titre: "Ce qui reste légitime" },
+      { id: "preuve", titre: "La charge de la preuve" },
+      { id: "sanctions", titre: "Les sanctions" },
+      { id: "recours", titre: "Où signaler" },
+    ],
+    titre: "Un propriétaire peut-il refuser votre dossier sans donner de motif ?",
+    titreSeo: "Refus de dossier : ce qui est permis",
+    resume:
+      "Oui, il choisit son locataire, et il n'a pas à se justifier. Mais la liste des raisons qui lui sont interdites est longue, et quand un refus semble en relever, c'est à lui de prouver le contraire.",
+    description:
+      "Un propriétaire choisit son locataire, mais pas sur n'importe quel critère. Les motifs interdits, la charge de la preuve, les sanctions, et où signaler.",
+    publieLe: "2026-10-19",
+    lecture: 7,
+    sources: [
+      {
+        nom: "Service-public.gouv.fr · Discrimination à la location d'un logement",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F14750",
+      },
+      {
+        nom: "Légifrance · Articles 225-1 à 225-4 du Code pénal",
+        url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070719/LEGISCTA000006165298",
+      },
+      {
+        nom: "Légifrance · Article 1er de la loi n° 89-462 du 6 juillet 1989",
+        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037670637",
+      },
+      {
+        nom: "Défenseur des droits · Discriminations à la location de logement",
+        url: "https://www.defenseurdesdroits.fr/discriminations-la-location-de-logement-338",
+      },
+    ],
+    questions: [
+      {
+        q: "Un propriétaire doit-il justifier le refus de mon dossier ?",
+        a: "Non. Il choisit librement son locataire et n'a aucune obligation de motiver un refus. La loi n'exige aucune explication de sa part ; elle lui interdit seulement de fonder sa décision sur un critère discriminatoire.",
+      },
+      {
+        q: "Quels critères de refus sont interdits ?",
+        a: "L'article 225-1 du Code pénal en liste une vingtaine, parmi lesquels l'origine, le sexe, la situation de famille, la grossesse, l'apparence physique, la vulnérabilité économique, le nom, le lieu de résidence, l'état de santé, le handicap, les mœurs, l'orientation sexuelle, l'âge, les opinions politiques, les activités syndicales, la langue parlée et la religion.",
+      },
+      {
+        q: "Qui doit prouver qu'il y a eu discrimination ?",
+        a: "Vous réunissez d'abord des éléments datés qui laissent supposer un motif interdit : messages, courriels, captures d'écran, témoignages. C'est ensuite au propriétaire de démontrer que sa décision repose sur des éléments objectifs, étrangers à toute discrimination.",
+      },
+      {
+        q: "Que risque un propriétaire qui refuse un dossier pour un motif interdit ?",
+        a: "Jusqu'à trois ans d'emprisonnement et 45 000 € d'amende. Par ailleurs, demander une pièce qui ne figure pas dans la liste autorisée est passible d'une amende pouvant aller jusqu'à 3 000 € pour un particulier.",
       },
     ],
   },

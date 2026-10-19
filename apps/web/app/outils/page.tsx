@@ -75,6 +75,60 @@ export default function Outils() {
             ))}
           </ul>
 
+          <section className="mt-16 max-w-[44rem]">
+            <h2 className="display text-2xl text-ink">Pourquoi rien n&apos;est envoyé</h2>
+            <p className="mt-4 leading-relaxed text-ink-2">
+              Ces deux outils demandent des choses qui ne regardent personne : votre situation
+              professionnelle, vos revenus, qui se porte garant pour vous. Un formulaire en ligne
+              qui réclame ça finit normalement dans une base de données, puis dans une campagne
+              d&apos;e-mails.
+            </p>
+            <p className="mt-4 leading-relaxed text-ink-2">
+              Ici, le calcul se fait entièrement dans la page, par le navigateur. Concrètement :
+            </p>
+            <ul className="mt-5 space-y-3 leading-relaxed text-ink-2">
+              <li>
+                <strong className="text-ink">Aucune requête ne part</strong> quand vous répondez aux
+                questions. Vous pouvez couper votre connexion après le chargement de la page,
+                l&apos;outil fonctionne toujours.
+              </li>
+              <li>
+                <strong className="text-ink">Rien n&apos;est enregistré.</strong> Fermez
+                l&apos;onglet et vos réponses disparaissent. Il n&apos;y a pas de compte, donc pas
+                d&apos;historique à consulter ni à supprimer.
+              </li>
+              <li>
+                <strong className="text-ink">Le résultat est à vous.</strong> Vous le copiez, vous
+                le modifiez, vous l&apos;envoyez vous-même depuis votre messagerie habituelle.
+              </li>
+            </ul>
+            <p className="mt-5 leading-relaxed text-ink-2">
+              C&apos;est aussi le principe de l&apos;application Terouva, qui travaille en local
+              sur votre ordinateur. Le détail est dans la{" "}
+              <Link
+                href="/confidentialite"
+                className="text-accent underline decoration-accent/35 underline-offset-4 transition-colors hover:decoration-accent"
+              >
+                page de confidentialité
+              </Link>
+              .
+            </p>
+          </section>
+
+          <section className="mt-16 max-w-[44rem]">
+            <h2 className="display text-2xl text-ink">Ce que ces outils ne font pas</h2>
+            <p className="mt-4 leading-relaxed text-ink-2">
+              Autant le dire avant que vous cliquiez. Ils ne cherchent pas d&apos;annonces, ne se
+              connectent à aucun site de petites annonces et n&apos;envoient aucun message à votre
+              place. Ils préparent ce que vous enverrez, et vous gardez la main sur l&apos;envoi.
+            </p>
+            <p className="mt-4 leading-relaxed text-ink-2">
+              La checklist donne les pièces exigibles pour votre situation, pas un avis juridique
+              sur un litige en cours. Et le générateur écrit un message à partir de ce que vous lui
+              dites : relisez-le, c&apos;est votre candidature, pas la sienne.
+            </p>
+          </section>
+
           <section className="mt-16">
             <h2 className="display text-2xl text-ink">À lire aussi</h2>
             <ul className="mt-6 divide-y divide-rule border-t border-rule">

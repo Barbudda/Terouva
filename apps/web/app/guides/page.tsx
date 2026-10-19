@@ -73,6 +73,50 @@ export default function Guides() {
             ))}
           </ul>
 
+          <section className="mt-16 max-w-[44rem]">
+            <h2 className="display text-2xl text-ink">Par où commencer</h2>
+            <p className="mt-4 leading-relaxed text-ink-2">
+              Une recherche de logement se bloque presque toujours au même endroit, et dans le même
+              ordre. Si vous démarrez, voici le chemin qui évite de découvrir un problème au moment
+              où il coûte le plus cher.
+            </p>
+            <ol className="mt-6 space-y-5">
+              <li className="flex gap-4">
+                <span className="pastille shrink-0 font-bold">1</span>
+                <p className="leading-relaxed text-ink-2">
+                  <strong className="text-ink">Réunir le dossier.</strong> La liste des pièces
+                  qu&apos;un propriétaire peut réclamer est fixée par décret et elle est
+                  limitative. Savoir ce qui n&apos;y figure pas vous évite de fournir un document
+                  que personne n&apos;a le droit de vous demander.
+                </p>
+              </li>
+              <li className="flex gap-4">
+                <span className="pastille shrink-0 font-bold">2</span>
+                <p className="leading-relaxed text-ink-2">
+                  <strong className="text-ink">Régler la question du garant.</strong> C&apos;est
+                  elle qui élimine le plus de candidatures, et elle se traite avant de visiter, pas
+                  pendant. Visale se demande à l&apos;avance et ne coûte rien.
+                </p>
+              </li>
+              <li className="flex gap-4">
+                <span className="pastille shrink-0 font-bold">3</span>
+                <p className="leading-relaxed text-ink-2">
+                  <strong className="text-ink">Écrire le premier message.</strong> Sur une annonce
+                  de particulier en zone tendue, les premières réponses sont lues avec attention et
+                  les suivantes en diagonale. Avoir un message prêt change le délai de réponse.
+                </p>
+              </li>
+              <li className="flex gap-4">
+                <span className="pastille shrink-0 font-bold">4</span>
+                <p className="leading-relaxed text-ink-2">
+                  <strong className="text-ink">Savoir ce qui se passe ensuite.</strong> Un refus,
+                  un dépôt de garantie mal rendu, un engagement de garant qui court après le
+                  départ : ce sont les trois sujets sur lesquels on se renseigne trop tard.
+                </p>
+              </li>
+            </ol>
+          </section>
+
           <section className="mt-16">
             <h2 className="display text-2xl text-ink">Et des outils, gratuits</h2>
             <ul className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -87,6 +131,37 @@ export default function Guides() {
                 </li>
               ))}
             </ul>
+          </section>
+
+          <section className="mt-16 max-w-[44rem]">
+            <h2 className="display text-2xl text-ink">Comment ces guides sont écrits</h2>
+            <p className="mt-4 leading-relaxed text-ink-2">
+              Le sujet de la location est plein de pages recopiées les unes sur les autres, dont
+              certaines citent des montants ou des délais abrogés depuis des années. Trois règles
+              évitent d&apos;y ajouter une page de plus.
+            </p>
+            <ul className="mt-6 space-y-4 leading-relaxed text-ink-2">
+              <li>
+                <strong className="text-ink">Chaque affirmation vient d&apos;une source
+                officielle</strong>, service-public.gouv.fr ou Légifrance, listée en bas de la page
+                avec son lien. Quand une règle relève de l&apos;usage et non du droit, c&apos;est
+                écrit.
+              </li>
+              <li>
+                <strong className="text-ink">La date de vérification est affichée</strong> en haut
+                de chaque guide. Elle dit quand le texte a été relu contre sa source, ce qui est
+                plus utile qu&apos;une date de publication.
+              </li>
+              <li>
+                <strong className="text-ink">Les chiffres sont donnés avec leur condition</strong> :
+                un plafond sans sa zone, un délai sans son point de départ, un montant sans la
+                mention « hors charges » valent moins que rien.
+              </li>
+            </ul>
+            <p className="mt-6 leading-relaxed text-ink-2">
+              Ces pages renseignent, elles ne remplacent pas un conseil juridique. Pour une
+              situation personnelle, l&apos;ADIL de votre département renseigne gratuitement.
+            </p>
           </section>
 
           <div className="max-w-[44rem]">

@@ -48,6 +48,11 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
         "@id": `${siteUrl}${guide.chemin}#article`,
         headline: guide.titre,
         description: guide.description,
+        // Un `Article` sans image est incomplet pour Google, et c'était le cas
+        // des trois guides : trois erreurs sur un audit par ailleurs propre.
+        // Chaque guide a déjà son image de partage générée au build ; c'est
+        // elle qu'on déclare, plutôt que d'en inventer une.
+        image: [`${siteUrl}${guide.chemin}/opengraph-image`],
         inLanguage: "fr-FR",
         datePublished: guide.publieLe,
         dateModified: guide.modifieLe ?? guide.publieLe,

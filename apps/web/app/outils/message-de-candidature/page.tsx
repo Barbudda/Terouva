@@ -162,6 +162,51 @@ export default function OutilMessage() {
             </section>
           </div>
 
+          <section className="mt-20 max-w-[44rem]">
+            <h2 className="display text-2xl text-ink">Comment le message est construit</h2>
+            <p className="mt-4 leading-relaxed text-ink-2">
+              Le générateur assemble six blocs, toujours dans cet ordre, et saute ceux pour
+              lesquels il n&apos;a pas l&apos;information. Un profil à moitié rempli donne donc un
+              message plus court, jamais un message à trous.
+            </p>
+            <ol className="mt-6 space-y-4 leading-relaxed text-ink-2">
+              <li>
+                <strong className="text-ink">La salutation</strong>, sans nom de famille
+                hasardeux : la plupart des annonces de particuliers n&apos;en donnent pas.
+              </li>
+              <li>
+                <strong className="text-ink">Une phrase d&apos;accroche</strong>, qui dit
+                l&apos;intérêt sans récapituler l&apos;annonce. Trois formulations existent par
+                ton, pour que deux candidatures envoyées le même jour ne soient pas identiques.
+              </li>
+              <li>
+                <strong className="text-ink">Votre situation</strong> : métier, type de contrat,
+                revenu net, garant, et le fait que le dossier est complet. C&apos;est le bloc que
+                le propriétaire lit vraiment.
+              </li>
+              <li>
+                <strong className="text-ink">Les éléments pratiques</strong> : combien de personnes
+                vivront dans le logement, à partir de quand vous pouvez emménager, et pour combien
+                de temps vous comptez rester.
+              </li>
+              <li>
+                <strong className="text-ink">Votre disponibilité pour visiter</strong>, avec vos
+                créneaux réels si vous les avez indiqués, et une formule qui ouvre la visite sinon.
+              </li>
+              <li>
+                <strong className="text-ink">La signature</strong> : nom, téléphone, et courriel au
+                ton professionnel. Un message sans moyen de vous joindre oblige à répondre dans la
+                messagerie du site, ce qui ajoute un délai.
+              </li>
+            </ol>
+            <p className="mt-6 leading-relaxed text-ink-2">
+              Rien n&apos;est écrit à votre place sur ce que vous valez comme locataire : le
+              générateur n&apos;emploie ni superlatif, ni promesse, ni formule du type
+              « intéressé(e) ». Il met vos faits dans l&apos;ordre où ils se lisent le mieux, et
+              vous relisez avant d&apos;envoyer.
+            </p>
+          </section>
+
           <section className="mt-20">
             <h2 className="display text-2xl text-ink">Questions fréquentes</h2>
             <div className="mt-6 space-y-3">
@@ -186,6 +231,72 @@ export default function OutilMessage() {
                 </details>
               ))}
             </div>
+          </section>
+
+          <section className="mt-20 max-w-[44rem]">
+            <h2 className="display text-2xl text-ink">Après le message</h2>
+            <p className="mt-4 leading-relaxed text-ink-2">
+              Un message qui marche déclenche une réponse dans l&apos;heure, et la conversation
+              passe aussitôt à des sujets qu&apos;il vaut mieux avoir réglés d&apos;avance. Les
+              trois qui reviennent toujours :
+            </p>
+            <ul className="mt-6 space-y-5 leading-relaxed text-ink-2">
+              <li>
+                <strong className="text-ink">« Pouvez-vous m&apos;envoyer votre dossier ? »</strong>{" "}
+                Les pièces qu&apos;on peut vous réclamer sont fixées par décret, et la liste est
+                limitative. Le guide du{" "}
+                <Link
+                  href="/guides/dossier-de-location"
+                  className="text-accent underline underline-offset-4"
+                >
+                  dossier de location
+                </Link>{" "}
+                donne les pièces autorisées, les interdites et la sanction encourue.
+              </li>
+              <li>
+                <strong className="text-ink">« Qui est votre garant ? »</strong> C&apos;est la
+                question qui élimine le plus de candidatures. Ce que la caution signe vraiment est
+                détaillé dans le guide du{" "}
+                <Link
+                  href="/guides/garant-caution"
+                  className="text-accent underline underline-offset-4"
+                >
+                  garant
+                </Link>{" "}
+                ; si vous n&apos;avez personne à solliciter, la{" "}
+                <Link
+                  href="/guides/garantie-visale"
+                  className="text-accent underline underline-offset-4"
+                >
+                  garantie Visale
+                </Link>{" "}
+                s&apos;obtient gratuitement avant la visite.
+              </li>
+              <li>
+                <strong className="text-ink">« Il faudra prévoir le dépôt de garantie. »</strong>{" "}
+                Un mois de loyer hors charges pour un logement vide, deux pour un meublé. Le{" "}
+                <Link
+                  href="/guides/depot-de-garantie"
+                  className="text-accent underline underline-offset-4"
+                >
+                  guide du dépôt de garantie
+                </Link>{" "}
+                dit aussi ce qu&apos;on peut en retenir, et sous quel délai il doit vous être
+                rendu.
+              </li>
+            </ul>
+            <p className="mt-6 leading-relaxed text-ink-2">
+              Et si une candidature est écartée sans explication, c&apos;est le droit du
+              propriétaire. Les motifs qui lui sont en revanche interdits, et ce qu&apos;on peut
+              faire quand un refus en relève, sont réunis dans le guide sur le{" "}
+              <Link
+                href="/guides/refus-de-dossier"
+                className="text-accent underline underline-offset-4"
+              >
+                refus de dossier
+              </Link>
+              .
+            </p>
           </section>
 
           <FinDePage />
