@@ -42,6 +42,14 @@ export const GUIDES: Guide[] = [
     ],
     questions: [
       {
+        q: "Quels documents faut-il pour louer un appartement ?",
+        a: "Quatre catégories, et rien d'autre : une pièce d'identité, un justificatif de domicile, un justificatif de situation professionnelle et un justificatif de ressources. Le décret du 5 novembre 2015 en fixe la liste pour chaque catégorie, et cette liste est limitative : un document qui n'y figure pas peut être refusé.",
+      },
+      {
+        q: "Que mettre dans un dossier de location ?",
+        a: "Les pièces des quatre catégories autorisées, dans l'ordre, en un seul fichier lisible. Ajoutez celles de votre garant s'il y en a un : sa liste est différente de la vôtre. N'ajoutez rien de plus, même pour bien faire : un document interdit met le propriétaire en faute, pas vous en avance.",
+      },
+      {
         q: "Un propriétaire peut-il demander mon RIB avant la signature du bail ?",
         a: "Le RIB ne figure pas dans la liste des pièces autorisées par le décret du 5 novembre 2015. Comme cette liste est limitative, vous pouvez refuser de le fournir avant la signature. Il devient normal de le donner ensuite, pour le paiement du loyer.",
       },
@@ -56,6 +64,10 @@ export const GUIDES: Guide[] = [
       {
         q: "Faut-il envoyer tout le dossier dès le premier message ?",
         a: "Non. Dites qu'il est complet et prêt à être transmis, puis envoyez-le dès que le propriétaire répond. Un premier message court obtient davantage de réponses qu'un envoi massif de pièces jointes.",
+      },
+      {
+        q: "Comment faire un bon dossier de location ?",
+        a: "Complet, lisible et prêt avant de commencer à visiter. Un seul fichier PDF nommé clairement, les pièces dans l'ordre des quatre catégories, aucune page floue ou tronquée, et les documents du garant réunis en même temps que les vôtres. Ce qui fait la différence, c'est le délai : un dossier envoyé dans l'heure passe devant un meilleur dossier envoyé le lendemain.",
       },
     ],
   },
@@ -186,6 +198,18 @@ export const GUIDES: Guide[] = [
         a: "Un mois de loyer hors charges pour un logement vide, deux mois pour un meublé. Aucun dépôt ne peut être demandé si le loyer est payé par trimestre d'avance, ni pour un bail mobilité.",
       },
       {
+        q: "Le dépôt de garantie est-il encaissé ?",
+        a: "Oui. Le propriétaire l'encaisse et le conserve pendant toute la durée du bail ; il n'est pas bloqué sur un compte dédié et ne produit aucun intérêt pour vous. Il vous est restitué après l'état des lieux de sortie, diminué des sommes qu'il est en droit de retenir.",
+      },
+      {
+        q: "Quand faut-il payer le dépôt de garantie ?",
+        a: "À la signature du bail, et son montant doit y être écrit. Un propriétaire qui le réclame avant la signature, pour « réserver » le logement, sort du cadre : à ce stade, rien ne vous engage et rien ne l'engage.",
+      },
+      {
+        q: "Peut-on payer le dépôt de garantie en plusieurs fois ?",
+        a: "La loi ne prévoit pas d'échelonnement : cela se négocie avec le propriétaire, qui n'a pas à accepter. En revanche, l'avance Loca-Pass d'Action Logement prête jusqu'à 1 200 €, sans intérêts ni frais de dossier, remboursables sur 25 mois au maximum. La demande se fait en ligne, dans les deux mois suivant l'entrée dans le logement.",
+      },
+      {
         q: "Quel est le délai pour récupérer son dépôt de garantie ?",
         a: "Un mois après la remise des clés si l'état des lieux de sortie est conforme à celui d'entrée, deux mois s'il ne l'est pas. Le délai court à partir de la remise des clés, en main propre ou par lettre recommandée.",
       },
@@ -196,6 +220,10 @@ export const GUIDES: Guide[] = [
       {
         q: "Le dépôt de garantie peut-il servir à payer le dernier mois de loyer ?",
         a: "Non. Le dépôt ne peut pas être utilisé pour régler le dernier loyer : il doit être payé normalement, et le dépôt vous est restitué ensuite, après l'état des lieux de sortie.",
+      },
+      {
+        q: "Comment récupérer son dépôt de garantie ?",
+        a: "D'abord une lettre recommandée avec accusé de réception qui réclame la somme, rappelle la date de remise des clés et calcule la majoration de retard. En dessous de 5 000 €, une tentative de règlement amiable est ensuite obligatoire, et gratuite : conciliateur de justice, commission départementale de conciliation ou médiateur. Le tribunal vient en dernier. Vous avez trois ans à compter du jour où le dépôt était dû.",
       },
     ],
   },
@@ -246,12 +274,28 @@ export const GUIDES: Guide[] = [
         a: "Un propriétaire particulier qui a souscrit une assurance contre les risques locatifs ne peut demander une caution que si le locataire est étudiant ou apprenti. Un bailleur personne morale ne peut pas demander de caution à un étudiant boursier de l'enseignement supérieur.",
       },
       {
-        q: "Quels justificatifs peut-on demander à un garant ?",
-        a: "Une pièce d'identité, un justificatif de domicile, un justificatif de situation professionnelle et un justificatif de ressources. La liste est fixée par le décret du 5 novembre 2015 et elle est limitative : elle n'est pas la même que celle du locataire.",
+        q: "Comment trouver un garant pour une location ?",
+        a: "Dans l'ordre de ce qui aboutit le plus souvent : un proche, qui n'a pas besoin d'être de votre famille ni propriétaire ; la garantie Visale d'Action Logement, gratuite, qui se demande avant d'avoir trouvé le logement ; votre employeur ou votre banque ; enfin les sociétés de cautionnement privées, qui facturent un pourcentage du loyer annuel.",
       },
       {
-        q: "Jusqu'à quand un garant est-il engagé ?",
-        a: "Jusqu'à l'expiration du préavis du locataire s'il part, ou à la fin du bail si c'est le propriétaire qui donne congé. En colocation avec clause de solidarité, l'engagement se prolonge six mois après la fin du préavis du colocataire concerné.",
+        q: "Quels documents doit fournir un garant pour une location ?",
+        a: "Quatre catégories : une pièce d'identité, un justificatif de domicile, un justificatif de situation professionnelle et un justificatif de ressources. La liste précise est fixée par le décret du 5 novembre 2015, elle est limitative, et elle n'est pas la même que celle du locataire : le garant ne peut pas fournir d'attestation d'hébergement, ni d'avis d'attribution de bourse.",
+      },
+      {
+        q: "Combien doit gagner un garant pour une location ?",
+        a: "Aucun texte ne fixe de seuil. L'usage des propriétaires et des agences est de demander un revenu d'environ trois fois le loyer charges comprises, mais c'est une pratique, pas une règle de droit : vous pouvez la discuter, et un garant qui gagne moins peut être accepté. Ce que la loi encadre, ce sont les documents qui peuvent servir à le vérifier.",
+      },
+      {
+        q: "Peut-on avoir deux garants pour une location ?",
+        a: "Oui, rien ne l'interdit, et c'est fréquent quand deux parents se portent caution ensemble. Chacun signe son propre acte de cautionnement et fournit ses propres justificatifs. Attention à ce que l'acte précise : selon sa rédaction, chaque garant peut devoir la totalité de la dette, et pas la moitié.",
+      },
+      {
+        q: "Faut-il obligatoirement un garant pour louer ?",
+        a: "Non, aucune loi ne l'impose. C'est le propriétaire qui décide d'en demander un ou non, et il ne peut pas toujours : s'il a déjà une assurance contre les loyers impayés, il ne peut exiger une caution que d'un étudiant ou d'un apprenti.",
+      },
+      {
+        q: "Peut-on arrêter d'être garant d'une location ?",
+        a: "Si l'acte indique une durée, non : la caution va au bout. S'il n'en indique aucune, elle peut résilier à tout moment par lettre recommandée, mais la résiliation ne prend effet qu'à l'expiration du bail en cours, et elle reste tenue des dettes nées pendant ce bail. L'engagement s'arrête de lui-même à la fin du préavis du locataire, ou six mois après en colocation avec clause de solidarité.",
       },
     ],
   },
