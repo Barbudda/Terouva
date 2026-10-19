@@ -112,7 +112,7 @@ export default function OutilDossier() {
                 interdit, même demandé poliment, même « pour aller plus vite ».
               </p>
               <p>
-                Dans deux catégories — l&apos;identité et le domicile — le propriétaire ne peut
+                Dans deux catégories, l&apos;identité et le domicile, le propriétaire ne peut
                 exiger qu&apos;<strong className="text-ink">un seul</strong> document. Dans les deux
                 autres, il peut en demander plusieurs. C&apos;est pour cela que la liste
                 ci-dessus indique la règle à côté de chaque catégorie.

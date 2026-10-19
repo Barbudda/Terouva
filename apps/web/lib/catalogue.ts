@@ -236,14 +236,17 @@ export const GUIDES: Guide[] = [
       { id: "justificatifs", titre: "Les justificatifs du garant" },
       { id: "cumul", titre: "Garant et assurance" },
       { id: "fin", titre: "Jusqu'à quand il s'engage" },
-      { id: "sans-garant", titre: "Si vous n'avez personne" },
+      { id: "sans-garant", titre: "Louer sans garant" },
     ],
     titre: "Garant de location : qui peut s'engager, pour combien, et jusqu'à quand",
-    titreSeo: "Garant : qui peut l'être, et jusqu'à quand",
+    // « garant location » pèse 2 900 recherches par mois en France, « acte de
+    // cautionnement » autant pour une difficulté plus basse. Le titre portait
+    // « garant » sans « location » : il ratait la requête de peu.
+    titreSeo: "Garant de location : qui peut l'être",
     resume:
       "Un garant ne signe pas une formalité : il s'engage sur une dette qui peut courir des années après votre départ. Ce que l'acte doit contenir, ce qu'on peut lui demander, et quand son engagement s'arrête vraiment.",
     description:
-      "Qui peut se porter caution, les mentions obligatoires de l'acte, caution simple ou solidaire, les justificatifs demandés au garant, et la fin de l'engagement.",
+      "Qui peut se porter garant d'une location, ce que contient l'acte de cautionnement, les documents exigibles, et comment louer sans garant.",
     publieLe: "2026-10-19",
     lecture: 8,
     sources: [
@@ -288,6 +291,10 @@ export const GUIDES: Guide[] = [
       {
         q: "Peut-on avoir deux garants pour une location ?",
         a: "Oui, rien ne l'interdit, et c'est fréquent quand deux parents se portent caution ensemble. Chacun signe son propre acte de cautionnement et fournit ses propres justificatifs. Attention à ce que l'acte précise : selon sa rédaction, chaque garant peut devoir la totalité de la dette, et pas la moitié.",
+      },
+      {
+        q: "Peut-on louer sans garant ?",
+        a: "Oui, et c'est le cas le plus fréquent une fois passé le premier logement. Trois voies : la garantie Visale d'Action Logement, gratuite et demandée avant de visiter ; un propriétaire qui souscrit lui-même une assurance contre les loyers impayés, auquel cas il ne peut plus exiger de caution sauf d'un étudiant ou d'un apprenti ; une société de cautionnement privée, payante, qui se porte garant à la place d'un proche.",
       },
       {
         q: "Faut-il obligatoirement un garant pour louer ?",
@@ -377,7 +384,10 @@ export const OUTILS: Outil[] = [
   {
     chemin: "/outils/dossier-de-location",
     titre: "Checklist de dossier de location, selon votre situation",
-    titreSeo: "Checklist de dossier de location",
+    // « checklist dossier location » n'est tapé par personne ; « quels
+    // documents pour louer un appartement » l'est 480 fois par mois, et c'est
+    // exactement la question à laquelle l'outil répond.
+    titreSeo: "Quels documents pour louer un appartement",
     court: "Checklist de dossier",
     resume:
       "La liste exacte des pièces à réunir pour votre situation, et celles qu'on n'a pas le droit de vous demander.",

@@ -66,7 +66,7 @@ export default function GuideRepondre() {
       <div className="note">
         <p>
           <strong>Court, oui. Vide, non.</strong> Les mêmes guides déconseillent le message de
-          deux lignes — « bonjour, je suis intéressé, merci » — qui ne donne rien à décider, et le
+          deux lignes, « bonjour, je suis intéressé, merci », qui ne donne rien à décider, et le
           récit personnel qui noie l&apos;information. Un message complet sur ces six points tient
           en une dizaine de lignes. C&apos;est la bonne longueur.
         </p>

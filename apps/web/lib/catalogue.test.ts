@@ -13,7 +13,10 @@ import { GUIDES, OUTILS } from "./catalogue";
 const SUFFIXE = " · Terouva".length;
 const TITRE_MAX = 60;
 const DESC_MIN = 70;
-const DESC_MAX = 160;
+// 160 est la limite au-delà de laquelle Google tronque ; 155 laisse la marge
+// qu'il faut pour qu'un rendu mobile ou un suffixe ajouté ne coupe pas la
+// phrase en son milieu. Toutes les pages tiennent déjà sous ce seuil.
+const DESC_MAX = 155;
 
 const TOUT = [
   ...GUIDES.map((g) => ({ quoi: `guide ${g.chemin}`, ...g })),

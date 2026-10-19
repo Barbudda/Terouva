@@ -173,13 +173,44 @@ export default function GuideGarantCaution() {
         fin de ce préavis. Sans clause de solidarité, chacun ne doit que sa part.
       </p>
 
-      <h2 id="sans-garant">Si vous n&apos;avez personne</h2>
+      <h2 id="sans-garant">Louer sans garant</h2>
       <p>
-        C&apos;est le cas le plus fréquent, et ce n&apos;est pas une impasse. La{" "}
-        <Link href="/guides/garantie-visale">garantie Visale</Link> est gratuite, portée par Action
-        Logement, et le visa s&apos;obtient avant d&apos;avoir trouvé le logement : vous arrivez à
-        la visite avec la réponse à la question, ce qui change l&apos;ordre de la conversation.
+        Ne pas avoir de proche à solliciter est le cas le plus fréquent une fois passé le premier
+        logement, et ce n&apos;est pas une impasse : <strong>aucune loi n&apos;oblige à fournir un
+        garant</strong>. C&apos;est le propriétaire qui décide d&apos;en demander un, et trois
+        voies permettent de répondre à sa place.
       </p>
+      <h3>La garantie Visale</h3>
+      <p>
+        Gratuite, portée par Action Logement, et c&apos;est la seule qui se demande{" "}
+        <strong>avant</strong> d&apos;avoir trouvé le logement : vous arrivez à la visite avec le
+        visa en main, ce qui change l&apos;ordre de la conversation. Les conditions dépendent de
+        l&apos;âge, du statut et du loyer ; le détail est dans le guide de la{" "}
+        <Link href="/guides/garantie-visale">garantie Visale</Link>.
+      </p>
+      <h3>L&apos;assurance du propriétaire</h3>
+      <p>
+        Un propriétaire particulier qui souscrit une assurance contre les loyers impayés{" "}
+        <strong>ne peut plus exiger de caution</strong>, sauf d&apos;un étudiant ou d&apos;un
+        apprenti. Cela se dit : « si vous êtes assuré contre les impayés, mon dossier tient sans
+        garant ». Beaucoup de bailleurs demandent les deux par habitude, sans savoir que le cumul
+        leur est interdit.
+      </p>
+      <h3>Une société de cautionnement</h3>
+      <p>
+        Des sociétés privées se portent garant à la place d&apos;un proche, contre un pourcentage
+        du loyer annuel. C&apos;est payant et le coût court sur toute la durée du bail : à
+        regarder quand Visale ne s&apos;applique pas, pas en premier réflexe.
+      </p>
+      <div className="note">
+        <p>
+          Un dernier point, rarement dit : le <strong>lieu de résidence du garant est un critère
+          protégé</strong>. Écarter un dossier parce que la caution habite une autre région, ou une
+          commune jugée indésirable, est une discrimination. Le{" "}
+          <Link href="/guides/refus-de-dossier">guide sur le refus de dossier</Link> détaille ce
+          qui est interdit et comment le prouver.
+        </p>
+      </div>
       <p>
         Et quand le dossier est prêt, c&apos;est le premier message qui décide de la visite. La{" "}
         <Link href="/outils/dossier-de-location">checklist</Link> liste les pièces de votre
