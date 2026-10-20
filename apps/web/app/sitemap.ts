@@ -12,7 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   return [
-    { url: base, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    // La barre finale n'est pas cosmétique. Sans elle, le plan du site annonce
+    // « https://domaine » quand tous les liens de la page et la canonique
+    // pointent vers « https://domaine/ ». Un auditeur y voit deux adresses, et
+    // signale l'accueil comme une page orpheline du plan du site, c'est-à-dire
+    // sans aucun lien entrant, alors qu'elle en a plus de cent.
+    { url: `${base}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${base}/outils`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     ...OUTILS.map((o) => ({

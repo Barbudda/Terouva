@@ -30,14 +30,14 @@ export default function Outils() {
     "@id": `${siteUrl}${CHEMIN}#collection`,
     name: "Outils gratuits pour votre recherche de logement",
     inLanguage: "fr-FR",
+    // Deux entrées, donc deux erreurs d'audit quand le type réclame une note
+    // ou un avis qui n'existent pas. `WebPage` décrit les mêmes outils sans
+    // promettre ce qu'on n'a pas.
     hasPart: OUTILS.map((o) => ({
-      "@type": "WebApplication",
+      "@type": "WebPage",
       name: o.titre,
       description: o.description,
       url: `${siteUrl}${o.chemin}`,
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Tout navigateur web",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
       isAccessibleForFree: true,
     })),
   };

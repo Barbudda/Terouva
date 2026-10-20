@@ -53,18 +53,20 @@ export default function OutilDossier() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      // `WebPage` et non `WebApplication` : Google exige pour ce dernier une
+      // note ou un avis en plus du nom et de l'offre, et cet outil n'en a pas.
+      // Un type qu'on ne peut pas remplir honnêtement ne donne pas de résultat
+      // enrichi et compte comme une erreur à chaque audit. `WebPage` décrit la
+      // même chose, sans rien promettre qui n'existe pas.
       {
-        "@type": "WebApplication",
+        "@type": "WebPage",
         "@id": `${siteUrl}${CHEMIN}#outil`,
         name: OUTIL.titre,
         url: `${siteUrl}${CHEMIN}`,
-        applicationCategory: "BusinessApplication",
-        operatingSystem: "Tout navigateur web",
         inLanguage: "fr-FR",
         description: OUTIL.description,
-        offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
         isAccessibleForFree: true,
-        browserRequirements: "JavaScript activé",
+        isPartOf: { "@id": `${siteUrl}/#website` },
       },
       {
         "@type": "FAQPage",

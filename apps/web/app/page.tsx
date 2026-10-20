@@ -50,41 +50,26 @@ export default function Home() {
     publisher: { "@id": `${siteUrl}/#organization` },
   };
 
-  const appJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "Terouva",
-    url: `${siteUrl}/`,
-    description:
-      "Terouva repère les annonces de location qui vous correspondent, les classe et prépare votre message de candidature. Tout reste sur votre ordinateur.",
-    applicationCategory: "UtilitiesApplication",
-    operatingSystem: "macOS, Windows",
-    inLanguage: "fr-FR",
-    // Une application sans offre déclarée est un balisage incomplet pour Google,
-    // et c'était la cinquième erreur de l'audit. L'offre reprend donc mot pour
-    // mot ce que la page annonce déjà dans les questions fréquentes : environ
-    // 12 € par mois, avec un essai gratuit, prix définitif au lancement.
-    // `PreOrder` dit l'essentiel : annoncé, pas encore en vente. **Si le prix
-    // affiché change, celui-ci doit changer dans le même commit** — un prix
-    // balisé qui ne correspond plus à la page est une erreur qui se voit.
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/PreOrder",
-      url: `${siteUrl}/#inscription`,
-      price: "12",
-      priceCurrency: "EUR",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: "12",
-        priceCurrency: "EUR",
-        referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
-      },
-    },
-  };
+  /**
+   * Pas de nœud `SoftwareApplication` ici, et c'est une décision.
+   *
+   * Google exige trois choses ensemble pour ce type : `name`, `offers`, **et**
+   * `aggregateRating` ou `review`. Pas l'un ou l'autre, les trois. Un premier
+   * diagnostic maison avait lu cette règle comme une alternative et concluait
+   * à tort que le balisage était complet ; l'audit Semrush, lui, comptait cinq
+   * items invalides, dont celui-ci.
+   *
+   * Terouva n'a ni note ni avis, puisqu'il n'est pas encore sorti. Les inventer
+   * est exclu. Déclarer un type qu'on ne peut pas remplir honnêtement ne
+   * rapporte aucun résultat enrichi et coûte une erreur à chaque audit : on
+   * retire le nœud. Le produit reste décrit par `Organization` et `WebSite`
+   * dans le gabarit, par la vidéo, et par les questions fréquentes.
+   *
+   * À rétablir le jour où de vrais avis existent, pas avant.
+   */
 
   return (
     <>
-      <DonneesStructurees data={appJsonLd} />
       <DonneesStructurees data={faqJsonLd} />
       <DonneesStructurees data={videoJsonLd} />
       <Nav />

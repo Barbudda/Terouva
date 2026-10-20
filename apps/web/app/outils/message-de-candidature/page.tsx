@@ -53,19 +53,18 @@ export default function OutilMessage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      // Voir la note de l'outil dossier : `WebApplication` réclame une note ou
+      // un avis que cet outil n'a pas, `WebPage` dit la même chose sans mentir.
       {
-        "@type": "WebApplication",
+        "@type": "WebPage",
         "@id": `${siteUrl}${CHEMIN}#outil`,
         name: "Générateur de message de candidature pour une location",
         url: `${siteUrl}${CHEMIN}`,
-        applicationCategory: "BusinessApplication",
-        operatingSystem: "Tout navigateur web",
         inLanguage: "fr-FR",
         description:
           "Écrit le message qui accompagne un dossier de location, à partir de votre situation et de votre garant. Trois tons, six formulations, aucune donnée envoyée.",
-        offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
         isAccessibleForFree: true,
-        browserRequirements: "JavaScript activé",
+        isPartOf: { "@id": `${siteUrl}/#website` },
       },
       {
         "@type": "FAQPage",
