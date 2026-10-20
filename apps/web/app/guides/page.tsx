@@ -30,11 +30,15 @@ export default function Guides() {
     "@id": `${siteUrl}${CHEMIN}#collection`,
     name: "Guides pour trouver une location",
     inLanguage: "fr-FR",
+    // L'image est exigée par Google sur un « Article », y compris listé ici.
+    // Chaque guide a la sienne, générée au build : ne pas la reprendre faisait
+    // autant d'items incomplets que de guides.
     hasPart: GUIDES.map((g) => ({
       "@type": "Article",
       headline: g.titre,
       description: g.description,
       url: `${siteUrl}${g.chemin}`,
+      image: [`${siteUrl}${g.chemin}/opengraph-image`],
       datePublished: g.publieLe,
     })),
   };
