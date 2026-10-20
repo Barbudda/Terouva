@@ -28,11 +28,14 @@ const violations = [];
 // ── Règle 1 : une seule route API côté web, et c'est la liste d'attente ───────
 // L'application reste 100 % locale (IndexedDB) : aucune donnée de recherche,
 // d'annonce ou de candidature ne doit passer par un serveur. La seule exception
-// autorisée est le formulaire d'inscription du site vitrine, qui transmet une
-// adresse e-mail à Resend. Toute autre route est une violation.
-// La page privée /liste (voir qui a réservé) est rendue côté serveur elle aussi,
-// mais elle appartient au site vitrine, pas à l'application : elle relit la liste
-// chez Resend et ne touche jamais aux données de recherche de l'utilisateur.
+// autorisée est le formulaire d'inscription du site vitrine, qui range une
+// adresse e-mail dans le magasin Blob du projet. Toute autre route est une
+// violation.
+// La console privée /liste (qui a réservé) est rendue côté serveur elle aussi,
+// mais elle appartient au site vitrine, pas à l'application : elle relit cette
+// seule liste d'adresses, et ne touche jamais aux données de recherche de
+// l'utilisateur. Son export CSV est construit dans le navigateur, précisément
+// pour ne pas ouvrir une seconde porte serveur.
 const ALLOWED_API_ROUTES = ["waitlist/route.ts"];
 const apiDir = join(ROOT, "apps", "web", "app", "api");
 if (existsSync(apiDir)) {

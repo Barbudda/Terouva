@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isAlreadyRegistered, parseWaitlistInput } from "@/lib/waitlist";
+import { parseWaitlistInput } from "@/lib/waitlist";
 
 describe("parseWaitlistInput", () => {
   it("accepte une adresse normale et la normalise", () => {
@@ -29,17 +29,5 @@ describe("parseWaitlistInput", () => {
     expect(parseWaitlistInput(null).kind).toBe("invalid");
     expect(parseWaitlistInput("camille@example.fr").kind).toBe("invalid");
     expect(parseWaitlistInput({ email: 42 }).kind).toBe("invalid");
-  });
-});
-
-describe("isAlreadyRegistered", () => {
-  it("reconnaît un contact déjà présent", () => {
-    expect(isAlreadyRegistered({ message: "Contact already exists" })).toBe(true);
-    expect(isAlreadyRegistered({ name: "validation_error", message: "Email already in use" })).toBe(true);
-  });
-
-  it("laisse passer les vraies erreurs", () => {
-    expect(isAlreadyRegistered(null)).toBe(false);
-    expect(isAlreadyRegistered({ message: "Invalid API key" })).toBe(false);
   });
 });

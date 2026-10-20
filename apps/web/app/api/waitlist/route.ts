@@ -1,14 +1,13 @@
-import { Resend } from "resend";
-import { isAlreadyRegistered, parseWaitlistInput } from "@/lib/waitlist";
+import { parseWaitlistInput } from "@/lib/waitlist";
+import { enregistrer } from "@/lib/inscriptions";
 
 /**
  * Inscription à la liste d'attente.
  *
  * SEULE route serveur du projet, et elle le restera : l'application Terouva
  * reste entièrement locale (aucune donnée de recherche, d'annonce ou de
- * candidature ne passe par ici). Cette route ne fait qu'une chose : transmettre
- * une adresse e-mail à Resend, qui garde la liste et servira à prévenir du
- * lancement. Rien n'est stocké de notre côté.
+ * candidature ne passe par ici). Cette route ne fait qu'une chose : ranger une
+ * adresse e-mail dans la liste d'attente, que la console privée /liste relit.
  */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -101,44 +100,23 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.error("[waitlist] RESEND_API_KEY absente : inscription impossible.");
+  // Une adresse déjà présente est un succès du point de vue de la personne :
+  // elle a demandé à être prévenue, elle le sera. Lui annoncer une erreur la
+  // pousserait à réessayer pour rien.
+  const resultat = await enregistrer(input.email);
+
+  if (resultat === "config") {
     return json(
-      { ok: false, error: "Les inscriptions sont momentanément indisponibles. Réessayez plus tard." },
+      {
+        ok: false,
+        error: "Les inscriptions sont momentanément indisponibles. Réessayez plus tard.",
+      },
       503,
     );
   }
-
-  const resend = new Resend(apiKey);
-
-  try {
-    const { error } = await resend.contacts.create({
-      email: input.email,
-      unsubscribed: false,
-    });
-    if (error && !isAlreadyRegistered(error)) {
-      console.error("[waitlist] création du contact refusée :", error.name, error.message);
-      return json({ ok: false, error: "L'inscription n'a pas pu être enregistrée." }, 502);
-    }
-
-    // Le segment sert à envoyer l'annonce de lancement. Facultatif : sans lui,
-    // le contact existe quand même, il faudra juste le cibler autrement.
-    const segmentId = process.env.RESEND_SEGMENT_ID;
-    if (segmentId) {
-      const { error: segmentError } = await resend.contacts.segments.add({
-        email: input.email,
-        segmentId,
-      });
-      if (segmentError && !isAlreadyRegistered(segmentError)) {
-        // Le contact est enregistré : on ne fait pas échouer l'inscription pour ça.
-        console.error("[waitlist] ajout au segment refusé :", segmentError.message);
-      }
-    }
-
-    return json({ ok: true });
-  } catch (e) {
-    console.error("[waitlist] appel Resend impossible :", e);
+  if (resultat === "erreur") {
     return json({ ok: false, error: "L'inscription n'a pas pu être enregistrée." }, 502);
   }
+
+  return json({ ok: true });
 }

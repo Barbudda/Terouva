@@ -34,10 +34,3 @@ export function parseWaitlistInput(body: unknown): WaitlistInput {
   }
   return { kind: "ok", email: clean };
 }
-
-/** Un contact déjà inscrit n'est pas une erreur : on le traite comme un succès. */
-export function isAlreadyRegistered(error: { name?: string; message?: string } | null): boolean {
-  if (!error) return false;
-  const haystack = `${error.name ?? ""} ${error.message ?? ""}`.toLowerCase();
-  return haystack.includes("already") || haystack.includes("exists");
-}

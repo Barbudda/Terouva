@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { sameToken, tokenFor, usablePassword } from "./admin";
-import { inscritsRecents, type Inscrit } from "./inscrits";
 
 describe("tokenFor", () => {
   it("ne contient pas le mot de passe", () => {
@@ -52,33 +51,5 @@ describe("usablePassword", () => {
 
   it("accepte huit caractères ou plus", () => {
     expect(usablePassword("huitcars")).toBe(true);
-  });
-});
-
-describe("inscritsRecents", () => {
-  const maintenant = Date.parse("2026-10-11T12:00:00.000Z");
-  const inscrit = (jours: number, desinscrit = false): Inscrit => ({
-    id: `c${jours}${desinscrit}`,
-    email: `a${jours}@exemple.fr`,
-    date: new Date(maintenant - jours * 24 * 60 * 60 * 1000).toISOString(),
-    desinscrit,
-  });
-
-  it("compte les inscriptions de la fenêtre", () => {
-    const liste = [inscrit(0), inscrit(3), inscrit(6.5), inscrit(9)];
-    expect(inscritsRecents(liste, 7, maintenant)).toBe(3);
-  });
-
-  it("ignore les désinscrits", () => {
-    expect(inscritsRecents([inscrit(1), inscrit(2, true)], 7, maintenant)).toBe(1);
-  });
-
-  it("ignore une date illisible", () => {
-    const casse: Inscrit = { id: "x", email: "x@exemple.fr", date: "pas-une-date", desinscrit: false };
-    expect(inscritsRecents([casse], 7, maintenant)).toBe(0);
-  });
-
-  it("renvoie zéro sur une liste vide", () => {
-    expect(inscritsRecents([], 7, maintenant)).toBe(0);
   });
 });

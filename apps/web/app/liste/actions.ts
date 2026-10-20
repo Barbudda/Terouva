@@ -2,7 +2,9 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { COOKIE_MAX_AGE, COOKIE_NAME, tokenFor, usablePassword } from "@/lib/admin";
+import { revalidatePath } from "next/cache";
+import { COOKIE_MAX_AGE, COOKIE_NAME, sameToken, tokenFor, usablePassword } from "@/lib/admin";
+import { supprimer } from "@/lib/inscriptions";
 
 /**
  * Ralentisseur en mémoire. Les instances serverless ne partagent rien : ce n'est
@@ -41,6 +43,25 @@ export async function connexion(formData: FormData) {
     maxAge: COOKIE_MAX_AGE,
   });
   redirect("/liste");
+}
+
+/**
+ * Retire une adresse, sur demande de la personne concernée.
+ *
+ * Une action serveur est appelable par n'importe qui connaissant son
+ * identifiant : on revérifie donc le cookie ici, sans se reposer sur le fait
+ * que le bouton ne s'affiche que pour une session ouverte.
+ */
+export async function retirer(formData: FormData) {
+  const motDePasse = process.env.ADMIN_PASSWORD;
+  if (!usablePassword(motDePasse)) redirect("/liste?erreur=config");
+
+  const jar = await cookies();
+  if (!sameToken(jar.get(COOKIE_NAME)?.value, tokenFor(motDePasse))) redirect("/liste");
+
+  const clef = String(formData.get("clef") ?? "");
+  await supprimer(clef);
+  revalidatePath("/liste");
 }
 
 export async function deconnexion() {

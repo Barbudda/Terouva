@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
+import { X } from "lucide-react";
 import { COOKIE_NAME, sameToken, tokenFor, usablePassword } from "@/lib/admin";
-import { inscritsRecents, lireInscrits, type Inscrit } from "@/lib/inscrits";
+import { inscritsRecents, lireInscrits, versCsv, type Inscrit } from "@/lib/inscriptions";
 import { CopierEmails } from "@/components/liste/CopierEmails";
+import { TelechargerCsv } from "@/components/liste/TelechargerCsv";
 import { Logo } from "@/components/ui/Logo";
-import { connexion, deconnexion } from "./actions";
+import { connexion, deconnexion, retirer } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -102,24 +104,33 @@ async function Tableau() {
 
   if (liste.kind === "config") {
     return (
-      <Avertissement titre="La liste n'est pas encore branchée">
-        Ajoutez la clé <span className="font-semibold text-ink-2">RESEND_API_KEY</span> dans les
-        réglages Vercel du projet, puis relancez un déploiement. Les inscriptions ne sont pas
-        enregistrées tant qu'elle manque.
+      <Avertissement titre="La liste n'a pas encore d'endroit où vivre">
+        <>
+          Dans le tableau de bord Vercel du projet, onglet{" "}
+          <span className="font-semibold text-ink-2">Storage</span>, créez un magasin{" "}
+          <span className="font-semibold text-ink-2">Blob</span> et reliez-le à ce projet. Son jeton
+          d&apos;accès est posé tout seul : il n&apos;y a rien à recopier. Relancez ensuite un
+          déploiement.
+          <br />
+          <br />
+          <strong className="text-ink">
+            Tant que ce magasin n&apos;existe pas, les adresses laissées sur le site ne sont pas
+            enregistrées.
+          </strong>
+        </>
       </Avertissement>
     );
   }
 
   if (liste.kind === "erreur") {
     return (
-      <Avertissement titre="Resend n'a pas répondu">
-        {liste.message}
-      </Avertissement>
+      <Avertissement titre="La liste n'a pas pu être lue">{liste.message}</Avertissement>
     );
   }
 
-  const actifs = liste.inscrits.filter((i) => !i.desinscrit);
+  const actifs = liste.inscrits;
   const semaine = inscritsRecents(liste.inscrits, 7);
+  const jour = inscritsRecents(liste.inscrits, 1);
 
   return (
     <>
@@ -134,7 +145,7 @@ async function Tableau() {
           </h1>
           <p className="mt-2 text-ink-2">
             {semaine > 0
-              ? `${semaine} ${semaine > 1 ? "inscriptions" : "inscription"} ces sept derniers jours.`
+              ? `${semaine} ${semaine > 1 ? "inscriptions" : "inscription"} ces sept derniers jours, dont ${jour} aujourd'hui.`
               : "Aucune inscription ces sept derniers jours."}
           </p>
         </div>
@@ -150,8 +161,9 @@ async function Tableau() {
       </header>
 
       {actifs.length > 0 && (
-        <div className="mt-6">
+        <div className="mt-6 flex flex-wrap gap-3">
           <CopierEmails emails={actifs.map((i) => i.email)} />
+          <TelechargerCsv csv={versCsv(actifs)} nombre={actifs.length} />
         </div>
       )}
 
@@ -166,21 +178,22 @@ async function Tableau() {
       ) : (
         <ul className="card-soft mt-6 divide-y divide-rule overflow-hidden">
           {liste.inscrits.map((inscrit) => (
-            <Ligne key={inscrit.id} inscrit={inscrit} />
+            <Ligne key={inscrit.clef} inscrit={inscrit} />
           ))}
         </ul>
       )}
 
       {liste.tronquee && (
         <p className="mt-4 text-sm text-ink-3">
-          Seules les 2000 premières adresses sont affichées. Les suivantes sont dans Resend.
+          Seules les 10 000 premières adresses sont affichées.
         </p>
       )}
 
       <p className="mt-8 text-sm leading-relaxed text-ink-3">
-        Ces adresses sont gardées par Resend, qui servira à envoyer l&apos;annonce de lancement.
-        Terouva lui-même n&apos;a pas de serveur et ne stocke rien : tout ce qu&apos;un utilisateur
-        cherche, voit ou écrit reste sur son ordinateur.
+        Ces adresses sont gardées dans le magasin Blob du projet, en accès privé, et nulle part
+        ailleurs. Le CSV sert à les reprendre dans l&apos;outil d&apos;envoi de votre choix le jour
+        du lancement. Terouva lui-même n&apos;a pas de serveur : tout ce qu&apos;une personne
+        cherche, voit ou écrit dans l&apos;application reste sur son ordinateur.
       </p>
     </>
   );
@@ -192,19 +205,25 @@ function Ligne({ inscrit }: { inscrit: Inscrit }) {
 
   return (
     <li className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-5 py-4">
-      <span className="min-w-0 flex-1 truncate font-medium text-ink">
-        {inscrit.email}
-        {inscrit.desinscrit && (
-          <span className="ml-2 rounded-full bg-muted px-2 py-0.5 text-xs font-semibold text-ink-3">
-            désinscrit
-          </span>
-        )}
-      </span>
+      <span className="min-w-0 flex-1 truncate font-medium text-ink">{inscrit.email}</span>
       {valide && (
         <time dateTime={inscrit.date} className="tabular shrink-0 text-sm text-ink-3">
           {dateCourte.format(quand)} à {heure.format(quand)}
         </time>
       )}
+      {/* Pour honorer une demande de retrait : c'est la seule façon de sortir
+          de la liste, puisqu'il n'y a pas encore d'envoi, donc pas de lien de
+          désinscription. */}
+      <form action={retirer} className="shrink-0">
+        <input type="hidden" name="clef" value={inscrit.clef} />
+        <button
+          type="submit"
+          aria-label={`Retirer ${inscrit.email} de la liste`}
+          className="grid size-11 place-items-center rounded-full text-ink-3 transition-colors hover:bg-muted hover:text-bad"
+        >
+          <X aria-hidden className="size-4" strokeWidth={1.75} />
+        </button>
+      </form>
     </li>
   );
 }
