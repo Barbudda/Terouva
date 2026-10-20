@@ -5,6 +5,37 @@ Données de marché : Semrush, base **fr**, relevées le 19 octobre 2026.
 
 ---
 
+## 0. Correction de diagnostic (20 octobre)
+
+**Ce rapport s'était trompé sur les cinq erreurs de données structurées.** Le MCP Semrush donne
+les URL exactes, et ce n'étaient pas celles que j'avais désignées.
+
+Les cinq items invalides étaient les nœuds **`SoftwareApplication` et `WebApplication`** :
+l'accueil, les deux pages d'outils, et les deux entrées `hasPart` de la page Outils. Google exige
+pour ces types **`name` ET `offers` ET (`aggregateRating` ou `review`)**, les trois ensemble. Mon
+script de contrôle lisait la règle comme une alternative, et concluait donc que tout était bon.
+
+Terouva n'a ni note ni avis puisqu'il n'est pas sorti, et les inventer est exclu. Les cinq nœuds
+sont devenus des `WebPage`, qui décrivent la même chose sans rien promettre. À rétablir le jour où
+de vrais avis existent.
+
+**La page orpheline était l'accueil.** Le plan du site annonçait `https://terouva.com` quand la
+canonique et les 126 liens internes pointent vers `https://terouva.com/`. Pour un auditeur, deux
+adresses, dont une sans aucun lien entrant. La barre finale est ajoutée.
+
+**Le crawl Semrush n'avait jamais été relancé.** Un seul instantané existe, terminé le 19 octobre
+à 17 h 29, soit *avant* les deux déploiements. Les chiffres du PDF du 20 octobre sont ceux de ce
+même instantané. Le prochain passage automatique est prévu le **26 octobre**.
+
+Enfin, le script corrigé (`scripts/check-donnees-structurees.mjs`, désormais dans le dépôt) valide
+aussi les entrées imbriquées, et a trouvé neuf défauts que l'audit externe ne signalait pas : les
+`Article` listés sur la page Guides se déclaraient sans image. Corrigé.
+
+État vérifié en production après correction : **191 nœuds sur 15 pages, aucun champ exigé
+manquant, aucune question balisée absente de sa page.**
+
+---
+
 ## 1. Ce qui a été corrigé
 
 ### Le défaut important : une FAQ balisée mais jamais affichée
