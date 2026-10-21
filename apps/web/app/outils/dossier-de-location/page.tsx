@@ -91,7 +91,7 @@ export default function OutilDossier() {
 
           <h1 className="display mt-5 max-w-3xl text-[2.1rem] text-ink sm:text-5xl">
             Les pièces de votre dossier,{" "}
-            <span className="text-accent">et celles qu&apos;on ne peut pas vous demander.</span>
+            et celles qu&apos;on ne peut pas vous demander.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
             La liste est fixée par décret, et elle est limitative. Répondez à trois questions :

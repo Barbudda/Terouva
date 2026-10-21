@@ -31,7 +31,10 @@ export function Video() {
         <button
           type="button"
           onClick={() => setOuvert(true)}
-          aria-label="Regarder la présentation de Terouva, 29 secondes, sans son"
+          // Pas d'aria-label : le bouton porte déjà son texte, et un libellé
+          // vocal qui ne reprend pas mot pour mot ce qui est écrit casse le
+          // pilotage à la voix, qui cherche le texte lu à l'écran. Le nom
+          // accessible est donc le contenu lui-même.
           className="group relative block w-full overflow-hidden border-y border-rule bg-ash"
         >
           {/* L'image de l'animation, en filigrane : on devine le produit sans
@@ -61,7 +64,7 @@ export function Video() {
             </span>
             <span className="text-left">
               <span className="display block text-xl text-ink sm:text-2xl">
-                Voir Terouva <span className="text-accent">en 29 secondes</span>
+                Voir Terouva en 29 secondes
               </span>
               <span className="mt-1 block text-[15px] text-ink-2">
                 Une animation courte, sans son. Elle s&apos;ouvre en grand.

@@ -41,6 +41,9 @@
   --color-bad-wash: #fde4e4;
 
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Les titres. Georgia en repli : elle a le même contraste franc, donc la
+     page ne change pas de silhouette pendant le chargement. */
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Rectangles légèrement arrondis, pas des pilules : une pilule partout est
@@ -84,43 +87,55 @@ body {
 }
 
 /* Titres de la landing : très gras, serrés, la fin passe en accent. */
+/* Titres. La serif porte l'autorité : inutile de l'épaissir. On passe de 800 à
+   500, et le crénage négatif se relâche, parce qu'une serif à empattements
+   francs se referme vite si on la serre comme un grotesque. */
 .display {
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 0.97;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  line-height: 1.05;
   /* Evite les lignes orphelines : le navigateur repartit les mots. */
   text-wrap: balance;
 }
 
-/* Sur-titre de section : « POURQUOI TEROUVA », petites capitales espacées. */
+/* Sur-titre de section. C'était « POURQUOI TEROUVA » en magenta espacé : un
+   label en capitales colorées au-dessus de chaque bloc est l'un des tics les
+   plus répandus des pages générées. Devient une mention en serif italique, à
+   l'encre, qui se lit comme une rubrique de presse plutôt qu'une étiquette. */
 .eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-accent);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-ink-3);
 }
 
-/* Ombre colorée très douce, réservée à l'action principale de la page. */
+/* Ombre de l'action principale. Elle était teintée de l'accent : une lueur
+   colorée sous un bouton est décorative, pas informative. Neutre et verticale. */
 .shadow-accent {
-  box-shadow: 0 10px 26px -12px rgb(201 45 106 / 0.55);
+  box-shadow: 0 10px 26px -14px rgb(27 29 30 / 0.45);
 }
 
 /* Commande circulaire à flèche, posée au coin d'une carte. */
+/* Numéro d'étape, posé dans la marge et sans contenant.
+   C'était un chiffre dans un cercle bordé, répété en colonne : la signature la
+   plus répandue des blocs « comment ça marche » générés, et le reproche fait au
+   site. Un chiffre en serif, assez grand pour tenir seul, fait le même travail
+   de repère sans ajouter une forme de plus. */
 .pastille {
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 999px;
-  border: 1px solid var(--color-rule);
-  color: var(--color-ink);
-  transition: background-color 150ms, color 150ms, border-color 150ms;
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-ink-3);
+  font-variant-numeric: lining-nums tabular-nums;
+  transition: color 150ms;
 }
 .groupe-carte:hover .pastille {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #fff;
+  color: var(--color-ink);
 }
 
 /* Carte claire posée sur le fond, ombre douce vers le bas. */
@@ -332,8 +347,11 @@ details > summary::-webkit-details-marker {
 .article li + li {
   margin-top: 0.5rem;
 }
+/* Les puces reviennent a l'encre : l'accent est reserve aux liens, au bouton
+   principal et au focus. Des puces colorees sur chaque liste, c'est ce qui
+   rendait le site rose. */
 .article li::marker {
-  color: var(--color-accent);
+  color: var(--color-ink-3);
 }
 /* Encadré de source ou de mise en garde. */
 .article .note {

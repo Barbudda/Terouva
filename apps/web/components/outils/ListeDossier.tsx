@@ -86,7 +86,7 @@ export function ListeDossier() {
                 ce qui désoriente un lecteur d'écran. */}
             <h2 className="eyebrow">Votre dossier</h2>
             <p className="display mt-2 text-[2rem] text-ink">
-              {total} <span className="text-accent">{total > 1 ? "pièces" : "pièce"}</span>
+              {total} {total > 1 ? "pièces" : "pièce"}
             </p>
           </div>
 
@@ -108,7 +108,7 @@ export function ListeDossier() {
               onClick={() => window.print()}
               className="inline-flex h-11 items-center gap-2 rounded-md border border-rule bg-card px-5 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink"
             >
-              <Printer aria-hidden className="size-4 text-accent" strokeWidth={1.75} />
+              <Printer aria-hidden className="size-4 text-ink-3" strokeWidth={1.75} />
               Imprimer
             </button>
           </div>
@@ -123,7 +123,7 @@ export function ListeDossier() {
         {dossier.garant.length > 0 && (
           <>
             <h2 className="display mt-12 text-2xl text-ink">
-              Et pour votre <span className="text-accent">garant</span>
+              Et pour votre garant
             </h2>
             <div className="mt-8 space-y-8">
               {dossier.garant.map((c) => (
@@ -146,7 +146,7 @@ export function ListeDossier() {
 
         <section className="mt-12 rounded-lg border border-rule bg-paper-2 p-6 sm:p-7">
           <h2 className="display text-xl text-ink">
-            Ce qu&apos;on <span className="text-accent">ne peut pas</span> vous demander
+            Ce qu&apos;on ne peut pas vous demander
           </h2>
           <p className="mt-3 leading-relaxed text-ink-2">
             La liste des pièces autorisées est limitative : tout ce qui n&apos;y figure pas est

@@ -55,7 +55,7 @@ export default function Guides() {
 
           <h1 className="display mt-5 max-w-3xl text-[2.1rem] text-ink sm:text-5xl">
             Chercher un logement,{" "}
-            <span className="text-accent">sans y perdre son temps ni ses droits.</span>
+            sans y perdre son temps ni ses droits.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
             Des pages courtes sur ce qui bloque vraiment une recherche : le dossier, le garant, le
@@ -86,7 +86,7 @@ export default function Guides() {
             </p>
             <ol className="mt-6 space-y-5">
               <li className="flex gap-4">
-                <span className="pastille shrink-0 font-bold">1</span>
+                <span className="pastille w-8 shrink-0">1</span>
                 <p className="leading-relaxed text-ink-2">
                   <strong className="text-ink">Réunir le dossier.</strong> La liste des pièces
                   qu&apos;un propriétaire peut réclamer est fixée par décret et elle est
@@ -95,7 +95,7 @@ export default function Guides() {
                 </p>
               </li>
               <li className="flex gap-4">
-                <span className="pastille shrink-0 font-bold">2</span>
+                <span className="pastille w-8 shrink-0">2</span>
                 <p className="leading-relaxed text-ink-2">
                   <strong className="text-ink">Régler la question du garant.</strong> C&apos;est
                   elle qui élimine le plus de candidatures, et elle se traite avant de visiter, pas
@@ -103,7 +103,7 @@ export default function Guides() {
                 </p>
               </li>
               <li className="flex gap-4">
-                <span className="pastille shrink-0 font-bold">3</span>
+                <span className="pastille w-8 shrink-0">3</span>
                 <p className="leading-relaxed text-ink-2">
                   <strong className="text-ink">Écrire le premier message.</strong> Sur une annonce
                   de particulier en zone tendue, les premières réponses sont lues avec attention et
@@ -111,7 +111,7 @@ export default function Guides() {
                 </p>
               </li>
               <li className="flex gap-4">
-                <span className="pastille shrink-0 font-bold">4</span>
+                <span className="pastille w-8 shrink-0">4</span>
                 <p className="leading-relaxed text-ink-2">
                   <strong className="text-ink">Savoir ce qui se passe ensuite.</strong> Un refus,
                   un dépôt de garantie mal rendu, un engagement de garant qui court après le

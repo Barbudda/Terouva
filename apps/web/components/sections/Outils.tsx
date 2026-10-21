@@ -34,11 +34,12 @@ export function Outils() {
               >
                 <h3 className="display text-xl text-ink">{o.titre}</h3>
                 <p className="mt-3 leading-relaxed text-ink-2">{o.resume}</p>
-                <span className="mt-6 flex items-center gap-3 text-[15px] font-semibold text-accent">
+                {/* La flèche était enfermée dans un cercle bordé qui s'allumait
+                    au survol. Un cercle de plus, et un effet que toutes les
+                    cartes de toutes les pages de produit ont déjà. */}
+                <span className="mt-6 flex items-center gap-2 text-[15px] font-semibold text-ink-3 transition-colors group-hover:text-accent">
                   Ouvrir l&apos;outil
-                  <span className="pastille">
-                    <Fleche className="group-hover:translate-x-0" />
-                  </span>
+                  <Fleche />
                 </span>
               </Link>
             </li>

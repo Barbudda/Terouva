@@ -38,7 +38,10 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
   const etapes = [
     { nom: "Accueil", chemin: "/" },
     { nom: "Guides", chemin: "/guides" },
-    { nom: guide.titre, chemin: guide.chemin },
+    // Le titre court, pas le long : le fil d'Ariane reprenait la phrase entière
+    // du titre, qui passait sur deux lignes dès le mobile et répétait mot pour
+    // mot le H1 placé juste en dessous.
+    { nom: guide.titreSeo, chemin: guide.chemin },
   ];
 
   const jsonLd = {

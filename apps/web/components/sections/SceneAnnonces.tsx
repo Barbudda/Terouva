@@ -25,7 +25,7 @@ export function SceneAnnonces() {
     >
       <div className="flex flex-wrap items-center justify-between gap-3 px-1 pb-4">
         <p className="display text-lg text-ink">Mes annonces</p>
-        <p className="inline-flex items-center gap-2 rounded-full bg-accent-wash px-3 py-1 text-[12px] font-bold tracking-[0.08em] text-accent-ink uppercase">
+        <p className="inline-flex items-center gap-2 text-[13px] font-semibold text-ink-3">
           <span aria-hidden className="size-1.5 animate-breathe rounded-full bg-accent" />
           4 nouvelles
         </p>
@@ -67,7 +67,7 @@ function Carte({
       style={{ "--rang": rang } as React.CSSProperties}
     >
       {premiere && (
-        <span className="scene-sceau mb-2 inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[11px] font-bold tracking-[0.08em] text-white uppercase">
+        <span className="scene-sceau mb-2 inline-flex items-center gap-1.5 rounded-md border border-accent/30 bg-accent-wash px-2.5 py-1 text-[11px] font-bold tracking-[0.06em] text-accent-ink uppercase">
           À contacter en priorité
         </span>
       )}

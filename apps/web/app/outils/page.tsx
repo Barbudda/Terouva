@@ -53,7 +53,7 @@ export default function Outils() {
           <Ariane etapes={ETAPES} />
 
           <h1 className="display mt-5 max-w-3xl text-[2.1rem] text-ink sm:text-5xl">
-            Des outils gratuits, <span className="text-accent">qui ne gardent rien.</span>
+            Des outils gratuits, qui ne gardent rien.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
             Pas de compte à créer, pas de limite d&apos;utilisation, pas d&apos;adresse e-mail à
@@ -69,7 +69,7 @@ export default function Outils() {
                     {o.titre}
                   </h2>
                   <p className="mt-3 leading-relaxed text-ink-2">{o.resume}</p>
-                  <p className="mt-4 text-sm font-semibold text-accent">Ouvrir l&apos;outil</p>
+                  <p className="mt-4 text-sm font-semibold text-ink-3 transition-colors group-hover:text-accent">Ouvrir l&apos;outil</p>
                 </Link>
               </li>
             ))}

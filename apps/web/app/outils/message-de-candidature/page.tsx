@@ -89,7 +89,7 @@ export default function OutilMessage() {
 
           <h1 className="display mt-5 max-w-3xl text-[2.1rem] text-ink sm:text-5xl">
             Le message qui accompagne votre dossier,{" "}
-            <span className="text-accent">écrit en une minute.</span>
+            écrit en une minute.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
             Remplissez vos informations, choisissez un ton, copiez. C&apos;est gratuit, il n&apos;y

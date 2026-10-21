@@ -58,7 +58,7 @@ function Porte({ erreur }: { erreur?: string }) {
   return (
     <div className="card-soft mt-8 p-6 sm:p-8">
       <h1 className="display text-[2rem] text-ink">
-        Qui a réservé<span className="text-accent">&#8239;?</span>
+        Qui a réservé&#8239;?
       </h1>
       <p className="mt-3 text-ink-2">Cette page est privée. Entrez le mot de passe pour la voir.</p>
 
@@ -138,10 +138,7 @@ async function Tableau() {
         <div>
           <p className="eyebrow">Liste d&apos;attente</p>
           <h1 className="display mt-2 text-[2rem] text-ink">
-            {actifs.length}{" "}
-            <span className="text-accent">
-              {actifs.length > 1 ? "personnes attendent" : "personne attend"}
-            </span>
+            {actifs.length} {actifs.length > 1 ? "personnes attendent" : "personne attend"}
           </h1>
           <p className="mt-2 text-ink-2">
             {semaine > 0

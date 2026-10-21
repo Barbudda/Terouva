@@ -19,13 +19,16 @@ export function Hero() {
     <section className="px-4 pt-8 pb-16 sm:px-6 md:pt-14 md:pb-24">
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-14">
         <div className="min-w-0">
-          <p className="inline-flex items-center gap-2 rounded-full border border-rule bg-card px-3.5 py-1.5 text-[13px] font-bold tracking-[0.1em] text-accent-ink uppercase">
-            <span aria-hidden className="size-1.5 animate-breathe rounded-full bg-accent" />
-            {HERO.eyebrow}
+          {/* C'était une pilule bordée, en capitales magenta, avec une pastille
+              qui clignotait dedans. Trois signaux pour dire une information
+              calme. Un filet et une mention en serif italique suffisent. */}
+          <p className="flex items-center gap-3 text-ink-3">
+            <span aria-hidden className="h-px w-8 bg-rule" />
+            <span className="eyebrow">{HERO.eyebrow}</span>
           </p>
 
           <h1 className="display mt-6 text-[2.6rem] text-ink sm:text-[3.6rem] lg:text-[4.9rem]">
-            {HERO.titleLead} <span className="text-accent">{HERO.titleTail}</span>
+            {HERO.titleLead} {HERO.titleTail}
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-2">{HERO.subtitle}</p>

@@ -1,14 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Newsreader } from "next/font/google";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
-// DM Sans : compacte, très lisible en gras serré. Inter et Geist sont exclues
-// par les règles du projet ; DM Sans tient le même rôle sans le déjà-vu.
+// DM Sans porte l'interface : navigation, boutons, étiquettes, texte courant.
+// Inter et Geist sont exclues par les règles du projet.
 const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-dm-sans",
   display: "swap",
+});
+
+// Newsreader porte les titres. Le site n'avait qu'une police, en graisse 800 :
+// c'est la silhouette la plus reconnaissable d'une page produit générée, un gros
+// grotesque noir et serré sur fond clair. Une serif dessinée pour l'écran donne
+// aux titres le ton d'une notice officielle, qui est le registre des guides, et
+// n'a pas besoin d'être épaissie pour faire autorité. Voir DESIGN.md.
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+  display: "swap",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -99,7 +112,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={dmSans.variable}>
+    <html lang="fr" className={`${dmSans.variable} ${newsreader.variable}`}>
       <body>
         <script
           type="application/ld+json"

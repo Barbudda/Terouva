@@ -12,11 +12,13 @@ export function HowItWorks() {
 
         <ol className="mt-12 grid gap-5 md:grid-cols-3">
           {STEPS.map((step, i) => (
-            <li key={step.title} className="monte card-soft p-6">
-              <span className="display grid size-11 place-items-center rounded-full bg-accent-wash text-xl text-accent-ink tabular">
-                {i + 1}
-              </span>
-              <h3 className="mt-5 text-lg font-bold leading-snug text-ink">{step.title}</h3>
+            // Le numéro était un chiffre dans une pastille rose. Trois bulles
+            // colorées alignées, c'est la forme par défaut de tous les blocs
+            // « comment ça marche ». Il est maintenant posé en serif sur un
+            // filet, comme un numéro de paragraphe dans une notice.
+            <li key={step.title} className="monte border-t border-rule pt-5">
+              <span className="pastille block tabular">{i + 1}</span>
+              <h3 className="mt-4 text-lg font-bold leading-snug text-ink">{step.title}</h3>
               <p className="mt-2.5 leading-relaxed text-ink-2">{step.body}</p>
             </li>
           ))}
