@@ -40,11 +40,17 @@ export const SIGNUP = {
  * faits sur le produit, vérifiables en l'ouvrant. Deux valent zéro, et c'est
  * justement l'argument.
  */
+/**
+ * Chiffres clés. Chacun porte son unité **sur la même ligne** : seuls, alignés
+ * à l'identique, « 0 · 0 · 3 · 100 » se lisent comme un bandeau de statistiques
+ * à moitié chargé, et le lecteur a classé le bloc comme cassé avant d'arriver
+ * aux légendes. Collé à son nom, un zéro redevient une affirmation.
+ */
 export const CHIFFRES = [
-  { valeur: "0", legende: "Compte à créer. Ni e-mail, ni mot de passe." },
-  { valeur: "0", legende: "Serveur. Vos données ne quittent pas votre machine." },
-  { valeur: "3", legende: "Tons de message, six formulations chacun." },
-  { valeur: "100", legende: "Points : la note qui classe chaque annonce." },
+  { valeur: "0", unite: "compte à créer", detail: "Ni adresse e-mail, ni mot de passe." },
+  { valeur: "0", unite: "serveur", detail: "Vos données ne quittent pas votre machine." },
+  { valeur: "3", unite: "tons de message", detail: "Six formulations pour chacun d'eux." },
+  { valeur: "100", unite: "points", detail: "La note qui classe chaque annonce." },
 ];
 
 export const PROBLEM = {
