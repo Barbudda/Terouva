@@ -69,6 +69,7 @@ function brancher() {
 
 beforeEach(() => {
   process.env.BLOB_READ_WRITE_TOKEN = "jeton-de-test";
+  delete process.env.BLOB_STORE_ID;
   faux.objets.clear();
   vi.clearAllMocks();
   brancher();
@@ -76,6 +77,26 @@ beforeEach(() => {
 
 afterEach(() => {
   delete process.env.BLOB_READ_WRITE_TOKEN;
+  delete process.env.BLOB_STORE_ID;
+});
+
+describe("configuree", () => {
+  it("accepte le jeton de longue durée", async () => {
+    await expect(enregistrer("camille@example.fr")).resolves.toBe("enregistre");
+  });
+
+  it("accepte aussi l'identifiant de magasin seul (mode OIDC)", async () => {
+    // C'est ce que pose Vercel quand on relie un magasin depuis l'interface :
+    // pas de jeton durable, un identifiant et un jeton court à l'exécution.
+    delete process.env.BLOB_READ_WRITE_TOKEN;
+    process.env.BLOB_STORE_ID = "store_test";
+    await expect(enregistrer("camille@example.fr")).resolves.toBe("enregistre");
+  });
+
+  it("refuse quand il n'y a ni l'un ni l'autre", async () => {
+    delete process.env.BLOB_READ_WRITE_TOKEN;
+    await expect(enregistrer("camille@example.fr")).resolves.toBe("config");
+  });
 });
 
 describe("enregistrer", () => {

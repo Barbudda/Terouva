@@ -57,9 +57,22 @@ export function cheminPour(email: string): string {
   return `${PREFIXE}${clefPour(email)}.json`;
 }
 
-/** Le jeton est posé par Vercel à la création du magasin Blob. */
+/**
+ * Y a-t-il un magasin relié ?
+ *
+ * Deux façons de s'authentifier, et Vercel choisit la seconde quand on relie un
+ * magasin depuis le tableau de bord :
+ *
+ * - `BLOB_READ_WRITE_TOKEN` : un jeton de longue durée, l'ancienne méthode ;
+ * - `BLOB_STORE_ID` + `VERCEL_OIDC_TOKEN` : un jeton court, émis à chaque
+ *   exécution de la fonction. C'est plus sûr, puisqu'il n'y a plus de secret
+ *   durable à fuiter, et c'est ce que pose la liaison depuis l'interface.
+ *
+ * Ne tester que le premier faisait répondre « pas configuré » sur un magasin
+ * parfaitement relié. Les deux comptent.
+ */
 export function configuree(): boolean {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 }
 
 /**
