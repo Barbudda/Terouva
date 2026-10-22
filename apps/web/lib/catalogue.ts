@@ -25,6 +25,7 @@ export const GUIDES: Guide[] = [
     description:
       "La liste officielle des justificatifs qu'un propriétaire peut exiger, ceux qui sont interdits, et la sanction. Sources : service-public et Légifrance.",
     publieLe: "2026-10-11",
+    modifieLe: "2026-10-20",
     lecture: 7,
     sources: [
       {
@@ -177,6 +178,7 @@ export const GUIDES: Guide[] = [
     description:
       "Un mois de loyer en vide, deux en meublé, rendu sous un mois si l'état des lieux est conforme. Les retenues autorisées, et la pénalité en cas de retard.",
     publieLe: "2026-10-19",
+    modifieLe: "2026-10-20",
     lecture: 6,
     sources: [
       {
@@ -248,6 +250,7 @@ export const GUIDES: Guide[] = [
     description:
       "Qui peut se porter garant d'une location, ce que contient l'acte de cautionnement, les documents exigibles, et comment louer sans garant.",
     publieLe: "2026-10-19",
+    modifieLe: "2026-10-20",
     lecture: 8,
     sources: [
       {
