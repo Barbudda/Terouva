@@ -26,6 +26,20 @@ import { del, get, head, list, put, BlobNotFoundError } from "@vercel/blob";
  */
 
 const PREFIXE = "inscriptions/";
+/**
+ * Journal de sauvegarde, une copie par inscription.
+ *
+ * Il ne protège pas contre la perte du magasin : les deux vivent au même
+ * endroit. Il protège contre ce qui est bien plus probable, un bug de notre
+ * côté qui effacerait ou corromprait les enregistrements vivants.
+ *
+ * **Une suppression purge aussi le journal.** Garder une adresse en copie après
+ * une demande de retrait serait exactement ce qu'un retrait est censé empêcher,
+ * et transformerait une sauvegarde en rétention illicite. La protection contre
+ * le clic malheureux n'est donc pas ici : elle est dans la confirmation
+ * demandée avant de retirer une ligne.
+ */
+const JOURNAL = "journal/";
 /** Taille d'une page de listing Blob. */
 const PAR_PAGE = 1000;
 /** 10 pages = 10 000 adresses. Au-delà, la console le dit au lieu de mentir. */
@@ -100,6 +114,7 @@ export async function enregistrer(email: string): Promise<Ecriture> {
       addRandomSuffix: false,
       contentType: "application/json",
     });
+    await journaliser(email);
     return "enregistre";
   } catch (e) {
     // Course entre deux inscriptions simultanées : le second écrit échoue
@@ -112,6 +127,51 @@ export async function enregistrer(email: string): Promise<Ecriture> {
       return "erreur";
     }
   }
+}
+
+/**
+ * Écrit la copie de sauvegarde. Elle ne doit jamais faire échouer une
+ * inscription : si le journal tombe, l'adresse est quand même enregistrée, et
+ * c'est l'enregistrement vivant qui compte.
+ */
+async function journaliser(email: string): Promise<void> {
+  try {
+    await put(
+      `${JOURNAL}${clefPour(email)}/${Date.now()}.json`,
+      JSON.stringify({ email, date: new Date().toISOString() }),
+      { access: "private", addRandomSuffix: false, contentType: "application/json" },
+    );
+  } catch (e) {
+    console.error("[inscriptions] copie de sauvegarde non écrite :", e);
+  }
+}
+
+/**
+ * Compte les adresses distinctes présentes au journal.
+ *
+ * Sert à la console : une sauvegarde qu'on ne voit pas est une sauvegarde dont
+ * on ne sait pas si elle existe. Afficher l'écart entre les deux comptes est le
+ * seul moyen de s'apercevoir que le journal a décroché.
+ */
+export async function compterSauvegardes(): Promise<number | null> {
+  if (!configuree()) return null;
+  const clefs = new Set<string>();
+  let cursor: string | undefined;
+  try {
+    for (let page = 0; page < PAGES_MAX; page += 1) {
+      const res = await list({ prefix: JOURNAL, limit: PAR_PAGE, cursor });
+      for (const b of res.blobs) {
+        const reste = b.pathname.slice(JOURNAL.length);
+        const clef = reste.split("/")[0];
+        if (clef) clefs.add(clef);
+      }
+      if (!res.hasMore || !res.cursor) break;
+      cursor = res.cursor;
+    }
+  } catch {
+    return null;
+  }
+  return clefs.size;
 }
 
 async function lireUn(pathname: string, repli: Date): Promise<Inscrit | null> {
@@ -194,6 +254,19 @@ export async function supprimer(clef: string): Promise<boolean> {
 
   try {
     await del(`${PREFIXE}${clef}.json`);
+
+    // Le retrait doit être complet. Laisser la copie de sauvegarde en place
+    // reviendrait à garder l'adresse de quelqu'un qui a demandé à partir.
+    try {
+      const { blobs } = await list({ prefix: `${JOURNAL}${clef}/` });
+      if (blobs.length > 0) await del(blobs.map((b) => b.url));
+    } catch (e) {
+      // On le signale fort : l'enregistrement vivant est parti, mais une copie
+      // subsiste, et c'est la seule situation où ce code laisse traîner une
+      // donnée personnelle.
+      console.error("[inscriptions] PURGE DU JOURNAL ÉCHOUÉE pour", clef, e);
+    }
+
     return true;
   } catch (e) {
     console.error("[inscriptions] suppression impossible :", e);

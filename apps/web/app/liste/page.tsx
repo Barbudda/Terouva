@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { X } from "lucide-react";
 import { COOKIE_NAME, sameToken, tokenFor, usablePassword } from "@/lib/admin";
-import { inscritsRecents, lireInscrits, versCsv, type Inscrit } from "@/lib/inscriptions";
+import {
+  compterSauvegardes,
+  inscritsRecents,
+  lireInscrits,
+  versCsv,
+  type Inscrit,
+} from "@/lib/inscriptions";
 import { CopierEmails } from "@/components/liste/CopierEmails";
 import { TelechargerCsv } from "@/components/liste/TelechargerCsv";
+import { BoutonRetirer } from "@/components/liste/BoutonRetirer";
 import { Logo } from "@/components/ui/Logo";
 import { connexion, deconnexion, retirer } from "./actions";
 
@@ -129,6 +135,10 @@ async function Tableau() {
   }
 
   const actifs = liste.inscrits;
+  // Une sauvegarde qu'on ne voit pas est une sauvegarde dont on ne sait pas si
+  // elle existe. On affiche l'écart : c'est la seule façon de s'apercevoir que
+  // le journal a décroché.
+  const sauvegardes = await compterSauvegardes();
   const semaine = inscritsRecents(liste.inscrits, 7);
   const jour = inscritsRecents(liste.inscrits, 1);
 
@@ -187,6 +197,26 @@ async function Tableau() {
       )}
 
       <p className="mt-8 text-sm leading-relaxed text-ink-3">
+        {sauvegardes !== null &&
+          (sauvegardes >= actifs.length ? (
+            <>
+              <strong className="text-ink">
+                Sauvegarde : {sauvegardes} {sauvegardes > 1 ? "copies" : "copie"} au journal.
+              </strong>{" "}
+              Chaque inscription en laisse une. Elle protège d&apos;une erreur de notre côté, pas
+              de la perte du magasin : pour ça, il faut télécharger le CSV de temps en temps.
+              Retirer une adresse supprime aussi sa copie, comme le veut une demande de retrait.{" "}
+            </>
+          ) : (
+            <>
+              <strong className="text-bad">
+                Sauvegarde incomplète : {sauvegardes} {sauvegardes > 1 ? "copies" : "copie"} au
+                journal pour {actifs.length} inscrits.
+              </strong>{" "}
+              Les adresses enregistrées avant la mise en place du journal n&apos;en ont pas.
+              Téléchargez le CSV pour en garder un double.{" "}
+            </>
+          ))}
         Ces adresses sont gardées dans le magasin Blob du projet, en accès privé, et nulle part
         ailleurs. Le CSV sert à les reprendre dans l&apos;outil d&apos;envoi de votre choix le jour
         du lancement. Terouva lui-même n&apos;a pas de serveur : tout ce qu&apos;une personne
@@ -210,17 +240,8 @@ function Ligne({ inscrit }: { inscrit: Inscrit }) {
       )}
       {/* Pour honorer une demande de retrait : c'est la seule façon de sortir
           de la liste, puisqu'il n'y a pas encore d'envoi, donc pas de lien de
-          désinscription. */}
-      <form action={retirer} className="shrink-0">
-        <input type="hidden" name="clef" value={inscrit.clef} />
-        <button
-          type="submit"
-          aria-label={`Retirer ${inscrit.email} de la liste`}
-          className="grid size-11 place-items-center rounded-full text-ink-3 transition-colors hover:bg-muted hover:text-bad"
-        >
-          <X aria-hidden className="size-4" strokeWidth={1.75} />
-        </button>
-      </form>
+          désinscription. Confirmation obligatoire, le geste est définitif. */}
+      <BoutonRetirer clef={inscrit.clef} email={inscrit.email} action={retirer} />
     </li>
   );
 }

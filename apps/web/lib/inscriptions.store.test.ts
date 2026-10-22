@@ -37,7 +37,12 @@ vi.mock("@vercel/blob", () => ({
   del: faux.del,
 }));
 
-const { clefPour, enregistrer, lireInscrits, supprimer } = await import("@/lib/inscriptions");
+const { clefPour, compterSauvegardes, enregistrer, lireInscrits, supprimer } = await import(
+  "@/lib/inscriptions"
+);
+
+/** Enregistrements vivants, journal exclu. */
+const vivants = () => [...faux.objets.keys()].filter((k) => k.startsWith("inscriptions/"));
 
 /** Branche les faux sur une simple Map, pour raisonner sur le contenu. */
 function brancher() {
@@ -54,16 +59,22 @@ function brancher() {
     if (corps === undefined) return null;
     return { stream: new Response(corps).body };
   });
-  faux.list.mockImplementation(async () => ({
-    blobs: [...faux.objets.keys()].map((pathname) => ({
-      pathname,
-      uploadedAt: new Date("2026-01-01T00:00:00.000Z"),
-    })),
+  // Le vrai list filtre par prefixe et expose une url par objet ; sans ça la
+  // simulation rendait tout le magasin a chaque appel, ce qui masquait les
+  // bugs de purge au lieu de les reveler.
+  faux.list.mockImplementation(async (opts?: { prefix?: string }) => ({
+    blobs: [...faux.objets.keys()]
+      .filter((p) => !opts?.prefix || p.startsWith(opts.prefix))
+      .map((pathname) => ({
+        pathname,
+        url: pathname,
+        uploadedAt: new Date("2026-01-01T00:00:00.000Z"),
+      })),
     hasMore: false,
     cursor: undefined,
   }));
-  faux.del.mockImplementation(async (chemin: string) => {
-    faux.objets.delete(chemin);
+  faux.del.mockImplementation(async (cible: string | string[]) => {
+    for (const c of Array.isArray(cible) ? cible : [cible]) faux.objets.delete(c);
   });
 }
 
@@ -102,7 +113,7 @@ describe("configuree", () => {
 describe("enregistrer", () => {
   it("écrit une adresse qui n'existe pas encore", async () => {
     await expect(enregistrer("camille@example.fr")).resolves.toBe("enregistre");
-    expect(faux.objets.size).toBe(1);
+    expect(vivants()).toHaveLength(1);
   });
 
   it("ne réécrit pas une adresse déjà présente", async () => {
@@ -123,7 +134,7 @@ describe("enregistrer", () => {
   it("traite la même adresse écrite différemment comme un doublon", async () => {
     await enregistrer("camille@example.fr");
     await expect(enregistrer("  Camille@Example.FR ")).resolves.toBe("deja");
-    expect(faux.objets.size).toBe(1);
+    expect(vivants()).toHaveLength(1);
   });
 
   it("survit à une course entre deux inscriptions simultanées", async () => {
@@ -197,11 +208,63 @@ describe("lireInscrits", () => {
   });
 });
 
+describe("journal de sauvegarde", () => {
+  it("laisse une copie à chaque inscription", async () => {
+    await enregistrer("camille@example.fr");
+    const copies = [...faux.objets.keys()].filter((k) => k.startsWith("journal/"));
+    expect(copies).toHaveLength(1);
+    expect(copies[0]).toContain(clefPour("camille@example.fr"));
+  });
+
+  it("ne recopie pas une adresse déjà inscrite", async () => {
+    await enregistrer("camille@example.fr");
+    await enregistrer("camille@example.fr");
+    expect([...faux.objets.keys()].filter((k) => k.startsWith("journal/"))).toHaveLength(1);
+  });
+
+  it("compte les adresses distinctes, pas les fichiers", async () => {
+    await enregistrer("a@example.fr");
+    await enregistrer("b@example.fr");
+    // Deuxième copie de la même adresse, comme après une restauration.
+    faux.objets.set(`journal/${clefPour("a@example.fr")}/999.json`, "{}");
+    await expect(compterSauvegardes()).resolves.toBe(2);
+  });
+
+  it("n'empêche pas l'inscription si le journal tombe", async () => {
+    faux.put.mockImplementation(async (chemin: string, corps: string) => {
+      if (chemin.startsWith("journal/")) throw new Error("journal injoignable");
+      faux.objets.set(chemin, corps);
+      return { pathname: chemin };
+    });
+    await expect(enregistrer("camille@example.fr")).resolves.toBe("enregistre");
+    expect(faux.objets.has(`inscriptions/${clefPour("camille@example.fr")}.json`)).toBe(true);
+  });
+});
+
 describe("supprimer", () => {
   it("retire l'adresse demandée", async () => {
     await enregistrer("camille@example.fr");
     await expect(supprimer(clefPour("camille@example.fr"))).resolves.toBe(true);
     expect(faux.objets.size).toBe(0);
+  });
+
+  it("purge aussi la copie de sauvegarde", async () => {
+    // Garder une copie après une demande de retrait transformerait la
+    // sauvegarde en rétention de donnée personnelle.
+    await enregistrer("camille@example.fr");
+    expect([...faux.objets.keys()].some((k) => k.startsWith("journal/"))).toBe(true);
+    await supprimer(clefPour("camille@example.fr"));
+    expect([...faux.objets.keys()].some((k) => k.startsWith("journal/"))).toBe(false);
+    expect(faux.objets.size).toBe(0);
+  });
+
+  it("ne touche pas au journal des autres adresses", async () => {
+    await enregistrer("camille@example.fr");
+    await enregistrer("dominique@example.fr");
+    await supprimer(clefPour("camille@example.fr"));
+    const restants = [...faux.objets.keys()].filter((k) => k.startsWith("journal/"));
+    expect(restants).toHaveLength(1);
+    expect(restants[0]).toContain(clefPour("dominique@example.fr"));
   });
 
   it("refuse une clé qui n'est pas une empreinte", async () => {
