@@ -18,6 +18,13 @@ export type Guide = {
   modifieLe?: string;
   /** Temps de lecture affiché, en minutes. */
   lecture: number;
+  /**
+   * Moment du parcours locatif auquel le guide sert.
+   *
+   * Sert à regrouper la rubrique : à neuf guides, une liste à plat ne dit plus
+   * dans quel ordre lire, ni lequel concerne la personne aujourd'hui.
+   */
+  etape: "avant" | "candidature" | "apres";
   sources?: Array<{ nom: string; url: string }>;
   questions?: Array<{ q: string; a: string }>;
   /** Titres de section, dans l'ordre. `id` doit exister dans la page. */

@@ -136,6 +136,60 @@ export default function OutilDossier() {
             </div>
           </section>
 
+          <section className="mt-16 max-w-3xl">
+            <h2 className="display text-2xl text-ink">Une fois la liste réunie</h2>
+            <p className="mt-4 leading-relaxed text-ink-2">
+              Un dossier complet ne suffit pas à obtenir une visite : il faut encore arriver tôt,
+              et avoir réglé d&apos;avance les deux questions qui éliminent le plus de
+              candidatures.
+            </p>
+            <ul className="mt-6 space-y-5 leading-relaxed text-ink-2">
+              <li>
+                <strong className="text-ink">« Qui est votre garant ? »</strong> C&apos;est la
+                première. Si vous n&apos;avez personne à solliciter, trois dispositifs répondent à
+                votre place, dont un gratuit qui se demande avant même de visiter :{" "}
+                <Link
+                  href="/guides/louer-sans-garant"
+                  className="text-accent underline underline-offset-4"
+                >
+                  louer sans garant
+                </Link>
+                . Si vous avez quelqu&apos;un, sachez ce qu&apos;il signe :{" "}
+                <Link
+                  href="/guides/garant-caution"
+                  className="text-accent underline underline-offset-4"
+                >
+                  le garant et l&apos;acte de cautionnement
+                </Link>
+                .
+              </li>
+              <li>
+                <strong className="text-ink">Le premier message.</strong> Sur une annonce de
+                particulier, les premières réponses sont lues avec attention et les suivantes en
+                diagonale. Le{" "}
+                <Link
+                  href="/outils/message-de-candidature"
+                  className="text-accent underline underline-offset-4"
+                >
+                  générateur de message
+                </Link>{" "}
+                l&apos;écrit en une minute, à partir des mêmes informations que cette checklist.
+              </li>
+              <li>
+                <strong className="text-ink">Si on vous refuse sans motif.</strong> C&apos;est le
+                droit du propriétaire. Mais les raisons qui lui sont interdites sont nombreuses, et
+                la charge de la preuve se partage :{" "}
+                <Link
+                  href="/guides/refus-de-dossier"
+                  className="text-accent underline underline-offset-4"
+                >
+                  le refus de dossier
+                </Link>
+                .
+              </li>
+            </ul>
+          </section>
+
           <Questions questions={QUESTIONS} className="mt-16 max-w-3xl" />
 
           <div className="max-w-3xl">

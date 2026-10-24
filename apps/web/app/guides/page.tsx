@@ -16,9 +16,36 @@ export const metadata = pageMetadata({
   chemin: CHEMIN,
 });
 
-const ETAPES = [
+const ARIANE = [
   { nom: "Accueil", chemin: "/" },
   { nom: "Guides", chemin: CHEMIN },
+];
+
+/**
+ * Les trois moments d'une location, dans l'ordre où on les traverse.
+ *
+ * Le chapô de chaque groupe dit ce qui se joue à ce moment-là : c'est ce qui
+ * permet à quelqu'un d'identifier sa situation sans lire les neuf titres.
+ */
+const ETAPES = [
+  {
+    cle: "avant" as const,
+    titre: "Avant de visiter",
+    chapo:
+      "Tout ce qui se prépare pendant que vous cherchez encore. C'est là qu'on gagne du temps, et c'est là qu'on se fait éliminer faute d'avoir anticipé.",
+  },
+  {
+    cle: "candidature" as const,
+    titre: "Au moment de candidater",
+    chapo:
+      "L'annonce est publiée, vous avez quelques heures. Ce qui décide d'une visite, et ce qu'un propriétaire a le droit de vous opposer.",
+  },
+  {
+    cle: "apres" as const,
+    titre: "Une fois le logement trouvé",
+    chapo:
+      "Les trois documents qui coûtent le plus cher quand on les expédie : l'état des lieux, le dépôt de garantie, et la lettre de congé.",
+  },
 ];
 
 export default function Guides() {
@@ -46,12 +73,12 @@ export default function Guides() {
   return (
     <>
       <DonneesStructurees data={jsonLd} />
-      <DonneesStructurees data={filAriane(ETAPES)} />
+      <DonneesStructurees data={filAriane(ARIANE)} />
       <Nav home={false} />
 
       <main className="px-4 pt-10 pb-16 sm:px-6 md:pt-14">
         <div className="mx-auto max-w-5xl">
-          <Ariane etapes={ETAPES} />
+          <Ariane etapes={ARIANE} />
 
           <h1 className="display mt-5 max-w-3xl text-[2.1rem] text-ink sm:text-5xl">
             Chercher un logement,{" "}
@@ -63,19 +90,33 @@ export default function Guides() {
             sujet est plein de textes recopiés et périmés.
           </p>
 
-          <ul className="mt-12 divide-y divide-rule border-t border-rule">
-            {GUIDES.map((g) => (
-              <li key={g.chemin}>
-                <Link href={g.chemin} className="group block py-7">
-                  <h2 className="display max-w-3xl text-xl text-ink transition-colors group-hover:text-accent sm:text-2xl">
-                    {g.titre}
-                  </h2>
-                  <p className="mt-2.5 max-w-2xl leading-relaxed text-ink-2">{g.resume}</p>
-                  <p className="mt-3 text-sm text-ink-3">{g.lecture} min de lecture</p>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {/* Groupés par moment du parcours. À neuf guides, une liste à plat
+              ne dit plus ni dans quel ordre lire, ni lequel vous concerne
+              aujourd'hui : c'est la question que se pose la personne qui
+              arrive, et la rubrique doit y répondre avant de tout dérouler. */}
+          {ETAPES.map(({ cle, titre, chapo }) => {
+            const guides = GUIDES.filter((g) => g.etape === cle);
+            if (guides.length === 0) return null;
+            return (
+              <section key={cle} className="mt-14">
+                <h2 className="display text-2xl text-ink">{titre}</h2>
+                <p className="mt-2.5 max-w-2xl leading-relaxed text-ink-2">{chapo}</p>
+                <ul className="mt-6 divide-y divide-rule border-t border-rule">
+                  {guides.map((g) => (
+                    <li key={g.chemin}>
+                      <Link href={g.chemin} className="group block py-6">
+                        <h3 className="display max-w-3xl text-xl text-ink transition-colors group-hover:text-accent">
+                          {g.titre}
+                        </h3>
+                        <p className="mt-2.5 max-w-2xl leading-relaxed text-ink-2">{g.resume}</p>
+                        <p className="mt-3 text-sm text-ink-3">{g.lecture} min de lecture</p>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })}
 
           <section className="mt-16 max-w-[44rem]">
             <h2 className="display text-2xl text-ink">Par où commencer</h2>

@@ -27,6 +27,7 @@ export const GUIDES: Guide[] = [
     publieLe: "2026-10-11",
     modifieLe: "2026-10-20",
     lecture: 7,
+    etape: "avant",
     sources: [
       {
         nom: "Service-public.gouv.fr · Quels documents le propriétaire peut-il demander au futur locataire ?",
@@ -90,6 +91,7 @@ export const GUIDES: Guide[] = [
       "Qui peut obtenir la garantie Visale, les plafonds de loyer, ce qu'elle couvre, et comment recevoir son visa avant même de visiter.",
     publieLe: "2026-10-11",
     lecture: 6,
+    etape: "avant",
     sources: [
       {
         nom: "Service-public.gouv.fr · Garantie Visale",
@@ -138,6 +140,7 @@ export const GUIDES: Guide[] = [
       "Comment écrire un message de candidature pour une location : quoi mettre, dans quel ordre, ce qui dessert, et un modèle gratuit à copier.",
     publieLe: "2026-10-11",
     lecture: 6,
+    etape: "candidature",
     questions: [
       {
         q: "Quelle longueur pour un message de candidature ?",
@@ -176,6 +179,7 @@ export const GUIDES: Guide[] = [
     publieLe: "2026-10-19",
     modifieLe: "2026-10-20",
     lecture: 6,
+    etape: "apres",
     sources: [
       {
         nom: "Service-public.gouv.fr · Dépôt de garantie d'un logement loué",
@@ -244,6 +248,7 @@ export const GUIDES: Guide[] = [
     publieLe: "2026-10-19",
     modifieLe: "2026-10-20",
     lecture: 8,
+    etape: "avant",
     sources: [
       {
         nom: "Service-public.gouv.fr · Caution d'un locataire ou d'un colocataire",
@@ -319,6 +324,7 @@ export const GUIDES: Guide[] = [
       "Un propriétaire choisit son locataire, mais pas sur n'importe quel critère. Les motifs interdits, la charge de la preuve, les sanctions, et où signaler.",
     publieLe: "2026-10-19",
     lecture: 7,
+    etape: "candidature",
     sources: [
       {
         nom: "Service-public.gouv.fr · Discrimination à la location d'un logement",
@@ -374,6 +380,7 @@ export const GUIDES: Guide[] = [
       "Aucune loi n'oblige à fournir un garant. Visale, l'assurance du propriétaire, les sociétés de cautionnement : les trois voies, et leur coût réel.",
     publieLe: "2026-10-19",
     lecture: 7,
+    etape: "avant",
     sources: [
       {
         nom: "Service-public.gouv.fr · Caution d'un locataire ou d'un colocataire",
@@ -435,6 +442,7 @@ export const GUIDES: Guide[] = [
       "Ce que l'état des lieux doit contenir, qui le paie, les dix jours pour le corriger, et pourquoi la vétusté ne peut pas être retenue sur votre dépôt.",
     publieLe: "2026-10-19",
     lecture: 8,
+    etape: "apres",
     sources: [
       {
         nom: "Service-public.gouv.fr · État des lieux d'entrée d'un bail d'habitation",
@@ -495,6 +503,7 @@ export const GUIDES: Guide[] = [
       "Trois mois en logement vide, un mois en meublé ou en zone tendue. Ce que la lettre doit contenir, et pourquoi le préavis part à la réception.",
     publieLe: "2026-10-19",
     lecture: 7,
+    etape: "apres",
     sources: [
       {
         nom: "Service-public.gouv.fr · Préavis et formalités du congé donné par le locataire",
