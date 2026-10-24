@@ -90,8 +90,11 @@ export default function GuideVisale() {
         <p>
           <strong>Ces montants bougent.</strong> Ils dépendent de votre commune et sont revus
           régulièrement. Avant de vous en servir pour écarter un logement, passez par le{" "}
-          <a href="https://site.actionlogement.fr/eligibilite-visale" target="_blank" rel="noopener">
-            simulateur d&apos;éligibilité d&apos;Action Logement
+          {/* Le simulateur était lié chez Action Logement, à une adresse qui
+              redirige désormais vers une page de maintenance. Il vit sur le
+              site officiel du dispositif, qui répond, lui. */}
+          <a href="https://www.visale.fr/" target="_blank" rel="noopener">
+            simulateur d&apos;éligibilité sur visale.fr
           </a>
           , qui répond en quelques minutes et fait foi.
         </p>
