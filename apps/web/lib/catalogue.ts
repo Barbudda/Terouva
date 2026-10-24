@@ -95,11 +95,7 @@ export const GUIDES: Guide[] = [
         nom: "Service-public.gouv.fr · Garantie Visale",
         url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F33453",
       },
-      {
-        nom: "Action Logement · Simulateur d'éligibilité Visale",
-        url: "https://site.actionlogement.fr/eligibilite-visale",
-      },
-      { nom: "Visale.fr", url: "https://www.visale.fr/" },
+      { nom: "Visale.fr · Le site officiel du dispositif", url: "https://www.visale.fr/" },
     ],
     questions: [
       {
@@ -186,12 +182,8 @@ export const GUIDES: Guide[] = [
         url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31269",
       },
       {
-        nom: "Légifrance · Article 22 de la loi n° 89-462 du 6 juillet 1989",
-        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000031012092",
-      },
-      {
-        nom: "Légifrance · Article 25-6 de la loi n° 89-462 (logements meublés)",
-        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000029105417",
+        nom: "Légifrance · Loi n° 89-462 du 6 juillet 1989 (articles 22 et 25-6)",
+        url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000509310",
       },
     ],
     questions: [
@@ -262,8 +254,8 @@ export const GUIDES: Guide[] = [
         url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F1169",
       },
       {
-        nom: "Légifrance · Article 22-1 de la loi n° 89-462 du 6 juillet 1989",
-        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037670636",
+        nom: "Légifrance · Loi n° 89-462 du 6 juillet 1989 (article 22-1)",
+        url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000509310",
       },
       {
         nom: "Légifrance · Décret n° 2015-1437 du 5 novembre 2015",
@@ -337,8 +329,8 @@ export const GUIDES: Guide[] = [
         url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070719/LEGISCTA000006165298",
       },
       {
-        nom: "Légifrance · Article 1er de la loi n° 89-462 du 6 juillet 1989",
-        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037670637",
+        nom: "Légifrance · Loi n° 89-462 du 6 juillet 1989 (article 1er)",
+        url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000509310",
       },
       {
         nom: "Défenseur des droits · Discriminations à la location de logement",
