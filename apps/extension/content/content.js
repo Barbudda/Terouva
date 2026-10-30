@@ -195,7 +195,7 @@
     ta.dispatchEvent(new Event("change", { bubbles: true }));
     ta.focus();
     ta.scrollIntoView({ behavior: "smooth", block: "center" });
-    tvHint(btn, "Message rempli ✓ Vérifie et clique sur « Envoyer ».", true);
+    tvHint(btn, "Message rempli. Vérifiez, puis cliquez sur « Envoyer ».", true);
   }
 
   function tvInjectButton() {
@@ -210,7 +210,7 @@
       "box-shadow:0 8px 32px -8px rgba(0,0,0,0.5)", "max-width:280px", "user-select:none",
     ].join(";");
     const label = document.createElement("div");
-    label.textContent = "📋 Remplir mon message Terouva";
+    label.textContent = "Remplir mon message Terouva";
     btn.appendChild(label);
     const hint = document.createElement("div");
     hint.className = "tv-hint";

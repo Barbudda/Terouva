@@ -207,6 +207,7 @@ export const FOOTER = {
       title: "Mentions légales",
       links: [
         { label: "Confidentialité", href: "/confidentialite" },
+        { label: "Conditions d'utilisation", href: "/cgu" },
         { label: "Questions fréquentes", href: "/#questions" },
       ],
     },

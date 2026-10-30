@@ -30,7 +30,8 @@ const MODIFIE_LE: Record<string, string> = {
   "/": "2026-10-21", // refonte typographique, chiffres clés réécrits
   "/outils": "2026-10-21",
   "/guides": "2026-10-21",
-  "/confidentialite": "2026-10-11",
+  "/confidentialite": "2026-10-30", // flux de données réécrit après la migration vers Blob
+  "/cgu": "2026-10-30",
 };
 
 /** La rubrique change quand son contenu change : on prend la page la plus récente. */
@@ -84,6 +85,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${base}/confidentialite`,
       lastModified: new Date(MODIFIE_LE["/confidentialite"]!),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${base}/cgu`,
+      lastModified: new Date(MODIFIE_LE["/cgu"]!),
       changeFrequency: "yearly",
       priority: 0.3,
     },

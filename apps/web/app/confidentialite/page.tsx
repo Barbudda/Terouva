@@ -62,14 +62,31 @@ export default function Confidentialite() {
             aucun autre envoi.
           </p>
           <p>
-            La liste est conservée chez <strong className="text-ink">Resend</strong>,
-            notre prestataire d'envoi d'e-mails, qui agit pour notre compte. Nous
-            gardons votre adresse jusqu'au lancement, puis au maximum un an.
+            La liste est conservée dans le stockage{" "}
+            <strong className="text-ink">Vercel Blob</strong> de notre site, en accès privé, et
+            nulle part ailleurs. Nous n'utilisons aucun prestataire d'envoi d'e-mails à ce jour.
+            Les serveurs qui hébergent cette liste se trouvent aux{" "}
+            <strong className="text-ink">États-Unis</strong> (région « iad1 », Virginie) : votre
+            adresse quitte donc l'Union européenne. Vercel Inc. adhère au cadre de protection des
+            données UE–États-Unis.
           </p>
           <p>
-            Vous pouvez à tout moment demander à consulter ou à supprimer votre
-            adresse : répondez à l'un de nos e-mails, ou écrivez-nous via la page
-            du projet. Chaque message contient aussi un lien de désinscription.
+            Nous conservons votre adresse jusqu'au lancement, puis au maximum un an. Nous
+            n'enregistrons avec elle que la date de votre inscription, rien d'autre : ni adresse
+            IP, ni navigateur, ni page d'origine.
+          </p>
+          <p>
+            Vous pouvez à tout moment demander à consulter ou à supprimer votre adresse, en nous
+            écrivant à l'adresse indiquée dans les{" "}
+            <a
+              href="/mentions-legales"
+              className="text-accent underline decoration-accent/35 underline-offset-4 transition-colors hover:decoration-accent"
+            >
+              mentions légales
+            </a>
+            . La suppression est immédiate et définitive : elle efface l'enregistrement et sa copie
+            de sauvegarde. Tant qu'aucun e-mail n'est parti, il n'existe pas encore de lien de
+            désinscription.
           </p>
         </Section>
 

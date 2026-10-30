@@ -313,7 +313,7 @@ export default function Annonces() {
               disabled={adding}
               title="Importe le payload JSON copié depuis l'extension Chrome Terouva"
             >
-              📋 Depuis presse-papier
+              Depuis presse-papier
             </Button>
             <div className="flex gap-1">
               <button
