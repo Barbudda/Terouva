@@ -1,159 +1,192 @@
 import Link from "next/link";
 import { ANNONCE_PIECE, CHIFFRES, HERO } from "@/lib/content";
-import { DECOMPOSITION } from "@/lib/exemples";
+import { DECOMPOSITION, MESSAGES } from "@/lib/exemples";
 import { PleinCadre } from "@/components/layout/coquilles/PleinCadre";
 
 /**
- * L'accueil, coquille A.
+ * L'accueil, coquille A, dans la composition de la référence : le titre au
+ * centre de la lueur, deux chiffres de chaque côté, et trois panneaux produit
+ * en bas qui mordent sur la section suivante. Pas de photographie : les trois
+ * panneaux sont la matière du produit, une annonce lue, une note décomposée,
+ * un message prêt.
  *
- * Le visuel plein cadre est fait de la matière du produit : une annonce de
- * location affichée en grand, légèrement inclinée, partiellement sortie du
- * cadre à droite, avec ce que Terouva en extrait souligné par des filets et
- * des libellés en `.champ`. Ce n'est pas une décoration, c'est la pièce à
- * conviction. Pas de photographie : trois professionnels souriants en photo
- * de stock, c'est le signal n°37.
- *
- * Par-dessus, en bas à gauche, le panneau chevauchant : la mention, le titre,
- * trois lignes, et le bouton orange, un seul. À sa droite, une vignette
- * carrée : la note de l'annonce, sur fond nuit, premier signe de l'instrument
- * qu'on trouvera plus bas. Sous le visuel, les chiffres clés deviennent une
- * ligne de base sur un filet fort, en trois cellules inégales.
+ * Le titre finit en italique, comme « of Thought. » sur la référence : c'est
+ * la seule italique de titre du site, elle marque la promesse.
  */
 export function Hero() {
+  const [c1, c2, c3, c4] = CHIFFRES;
   return (
     <PleinCadre
-      visuel={<AnnoncePiece />}
-      vignette={<Vignette />}
-      ligneDeBase={<LigneDeBase />}
+      gauche={
+        <dl className="space-y-6">
+          <Chiffre valeur={c1.valeur} unite={c1.unite} detail={c1.detail} />
+          <Chiffre valeur={c2.valeur} unite={c2.unite} detail={c2.detail} />
+        </dl>
+      }
+      droite={
+        <dl className="space-y-6">
+          <Chiffre valeur={c3.valeur} unite={c3.unite} detail={c3.detail} droite />
+          <Chiffre valeur={c4.valeur} unite={c4.unite} detail={c4.detail} droite />
+        </dl>
+      }
+      panneaux={[<PanneauAnnonce key="annonce" />, <PanneauNote key="note" />, <PanneauMessage key="message" />]}
     >
-      <p className="champ text-ink-3">{HERO.mention}</p>
-      <h1 className="titre mt-4 text-[clamp(2.5rem,1.2rem+5.2vw,5.25rem)] text-ink">
-        {HERO.titleLead} {HERO.titleTail}
+      <p className="entree champ text-blue-clair" style={{ "--rang": 0 } as React.CSSProperties}>
+        {HERO.mention} · {HERO.eyebrow}
+      </p>
+      <h1
+        className="entree titre mx-auto mt-6 max-w-[14ch] text-[clamp(2.75rem,1.4rem+5.6vw,5.75rem)] text-ink"
+        style={{ "--rang": 1 } as React.CSSProperties}
+      >
+        {HERO.titleLead} <em className="font-normal italic">{HERO.titleTail}</em>
       </h1>
-      <p className="marge mt-5 max-w-[34rem] text-ink-2">{HERO.panneau}</p>
-      <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+      <p
+        className="entree mx-auto mt-6 max-w-[34rem] text-[15px] leading-relaxed text-ink-2 sm:text-base"
+        style={{ "--rang": 2 } as React.CSSProperties}
+      >
+        {HERO.panneau}
+      </p>
+      <div
+        className="entree mt-8 flex flex-wrap items-center justify-center gap-3"
+        style={{ "--rang": 3 } as React.CSSProperties}
+      >
         <a href="#inscription" className="bouton bouton--accent">
           Être prévenu du lancement
         </a>
-        <Link href="/outils/message-de-candidature" className="lien text-[15px]">
-          Ou écrire votre message de candidature, gratuit
+        <Link href="/outils/message-de-candidature" className="bouton bouton--filet">
+          Essayer l&apos;outil gratuit
         </Link>
       </div>
     </PleinCadre>
   );
 }
 
-/**
- * La note de l'annonce vedette, sur un carré nuit. Le seul morceau du monde
- * nuit au-dessus de la ligne de flottaison : il annonce l'instrument.
- */
-function Vignette() {
+/** Un chiffre clé : la valeur en Fraunces orange, l'unité en champ, le détail en marge. */
+function Chiffre({
+  valeur,
+  unite,
+  detail,
+  droite = false,
+}: {
+  valeur: string;
+  unite: string;
+  detail: string;
+  droite?: boolean;
+}) {
   return (
-    <div className="nuit flex size-28 flex-col justify-between border border-night-rule bg-night p-3 text-night-ink lg:size-32">
-      <span className="champ text-night-ink-2">Note</span>
-      <span className="flex items-baseline gap-1">
-        <span className="font-mono text-[2.5rem] leading-none tabular-nums lg:text-[3rem]">
-          {DECOMPOSITION.note}
-        </span>
-        <span className="champ text-night-ink-2">/100</span>
-      </span>
+    <div className={droite ? "text-right" : ""}>
+      <dt className="sr-only">{unite}</dt>
+      <dd className="titre text-[2.5rem] text-action lg:text-[2.75rem]">{valeur}</dd>
+      <dd className="champ mt-1 text-ink">{unite}</dd>
+      <dd className="marge mt-1 hidden lg:block">{detail}</dd>
     </div>
   );
 }
 
-/**
- * L'annonce, composée en HTML. Une feuille claire posée sur le papier teinté,
- * inclinée de deux degrés, qui sort du cadre à droite. À sa gauche, la
- * colonne des extraits : ce que l'outil lit, dans l'ordre où il le lit, et
- * un filet qui relie chaque libellé à la feuille.
- */
-function AnnoncePiece() {
+/** Cadre commun des trois panneaux : titre en champ, filet, contenu. */
+function Panneau({
+  titre,
+  children,
+  papier = false,
+}: {
+  titre: string;
+  children: React.ReactNode;
+  papier?: boolean;
+}) {
+  return (
+    <article
+      className={
+        papier
+          ? "monde-papier h-full border border-rule bg-card p-5 text-ink"
+          : "h-full border border-night-rule bg-night-2/90 p-5 text-night-ink backdrop-blur-sm"
+      }
+    >
+      <p className={papier ? "champ text-ink-3" : "champ text-night-ink-2"}>{titre}</p>
+      <span aria-hidden className={papier ? "mt-2 block h-px bg-rule" : "mt-2 block h-px bg-night-rule"} />
+      <div className="mt-4">{children}</div>
+    </article>
+  );
+}
+
+/** L'annonce lue : une feuille de papier posée sur la nuit. */
+function PanneauAnnonce() {
   const a = ANNONCE_PIECE;
   return (
-    <div className="cadre relative h-full min-h-[inherit]" aria-label="Une annonce de location, et ce que Terouva en lit">
-      {/* Les extraits. Sur petit écran ils passent au-dessus de la feuille. */}
-      <dl className="relative z-10 grid max-w-[22rem] gap-y-3 pt-8 lg:absolute lg:top-[14%] lg:left-[clamp(1rem,0.5rem+2vw,3.5rem)] lg:max-w-[26rem] lg:gap-y-4 lg:pt-0">
-        {a.extraits.map((e, i) => (
-          <div key={e.champ} className="flex items-baseline gap-3">
-            <dt className="champ w-[7.5rem] shrink-0 text-ink-3 lg:w-[8.5rem]">{e.champ}</dt>
-            <dd className="champ shrink-0 text-ink">{e.valeur}</dd>
-            <span
-              aria-hidden
-              className="filet-trace hidden h-px flex-1 self-center bg-rule-fort lg:block"
-              style={{ animationDelay: `${i * 60}ms` }}
-            />
+    <Panneau titre="Une annonce, lue par Terouva" papier>
+      <p className="text-[15px] leading-snug font-medium">{a.titre}</p>
+      <p className="marge mt-1">
+        {a.auteur} · {a.ville} · {a.publie}
+      </p>
+      <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5">
+        {a.extraits.slice(0, 4).map((e) => (
+          <div key={e.champ}>
+            <dt className="champ text-ink-3">{e.champ}</dt>
+            <dd className="mt-0.5 text-[14px] font-medium">{e.valeur}</dd>
           </div>
         ))}
       </dl>
+    </Panneau>
+  );
+}
 
-      {/* La feuille. `rotate` et `translate` séparés : l'inclinaison reste
-          lisible dans le code et la feuille garde ses bords nets. */}
-      <article
-        className="monde-papier relative mt-8 ml-auto w-[min(40rem,96%)] origin-top-left rotate-[-2deg] border border-rule bg-card p-6 text-ink sm:p-8 lg:absolute lg:top-[18%] lg:right-[-6%] lg:mt-0 lg:ml-0 lg:w-[46rem] lg:p-10"
-        aria-hidden
-      >
-        <header className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-          <h2 className="text-[1.375rem] leading-tight font-medium sm:text-2xl">{a.titre}</h2>
-          <p className="text-[1.75rem] leading-none font-medium tabular-nums sm:text-[2rem]">
-            {a.loyer}&nbsp;€ <span className="text-base text-ink-3">CC</span>
+/** La note, et ce qui la compose : l'instrument, en version courte. */
+function PanneauNote() {
+  const { note, lignes } = DECOMPOSITION;
+  const max = Math.max(...lignes.map((l) => l.delta));
+  const rayon = 26;
+  const perimetre = 2 * Math.PI * rayon;
+  return (
+    <Panneau titre="Sa note, et pourquoi">
+      <div className="flex items-center gap-5">
+        <div className="relative size-16 shrink-0">
+          <svg viewBox="0 0 64 64" className="size-full -rotate-90" aria-hidden>
+            <circle cx="32" cy="32" r={rayon} fill="none" stroke="var(--color-night-rule)" strokeWidth="2" />
+            <circle
+              cx="32"
+              cy="32"
+              r={rayon}
+              fill="none"
+              stroke="var(--color-action)"
+              strokeWidth="2"
+              strokeDasharray={perimetre}
+              strokeDashoffset={perimetre * (1 - note / 100)}
+            />
+          </svg>
+          <p className="absolute inset-0 flex items-center justify-center font-mono text-xl tabular-nums">
+            {note}
+            <span className="sr-only"> sur 100</span>
           </p>
-        </header>
-
-        <p className="marge mt-2 text-ink-3">
-          {a.auteur} · {a.ville} · {a.publie}
-        </p>
-
-        <div className="mt-6 grid grid-cols-[1fr_1fr] gap-x-6 gap-y-3 border-y border-rule py-4 text-[15px] sm:grid-cols-4">
-          <Attribut nom="Surface" valeur={`${a.surface} m²`} />
-          <Attribut nom="Pièces" valeur={`${a.pieces}`} />
-          <Attribut nom="Étage" valeur={a.etage} />
-          <Attribut nom="Charges" valeur={`${a.charges} € incluses`} />
         </div>
-
-        <div className="mt-6 grid gap-6 sm:grid-cols-[9rem_1fr]">
-          {/* Pas d'image : un emplacement qui dit ce qu'il contiendrait. */}
-          <div className="champ hidden aspect-[4/3] items-end border border-rule bg-paper-2 p-3 text-ink-3 sm:flex">
-            Photos · {a.photos}
-          </div>
-          <div className="space-y-3 text-[15px] leading-relaxed text-ink-2">
-            {a.description.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
-          </div>
-        </div>
-      </article>
-    </div>
+        <dl className="min-w-0 flex-1">
+          {lignes.slice(0, 4).map((l) => (
+            <div key={l.critere} className="grid grid-cols-[1fr_2.5rem] items-center gap-x-3 py-1">
+              <dt className="champ truncate text-night-ink-2">{l.critere}</dt>
+              <dd className="text-right font-mono text-[13px] tabular-nums">+{l.delta}</dd>
+              <dd className="col-span-2 h-px bg-night-rule">
+                <span className="block h-full bg-blue" style={{ width: `${(l.delta / max) * 100}%` }} />
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </Panneau>
   );
 }
 
-function Attribut({ nom, valeur }: { nom: string; valeur: string }) {
+/** Le message préparé : les premières lignes du brouillon réel. */
+function PanneauMessage() {
+  const m = MESSAGES[0];
+  const lignes = m.texte.split("\n\n").slice(0, 3);
   return (
-    <div>
-      <p className="champ text-ink-3">{nom}</p>
-      <p className="mt-1 font-medium">{valeur}</p>
-    </div>
-  );
-}
-
-/**
- * Trois faits sur le produit, aucun n'est une statistique d'usage. Sur un
- * filet fort, en trois cellules inégales : 5, 4 et 3 colonnes.
- */
-function LigneDeBase() {
-  const cellules = ["lg:col-span-5", "lg:col-span-4", "lg:col-span-3"];
-  return (
-    <dl className="grille mt-demi-pas">
-      <span aria-hidden className="filet-trace col-span-12 block h-px bg-rule-fort" />
-      {CHIFFRES.slice(0, 3).map((c, i) => (
-        <div key={c.unite} className={`col-span-12 border-rule py-5 sm:col-span-4 ${cellules[i]}`}>
-          <dt className="sr-only">{c.unite}</dt>
-          <dd className="flex items-baseline gap-3">
-            <span className="titre text-titre-2 text-ink">{c.valeur}</span>
-            <span className="champ text-ink">{c.unite}</span>
-          </dd>
-          <dd className="marge mt-1.5">{c.detail}</dd>
-        </div>
-      ))}
-    </dl>
+    <Panneau titre="Le message, prêt à relire">
+      <div className="space-y-2 text-[13px] leading-relaxed text-night-ink-2">
+        {lignes.map((l) => (
+          <p key={l} className="line-clamp-2">
+            {l}
+          </p>
+        ))}
+      </div>
+      <p className="champ mt-4 text-blue-clair">Ton {m.ton.toLowerCase()} · vous l&apos;envoyez</p>
+    </Panneau>
   );
 }

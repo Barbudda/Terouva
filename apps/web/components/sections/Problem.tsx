@@ -9,7 +9,7 @@ import { PapierLarge } from "@/components/layout/coquilles/PapierLarge";
 export function Problem() {
   const [enonce, reserve] = PROBLEM.body;
   return (
-    <PapierLarge id="pourquoi" mention={PROBLEM.eyebrow} depart={2} secondeVoix={<p>{reserve}</p>}>
+    <PapierLarge id="pourquoi" mention={PROBLEM.eyebrow} depart={2} secondeVoix={<p>{reserve}</p>} className="pt-[calc(var(--spacing-pas)+3rem)]">
       <p>{enonce}</p>
     </PapierLarge>
   );

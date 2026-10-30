@@ -11,39 +11,40 @@
      minuit, bleu électrique et orange de la référence. Les jetons gardent
      leurs anciens noms (paper, ink, rule) pour que les coquilles n'aient pas
      à changer : sur une page sombre, « paper » EST le minuit. */
-  --color-paper: #02070a;       /* minuit : la page */
-  --color-paper-2: #0b1119;     /* surface, fiches, bande */
-  --color-ink: #eef2f5;         /* sur minuit : 17,98:1 */
-  --color-ink-2: #b4bec8;       /* sur minuit : 10,74:1 ; sur panneau : 9,29:1 */
-  --color-ink-3: #8a97a4;       /* sur minuit : 6,79:1 ; sur panneau : 5,87:1 */
-  --color-rule: #1a222c;
-  --color-rule-fort: #2a3542;
+  --color-paper: #081120;       /* bleu nuit : la page. Hugo, 30 octobre : « Terouva est trop sombre » */
+  --color-paper-2: #0d1829;     /* surface, fiches, bande */
+  --color-ink: #eef3f8;         /* sur bleu nuit : 16,5:1 */
+  --color-ink-2: #b7c2cf;       /* sur bleu nuit : 10:1 */
+  --color-ink-3: #8c9bab;       /* sur bleu nuit : 6,2:1 ; sur panneau : 5,3:1 */
+  --color-rule: #1b2a3e;
+  --color-rule-fort: #2b3d55;
 
   /* ── Le monde nuit : la bande de l'instrument, une strate au-dessus de la page. */
-  --color-night: #0b1119;
-  --color-night-2: #121a24;
-  --color-night-ink: #eef2f5;
-  --color-night-ink-2: #9aa6b2;   /* sur panneau : 6,5:1 */
-  --color-night-rule: #1e2834;
+  --color-night: #0d1829;
+  --color-night-2: #142137;
+  --color-night-ink: #eef3f8;
+  --color-night-ink-2: #9fadbd;   /* sur panneau : 6,3:1 */
+  --color-night-rule: #22324a;
 
   /* ── Deux accents, et pas un troisième.
      Le bleu électrique est l'accent d'interface : liens, focus, état actif,
      jauges et arc du cadran. L'orange est l'accent d'action : le bouton
      principal d'un écran, un seul. Le blanc ne tient pas sur l'orange
      (2,73:1) : le texte d'un bouton est toujours minuit (7,42:1). */
-  --color-blue: #0297de;          /* sur minuit : 6,25:1 ; sur panneau : 5,41:1 */
+  --color-blue: #0297de;          /* sur bleu nuit : 5,9:1 ; sur panneau : 5,1:1 */
+  --color-blue-clair: #5cbcf2;    /* le bleu quand il porte un petit texte : 8,9:1 */
   --color-action: #fc734d;        /* sur minuit : 7,42:1 */
-  --color-action-ink: #02070a;
+  --color-action-ink: #081120;
   --color-accent: #fc734d;        /* alias : l'action */
   --color-accent-ink: #0297de;    /* alias : le bleu QUAND IL PORTE DU TEXTE (liens) */
   --color-night-accent: #0297de;  /* alias : le bleu de l'instrument */
 
   /* Alias conservés pour l'application (`components/app`), hors périmètre. */
-  --color-card: #121a24;
-  --color-muted: #1a222c;
-  --color-ash: #0b1119;
-  --color-field: #3a4652;
-  --color-accent-wash: #0f2a3d;
+  --color-card: #142137;
+  --color-muted: #1b2a3e;
+  --color-ash: #0d1829;
+  --color-field: #3b4d66;
+  --color-accent-wash: #10304a;
   --color-good: #4fd1a5;
   --color-good-wash: #0f2a22;
   --color-warn: #f0b24a;
@@ -116,19 +117,70 @@
   color-scheme: light;
 }
 
-/* ── Le halo de l'accueil. C'est le signal n°1 de la checklist pas-IA, et
-   c'est une dérogation explicite d'Hugo (bonds-lock.json) : « oui, assumé
-   comme la photo ». Deux lueurs, bleue et orange, sous la feuille d'annonce ;
-   rien d'autre sur le site n'est dégradé. */
-.halo::before {
+/* ── Le halo de l'accueil. Décision d'Hugo, 30 octobre : « deux couleurs
+   qui vont bien ensemble, plus une couleur vive bien mélangée ». Une aurore
+   bleue qui occupe le champ, un cœur orange sous le titre et l'action, de
+   fins rayons verticaux. Les calques dérivent lentement : c'est de la lumière,
+   pas un fond. Dégradés purs, aucun flou calculé. */
+.halo {
+  isolation: isolate;
+}
+.halo::before,
+.halo::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -10% -5%;
+  z-index: -1;
   pointer-events: none;
+}
+.halo::before {
   background:
-    radial-gradient(55% 60% at 62% 105%, rgb(252 115 77 / 0.62), transparent 70%),
-    radial-gradient(45% 55% at 12% 85%, rgb(2 151 222 / 0.55), transparent 70%),
-    radial-gradient(40% 50% at 90% 20%, rgb(2 151 222 / 0.28), transparent 70%);
+    radial-gradient(42% 46% at 50% 78%, rgb(252 115 77 / 0.9) 0%, rgb(252 115 77 / 0.4) 30%, transparent 66%),
+    radial-gradient(55% 60% at 14% 48%, rgb(2 151 222 / 0.7) 0%, transparent 62%),
+    radial-gradient(55% 60% at 86% 42%, rgb(2 151 222 / 0.6) 0%, transparent 62%),
+    radial-gradient(80% 50% at 50% 100%, rgb(252 115 77 / 0.35) 0%, transparent 70%),
+    linear-gradient(180deg, var(--color-paper) 0%, transparent 35%, transparent 100%);
+  animation: derive 22s var(--ease-terouva) infinite alternate;
+}
+.halo::after {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 22px,
+    rgb(255 255 255 / 0.06) 22px 23px,
+    transparent 23px 41px,
+    rgb(255 255 255 / 0.03) 41px 42px
+  );
+  mask-image: linear-gradient(180deg, transparent 25%, #000 75%, transparent 100%);
+  mix-blend-mode: screen;
+  animation: scintille 9s ease-in-out infinite alternate;
+}
+@keyframes derive {
+  from { transform: translate3d(-2%, 0, 0) scale(1); }
+  to { transform: translate3d(2%, -3%, 0) scale(1.06); }
+}
+@keyframes scintille {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+/* ── L'entrée en scène de l'accueil : chaque élément monte à son tour,
+   90 ms d'écart, une seule fois au chargement. */
+@keyframes entree {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+.entree {
+  animation: entree 760ms var(--ease-terouva) both;
+  animation-delay: calc(var(--rang, 0) * 90ms);
+}
+/* Le panneau central respire : six secondes, six pixels. */
+@keyframes flotte {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+.flotte {
+  animation: entree 760ms var(--ease-terouva) both, flotte 6s ease-in-out infinite alternate;
+  animation-delay: calc(var(--rang, 0) * 90ms), 1.4s;
 }
 
 html {
@@ -213,7 +265,10 @@ body {
   font-size: 1.0625rem;
   letter-spacing: 0;
   text-transform: none;
-  color: var(--color-ink-3);
+  color: var(--color-blue-clair);
+}
+.monde-papier .mention {
+  color: var(--color-accent-ink);
 }
 
 /* Le paragraphe-énoncé et la seconde voix de la coquille « papier large ». */
@@ -259,7 +314,10 @@ body {
   font-weight: 400;
   line-height: 1;
   font-variant-numeric: lining-nums tabular-nums;
-  color: var(--color-ink-3);
+  color: var(--color-action);
+}
+.monde-papier .numero {
+  color: var(--color-accent-ink);
 }
 /* `pastille` est l'ancien nom, encore lu par deux pages intérieures. */
 .pastille {
@@ -358,10 +416,10 @@ body {
 .bouton--filet {
   border: 1px solid var(--color-rule-fort);
   color: var(--color-ink);
-  background: transparent;
+  background: rgb(255 255 255 / 0.04);
 }
 .bouton--filet:hover {
-  background: var(--color-paper-2);
+  background: rgb(255 255 255 / 0.1);
 }
 
 /* Lien dans le corps : l'un des quatre emplois de l'accent. */
@@ -609,6 +667,15 @@ details > summary::-webkit-details-marker {
   }
   .monde-papier {
     --color-rule: #c6bdb0;
+  }
+}
+
+@media print {
+  .entree,
+  .flotte {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

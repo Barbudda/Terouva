@@ -4,48 +4,75 @@ import { cn } from "@/lib/utils";
 /**
  * Coquille A : le plein cadre.
  *
- * Un visuel qui touche les deux bords de l'écran, sans titre posé dessus au
- * centre. L'énoncé vit dans un panneau clair qui chevauche le bord bas-gauche
- * du visuel d'environ 80 px : c'est le premier des chevauchements du site, et
- * c'est lui qui empêche l'accueil de ressembler à un hero. Le panneau se
- * détache par le contraste du fond, pas par une ombre.
+ * Un champ de lumière qui touche les deux bords, et une composition centrée
+ * posée dessus : la mention, le titre, le texte, l'action. De part et d'autre,
+ * deux colonnes de chiffres. En bas, des panneaux produit qui mordent sur la
+ * section suivante d'environ 80 px : c'est le premier chevauchement du site.
  *
- * Le visuel est fait de la matière du produit (une annonce, un écran), jamais
- * d'une photographie : Terouva n'en a pas et n'en achètera pas.
+ * Tout entre en scène à l'arrivée (`.entree`, décalages de 90 ms), et l'aurore
+ * dérive lentement derrière (`.halo`). Décision d'Hugo du 30 octobre, d'après
+ * la référence qu'il a envoyée : deux couleurs qui vont ensemble, une couleur
+ * vive mélangée à tout ça, et du mouvement.
  */
 export function PleinCadre({
-  visuel,
-  vignette,
-  ligneDeBase,
+  gauche,
+  droite,
+  panneaux,
   children,
   className,
 }: {
-  /** Le visuel plein cadre. Il reçoit toute la largeur et une hauteur minimale. */
-  visuel: ReactNode;
-  /** La vignette carrée à droite du panneau. */
-  vignette?: ReactNode;
-  /** Les chiffres clés, sur un filet fort, sous le visuel. */
-  ligneDeBase?: ReactNode;
-  /** Le contenu du panneau : mention, titre, texte, action. */
+  /** Les chiffres de gauche. */
+  gauche?: ReactNode;
+  /** Les chiffres de droite. */
+  droite?: ReactNode;
+  /** Les panneaux produit, en bas, qui chevauchent la section suivante. */
+  panneaux?: ReactNode[];
+  /** Le centre : mention, titre, texte, action. */
   children: ReactNode;
   className?: string;
 }) {
   return (
-    <section className={cn("relative", className)}>
-      <div className="plein-cadre halo relative min-h-[26rem] overflow-hidden bg-paper-2 sm:min-h-[32rem] lg:min-h-[min(40rem,calc(100vh-20rem))]">
-        {visuel}
+    <section className={cn("halo relative overflow-x-clip", className)}>
+      <div className="grille items-center pt-14 pb-10 sm:pt-20 lg:min-h-[min(40rem,calc(100vh-14rem))] lg:pt-16 lg:pb-14">
+        {gauche && (
+          <div
+            className="entree order-2 col-span-6 mt-10 lg:order-1 lg:col-span-2 lg:mt-0"
+            style={{ "--rang": 5 } as React.CSSProperties}
+          >
+            {gauche}
+          </div>
+        )}
+        <div className="order-1 col-span-12 text-center lg:col-span-8 lg:col-start-3">{children}</div>
+        {droite && (
+          <div
+            className="entree order-3 col-span-6 mt-10 text-right lg:col-span-2 lg:col-start-11 lg:mt-0"
+            style={{ "--rang": 6 } as React.CSSProperties}
+          >
+            {droite}
+          </div>
+        )}
       </div>
 
-      <div className="grille">
-        {/* Le chevauchement : 80 px sur grand écran, 40 px sur petit, où un
-            panneau trop haut cacherait le visuel au lieu de le mordre. */}
-        <div className="relative z-10 col-span-12 -mt-10 flex flex-col gap-6 bg-paper pt-7 pr-6 pb-2 lg:col-span-10 lg:-mt-20 lg:flex-row lg:items-end lg:gap-10 lg:pt-10 lg:pr-12">
-          <div className="min-w-0 flex-1">{children}</div>
-          {vignette && <div className="shrink-0 self-start lg:self-end">{vignette}</div>}
+      {panneaux && panneaux.length > 0 && (
+        <div className="grille relative z-10 -mb-12 lg:-mb-20">
+          <div className="col-span-12 grid gap-4 lg:grid-cols-12 lg:gap-6">
+            {panneaux.map((p, i) => (
+              <div
+                key={i}
+                className={cn(
+                  "entree min-w-0",
+                  i === 0 && "lg:col-span-4",
+                  i === 1 && "flotte lg:col-span-5",
+                  i === 2 && "lg:col-span-3",
+                )}
+                style={{ "--rang": 7 + i } as React.CSSProperties}
+              >
+                {p}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-
-      {ligneDeBase}
+      )}
     </section>
   );
 }

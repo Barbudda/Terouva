@@ -7,9 +7,10 @@
 
 ## Révision du 30 octobre au soir : la nuit devient la base
 
-Hugo a vu la version « papier dominant » et l'a refusée : « le fond blanc
-éblouit ». Trois décisions, prises par lui, remplacent ce que le brief du jour
-disait sur la proportion des mondes et sur la couleur :
+Hugo a vu la version « papier dominant » et a tranché : « le fond blanc
+éblouit ». Les briefs et la checklist BONDS sont des inspirations, pas des
+règles ; son point de vue évolue, et c'est la dernière décision qui compte.
+Trois décisions du soir :
 
 - **Nuit dominante.** L'accueil, les outils, les textes courts et le pied sont
   sur minuit `#02070a`. Le papier chaud ne reste que là où on lit longtemps : les
@@ -23,9 +24,20 @@ disait sur la proportion des mondes et sur la couleur :
   l'accent d'action : le bouton principal d'un écran, texte minuit, jamais
   blanc (2,73:1). La marque passe au carré bleu, favicon et images de partage
   comprises.
-- **Un halo assumé** derrière la feuille d'annonce de l'accueil, bleu et
-  orange : c'est le signal n°1 de la checklist pas-IA, consigné comme dérogation
-  dans `bonds-lock.json`. C'est le seul dégradé du site.
+- **Un halo franc** sur toute la section d'accueil, titre compris : lueur
+  orange qui monte du bas, flancs bleus, rayons verticaux, comme la référence.
+  La checklist pas-IA le classe en signal n°1 ; Hugo tranche, et c'est noté
+  dans `bonds-lock.json` pour que l'audit ne le remonte plus. C'est le seul
+  dégradé du site, et c'est ce qui fait l'accueil.
+
+Puis, une heure plus tard, trois retouches sur ses retours (« un bordel sans
+nom », « trop sombre », « ça ne ressemble pas assez à l'image ») :
+l'accueil reprend la composition de la référence, titre centré sur l'aurore,
+chiffres de part et d'autre, trois panneaux produit qui mordent la section
+suivante ; le masthead tient en une ligne avec deux boutons ; la base passe
+du noir au bleu nuit `#081120` ; l'orange circule (numéros d'index, chiffres
+clés, arc de la note, bouton) et le bleu clair porte les mentions ; tout entre
+en scène à l'arrivée et l'aurore dérive lentement.
 
 Le reste du document décrit le système tel qu'il tient toujours : trois voix,
 six coquilles, les trois gestes, la grille. Là où il dit « papier chaud » pour

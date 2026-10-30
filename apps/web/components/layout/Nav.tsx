@@ -6,24 +6,23 @@ import { NAV_COLONNES } from "@/lib/content";
 import { Logo, LogoMark } from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
 
+/** Les quatre destinations de la barre. Les sous-liens vivent dans le menu et le pied. */
+const LIENS = [
+  { href: "#comment", label: "Comment ça marche" },
+  { href: "#fonctions", label: "Ce que fait Terouva" },
+  { href: "/outils", label: "Outils gratuits" },
+  { href: "/guides", label: "Guides" },
+];
+
 /**
- * Le masthead : un en-tête de publication, pas une barre d'application.
- *
- * Le logotype à gauche, en Fraunces, haut de 48 px sur grand écran. À droite,
- * non pas une rangée de liens mais trois colonnes intitulées (l'outil, les
- * guides, vos droits), chaque intitulé en `.champ` suivi d'un filet. L'en-tête
- * n'est pas collant : il défile avec la page et laisse le plein cadre occuper
- * l'écran. Une barre compacte, logotype et bouton, réapparaît en position fixe
- * après 70 vh de défilement, en montant du bord haut en 220 ms.
- *
- * Sur petit écran, les colonnes se replient en un bouton de menu qui ouvre un
- * panneau plein écran sur fond nuit, liens en Fraunces, un par ligne. Le
- * panneau piège le focus et se ferme à Échap. La rangée horizontale qui
- * défilait est partie : à trois colonnes et douze destinations, elle ne
- * suffisait plus.
+ * Le masthead, en une ligne, comme la référence : le logotype à gauche, les
+ * destinations au centre, deux boutons à droite (la démo en filet, l'action en
+ * orange). Il défile avec la page ; une barre compacte revient en position
+ * fixe après 70 vh. Sur petit écran, un bouton de menu ouvre un panneau plein
+ * écran avec les trois colonnes complètes ; il piège le focus et se ferme à
+ * Échap.
  */
 export function Nav({ home = true }: { home?: boolean }) {
-  // Les ancres (#comment) ne mènent nulle part hors de l'accueil : on les préfixe.
   const href = (lien: string) => (lien.startsWith("#") && !home ? `/${lien}` : lien);
 
   const [compacte, setCompacte] = useState(false);
@@ -36,44 +35,45 @@ export function Nav({ home = true }: { home?: boolean }) {
 
   return (
     <>
-      <header className="cadre flex items-start justify-between gap-6 pt-5 pb-6 lg:pt-7 lg:pb-8">
-        <Link href="/" aria-label="Terouva, accueil" className="shrink-0 pt-1">
-          <Logo grand />
+      <header className="cadre entree flex h-20 items-center justify-between gap-6" style={{ "--rang": 0 } as React.CSSProperties}>
+        <Link href="/" aria-label="Terouva, accueil" className="shrink-0">
+          <Logo />
         </Link>
 
-        <nav aria-label="Plan du site" className="hidden lg:block">
-          <ul className="flex gap-10 xl:gap-14">
-            {NAV_COLONNES.map((col) => (
-              <li key={col.titre} className="w-44 xl:w-48">
-                <p className="champ text-ink-3">{col.titre}</p>
-                <span aria-hidden className="mt-2 block h-px bg-rule" />
-                <ul className="mt-2.5">
-                  {col.liens.map((l) => (
-                    <li key={l.href}>
-                      <a
-                        href={href(l.href)}
-                        className="marge inline-block leading-[1.9] text-ink-2 transition-colors duration-150 hover:text-ink"
-                      >
-                        {l.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+        <nav aria-label="Sections" className="hidden lg:block">
+          <ul className="flex items-center gap-8">
+            {LIENS.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={href(l.href)}
+                  className="inline-flex h-10 items-center text-[14px] text-ink-2 transition-colors duration-150 hover:text-ink"
+                >
+                  {l.label}
+                </a>
               </li>
             ))}
           </ul>
         </nav>
 
+        <div className="hidden items-center gap-2 lg:flex">
+          <Link href="/app?demo=1" className="bouton bouton--filet h-10 px-4 text-[14px]">
+            Voir la démo
+          </Link>
+          <a href={href("#inscription")} className="bouton bouton--accent h-10 px-4 text-[14px]">
+            Être prévenu
+          </a>
+        </div>
+
         <Menu href={href} />
       </header>
 
       {compacte && (
-        <div className="barre-compacte fixed inset-x-0 top-0 z-40 border-b border-rule bg-paper/95 backdrop-blur-sm">
+        <div className="barre-compacte fixed inset-x-0 top-0 z-40 border-b border-rule bg-paper/90 backdrop-blur-sm">
           <div className="cadre flex h-14 items-center justify-between gap-6">
             <Link href="/" aria-label="Terouva, accueil">
               <Logo />
             </Link>
-            <a href={href("#inscription")} className="bouton bouton--encre h-10 px-4 text-[14px]">
+            <a href={href("#inscription")} className="bouton bouton--accent h-10 px-4 text-[14px]">
               Être prévenu
             </a>
           </div>
@@ -178,7 +178,7 @@ function Menu({ href }: { href: (lien: string) => string }) {
           <nav aria-label="Plan du site" className="cadre flex-1 pt-6 pb-10">
             {NAV_COLONNES.map((col) => (
               <div key={col.titre} className="mt-8 first:mt-0">
-                <p className="champ text-night-ink-2">{col.titre}</p>
+                <p className="champ text-blue-clair">{col.titre}</p>
                 <span aria-hidden className="mt-2 block h-px bg-night-rule" />
                 <ul>
                   {col.liens.map((l) => (
@@ -188,7 +188,7 @@ function Menu({ href }: { href: (lien: string) => string }) {
                         onClick={() => setOuvert(false)}
                         className={cn(
                           "titre titre--petit block py-3 text-[clamp(1.5rem,1rem+2.4vw,2rem)] text-night-ink",
-                          "active:text-night-accent",
+                          "active:text-action",
                         )}
                       >
                         {l.label}
@@ -198,6 +198,9 @@ function Menu({ href }: { href: (lien: string) => string }) {
                 </ul>
               </div>
             ))}
+            <a href={href("#inscription")} onClick={() => setOuvert(false)} className="bouton bouton--accent mt-10 w-full">
+              Être prévenu du lancement
+            </a>
           </nav>
         </div>
       )}
