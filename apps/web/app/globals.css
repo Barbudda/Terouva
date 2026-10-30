@@ -146,12 +146,6 @@ body {
   box-shadow: 0 1px 2px rgb(27 29 30 / 0.04), 0 8px 24px -12px rgb(27 29 30 / 0.08);
 }
 
-/* Halo rose très discret au sommet des blocs sombres. */
-.night-glow {
-  background:
-    radial-gradient(60% 55% at 50% 0%, rgb(201 45 106 / 0.22) 0%, transparent 70%),
-    var(--color-night);
-}
 
 details > summary {
   list-style: none;
@@ -184,11 +178,38 @@ details > summary::-webkit-details-marker {
    Ailleurs, le bloc est simplement visible : rien ne se perd. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
+    /* La plage se termine quand l'élément est presque entièrement entré, et
+       non plus à « cover 26 % » : sur un petit écran, un bloc en bas de page
+       n'atteignait jamais ce seuil et restait à demi-fondu, et dans une capture
+       pleine page, où le viewport fait la hauteur du document, tout ce qui
+       suivait le hero sortait blanc. Un bloc qu'on voit en entier est opaque. */
     .monte {
       animation: monte linear both;
       animation-timeline: view();
-      animation-range: entry 8% cover 26%;
+      animation-range: entry 8% entry 80%;
     }
+  }
+}
+
+/* Rangée de navigation qui défile à l'horizontale sur petit écran : barre de
+   défilement masquée, bords estompés pour dire qu'il y a une suite. */
+.defile-x {
+  scrollbar-width: none;
+  mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 24px), transparent 100%);
+}
+.defile-x::-webkit-scrollbar {
+  display: none;
+}
+
+/* À l'impression et dans un export PDF, rien ne défile : une animation liée au
+   défilement resterait figée à son premier instant, et la page sortirait blanche
+   sous le hero. C'est ce que montrait la capture pleine page. On révèle tout. */
+@media print {
+  .monte,
+  .scene-carte {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

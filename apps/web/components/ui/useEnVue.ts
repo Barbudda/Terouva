@@ -10,7 +10,10 @@ import { useEffect, useRef, useState } from "react";
  * pas (`une: false`), ce qui évite de faire tourner une boucle dans le vide.
  *
  * Avant l'hydratation, et si l'API manque, on répond « visible » : mieux vaut
- * une page sans animation qu'une page vide.
+ * une page sans animation qu'une page vide. La même règle vaut pour deux cas
+ * qui manquaient : l'impression, où rien ne défile donc rien n'entrerait
+ * jamais dans l'écran, et `prefers-reduced-motion`, où l'on a demandé à ne
+ * rien voir bouger. Dans les deux, tout est visible d'emblée.
  */
 export function useEnVue<T extends HTMLElement>({
   une = true,
@@ -21,10 +24,21 @@ export function useEnVue<T extends HTMLElement>({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || typeof IntersectionObserver === "undefined") {
+
+    const statique =
+      typeof window.matchMedia === "function" &&
+      (window.matchMedia("print").matches ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+    if (!el || typeof IntersectionObserver === "undefined" || statique) {
       setVu(true);
       return;
     }
+
+    // Une impression lancée après coup : on révèle tout avant que la page parte
+    // vers l'imprimante ou le PDF.
+    const avantImpression = () => setVu(true);
+    window.addEventListener("beforeprint", avantImpression);
 
     const obs = new IntersectionObserver(
       ([entry]) => {
@@ -39,7 +53,10 @@ export function useEnVue<T extends HTMLElement>({
     );
 
     obs.observe(el);
-    return () => obs.disconnect();
+    return () => {
+      obs.disconnect();
+      window.removeEventListener("beforeprint", avantImpression);
+    };
   }, [une, marge]);
 
   return { ref, vu };

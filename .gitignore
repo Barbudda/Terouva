@@ -83,3 +83,5 @@ desktop.ini
 # Vidéos de promotion : regénérables avec « npm run promo ».
 # Le source (scripts/promo/) est versionné, pas les fichiers de sortie.
 /promo/*.mp4
+
+.env*.local

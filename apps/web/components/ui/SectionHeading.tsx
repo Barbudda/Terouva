@@ -63,26 +63,19 @@ export function SectionHeading({
   );
 }
 
-/** Ligne de réassurances. Les coches étaient roses : à l'encre, elles disent la
- *  même chose sans ajouter de couleur à un écran qui en avait déjà partout. */
+/**
+ * Les promesses du produit, en une ligne de prose.
+ *
+ * C'était une rangée de coches, une par promesse : le réflexe de toutes les
+ * pages de vente générées, et le signal n°16 de la checklist pas-IA. Or ces
+ * trois phrases sont les meilleures du site. Elles n'ont pas besoin d'un
+ * glyphe de validation pour peser : séparées par des points médians, dans la
+ * couleur du texte courant, c'est ce qui est dit qui porte.
+ */
 export function Assurances({ items, dark = false }: { items: string[]; dark?: boolean }) {
   return (
-    <ul className={cn("flex flex-wrap gap-x-6 gap-y-2 text-[15px]", dark ? "text-night-ink-2" : "text-ink-2")}>
-      {items.map((item) => (
-        <li key={item} className="flex items-center gap-2">
-          <svg viewBox="0 0 16 16" aria-hidden className="size-4 shrink-0 text-ink-3">
-            <path
-              d="M3 8.5l3.2 3.2L13 5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          {item}
-        </li>
-      ))}
-    </ul>
+    <p className={cn("text-[15px] leading-relaxed", dark ? "text-night-ink-2" : "text-ink-2")}>
+      {items.join(" · ")}
+    </p>
   );
 }

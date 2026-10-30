@@ -5,7 +5,7 @@ Toutes les évolutions notables de Terouva sont consignées ici.
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 Versionnage [SemVer](https://semver.org/lang/fr/).
 
-## [0.2.0] — 2026-05-26
+## [0.2.0] : 2026-05-26
 
 Première release distribuée. La boucle complète "surveillance live → score → notif → message prêt à coller" est opérationnelle.
 
@@ -19,14 +19,14 @@ Première release distribuée. La boucle complète "surveillance live → score 
 
 ### Amélioré
 
-- Le scoring qui tournait via clipboard tourne maintenant aussi pour les annonces venant de l'extension et du polling — pipeline unique, dédoublonnage par URL, score contre la meilleure recherche active matchée.
+- Le scoring qui tournait via clipboard tourne maintenant aussi pour les annonces venant de l'extension et du polling : pipeline unique, dédoublonnage par URL, score contre la meilleure recherche active matchée.
 - CSP Tauri durcie (était `null`), Cargo release profile optimisé (LTO + opt-level "s" + strip → MSI de 4.2 MB).
 - Parser host allowlist : seules les URLs `leboncoin.fr` sont fetchées.
 
 ### Non négociable
 
 - Pas de Patchright, pas de browser automation, pas de stealth lib. La détection est invisible par construction parce qu'aucune signature d'automation n'existe.
-- Pas d'envoi automatique de messages — l'humain valide, copie, colle, envoie.
+- Pas d'envoi automatique de messages : l'humain valide, copie, colle, envoie.
 - Aucune donnée ne sort de la machine : pas de serveur Terouva, pas de cloud, pas de tracker.
 
 ### Connu
@@ -34,7 +34,7 @@ Première release distribuée. La boucle complète "surveillance live → score 
 - **MSI non signé** : Windows SmartScreen affichera un avertissement à l'installation. Clic sur "Plus d'infos" → "Exécuter quand même". La signature de code arrivera dans une prochaine release.
 - **Mac & Linux** non encore disponibles. Tauri 2 est cross-platform, les builds suivront.
 
-## [0.1.0] — 2026-05-24
+## [0.1.0] : 2026-05-24
 
 Première version interne. Stack desktop + site marketing + extension clipboard.
 

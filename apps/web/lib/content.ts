@@ -28,7 +28,10 @@ export const SIGNUP = {
   titleLead: "Terouva arrive.",
   titleTail: "Soyez prévenu le jour du lancement.",
   body: "Laissez votre adresse : vous recevrez un message dès que l'application sera téléchargeable. Un seul e-mail, pas de publicité.",
-  assurances: ["Un seul e-mail, au lancement", "Désinscription en un clic", "Aucune donnée revendue"],
+  // « Désinscription en un clic » promettait un lien qui n'existe pas : aucun
+  // e-mail n'est encore parti. Le retrait se fait sur demande, et c'est ce que
+  // dit la politique de confidentialité.
+  assurances: ["Un seul e-mail, au lancement", "Retrait sur simple demande", "Aucune donnée revendue"],
   platforms: [
     { name: "Mac", detail: "Bientôt · Intel et puces Apple" },
     { name: "Windows", detail: "Bientôt · Windows 10 et 11" },

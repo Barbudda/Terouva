@@ -74,7 +74,9 @@ export function Messages() {
 
 function Fiche({ message }: { message: MessageExemple }) {
   return (
-    <li className="ruban-fiche card-soft flex flex-col p-5">
+    // Une fiche garde son bord : c'est un objet distinct qui défile sur la bande.
+    // Elle perd son ombre, réservée au seul panneau de démonstration.
+    <li className="ruban-fiche flex flex-col rounded-lg border border-rule bg-card p-5">
       <div className="flex items-start justify-between gap-3 border-b border-rule pb-3">
         <div className="min-w-0">
           <p className="truncate font-semibold text-ink">{message.annonce}</p>
@@ -89,7 +91,9 @@ function Fiche({ message }: { message: MessageExemple }) {
         {message.texte}
       </p>
 
-      <p className="mt-3 shrink-0 text-[12px] font-bold tracking-[0.08em] text-accent-ink uppercase">
+      {/* Le libellé était en capitales espacées et en magenta : le sur-titre
+          coloré que le DESIGN.md interdit, répété six fois. */}
+      <p className="mt-3 shrink-0 text-[13px] font-medium text-ink-3">
         Ton {message.ton.toLowerCase()}
       </p>
     </li>

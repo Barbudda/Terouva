@@ -1,4 +1,4 @@
-# Direction artistique — Terouva
+# Direction artistique de Terouva
 
 > Écrit le 21 octobre 2026, après le constat qu'il n'existait pas. C'est la cause
 > racine du reproche fait au site : sans direction écrite, chaque écran a été

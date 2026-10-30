@@ -18,7 +18,9 @@ export function Privacy() {
           </Link>
         </div>
 
-        <dl className="monte card-soft divide-y divide-rule px-6 md:col-span-6 md:col-start-7">
+        {/* Des filets, pas une carte : la liste se lit comme une fiche
+            d'identité, elle n'a pas besoin d'un cadre ni d'une ombre. */}
+        <dl className="monte divide-y divide-rule border-y border-rule md:col-span-6 md:col-start-7">
           {PRIVACY.points.map((p) => (
             <div key={p.label} className="grid gap-1 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
               <dt className="text-[15px] text-ink-3">{p.label}</dt>

@@ -40,11 +40,14 @@ export function Features() {
                 className="monte border-t border-rule py-7 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
               >
                 <h3 className="flex items-start gap-3 text-lg leading-snug font-bold text-ink">
+                  {/* Six icônes magenta en colonne, c'était l'accent employé en
+                      motif. À l'encre, elles redeviennent ce qu'elles sont :
+                      des repères de lecture. */}
                   <Icon
                     size={19}
                     strokeWidth={1.75}
                     aria-hidden
-                    className="mt-[3px] shrink-0 text-accent"
+                    className="mt-[3px] shrink-0 text-ink-3"
                   />
                   {f.title}
                 </h3>

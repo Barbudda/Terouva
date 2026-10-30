@@ -53,7 +53,7 @@ Build prod : `npm run build`. Déploiement Vercel : connecter le repo, **Root Di
 # 3. "Charger l'extension non empaquetée" → apps/extension/
 ```
 
-L'extension parse `__NEXT_DATA__` sur les pages LBC ouvertes par l'utilisateur, et copie un payload JSON dans le presse-papier. Côté desktop, **Annonces → 📋 Depuis presse-papier** pour ingérer.
+L'extension parse `__NEXT_DATA__` sur les pages LBC ouvertes par l'utilisateur, et copie un payload JSON dans le presse-papier. Côté desktop, **Annonces**, puis **Depuis presse-papier**, pour ingérer.
 
 ## Principes non négociables
 
