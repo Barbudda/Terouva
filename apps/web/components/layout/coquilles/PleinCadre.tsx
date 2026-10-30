@@ -32,7 +32,7 @@ export function PleinCadre({
 }) {
   return (
     <section className={cn("relative", className)}>
-      <div className="plein-cadre relative min-h-[26rem] overflow-hidden bg-paper-2 sm:min-h-[32rem] lg:min-h-[min(40rem,calc(100vh-20rem))]">
+      <div className="plein-cadre halo relative min-h-[26rem] overflow-hidden bg-paper-2 sm:min-h-[32rem] lg:min-h-[min(40rem,calc(100vh-20rem))]">
         {visuel}
       </div>
 

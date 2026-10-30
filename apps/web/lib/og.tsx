@@ -19,14 +19,15 @@ import { getSiteUrl } from "@/lib/site";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/* Les mêmes valeurs que `globals.css` : l'image de partage est du monde papier. */
-export const PAPER = "#F7F3ED";
-export const PAPER_2 = "#EFE9E0";
-export const INK = "#17181A";
-export const INK_2 = "#4E5154";
-export const INK_3 = "#64686B";
-export const RULE_FORT = "#C6BDB0";
-export const ACCENT = "#C92D6A";
+/* Les mêmes valeurs que `globals.css` : l'image de partage est de la nuit du site. */
+export const PAPER = "#02070A";
+export const PAPER_2 = "#0B1119";
+export const INK = "#EEF2F5";
+export const INK_2 = "#B4BEC8";
+export const INK_3 = "#8A97A4";
+export const RULE_FORT = "#2A3542";
+export const ACCENT = "#FC734D";
+export const BLUE = "#0297DE";
 
 /** Le domaine du site, sans protocole ni barre finale. */
 export function domaineAffiche(): string {
@@ -45,20 +46,20 @@ export function polices() {
   ]);
 }
 
-/** La marque, aux couleurs du papier. */
+/** La marque : carré bleu, toit et point clairs. */
 export function Marque({ taille = 48 }: { taille?: number }) {
   return (
     <svg width={taille} height={taille} viewBox="0 0 32 32">
-      <rect width="32" height="32" rx="7" fill={ACCENT} />
+      <rect width="32" height="32" rx="7" fill={BLUE} />
       <path
         d="M8.5 16.5 16 9.5l7.5 7"
         fill="none"
-        stroke={PAPER}
+        stroke={INK}
         strokeWidth="2.6"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="16" cy="21.5" r="2.4" fill={PAPER} />
+      <circle cx="16" cy="21.5" r="2.4" fill={INK} />
     </svg>
   );
 }

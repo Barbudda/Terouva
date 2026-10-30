@@ -72,7 +72,7 @@ export default function Guides() {
   };
 
   return (
-    <>
+    <div className="monde-papier min-h-screen">
       <DonneesStructurees data={jsonLd} />
       <DonneesStructurees data={filAriane(ARIANE)} />
       <Nav home={false} />
@@ -216,6 +216,6 @@ export default function Guides() {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }

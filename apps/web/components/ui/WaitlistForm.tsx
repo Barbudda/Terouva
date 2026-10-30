@@ -86,8 +86,8 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
             className={cn(
               "h-12 w-full border-b bg-transparent text-base outline-none transition-colors duration-150",
               dark
-                ? "border-night-ink-2 text-night-ink placeholder:text-night-ink-2 focus:border-night-accent"
-                : "border-rule-fort text-ink placeholder:text-ink-3 focus:border-accent",
+                ? "border-night-ink-2 text-night-ink placeholder:text-night-ink-2 focus:border-blue"
+                : "border-rule-fort text-ink placeholder:text-ink-3 focus:border-accent-ink",
             )}
           />
         </label>

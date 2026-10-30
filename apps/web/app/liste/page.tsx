@@ -47,7 +47,7 @@ export default async function ListePage({
     usablePassword(motDePasse) && sameToken(jar.get(COOKIE_NAME)?.value, tokenFor(motDePasse));
 
   return (
-    <main className="min-h-screen bg-paper-2 px-4 py-10 sm:px-6 sm:py-16">
+    <main className="monde-papier min-h-screen bg-paper-2 px-4 py-10 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-3xl">
         <Link href="/" className="inline-flex">
           <Logo />

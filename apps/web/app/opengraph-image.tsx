@@ -1,13 +1,13 @@
 import { ImageResponse } from "next/og";
-import { ACCENT, INK, INK_2, INK_3, Marque, PAPER, PAPER_2, RULE_FORT, domaineAffiche, polices } from "@/lib/og";
+import { ACCENT, BLUE, INK, INK_2, INK_3, Marque, PAPER, PAPER_2, RULE_FORT, domaineAffiche, polices } from "@/lib/og";
 
 export const alt = "Terouva · Trouvez votre logement sans y passer vos journées";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /**
- * L'image de partage de l'accueil : le monde papier, et un carré nuit qui
- * porte la note, comme la vignette du panneau d'accueil. Les polices sont
+ * L'image de partage de l'accueil : la nuit du site, et un panneau à filet
+ * bleu qui porte la note, comme la vignette du panneau d'accueil. Les polices sont
  * lues depuis le dépôt : l'image est générée au build, sans appel réseau.
  */
 export default async function OG() {
@@ -81,15 +81,16 @@ export default async function OG() {
               justifyContent: "space-between",
               width: "168px",
               height: "168px",
-              background: INK,
-              color: PAPER,
+              background: PAPER_2,
+              color: INK,
+              border: `1px solid ${BLUE}`,
               padding: "18px",
             }}
           >
-            <div style={{ fontSize: "16px", letterSpacing: "0.04em", color: "#9EA3A6" }}>NOTE</div>
+            <div style={{ fontSize: "16px", letterSpacing: "0.04em", color: INK_3 }}>NOTE</div>
             <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
               <div style={{ fontSize: "72px", lineHeight: 1 }}>97</div>
-              <div style={{ fontSize: "18px", color: "#9EA3A6" }}>/100</div>
+              <div style={{ fontSize: "18px", color: INK_3 }}>/100</div>
             </div>
           </div>
         </div>
@@ -106,7 +107,7 @@ export default async function OG() {
           }}
         >
           <div>{domaineAffiche()}</div>
-          <div style={{ color: ACCENT, background: PAPER_2, padding: "0 10px" }}>Gratuit pendant l&apos;essai</div>
+          <div style={{ color: ACCENT }}>Gratuit pendant l&apos;essai</div>
         </div>
       </div>
     ),

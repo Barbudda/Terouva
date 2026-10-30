@@ -6,43 +6,54 @@
    bases, son accent, son échelle. Référence : DESIGN.md et le brief de refonte
    du 30 octobre 2026. Tous les rapports de contraste cités sont calculés. */
 @theme {
-  /* ── Monde papier ── */
-  --color-paper: #f7f3ed;      /* papier chaud. Encre dessus : 16,07:1 */
-  --color-paper-2: #efe9e0;    /* surface teintée. Encre dessus : 14,72:1 */
-  --color-ink: #17181a;
-  --color-ink-2: #4e5154;      /* sur papier : 7,23:1 */
-  --color-ink-3: #64686b;      /* sur papier-2 : 4,66:1 */
-  --color-rule: #ddd6cb;       /* filet standard */
-  --color-rule-fort: #c6bdb0;  /* filet de séparation de section */
-  --color-accent: #c92d6a;     /* sur papier : 4,67:1. Blanc dessus : 5,16:1 */
-  --color-accent-ink: #a52254; /* le magenta QUAND IL PORTE DU TEXTE sur papier-2 : 5,89:1 */
+  /* ── Base du site : la nuit. Décision d'Hugo du 30 octobre au soir, après
+     la refonte du jour : « le fond blanc éblouit », nuit dominante, palette
+     minuit, bleu électrique et orange de la référence. Les jetons gardent
+     leurs anciens noms (paper, ink, rule) pour que les coquilles n'aient pas
+     à changer : sur une page sombre, « paper » EST le minuit. */
+  --color-paper: #02070a;       /* minuit : la page */
+  --color-paper-2: #0b1119;     /* surface, fiches, bande */
+  --color-ink: #eef2f5;         /* sur minuit : 17,98:1 */
+  --color-ink-2: #b4bec8;       /* sur minuit : 10,74:1 ; sur panneau : 9,29:1 */
+  --color-ink-3: #8a97a4;       /* sur minuit : 6,79:1 ; sur panneau : 5,87:1 */
+  --color-rule: #1a222c;
+  --color-rule-fort: #2a3542;
 
-  /* ── Monde nuit ── */
-  --color-night: #17181a;
-  --color-night-2: #1f2123;        /* strate, pour un panneau dans la bande */
-  --color-night-ink: #f7f3ed;      /* 16,07:1 */
-  --color-night-ink-2: #9ea3a6;    /* 7,25:1 */
-  --color-night-rule: #2a2c2f;     /* filet, non textuel, 1,27:1 assumé */
-  --color-night-accent: #e85a8f;   /* sur nuit : 5,32:1. LE SEUL magenta du monde nuit.
-                                      Encre dessus : 4,8:1, donc le texte d'un bouton
-                                      est à l'encre, jamais en blanc (3,75:1). */
+  /* ── Le monde nuit : la bande de l'instrument, une strate au-dessus de la page. */
+  --color-night: #0b1119;
+  --color-night-2: #121a24;
+  --color-night-ink: #eef2f5;
+  --color-night-ink-2: #9aa6b2;   /* sur panneau : 6,5:1 */
+  --color-night-rule: #1e2834;
 
-  /* Alias conservés pour l'application (`components/app`), hors périmètre de
-     la refonte. Ils suivent le papier chaud pour que l'app ne détonne pas. */
-  --color-card: #fdfbf7;
-  --color-muted: #e9e3d9;
-  --color-ash: #efe9e0;
-  --color-field: #b4ab9e;
-  --color-accent-wash: #f6dbe5;
-  --color-good: #11785a;
-  --color-good-wash: #d9f0e7;
-  --color-warn: #8a5a08;
-  --color-warn-wash: #fdeccd;
-  --color-bad: #c62f33;
-  --color-bad-wash: #fde4e4;
+  /* ── Deux accents, et pas un troisième.
+     Le bleu électrique est l'accent d'interface : liens, focus, état actif,
+     jauges et arc du cadran. L'orange est l'accent d'action : le bouton
+     principal d'un écran, un seul. Le blanc ne tient pas sur l'orange
+     (2,73:1) : le texte d'un bouton est toujours minuit (7,42:1). */
+  --color-blue: #0297de;          /* sur minuit : 6,25:1 ; sur panneau : 5,41:1 */
+  --color-action: #fc734d;        /* sur minuit : 7,42:1 */
+  --color-action-ink: #02070a;
+  --color-accent: #fc734d;        /* alias : l'action */
+  --color-accent-ink: #0297de;    /* alias : le bleu QUAND IL PORTE DU TEXTE (liens) */
+  --color-night-accent: #0297de;  /* alias : le bleu de l'instrument */
 
-  /* Trois voix. Fraunces pour les titres, Archivo pour le texte et
-     l'interface, DM Mono pour l'instrument et les références de loi. */
+  /* Alias conservés pour l'application (`components/app`), hors périmètre. */
+  --color-card: #121a24;
+  --color-muted: #1a222c;
+  --color-ash: #0b1119;
+  --color-field: #3a4652;
+  --color-accent-wash: #0f2a3d;
+  --color-good: #4fd1a5;
+  --color-good-wash: #0f2a22;
+  --color-warn: #f0b24a;
+  --color-warn-wash: #2a2210;
+  --color-bad: #ff7b7b;
+  --color-bad-wash: #2d1414;
+
+  /* Trois voix. Fraunces pour les titres du monde papier et les grands
+     titres sombres de l'accueil, Archivo pour le texte et l'interface,
+     DM Mono pour l'instrument et les références de loi. */
   --font-sans: var(--font-archivo), system-ui, sans-serif;
   --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-dm-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -76,6 +87,50 @@
   --radius-xl: 0.25rem;
 }
 
+/* ── Le monde papier, scopé. Les guides, les textes légaux et la feuille
+   d'annonce de l'accueil le portent : longue lecture, papier chaud. Les
+   mêmes jetons, d'autres valeurs ; les composants ne savent pas dans quel
+   monde ils sont rendus, et c'est le but. */
+.monde-papier {
+  --color-paper: #f7f3ed;      /* encre dessus : 16,07:1 */
+  --color-paper-2: #efe9e0;    /* encre dessus : 14,72:1 */
+  --color-ink: #17181a;
+  --color-ink-2: #4e5154;      /* sur papier : 7,23:1 */
+  --color-ink-3: #64686b;      /* sur papier-2 : 4,66:1 */
+  --color-rule: #ddd6cb;
+  --color-rule-fort: #c6bdb0;
+  --color-accent-ink: #0a6aa8; /* le bleu quand il porte du texte sur papier : 5,22:1 ; sur papier-2 : 4,78:1 */
+  --color-card: #fdfbf7;
+  --color-muted: #e9e3d9;
+  --color-ash: #efe9e0;
+  --color-field: #b4ab9e;
+  --color-accent-wash: #d7eefb;
+  --color-good: #11785a;
+  --color-good-wash: #d9f0e7;
+  --color-warn: #8a5a08;
+  --color-warn-wash: #fdeccd;
+  --color-bad: #c62f33;
+  --color-bad-wash: #fde4e4;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  color-scheme: light;
+}
+
+/* ── Le halo de l'accueil. C'est le signal n°1 de la checklist pas-IA, et
+   c'est une dérogation explicite d'Hugo (bonds-lock.json) : « oui, assumé
+   comme la photo ». Deux lueurs, bleue et orange, sous la feuille d'annonce ;
+   rien d'autre sur le site n'est dégradé. */
+.halo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 60% at 62% 105%, rgb(252 115 77 / 0.62), transparent 70%),
+    radial-gradient(45% 55% at 12% 85%, rgb(2 151 222 / 0.55), transparent 70%),
+    radial-gradient(40% 50% at 90% 20%, rgb(2 151 222 / 0.28), transparent 70%);
+}
+
 html {
   background: var(--color-paper);
   color: var(--color-ink);
@@ -97,16 +152,14 @@ body {
 }
 
 ::selection {
-  background: var(--color-accent-wash);
-  color: var(--color-ink);
+  background: var(--color-blue);
+  color: #02070a;
 }
 
+/* Le focus est bleu partout : c'est un état d'interface, pas une action. */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-blue);
   outline-offset: 2px;
-}
-.nuit :focus-visible {
-  outline-color: var(--color-night-accent);
 }
 
 .tabular {
@@ -284,26 +337,23 @@ body {
   white-space: nowrap;
   transition: background-color 150ms var(--ease-terouva), color 150ms var(--ease-terouva);
 }
-.bouton--accent {
-  background: var(--color-accent);
-  color: #fff;
+/* Un seul bouton d'action par écran, orange, texte minuit, dans les deux
+   mondes : `bouton--nuit` est son ancien nom, gardé pour les appelants. */
+.bouton--accent,
+.bouton--nuit {
+  background: var(--color-action);
+  color: var(--color-action-ink);
 }
-.bouton--accent:hover {
-  background: var(--color-accent-ink);
+.bouton--accent:hover,
+.bouton--nuit:hover {
+  background: #ff8a6a;
 }
 .bouton--encre {
   background: var(--color-ink);
   color: var(--color-paper);
 }
 .bouton--encre:hover {
-  background: #2c2e31;
-}
-.bouton--nuit {
-  background: var(--color-night-accent);
-  color: var(--color-ink);
-}
-.bouton--nuit:hover {
-  background: #f07aa5;
+  opacity: 0.88;
 }
 .bouton--filet {
   border: 1px solid var(--color-rule-fort);
@@ -327,11 +377,11 @@ body {
   text-decoration-color: var(--color-accent-ink);
 }
 .nuit .lien {
-  color: var(--color-night-accent);
-  text-decoration-color: color-mix(in oklch, var(--color-night-accent) 40%, transparent);
+  color: var(--color-blue);
+  text-decoration-color: color-mix(in oklch, var(--color-blue) 40%, transparent);
 }
 .nuit .lien:hover {
-  text-decoration-color: var(--color-night-accent);
+  text-decoration-color: var(--color-blue);
 }
 }
 
@@ -441,6 +491,20 @@ details > summary::-webkit-details-marker {
     opacity: 1 !important;
     transform: none !important;
   }
+  :root {
+    --color-paper: #fff;
+    --color-paper-2: #f3f3f3;
+    --color-ink: #17181a;
+    --color-ink-2: #4e5154;
+    --color-ink-3: #5c6063;
+    --color-rule: #d0d0d0;
+    --color-rule-fort: #b0b0b0;
+    --color-accent-ink: #0a6aa8;
+    --color-card: #fff;
+  }
+  .halo::before {
+    display: none;
+  }
   .nuit {
     --color-night: #fff;
     --color-night-2: #f3f3f3;
@@ -540,8 +604,11 @@ details > summary::-webkit-details-marker {
 /* Contraste renforcé : les filets passent au filet fort. */
 @media (prefers-contrast: more) {
   :root {
+    --color-rule: #2a3542;
+    --color-night-rule: #3a4652;
+  }
+  .monde-papier {
     --color-rule: #c6bdb0;
-    --color-night-rule: #4a4d51;
   }
 }
 

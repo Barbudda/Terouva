@@ -5,6 +5,32 @@
 > pris. Un site d'où l'on a retiré tout ce qui dépasse est propre et
 > interchangeable : la direction ne naît pas de la suppression des erreurs.
 
+## Révision du 30 octobre au soir : la nuit devient la base
+
+Hugo a vu la version « papier dominant » et l'a refusée : « le fond blanc
+éblouit ». Trois décisions, prises par lui, remplacent ce que le brief du jour
+disait sur la proportion des mondes et sur la couleur :
+
+- **Nuit dominante.** L'accueil, les outils, les textes courts et le pied sont
+  sur minuit `#02070a`. Le papier chaud ne reste que là où on lit longtemps : les
+  guides, les CGU, la confidentialité, et la feuille d'annonce de l'accueil,
+  posée comme une feuille sur une table sombre. Techniquement, les jetons
+  gardent leurs noms et la classe `.monde-papier` les redéfinit : les coquilles
+  ne savent pas dans quel monde elles sont rendues.
+- **Bleu électrique et orange** à la place du magenta. Le bleu `#0297de` est
+  l'accent d'interface (liens, focus, état actif, jauges, arc du cadran), sur
+  papier il s'assombrit en `#0a6aa8` pour tenir 4,5:1. L'orange `#fc734d` est
+  l'accent d'action : le bouton principal d'un écran, texte minuit, jamais
+  blanc (2,73:1). La marque passe au carré bleu, favicon et images de partage
+  comprises.
+- **Un halo assumé** derrière la feuille d'annonce de l'accueil, bleu et
+  orange : c'est le signal n°1 de la checklist pas-IA, consigné comme dérogation
+  dans `bonds-lock.json`. C'est le seul dégradé du site.
+
+Le reste du document décrit le système tel qu'il tient toujours : trois voix,
+six coquilles, les trois gestes, la grille. Là où il dit « papier chaud » pour
+la page, lire « minuit », sauf dans les guides.
+
 ## Le parti pris, en une phrase
 
 **Terouva est un dossier de presse immobilier dans lequel est encastré un

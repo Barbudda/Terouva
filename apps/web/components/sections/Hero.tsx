@@ -14,7 +14,7 @@ import { PleinCadre } from "@/components/layout/coquilles/PleinCadre";
  * de stock, c'est le signal n°37.
  *
  * Par-dessus, en bas à gauche, le panneau chevauchant : la mention, le titre,
- * trois lignes, et le bouton magenta, un seul. À sa droite, une vignette
+ * trois lignes, et le bouton orange, un seul. À sa droite, une vignette
  * carrée : la note de l'annonce, sur fond nuit, premier signe de l'instrument
  * qu'on trouvera plus bas. Sous le visuel, les chiffres clés deviennent une
  * ligne de base sur un filet fort, en trois cellules inégales.
@@ -49,7 +49,7 @@ export function Hero() {
  */
 function Vignette() {
   return (
-    <div className="nuit flex size-28 flex-col justify-between bg-night p-3 text-night-ink lg:size-32">
+    <div className="nuit flex size-28 flex-col justify-between border border-night-rule bg-night p-3 text-night-ink lg:size-32">
       <span className="champ text-night-ink-2">Note</span>
       <span className="flex items-baseline gap-1">
         <span className="font-mono text-[2.5rem] leading-none tabular-nums lg:text-[3rem]">
@@ -89,7 +89,7 @@ function AnnoncePiece() {
       {/* La feuille. `rotate` et `translate` séparés : l'inclinaison reste
           lisible dans le code et la feuille garde ses bords nets. */}
       <article
-        className="relative mt-8 ml-auto w-[min(40rem,96%)] origin-top-left rotate-[-2deg] border border-rule bg-card p-6 text-ink sm:p-8 lg:absolute lg:top-[18%] lg:right-[-6%] lg:mt-0 lg:ml-0 lg:w-[46rem] lg:p-10"
+        className="monde-papier relative mt-8 ml-auto w-[min(40rem,96%)] origin-top-left rotate-[-2deg] border border-rule bg-card p-6 text-ink sm:p-8 lg:absolute lg:top-[18%] lg:right-[-6%] lg:mt-0 lg:ml-0 lg:w-[46rem] lg:p-10"
         aria-hidden
       >
         <header className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">

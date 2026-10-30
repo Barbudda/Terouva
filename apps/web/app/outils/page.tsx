@@ -134,7 +134,7 @@ export default function Outils() {
               {GUIDES.map((g) => (
                 <li key={g.chemin}>
                   <Link href={g.chemin} className="group block py-5">
-                    <h3 className="max-w-3xl font-bold text-ink transition-colors group-hover:text-accent">
+                    <h3 className="max-w-3xl font-bold text-ink transition-colors group-hover:text-accent-ink">
                       {g.titre}
                     </h3>
                     <p className="mt-1.5 max-w-2xl text-[15px] leading-relaxed text-ink-2">

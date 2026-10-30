@@ -22,7 +22,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function Cgu() {
   return (
-    <>
+    <div className="monde-papier min-h-screen">
       <Nav home={false} />
       <main className="mx-auto max-w-3xl px-4 pt-14 pb-24 sm:px-6 md:pt-20">
         <h1 className="display text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
@@ -133,7 +133,7 @@ export default function Cgu() {
             détail du traitement figure dans la{" "}
             <Link
               href="/confidentialite"
-              className="text-accent underline decoration-accent/35 underline-offset-4 transition-colors hover:decoration-accent"
+              className="lien"
             >
               politique de confidentialité
             </Link>
@@ -202,7 +202,7 @@ export default function Cgu() {
             invitons à nous écrire d&apos;abord : l&apos;adresse figure dans les{" "}
             <Link
               href="/mentions-legales"
-              className="text-accent underline decoration-accent/35 underline-offset-4 transition-colors hover:decoration-accent"
+              className="lien"
             >
               mentions légales
             </Link>
@@ -216,6 +216,6 @@ export default function Cgu() {
         </Section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

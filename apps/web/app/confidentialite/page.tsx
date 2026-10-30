@@ -26,7 +26,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function Confidentialite() {
   return (
-    <>
+    <div className="monde-papier min-h-screen">
       <Nav home={false} />
       <main className="mx-auto max-w-3xl px-4 pt-14 pb-24 sm:px-6 md:pt-20">
         <h1 className="display text-4xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
@@ -80,7 +80,7 @@ export default function Confidentialite() {
             écrivant à l'adresse indiquée dans les{" "}
             <a
               href="/mentions-legales"
-              className="text-accent underline decoration-accent/35 underline-offset-4 transition-colors hover:decoration-accent"
+              className="lien"
             >
               mentions légales
             </a>
@@ -161,6 +161,6 @@ export default function Confidentialite() {
         </Section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

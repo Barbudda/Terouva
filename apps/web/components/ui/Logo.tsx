@@ -2,22 +2,23 @@ import { cn } from "@/lib/utils";
 
 /**
  * Marque Terouva : un toit et un point (l'annonce qui vous est signalée),
- * posés sur un carré rose. Même dessin que `app/icon.svg`, aux couleurs des
+ * posés sur un carré bleu électrique (la marque a changé de couleur le
+ * 30 octobre 2026, avec le passage du site à la nuit). Même dessin que `app/icon.svg`, aux couleurs des
  * jetons du thème : aucune valeur en dur dans les composants.
  */
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" aria-hidden className={cn("size-8 shrink-0", className)}>
-      <rect width="32" height="32" rx="7" fill="var(--color-accent)" />
+      <rect width="32" height="32" rx="7" fill="var(--color-blue)" />
       <path
         d="M8.5 16.5 16 9.5l7.5 7"
         fill="none"
-        stroke="var(--color-paper)"
+        stroke="var(--color-night-ink)"
         strokeWidth="2.6"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="16" cy="21.5" r="2.4" fill="var(--color-paper)" />
+      <circle cx="16" cy="21.5" r="2.4" fill="var(--color-night-ink)" />
     </svg>
   );
 }

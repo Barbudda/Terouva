@@ -40,7 +40,8 @@ const RUBRIQUES: Record<Guide["etape"], string> = {
 };
 
 /**
- * Cadre commun des guides : le monde papier à l'état pur.
+ * Cadre commun des guides : le monde papier à l'état pur, sur un site
+ * désormais sombre. Le scope `.monde-papier` enveloppe toute la page.
  *
  * Un en-tête d'article (rubrique en `.champ`, titre, chapeau en énoncé, ligne
  * de métadonnées à filets), puis trois colonnes sur grand écran : le sommaire
@@ -103,7 +104,7 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
   });
 
   return (
-    <>
+    <div className="monde-papier min-h-screen">
       <DonneesStructurees data={jsonLd} />
       <DonneesStructurees data={filAriane(etapes)} />
       <Nav home={false} />
@@ -164,7 +165,7 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
 
