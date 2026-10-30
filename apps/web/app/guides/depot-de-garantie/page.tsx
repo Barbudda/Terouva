@@ -23,8 +23,9 @@ export default function GuideDepotDeGarantie() {
         <strong>le délai pour vous le rendre</strong>. Le reste se négocie, ou se conteste.
       </p>
 
-      <h2 id="montant">Le montant maximum</h2>
-      <p>Il dépend du type de location, et il est plafonné :</p>
+      <h2 id="montant">Quel est le montant maximum d&apos;un dépôt de garantie ?</h2>
+      <p>Un mois de loyer hors charges au maximum pour un logement vide, deux mois pour un meublé. Aucun dépôt ne peut être exigé si le loyer est payé par trimestre d&apos;avance, ni pour un bail mobilité. Le plafond se calcule sur le loyer seul : les charges n&apos;entrent pas dans le calcul.</p>
+      <p>Le détail, selon le type de location :</p>
       <ul>
         <li>
           <strong>Logement vide</strong> : un mois de loyer hors charges, au maximum.
@@ -50,7 +51,8 @@ export default function GuideDepotDeGarantie() {
         </p>
       </div>
 
-      <h2 id="versement">Quand on le verse</h2>
+      <h2 id="versement">Quand faut-il payer le dépôt de garantie ?</h2>
+      <p>À la signature du bail, et son montant doit y figurer. Un propriétaire qui le réclame avant la signature, pour « réserver » le logement, sort du cadre : à ce stade, rien ne vous engage et rien ne l&apos;engage. Le dépôt ne fait pas partie des pièces du dossier.</p>
       <p>
         À la signature du bail, et son montant doit être écrit dans le bail. Un propriétaire qui
         réclame le dépôt avant la signature, pour « réserver » le logement, sort du cadre : à ce
@@ -62,7 +64,8 @@ export default function GuideDepotDeGarantie() {
         <Link href="/guides/dossier-de-location">liste autorisée</Link>.
       </p>
 
-      <h2 id="retenues">Ce qui peut être retenu</h2>
+      <h2 id="retenues">Que peut retenir le propriétaire sur le dépôt de garantie ?</h2>
+      <p>Trois choses, et chacune doit être justifiée par une pièce : les loyers et charges restés impayés, les dégradations constatées par rapport à l&apos;état des lieux d&apos;entrée, et les réparations locatives non faites. Une retenue annoncée sans devis, facture ni photo n&apos;a pas à être acceptée.</p>
       <p>À la fin du bail, le propriétaire peut déduire du dépôt :</p>
       <ul>
         <li>les loyers et les charges restés impayés ;</li>
@@ -91,7 +94,8 @@ export default function GuideDepotDeGarantie() {
         </p>
       </div>
 
-      <h2 id="restitution">Le délai de restitution</h2>
+      <h2 id="restitution">Dans quel délai le dépôt de garantie doit-il être rendu ?</h2>
+      <p>Un mois après la remise des clés si l&apos;état des lieux de sortie est conforme à celui d&apos;entrée, deux mois s&apos;il ne l&apos;est pas. Le délai court à partir de la remise des clés, en main propre ou par lettre recommandée, et non de votre départ effectif.</p>
       <p>
         Le délai court à partir de la remise des clés, en main propre ou par lettre recommandée :
       </p>
@@ -115,7 +119,8 @@ export default function GuideDepotDeGarantie() {
         l&apos;état des lieux.
       </p>
 
-      <h2 id="retard">Si le propriétaire tarde</h2>
+      <h2 id="retard">Que se passe-t-il si le propriétaire rend le dépôt en retard ?</h2>
+      <p>La somme due augmente de 10 % du loyer mensuel hors charges par mois de retard commencé : un seul jour de dépassement compte pour un mois entier. Cette majoration ne s&apos;applique pas si vous n&apos;avez pas communiqué votre nouvelle adresse au moment de rendre les clés.</p>
       <p>
         La somme due augmente de{" "}
         <strong>10&nbsp;% du loyer mensuel hors charges par mois de retard commencé</strong>.
@@ -127,7 +132,8 @@ export default function GuideDepotDeGarantie() {
         de majoration. Le propriétaire doit donc 1&nbsp;040&nbsp;€.
       </p>
 
-      <h2 id="recuperer">Le récupérer</h2>
+      <h2 id="recuperer">Comment récupérer un dépôt de garantie non rendu ?</h2>
+      <p>D&apos;abord une lettre recommandée avec accusé de réception qui réclame la somme et calcule la majoration. En dessous de 5 000 €, une tentative de règlement amiable est ensuite obligatoire, et gratuite : conciliateur de justice ou commission départementale de conciliation. Le tribunal vient en dernier.</p>
       <p>Dans l&apos;ordre, et sans sauter d&apos;étape :</p>
       <ol>
         <li>
@@ -145,7 +151,8 @@ export default function GuideDepotDeGarantie() {
         </li>
       </ol>
 
-      <h2 id="et-apres">Avant d&apos;en arriver là</h2>
+      <h2 id="et-apres">Comment éviter un litige sur le dépôt de garantie ?</h2>
+      <p>En soignant l&apos;état des lieux d&apos;entrée, seule preuve de l&apos;état du logement à votre arrivée, et en vérifiant que le bail mentionne le montant exact du dépôt. Tout ce qui se règle à la sortie se prépare à l&apos;entrée.</p>
       <p>
         Tout ce qui précède se joue à la sortie, mais se prépare à l&apos;entrée : un état des
         lieux détaillé, un bail qui mentionne le montant exact, et un dossier qui tient debout pour

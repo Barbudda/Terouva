@@ -24,7 +24,8 @@ export default function GuideLouerSansGarant() {
         permettent de répondre sans mobiliser un proche.
       </p>
 
-      <h2 id="pas-obligatoire">Ce n&apos;est pas une obligation légale</h2>
+      <h2 id="pas-obligatoire">Un garant est-il obligatoire pour louer ?</h2>
+      <p>Non. Aucun texte n&apos;impose à un locataire de présenter une caution : c&apos;est le propriétaire qui décide d&apos;en exiger une, et il reste libre de choisir son locataire. Deux limites s&apos;imposent à lui, selon qu&apos;il est déjà assuré contre les impayés ou qu&apos;il s&apos;agit d&apos;une personne morale.</p>
       <p>
         La loi encadre ce qu&apos;un propriétaire peut <em>demander</em> comme justificatifs, pas
         ce qu&apos;il peut <em>exiger</em> comme garanties. Il choisit librement son locataire et
@@ -46,7 +47,8 @@ export default function GuideLouerSansGarant() {
         l&apos;ordre de ce qui aboutit.
       </p>
 
-      <h2 id="visale">Visale, à demander avant de visiter</h2>
+      <h2 id="visale">La garantie Visale remplace-t-elle un garant ?</h2>
+      <p>Oui. Visale est une caution portée par Action Logement, gratuite, qui se substitue à un garant personnel auprès du propriétaire. C&apos;est la seule qui se demande <strong>avant</strong> d&apos;avoir trouvé le logement : vous obtenez un visa en ligne, que vous présentez avec votre dossier.</p>
       <p>
         La garantie Visale est une caution portée par Action Logement.{" "}
         <strong>Elle est gratuite</strong>, et c&apos;est la seule qui se demande{" "}
@@ -69,7 +71,8 @@ export default function GuideLouerSansGarant() {
         </p>
       </div>
 
-      <h2 id="assurance">Le propriétaire déjà assuré</h2>
+      <h2 id="assurance">Un propriétaire assuré peut-il exiger un garant ?</h2>
+      <p>Non, sauf si le locataire est étudiant ou apprenti. Un propriétaire particulier qui a souscrit une assurance contre les risques locatifs n&apos;a plus le droit de demander une caution. Beaucoup réclament les deux par habitude, sans savoir que ce cumul leur est interdit.</p>
       <p>
         C&apos;est la voie que presque personne ne mentionne, et elle ne coûte rien. Un
         propriétaire particulier qui a souscrit une assurance contre les risques locatifs{" "}
@@ -83,7 +86,8 @@ export default function GuideLouerSansGarant() {
         Vous lui laissez la sortie, et vous vous épargnez un refus de principe.
       </p>
 
-      <h2 id="societes">Les sociétés de cautionnement</h2>
+      <h2 id="societes">Combien coûte une société de cautionnement ?</h2>
+      <p>Ces sociétés se rémunèrent par un pourcentage du loyer annuel, prélevé chaque année du bail. Demandez le coût total sur la durée, pas le tarif mensuel, qui donne une idée fausse de la dépense. Vérifiez aussi que le propriétaire accepte l&apos;organisme avant de payer.</p>
       <p>
         Des sociétés privées se portent garant à votre place, contre un pourcentage du loyer
         annuel, prélevé chaque année du bail. C&apos;est la solution de dernier recours : elle
@@ -97,7 +101,8 @@ export default function GuideLouerSansGarant() {
         l&apos;organisme : certains refusent les cautions privées, et vous auriez payé pour rien.
       </p>
 
-      <h2 id="etudiant">Le cas des étudiants</h2>
+      <h2 id="etudiant">Un étudiant peut-il louer sans garant ?</h2>
+      <p>Oui, et c&apos;est la situation la mieux couverte. Visale s&apos;adresse en priorité aux moins de 30 ans. Un bailleur personne morale ne peut rien exiger d&apos;un boursier de l&apos;enseignement supérieur. Et l&apos;avance Loca-Pass prête jusqu&apos;à 1 200 € sans intérêts pour le dépôt de garantie.</p>
       <p>
         C&apos;est la situation la mieux couverte, ce qui surprend souvent. Visale s&apos;adresse
         en priorité aux moins de 30 ans. Un bailleur personne morale ne peut rien exiger d&apos;un
@@ -110,7 +115,8 @@ export default function GuideLouerSansGarant() {
         Loca-Pass pour le dépôt, et les aides au logement une fois installé.
       </p>
 
-      <h2 id="dire">Quoi répondre quand on vous demande un garant</h2>
+      <h2 id="dire">Que répondre quand on vous demande un garant ?</h2>
+      <p>Trois phrases, dans cet ordre : le fait, sans justification ni récit de famille ; ce qui le remplace, concrètement, un visa Visale déjà obtenu valant mieux qu&apos;une intention ; puis le reste du dossier, métier, contrat et revenu, qui décide une fois la question du garant écartée.</p>
       <p>
         Le message compte autant que la solution. Trois phrases suffisent, dans cet ordre :
       </p>
@@ -137,7 +143,8 @@ export default function GuideLouerSansGarant() {
         qu&apos;un garant signe vraiment, si vous finissez par en trouver un.
       </p>
 
-      <h2 id="refus">Si le refus porte sur le garant lui-même</h2>
+      <h2 id="refus">Peut-on refuser mon dossier à cause de mon garant ?</h2>
+      <p>Pas pour n&apos;importe quelle raison. Le <strong>lieu de résidence du garant est un critère protégé</strong> : écarter une candidature parce que la caution habite une autre région ou une commune jugée indésirable est une discrimination, pas une exigence de gestion.</p>
       <p>
         Dernier point, rarement connu : le <strong>lieu de résidence du garant est un critère
         protégé</strong>. Écarter une candidature parce que la caution habite une autre région, un
