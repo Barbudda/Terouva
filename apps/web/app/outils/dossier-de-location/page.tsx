@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { ListeDossier } from "@/components/outils/ListeDossier";
+import { BandeNuit } from "@/components/layout/coquilles/BandeNuit";
 import { Questions } from "@/components/ui/Questions";
 import { OUTILS } from "@/lib/catalogue";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
@@ -85,26 +86,34 @@ export default function OutilDossier() {
       <DonneesStructurees data={filAriane(ETAPES)} />
       <Nav home={false} />
 
-      <main className="px-4 pt-10 pb-16 sm:px-6 md:pt-14">
-        <div className="mx-auto max-w-6xl">
+      <main className="pb-16">
+        <div className="cadre pt-4 md:pt-6">
           <Ariane etapes={ETAPES} />
 
-          <h1 className="display mt-5 max-w-3xl text-[2.1rem] text-ink sm:text-5xl">
+          <h1 className="titre mt-5 max-w-[22ch] text-titre-2 text-ink">
             Les pièces de votre dossier,{" "}
             et celles qu&apos;on ne peut pas vous demander.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
+          <p className="enonce mt-6 text-ink-2">
             La liste est fixée par décret, et elle est limitative. Répondez à trois questions :
             vous obtenez exactement ce qu&apos;il vous faut réunir, sans les pièces qui ne vous
             concernent pas. Gratuit, sans inscription, et rien ne quitte votre navigateur.
           </p>
 
-          <div className="mt-10">
+        </div>
+
+        {/* L'outil est un instrument : il vit dans le monde nuit, l'explication
+            autour reste sur le papier. */}
+        <BandeNuit className="mt-10">
+          <div className="cadre">
             <ListeDossier />
           </div>
+        </BandeNuit>
+
+        <div className="cadre">
 
           <section className="mt-20 max-w-3xl">
-            <h2 className="display text-2xl text-ink">Pourquoi cette liste et pas une autre</h2>
+            <h2 className="titre titre--petit text-[1.75rem] text-ink">Pourquoi cette liste et pas une autre</h2>
             <div className="mt-5 space-y-4 leading-relaxed text-ink-2">
               <p>
                 Le <strong className="text-ink">décret n° 2015-1437 du 5 novembre 2015</strong>,
@@ -137,7 +146,7 @@ export default function OutilDossier() {
           </section>
 
           <section className="mt-16 max-w-3xl">
-            <h2 className="display text-2xl text-ink">Une fois la liste réunie</h2>
+            <h2 className="titre titre--petit text-[1.75rem] text-ink">Une fois la liste réunie</h2>
             <p className="mt-4 leading-relaxed text-ink-2">
               Un dossier complet ne suffit pas à obtenir une visite : il faut encore arriver tôt,
               et avoir réglé d&apos;avance les deux questions qui éliminent le plus de
@@ -150,14 +159,14 @@ export default function OutilDossier() {
                 votre place, dont un gratuit qui se demande avant même de visiter :{" "}
                 <Link
                   href="/guides/louer-sans-garant"
-                  className="text-accent underline underline-offset-4"
+                  className="lien"
                 >
                   louer sans garant
                 </Link>
                 . Si vous avez quelqu&apos;un, sachez ce qu&apos;il signe :{" "}
                 <Link
                   href="/guides/garant-caution"
-                  className="text-accent underline underline-offset-4"
+                  className="lien"
                 >
                   le garant et l&apos;acte de cautionnement
                 </Link>
@@ -169,7 +178,7 @@ export default function OutilDossier() {
                 diagonale. Le{" "}
                 <Link
                   href="/outils/message-de-candidature"
-                  className="text-accent underline underline-offset-4"
+                  className="lien"
                 >
                   générateur de message
                 </Link>{" "}
@@ -181,7 +190,7 @@ export default function OutilDossier() {
                 la charge de la preuve se partage :{" "}
                 <Link
                   href="/guides/refus-de-dossier"
-                  className="text-accent underline underline-offset-4"
+                  className="lien"
                 >
                   le refus de dossier
                 </Link>

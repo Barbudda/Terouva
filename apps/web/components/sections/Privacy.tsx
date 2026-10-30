@@ -1,34 +1,39 @@
 import Link from "next/link";
 import { PRIVACY } from "@/lib/content";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PapierLarge } from "@/components/layout/coquilles/PapierLarge";
 
+/**
+ * La confidentialité, coquille B, composée comme une note signée : le
+ * paragraphe étroit, et dessous, en `.champ`, les faits techniques séparés
+ * par des points médians. La seconde voix porte la fiche d'identité des
+ * données, en quatre lignes.
+ */
 export function Privacy() {
   return (
-    <section id="donnees" className="px-4 pb-16 sm:px-6 md:pb-24">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-12">
-        <div className="monte md:col-span-5">
-          <SectionHeading eyebrow={PRIVACY.eyebrow} lead={PRIVACY.titleLead} tail={PRIVACY.titleTail}>
-            {PRIVACY.body}
-          </SectionHeading>
-          <Link
-            href="/confidentialite"
-            className="mt-6 inline-block font-semibold text-accent underline decoration-accent/30 underline-offset-[6px] hover:decoration-accent"
-          >
-            Lire la politique de confidentialité
-          </Link>
-        </div>
-
-        {/* Des filets, pas une carte : la liste se lit comme une fiche
-            d'identité, elle n'a pas besoin d'un cadre ni d'une ombre. */}
-        <dl className="monte divide-y divide-rule border-y border-rule md:col-span-6 md:col-start-7">
+    <PapierLarge
+      id="donnees"
+      mention={PRIVACY.eyebrow}
+      depart={3}
+      secondeVoix={
+        <>
+          <dl>
           {PRIVACY.points.map((p) => (
-            <div key={p.label} className="grid gap-1 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
-              <dt className="text-[15px] text-ink-3">{p.label}</dt>
-              <dd className="font-medium text-ink">{p.value}</dd>
+            <div key={p.label} className="border-t border-rule py-3 first:border-t-0 first:pt-0">
+              <dt className="champ text-ink-3">{p.label}</dt>
+              <dd className="mt-1 text-ink-2">{p.value}</dd>
             </div>
           ))}
-        </dl>
-      </div>
-    </section>
+          </dl>
+          <p className="pt-4">
+            <Link href="/confidentialite" className="lien">
+              Lire la politique de confidentialité
+            </Link>
+          </p>
+        </>
+      }
+    >
+      <p>{PRIVACY.body}</p>
+      <p className="champ mt-6 text-ink-3">Aucun serveur · Données locales · Aucun traceur</p>
+    </PapierLarge>
   );
 }

@@ -1,20 +1,17 @@
 import { ImageResponse } from "next/og";
-import { domaineAffiche, polices } from "@/lib/og";
+import { ACCENT, INK, INK_2, INK_3, Marque, PAPER, PAPER_2, RULE_FORT, domaineAffiche, polices } from "@/lib/og";
 
 export const alt = "Terouva · Trouvez votre logement sans y passer vos journées";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Palette et polices du site (DESIGN.md). Les polices sont lues depuis le dépôt :
-// l'image est générée au build, sans appel réseau.
-const PAPER = "#FDFDFD";
-const INK = "#1B1D1E";
-const INK_2 = "#55595C";
-const ACCENT = "#C92D6A";
-const WASH = "#FBDAE7";
-
+/**
+ * L'image de partage de l'accueil : le monde papier, et un carré nuit qui
+ * porte la note, comme la vignette du panneau d'accueil. Les polices sont
+ * lues depuis le dépôt : l'image est générée au build, sans appel réseau.
+ */
 export default async function OG() {
-  const [bold, regular] = await polices();
+  const [fraunces, archivo] = await polices();
 
   return new ImageResponse(
     (
@@ -27,88 +24,97 @@ export default async function OG() {
           background: PAPER,
           color: INK,
           padding: "72px 80px",
-          fontFamily: "DM Sans",
+          fontFamily: "Archivo",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
-          <svg width="56" height="56" viewBox="0 0 32 32">
-            <rect width="32" height="32" rx="9" fill={ACCENT} />
-            <path
-              d="M8.5 16.5 16 9.5l7.5 7"
-              fill="none"
-              stroke="#FFFFFF"
-              strokeWidth="2.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="16" cy="21.5" r="2.4" fill="#FFFFFF" />
-          </svg>
-          <div style={{ fontSize: "40px", fontWeight: 700, letterSpacing: "-0.02em" }}>Terouva</div>
+          <Marque taille={56} />
+          <div style={{ fontFamily: "Fraunces", fontSize: "42px", letterSpacing: "-0.03em" }}>Terouva</div>
           <div
             style={{
-              marginLeft: "12px",
-              background: WASH,
-              color: "#A52254",
-              borderRadius: "999px",
-              padding: "8px 18px",
-              fontSize: "20px",
-              fontWeight: 700,
-              letterSpacing: "0.12em",
+              marginLeft: "20px",
+              paddingLeft: "20px",
+              borderLeft: `1px solid ${RULE_FORT}`,
+              color: INK_3,
+              fontSize: "19px",
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
               display: "flex",
             }}
           >
-            BIENTÔT DISPONIBLE
+            Bientôt disponible
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", marginTop: "auto" }}>
-          <div
-            style={{
-              fontSize: "82px",
-              fontWeight: 700,
-              lineHeight: 1,
-              letterSpacing: "-0.03em",
-              maxWidth: "1000px",
-              display: "flex",
-              flexWrap: "wrap",
-            }}
-          >
-            <span>Trouvez votre logement&nbsp;</span>
-            <span style={{ color: ACCENT }}>sans y passer vos journées.</span>
+        <div style={{ display: "flex", marginTop: "auto", alignItems: "flex-end", gap: "48px" }}>
+          <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+            <div
+              style={{
+                fontFamily: "Fraunces",
+                fontSize: "80px",
+                lineHeight: 0.98,
+                letterSpacing: "-0.025em",
+                maxWidth: "860px",
+                display: "flex",
+              }}
+            >
+              Trouvez votre logement sans y passer vos journées.
+            </div>
+            <div
+              style={{
+                fontSize: "27px",
+                color: INK_2,
+                marginTop: "26px",
+                maxWidth: "820px",
+                lineHeight: 1.35,
+              }}
+            >
+              Les annonces qui vous correspondent, notées sur 100, avec un message prêt à envoyer.
+              Tout reste sur votre ordinateur.
+            </div>
           </div>
+
           <div
             style={{
-              fontSize: "30px",
-              color: INK_2,
-              marginTop: "28px",
-              maxWidth: "940px",
-              lineHeight: 1.35,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              width: "168px",
+              height: "168px",
+              background: INK,
+              color: PAPER,
+              padding: "18px",
             }}
           >
-            Les annonces qui vous correspondent, classées, avec un message prêt à envoyer. Tout
-            reste sur votre ordinateur.
+            <div style={{ fontSize: "16px", letterSpacing: "0.04em", color: "#9EA3A6" }}>NOTE</div>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+              <div style={{ fontSize: "72px", lineHeight: 1 }}>97</div>
+              <div style={{ fontSize: "18px", color: "#9EA3A6" }}>/100</div>
+            </div>
           </div>
         </div>
 
         <div
           style={{
             display: "flex",
-            marginTop: "44px",
+            justifyContent: "space-between",
+            marginTop: "40px",
             paddingTop: "22px",
-            borderTop: `2px solid ${WASH}`,
+            borderTop: `1px solid ${RULE_FORT}`,
             fontSize: "24px",
             color: INK_2,
           }}
         >
-          {domaineAffiche()}
+          <div>{domaineAffiche()}</div>
+          <div style={{ color: ACCENT, background: PAPER_2, padding: "0 10px" }}>Gratuit pendant l&apos;essai</div>
         </div>
       </div>
     ),
     {
       ...size,
       fonts: [
-        { name: "DM Sans", data: bold, weight: 700, style: "normal" },
-        { name: "DM Sans", data: regular, weight: 400, style: "normal" },
+        { name: "Fraunces", data: fraunces, weight: 400, style: "normal" },
+        { name: "Archivo", data: archivo, weight: 400, style: "normal" },
       ],
     },
   );

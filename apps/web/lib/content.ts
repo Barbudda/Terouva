@@ -1,13 +1,41 @@
-export const NAV_LINKS = [
-  { href: "#comment", label: "Comment ça marche" },
-  { href: "#fonctions", label: "Ce que fait Terouva" },
-  { href: "/outils", label: "Outils gratuits" },
-  { href: "/guides", label: "Guides" },
+/**
+ * Le masthead est un en-tête de publication : trois colonnes intitulées, pas
+ * une rangée de liens. Chaque colonne dit à quel monde elle mène : l'outil,
+ * les guides, les droits. Les intitulés sont en capitales monospace (`.champ`).
+ */
+export const NAV_COLONNES = [
+  {
+    titre: "L'outil",
+    liens: [
+      { href: "#comment", label: "Comment ça marche" },
+      { href: "#fonctions", label: "Ce que fait Terouva" },
+      { href: "/outils", label: "Outils gratuits" },
+      { href: "#inscription", label: "Être prévenu" },
+    ],
+  },
+  {
+    titre: "Les guides",
+    liens: [
+      { href: "/guides/dossier-de-location", label: "Le dossier de location" },
+      { href: "/guides/louer-sans-garant", label: "Louer sans garant" },
+      { href: "/guides/repondre-a-une-annonce-de-location", label: "Répondre à une annonce" },
+      { href: "/guides", label: "Tous les guides" },
+    ],
+  },
+  {
+    titre: "Vos droits",
+    liens: [
+      { href: "/guides/depot-de-garantie", label: "Le dépôt de garantie" },
+      { href: "/guides/preavis-location", label: "Le préavis" },
+      { href: "/guides/etat-des-lieux", label: "L'état des lieux" },
+      { href: "/guides/refus-de-dossier", label: "Un refus de dossier" },
+    ],
+  },
 ];
 
 /**
- * Titres en deux morceaux : le second passe en rose, comme sur la référence.
- * Le texte reste au vouvoiement, simple et sans promesse invérifiable.
+ * Titres en deux morceaux, lus d'un seul tenant. Le texte reste au
+ * vouvoiement, simple et sans promesse invérifiable.
  */
 export const HERO = {
   eyebrow: "Bientôt disponible",
@@ -21,6 +49,55 @@ export const HERO = {
     "Vos données restent chez vous",
   ],
   caption: "Quatre annonces d'exemple, notées sur 100 pour une recherche de 2 pièces à Lyon sous 950 €.",
+  /** La mention au-dessus du titre, dans le panneau d'accueil. */
+  mention: "France · 2026",
+  /** Les trois lignes sous le titre, dans le panneau. */
+  panneau:
+    "Terouva repère les annonces qui vous correspondent, les note, et prépare votre message. Vous relisez, vous envoyez. Tout reste sur votre ordinateur.",
+};
+
+/**
+ * La pièce à conviction du plein cadre : une annonce de location, affichée en
+ * grand, avec ce que Terouva en extrait. C'est l'annonce vedette de la
+ * démonstration, pas une capture d'un site tiers : ni logotype, ni habillage,
+ * ni nom, ni téléphone. Le dépôt de garantie vaut un mois hors charges, comme
+ * la loi le plafonne pour un logement vide.
+ */
+export const ANNONCE_PIECE = {
+  titre: "T2 lumineux avec balcon, Croix-Rousse",
+  loyer: 890,
+  charges: 60,
+  surface: 42,
+  pieces: 2,
+  etage: "3e étage, ascenseur",
+  ville: "Lyon 4e",
+  publie: "il y a 3 min",
+  auteur: "Particulier",
+  photos: 6,
+  description: [
+    "Appartement lumineux de 42 m² au 3e étage avec ascenseur, séjour exposé sud, balcon, cuisine équipée et une chambre. Métro Croix-Rousse à deux pas.",
+    "Charges de 60 € comprises (eau froide, entretien des parties communes). Dépôt de garantie : 830 €. Disponible à partir du 1er décembre. Logement non meublé.",
+  ],
+  /** Ce que l'outil lit dans l'annonce, dans l'ordre où il le lit. */
+  extraits: [
+    { champ: "Loyer", valeur: "890 € CC" },
+    { champ: "Hors charges", valeur: "830 €" },
+    { champ: "Surface", valeur: "42 m²" },
+    { champ: "Ascenseur", valeur: "oui" },
+    { champ: "Encadrement", valeur: "Lyon, zone soumise" },
+  ],
+};
+
+/**
+ * La bande nuit de l'instrument. Le flux reprend les trois étapes, parce que
+ * ce sont elles ; les libellés sont en `.champ`.
+ */
+export const INSTRUMENT = {
+  titre: "Une note sur 100, et ce qui la compose.",
+  texte:
+    "Chaque annonce est comparée à ce que vous cherchez, critère par critère. La note se lit, et surtout elle s'explique : aucun point n'est donné sans dire pourquoi.",
+  flux: ["Votre dossier", "La veille", "La réponse"],
+  cta: { label: "Voir la démonstration", href: "/app?demo=1" },
 };
 
 export const SIGNUP = {

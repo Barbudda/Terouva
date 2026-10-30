@@ -2,99 +2,80 @@
 
 import Link from "next/link";
 import { MESSAGES, type MessageExemple } from "@/lib/exemples";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Mosaique, gabarit } from "@/components/layout/coquilles/Mosaique";
 import { useEnVue } from "@/components/ui/useEnVue";
 
 /**
- * Les messages que Terouva écrit, qui défilent.
+ * Les messages que Terouva écrit, coquille E : la mosaïque défilante.
  *
  * Ce ne sont pas des avis de clients : le produit n'est pas sorti, et inventer
- * des témoignages tromperait les visiteurs qui laissent leur adresse. Ce sont
- * les brouillons produits par le moteur de messages pour les annonces de la
- * section précédente, recopiés tels quels. C'est à la fois plus honnête et plus
- * convaincant : on montre le travail, pas un compliment.
+ * des témoignages tromperait les visiteurs. Ce sont les brouillons produits par
+ * le moteur pour six profils, recopiés tels quels. On montre le travail, pas
+ * un compliment.
+ *
+ * Les fiches : fond papier teinté, un filet, aucun arrondi, aucune ombre, le
+ * nom de l'expéditeur en `.champ`, le message en Archivo 400. Hauteurs et
+ * largeurs inégales d'une fiche à l'autre, par le gabarit de la coquille.
  */
 export function Messages() {
   const { ref, vu } = useEnVue<HTMLDivElement>({ une: false, marge: "200px" });
 
   return (
-    <section id="messages" className="bg-paper-2 py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="Le plus pénible, en moins"
-          lead="Terouva écrit le message,"
-          tail="vous le relisez."
-          align="center"
-          className="monte max-w-3xl"
-        >
-          Il ne récite pas l&apos;annonce à celui qui l&apos;a écrite. Il donne ce avec quoi un
-          propriétaire trie vraiment : qui vous êtes, ce que vaut votre dossier, combien vous serez,
-          à partir de quand, et quand vous pouvez visiter. Trois tons au choix, et vous gardez la
-          main sur le texte.
-        </SectionHeading>
-      </div>
-
-      <div
-        ref={ref}
-        data-joue={vu ? "oui" : "non"}
-        className="ruban monte mt-12"
-        role="group"
-        aria-label="Exemples de messages écrits par Terouva"
-      >
-        <div className="ruban-piste">
-          <ul className="ruban-jeu">
-            {MESSAGES.map((m) => (
-              <Fiche key={m.annonce} message={m} />
-            ))}
-          </ul>
-          {/* Deuxième jeu : il n'existe que pour que la boucle soit continue. */}
-          <ul className="ruban-jeu ruban-double" aria-hidden>
-            {MESSAGES.map((m) => (
-              <Fiche key={`bis-${m.annonce}`} message={m} />
-            ))}
-          </ul>
+    <section id="messages" className="py-pas">
+      <div className="grille">
+        <div className="col-span-12 md:col-span-6 md:col-start-5">
+          <p className="mention">Le plus pénible, en moins</p>
+          <h2 className="titre mt-3 text-titre-2 text-ink">Terouva écrit le message, vous le relisez.</h2>
+          <p className="mt-5 max-w-[34rem] leading-relaxed text-ink-2">
+            Il ne récite pas l&apos;annonce à celui qui l&apos;a écrite. Il donne ce avec quoi un
+            propriétaire trie vraiment : qui vous êtes, ce que vaut votre dossier, combien vous
+            serez, à partir de quand, et quand vous pouvez visiter. Trois tons au choix, et vous
+            gardez la main sur le texte.
+          </p>
         </div>
       </div>
 
-      <div className="mx-auto mt-8 max-w-6xl px-4 text-center sm:px-6">
-        <p className="text-sm text-ink-3">
-          Six brouillons, écrits par Terouva pour les annonces d&apos;exemple. Aucun n&apos;est
-          envoyé sans vous.
-        </p>
-        <Link
-          href="/outils/message-de-candidature"
-          className="mt-4 inline-block font-semibold text-accent underline decoration-accent/30 underline-offset-[6px] transition-colors hover:decoration-accent"
-        >
-          Écrire le vôtre maintenant, gratuitement
-        </Link>
+      <Mosaique
+        refExterne={ref}
+        joue={vu}
+        ariaLabel="Exemples de messages écrits par Terouva"
+        className="mt-12"
+        tuiles={MESSAGES.map((m, i) => (
+          <Fiche key={m.annonce} message={m} rang={i} />
+        ))}
+      />
+
+      <div className="grille mt-8">
+        <div className="col-span-12 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 md:col-span-6 md:col-start-5">
+          <p className="marge">
+            Six brouillons, écrits par Terouva pour les annonces d&apos;exemple. Aucun n&apos;est
+            envoyé sans vous.
+          </p>
+          <Link href="/outils/message-de-candidature" className="lien text-[15px]">
+            Écrire le vôtre, gratuitement
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
 
-function Fiche({ message }: { message: MessageExemple }) {
+function Fiche({ message, rang }: { message: MessageExemple; rang: number }) {
+  const [, ...corps] = message.texte.split("\n\n");
+  const signature = corps.at(-1)?.split("\n")[0] ?? "";
   return (
-    // Une fiche garde son bord : c'est un objet distinct qui défile sur la bande.
-    // Elle perd son ombre, réservée au seul panneau de démonstration.
-    <li className="ruban-fiche flex flex-col rounded-lg border border-rule bg-card p-5">
-      <div className="flex items-start justify-between gap-3 border-b border-rule pb-3">
-        <div className="min-w-0">
-          <p className="truncate font-semibold text-ink">{message.annonce}</p>
-          <p className="tabular mt-0.5 text-[13px] text-ink-3">
-            {message.lieu} · {message.prix} €
-          </p>
-        </div>
-        <p className="tabular display shrink-0 text-xl text-ink-2">{message.note}</p>
+    <li className="ruban-fiche flex flex-col border border-rule bg-paper-2 p-5" style={gabarit(rang)}>
+      <div className="flex items-baseline justify-between gap-3 border-b border-rule pb-3">
+        <p className="champ truncate text-ink">{signature}</p>
+        <p className="champ shrink-0 text-ink-3">Ton {message.ton.toLowerCase()}</p>
       </div>
 
-      <p className="ruban-texte mt-3 whitespace-pre-line text-[14px] leading-relaxed text-ink-2">
+      <p className="ruban-texte mt-4 text-[14px] leading-relaxed whitespace-pre-line text-ink-2">
         {message.texte}
       </p>
 
-      {/* Le libellé était en capitales espacées et en magenta : le sur-titre
-          coloré que le DESIGN.md interdit, répété six fois. */}
-      <p className="mt-3 shrink-0 text-[13px] font-medium text-ink-3">
-        Ton {message.ton.toLowerCase()}
+      <p className="champ mt-3 shrink-0 text-ink-3">
+        Pour « {message.annonce} » · {message.note}/100
       </p>
     </li>
   );

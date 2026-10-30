@@ -1,102 +1,117 @@
 # Direction artistique de Terouva
 
-> Écrit le 21 octobre 2026, après le constat qu'il n'existait pas. C'est la cause
-> racine du reproche fait au site : sans direction écrite, chaque écran a été
-> tranché par défaut, et les défauts d'un outil de génération se ressemblent tous.
+> Écrit le 21 octobre 2026, réécrit le 30 octobre 2026 après la seconde refonte
+> graphique. La première version corrigeait des défauts ; celle-ci pose un parti
+> pris. Un site d'où l'on a retiré tout ce qui dépasse est propre et
+> interchangeable : la direction ne naît pas de la suppression des erreurs.
 
-## Le mot de ton : **net**
+## Le parti pris, en une phrase
 
-Terouva sert à récupérer du temps et à connaître ses droits dans une recherche de
-logement. Le site doit donner la même impression que le produit : une décision
-déjà prise, pas une proposition qui s'excuse. Net veut dire : une idée par écran,
-une couleur qui compte, une typographie qui assume sa taille, et rien qui clignote
-pour attirer l'attention.
+**Terouva est un dossier de presse immobilier dans lequel est encastré un
+instrument de mesure.** Deux mondes, visuellement opposés, et le passage de
+l'un à l'autre correspond à un changement de nature du contenu : le papier
+parle, l'instrument mesure.
 
-Ce qui vient de « net », concrètement : des titres d'un seul tenant, des filets
-plutôt que des cadres, des chiffres posés dans la marge plutôt qu'enfermés dans
-des bulles, et du blanc qui sépare au lieu de bordures qui cernent.
-
-## Typographie : deux voix, pas une
-
-Le site n'avait qu'une police, en graisse 800 pour tous les titres. C'est la
-silhouette la plus reconnaissable d'une page produit générée : un gros grotesque
-noir, serré, sur fond clair.
-
-| Rôle | Police | Pourquoi |
+| | Monde papier | Monde nuit |
 |---|---|---|
-| **Titres** | **Newsreader** (serif), 400 à 600 | Dessinée par Production Type pour la lecture à l'écran. Empattements francs, contraste marqué : elle a le ton d'une notice officielle, ce qui est exactement le registre des guides. Elle n'est pas encore partout. |
-| **Interface et texte courant** | **DM Sans**, 400 à 700 | Compacte, très lisible en petit. Elle reste pour la navigation, les boutons, les étiquettes et le corps de texte. |
+| Ce qu'il porte | les guides, les droits, le discours, la confiance | l'outil, le score, la donnée, la démonstration |
+| Fond | papier chaud `#f7f3ed` | encre `#17181a` |
+| Voix | Fraunces à fort contraste, grandes tailles, beaucoup de vide | Archivo et DM Mono, petites tailles, densité |
+| Rythme | lent, aéré, asymétrique (`--spacing-pas`) | serré, aligné, tabulaire (`--spacing-pas-nuit`) |
+| Preuve | filets, numéros dans la marge, références d'articles de loi | chiffres, jauges, horodatages |
 
-Inter, Geist et Space Grotesk restent exclues (règle projet). Les titres passent
-de la graisse 800 à **500-600** : la serif porte l'autorité, elle n'a pas besoin
-d'être épaissie.
+Trois gestes tiennent la différence entre « correct » et « on s'arrête de
+défiler » : **le chevauchement** (le panneau d'accueil mord le visuel, le cadran
+dépasse de sa bande, le logotype est coupé par le bord bas), **la typographie
+comme matière** (le logotype du pied remplit la largeur), **l'index plutôt que
+la carte** (toute liste est une suite de lignes à filets, numéro à gauche,
+mention à droite).
 
-## Couleur : l'accent redevient rare
+## Typographie : trois voix, une par fonction
 
-La palette ne change pas. Son **usage**, oui. Le magenta `#c92d6a` servait à sept
-rôles à la fois : moitié de titre, sur-titre, puces, coches, ombres, pastilles,
-boutons. Un accent qui est partout n'accentue plus rien, et le site devient rose.
+| Voix | Police | Où, exclusivement |
+|---|---|---|
+| Titre | **Fraunces** (variable, axes SOFT 0, WONK 1, opsz) | niveaux 1 et 2 du monde papier, chiffres clés, mentions italiques, logotype, numéros dans la marge |
+| Texte et interface | **Archivo** | corps, navigation, boutons, libellés, niveaux 3 et au-delà, **tous les titres du monde nuit** |
+| Instrument | **DM Mono** | monde nuit : champs (`.champ`), scores, horodatages ; et les références d'articles de loi (`.loi`) dans les guides |
 
-**L'accent est désormais réservé à quatre choses :**
+Interdits : graisse au-dessus de 500 sur Fraunces ; capitales espacées sur un
+titre ; `text-transform: uppercase` sur Fraunces. Les capitales sont réservées
+à `.champ`, en monospace. La serif n'entre pas dans le monde nuit, la monospace
+n'entre pas dans le monde papier hors `.loi`.
 
-1. le bouton d'action principal de l'écran, un seul ;
-2. les liens dans le corps de texte ;
-3. l'état actif, le survol d'un élément cliquable, ou le focus ;
-4. deux moments voulus par Hugo dans son brief d'origine, et eux seuls : les
-   **chiffres clés** du bandeau de l'accueil, et le **panneau d'appel** en aplat.
-   Ils tiennent précisément parce que le reste de la page n'est plus coloré.
+Classes : `.titre` / `.titre--petit`, `.mention`, `.enonce` (38 rem), `.marge`,
+`.champ`, `.loi`, `.numero`. Échelles dans `@theme` (`--text-titre-1` …
+`--text-nuit-champ`), fluides entre 390 et 1440 px.
 
-Partout ailleurs : encre (`--color-ink`, `--color-ink-2`, `--color-ink-3`) et
-filets (`--color-rule`). Les coches, les puces, les marqueurs de liste et les
-sur-titres passent à l'encre.
+## Couleur : deux bases par monde, un accent par monde
 
-| Token | Rôle |
-|---|---|
-| `--color-paper` `#fdfdfd` | fond général, jamais le blanc pur |
-| `--color-paper-2` `#fbf7f8` | fond teinté, pour séparer une section sans la cadrer |
-| `--color-ink` `#1b1d1e` | titres et texte fort |
-| `--color-ink-2` `--color-ink-3` | texte courant, mentions |
-| `--color-rule` `#e7e7ee` | filets horizontaux, séparateurs |
-| `--color-accent` `#c92d6a` | les trois rôles ci-dessus, rien d'autre |
+Le fait qui décide de tout : `#c92d6a` sur `#17181a` donne 3,58:1. Le magenta
+de marque ne porte donc jamais de texte sur fond sombre. Le monde nuit reçoit
+`--color-night-accent: #e85a8f` (5,32:1), et le texte d'un bouton nuit est à
+l'encre (4,8:1), jamais en blanc (3,75:1).
 
-## Interdits, nommés
+**L'accent, quatre emplois et pas un cinquième** : le bouton d'action principal
+d'un écran (un seul), les liens dans le corps, l'état actif ou le focus, le
+remplissage de la jauge de score. Chevrons, puces, coches, filets, icônes : à
+l'encre. **Le vert a disparu des scores** : un score se dit par sa valeur et sa
+jauge.
 
-Ce sont les tics relevés sur le site livré. Ils ne reviennent pas.
+Tokens dans `apps/web/app/globals.css`, tous les rapports de contraste calculés
+en commentaire. Aucune couleur en dur dans les composants ; `lib/og.tsx` reprend
+les valeurs pour les images de partage.
 
-- **Le mot accentué dans un titre.** Un `<span className="text-accent">` qui
-  colore la seconde moitié d'un H1. C'était sur huit pages. Un titre se lit d'un
-  seul tenant, dans une seule couleur.
-- **Les pastilles rondes numérotées.** Un chiffre dans un cercle bordé, répété en
-  colonne. Les étapes se numérotent dans la marge, en serif, sans contenant.
-- **Le sur-titre en capitales colorées.** « POURQUOI TEROUVA » en magenta espacé
-  au-dessus de chaque section. Devient une mention discrète à l'encre, ou rien.
-- **L'ombre colorée** sous les boutons. Une ombre neutre, à une seule direction,
-  ou pas d'ombre.
-- **Tout arrondir.** Les pilules restent réservées aux champs et au bouton
-  principal ; les cartes et panneaux gardent un arrondi franc mais mesuré.
+## Grille et rythme
 
-## Densité : aérée, et tenue
+Douze colonnes (`.grille`), 88 rem au plus. **Deux sections consécutives ne
+démarrent jamais à la même colonne.** Mesure de lecture : 38 rem pour l'énoncé,
+44 rem pour la prose des guides. Aucun arrondi au-delà de 4 px.
 
-Une seule densité sur tout le site : aérée. Espacements en multiples de 4 px,
-rythme vertical régulier entre sections (96 px de respiration sur desktop, 64 px
-sur mobile). Mesure de lecture à 44 rem maximum, jamais plus large.
+## Six coquilles, pas une de plus
 
-## Lumière
+`apps/web/components/layout/coquilles/`. Les sections les consomment, elles ne
+les réinventent pas. Chacune apparaît au plus deux fois sur l'accueil, jamais
+deux fois de suite.
 
-Fond `paper`, surfaces `card` à peine plus claires, séparation par **filets** et
-par le vide plutôt que par des ombres. Une seule ombre douce, verticale, réservée
-aux éléments qui flottent vraiment (dialogue plein écran). Pas d'ombre portée sur
-les cartes au repos.
+| | Coquille | Sur l'accueil |
+|---|---|---|
+| A | `PleinCadre` : visuel bord à bord, panneau chevauchant, ligne de base | l'accueil (annonce composée en HTML, pas de photographie) |
+| B | `PapierLarge` : énoncé en colonne 2 ou 3, seconde voix plus bas à droite | le problème, la confidentialité |
+| C | `IndexFilets` : lignes numérotées à filets, mention à droite | ce que fait l'outil, guides et outils |
+| D | `BandeNuit` : fond encre, densité, un élément qui dépasse | l'instrument (cadran, décomposition, annonces, vidéo), questions et inscription |
+| E | `Mosaique` : tuiles de tailles inégales, défilantes | les messages |
+| F | `PiedLogotype` : colonnes intitulées, logotype coupé par le bord bas | le pied |
+
+Le masthead est un en-tête de publication : logotype grand, trois colonnes
+intitulées, non collant ; une barre compacte revient après 70 vh. Sur petit
+écran, un panneau plein écran qui piège le focus et se ferme à Échap.
 
 ## Mouvement
 
-Inchangé : révélations au défilement par `animation-timeline: view()`, sans
-JavaScript, sous `@media (prefers-reduced-motion: no-preference)`. Durées de 150 à
-300 ms, easing sur mesure. Le mouvement sert à hiérarchiser l'arrivée du contenu,
-jamais à décorer.
+Une courbe, `--ease-terouva: cubic-bezier(0.22, 0.75, 0.3, 1)`. Trois gestes :
+le filet se trace (`.filet-trace`, lié au défilement), le bloc monte (`.monte`,
+cinq frères au plus), le cadran se remplit (une fois, 900 ms, décomposition à
+80 ms d'écart). Au survol, une seule chose bouge par élément. `@media print`
+révèle tout et rend le monde nuit clair ; `prefers-reduced-motion` éteint tout.
 
-## Preuve
+## Imagerie
 
-Toute modification d'écran se vérifie par capture à 375, 768 et 1440 px, et par un
-passage Lighthouse mobile. Les chiffres vont dans le message de fin. Un audit rouge
-se corrige, il ne se commente pas.
+Pas de photographie, ni de stock, ni d'image générée. Le visuel plein cadre est
+fait de la matière du produit : une annonce, un écran. Un seul cercle sur tout
+le site, le cadran.
+
+## Ce qu'on ne fait pas
+
+Une bande sombre posée sur une page claire banale ; des cartes arrondies
+remplacées par des cartes carrées (la réponse est de retirer un niveau de
+contenant) ; la serif dans le monde nuit ; animer tout ce qui est survolable ;
+toucher aux textes des guides ou au balisage pour des raisons de mise en page.
+
+## D'où vient cette direction
+
+Trois sources du 30 octobre 2026, dont on prend la structure, jamais l'effet :
+une maquette d'architecture d'intérieur (masthead à plan du site, panneau
+chevauchant, index à filets, logotype géant), une maquette de complément
+alimentaire (bande instrumentée, module circulaire, monospace ; refusés : le halo
+violet et les panneaux vitrés), un reel sur la couleur (deux bases sages, un
+accent inattendu sur petite surface).

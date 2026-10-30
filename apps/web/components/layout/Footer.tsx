@@ -1,40 +1,32 @@
 import Link from "next/link";
 import { FOOTER } from "@/lib/content";
-import { Logo } from "@/components/ui/Logo";
+import { PiedLogotype } from "@/components/layout/coquilles/PiedLogotype";
 
+/**
+ * Le pied de page consomme la coquille F. Les quatre colonnes viennent de
+ * `FOOTER.columns` ; la ligne du bas dit l'éditeur, renvoie aux textes
+ * légaux (les mentions légales manquent encore, voir PROMPT-VISIBILITE.md) et
+ * rappelle que Terouva n'a aucun lien avec Leboncoin.
+ */
 export function Footer() {
   return (
-    <footer className="border-t border-rule px-4 py-12 sm:px-6 md:py-16">
-      <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
-        <div className="space-y-4">
-          <Logo />
-          <p className="max-w-xs leading-relaxed text-ink-2">{FOOTER.signature}</p>
-          <p className="text-sm text-accent">{FOOTER.local}</p>
-        </div>
-
-        {FOOTER.columns.map((col) => (
-          <nav key={col.title} aria-label={col.title}>
-            <p className="text-[13px] font-bold tracking-wider text-ink uppercase">{col.title}</p>
-            <ul className="mt-3 space-y-0.5">
-              {col.links.map((l) => (
-                <li key={l.label}>
-                  <Link
-                    href={l.href}
-                    className="inline-block py-1.5 text-ink-2 transition-colors hover:text-accent"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        ))}
-      </div>
-
-      <div className="mx-auto mt-12 flex max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-rule pt-6 text-sm text-ink-3">
-        <p>Terouva · © {new Date().getFullYear()}</p>
-        <p>{FOOTER.disclaimer}</p>
-      </div>
-    </footer>
+    <PiedLogotype
+      colonnes={FOOTER.columns.map((c) => ({ titre: c.title, liens: c.links }))}
+      ligne={
+        <>
+          <p>Terouva, éditeur du site · {FOOTER.local}</p>
+          <p className="flex flex-wrap gap-x-4">
+            <Link href="/confidentialite" className="hover:text-ink">
+              Confidentialité
+            </Link>
+            <Link href="/cgu" className="hover:text-ink">
+              Conditions d&apos;utilisation
+            </Link>
+            <span>{FOOTER.disclaimer}</span>
+            <span>{new Date().getFullYear()}</span>
+          </p>
+        </>
+      }
+    />
   );
 }

@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { Questions } from "@/components/ui/Questions";
+import { Sommaire } from "@/components/guides/Sommaire";
 import { DonneesStructurees, filAriane } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
@@ -31,10 +32,21 @@ export type Guide = {
   sommaire?: Array<{ id: string; titre: string }>;
 };
 
+/** La rubrique affichée en mention, au-dessus du titre. */
+const RUBRIQUES: Record<Guide["etape"], string> = {
+  avant: "Avant de visiter",
+  candidature: "Au moment de candidater",
+  apres: "Une fois le logement trouvé",
+};
+
 /**
- * Cadre commun des guides : fil d'Ariane, titre, date de vérification,
- * sources, balisage `Article` et `BreadcrumbList`, puis l'appel à la liste
- * d'attente.
+ * Cadre commun des guides : le monde papier à l'état pur.
+ *
+ * Un en-tête d'article (rubrique en `.champ`, titre, chapeau en énoncé, ligne
+ * de métadonnées à filets), puis trois colonnes sur grand écran : le sommaire
+ * collé à gauche, la prose au centre sur 44 rem, et une marge de droite qui ne
+ * sert qu'aux notes (les `.note` y flottent, voir `globals.css`). Cette
+ * troisième colonne est ce qui donne au guide l'allure d'un ouvrage.
  *
  * La date de vérification n'est pas décorative. Ces pages citent du droit qui
  * change ; afficher quand on l'a relu, et d'où ça vient, c'est ce qui distingue
@@ -45,9 +57,6 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
   const etapes = [
     { nom: "Accueil", chemin: "/" },
     { nom: "Guides", chemin: "/guides" },
-    // Le titre court, pas le long : le fil d'Ariane reprenait la phrase entière
-    // du titre, qui passait sur deux lignes dès le mobile et répétait mot pour
-    // mot le H1 placé juste en dessous.
     { nom: guide.titreSeo, chemin: guide.chemin },
   ];
 
@@ -59,10 +68,8 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
         "@id": `${siteUrl}${guide.chemin}#article`,
         headline: guide.titre,
         description: guide.description,
-        // Un `Article` sans image est incomplet pour Google, et c'était le cas
-        // des trois guides : trois erreurs sur un audit par ailleurs propre.
-        // Chaque guide a déjà son image de partage générée au build ; c'est
-        // elle qu'on déclare, plutôt que d'en inventer une.
+        // Un `Article` sans image est incomplet pour Google. Chaque guide a
+        // son image de partage générée au build ; c'est elle qu'on déclare.
         image: [`${siteUrl}${guide.chemin}/opengraph-image`],
         inLanguage: "fr-FR",
         datePublished: guide.publieLe,
@@ -101,78 +108,71 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
       <DonneesStructurees data={filAriane(etapes)} />
       <Nav home={false} />
 
-      <main className="px-4 pt-10 pb-16 sm:px-6 md:pt-14">
-        <div className="mx-auto max-w-5xl">
-          <Ariane etapes={etapes} />
-
-          <h1 className="display mt-5 max-w-3xl text-[2.1rem] text-ink sm:text-[2.75rem]">
-            {guide.titre}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">{guide.resume}</p>
-          <p className="mt-4 text-sm text-ink-3">
-            Vérifié le {verifieLe} · {guide.lecture} min de lecture
-          </p>
-
-          <div className="mt-10 gap-14 lg:flex lg:items-start">
-            <article className="article">{children}</article>
-
-            {guide.sommaire && guide.sommaire.length > 0 && (
-              <nav
-                aria-label="Sommaire"
-                className="sticky top-28 hidden w-56 shrink-0 lg:block"
-              >
-                <p className="text-[13px] font-bold tracking-wider text-ink uppercase">
-                  Sur cette page
-                </p>
-                <ul className="mt-4 space-y-2.5 border-l border-rule pl-4 text-[14px] leading-snug">
-                  {guide.sommaire.map((s) => (
-                    <li key={s.id}>
-                      <a
-                        href={`#${s.id}`}
-                        className="text-ink-2 transition-colors hover:text-accent"
-                      >
-                        {s.titre}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            )}
+      <main className="pb-16">
+        <header className="grille pt-4 md:pt-6">
+          <div className="col-span-12 lg:col-span-9">
+            <Ariane etapes={etapes} />
+            <p className="champ mt-8 text-ink-3">{RUBRIQUES[guide.etape]}</p>
+            <h1 className="titre mt-4 max-w-[22ch] text-titre-2 text-ink">{guide.titre}</h1>
+            <p className="enonce mt-6 text-ink-2">{guide.resume}</p>
           </div>
+          <dl className="col-span-12 mt-8 flex flex-wrap gap-x-10 gap-y-3 border-y border-rule py-3 lg:col-span-9">
+            <Meta nom="Mis à jour le" valeur={verifieLe} />
+            <Meta nom="Lecture" valeur={`${guide.lecture} min`} />
+            {guide.sources && guide.sources.length > 0 && (
+              <Meta nom="Sources" valeur={`${guide.sources.length} officielle${guide.sources.length > 1 ? "s" : ""}`} />
+            )}
+          </dl>
+        </header>
 
-          {guide.sources && guide.sources.length > 0 && (
-            <section className="mt-14 max-w-[44rem] border-t border-rule pt-6">
-              <h2 className="text-[13px] font-bold tracking-wider text-ink uppercase">Sources</h2>
-              <ul className="mt-4 space-y-2 text-[15px] text-ink-2">
-                {guide.sources.map((s) => (
-                  <li key={s.url}>
-                    <a
-                      href={s.url}
-                      target="_blank"
-                      rel="noopener"
-                      className="text-accent underline underline-offset-4"
-                    >
-                      {s.nom}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </section>
+        <div className="grille mt-10 lg:mt-14">
+          {guide.sommaire && guide.sommaire.length > 0 && (
+            <aside className="hidden lg:col-span-2 lg:block">
+              <div className="sticky top-20">
+                <Sommaire entrees={guide.sommaire} />
+              </div>
+            </aside>
           )}
 
-          {/* Affichées, et pas seulement balisées : c'est la condition posée
-              par Google pour un bloc `FAQPage`, et c'est aussi ce qu'un
-              assistant cite le plus volontiers, parce qu'une réponse courte
-              sous sa question se reprend telle quelle. */}
-          <Questions questions={guide.questions ?? []} className="mt-16 max-w-[44rem]" />
+          <div className="col-span-12 lg:col-span-9 lg:col-start-4">
+            <article className="article article--marge">{children}</article>
 
-          <div className="max-w-[44rem]">
-            <FinDePage />
+            <div className="max-w-[44rem]">
+              {guide.sources && guide.sources.length > 0 && (
+                <section className="mt-14 border-t border-rule-fort pt-5">
+                  <h2 className="champ text-ink-3">Sources</h2>
+                  <ul className="mt-4 space-y-2 text-[15px] text-ink-2">
+                    {guide.sources.map((s) => (
+                      <li key={s.url}>
+                        <a href={s.url} target="_blank" rel="noopener" className="lien">
+                          {s.nom}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {/* Affichées, et pas seulement balisées : c'est la condition posée
+                  par Google pour un bloc `FAQPage`. */}
+              <Questions questions={guide.questions ?? []} className="mt-16" />
+
+              <FinDePage />
+            </div>
           </div>
         </div>
       </main>
 
       <Footer />
     </>
+  );
+}
+
+function Meta({ nom, valeur }: { nom: string; valeur: string }) {
+  return (
+    <div className="flex items-baseline gap-2">
+      <dt className="champ text-ink-3">{nom}</dt>
+      <dd className="champ text-ink">{valeur}</dd>
+    </div>
   );
 }

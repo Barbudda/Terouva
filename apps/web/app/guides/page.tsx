@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
+import { IndexFilets } from "@/components/layout/coquilles/IndexFilets";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
@@ -76,15 +77,15 @@ export default function Guides() {
       <DonneesStructurees data={filAriane(ARIANE)} />
       <Nav home={false} />
 
-      <main className="px-4 pt-10 pb-16 sm:px-6 md:pt-14">
-        <div className="mx-auto max-w-5xl">
+      <main className="pb-16">
+        <div className="cadre pt-4 md:pt-6">
           <Ariane etapes={ARIANE} />
 
-          <h1 className="display mt-5 max-w-3xl text-[2.1rem] text-ink sm:text-5xl">
+          <h1 className="titre mt-5 max-w-[22ch] text-titre-2 text-ink">
             Chercher un logement,{" "}
             sans y perdre son temps ni ses droits.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
+          <p className="enonce mt-6 text-ink-2">
             Des pages courtes sur ce qui bloque vraiment une recherche : le dossier, le garant, le
             premier message. Chacune indique sa date de vérification et ses sources, parce que ce
             sujet est plein de textes recopiés et périmés.
@@ -99,17 +100,17 @@ export default function Guides() {
             if (guides.length === 0) return null;
             return (
               <section key={cle} className="mt-14">
-                <h2 className="display text-2xl text-ink">{titre}</h2>
+                <h2 className="titre titre--petit text-[1.75rem] text-ink">{titre}</h2>
                 <p className="mt-2.5 max-w-2xl leading-relaxed text-ink-2">{chapo}</p>
                 <ul className="mt-6 divide-y divide-rule border-t border-rule">
                   {guides.map((g) => (
                     <li key={g.chemin}>
                       <Link href={g.chemin} className="group block py-6">
-                        <h3 className="display max-w-3xl text-xl text-ink transition-colors group-hover:text-accent">
+                        <h3 className="titre titre--petit max-w-3xl text-[1.375rem] text-ink transition-colors group-hover:text-accent-ink">
                           {g.titre}
                         </h3>
                         <p className="mt-2.5 max-w-2xl leading-relaxed text-ink-2">{g.resume}</p>
-                        <p className="mt-3 text-sm text-ink-3">{g.lecture} min de lecture</p>
+                        <p className="champ mt-3 text-ink-3">Guide · {g.lecture} min</p>
                       </Link>
                     </li>
                   ))}
@@ -119,7 +120,7 @@ export default function Guides() {
           })}
 
           <section className="mt-16 max-w-[44rem]">
-            <h2 className="display text-2xl text-ink">Par où commencer</h2>
+            <h2 className="titre titre--petit text-[1.75rem] text-ink">Par où commencer</h2>
             <p className="mt-4 leading-relaxed text-ink-2">
               Une recherche de logement se bloque presque toujours au même endroit, et dans le même
               ordre. Si vous démarrez, voici le chemin qui évite de découvrir un problème au moment
@@ -163,23 +164,22 @@ export default function Guides() {
           </section>
 
           <section className="mt-16">
-            <h2 className="display text-2xl text-ink">Et des outils, gratuits</h2>
-            <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-              {OUTILS.map((o) => (
-                <li key={o.chemin}>
-                  <Link href={o.chemin} className="card-soft group block h-full p-6">
-                    <h3 className="font-bold text-ink transition-colors group-hover:text-accent">
-                      {o.titre}
-                    </h3>
-                    <p className="mt-2 leading-relaxed text-ink-2">{o.resume}</p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <h2 className="titre titre--petit text-[1.75rem] text-ink">Et des outils, gratuits</h2>
+            <IndexFilets
+              className="mt-6 !px-0"
+              ariaLabel="Les outils"
+              lignes={OUTILS.map((o, i) => ({
+                numero: `0${i + 1}`,
+                titre: o.titre,
+                description: o.resume,
+                mention: "Ouvrir l'outil",
+                href: o.chemin,
+              }))}
+            />
           </section>
 
           <section className="mt-16 max-w-[44rem]">
-            <h2 className="display text-2xl text-ink">Comment ces guides sont écrits</h2>
+            <h2 className="titre titre--petit text-[1.75rem] text-ink">Comment ces guides sont écrits</h2>
             <p className="mt-4 leading-relaxed text-ink-2">
               Le sujet de la location est plein de pages recopiées les unes sur les autres, dont
               certaines citent des montants ou des délais abrogés depuis des années. Trois règles

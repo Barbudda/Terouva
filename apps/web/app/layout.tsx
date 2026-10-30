@@ -1,27 +1,41 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Newsreader } from "next/font/google";
+import { Archivo, DM_Mono, Fraunces } from "next/font/google";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
-// DM Sans porte l'interface : navigation, boutons, étiquettes, texte courant.
-// Inter et Geist sont exclues par les règles du projet.
-const dmSans = DM_Sans({
+/**
+ * Trois voix, une par fonction. Aucune n'assure le rôle d'une autre.
+ *
+ * Fraunces porte les titres du monde papier. C'est une serif variable dont
+ * deux axes ne servent jamais par défaut : SOFT et WONK. Réglée à WONK 1 dans
+ * `globals.css`, elle prend des formes irrégulières sur le g, le a et le y
+ * qu'aucune serif d'écran n'a. L'axe opsz fait son travail de taille optique :
+ * gros titre réglé gros, petit texte réglé petit.
+ */
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
   display: "swap",
+  variable: "--font-fraunces",
+  axes: ["SOFT", "WONK", "opsz"],
 });
 
-// Newsreader porte les titres. Le site n'avait qu'une police, en graisse 800 :
-// c'est la silhouette la plus reconnaissable d'une page produit générée, un gros
-// grotesque noir et serré sur fond clair. Une serif dessinée pour l'écran donne
-// aux titres le ton d'une notice officielle, qui est le registre des guides, et
-// n'a pas besoin d'être épaissie pour faire autorité. Voir DESIGN.md.
-const newsreader = Newsreader({
+/** Archivo : le texte, la navigation, les boutons, les libellés. */
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-newsreader",
   display: "swap",
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  variable: "--font-archivo",
+});
+
+/**
+ * DM Mono : la voix de l'instrument. Monde nuit seulement (champs, scores,
+ * horodatages), plus les références d'articles de loi dans les guides, où
+ * une référence composée en monospace se lit comme ce qu'elle est.
+ */
+const dmMono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  display: "swap",
+  variable: "--font-dm-mono",
 });
 
 export const metadata: Metadata = {
@@ -78,7 +92,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fdfdfd",
+  themeColor: "#f7f3ed",
   colorScheme: "light",
 };
 
@@ -112,7 +126,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={`${dmSans.variable} ${newsreader.variable}`}>
+    <html lang="fr" className={`${fraunces.variable} ${archivo.variable} ${dmMono.variable}`}>
       <body>
         <script
           type="application/ld+json"

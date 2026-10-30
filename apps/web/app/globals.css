@@ -1,75 +1,99 @@
 @import "tailwindcss";
 
-/* Palette et typographie Terouva. Référence : DESIGN.md. */
+/* ───────────────────────────── Fondations ─────────────────────────────
+   Deux mondes, un site. Le monde papier porte le discours, les guides et les
+   droits ; le monde nuit porte l'outil, le score et la donnée. Chacun a ses
+   bases, son accent, son échelle. Référence : DESIGN.md et le brief de refonte
+   du 30 octobre 2026. Tous les rapports de contraste cités sont calculés. */
 @theme {
-  /* Surfaces claires */
-  --color-paper: #fdfdfd;
-  --color-paper-2: #fbf7f8;
-  /* Gris très clair, neutre : fond des blocs de chiffres clés. */
-  --color-ash: #f6f6f7;
-  --color-card: #ffffff;
-  --color-muted: #f5f5f5;
+  /* ── Monde papier ── */
+  --color-paper: #f7f3ed;      /* papier chaud. Encre dessus : 16,07:1 */
+  --color-paper-2: #efe9e0;    /* surface teintée. Encre dessus : 14,72:1 */
+  --color-ink: #17181a;
+  --color-ink-2: #4e5154;      /* sur papier : 7,23:1 */
+  --color-ink-3: #64686b;      /* sur papier-2 : 4,66:1 */
+  --color-rule: #ddd6cb;       /* filet standard */
+  --color-rule-fort: #c6bdb0;  /* filet de séparation de section */
+  --color-accent: #c92d6a;     /* sur papier : 4,67:1. Blanc dessus : 5,16:1 */
+  --color-accent-ink: #a52254; /* le magenta QUAND IL PORTE DU TEXTE sur papier-2 : 5,89:1 */
 
-  /* Encre */
-  --color-ink: #1b1d1e;
-  --color-ink-2: #55595c;
-  --color-ink-3: #6e7376;
+  /* ── Monde nuit ── */
+  --color-night: #17181a;
+  --color-night-2: #1f2123;        /* strate, pour un panneau dans la bande */
+  --color-night-ink: #f7f3ed;      /* 16,07:1 */
+  --color-night-ink-2: #9ea3a6;    /* 7,25:1 */
+  --color-night-rule: #2a2c2f;     /* filet, non textuel, 1,27:1 assumé */
+  --color-night-accent: #e85a8f;   /* sur nuit : 5,32:1. LE SEUL magenta du monde nuit.
+                                      Encre dessus : 4,8:1, donc le texte d'un bouton
+                                      est à l'encre, jamais en blanc (3,75:1). */
 
-  /* Filets et champs */
-  --color-rule: #e7e7ee;
-  --color-field: #c9cad3;
-
-  /* Accent de marque */
-  --color-accent: #c92d6a;
-  --color-accent-ink: #a52254;
-  --color-accent-wash: #fbdae7;
-
-  /* Bloc sombre (hero secondaire, appel final) */
-  --color-night: #1b1d1e;
-  --color-night-2: #26292b;
-  --color-night-ink: #f6f6f7;
-  --color-night-ink-2: #aeb2b5;
-  --color-night-rule: #34383a;
-
-  /* États */
+  /* Alias conservés pour l'application (`components/app`), hors périmètre de
+     la refonte. Ils suivent le papier chaud pour que l'app ne détonne pas. */
+  --color-card: #fdfbf7;
+  --color-muted: #e9e3d9;
+  --color-ash: #efe9e0;
+  --color-field: #b4ab9e;
+  --color-accent-wash: #f6dbe5;
   --color-good: #11785a;
   --color-good-wash: #d9f0e7;
   --color-warn: #8a5a08;
   --color-warn-wash: #fdeccd;
-  /* Rouge du thème (#e54b4f) assombri : il ne passait pas 4,5:1 sur blanc. */
   --color-bad: #c62f33;
   --color-bad-wash: #fde4e4;
 
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  /* Les titres. Georgia en repli : elle a le même contraste franc, donc la
-     page ne change pas de silhouette pendant le chargement. */
-  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Trois voix. Fraunces pour les titres, Archivo pour le texte et
+     l'interface, DM Mono pour l'instrument et les références de loi. */
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  /* Rectangles légèrement arrondis, pas des pilules : une pilule partout est
-     la forme par défaut de toutes les pages de produit. Les grandes images et
-     les panneaux gardent un arrondi plus généreux. */
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1.25rem;
-  --radius-xl: 2rem;
+  /* Échelle du monde papier. Fluide entre 390 px et 1440 px. */
+  --text-titre-1: clamp(2.75rem, 1.2rem + 6.4vw, 6rem);
+  --text-titre-2: clamp(2rem, 1.1rem + 3.6vw, 3.5rem);
+  --text-titre-3: clamp(1.25rem, 1.05rem + 0.8vw, 1.5rem);
+  --text-enonce: clamp(1.25rem, 1.05rem + 0.9vw, 1.625rem);
+  --text-corps: 1.0625rem;
+  --text-marge: 0.875rem;
+  --text-mention: 0.75rem;
+
+  /* Échelle du monde nuit : plus petite, plus dense, jamais au-delà de 2,5 rem. */
+  --text-nuit-titre: clamp(1.75rem, 1.2rem + 2.2vw, 2.5rem);
+  --text-nuit-chiffre: clamp(3rem, 2rem + 4vw, 5rem);
+  --text-nuit-champ: 0.8125rem;
+
+  /* Une seule courbe pour tout le site. */
+  --ease-terouva: cubic-bezier(0.22, 0.75, 0.3, 1);
+
+  /* Rythme vertical. Le monde nuit respire moins, et c'est voulu. */
+  --spacing-pas: clamp(4rem, 2rem + 6vw, 9rem);
+  --spacing-demi-pas: clamp(2rem, 1rem + 3vw, 4.5rem);
+  --spacing-pas-nuit: clamp(2.5rem, 1.5rem + 3vw, 5rem);
+
+  /* Au-delà de 4 px, un arrondi est un choix de gabarit. */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.25rem;
 }
 
 html {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  font-size: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 5rem;
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
   min-height: 100vh;
+  font-size: var(--text-corps);
+  line-height: 1.6;
 }
 
 ::selection {
@@ -81,71 +105,235 @@ body {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
+.nuit :focus-visible {
+  outline-color: var(--color-night-accent);
+}
 
 .tabular {
   font-variant-numeric: tabular-nums;
 }
 
-/* Titres de la landing : très gras, serrés, la fin passe en accent. */
-/* Titres. La serif porte l'autorité : inutile de l'épaissir. On passe de 800 à
-   500, et le crénage négatif se relâche, parce qu'une serif à empattements
-   francs se referme vite si on la serre comme un grotesque. */
+/* Les classes maison vivent dans la couche `components` : les utilitaires
+   Tailwind, déclarés après, les surchargent. Sans cela, `.marge` imposait sa
+   couleur par-dessus `text-night-ink-2` et le gris du papier se retrouvait
+   sur fond nuit, sous le seuil de contraste. */
+@layer components {
+/* ───────────────────────────── Typographie ───────────────────────────── */
+
+/* Le titre, voix du monde papier. WONK 1 bascule le g, le a et le y vers
+   leurs formes irrégulières : c'est ce qu'aucune serif d'écran courante n'a. L'interligne serré fait « affiche ». */
+.titre {
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 120;
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+/* Au-dessous de 2 rem, la taille optique redescend, sinon les empattements
+   deviennent trop fins et le titre s'efface. */
+.titre--petit {
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 24;
+  line-height: 1.1;
+}
+
+/* `display` est l'ancien nom du titre, encore employé par l'application et
+   par les pages d'administration. Même voix, taille optique automatique :
+   il sert à des corps très différents. */
 .display {
   font-family: var(--font-serif);
-  font-weight: 500;
-  letter-spacing: -0.012em;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
   line-height: 1.05;
-  /* Evite les lignes orphelines : le navigateur repartit les mots. */
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
-/* Sur-titre de section. C'était « POURQUOI TEROUVA » en magenta espacé : un
-   label en capitales colorées au-dessus de chaque bloc est l'un des tics les
-   plus répandus des pages générées. Devient une mention en serif italique, à
-   l'encre, qui se lit comme une rubrique de presse plutôt qu'une étiquette. */
+/* La mention : Fraunces italique, petite, à l'encre grise. Elle précède un
+   énoncé comme une rubrique de presse. `eyebrow` est son ancien nom. */
+.mention,
 .eyebrow {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 24;
   font-style: italic;
   font-weight: 400;
+  font-size: 1.0625rem;
   letter-spacing: 0;
   text-transform: none;
   color: var(--color-ink-3);
 }
 
-/* Ombre de l'action principale. Elle était teintée de l'accent : une lueur
-   colorée sous un bouton est décorative, pas informative. Neutre et verticale. */
-.shadow-accent {
-  box-shadow: 0 10px 26px -14px rgb(27 29 30 / 0.45);
+/* Le paragraphe-énoncé et la seconde voix de la coquille « papier large ». */
+.enonce {
+  font-size: var(--text-enonce);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  max-width: 38rem;
+  text-wrap: pretty;
+}
+.marge {
+  font-size: var(--text-marge);
+  line-height: 1.6;
+  color: var(--color-ink-3);
 }
 
-/* Commande circulaire à flèche, posée au coin d'une carte. */
-/* Numéro d'étape, posé dans la marge et sans contenant.
-   C'était un chiffre dans un cercle bordé, répété en colonne : la signature la
-   plus répandue des blocs « comment ça marche » générés, et le reproche fait au
-   site. Un chiffre en serif, assez grand pour tenir seul, fait le même travail
-   de repère sans ajouter une forme de plus. */
+/* Le champ : la voix de l'instrument. Les seules capitales du site. */
+.champ {
+  font-family: var(--font-mono);
+  font-size: var(--text-nuit-champ);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* La référence d'article, dans les guides. Une seule règle, gros effet :
+   « art. 22 loi n° 89-462 » en monospace se lit comme ce qu'elle est. */
+.article .loi,
+.loi {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  letter-spacing: -0.01em;
+  border-bottom: 1px dotted var(--color-rule-fort);
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+/* Numéro dans la marge d'un index : Fraunces, assez grand pour tenir seul. */
+.numero {
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 48;
+  font-weight: 400;
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--color-ink-3);
+}
+/* `pastille` est l'ancien nom, encore lu par deux pages intérieures. */
 .pastille {
   font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 48;
   font-size: 1.75rem;
   font-weight: 400;
   line-height: 1;
   color: var(--color-ink-3);
   font-variant-numeric: lining-nums tabular-nums;
-  transition: color 150ms;
 }
-.groupe-carte:hover .pastille {
+
+/* ───────────────────────────── Grille ───────────────────────────── */
+
+/* Douze colonnes, posées une fois. C'est la grille qui produit l'asymétrie :
+   deux sections consécutives ne démarrent jamais à la même colonne. */
+.grille {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 0.5rem + 1.2vw, 2rem);
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 0.5rem + 2vw, 3.5rem);
+}
+/* La même largeur et les mêmes marges, sans les colonnes. */
+.cadre {
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 0.5rem + 2vw, 3.5rem);
+}
+
+/* Certaines sections sortent de la grille et touchent les deux bords. Les
+   sections sont des enfants directs de `main`, donc déjà pleine largeur : la
+   classe dit l'intention et neutralise toute marge héritée. `100vw` est exclu,
+   il compte la barre de défilement et fait déborder la page à droite. */
+.plein-cadre {
+  width: 100%;
+  margin-inline: 0;
+}
+
+/* ───────────────────────────── Index à filets ─────────────────────────────
+   Une ligne : numéro, titre, description, mention à droite, et un filet de
+   1 px dessous. Pas de fond, pas de bordure latérale, pas d'arrondi, pas
+   d'ombre. Au survol : le fond passe au papier teinté, la mention glisse de
+   4 px. Rien d'autre ne bouge. */
+.index-ligne {
+  transition: background-color 150ms var(--ease-terouva);
+}
+.index-ligne .index-mention {
+  transition: transform 150ms var(--ease-terouva);
+}
+@media (hover: hover) {
+  .index-ligne:hover {
+    background-color: var(--color-paper-2);
+  }
+  .index-ligne:hover .index-mention {
+    transform: translateX(4px);
+  }
+  .nuit .index-ligne:hover {
+    background-color: var(--color-night-2);
+  }
+}
+
+/* Les boutons : une seule chose bouge au survol, la couleur de fond. */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  padding-inline: 1.5rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: 0.005em;
+  white-space: nowrap;
+  transition: background-color 150ms var(--ease-terouva), color 150ms var(--ease-terouva);
+}
+.bouton--accent {
+  background: var(--color-accent);
+  color: #fff;
+}
+.bouton--accent:hover {
+  background: var(--color-accent-ink);
+}
+.bouton--encre {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.bouton--encre:hover {
+  background: #2c2e31;
+}
+.bouton--nuit {
+  background: var(--color-night-accent);
   color: var(--color-ink);
 }
-
-/* Carte claire posée sur le fond, ombre douce vers le bas. */
-.card-soft {
-  background: var(--color-card);
-  border: 1px solid var(--color-rule);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 1px 2px rgb(27 29 30 / 0.04), 0 8px 24px -12px rgb(27 29 30 / 0.08);
+.bouton--nuit:hover {
+  background: #f07aa5;
+}
+.bouton--filet {
+  border: 1px solid var(--color-rule-fort);
+  color: var(--color-ink);
+  background: transparent;
+}
+.bouton--filet:hover {
+  background: var(--color-paper-2);
 }
 
+/* Lien dans le corps : l'un des quatre emplois de l'accent. */
+.lien {
+  color: var(--color-accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklch, var(--color-accent-ink) 40%, transparent);
+  transition: text-decoration-color 150ms var(--ease-terouva);
+}
+.lien:hover {
+  text-decoration-color: var(--color-accent-ink);
+}
+.nuit .lien {
+  color: var(--color-night-accent);
+  text-decoration-color: color-mix(in oklch, var(--color-night-accent) 40%, transparent);
+}
+.nuit .lien:hover {
+  text-decoration-color: var(--color-night-accent);
+}
+}
 
 details > summary {
   list-style: none;
@@ -154,124 +342,139 @@ details > summary::-webkit-details-marker {
   display: none;
 }
 
-@keyframes breathe {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+/* ───────────────────────────── Mouvement ─────────────────────────────
+   Trois gestes, une courbe. Tout passe par `transform` et `opacity`, et tout
+   s'éteint sous `prefers-reduced-motion`. */
+
+/* 1. Le filet se trace. La signature du site : il est fait de filets. */
+@keyframes trace {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
-.animate-breathe {
-  animation: breathe 2.4s ease-in-out infinite;
+.filet-trace {
+  transform-origin: left center;
 }
 
-/* ───────────────────────── Mouvement ─────────────────────────
-   Trois gestes, pas un de plus : un bloc qui monte à son arrivée, la scène
-   d'accueil qui se remplit une fois, et le ruban de messages qui défile.
-   Tout passe par `transform` et `opacity` (pas de reflow), et tout s'éteint
-   sous `prefers-reduced-motion`. */
-
-/* Courbe maison : départ franc, arrivée posée. */
+/* 2. Le bloc monte. */
 @keyframes monte {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: none; }
 }
 
-/* Révélation au défilement, sans JavaScript, là où le navigateur sait le faire.
-   Ailleurs, le bloc est simplement visible : rien ne se perd. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    /* La plage se termine quand l'élément est presque entièrement entré, et
-       non plus à « cover 26 % » : sur un petit écran, un bloc en bas de page
-       n'atteignait jamais ce seuil et restait à demi-fondu, et dans une capture
-       pleine page, où le viewport fait la hauteur du document, tout ce qui
-       suivait le hero sortait blanc. Un bloc qu'on voit en entier est opaque. */
+    .filet-trace {
+      animation: trace linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+    /* La plage se termine quand l'élément est presque entièrement entré :
+       un bloc qu'on voit en entier est opaque, y compris sur un petit écran
+       et dans une capture pleine page. */
     .monte {
       animation: monte linear both;
       animation-timeline: view();
       animation-range: entry 8% entry 80%;
     }
+    /* Frères décalés de 60 ms, cinq au maximum. Au défilement, le décalage
+       devient un léger retard de plage. */
+    .monte:nth-child(2) { animation-range: entry 12% entry 84%; }
+    .monte:nth-child(3) { animation-range: entry 16% entry 88%; }
+    .monte:nth-child(4) { animation-range: entry 20% entry 92%; }
+    .monte:nth-child(5) { animation-range: entry 24% entry 96%; }
   }
 }
 
-/* Rangée de navigation qui défile à l'horizontale sur petit écran : barre de
-   défilement masquée, bords estompés pour dire qu'il y a une suite. */
-.defile-x {
-  scrollbar-width: none;
-  mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 24px), transparent 100%);
+/* 3. Le cadran se remplit, une fois, à l'entrée dans la bande nuit. */
+@keyframes cadran-remplit {
+  from { stroke-dashoffset: var(--perimetre); }
+  to { stroke-dashoffset: var(--reste); }
 }
-.defile-x::-webkit-scrollbar {
-  display: none;
-}
-
-/* À l'impression et dans un export PDF, rien ne défile : une animation liée au
-   défilement resterait figée à son premier instant, et la page sortirait blanche
-   sous le hero. C'est ce que montrait la capture pleine page. On révèle tout. */
-@media print {
-  .monte,
-  .scene-carte {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
-
-/* ── Scène d'accueil ── */
-@keyframes carte-arrive {
-  from { opacity: 0; transform: translateY(22px) scale(0.985); }
+@keyframes ligne-inscrit {
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: none; }
 }
 @keyframes jauge-remplit {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
-@keyframes sceau-apparait {
-  from { opacity: 0; transform: translateY(-6px) scale(0.9); }
-  to { opacity: 1; transform: none; }
+.cadran-arc {
+  stroke-dasharray: var(--perimetre);
+  stroke-dashoffset: var(--reste);
 }
-
+.instrument-jauge {
+  transform-origin: left center;
+}
 @media (prefers-reduced-motion: no-preference) {
-  /* Les cartes arrivent les unes après les autres, la meilleure en dernier
-     signalée : l'ordre raconte ce que fait l'outil. */
-  .scene[data-joue="oui"] .scene-carte {
-    animation: carte-arrive 620ms cubic-bezier(0.22, 0.75, 0.3, 1) both;
-    animation-delay: calc(var(--rang) * 150ms);
+  .instrument[data-joue="non"] .cadran-arc {
+    stroke-dashoffset: var(--perimetre);
   }
-  .scene[data-joue="non"] .scene-carte {
+  .instrument[data-joue="non"] .decomp-ligne {
     opacity: 0;
   }
-  .scene[data-joue="oui"] .scene-jauge {
-    animation: jauge-remplit 700ms cubic-bezier(0.22, 0.75, 0.3, 1) both;
-    animation-delay: calc(var(--rang) * 150ms + 260ms);
+  .instrument[data-joue="oui"] .cadran-arc {
+    animation: cadran-remplit 900ms var(--ease-terouva) both;
   }
-  .scene[data-joue="oui"] .scene-sceau {
-    animation: sceau-apparait 420ms cubic-bezier(0.22, 0.75, 0.3, 1) both;
-    animation-delay: 900ms;
+  .instrument[data-joue="oui"] .decomp-ligne {
+    animation: ligne-inscrit 420ms var(--ease-terouva) both;
+    animation-delay: calc(300ms + var(--rang) * 80ms);
   }
-  .scene[data-joue="oui"] .scene-pied {
-    animation: monte 520ms cubic-bezier(0.22, 0.75, 0.3, 1) both;
-    animation-delay: 1050ms;
+  .instrument[data-joue="oui"] .instrument-jauge {
+    animation: jauge-remplit 600ms var(--ease-terouva) both;
+    animation-delay: calc(420ms + var(--rang) * 80ms);
+  }
+  .instrument[data-joue="non"] .instrument-jauge {
+    transform: scaleX(0);
   }
 }
 
-/* ── Ruban de messages ── */
+/* À l'impression et dans un export PDF, rien ne défile : une animation liée
+   au défilement resterait figée à son premier instant et la page sortirait
+   blanche sous l'accueil. On révèle tout, et le monde nuit redevient clair
+   pour ne pas noyer la page d'encre. */
+@media print {
+  .monte,
+  .filet-trace,
+  .decomp-ligne,
+  .instrument-jauge {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .nuit {
+    --color-night: #fff;
+    --color-night-2: #f3f3f3;
+    --color-night-ink: #17181a;
+    --color-night-ink-2: #4e5154;
+    --color-night-rule: #d0d0d0;
+    --color-night-accent: #a52254;
+  }
+}
+
+/* ───────────────────────────── Mosaïque défilante ─────────────────────────────
+   Le ruban des messages est la seule animation horizontale du site. Les
+   fiches y ont des largeurs et des hauteurs inégales : des fiches identiques
+   en rang, c'est la grille de cartes qu'on cherche à fuir. */
 .ruban {
   overflow: hidden;
-  /* Les fiches s'effacent sur les bords au lieu d'être coupées net. */
   mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
 }
 .ruban-piste {
   display: flex;
   width: max-content;
+  align-items: flex-start;
 }
 .ruban-jeu {
   display: flex;
+  align-items: flex-start;
 }
 .ruban-fiche {
-  /* Assez large pour que le message respire, jamais plus large que l'écran. */
-  width: min(26rem, 84vw);
-  height: 29rem;
-  margin-right: 1rem;
   flex: none;
+  margin-right: 1rem;
+  width: min(var(--largeur, 26rem), 84vw);
+  height: var(--hauteur, 29rem);
+  margin-top: var(--decalage, 0);
 }
-/* Le message est long : il s'estompe en bas plutôt que de s'arrêter net. */
 .ruban-texte {
   overflow: hidden;
   flex: 1;
@@ -284,9 +487,8 @@ details > summary::-webkit-details-marker {
 
 @media (prefers-reduced-motion: no-preference) {
   .ruban-piste {
-    animation: defile 55s linear infinite;
+    animation: defile 60s linear infinite;
   }
-  /* On s'arrête quand on lit (survol, tabulation) et quand on ne regarde pas. */
   .ruban:hover .ruban-piste,
   .ruban:focus-within .ruban-piste,
   .ruban[data-joue="non"] .ruban-piste {
@@ -309,6 +511,23 @@ details > summary::-webkit-details-marker {
   }
 }
 
+/* Barre compacte du masthead : elle monte du bord haut en 220 ms. */
+@keyframes barre-arrive {
+  from { transform: translateY(-100%); }
+  to { transform: none; }
+}
+.barre-compacte {
+  animation: barre-arrive 220ms var(--ease-terouva) both;
+}
+
+/* Rangée qui défile à l'horizontale sans barre visible. */
+.defile-x {
+  scrollbar-width: none;
+}
+.defile-x::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -318,13 +537,21 @@ details > summary::-webkit-details-marker {
   }
 }
 
+/* Contraste renforcé : les filets passent au filet fort. */
+@media (prefers-contrast: more) {
+  :root {
+    --color-rule: #c6bdb0;
+    --color-night-rule: #4a4d51;
+  }
+}
+
 /* ───────────────────── Articles et guides ─────────────────────
-   Les pages de guide sont de la prose longue : on la style une fois ici
-   plutôt que d'habiller chaque balise dans le JSX. Mesure de ligne limitée
-   (environ 70 signes), pour que ça se lise vraiment. */
+   Le monde papier à l'état pur. Mesure de 44 rem pour la prose, titres en
+   Fraunces, références de loi en monospace, et les encadrés deviennent des
+   notes de marge sur grand écran. */
 .article {
   max-width: 44rem;
-  font-size: 1.0625rem;
+  font-size: var(--text-corps);
   line-height: 1.75;
   color: var(--color-ink-2);
 }
@@ -332,32 +559,37 @@ details > summary::-webkit-details-marker {
   margin-top: 1.25rem;
 }
 .article h2 {
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  font-size: 1.75rem;
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 36;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.125rem);
   color: var(--color-ink);
-  margin-top: 3rem;
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-rule);
   scroll-margin-top: 6rem;
+  text-wrap: balance;
 }
 .article h3 {
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1.1875rem;
   color: var(--color-ink);
   margin-top: 2rem;
 }
 .article strong {
-  font-weight: 700;
+  font-weight: 500;
   color: var(--color-ink);
 }
 .article a {
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-color: color-mix(in oklch, var(--color-accent) 35%, transparent);
+  text-decoration-color: color-mix(in oklch, var(--color-accent-ink) 40%, transparent);
 }
 .article a:hover {
-  text-decoration-color: var(--color-accent);
+  text-decoration-color: var(--color-accent-ink);
 }
 .article ul,
 .article ol {
@@ -368,20 +600,46 @@ details > summary::-webkit-details-marker {
 .article li + li {
   margin-top: 0.5rem;
 }
-/* Les puces reviennent a l'encre : l'accent est reserve aux liens, au bouton
-   principal et au focus. Des puces colorees sur chaque liste, c'est ce qui
-   rendait le site rose. */
 .article li::marker {
   color: var(--color-ink-3);
 }
-/* Encadré de source ou de mise en garde. */
+/* L'encadré de source ou de mise en garde : à filet haut et bas, sans fond,
+   sans arrondi. Sur grand écran, il quitte la colonne de prose pour la marge
+   de droite, et c'est cette troisième colonne qui donne au guide l'allure d'un
+   ouvrage plutôt que d'un article de blog. */
 .article .note {
-  border-left: 3px solid var(--color-accent-wash);
-  background: var(--color-paper-2);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 1rem 1.25rem;
-  font-size: 0.9375rem;
+  border-top: 1px solid var(--color-rule);
+  border-bottom: 1px solid var(--color-rule);
+  padding: 0.875rem 0;
+  font-size: var(--text-marge);
+  line-height: 1.6;
+  color: var(--color-ink-3);
 }
 .article .note > * + * {
   margin-top: 0.5rem;
+}
+.article .note a {
+  color: var(--color-ink);
+  text-decoration-color: var(--color-rule-fort);
+}
+@media (min-width: 64rem) {
+  .article--marge {
+    --marge-largeur: 16rem;
+    --marge-ecart: 3.5rem;
+    max-width: none;
+    padding-right: calc(var(--marge-largeur) + var(--marge-ecart));
+  }
+  .article--marge > :not(.note) {
+    max-width: 44rem;
+  }
+  .article--marge .note {
+    float: right;
+    clear: right;
+    width: var(--marge-largeur);
+    margin-top: 0.35rem;
+    margin-right: calc(-1 * (var(--marge-largeur) + var(--marge-ecart)));
+    border-top: 1px solid var(--color-rule-fort);
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
 }

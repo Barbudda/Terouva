@@ -10,8 +10,12 @@ type State = { kind: "idle" | "sending" | "done" } | { kind: "error"; message: s
  * Inscription pour être prévenu du lancement.
  *
  * La seule donnée qui quitte le navigateur sur tout le site. Elle part vers
- * `/api/waitlist`, qui la confie à Resend. Le champ « website » est un piège à
- * robots : invisible, il doit rester vide.
+ * `/api/waitlist`, qui l'enregistre dans le stockage du site. Le champ
+ * « website » est un piège à robots : invisible, il doit rester vide.
+ *
+ * Forme : un champ unique à filet bas, pas une boîte, et le bouton. Dans le
+ * monde nuit, le bouton prend l'accent nuit avec son texte à l'encre (le blanc
+ * n'y tiendrait pas le contraste) ; dans le monde papier, l'accent de marque.
  */
 export function WaitlistForm({ className, dark = false }: { className?: string; dark?: boolean }) {
   const [email, setEmail] = useState("");
@@ -51,26 +55,23 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
       <p
         role="status"
         className={cn(
-          "rounded-lg px-6 py-4 text-center font-semibold",
-          dark ? "bg-night-2 text-night-ink" : "bg-good-wash text-good",
+          "border-y py-4 text-[15px] font-medium",
+          dark ? "border-night-rule text-night-ink" : "border-rule-fort text-ink",
           className,
         )}
       >
-        C'est noté. Vous recevrez un e-mail le jour du lancement.
+        C&apos;est noté. Vous recevrez un e-mail le jour du lancement.
       </p>
     );
   }
 
   return (
     <form onSubmit={submit} className={cn("w-full", className)} noValidate>
-      <div
-        className={cn(
-          "flex flex-col gap-2 rounded-lg p-2 sm:flex-row",
-          dark ? "bg-night-2" : "border border-rule bg-card",
-        )}
-      >
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <label className="flex-1">
-          <span className="sr-only">Votre adresse e-mail</span>
+          <span className={cn("champ block", dark ? "text-night-ink-2" : "text-ink-3")}>
+            Votre adresse e-mail
+          </span>
           <input
             type="email"
             name="email"
@@ -83,8 +84,10 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
               if (state.kind === "error") setState({ kind: "idle" });
             }}
             className={cn(
-              "h-12 w-full rounded-md bg-transparent px-4 text-base outline-none",
-              dark ? "text-night-ink placeholder:text-night-ink-2" : "text-ink placeholder:text-ink-3",
+              "h-12 w-full border-b bg-transparent text-base outline-none transition-colors duration-150",
+              dark
+                ? "border-night-ink-2 text-night-ink placeholder:text-night-ink-2 focus:border-night-accent"
+                : "border-rule-fort text-ink placeholder:text-ink-3 focus:border-accent",
             )}
           />
         </label>
@@ -107,25 +110,22 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
         <button
           type="submit"
           disabled={state.kind === "sending"}
-          className="h-12 shrink-0 rounded-md bg-accent px-6 font-semibold text-white shadow-accent transition-colors hover:bg-accent-ink disabled:opacity-60"
+          className={cn("bouton shrink-0 disabled:opacity-60", dark ? "bouton--nuit" : "bouton--accent")}
         >
           {state.kind === "sending" ? "Enregistrement…" : "Me prévenir"}
         </button>
       </div>
 
       {state.kind === "error" && (
-        <p role="alert" className={cn("mt-3 text-[15px]", dark ? "text-accent-wash" : "text-bad")}>
+        <p role="alert" className={cn("mt-3 text-[15px]", dark ? "text-night-ink" : "text-bad")}>
           {state.message}
         </p>
       )}
 
-      <p className={cn("mt-3 text-sm leading-relaxed", dark ? "text-night-ink-2" : "text-ink-3")}>
-        Un seul e-mail, au lancement. Pas de publicité.{" "}
-        <Link
-          href="/confidentialite"
-          className="underline underline-offset-4 hover:opacity-80"
-        >
-          Politique de confidentialité
+      <p className={cn("champ mt-4", dark ? "text-night-ink-2" : "text-ink-3")}>
+        Un seul e-mail · au lancement · pas de publicité ·{" "}
+        <Link href="/confidentialite" className="underline underline-offset-4 hover:opacity-80">
+          Confidentialité
         </Link>
       </p>
     </form>

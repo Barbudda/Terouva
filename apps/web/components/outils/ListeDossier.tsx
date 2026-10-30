@@ -22,6 +22,10 @@ import {
  * Tout est calculé dans le navigateur, à partir du décret du 5 novembre 2015 :
  * cette page n'envoie rien et ne garde rien. Les trois questions suffisent,
  * parce que ce sont les trois seules choses dont dépend la liste.
+ *
+ * L'outil vit dans le monde nuit : libellés en `.champ`, compte en monospace,
+ * choix marqués par un filet, un seul bouton coloré. À l'impression, la bande
+ * redevient claire (voir `globals.css`).
  */
 export function ListeDossier() {
   const [situation, setSituation] = useState<Situation>("salarie");
@@ -50,12 +54,12 @@ export function ListeDossier() {
   return (
     <div className="grid gap-8 lg:grid-cols-[22rem_1fr] lg:gap-12">
       <form
-        className="h-fit rounded-lg border border-rule bg-card p-6 lg:sticky lg:top-28"
+        className="h-fit border border-night-rule bg-night-2 p-6 lg:sticky lg:top-20"
         onSubmit={(e) => e.preventDefault()}
         aria-label="Votre situation"
       >
-        <p className="eyebrow">Votre situation</p>
-        <p className="mt-3 text-[15px] leading-relaxed text-ink-2">
+        <p className="champ text-night-ink-2">Votre situation</p>
+        <p className="mt-3 text-[15px] leading-relaxed text-night-ink-2">
           Trois questions. Rien n&apos;est envoyé, rien n&apos;est conservé.
         </p>
 
@@ -84,18 +88,14 @@ export function ListeDossier() {
           <div>
             {/* Vrai titre de niveau 2 : sans lui la page sautait de H1 à H3,
                 ce qui désoriente un lecteur d'écran. */}
-            <h2 className="eyebrow">Votre dossier</h2>
-            <p className="display mt-2 text-[2rem] text-ink">
-              {total} {total > 1 ? "pièces" : "pièce"}
+            <h2 className="champ text-night-ink-2">Votre dossier</h2>
+            <p className="mt-2 font-mono text-[2rem] leading-none tabular-nums text-night-ink">
+              {total} <span className="text-base text-night-ink-2">{total > 1 ? "pièces" : "pièce"}</span>
             </p>
           </div>
 
           <div className="flex flex-wrap gap-2 print:hidden">
-            <button
-              type="button"
-              onClick={copier}
-              className="inline-flex h-11 items-center gap-2 rounded-md bg-accent px-5 text-[15px] font-semibold text-white shadow-accent transition-colors hover:bg-accent-ink"
-            >
+            <button type="button" onClick={copier} className="bouton bouton--nuit h-11 gap-2 px-5">
               {copie ? (
                 <Check aria-hidden className="size-4" strokeWidth={2} />
               ) : (
@@ -106,9 +106,9 @@ export function ListeDossier() {
             <button
               type="button"
               onClick={() => window.print()}
-              className="inline-flex h-11 items-center gap-2 rounded-md border border-rule bg-card px-5 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink"
+              className="bouton h-11 gap-2 border border-night-rule px-5 text-night-ink-2 hover:bg-night-2 hover:text-night-ink"
             >
-              <Printer aria-hidden className="size-4 text-ink-3" strokeWidth={1.75} />
+              <Printer aria-hidden className="size-4" strokeWidth={1.5} />
               Imprimer
             </button>
           </div>
@@ -122,10 +122,8 @@ export function ListeDossier() {
 
         {dossier.garant.length > 0 && (
           <>
-            <h2 className="display mt-12 text-2xl text-ink">
-              Et pour votre garant
-            </h2>
-            <div className="mt-8 space-y-8">
+            <h2 className="mt-12 text-[1.25rem] font-medium text-night-ink">Et pour votre garant</h2>
+            <div className="mt-6 space-y-8">
               {dossier.garant.map((c) => (
                 <Bloc key={c.titre} categorie={c} />
               ))}
@@ -134,36 +132,36 @@ export function ListeDossier() {
         )}
 
         {dossier.note && (
-          <p className="mt-10 rounded-md border-l-[3px] border-accent-wash bg-paper-2 px-5 py-4 leading-relaxed text-ink-2">
+          <p className="mt-10 border-t border-night-rule pt-4 text-[15px] leading-relaxed text-night-ink-2">
             {dossier.note}{" "}
             {garantie !== "personne" && (
-              <Link href="/guides/garantie-visale" className="text-accent underline underline-offset-4">
+              <Link href="/guides/garantie-visale" className="lien">
                 Comment obtenir la garantie Visale
               </Link>
             )}
           </p>
         )}
 
-        <section className="mt-12 rounded-lg border border-rule bg-paper-2 p-6 sm:p-7">
-          <h2 className="display text-xl text-ink">
+        <section className="mt-12 border border-night-rule p-6 sm:p-7">
+          <h2 className="text-[1.25rem] font-medium text-night-ink">
             Ce qu&apos;on ne peut pas vous demander
           </h2>
-          <p className="mt-3 leading-relaxed text-ink-2">
+          <p className="mt-3 text-[15px] leading-relaxed text-night-ink-2">
             La liste des pièces autorisées est limitative : tout ce qui n&apos;y figure pas est
             interdit. Ceux-ci sont nommés par la loi, parce qu&apos;ils étaient réclamés couramment.
           </p>
           <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
             {dossier.interdits.map((i) => (
-              <li key={i} className="flex items-start gap-2.5 text-[15px] leading-snug text-ink-2">
+              <li key={i} className="flex items-start gap-2.5 text-[15px] leading-snug text-night-ink-2">
                 <Croix />
                 {i}
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-[15px] leading-relaxed text-ink-3">
+          <p className="mt-6 text-[14px] leading-relaxed text-night-ink-2">
             Une demande hors liste expose le propriétaire à une amende pouvant atteindre 3 000 €,
             et 15 000 € s&apos;il s&apos;agit d&apos;une agence.{" "}
-            <Link href="/guides/dossier-de-location" className="text-accent underline underline-offset-4">
+            <Link href="/guides/dossier-de-location" className="lien">
               Comment refuser sans perdre le logement
             </Link>
           </p>
@@ -175,21 +173,25 @@ export function ListeDossier() {
 
 function Bloc({ categorie }: { categorie: Categorie }) {
   return (
-    <section className="border-t border-rule pt-6">
+    <section className="border-t border-night-rule pt-5">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h3 className="text-lg font-bold text-ink">{categorie.titre}</h3>
-        <p className="text-[13px] tracking-[0.06em] text-ink-3 uppercase">{categorie.regle}</p>
+        <h3 className="text-[15px] font-medium text-night-ink">{categorie.titre}</h3>
+        <p className="champ text-night-ink-2">{categorie.regle}</p>
       </div>
       <ul className="mt-4 space-y-4">
         {categorie.pieces.map((p) => (
           <li key={p.libelle} className={p.alternative ? "flex items-start gap-3 pl-7" : "flex items-start gap-3"}>
             {!p.alternative && (
-              <span aria-hidden className="mt-1 size-4 shrink-0 rounded-[4px] border border-field" />
+              <span aria-hidden className="mt-1 size-4 shrink-0 border border-night-ink-2" />
             )}
             <span>
-              <span className={p.alternative ? "text-ink-2" : "font-medium text-ink"}>{p.libelle}</span>
+              <span className={p.alternative ? "text-night-ink-2" : "font-medium text-night-ink"}>
+                {p.libelle}
+              </span>
               {p.precision && (
-                <span className="mt-1 block text-[15px] leading-relaxed text-ink-3">{p.precision}</span>
+                <span className="mt-1 block text-[14px] leading-relaxed text-night-ink-2">
+                  {p.precision}
+                </span>
               )}
             </span>
           </li>
@@ -204,10 +206,10 @@ function Croix() {
     <svg
       viewBox="0 0 16 16"
       aria-hidden
-      className="mt-1 size-3.5 shrink-0 text-bad"
+      className="mt-1 size-3.5 shrink-0 text-night-ink-2"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2.2"
+      strokeWidth="1.8"
       strokeLinecap="round"
     >
       <path d="M4 4l8 8M12 4l-8 8" />
@@ -215,7 +217,7 @@ function Croix() {
   );
 }
 
-/** Groupe de boutons radio, dessinés comme des lignes cliquables. */
+/** Groupe de boutons radio, dessinés comme des lignes à filet. */
 function Choix({
   legende,
   valeur,
@@ -230,15 +232,15 @@ function Choix({
   const nom = legende.replace(/\s/g, "-").toLowerCase();
   return (
     <fieldset className="mt-7">
-      <legend className="text-[13px] font-semibold text-ink-2">{legende}</legend>
-      <div className="mt-2.5 space-y-1">
+      <legend className="champ text-night-ink-2">{legende}</legend>
+      <div className="mt-2.5 border-t border-night-rule">
         {options.map((o) => (
           <label
             key={o.valeur}
             className={
               valeur === o.valeur
-                ? "flex cursor-pointer items-center gap-3 rounded-md bg-accent-wash px-3 py-2.5 text-[15px] font-semibold text-accent-ink"
-                : "flex cursor-pointer items-center gap-3 rounded-md px-3 py-2.5 text-[15px] text-ink-2 transition-colors hover:bg-muted"
+                ? "flex cursor-pointer items-center gap-3 border-b border-night-rule py-2.5 text-[15px] font-medium text-night-ink"
+                : "flex cursor-pointer items-center gap-3 border-b border-night-rule py-2.5 text-[15px] text-night-ink-2 transition-colors duration-150 hover:text-night-ink"
             }
           >
             <input
@@ -247,7 +249,7 @@ function Choix({
               value={o.valeur}
               checked={valeur === o.valeur}
               onChange={() => onChange(o.valeur)}
-              className="size-4 accent-[#c92d6a]"
+              className="size-4 accent-night-accent"
             />
             {o.libelle}
           </label>

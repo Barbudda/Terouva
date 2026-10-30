@@ -31,7 +31,7 @@ export default function GuideRefusDeDossier() {
         d&apos;expliquer, aucun délai de réponse, aucun classement à justifier.
       </p>
       <p>
-        L&apos;article 1er de la loi du 6 juillet 1989 lui interdit en revanche de refuser de louer
+        L&apos;<span className="loi">article 1er</span> de la <span className="loi">loi du 6 juillet 1989</span> lui interdit en revanche de refuser de louer
         pour un motif discriminatoire. Et selon le Défenseur des droits, cette interdiction
         s&apos;applique même sans intention de discriminer : un réflexe de tri, une consigne
         d&apos;agence, une habitude suffisent.
@@ -39,7 +39,7 @@ export default function GuideRefusDeDossier() {
 
       <h2 id="interdits">Les critères interdits</h2>
       <p>
-        L&apos;article 225-1 du Code pénal en liste une vingtaine. Un refus fondé sur l&apos;un
+        L&apos;<span className="loi">article 225-1</span> du Code pénal en liste une vingtaine. Un refus fondé sur l&apos;un
         d&apos;eux est une discrimination :
       </p>
       <ul>
@@ -101,7 +101,7 @@ export default function GuideRefusDeDossier() {
       <p>
         Dès lors que ces éléments existent, c&apos;est au propriétaire de démontrer que sa décision
         repose sur des éléments objectifs, étrangers à toute discrimination. Le testing lui-même est
-        encadré par l&apos;article 225-3-1 du Code pénal.
+        encadré par l&apos;<span className="loi">article 225-3-1</span> du Code pénal.
       </p>
       <p>
         Pratiquement, cela veut dire une chose : gardez les échanges écrits. Un refus formulé au

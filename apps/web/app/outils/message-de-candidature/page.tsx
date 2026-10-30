@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { GenerateurMessage } from "@/components/outils/GenerateurMessage";
+import { BandeNuit } from "@/components/layout/coquilles/BandeNuit";
 import { Questions } from "@/components/ui/Questions";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { OUTILS } from "@/lib/catalogue";
@@ -83,27 +84,35 @@ export default function OutilMessage() {
       <DonneesStructurees data={filAriane(ETAPES)} />
       <Nav home={false} />
 
-      <main className="px-4 pt-10 pb-16 sm:px-6 md:pt-14">
-        <div className="mx-auto max-w-5xl">
+      <main className="pb-16">
+        <div className="cadre pt-4 md:pt-6">
           <Ariane etapes={ETAPES} />
 
-          <h1 className="display mt-5 max-w-3xl text-[2.1rem] text-ink sm:text-5xl">
+          <h1 className="titre mt-5 max-w-[22ch] text-titre-2 text-ink">
             Le message qui accompagne votre dossier,{" "}
             écrit en une minute.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
+          <p className="enonce mt-6 text-ink-2">
             Remplissez vos informations, choisissez un ton, copiez. C&apos;est gratuit, il n&apos;y
             a rien à installer et rien à créer. Les champs restent dans votre navigateur : cette
             page n&apos;envoie aucune donnée.
           </p>
 
-          <div className="mt-10">
+        </div>
+
+        {/* Un générateur est un instrument : le formulaire et le résultat vivent
+            dans le monde nuit, l'explication autour reste sur le papier. */}
+        <BandeNuit className="mt-10">
+          <div className="cadre">
             <GenerateurMessage />
           </div>
+        </BandeNuit>
+
+        <div className="cadre">
 
           <div className="mt-20 grid gap-12 md:grid-cols-2">
             <section>
-              <h2 className="display text-2xl text-ink">Ce qui fait un message qui obtient une visite</h2>
+              <h2 className="titre titre--petit text-[1.75rem] text-ink">Ce qui fait un message qui obtient une visite</h2>
               <ul className="mt-5 space-y-5 leading-relaxed text-ink-2">
                 <li>
                   <strong className="text-ink">Être court.</strong> Un propriétaire qui reçoit
@@ -133,7 +142,7 @@ export default function OutilMessage() {
             </section>
 
             <section>
-              <h2 className="display text-2xl text-ink">Ce qui dessert un message</h2>
+              <h2 className="titre titre--petit text-[1.75rem] text-ink">Ce qui dessert un message</h2>
               <ul className="mt-5 space-y-5 leading-relaxed text-ink-2">
                 <li>
                   <strong className="text-ink">Récapituler l&apos;annonce.</strong> « Votre 2 pièces
@@ -153,7 +162,7 @@ export default function OutilMessage() {
                   <strong className="text-ink">Donner des informations que personne ne peut
                   demander.</strong> Un propriétaire n&apos;a pas le droit d&apos;exiger votre
                   relevé de compte, votre dossier médical ou votre extrait de casier :{" "}
-                  <Link href="/guides/dossier-de-location" className="text-accent underline underline-offset-4">
+                  <Link href="/guides/dossier-de-location" className="lien">
                     la liste des pièces autorisées est fixée par décret
                   </Link>
                   . Ne les proposez pas de vous-même.
@@ -163,7 +172,7 @@ export default function OutilMessage() {
           </div>
 
           <section className="mt-20 max-w-[44rem]">
-            <h2 className="display text-2xl text-ink">Comment le message est construit</h2>
+            <h2 className="titre titre--petit text-[1.75rem] text-ink">Comment le message est construit</h2>
             <p className="mt-4 leading-relaxed text-ink-2">
               Le générateur assemble six blocs, toujours dans cet ordre, et saute ceux pour
               lesquels il n&apos;a pas l&apos;information. Un profil à moitié rempli donne donc un
@@ -210,7 +219,7 @@ export default function OutilMessage() {
           <Questions questions={QUESTIONS} className="mt-20" />
 
           <section className="mt-20 max-w-[44rem]">
-            <h2 className="display text-2xl text-ink">Après le message</h2>
+            <h2 className="titre titre--petit text-[1.75rem] text-ink">Après le message</h2>
             <p className="mt-4 leading-relaxed text-ink-2">
               Un message qui marche déclenche une réponse dans l&apos;heure, et la conversation
               passe aussitôt à des sujets qu&apos;il vaut mieux avoir réglés d&apos;avance. Les
@@ -223,7 +232,7 @@ export default function OutilMessage() {
                 limitative. Le guide du{" "}
                 <Link
                   href="/guides/dossier-de-location"
-                  className="text-accent underline underline-offset-4"
+                  className="lien"
                 >
                   dossier de location
                 </Link>{" "}
@@ -235,14 +244,14 @@ export default function OutilMessage() {
                 détaillé dans le guide du{" "}
                 <Link
                   href="/guides/garant-caution"
-                  className="text-accent underline underline-offset-4"
+                  className="lien"
                 >
                   garant
                 </Link>{" "}
                 ; si vous n&apos;avez personne à solliciter, la{" "}
                 <Link
                   href="/guides/garantie-visale"
-                  className="text-accent underline underline-offset-4"
+                  className="lien"
                 >
                   garantie Visale
                 </Link>{" "}
@@ -253,7 +262,7 @@ export default function OutilMessage() {
                 Un mois de loyer hors charges pour un logement vide, deux pour un meublé. Le{" "}
                 <Link
                   href="/guides/depot-de-garantie"
-                  className="text-accent underline underline-offset-4"
+                  className="lien"
                 >
                   guide du dépôt de garantie
                 </Link>{" "}
@@ -267,7 +276,7 @@ export default function OutilMessage() {
               faire quand un refus en relève, sont réunis dans le guide sur le{" "}
               <Link
                 href="/guides/refus-de-dossier"
-                className="text-accent underline underline-offset-4"
+                className="lien"
               >
                 refus de dossier
               </Link>

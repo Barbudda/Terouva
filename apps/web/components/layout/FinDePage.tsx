@@ -13,9 +13,9 @@ export function FinDePage({
   texte?: string;
 }) {
   return (
-    <aside className="mt-16 rounded-xl bg-paper-2 p-6 sm:p-8">
-      <p className="eyebrow">Bientôt disponible</p>
-      <h2 className="display mt-3 text-2xl text-ink sm:text-[1.75rem]">{titre}</h2>
+    <aside className="mt-16 border-y border-rule-fort py-8">
+      <p className="mention">Bientôt disponible</p>
+      <h2 className="titre titre--petit mt-3 text-[1.75rem] text-ink sm:text-[2rem]">{titre}</h2>
       <p className="mt-3 max-w-2xl leading-relaxed text-ink-2">{texte}</p>
 
       <div className="mt-6 max-w-xl">
@@ -24,7 +24,7 @@ export function FinDePage({
 
       <p className="mt-5 text-sm text-ink-3">
         Vous pouvez aussi{" "}
-        <Link href="/app?demo=1" className="text-accent underline underline-offset-4">
+        <Link href="/app?demo=1" className="lien">
           essayer la démonstration
         </Link>{" "}
         tout de suite, sans rien installer.

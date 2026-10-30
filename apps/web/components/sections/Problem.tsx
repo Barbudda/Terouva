@@ -1,22 +1,16 @@
 import { PROBLEM } from "@/lib/content";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PapierLarge } from "@/components/layout/coquilles/PapierLarge";
 
+/**
+ * Le problème, coquille B. L'énoncé à gauche, et à droite plus bas la
+ * seconde voix, qui porte la réserve. Aucune illustration : c'est la section
+ * qui doit paraître vide.
+ */
 export function Problem() {
+  const [enonce, reserve] = PROBLEM.body;
   return (
-    <section id="pourquoi" className="px-4 py-16 sm:px-6 md:py-24">
-      <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-12">
-        <SectionHeading
-          eyebrow={PROBLEM.eyebrow}
-          lead={PROBLEM.titleLead}
-          tail={PROBLEM.titleTail}
-          className="monte md:col-span-5"
-        />
-        <div className="monte space-y-5 text-lg leading-relaxed text-ink-2 md:col-span-6 md:col-start-7">
-          {PROBLEM.body.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </div>
-      </div>
-    </section>
+    <PapierLarge id="pourquoi" mention={PROBLEM.eyebrow} depart={2} secondeVoix={<p>{reserve}</p>}>
+      <p>{enonce}</p>
+    </PapierLarge>
   );
 }

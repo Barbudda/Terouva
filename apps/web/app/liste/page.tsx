@@ -62,7 +62,7 @@ export default async function ListePage({
 /** Écran fermé : un champ, rien d'autre. */
 function Porte({ erreur }: { erreur?: string }) {
   return (
-    <div className="card-soft mt-8 p-6 sm:p-8">
+    <div className="border border-rule bg-card mt-8 p-6 sm:p-8">
       <h1 className="display text-[2rem] text-ink">
         Qui a réservé&#8239;?
       </h1>
@@ -175,7 +175,7 @@ async function Tableau() {
       )}
 
       {liste.inscrits.length === 0 ? (
-        <div className="card-soft mt-6 p-8 text-center">
+        <div className="border border-rule bg-card mt-6 p-8 text-center">
           <p className="font-semibold text-ink">Personne pour l&apos;instant.</p>
           <p className="mx-auto mt-2 max-w-sm text-ink-2">
             Les adresses laissées sur la page d&apos;accueil apparaîtront ici, de la plus récente à
@@ -183,7 +183,7 @@ async function Tableau() {
           </p>
         </div>
       ) : (
-        <ul className="card-soft mt-6 divide-y divide-rule overflow-hidden">
+        <ul className="border border-rule bg-card mt-6 divide-y divide-rule overflow-hidden">
           {liste.inscrits.map((inscrit) => (
             <Ligne key={inscrit.clef} inscrit={inscrit} />
           ))}
@@ -248,7 +248,7 @@ function Ligne({ inscrit }: { inscrit: Inscrit }) {
 
 function Avertissement({ titre, children }: { titre: string; children: React.ReactNode }) {
   return (
-    <div className="card-soft mt-8 p-6 sm:p-8">
+    <div className="border border-rule bg-card mt-8 p-6 sm:p-8">
       <h1 className="display text-[1.6rem] text-ink">{titre}</h1>
       <p className="mt-3 leading-relaxed text-ink-2">{children}</p>
     </div>

@@ -31,7 +31,7 @@ export const ANNONCES: AnnonceExemple[] = [
     prix: 890,
     surface: 42,
     ville: "Lyon 4e",
-    note: 96,
+    note: 97,
     publie: "il y a 3 min",
     auteur: "Particulier",
     pour: "Balcon, ascenseur, publiée à l'instant",
@@ -118,7 +118,7 @@ export const MESSAGES: MessageExemple[] = [
     annonce: "T2 lumineux avec balcon",
     lieu: "Croix-Rousse",
     prix: 890,
-    note: 96,
+    note: 97,
     ton: "Direct",
     texte:
       "Bonjour,\n\nVotre annonce m'intéresse beaucoup, en particulier pour le balcon.\n\nJe suis infirmière en CDI. Mon revenu net est de 2 400 € par mois et je bénéficie de la garantie Visale. Mon dossier est complet.\n\nJe serais la seule personne à y vivre, et je peux emménager à partir du 1er décembre. Je cherche à m'installer durablement.\n\nPour la visite, je suis disponible en semaine après 18 h ou le samedi.\n\nCordialement,\nCamille Martin\n06 12 34 56 78",
@@ -169,3 +169,22 @@ export const MESSAGES: MessageExemple[] = [
       "Bonjour,\n\nVotre annonce a retenu toute mon attention, en particulier pour la vue.\n\nJe suis Thomas Bastien, graphiste, indépendant. Mon revenu net est de 2 800 € par mois. J'ai un garant : une caution solidaire. L'ensemble des justificatifs (pièce d'identité, avis d'imposition, deux derniers bilans) est prêt à vous être transmis.\n\nNous serions 2 à y vivre, et nous pouvons emménager à partir du 1er décembre. Nous cherchons à nous installer pour au moins trois ans.\n\nPour la visite, je suis disponible en semaine, en fin de journée.\n\nCordialement,\nThomas Bastien\n06 90 80 70 60\nt.bastien@exemple.fr",
   },
 ];
+
+/**
+ * La décomposition de la note de l'annonce vedette, telle que `scoreListing`
+ * la rend pour le profil de démonstration (relancé le 30 octobre 2026 : 97).
+ * Huit règles ; on en montre six, les deux plus petites sont résumées. C'est
+ * la preuve que le score est explicable, qui est l'argument du produit.
+ */
+export const DECOMPOSITION = {
+  note: 97,
+  lignes: [
+    { critere: "Prix dans le budget", detail: "890 € ≤ 950 €", delta: 26 },
+    { critere: "Annonce très récente", detail: "moins de 2 h", delta: 20 },
+    { critere: "Ville correspondante", detail: "Lyon 4e", delta: 20 },
+    { critere: "Surface suffisante", detail: "42 m² ≥ 30 m²", delta: 20 },
+    { critere: "Mots-clés trouvés", detail: "balcon, lumineux", delta: 10 },
+    { critere: "Ascenseur présent", detail: "demandé", delta: 8 },
+  ],
+  reste: "Deux pièces et type de bien : + 22 points, puis plafonnement à 100.",
+};

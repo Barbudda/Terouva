@@ -70,8 +70,8 @@ export default function GuideGarantCaution() {
         <li>le montant du loyer, en lettres et en chiffres, et ses conditions de révision ;</li>
         <li>s&apos;il s&apos;agit d&apos;une caution simple ou solidaire ;</li>
         <li>
-          la reconnaissance, par la caution, de l&apos;avant-dernier alinéa de l&apos;article 22-1
-          de la loi du 6 juillet 1989 et de l&apos;article 2297 du Code civil ;
+          la reconnaissance, par la caution, de l&apos;avant-dernier alinéa de l&apos;<span className="loi">article 22-1</span>
+          de la <span className="loi">loi du 6 juillet 1989</span> et de l&apos;<span className="loi">article 2297</span> du Code civil ;
         </li>
         <li>
           en colocation, le nom du colocataire dont le départ mettra fin à l&apos;engagement du
@@ -93,7 +93,7 @@ export default function GuideGarantCaution() {
 
       <h2 id="justificatifs">Les justificatifs du garant</h2>
       <p>
-        La liste est fixée par le décret du 5 novembre 2015, elle est <strong>limitative</strong>,
+        La liste est fixée par le <span className="loi">décret du 5 novembre 2015</span>, elle est <strong>limitative</strong>,
         et elle n&apos;est pas la même que celle du locataire. Pour une caution personne physique :
       </p>
       <ul>

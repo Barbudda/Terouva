@@ -1,21 +1,33 @@
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { Chiffres } from "@/components/sections/Chiffres";
-import { Video } from "@/components/sections/Video";
 import { Problem } from "@/components/sections/Problem";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Features } from "@/components/sections/Features";
+import { Instrument } from "@/components/sections/Instrument";
+import { Fonctions } from "@/components/sections/Fonctions";
 import { Messages } from "@/components/sections/Messages";
-import { Demo } from "@/components/sections/Demo";
 import { Outils } from "@/components/sections/Outils";
 import { Privacy } from "@/components/sections/Privacy";
-import { FAQ } from "@/components/sections/FAQ";
-import { Signup } from "@/components/sections/Signup";
+import { Inscription } from "@/components/sections/Inscription";
 import { getSiteUrl } from "@/lib/site";
 import { FAQ_ITEMS } from "@/lib/content";
 import { DonneesStructurees } from "@/lib/seo";
 
+/**
+ * L'accueil : neuf blocs, six coquilles, et l'alternance des deux mondes.
+ *
+ *   A plein cadre  (Hero)        papier
+ *   B papier large (Problem)     papier
+ *   D bande nuit   (Instrument)  nuit
+ *   C index        (Fonctions)   papier
+ *   E mosaïque     (Messages)    papier
+ *   C index        (Outils)      papier
+ *   B papier large (Privacy)     papier
+ *   D bande nuit   (Inscription) nuit
+ *   F pied logotype (Footer)     papier
+ *
+ * Aucune coquille deux fois de suite, aucune plus de deux fois. Deux sections
+ * consécutives ne démarrent jamais à la même colonne (voir chaque composant).
+ */
 export default function Home() {
   const siteUrl = getSiteUrl();
 
@@ -54,18 +66,10 @@ export default function Home() {
    * Pas de nœud `SoftwareApplication` ici, et c'est une décision.
    *
    * Google exige trois choses ensemble pour ce type : `name`, `offers`, **et**
-   * `aggregateRating` ou `review`. Pas l'un ou l'autre, les trois. Un premier
-   * diagnostic maison avait lu cette règle comme une alternative et concluait
-   * à tort que le balisage était complet ; l'audit Semrush, lui, comptait cinq
-   * items invalides, dont celui-ci.
-   *
-   * Terouva n'a ni note ni avis, puisqu'il n'est pas encore sorti. Les inventer
-   * est exclu. Déclarer un type qu'on ne peut pas remplir honnêtement ne
-   * rapporte aucun résultat enrichi et coûte une erreur à chaque audit : on
-   * retire le nœud. Le produit reste décrit par `Organization` et `WebSite`
-   * dans le gabarit, par la vidéo, et par les questions fréquentes.
-   *
-   * À rétablir le jour où de vrais avis existent, pas avant.
+   * `aggregateRating` ou `review`. Terouva n'a ni note ni avis, puisqu'il n'est
+   * pas encore sorti. Déclarer un type qu'on ne peut pas remplir honnêtement ne
+   * rapporte aucun résultat enrichi et coûte une erreur à chaque audit. À
+   * rétablir le jour où de vrais avis existent, pas avant.
    */
 
   return (
@@ -73,19 +77,15 @@ export default function Home() {
       <DonneesStructurees data={faqJsonLd} />
       <DonneesStructurees data={videoJsonLd} />
       <Nav />
-      <main>
+      <main className="overflow-x-clip">
         <Hero />
-        <Chiffres />
-        <Video />
         <Problem />
-        <HowItWorks />
-        <Features />
+        <Instrument />
+        <Fonctions />
         <Messages />
-        <Demo />
         <Outils />
         <Privacy />
-        <FAQ />
-        <Signup />
+        <Inscription />
       </main>
       <Footer />
     </>

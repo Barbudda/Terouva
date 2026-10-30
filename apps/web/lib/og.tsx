@@ -13,30 +13,54 @@ import { getSiteUrl } from "@/lib/site";
  *
  * **L'adresse en bas de l'image n'est jamais écrite en dur.** Elle était restée
  * sur le sous-domaine de la plateforme après le branchement du domaine, et
- * chaque lien partagé affichait donc une image portant l'ancienne adresse —
+ * chaque lien partagé affichait donc une image portant l'ancienne adresse,
  * invisible dans le code, lisible par tout le monde.
  */
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const PAPER = "#FDFDFD";
-const INK = "#1B1D1E";
-const INK_2 = "#55595C";
-const ACCENT = "#C92D6A";
-const WASH = "#FBDAE7";
+/* Les mêmes valeurs que `globals.css` : l'image de partage est du monde papier. */
+export const PAPER = "#F7F3ED";
+export const PAPER_2 = "#EFE9E0";
+export const INK = "#17181A";
+export const INK_2 = "#4E5154";
+export const INK_3 = "#64686B";
+export const RULE_FORT = "#C6BDB0";
+export const ACCENT = "#C92D6A";
 
 /** Le domaine du site, sans protocole ni barre finale. */
 export function domaineAffiche(): string {
   return getSiteUrl().replace(/^https?:\/\//, "").replace(/\/$/, "");
 }
 
-/** DM Sans, comme le site. Une image de partage dans une autre police ne
- *  ressemble pas à la page qu'elle annonce. */
+/**
+ * Fraunces pour le titre, Archivo pour le reste, comme le site. Ce sont les
+ * fichiers variables du dépôt Google Fonts (licence OFL) ; le moteur d'image
+ * rend leur instance par défaut, graisse 400, qui est aussi celle du site.
+ */
 export function polices() {
   return Promise.all([
-    readFile(join(process.cwd(), "assets/og/dm-sans-700.woff")),
-    readFile(join(process.cwd(), "assets/og/dm-sans-400.woff")),
+    readFile(join(process.cwd(), "assets/og/Fraunces.ttf")),
+    readFile(join(process.cwd(), "assets/og/Archivo.ttf")),
   ]);
+}
+
+/** La marque, aux couleurs du papier. */
+export function Marque({ taille = 48 }: { taille?: number }) {
+  return (
+    <svg width={taille} height={taille} viewBox="0 0 32 32">
+      <rect width="32" height="32" rx="7" fill={ACCENT} />
+      <path
+        d="M8.5 16.5 16 9.5l7.5 7"
+        fill="none"
+        stroke={PAPER}
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="16" cy="21.5" r="2.4" fill={PAPER} />
+    </svg>
+  );
 }
 
 export async function imageOG({
@@ -48,11 +72,11 @@ export async function imageOG({
   titre: string;
   pied?: string;
 }) {
-  const [bold, regular] = await polices();
+  const [fraunces, archivo] = await polices();
   const adresse = pied ?? domaineAffiche();
 
   // Un titre long doit rester lisible : on descend la taille par paliers.
-  const taille = titre.length > 90 ? 58 : titre.length > 60 ? 68 : 80;
+  const taille = titre.length > 90 ? 56 : titre.length > 60 ? 66 : 78;
 
   return new ImageResponse(
     (
@@ -65,35 +89,22 @@ export async function imageOG({
           background: PAPER,
           color: INK,
           padding: "68px 76px",
-          fontFamily: "DM Sans",
+          fontFamily: "Archivo",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <svg width="48" height="48" viewBox="0 0 32 32">
-            <rect width="32" height="32" rx="9" fill={ACCENT} />
-            <path
-              d="M8.5 16.5 16 9.5l7.5 7"
-              fill="none"
-              stroke="#FFFFFF"
-              strokeWidth="2.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="16" cy="21.5" r="2.4" fill="#FFFFFF" />
-          </svg>
-          <div style={{ fontSize: "34px", fontWeight: 700, letterSpacing: "-0.02em" }}>Terouva</div>
+          <Marque />
+          <div style={{ fontFamily: "Fraunces", fontSize: "36px", letterSpacing: "-0.03em" }}>Terouva</div>
           <div
             style={{
-              marginLeft: "10px",
-              background: WASH,
-              color: "#A52254",
-              borderRadius: "999px",
-              padding: "7px 16px",
-              fontSize: "17px",
-              fontWeight: 700,
-              letterSpacing: "0.12em",
-              display: "flex",
+              marginLeft: "18px",
+              paddingLeft: "18px",
+              borderLeft: `1px solid ${RULE_FORT}`,
+              color: INK_3,
+              fontSize: "18px",
+              letterSpacing: "0.04em",
               textTransform: "uppercase",
+              display: "flex",
             }}
           >
             {surtitre}
@@ -104,10 +115,10 @@ export async function imageOG({
           style={{
             display: "flex",
             marginTop: "auto",
+            fontFamily: "Fraunces",
             fontSize: `${taille}px`,
-            fontWeight: 700,
-            lineHeight: 1.05,
-            letterSpacing: "-0.03em",
+            lineHeight: 1.02,
+            letterSpacing: "-0.02em",
             maxWidth: "1020px",
           }}
         >
@@ -119,7 +130,7 @@ export async function imageOG({
             display: "flex",
             marginTop: "38px",
             paddingTop: "20px",
-            borderTop: `2px solid ${WASH}`,
+            borderTop: `1px solid ${RULE_FORT}`,
             fontSize: "22px",
             color: INK_2,
           }}
@@ -131,8 +142,8 @@ export async function imageOG({
     {
       ...size,
       fonts: [
-        { name: "DM Sans", data: bold, weight: 700, style: "normal" },
-        { name: "DM Sans", data: regular, weight: 400, style: "normal" },
+        { name: "Fraunces", data: fraunces, weight: 400, style: "normal" },
+        { name: "Archivo", data: archivo, weight: 400, style: "normal" },
       ],
     },
   );

@@ -100,7 +100,7 @@ export default function GuidePreavisLocation() {
       </p>
       <p>
         Dans la lettre, mentionnez l&apos;adresse du logement et le bénéfice du délai réduit, avec
-        le renvoi à l&apos;article 15 de la loi du 6 juillet 1989, et joignez le justificatif.
+        le renvoi à l&apos;<span className="loi">article 15</span> de la <span className="loi">loi du 6 juillet 1989</span>, et joignez le justificatif.
       </p>
 
       <h2 id="lettre">La lettre de congé</h2>
@@ -109,8 +109,8 @@ export default function GuidePreavisLocation() {
         <li>votre identité et l&apos;adresse du logement que vous quittez ;</li>
         <li>la volonté claire de donner congé, et la date de départ qui en découle ;</li>
         <li>
-          si vous demandez le délai réduit : le motif invoqué, le renvoi à l&apos;article 15 de la
-          loi du 6 juillet 1989, et la pièce justificative jointe.
+          si vous demandez le délai réduit : le motif invoqué, le renvoi à l&apos;<span className="loi">article 15</span> de la
+          <span className="loi">loi du 6 juillet 1989</span>, et la pièce justificative jointe.
         </li>
       </ul>
       <p>

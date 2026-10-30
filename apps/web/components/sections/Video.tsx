@@ -4,19 +4,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 /**
- * Accès à l'animation de présentation.
+ * Accès à l'animation de présentation, dans la bande nuit.
  *
- * **Un ruban, pas un bloc.** Un grand rectangle noir avec un bouton au milieu
- * casse la page en deux et crie « vidéo ». Ici c'est une bande fine qui va d'un
- * bord à l'autre, où l'image de l'animation passe en filigrane : on la remarque
- * sans qu'elle prenne toute la place, et elle fait office de respiration entre
- * deux sections.
- *
- * **Et un vrai plein écran.** Au clic, la vidéo occupe l'écran entier, pas un
- * panneau centré avec le site autour. On demande même le plein écran du
- * navigateur quand il l'accepte, pour faire disparaître sa barre d'adresse.
- *
- * Rien n'est chargé avant le clic : le ruban n'affiche qu'une image.
+ * Un cadre à filet, l'affiche en dessous, le libellé en `.champ` : pas de
+ * bouton de lecture rond posé par-dessus. Le seul cercle du site est le
+ * cadran, et un bouton n'a pas besoin d'être une forme pour être un bouton.
+ * Au clic, la vidéo occupe l'écran entier, avec le plein écran du navigateur
+ * quand il l'accepte. Rien n'est chargé avant le clic.
  */
 const CLE_REPRISE = "terouva:promo:seconde";
 const DUREE = 29;
@@ -26,53 +20,36 @@ export function Video() {
 
   return (
     <>
-      {/* Pleine largeur : le ruban traverse la page, sans marge latérale. */}
-      <section id="video" className="mb-16 md:mb-24">
-        <button
-          type="button"
-          onClick={() => setOuvert(true)}
-          // Pas d'aria-label : le bouton porte déjà son texte, et un libellé
-          // vocal qui ne reprend pas mot pour mot ce qui est écrit casse le
-          // pilotage à la voix, qui cherche le texte lu à l'écran. Le nom
-          // accessible est donc le contenu lui-même.
-          className="group relative block w-full overflow-hidden border-y border-rule bg-ash"
-        >
-          {/* L'image de l'animation, en filigrane : on devine le produit sans
-              que la bande devienne un écran. */}
+      <button
+        type="button"
+        onClick={() => setOuvert(true)}
+        // Pas d'aria-label : le bouton porte déjà son texte, et un libellé
+        // vocal différent du texte lu casse le pilotage à la voix.
+        className="group block w-full border border-night-rule text-left transition-colors duration-150 hover:bg-night-2"
+      >
+        <span className="flex items-baseline justify-between gap-4 border-b border-night-rule px-4 py-3">
+          <span className="text-[15px] font-medium text-night-ink">Voir Terouva en 29 secondes</span>
+          <span className="champ shrink-0 text-night-ink-2">Vidéo · 0:29 · sans son</span>
+        </span>
+        <span className="relative block aspect-video overflow-hidden">
+          {/* Une seule image, déjà compressée, chargée à la demande : le service
+              d'optimisation d'images n'apporterait rien ici et facturerait. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            // Version légère et réduite de l'affiche : 13 ko au lieu de 76.
-            // L'image est floutée et à 30 % d'opacité, la définition d'origine
-            // n'y survivrait pas de toute façon. L'affiche pleine taille reste
-            // servie là où elle compte : la vignette déclarée aux moteurs et
-            // l'affiche du lecteur.
-            src="/promo/ruban.webp"
+            src="/promo/affiche.jpg"
             alt=""
             aria-hidden
             width={1280}
             height={720}
             loading="lazy"
             decoding="async"
-            // Léger flou : sans lui, les titres des annonces restent lisibles et
-            // concurrencent le libellé du ruban. Flouté, c'est une matière.
-            className="absolute inset-0 size-full scale-110 object-cover opacity-[0.3] blur-[3px] transition-opacity duration-300 group-hover:opacity-40"
+            className="absolute inset-0 size-full object-cover opacity-80 transition-opacity duration-300 group-hover:opacity-100"
           />
-          <span className="absolute inset-0 bg-gradient-to-r from-paper via-transparent to-paper" />
-
-          <span className="relative flex h-[112px] items-center justify-center gap-5 px-4 sm:h-[132px] sm:gap-7">
-            <span className="grid size-12 shrink-0 place-items-center rounded-full bg-accent text-white shadow-accent transition-transform duration-200 group-hover:scale-110 sm:size-14">
-              <IconeLecture />
-            </span>
-            <span className="text-left">
-              <span className="display block text-xl text-ink sm:text-2xl">
-                Voir Terouva en 29 secondes
-              </span>
-              <span className="mt-1 block text-[15px] text-ink-2">
-                Une animation courte, sans son. Elle s&apos;ouvre en grand.
-              </span>
-            </span>
+          <span className="champ absolute right-3 bottom-3 border border-night-rule bg-night px-2 py-1 text-night-ink">
+            Lire
           </span>
-        </button>
-      </section>
+        </span>
+      </button>
 
       {ouvert && <PleinEcran fermer={() => setOuvert(false)} />}
     </>
@@ -211,7 +188,7 @@ function PleinEcran({ fermer }: { fermer: () => void }) {
         type="button"
         onClick={fermer}
         aria-label="Fermer la vidéo"
-        className="absolute top-3 right-3 z-10 grid size-12 place-items-center rounded-md text-night-ink-2 transition-colors hover:bg-white/10 hover:text-white sm:top-5 sm:right-5"
+        className="absolute top-3 right-3 z-10 grid size-12 place-items-center text-night-ink-2 transition-colors hover:bg-white/10 hover:text-white sm:top-5 sm:right-5"
       >
         <IconeFermer />
       </button>
@@ -233,9 +210,10 @@ function PleinEcran({ fermer }: { fermer: () => void }) {
           <button
             type="button"
             onClick={basculer}
+            aria-label="Rejouer la vidéo"
             className="absolute inset-0 grid place-items-center bg-night/55"
           >
-            <span className="grid size-20 place-items-center rounded-full bg-accent text-white shadow-accent">
+            <span className="grid size-16 place-items-center bg-night-accent text-ink">
               <IconeRejouer />
             </span>
           </button>
@@ -249,7 +227,7 @@ function PleinEcran({ fermer }: { fermer: () => void }) {
           type="button"
           onClick={basculer}
           aria-label={enLecture ? "Mettre en pause" : "Reprendre"}
-          className="grid size-11 shrink-0 place-items-center rounded-md bg-white text-ink transition-colors hover:bg-night-ink-2"
+          className="grid size-11 shrink-0 place-items-center bg-night-ink text-ink transition-colors hover:bg-night-ink-2"
         >
           {enLecture ? <IconePause /> : <IconeLecture petite />}
         </button>
@@ -261,10 +239,10 @@ function PleinEcran({ fermer }: { fermer: () => void }) {
           aria-valuenow={Math.round(progression * 100)}
           aria-valuemin={0}
           aria-valuemax={100}
-          className="h-2 flex-1 cursor-pointer rounded-full bg-white/25"
+          className="h-1 flex-1 cursor-pointer bg-white/25"
         >
           <div
-            className="h-full rounded-full bg-accent"
+            className="h-full bg-night-accent"
             style={{ width: `${progression * 100}%` }}
           />
         </div>

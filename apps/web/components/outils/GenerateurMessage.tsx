@@ -11,6 +11,10 @@ import { generateMessage, TONE_LABELS, type Listing, type MessageTone, type User
  * navigateur : **rien n'est envoyé nulle part**, il n'y a pas de route serveur
  * derrière cette page. Le formulaire sert aussi de démonstration honnête : ce
  * qu'on voit ici est exactement ce que produit l'outil.
+ *
+ * Un générateur est un instrument : il vit dans le monde nuit. Champs à filet
+ * bas, libellés en `.champ`, un seul bouton coloré (copier), et les tons
+ * choisis par un filet, pas par un remplissage.
  */
 const TONS: MessageTone[] = ["direct", "warm", "pro"];
 
@@ -75,6 +79,9 @@ const AGREMENTS = [
   { valeur: "parquet cachet", libelle: "Le cachet" },
   { valeur: "jardin", libelle: "Le jardin" },
 ];
+
+const SAISIE =
+  "mt-1.5 h-11 w-full border-b border-night-ink-2 bg-transparent text-base text-night-ink outline-none transition-colors duration-150 placeholder:text-night-ink-2 focus:border-night-accent";
 
 export function GenerateurMessage() {
   const [champs, setChamps] = useState<Champs>(VIDE);
@@ -151,16 +158,16 @@ export function GenerateurMessage() {
   return (
     <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
       <form
-        className="card-soft p-6 sm:p-7"
+        className="border border-night-rule bg-night-2 p-6 sm:p-7"
         onSubmit={(e) => e.preventDefault()}
         aria-label="Vos informations"
       >
-        <p className="eyebrow">Vos informations</p>
-        <p className="mt-3 text-[15px] leading-relaxed text-ink-2">
+        <p className="champ text-night-ink-2">Vos informations</p>
+        <p className="mt-3 text-[15px] leading-relaxed text-night-ink-2">
           Elles ne quittent pas votre navigateur : cette page n&apos;envoie rien, à personne.
         </p>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
           <Champ label="Prénom" value={champs.prenom} onChange={set("prenom")} placeholder="Camille" />
           <Champ label="Nom" value={champs.nom} onChange={set("nom")} placeholder="Martin" />
           <Champ
@@ -213,8 +220,8 @@ export function GenerateurMessage() {
         {/* Les quatre informations avec lesquelles un bailleur trie avant même
             d'accorder une visite. Les omettre l'oblige à poser la question, ou
             à passer au candidat suivant. */}
-        <p className="eyebrow mt-8">Ce qu&apos;on vous demandera de toute façon</p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <p className="champ mt-9 text-night-ink-2">Ce qu&apos;on vous demandera de toute façon</p>
+        <div className="mt-4 grid gap-5 sm:grid-cols-2">
           <Champ
             label="Nombre d'occupants"
             value={champs.occupants}
@@ -252,16 +259,10 @@ export function GenerateurMessage() {
           />
         </div>
 
-        <div className="mt-8">
+        <div className="mt-9">
           <label className="block">
-            <span className="text-[13px] font-semibold text-ink-2">
-              Ce qui vous a plu dans l&apos;annonce
-            </span>
-            <select
-              value={champs.aPlu}
-              onChange={set("aPlu")}
-              className="mt-1.5 h-12 w-full rounded-md border border-field bg-card px-3 text-base text-ink outline-none focus-visible:border-accent"
-            >
+            <span className="champ text-night-ink-2">Ce qui vous a plu dans l&apos;annonce</span>
+            <select value={champs.aPlu} onChange={set("aPlu")} className={`${SAISIE} bg-night-2`}>
               {AGREMENTS.map((a) => (
                 <option key={a.libelle} value={a.valeur}>
                   {a.libelle}
@@ -269,7 +270,7 @@ export function GenerateurMessage() {
               ))}
             </select>
           </label>
-          <p className="mt-1.5 text-[13px] text-ink-3">
+          <p className="mt-2 text-[13px] leading-relaxed text-night-ink-2">
             Une seule phrase l&apos;évoquera. Le message ne répète jamais la surface, le prix ni le
             quartier : la personne qui le reçoit a écrit l&apos;annonce.
           </p>
@@ -289,8 +290,8 @@ export function GenerateurMessage() {
               aria-pressed={ton === t}
               className={
                 ton === t
-                  ? "h-11 rounded-full bg-accent px-4 text-[15px] font-semibold text-white"
-                  : "h-11 rounded-full border border-rule bg-card px-4 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink"
+                  ? "champ h-10 border border-night-accent px-3 text-night-ink"
+                  : "champ h-10 border border-night-rule px-3 text-night-ink-2 transition-colors duration-150 hover:text-night-ink"
               }
             >
               {TONE_LABELS[t]}
@@ -303,7 +304,7 @@ export function GenerateurMessage() {
               setVariante((v) => (v + 1) % 6);
               setCopie(false);
             }}
-            className="ml-auto inline-flex h-11 items-center gap-2 rounded-full border border-rule bg-card px-4 text-[15px] font-semibold text-ink-2 transition-colors hover:text-ink"
+            className="champ ml-auto inline-flex h-10 items-center gap-2 border border-night-rule px-3 text-night-ink-2 transition-colors duration-150 hover:text-night-ink"
           >
             <Rejouer />
             Autre version
@@ -311,17 +312,13 @@ export function GenerateurMessage() {
         </div>
 
         <output
-          className="card-soft mt-4 flex-1 overflow-auto p-6 text-[15px] leading-relaxed whitespace-pre-line text-ink"
+          className="mt-4 flex-1 overflow-auto border border-night-rule bg-night-2 p-6 text-[15px] leading-relaxed whitespace-pre-line text-night-ink"
           aria-live="polite"
         >
           {message}
         </output>
 
-        <button
-          type="button"
-          onClick={copier}
-          className="mt-4 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-accent px-6 font-semibold text-white transition-colors hover:bg-accent-ink"
-        >
+        <button type="button" onClick={copier} className="bouton bouton--nuit mt-4 gap-2 self-start">
           {copie ? (
             <Check aria-hidden className="size-4" strokeWidth={2} />
           ) : (
@@ -330,7 +327,7 @@ export function GenerateurMessage() {
           {copie ? "Message copié" : "Copier le message"}
         </button>
 
-        <p className="mt-3 text-[13px] leading-relaxed text-ink-3">
+        <p className="mt-3 text-[13px] leading-relaxed text-night-ink-2">
           Relisez-le avant de l&apos;envoyer : c&apos;est un brouillon, et c&apos;est vous qui
           écrivez au propriétaire.
         </p>
@@ -343,7 +340,7 @@ export function GenerateurMessage() {
  *  justifie pas une dépendance, et le trait suit celui du reste du site. */
 function Rejouer() {
   return (
-    <svg viewBox="0 0 20 20" aria-hidden className="size-4 text-accent" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+    <svg viewBox="0 0 20 20" aria-hidden className="size-4" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M16.5 8.5a6.5 6.5 0 1 0 .3 3.2" />
       <path d="M16.8 4.2v4.4h-4.4" />
     </svg>
@@ -357,12 +354,9 @@ function Champ({
 }: { label: string; aide?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <label className="block">
-      <span className="text-[13px] font-semibold text-ink-2">{label}</span>
-      <input
-        {...props}
-        className="mt-1.5 h-12 w-full rounded-md border border-field bg-card px-3 text-base text-ink outline-none placeholder:text-ink-3 focus-visible:border-accent"
-      />
-      {aide && <span className="mt-1.5 block text-[13px] text-ink-3">{aide}</span>}
+      <span className="champ text-night-ink-2">{label}</span>
+      <input {...props} className={SAISIE} />
+      {aide && <span className="mt-1.5 block text-[13px] text-night-ink-2">{aide}</span>}
     </label>
   );
 }
@@ -377,18 +371,14 @@ function Liste({
   const id = `liste-${label.replace(/\s/g, "-")}`;
   return (
     <label className="block">
-      <span className="text-[13px] font-semibold text-ink-2">{label}</span>
-      <input
-        {...props}
-        list={id}
-        className="mt-1.5 h-12 w-full rounded-md border border-field bg-card px-3 text-base text-ink outline-none placeholder:text-ink-3 focus-visible:border-accent"
-      />
+      <span className="champ text-night-ink-2">{label}</span>
+      <input {...props} list={id} className={SAISIE} />
       <datalist id={id}>
         {options.map((o) => (
           <option key={o} value={o} />
         ))}
       </datalist>
-      {aide && <span className="mt-1.5 block text-[13px] text-ink-3">{aide}</span>}
+      {aide && <span className="mt-1.5 block text-[13px] text-night-ink-2">{aide}</span>}
     </label>
   );
 }
