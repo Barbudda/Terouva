@@ -64,7 +64,13 @@ la **chaleur**, cœur orange au bas du rideau et de l'aurore, et les trois
 panneaux produit en **perspective** (les extérieurs pivotent vers le centre),
 légende à point bleu au-dessus de chacun, coins arrondis. Les boutons passent
 en pilule sur tout le site, le sous-titre en DM Mono, quelques étoiles fixes
-dans le haut du cadre. Techniquement le rideau est du CSS pur : un champ de
+dans le haut du cadre. Puis, sur son retour (« le reste du hero doit suivre le
+dégradé, exactement comme sur la photo »), le halo cesse d'être une lueur sur
+la nuit : c'est un champ plein, nuit en haut, bleu électrique au milieu, cœur
+pêche en bas, flancs bleus, et les traits du rideau ne sont plus que des
+stries plus claires dessus. Les textes posés sur le clair (lien sous le bouton
+rond, légendes des panneaux) prennent une pastille de nuit translucide.
+Techniquement le rideau est du CSS pur : un champ de
 couleur masqué par une silhouette SVG en escalier calculée au rendu, puis par
 un motif de barres au même pas ; aucun élément par trait.
 

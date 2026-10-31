@@ -79,7 +79,10 @@ export function Hero() {
           <br />
           la démo
         </Link>
-        <a href="#inscription" className="lien text-[14px] text-ink-2">
+        <a
+          href="#inscription"
+          className="lien rounded-full bg-paper/70 px-4 py-2 text-[14px] text-ink backdrop-blur-sm"
+        >
           Être prévenu du lancement
         </a>
       </div>

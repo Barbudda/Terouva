@@ -82,7 +82,7 @@ export function PleinCadre({
                 )}
                 style={{ "--rang": 7 + i } as React.CSSProperties}
               >
-                <p className="champ mb-3 flex items-center gap-2 text-ink [text-shadow:0_1px_10px_rgb(8_17_32/0.95),0_0_2px_rgb(8_17_32)]">
+                <p className="champ mb-3 inline-flex items-center gap-2 rounded-full bg-paper/70 py-1.5 pr-3 pl-2.5 text-ink backdrop-blur-sm">
                   <span
                     aria-hidden
                     className="size-1.5 rounded-full bg-blue-clair"
@@ -155,6 +155,7 @@ function Rideau({
         } as React.CSSProperties
       }
     >
+      <div className="rideau-fond" />
       <div className="rideau-barres">
         <span className="rideau-lueur" />
       </div>
