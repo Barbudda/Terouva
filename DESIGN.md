@@ -50,6 +50,24 @@ lentement. Un fondu vers le haut les efface là où passe le texte : « attentio
 à ce que ça ne cache pas le texte ». Sur petit écran ils gardent leur
 proportion, se posent derrière les chiffres clés, un bâton sur deux.
 
+Le 31 octobre encore, Hugo envoie deux images de sa référence et demande de
+lui ressembler, « trois étapes pour avoir un design mémorable ». L'accueil
+les suit dans l'ordre. Un : le **rideau de lumière**, un mur de fins traits
+verticaux serrés, bleu électrique, sous le titre, dont la silhouette dessine
+la courbe (montée progressive, pic au centre, descente progressive) avec un
+léger aléa d'un trait à l'autre ; il se lève à l'arrivée, respire, une lueur
+le balaie ; le titre reste au-dessus, rien ne passe derrière ; sur petit écran
+il devient une bande entre le texte et les chiffres. Deux : les chiffres de
+part et d'autre, et un **bouton rond** « Voir la démo » posé au sommet du
+rideau, l'inscription en lien dessous et en pilule dans le masthead. Trois :
+la **chaleur**, cœur orange au bas du rideau et de l'aurore, et les trois
+panneaux produit en **perspective** (les extérieurs pivotent vers le centre),
+légende à point bleu au-dessus de chacun, coins arrondis. Les boutons passent
+en pilule sur tout le site, le sous-titre en DM Mono, quelques étoiles fixes
+dans le haut du cadre. Techniquement le rideau est du CSS pur : un champ de
+couleur masqué par une silhouette SVG en escalier calculée au rendu, puis par
+un motif de barres au même pas ; aucun élément par trait.
+
 Le reste du document décrit le système tel qu'il tient toujours : trois voix,
 six coquilles, les trois gestes, la grille. Là où il dit « papier chaud » pour
 la page, lire « minuit », sauf dans les guides.

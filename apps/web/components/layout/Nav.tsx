@@ -35,7 +35,7 @@ export function Nav({ home = true }: { home?: boolean }) {
 
   return (
     <>
-      <header className="cadre entree flex h-20 items-center justify-between gap-6" style={{ "--rang": 0 } as React.CSSProperties}>
+      <header className="cadre entree relative z-10 flex h-20 items-center justify-between gap-6" style={{ "--rang": 0 } as React.CSSProperties}>
         <Link href="/" aria-label="Terouva, accueil" className="shrink-0">
           <Logo />
         </Link>

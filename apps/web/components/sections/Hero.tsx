@@ -5,8 +5,9 @@ import { PleinCadre } from "@/components/layout/coquilles/PleinCadre";
 
 /**
  * L'accueil, coquille A, dans la composition de la référence : le titre au
- * centre de la lueur, deux chiffres de chaque côté, et trois panneaux produit
- * en bas qui mordent sur la section suivante. Pas de photographie : les trois
+ * centre, le rideau de lumière en dessous, deux chiffres de chaque côté, un
+ * bouton rond au sommet du rideau, et trois panneaux produit en perspective
+ * qui mordent sur la section suivante. Pas de photographie : les trois
  * panneaux sont la matière du produit, une annonce lue, une note décomposée,
  * un message prêt.
  *
@@ -25,37 +26,62 @@ export function Hero() {
       }
       droite={
         <dl className="space-y-6">
-          <Chiffre valeur={c3.valeur} unite={c3.unite} detail={c3.detail} droite />
-          <Chiffre valeur={c4.valeur} unite={c4.unite} detail={c4.detail} droite />
+          <Chiffre
+            valeur={c3.valeur}
+            unite={c3.unite}
+            detail={c3.detail}
+            droite
+          />
+          <Chiffre
+            valeur={c4.valeur}
+            unite={c4.unite}
+            detail={c4.detail}
+            droite
+          />
         </dl>
       }
-      panneaux={[<PanneauAnnonce key="annonce" />, <PanneauNote key="note" />, <PanneauMessage key="message" />]}
+      panneaux={[
+        {
+          legende: "Une annonce, lue par Terouva",
+          contenu: <PanneauAnnonce />,
+        },
+        { legende: "Sa note, et pourquoi", contenu: <PanneauNote /> },
+        { legende: "Le message, prêt à relire", contenu: <PanneauMessage /> },
+      ]}
     >
-      <p className="entree champ text-blue-clair" style={{ "--rang": 0 } as React.CSSProperties}>
+      <p
+        className="entree champ text-blue-clair"
+        style={{ "--rang": 0 } as React.CSSProperties}
+      >
         {HERO.eyebrow}
       </p>
       <h1
         className="entree titre mx-auto mt-6 max-w-[14ch] text-[clamp(2.75rem,1.4rem+5.6vw,5.75rem)] text-ink"
         style={{ "--rang": 1 } as React.CSSProperties}
       >
-        {HERO.titleLead} <em className="font-normal italic">{HERO.titleTail}</em>
+        {HERO.titleLead}{" "}
+        <em className="font-normal italic">{HERO.titleTail}</em>
       </h1>
       <p
-        className="entree mx-auto mt-6 max-w-[34rem] text-[15px] leading-relaxed text-ink-2 sm:text-base"
+        className="entree mx-auto mt-6 max-w-[32rem] font-mono text-[13px] leading-relaxed text-ink-2 sm:text-sm"
         style={{ "--rang": 2 } as React.CSSProperties}
       >
         {HERO.panneau}
       </p>
+      {/* Le bouton rond, posé au sommet du rideau comme sur la référence ;
+          l'inscription reste à portée, en dessous, et dans le masthead. */}
       <div
-        className="entree mt-8 flex flex-wrap items-center justify-center gap-3"
+        className="entree mt-10 flex flex-col items-center gap-5"
         style={{ "--rang": 3 } as React.CSSProperties}
       >
-        <a href="#inscription" className="bouton bouton--accent">
+        <Link href="/app?demo=1" className="bouton-rond champ">
+          Voir
+          <br />
+          la démo
+        </Link>
+        <a href="#inscription" className="lien text-[14px] text-ink-2">
           Être prévenu du lancement
         </a>
-        <Link href="/outils/message-de-candidature" className="bouton bouton--filet">
-          Essayer l&apos;outil gratuit
-        </Link>
       </div>
     </PleinCadre>
   );
@@ -76,20 +102,20 @@ function Chiffre({
   return (
     <div className={droite ? "text-right" : ""}>
       <dt className="sr-only">{unite}</dt>
-      <dd className="titre text-[2.5rem] text-action lg:text-[2.75rem]">{valeur}</dd>
+      <dd className="titre text-[2.5rem] text-action lg:text-[2.75rem]">
+        {valeur}
+      </dd>
       <dd className="champ mt-1 text-ink">{unite}</dd>
       <dd className="marge mt-1 hidden lg:block">{detail}</dd>
     </div>
   );
 }
 
-/** Cadre commun des trois panneaux : titre en champ, filet, contenu. */
+/** Cadre commun des trois panneaux : une vitre arrondie, la légende est au-dessus. */
 function Panneau({
-  titre,
   children,
   papier = false,
 }: {
-  titre: string;
   children: React.ReactNode;
   papier?: boolean;
 }) {
@@ -97,13 +123,11 @@ function Panneau({
     <article
       className={
         papier
-          ? "monde-papier h-full border border-rule bg-card p-5 text-ink"
-          : "h-full border border-night-rule bg-night-2/90 p-5 text-night-ink backdrop-blur-sm"
+          ? "monde-papier h-full rounded-[0.75rem] border border-rule bg-card p-5 text-ink"
+          : "h-full rounded-[0.75rem] border border-white/10 bg-night-2/75 p-5 text-night-ink backdrop-blur-md"
       }
     >
-      <p className={papier ? "champ text-ink-3" : "champ text-night-ink-2"}>{titre}</p>
-      <span aria-hidden className={papier ? "mt-2 block h-px bg-rule" : "mt-2 block h-px bg-night-rule"} />
-      <div className="mt-4">{children}</div>
+      {children}
     </article>
   );
 }
@@ -112,7 +136,7 @@ function Panneau({
 function PanneauAnnonce() {
   const a = ANNONCE_PIECE;
   return (
-    <Panneau titre="Une annonce, lue par Terouva" papier>
+    <Panneau papier>
       <p className="text-[15px] leading-snug font-medium">{a.titre}</p>
       <p className="marge mt-1">
         {a.auteur} · {a.ville} · {a.publie}
@@ -136,11 +160,18 @@ function PanneauNote() {
   const rayon = 26;
   const perimetre = 2 * Math.PI * rayon;
   return (
-    <Panneau titre="Sa note, et pourquoi">
+    <Panneau>
       <div className="flex items-center gap-5">
         <div className="relative size-16 shrink-0">
           <svg viewBox="0 0 64 64" className="size-full -rotate-90" aria-hidden>
-            <circle cx="32" cy="32" r={rayon} fill="none" stroke="var(--color-night-rule)" strokeWidth="2" />
+            <circle
+              cx="32"
+              cy="32"
+              r={rayon}
+              fill="none"
+              stroke="var(--color-night-rule)"
+              strokeWidth="2"
+            />
             <circle
               cx="32"
               cy="32"
@@ -159,11 +190,19 @@ function PanneauNote() {
         </div>
         <dl className="min-w-0 flex-1">
           {lignes.slice(0, 4).map((l) => (
-            <div key={l.critere} className="grid grid-cols-[1fr_2.5rem] items-center gap-x-3 py-1">
+            <div
+              key={l.critere}
+              className="grid grid-cols-[1fr_2.5rem] items-center gap-x-3 py-1"
+            >
               <dt className="champ truncate text-night-ink-2">{l.critere}</dt>
-              <dd className="text-right font-mono text-[13px] tabular-nums">+{l.delta}</dd>
+              <dd className="text-right font-mono text-[13px] tabular-nums">
+                +{l.delta}
+              </dd>
               <dd className="col-span-2 h-px bg-night-rule">
-                <span className="block h-full bg-blue" style={{ width: `${(l.delta / max) * 100}%` }} />
+                <span
+                  className="block h-full bg-blue"
+                  style={{ width: `${(l.delta / max) * 100}%` }}
+                />
               </dd>
             </div>
           ))}
@@ -178,7 +217,7 @@ function PanneauMessage() {
   const m = MESSAGES[0];
   const lignes = m.texte.split("\n\n").slice(0, 3);
   return (
-    <Panneau titre="Le message, prêt à relire">
+    <Panneau>
       <div className="space-y-2 text-[13px] leading-relaxed text-night-ink-2">
         {lignes.map((l) => (
           <p key={l} className="line-clamp-2">
@@ -186,7 +225,9 @@ function PanneauMessage() {
           </p>
         ))}
       </div>
-      <p className="champ mt-4 text-blue-clair">Ton {m.ton.toLowerCase()} · vous l&apos;envoyez</p>
+      <p className="champ mt-4 text-blue-clair">
+        Ton {m.ton.toLowerCase()} · vous l&apos;envoyez
+      </p>
     </Panneau>
   );
 }

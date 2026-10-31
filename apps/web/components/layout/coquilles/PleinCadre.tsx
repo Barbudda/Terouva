@@ -2,17 +2,21 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Coquille A : le plein cadre.
+ * Coquille A : le plein cadre, dans la composition de la référence qu'Hugo a
+ * envoyée le 31 octobre (trois couches, dans cet ordre) :
  *
- * Un champ de lumière qui touche les deux bords, et une composition centrée
- * posée dessus : la mention, le titre, le texte, l'action. De part et d'autre,
- * deux colonnes de chiffres. En bas, des panneaux produit qui mordent sur la
- * section suivante d'environ 80 px : c'est le premier chevauchement du site.
+ * 1. Le rideau de lumière. Sous le titre, un mur de fins traits verticaux,
+ *    serrés, bleu électrique, dont la silhouette dessine une courbe : montée
+ *    progressive, pic au centre, descente progressive. Il se lève à l'arrivée
+ *    et respire ensuite. Le titre reste au-dessus : rien ne passe derrière.
+ * 2. Les chiffres de part et d'autre, et un bouton rond posé au sommet.
+ * 3. La chaleur : le cœur du rideau vire à l'orange, et trois panneaux
+ *    produit en perspective mordent sur la section suivante.
  *
- * Tout entre en scène à l'arrivée (`.entree`, décalages de 90 ms), et l'aurore
- * dérive lentement derrière (`.halo`). Décision d'Hugo du 30 octobre, d'après
- * la référence qu'il a envoyée : deux couleurs qui vont ensemble, une couleur
- * vive mélangée à tout ça, et du mouvement.
+ * Le rideau n'est que du CSS : un champ de couleur masqué deux fois, par une
+ * silhouette SVG en escalier (chaque marche est un trait, avec sa propre
+ * hauteur) et par un motif de barres au même pas. Pas un élément par trait,
+ * donc rien à repeindre : seules des transformations bougent.
  */
 export function PleinCadre({
   gauche,
@@ -25,33 +29,37 @@ export function PleinCadre({
   gauche?: ReactNode;
   /** Les chiffres de droite. */
   droite?: ReactNode;
-  /** Les panneaux produit, en bas, qui chevauchent la section suivante. */
-  panneaux?: ReactNode[];
+  /** Les panneaux produit, en bas, avec leur légende au-dessus. */
+  panneaux?: { legende: string; contenu: ReactNode }[];
   /** Le centre : mention, titre, texte, action. */
   children: ReactNode;
   className?: string;
 }) {
   return (
     <section className={cn("halo relative overflow-x-clip", className)}>
-      {/* Les bâtons se mesurent au bloc de contenu, pas aux panneaux : sur
-          petit écran, ceux-ci s'empilent et les auraient cachés. */}
+      {/* Le rideau se mesure au bloc de contenu, pas aux panneaux. */}
       <div className="relative">
-        <Batons />
+        <Rideau className="rideau rideau--large hidden lg:block" />
         <div className="grille items-center pt-14 pb-10 sm:pt-20 lg:min-h-[min(40rem,calc(100vh-14rem))] lg:pt-16 lg:pb-14">
+          <div className="order-1 col-span-12 text-center lg:order-2 lg:col-span-8 lg:col-start-3">
+            {children}
+          </div>
+          {/* Sur petit écran, le rideau prend place entre le centre et les
+              chiffres : aucun texte ne passe devant. */}
+          <div className="relative order-2 col-span-12 mt-8 h-52 sm:h-64 lg:hidden">
+            <Rideau className="rideau rideau--bande" bande />
+          </div>
           {gauche && (
             <div
-              className="entree order-2 col-span-6 mt-10 lg:order-1 lg:col-span-2 lg:mt-0"
+              className="entree order-3 col-span-6 mt-8 lg:order-1 lg:col-span-2 lg:col-start-1 lg:mt-0"
               style={{ "--rang": 5 } as React.CSSProperties}
             >
               {gauche}
             </div>
           )}
-          <div className="order-1 col-span-12 text-center lg:col-span-8 lg:col-start-3">
-            {children}
-          </div>
           {droite && (
             <div
-              className="entree order-3 col-span-6 mt-10 text-right lg:col-span-2 lg:col-start-11 lg:mt-0"
+              className="entree order-4 col-span-6 mt-8 text-right lg:order-3 lg:col-span-2 lg:col-start-11 lg:mt-0"
               style={{ "--rang": 6 } as React.CSSProperties}
             >
               {droite}
@@ -62,10 +70,10 @@ export function PleinCadre({
 
       {panneaux && panneaux.length > 0 && (
         <div className="grille relative z-10 -mb-12 lg:-mb-20">
-          <div className="col-span-12 grid gap-4 lg:grid-cols-12 lg:gap-6">
+          <div className="col-span-12 grid gap-6 lg:grid-cols-12 lg:[perspective:1600px]">
             {panneaux.map((p, i) => (
               <div
-                key={i}
+                key={p.legende}
                 className={cn(
                   "entree min-w-0",
                   i === 0 && "lg:col-span-4",
@@ -74,7 +82,22 @@ export function PleinCadre({
                 )}
                 style={{ "--rang": 7 + i } as React.CSSProperties}
               >
-                {p}
+                <p className="champ mb-3 flex items-center gap-2 text-ink [text-shadow:0_1px_10px_rgb(8_17_32/0.95),0_0_2px_rgb(8_17_32)]">
+                  <span
+                    aria-hidden
+                    className="size-1.5 rounded-full bg-blue-clair"
+                  />
+                  {p.legende}
+                </p>
+                <div
+                  className={cn(
+                    "panneau-incline",
+                    i === 0 && "panneau-incline--gauche",
+                    i === 2 && "panneau-incline--droite",
+                  )}
+                >
+                  {p.contenu}
+                </div>
               </div>
             ))}
           </div>
@@ -84,77 +107,57 @@ export function PleinCadre({
   );
 }
 
-/**
- * Les bâtons. Un graphique en bâtons, soixante traits verticaux épais qui
- * poussent depuis le bas du cadre ; leurs sommets dessinent la courbe :
- * montée progressive, montée en pic, descente en pic, descente progressive.
- * Bleus à la base, orange au sommet des plus hauts : la couleur vive au point
- * haut. Un fondu vers le haut (`mask-image`) les efface là où le texte passe,
- * pour qu'ils ne le cachent jamais.
- *
- * Demande d'Hugo du 31 octobre : « des traits verticaux, graphique en
- * bâtons », épais et visibles, « attention à ce que ça ne cache pas le
- * texte ». Les bâtons poussent à l'arrivée depuis le centre vers les bords,
- * puis l'ensemble ondule lentement ; `vector-effect` garde l'épaisseur du
- * trait quelle que soit la largeur de l'écran.
- */
-const NOMBRE_BATONS = 60;
-const LARGEUR = 1440;
-const HAUTEUR = 720;
+/** Nombre de traits : serrés sur grand écran, plus espacés sur la bande mobile. */
+const TRAITS_LARGE = 200;
+const TRAITS_BANDE = 72;
 
-/** La hauteur d'un bâton selon sa position (u de -1 à 1) : queues douces, pic serré. */
-function hauteurBaton(u: number) {
-  return 110 + 410 * Math.exp(-Math.abs(u) / 0.3);
+/**
+ * La silhouette du rideau, en escalier : une marche par trait. La hauteur
+ * suit une cloche à pic serré et à queues longues, plus un léger aléa fixe
+ * d'un trait à l'autre, pour que le sommet vibre comme un égaliseur.
+ */
+function silhouette(n: number) {
+  let d = "M0 100";
+  for (let i = 0; i < n; i++) {
+    const u = ((i + 0.5) / n) * 2 - 1;
+    const cloche = 0.24 + 0.76 * Math.exp(-Math.pow(Math.abs(u) / 0.46, 1.6));
+    const alea = (((i * 7919) % 101) / 101 - 0.5) * 0.08;
+    const h = Math.min(1, Math.max(0.06, cloche + alea));
+    d += `L${i} ${(100 - h * 100).toFixed(1)}H${i + 1}`;
+  }
+  return d + `L${n} 100Z`;
 }
 
-const BATONS = Array.from({ length: NOMBRE_BATONS }, (_, i) => {
-  const x = ((i + 0.5) * LARGEUR) / NOMBRE_BATONS;
-  const u = (x - LARGEUR / 2) / (LARGEUR / 2);
-  return {
-    x,
-    sommet: HAUTEUR - hauteurBaton(u),
-    rang: Math.abs(i - (NOMBRE_BATONS - 1) / 2),
-  };
-});
+function masque(n: number) {
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${n} 100' preserveAspectRatio='none'><path d='${silhouette(n)}'/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
 
-function Batons() {
+const MASQUE_LARGE = masque(TRAITS_LARGE);
+const MASQUE_BANDE = masque(TRAITS_BANDE);
+
+/** Le rideau : le masque en escalier sur l'enveloppe, le motif de barres sur le champ de couleur. */
+function Rideau({
+  className,
+  bande = false,
+}: {
+  className?: string;
+  bande?: boolean;
+}) {
   return (
-    <svg
-      className="batons"
-      viewBox={`0 0 ${LARGEUR} ${HAUTEUR}`}
-      preserveAspectRatio="none"
+    <div
       aria-hidden
-      focusable="false"
+      className={className}
+      style={
+        {
+          "--masque": bande ? MASQUE_BANDE : MASQUE_LARGE,
+          "--traits": bande ? TRAITS_BANDE : TRAITS_LARGE,
+        } as React.CSSProperties
+      }
     >
-      <defs>
-        <linearGradient
-          id="baton-degrade"
-          gradientUnits="userSpaceOnUse"
-          x1="0"
-          y1={HAUTEUR}
-          x2="0"
-          y2="180"
-        >
-          <stop offset="0" stopColor="var(--color-blue)" />
-          <stop offset="0.5" stopColor="var(--color-blue-clair)" />
-          <stop offset="0.82" stopColor="var(--color-action)" />
-          <stop offset="1" stopColor="var(--color-action)" />
-        </linearGradient>
-      </defs>
-      <g className="batons-groupe">
-        {BATONS.map((b) => (
-          <line
-            key={b.x}
-            className="baton"
-            x1={b.x}
-            x2={b.x}
-            y1={HAUTEUR}
-            y2={b.sommet}
-            vectorEffect="non-scaling-stroke"
-            style={{ "--rang": b.rang } as React.CSSProperties}
-          />
-        ))}
-      </g>
-    </svg>
+      <div className="rideau-barres">
+        <span className="rideau-lueur" />
+      </div>
+    </div>
   );
 }
