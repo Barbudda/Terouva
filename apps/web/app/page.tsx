@@ -55,7 +55,8 @@ export default function Home() {
       "Comment Terouva repère les annonces de location qui vous correspondent, les note, et prépare votre message de candidature. Animation sans son.",
     thumbnailUrl: [`${siteUrl}/promo/affiche.jpg`],
     contentUrl: `${siteUrl}/promo/terouva.mp4`,
-    uploadDate: "2026-10-12",
+    // Refaite le 31 octobre avec le nouveau design de l'accueil.
+    uploadDate: "2026-10-31",
     duration: "PT29S",
     inLanguage: "fr-FR",
     isFamilyFriendly: true,

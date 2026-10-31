@@ -13,6 +13,12 @@
  *
  * Usage : node scripts/promo/rendre.mjs [--carre] [--fps 30]
  * Sortie : promo/terouva-promo-16x9.mp4 (ou -1x1.mp4)
+ *
+ * Le format 16:9 alimente aussi le site : une copie allégée en 720p
+ * (apps/web/public/promo/terouva.mp4) et l'affiche, prise sur le plan des
+ * annonces notées (apps/web/public/promo/affiche.jpg). Le fond en dégradé et
+ * en stries coûte cher à l'encodage : la copie 1080p pèse près de 6 Mo, la
+ * 720p un peu plus de 2, sans perte visible dans le lecteur du site.
  */
 import { chromium } from "playwright-core";
 import { mkdirSync, existsSync, readdirSync, statSync } from "node:fs";
@@ -124,3 +130,33 @@ if (code !== 0 || !existsSync(fichier)) {
 console.log(
   `✓ ${fichier} — ${(statSync(fichier).size / 1e6).toFixed(1)} Mo, ${duree} s, ${fps} i/s`,
 );
+
+/** Lance ffmpeg et attend sa fin ; échoue bruyamment plutôt que de laisser un fichier à moitié écrit. */
+async function ffmpegSimple(args) {
+  const p = spawn("ffmpeg", ["-v", "error", "-y", ...args], { stdio: ["ignore", "ignore", "inherit"] });
+  const [c] = await once(p, "close");
+  if (c !== 0) {
+    console.error(`✗ ffmpeg a échoué (code ${c}).`);
+    process.exit(1);
+  }
+}
+
+if (!carre) {
+  const publicPromo = join(RACINE, "apps", "web", "public", "promo");
+  const video = join(publicPromo, "terouva.mp4");
+  const affiche = join(publicPromo, "affiche.jpg");
+  await ffmpegSimple([
+    "-i", fichier,
+    "-vf", "scale=1280:720:flags=lanczos",
+    "-c:v", "libx264", "-preset", "slow", "-crf", "23",
+    "-pix_fmt", "yuv420p", "-movflags", "+faststart",
+    video,
+  ]);
+  // 12,4 s : les quatre annonces sont notées et le sceau est posé.
+  await ffmpegSimple([
+    "-ss", "12.4", "-i", fichier, "-frames:v", "1",
+    "-vf", "scale=1280:720:flags=lanczos", "-q:v", "4",
+    affiche,
+  ]);
+  console.log(`✓ site : ${video} (${(statSync(video).size / 1e6).toFixed(1)} Mo) et ${affiche}`);
+}
