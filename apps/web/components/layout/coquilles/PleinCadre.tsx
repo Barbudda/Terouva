@@ -33,24 +33,31 @@ export function PleinCadre({
 }) {
   return (
     <section className={cn("halo relative overflow-x-clip", className)}>
-      <div className="grille items-center pt-14 pb-10 sm:pt-20 lg:min-h-[min(40rem,calc(100vh-14rem))] lg:pt-16 lg:pb-14">
-        {gauche && (
-          <div
-            className="entree order-2 col-span-6 mt-10 lg:order-1 lg:col-span-2 lg:mt-0"
-            style={{ "--rang": 5 } as React.CSSProperties}
-          >
-            {gauche}
+      {/* Les cordes se mesurent au bloc de contenu, pas aux panneaux : sur
+          petit écran, ceux-ci s'empilent et les auraient cachées. */}
+      <div className="relative">
+        <Cordes />
+        <div className="grille items-center pt-14 pb-10 sm:pt-20 lg:min-h-[min(40rem,calc(100vh-14rem))] lg:pt-16 lg:pb-14">
+          {gauche && (
+            <div
+              className="entree order-2 col-span-6 mt-10 lg:order-1 lg:col-span-2 lg:mt-0"
+              style={{ "--rang": 5 } as React.CSSProperties}
+            >
+              {gauche}
+            </div>
+          )}
+          <div className="order-1 col-span-12 text-center lg:col-span-8 lg:col-start-3">
+            {children}
           </div>
-        )}
-        <div className="order-1 col-span-12 text-center lg:col-span-8 lg:col-start-3">{children}</div>
-        {droite && (
-          <div
-            className="entree order-3 col-span-6 mt-10 text-right lg:col-span-2 lg:col-start-11 lg:mt-0"
-            style={{ "--rang": 6 } as React.CSSProperties}
-          >
-            {droite}
-          </div>
-        )}
+          {droite && (
+            <div
+              className="entree order-3 col-span-6 mt-10 text-right lg:col-span-2 lg:col-start-11 lg:mt-0"
+              style={{ "--rang": 6 } as React.CSSProperties}
+            >
+              {droite}
+            </div>
+          )}
+        </div>
       </div>
 
       {panneaux && panneaux.length > 0 && (
@@ -74,5 +81,85 @@ export function PleinCadre({
         </div>
       )}
     </section>
+  );
+}
+
+/**
+ * Les cordes. Six traits épais tendus d'un bord à l'autre, qui suivent la
+ * courbe d'un graphique : montée progressive, montée en pic, descente en pic,
+ * descente progressive. Le pic passe derrière le titre. Chaque corde porte le
+ * dégradé bleu, orange au sommet, bleu : la couleur vive au point haut.
+ *
+ * Demande d'Hugo du 31 octobre : « des lignes plus épaisses et visibles,
+ * comme des cordes », à la place des rayons fins qui faisaient lignes de
+ * cahier. Les cordes se tendent à l'arrivée (tracé du trait, 120 ms d'écart)
+ * puis ondulent très lentement ; `vector-effect` garde l'épaisseur du trait
+ * quelle que soit la largeur de l'écran, la forme s'étire avec le cadre.
+ */
+const CORDE =
+  "M -20 605 C 240 598 420 570 520 480 C 610 410 680 300 720 160 C 760 300 830 410 920 480 C 1020 570 1200 598 1460 605";
+
+/** Décalage vertical, épaisseur et opacité de chaque corde, du dessus au dessous. */
+const CORDES = [
+  { dy: 0, epaisseur: 3.5, opacite: 0.95 },
+  { dy: 18, epaisseur: 3, opacite: 0.85 },
+  { dy: 36, epaisseur: 2.5, opacite: 0.7 },
+  { dy: 54, epaisseur: 2.5, opacite: 0.6 },
+  { dy: 72, epaisseur: 2, opacite: 0.5 },
+  { dy: 90, epaisseur: 2, opacite: 0.4 },
+];
+
+function Cordes() {
+  return (
+    <svg
+      className="cordes"
+      viewBox="0 0 1440 720"
+      preserveAspectRatio="none"
+      aria-hidden
+      focusable="false"
+    >
+      <defs>
+        <linearGradient
+          id="corde-degrade"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="0"
+          x2="1440"
+          y2="0"
+        >
+          <stop offset="0" stopColor="var(--color-blue)" />
+          <stop offset="0.36" stopColor="var(--color-blue-clair)" />
+          <stop offset="0.5" stopColor="var(--color-action)" />
+          <stop offset="0.64" stopColor="var(--color-blue-clair)" />
+          <stop offset="1" stopColor="var(--color-blue)" />
+        </linearGradient>
+      </defs>
+      <g className="cordes-groupe">
+        {/* La lueur de la première corde : le même trait, large et presque transparent. */}
+        <path
+          d={CORDE}
+          className="corde corde--lueur"
+          pathLength={1}
+          vectorEffect="non-scaling-stroke"
+        />
+        {CORDES.map((c, i) => (
+          <path
+            key={c.dy}
+            d={CORDE}
+            className="corde"
+            pathLength={1}
+            vectorEffect="non-scaling-stroke"
+            transform={`translate(0 ${c.dy})`}
+            style={
+              {
+                "--rang": i,
+                strokeWidth: c.epaisseur,
+                opacity: c.opacite,
+              } as React.CSSProperties
+            }
+          />
+        ))}
+      </g>
+    </svg>
   );
 }

@@ -39,6 +39,15 @@ du noir au bleu nuit `#081120` ; l'orange circule (numéros d'index, chiffres
 clés, arc de la note, bouton) et le bleu clair porte les mentions ; tout entre
 en scène à l'arrivée et l'aurore dérive lentement.
 
+Le 31 octobre, deux retouches de plus. La mention « France · 2026 » disparaît
+(« typique d'une IA ») : il ne reste que « Bientôt disponible ». Et les rayons
+verticaux, qui faisaient lignes de cahier, deviennent six **cordes** épaisses,
+tendues d'un bord à l'autre du hero, qui suivent la courbe d'un graphique :
+montée progressive, montée en pic derrière le titre, descente en pic, descente
+progressive. Bleu aux extrémités, orange au sommet ; elles se tendent à
+l'arrivée puis ondulent lentement. Sur petit écran elles gardent leur
+proportion et se posent derrière les chiffres clés.
+
 Le reste du document décrit le système tel qu'il tient toujours : trois voix,
 six coquilles, les trois gestes, la grille. Là où il dit « papier chaud » pour
 la page, lire « minuit », sauf dans les guides.

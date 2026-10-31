@@ -32,7 +32,7 @@ export function Hero() {
       panneaux={[<PanneauAnnonce key="annonce" />, <PanneauNote key="note" />, <PanneauMessage key="message" />]}
     >
       <p className="entree champ text-blue-clair" style={{ "--rang": 0 } as React.CSSProperties}>
-        {HERO.mention} · {HERO.eyebrow}
+        {HERO.eyebrow}
       </p>
       <h1
         className="entree titre mx-auto mt-6 max-w-[14ch] text-[clamp(2.75rem,1.4rem+5.6vw,5.75rem)] text-ink"

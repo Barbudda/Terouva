@@ -49,8 +49,6 @@ export const HERO = {
     "Vos données restent chez vous",
   ],
   caption: "Quatre annonces d'exemple, notées sur 100 pour une recherche de 2 pièces à Lyon sous 950 €.",
-  /** La mention au-dessus du titre, dans le panneau d'accueil. */
-  mention: "France · 2026",
   /** Les trois lignes sous le titre, dans le panneau. */
   panneau:
     "Terouva repère les annonces qui vous correspondent, les note, et prépare votre message. Vous relisez, vous envoyez. Tout reste sur votre ordinateur.",
