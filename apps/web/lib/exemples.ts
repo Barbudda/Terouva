@@ -188,3 +188,15 @@ export const DECOMPOSITION = {
   ],
   reste: "Deux pièces et type de bien : + 22 points, puis plafonnement à 100.",
 };
+
+/**
+ * Les six annonces de l'accueil, chacune avec le message qui lui répond : les
+ * flèches du plein cadre passent de l'une à l'autre. Le message est retrouvé
+ * par le début du titre ; le test vérifie que chaque annonce a le sien et que
+ * les deux notes concordent.
+ */
+export const EXEMPLES_ACCUEIL = ANNONCES.map((annonce) => {
+  const message = MESSAGES.find((m) => annonce.titre.startsWith(m.annonce));
+  if (!message) throw new Error(`Aucun message pour « ${annonce.titre} »`);
+  return { annonce, message };
+});

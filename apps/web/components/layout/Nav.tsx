@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { NAV_COLONNES } from "@/lib/content";
 import { Logo, LogoMark } from "@/components/ui/Logo";
@@ -23,7 +24,15 @@ const LIENS = [
  * Échap.
  */
 export function Nav({ home = true }: { home?: boolean }) {
-  const href = (lien: string) => (lien.startsWith("#") && !home ? `/${lien}` : lien);
+  const href = (lien: string) =>
+    lien.startsWith("#") && !home ? `/${lien}` : lien;
+  // Le point orange de la référence marque où l'on est : la page en cours,
+  // ou, sur l'accueil, le premier pas.
+  const chemin = usePathname();
+  const actif = (lien: string) =>
+    lien.startsWith("#")
+      ? home && lien === LIENS[0].href
+      : chemin.startsWith(lien);
 
   const [compacte, setCompacte] = useState(false);
   useEffect(() => {
@@ -35,7 +44,10 @@ export function Nav({ home = true }: { home?: boolean }) {
 
   return (
     <>
-      <header className="cadre entree relative z-10 flex h-20 items-center justify-between gap-6" style={{ "--rang": 0 } as React.CSSProperties}>
+      <header
+        className="cadre entree relative z-10 flex h-20 items-center justify-between gap-6"
+        style={{ "--rang": 0 } as React.CSSProperties}
+      >
         <Link href="/" aria-label="Terouva, accueil" className="shrink-0">
           <Logo />
         </Link>
@@ -46,8 +58,22 @@ export function Nav({ home = true }: { home?: boolean }) {
               <li key={l.href}>
                 <a
                   href={href(l.href)}
-                  className="inline-flex h-10 items-center text-[14px] text-ink-2 transition-colors duration-150 hover:text-ink"
+                  aria-current={
+                    actif(l.href) && !l.href.startsWith("#")
+                      ? "page"
+                      : undefined
+                  }
+                  className={cn(
+                    "inline-flex h-10 items-center gap-2 text-[14px] transition-colors duration-150 hover:text-ink",
+                    actif(l.href) ? "text-ink" : "text-ink-2",
+                  )}
                 >
+                  {actif(l.href) && (
+                    <span
+                      aria-hidden
+                      className="size-1.5 rounded-full bg-action"
+                    />
+                  )}
                   {l.label}
                 </a>
               </li>
@@ -56,10 +82,16 @@ export function Nav({ home = true }: { home?: boolean }) {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Link href="/app?demo=1" className="bouton bouton--filet h-10 px-4 text-[14px]">
+          <Link
+            href="/app?demo=1"
+            className="bouton bouton--filet h-10 px-4 text-[14px]"
+          >
             Voir la démo
           </Link>
-          <a href={href("#inscription")} className="bouton bouton--accent h-10 px-4 text-[14px]">
+          <a
+            href={href("#inscription")}
+            className="bouton bouton--clair h-10 px-4 text-[14px]"
+          >
             Être prévenu
           </a>
         </div>
@@ -73,7 +105,10 @@ export function Nav({ home = true }: { home?: boolean }) {
             <Link href="/" aria-label="Terouva, accueil">
               <Logo />
             </Link>
-            <a href={href("#inscription")} className="bouton bouton--accent h-10 px-4 text-[14px]">
+            <a
+              href={href("#inscription")}
+              className="bouton bouton--clair h-10 px-4 text-[14px]"
+            >
               Être prévenu
             </a>
           </div>
@@ -198,7 +233,11 @@ function Menu({ href }: { href: (lien: string) => string }) {
                 </ul>
               </div>
             ))}
-            <a href={href("#inscription")} onClick={() => setOuvert(false)} className="bouton bouton--accent mt-10 w-full">
+            <a
+              href={href("#inscription")}
+              onClick={() => setOuvert(false)}
+              className="bouton bouton--accent mt-10 w-full"
+            >
               Être prévenu du lancement
             </a>
           </nav>

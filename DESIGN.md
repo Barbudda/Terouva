@@ -70,6 +70,21 @@ la nuit : c'est un champ plein, nuit en haut, bleu électrique au milieu, cœur
 pêche en bas, flancs bleus, et les traits du rideau ne sont plus que des
 stries plus claires dessus. Les textes posés sur le clair (lien sous le bouton
 rond, légendes des panneaux) prennent une pastille de nuit translucide.
+Enfin, troisième image (« étends plus sur la page, exactement comme sur la
+photo, je veux tout copier ») : le champ remonte derrière le masthead, de
+fines stries couvrent tout le hero, le faisceau cyan monte derrière le titre,
+l'orange, le pêche et le rose occupent le tiers bas où reposent les panneaux.
+Le titre tient en deux lignes au sommet ; dessous, une rangée flèche ronde et
+chiffres blancs à gauche, texte et bouton rond au centre, chiffres et flèche à
+droite. Les **flèches** ne sont pas décoratives : elles font défiler les six
+annonces de la démonstration dans les trois panneaux (annonce, note, message),
+et les barres du graphique de notes se cliquent aussi. Panneaux comme la
+référence : blanc à gauche, vitre claire au centre, nuit à droite. Le masthead
+prend un point orange sur la rubrique en cours et un bouton blanc « Être
+prévenu ». Le pied de page se ferme sur la même aurore, derrière le grand
+logotype. La vidéo de promotion est refaite dans ce design : même scénario,
+champ et rideau en fond, et le récit passe du froid au chaud, l'orange
+montant quand Terouva entre en scène.
 Techniquement le rideau est du CSS pur : un champ de
 couleur masqué par une silhouette SVG en escalier calculée au rendu, puis par
 un motif de barres au même pas ; aucun élément par trait.

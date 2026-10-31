@@ -2,16 +2,16 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Coquille A : le plein cadre, dans la composition de la référence qu'Hugo a
- * envoyée le 31 octobre (trois couches, dans cet ordre) :
+ * Coquille A : le plein cadre, copié sur la référence qu'Hugo a envoyée le
+ * 31 octobre (« je veux tout copier »).
  *
- * 1. Le rideau de lumière. Sous le titre, un mur de fins traits verticaux,
- *    serrés, bleu électrique, dont la silhouette dessine une courbe : montée
- *    progressive, pic au centre, descente progressive. Il se lève à l'arrivée
- *    et respire ensuite. Le titre reste au-dessus : rien ne passe derrière.
- * 2. Les chiffres de part et d'autre, et un bouton rond posé au sommet.
- * 3. La chaleur : le cœur du rideau vire à l'orange, et trois panneaux
- *    produit en perspective mordent sur la section suivante.
+ * - Le champ : tout le cadre suit le dégradé, nuit au sommet, bleu électrique
+ *   au milieu avec un faisceau cyan, orange et rose au pied (`.halo`).
+ * - Les stries : de fins traits verticaux sur toute la hauteur (`.stries`),
+ *   et au centre le rideau en dôme d'égaliseur, plus clair, sous le bouton.
+ * - La composition : le titre seul au sommet ; dessous, une rangée flèche et
+ *   chiffres à gauche, texte et bouton rond au centre, chiffres et flèche à
+ *   droite ; en bas, trois panneaux en perspective qui mordent sur la suite.
  *
  * Le rideau n'est que du CSS : un champ de couleur masqué deux fois, par une
  * silhouette SVG en escalier (chaque marche est un trait, avec sa propre
@@ -19,54 +19,68 @@ import { cn } from "@/lib/utils";
  * donc rien à repeindre : seules des transformations bougent.
  */
 export function PleinCadre({
+  entete,
   gauche,
   droite,
+  controles,
   panneaux,
   children,
   className,
 }: {
-  /** Les chiffres de gauche. */
+  /** Le sommet : mention et titre. */
+  entete: ReactNode;
+  /** Flèche et chiffres de gauche. */
   gauche?: ReactNode;
-  /** Les chiffres de droite. */
+  /** Chiffres et flèche de droite. */
   droite?: ReactNode;
+  /** Les commandes des panneaux sur petit écran. */
+  controles?: ReactNode;
   /** Les panneaux produit, en bas, avec leur légende au-dessus. */
   panneaux?: { legende: string; contenu: ReactNode }[];
-  /** Le centre : mention, titre, texte, action. */
+  /** Le centre de la rangée : texte et bouton rond. */
   children: ReactNode;
   className?: string;
 }) {
   return (
     <section className={cn("halo relative overflow-x-clip", className)}>
+      <div aria-hidden className="stries" />
       {/* Le rideau se mesure au bloc de contenu, pas aux panneaux. */}
       <div className="relative">
         <Rideau className="rideau rideau--large hidden lg:block" />
-        <div className="grille items-center pt-14 pb-10 sm:pt-20 lg:min-h-[min(40rem,calc(100vh-14rem))] lg:pt-16 lg:pb-14">
-          <div className="order-1 col-span-12 text-center lg:order-2 lg:col-span-8 lg:col-start-3">
-            {children}
-          </div>
-          {/* Sur petit écran, le rideau prend place entre le centre et les
-              chiffres : aucun texte ne passe devant. */}
-          <div className="relative order-2 col-span-12 mt-8 h-52 sm:h-64 lg:hidden">
-            <Rideau className="rideau rideau--bande" bande />
-          </div>
-          {gauche && (
-            <div
-              className="entree order-3 col-span-6 mt-8 lg:order-1 lg:col-span-2 lg:col-start-1 lg:mt-0"
-              style={{ "--rang": 5 } as React.CSSProperties}
-            >
-              {gauche}
+        <div className="cadre flex flex-col pt-14 pb-10 sm:pt-20 lg:min-h-[calc(100svh-15rem)] lg:justify-center lg:pt-8 lg:pb-20">
+          <div className="text-center">{entete}</div>
+          <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 lg:mt-12 lg:grid-cols-[1fr_minmax(0,40rem)_1fr] lg:items-center lg:gap-x-10">
+            <div className="col-span-2 text-center lg:order-2 lg:col-span-1">
+              {children}
             </div>
-          )}
-          {droite && (
-            <div
-              className="entree order-4 col-span-6 mt-8 text-right lg:order-3 lg:col-span-2 lg:col-start-11 lg:mt-0"
-              style={{ "--rang": 6 } as React.CSSProperties}
-            >
-              {droite}
+            {/* Sur petit écran, le rideau prend place entre le centre et les
+                chiffres : aucun texte ne passe devant. */}
+            <div className="relative col-span-2 h-52 sm:h-64 lg:hidden">
+              <Rideau className="rideau rideau--bande" bande />
             </div>
-          )}
+            {gauche && (
+              <div
+                className="entree lg:order-1"
+                style={{ "--rang": 4 } as React.CSSProperties}
+              >
+                {gauche}
+              </div>
+            )}
+            {droite && (
+              <div
+                className="entree lg:order-3"
+                style={{ "--rang": 5 } as React.CSSProperties}
+              >
+                {droite}
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      {controles && (
+        <div className="cadre relative z-10 mb-6 lg:hidden">{controles}</div>
+      )}
 
       {panneaux && panneaux.length > 0 && (
         <div className="grille relative z-10 -mb-12 lg:-mb-20">
@@ -75,17 +89,17 @@ export function PleinCadre({
               <div
                 key={p.legende}
                 className={cn(
-                  "entree min-w-0",
+                  "entree flex min-w-0 flex-col",
                   i === 0 && "lg:col-span-4",
                   i === 1 && "flotte lg:col-span-5",
                   i === 2 && "lg:col-span-3",
                 )}
                 style={{ "--rang": 7 + i } as React.CSSProperties}
               >
-                <p className="champ mb-3 inline-flex items-center gap-2 rounded-full bg-paper/70 py-1.5 pr-3 pl-2.5 text-ink backdrop-blur-sm">
+                <p className="champ mb-3 inline-flex items-center self-start gap-2 rounded-full bg-paper/70 py-1.5 pr-3 pl-2.5 text-ink backdrop-blur-sm">
                   <span
                     aria-hidden
-                    className="size-1.5 rounded-full bg-blue-clair"
+                    className="size-1.5 rounded-full bg-action"
                   />
                   {p.legende}
                 </p>

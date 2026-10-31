@@ -55,38 +55,6 @@ export const HERO = {
 };
 
 /**
- * La pièce à conviction du plein cadre : une annonce de location, affichée en
- * grand, avec ce que Terouva en extrait. C'est l'annonce vedette de la
- * démonstration, pas une capture d'un site tiers : ni logotype, ni habillage,
- * ni nom, ni téléphone. Le dépôt de garantie vaut un mois hors charges, comme
- * la loi le plafonne pour un logement vide.
- */
-export const ANNONCE_PIECE = {
-  titre: "T2 lumineux avec balcon, Croix-Rousse",
-  loyer: 890,
-  charges: 60,
-  surface: 42,
-  pieces: 2,
-  etage: "3e étage, ascenseur",
-  ville: "Lyon 4e",
-  publie: "il y a 3 min",
-  auteur: "Particulier",
-  photos: 6,
-  description: [
-    "Appartement lumineux de 42 m² au 3e étage avec ascenseur, séjour exposé sud, balcon, cuisine équipée et une chambre. Métro Croix-Rousse à deux pas.",
-    "Charges de 60 € comprises (eau froide, entretien des parties communes). Dépôt de garantie : 830 €. Disponible à partir du 1er décembre. Logement non meublé.",
-  ],
-  /** Ce que l'outil lit dans l'annonce, dans l'ordre où il le lit. */
-  extraits: [
-    { champ: "Loyer", valeur: "890 € CC" },
-    { champ: "Hors charges", valeur: "830 €" },
-    { champ: "Surface", valeur: "42 m²" },
-    { champ: "Ascenseur", valeur: "oui" },
-    { champ: "Encadrement", valeur: "Lyon, zone soumise" },
-  ],
-};
-
-/**
  * La bande nuit de l'instrument. Le flux reprend les trois étapes, parce que
  * ce sont elles ; les libellés sont en `.champ`.
  */

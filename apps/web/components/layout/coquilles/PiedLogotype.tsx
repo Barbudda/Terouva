@@ -9,6 +9,9 @@ import type { ReactNode } from "react";
  * le troisième chevauchement du site, et le seul endroit où la typographie
  * est traitée comme une matière. Au-dessus : les liens en quatre colonnes
  * avec leurs intitulés en `.champ`, puis une ligne pour l'éditeur et l'année.
+ *
+ * Le logotype repose sur l'aurore de l'accueil (`.aurore-pied`) : la page
+ * s'ouvre et se ferme sur le même dégradé, nuit, bleu électrique, orange.
  */
 export function PiedLogotype({
   colonnes,
@@ -50,12 +53,14 @@ export function PiedLogotype({
       {/* Le logotype : interligne réduit à la hauteur de capitale, puis
           remonté d'un tiers sous le bord. Le `overflow: hidden` du pied fait
           la coupe. */}
-      <p
-        aria-hidden
-        className="cadre mt-6 -mb-[0.3em] font-serif text-[clamp(4rem,14vw,13rem)] leading-[0.78] tracking-[-0.04em] text-ink select-none [font-variation-settings:'SOFT'_0,'WONK'_1,'opsz'_144]"
-      >
-        TEROUVA
-      </p>
+      <div className="aurore-pied">
+        <p
+          aria-hidden
+          className="cadre -mb-[0.3em] font-serif text-[clamp(4rem,14vw,13rem)] leading-[0.78] tracking-[-0.04em] text-ink select-none [font-variation-settings:'SOFT'_0,'WONK'_1,'opsz'_144]"
+        >
+          TEROUVA
+        </p>
+      </div>
     </footer>
   );
 }

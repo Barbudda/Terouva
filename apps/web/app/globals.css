@@ -132,18 +132,56 @@
   z-index: -1;
   pointer-events: none;
 }
-/* Le champ est plein, pas une lueur sur la nuit : tout le hero suit le
-   dégradé, comme la photo. Nuit en haut, bleu électrique au milieu, cœur
-   pêche en bas, flancs bleus ; le dernier calque ramène à la page en bas. */
+/* Le champ, copié sur la référence : tout le cadre suit le dégradé. Nuit
+   au sommet, bleu électrique au milieu avec un faisceau cyan au centre, pied
+   orange à gauche, pêche au centre, rose à droite ; le dernier calque ramène
+   à la page sous les panneaux. */
 .halo::before {
-  inset: 0 -5% -10% -5%;
+  /* Remonte derrière le masthead : sur la référence, le menu flotte sur le champ. */
+  inset: -5rem -5% -12% -5%;
   background:
-    linear-gradient(to top, var(--color-paper) 0%, transparent 9%),
-    radial-gradient(58% 56% at 50% 100%, #ffc3a0 0%, #fc8f66 24%, rgb(252 115 77 / 0.85) 44%, transparent 74%),
-    radial-gradient(95% 62% at 50% 92%, #1f93ee 0%, rgb(2 151 222 / 0.85) 42%, transparent 78%),
-    radial-gradient(58% 42% at 50% 60%, rgb(31 147 238 / 0.55) 0%, transparent 72%),
-    linear-gradient(180deg, #03070f 0%, #061330 34%, #0a2a62 58%, #0c55b4 82%, #1178d8 100%);
+    linear-gradient(to top, var(--color-paper) 0%, var(--color-paper) 3%, transparent 20%),
+    radial-gradient(30% 20% at 50% 61%, rgb(255 244 234 / 0.95) 0%, rgb(255 200 168 / 0.7) 40%, transparent 80%),
+    radial-gradient(85% 34% at 50% 80%, #ffb08c 0%, rgb(252 115 77 / 0.92) 42%, transparent 82%),
+    radial-gradient(46% 38% at 0% 78%, #ff5b35 0%, rgb(255 91 53 / 0.8) 42%, transparent 82%),
+    radial-gradient(46% 38% at 100% 78%, #ff7389 0%, rgb(255 115 137 / 0.8) 42%, transparent 82%),
+    radial-gradient(14% 36% at 50% 40%, rgb(205 240 255 / 0.85) 0%, rgb(110 200 255 / 0.5) 48%, transparent 88%),
+    radial-gradient(58% 42% at 50% 42%, rgb(22 142 236 / 0.95) 0%, rgb(12 100 212 / 0.65) 48%, transparent 86%),
+    linear-gradient(180deg, #030814 0%, #071a40 14%, #0b3a80 30%, #0e5cc0 45%, #3d7fd6 56%, #c98a9a 66%, #ff8a5c 78%, #ffa47e 88%);
   animation: derive 22s var(--ease-terouva) infinite alternate;
+}
+/* Les stries : de fins traits verticaux sur toute la hauteur, plus clairs et
+   plus sombres que le champ, à des pas irréguliers. Discrètes au sommet,
+   franches au milieu. Elles glissent de quelques pixels, très lentement. */
+.stries {
+  position: absolute;
+  inset: -5rem -3% 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 4px,
+      rgb(255 255 255 / 0.13) 4px 5px,
+      transparent 5px 11px,
+      rgb(175 225 255 / 0.1) 11px 13px,
+      transparent 13px 17px,
+      rgb(0 10 40 / 0.16) 17px 19px,
+      transparent 19px 26px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 37px,
+      rgb(255 255 255 / 0.06) 37px 61px,
+      transparent 61px 97px
+    );
+  -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.35) 0%, rgb(0 0 0 / 0.75) 38%, #000 66%, rgb(0 0 0 / 0.5) 100%);
+  mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.35) 0%, rgb(0 0 0 / 0.75) 38%, #000 66%, rgb(0 0 0 / 0.5) 100%);
+  animation: glisse 26s ease-in-out infinite alternate;
+}
+@keyframes glisse {
+  from { transform: translateX(-1.2%); }
+  to { transform: translateX(1.2%); }
 }
 /* Les étoiles : une poignée de points fixes dans le haut du cadre. */
 .halo::after {
@@ -245,37 +283,124 @@
   to { transform: translateX(270%); }
 }
 
-/* ── Le bouton rond, au sommet du rideau : une vitre, un anneau de lumière. */
+/* ── L'aurore du pied : le champ de l'accueil, en bande, sous le logotype.
+   Elle monte de la nuit au bleu électrique et finit en orange au bord bas. */
+.aurore-pied {
+  position: relative;
+  isolation: isolate;
+  margin-top: 1.5rem;
+  padding-top: clamp(3.5rem, 9vw, 8rem);
+}
+.aurore-pied::before,
+.aurore-pied::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.aurore-pied::before {
+  background:
+    radial-gradient(34% 60% at 50% 100%, rgb(255 244 234 / 0.9) 0%, rgb(255 200 168 / 0.6) 40%, transparent 80%),
+    radial-gradient(55% 75% at 0% 100%, #ff5b35 0%, rgb(255 91 53 / 0.6) 45%, transparent 82%),
+    radial-gradient(55% 75% at 100% 100%, #ff7389 0%, rgb(255 115 137 / 0.6) 45%, transparent 82%),
+    radial-gradient(16% 90% at 50% 62%, rgb(205 240 255 / 0.55) 0%, transparent 88%),
+    linear-gradient(180deg, var(--color-paper) 0%, #0b3a80 32%, #0e5cc0 52%, #c98a9a 72%, #ff8a5c 88%, #ffa47e 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 34%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 34%);
+}
+.aurore-pied::after {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 4px,
+    rgb(255 255 255 / 0.13) 4px 5px,
+    transparent 5px 11px,
+    rgb(175 225 255 / 0.1) 11px 13px,
+    transparent 13px 17px,
+    rgb(0 10 40 / 0.14) 17px 19px,
+    transparent 19px 26px
+  );
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+}
+
+/* ── Le bouton rond, au sommet du rideau : une vitre, un anneau de lumière,
+   l'icône au-dessus du libellé, comme le « Try Now » de la référence. */
 .bouton-rond {
   position: relative;
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 7rem;
-  height: 7rem;
+  width: 7.25rem;
+  height: 7.25rem;
   border-radius: 9999px;
-  border: 1px solid rgb(255 255 255 / 0.4);
+  border: 1px solid rgb(255 255 255 / 0.55);
+  /* Un fond de vitre bleutée : sur le faisceau clair, le libellé blanc reste lisible. */
+  background: radial-gradient(circle at 50% 35%, rgb(40 90 170 / 0.55), rgb(8 30 80 / 0.5) 72%);
+  backdrop-filter: blur(10px);
+  color: var(--color-ink);
+  box-shadow:
+    0 0 0 12px rgb(255 255 255 / 0.07),
+    0 0 60px rgb(190 230 255 / 0.55);
+  transition:
+    transform 200ms var(--ease-terouva),
+    background-color 200ms var(--ease-terouva),
+    box-shadow 200ms var(--ease-terouva);
+}
+.bouton-rond:hover {
+  transform: scale(1.04);
+  box-shadow:
+    0 0 0 16px rgb(255 255 255 / 0.1),
+    0 0 72px rgb(190 230 255 / 0.7);
+}
+
+/* ── Les flèches rondes, aux deux bords de la rangée centrale. */
+/* Pas de `display` ici : la classe est hors couche et battrait `hidden`.
+   L'appelant le donne (`inline-flex`, ou `hidden lg:inline-flex`). */
+.fleche-ronde {
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.3);
   background: rgb(255 255 255 / 0.08);
   backdrop-filter: blur(8px);
   color: var(--color-ink);
-  text-align: center;
-  line-height: 1.35;
-  box-shadow:
-    0 0 0 10px rgb(255 255 255 / 0.05),
-    0 0 48px rgb(143 211 255 / 0.4);
   transition:
     transform 200ms var(--ease-terouva),
     background-color 200ms var(--ease-terouva);
 }
-.bouton-rond:hover {
-  transform: scale(1.04);
-  background: rgb(255 255 255 / 0.16);
+.fleche-ronde:hover {
+  background: rgb(255 255 255 / 0.18);
+}
+.fleche-ronde:active {
+  transform: scale(0.95);
+}
+.fleche-ronde--petite {
+  width: 2.75rem;
+  height: 2.75rem;
+  background: rgb(8 17 32 / 0.55);
+}
+
+/* Le contenu d'un panneau qui change d'exemple entre en fondu. */
+@keyframes bascule {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.bascule {
+  animation: bascule 380ms var(--ease-terouva) both;
 }
 
 /* ── Les panneaux en perspective : les deux extérieurs pivotent vers le
    centre, leur bord intérieur reste à sa place. */
+/* Le panneau remplit ce qui reste sous la légende : les trois cartes d'une
+   rangée finissent à la même hauteur, sans déborder sur la suivante. */
 .panneau-incline {
-  height: 100%;
+  flex: 1 1 auto;
+  display: grid;
 }
 @media (width >= 64rem) {
   .panneau-incline--gauche {
@@ -541,6 +666,14 @@ body {
 .bouton--encre:hover {
   opacity: 0.88;
 }
+/* Le bouton clair du masthead : blanc, texte nuit, comme la référence. */
+.bouton--clair {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.bouton--clair:hover {
+  background: #ffffff;
+}
 .bouton--filet {
   border: 1px solid var(--color-rule-fort);
   color: var(--color-ink);
@@ -690,7 +823,10 @@ details > summary::-webkit-details-marker {
   }
   .halo::before,
   .halo::after,
-  .rideau {
+  .stries,
+  .rideau,
+  .aurore-pied::before,
+  .aurore-pied::after {
     display: none;
   }
   .nuit {
