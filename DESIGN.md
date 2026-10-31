@@ -41,12 +41,14 @@ en scène à l'arrivée et l'aurore dérive lentement.
 
 Le 31 octobre, deux retouches de plus. La mention « France · 2026 » disparaît
 (« typique d'une IA ») : il ne reste que « Bientôt disponible ». Et les rayons
-verticaux, qui faisaient lignes de cahier, deviennent six **cordes** épaisses,
-tendues d'un bord à l'autre du hero, qui suivent la courbe d'un graphique :
-montée progressive, montée en pic derrière le titre, descente en pic, descente
-progressive. Bleu aux extrémités, orange au sommet ; elles se tendent à
-l'arrivée puis ondulent lentement. Sur petit écran elles gardent leur
-proportion et se posent derrière les chiffres clés.
+verticaux, qui faisaient lignes de cahier, deviennent un **graphique en
+bâtons** : soixante traits verticaux épais qui poussent depuis le bas du hero
+et dont les sommets dessinent la courbe, montée progressive, montée en pic,
+descente en pic, descente progressive. Bleus à la base, orange au sommet des
+plus hauts ; ils poussent à l'arrivée depuis le centre, puis ondulent
+lentement. Un fondu vers le haut les efface là où passe le texte : « attention
+à ce que ça ne cache pas le texte ». Sur petit écran ils gardent leur
+proportion, se posent derrière les chiffres clés, un bâton sur deux.
 
 Le reste du document décrit le système tel qu'il tient toujours : trois voix,
 six coquilles, les trois gestes, la grille. Là où il dit « papier chaud » pour

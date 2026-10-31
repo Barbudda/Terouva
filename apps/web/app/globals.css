@@ -120,7 +120,7 @@
 /* ── Le halo de l'accueil. Décision d'Hugo, 30 octobre : « deux couleurs
    qui vont bien ensemble, plus une couleur vive bien mélangée ». Une aurore
    bleue qui occupe le champ, un cœur orange sous le titre et l'action, et des
-   cordes (`.cordes`, SVG dans le plein cadre) tendues d'un bord à l'autre.
+   bâtons (`.batons`, SVG dans le plein cadre) qui poussent depuis le bas.
    L'aurore dérive lentement : c'est de la lumière, pas un fond. Dégradés
    purs, aucun flou calculé. */
 .halo {
@@ -147,10 +147,12 @@
   to { transform: translate3d(2%, -3%, 0) scale(1.06); }
 }
 
-/* Les cordes : au-dessus de l'aurore, sous le texte. Le trait se tend à
-   l'arrivée (`pathLength="1"`, donc un tiret de longueur 1 qu'on fait
-   glisser), puis l'ensemble ondule de dix pixels sur quatorze secondes. */
-.cordes {
+/* Les bâtons : au-dessus de l'aurore, sous le texte. Chaque trait pousse
+   depuis la base à l'arrivée, du centre vers les bords, puis l'ensemble
+   ondule de six pixels sur quatorze secondes. Le masque efface les bâtons
+   vers le haut : le titre et le texte restent nets, seuls les sommets des
+   plus hauts affleurent derrière, à peine. */
+.batons {
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -158,48 +160,56 @@
   height: 100%;
   overflow: visible;
   pointer-events: none;
+  mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    #000 34%,
+    rgb(0 0 0 / 0.45) 58%,
+    rgb(0 0 0 / 0.12) 100%
+  );
 }
-/* Sur petit écran le cadre est haut et étroit : étirée, la courbe devenait
-   une barre. On lui garde sa proportion et on la pose en bas du cadre,
-   derrière les chiffres. */
+/* Sur petit écran le cadre est haut et étroit : étiré, le graphique devenait
+   une barre. On lui garde sa proportion, on le pose en bas du cadre derrière
+   les chiffres, et on ne garde qu'un bâton sur deux. */
 @media (width < 64rem) {
-  .cordes {
+  .batons {
     top: auto;
     bottom: 0;
     height: auto;
     aspect-ratio: 8 / 5;
   }
+  .baton:nth-child(even) {
+    display: none;
+  }
 }
-/* Sur grand écran, elles descendent derrière les panneaux qui mordent. */
+/* Sur grand écran, ils descendent derrière les panneaux qui mordent. */
 @media (width >= 64rem) {
-  .cordes {
+  .batons {
     bottom: -6rem;
     height: auto;
   }
 }
-.corde {
-  fill: none;
-  stroke: url(#corde-degrade);
+.baton {
+  stroke: url(#baton-degrade);
+  stroke-width: 3.5;
   stroke-linecap: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: tendre 1600ms var(--ease-terouva) forwards;
-  animation-delay: calc(var(--rang, 0) * 120ms + 240ms);
+  opacity: 0.85;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(0);
+  animation: pousse 1100ms var(--ease-terouva) forwards;
+  animation-delay: calc(var(--rang, 0) * 28ms + 320ms);
 }
-.corde--lueur {
-  stroke-width: 22;
-  opacity: 0.14;
+@keyframes pousse {
+  to { transform: scaleY(1); }
 }
-@keyframes tendre {
-  to { stroke-dashoffset: 0; }
-}
-.cordes-groupe {
+.batons-groupe {
   transform-origin: 50% 50%;
   animation: onde 14s ease-in-out infinite alternate;
 }
 @keyframes onde {
   from { transform: translateY(0); }
-  to { transform: translateY(-10px); }
+  to { transform: translateY(-6px); }
 }
 
 /* ── L'entrée en scène de l'accueil : chaque élément monte à son tour,
@@ -600,7 +610,7 @@ details > summary::-webkit-details-marker {
     --color-card: #fff;
   }
   .halo::before,
-  .cordes {
+  .batons {
     display: none;
   }
   .nuit {

@@ -33,10 +33,10 @@ export function PleinCadre({
 }) {
   return (
     <section className={cn("halo relative overflow-x-clip", className)}>
-      {/* Les cordes se mesurent au bloc de contenu, pas aux panneaux : sur
-          petit écran, ceux-ci s'empilent et les auraient cachées. */}
+      {/* Les bâtons se mesurent au bloc de contenu, pas aux panneaux : sur
+          petit écran, ceux-ci s'empilent et les auraient cachés. */}
       <div className="relative">
-        <Cordes />
+        <Batons />
         <div className="grille items-center pt-14 pb-10 sm:pt-20 lg:min-h-[min(40rem,calc(100vh-14rem))] lg:pt-16 lg:pb-14">
           {gauche && (
             <div
@@ -85,78 +85,73 @@ export function PleinCadre({
 }
 
 /**
- * Les cordes. Six traits épais tendus d'un bord à l'autre, qui suivent la
- * courbe d'un graphique : montée progressive, montée en pic, descente en pic,
- * descente progressive. Le pic passe derrière le titre. Chaque corde porte le
- * dégradé bleu, orange au sommet, bleu : la couleur vive au point haut.
+ * Les bâtons. Un graphique en bâtons, soixante traits verticaux épais qui
+ * poussent depuis le bas du cadre ; leurs sommets dessinent la courbe :
+ * montée progressive, montée en pic, descente en pic, descente progressive.
+ * Bleus à la base, orange au sommet des plus hauts : la couleur vive au point
+ * haut. Un fondu vers le haut (`mask-image`) les efface là où le texte passe,
+ * pour qu'ils ne le cachent jamais.
  *
- * Demande d'Hugo du 31 octobre : « des lignes plus épaisses et visibles,
- * comme des cordes », à la place des rayons fins qui faisaient lignes de
- * cahier. Les cordes se tendent à l'arrivée (tracé du trait, 120 ms d'écart)
- * puis ondulent très lentement ; `vector-effect` garde l'épaisseur du trait
- * quelle que soit la largeur de l'écran, la forme s'étire avec le cadre.
+ * Demande d'Hugo du 31 octobre : « des traits verticaux, graphique en
+ * bâtons », épais et visibles, « attention à ce que ça ne cache pas le
+ * texte ». Les bâtons poussent à l'arrivée depuis le centre vers les bords,
+ * puis l'ensemble ondule lentement ; `vector-effect` garde l'épaisseur du
+ * trait quelle que soit la largeur de l'écran.
  */
-const CORDE =
-  "M -20 605 C 240 598 420 570 520 480 C 610 410 680 300 720 160 C 760 300 830 410 920 480 C 1020 570 1200 598 1460 605";
+const NOMBRE_BATONS = 60;
+const LARGEUR = 1440;
+const HAUTEUR = 720;
 
-/** Décalage vertical, épaisseur et opacité de chaque corde, du dessus au dessous. */
-const CORDES = [
-  { dy: 0, epaisseur: 3.5, opacite: 0.95 },
-  { dy: 18, epaisseur: 3, opacite: 0.85 },
-  { dy: 36, epaisseur: 2.5, opacite: 0.7 },
-  { dy: 54, epaisseur: 2.5, opacite: 0.6 },
-  { dy: 72, epaisseur: 2, opacite: 0.5 },
-  { dy: 90, epaisseur: 2, opacite: 0.4 },
-];
+/** La hauteur d'un bâton selon sa position (u de -1 à 1) : queues douces, pic serré. */
+function hauteurBaton(u: number) {
+  return 110 + 410 * Math.exp(-Math.abs(u) / 0.3);
+}
 
-function Cordes() {
+const BATONS = Array.from({ length: NOMBRE_BATONS }, (_, i) => {
+  const x = ((i + 0.5) * LARGEUR) / NOMBRE_BATONS;
+  const u = (x - LARGEUR / 2) / (LARGEUR / 2);
+  return {
+    x,
+    sommet: HAUTEUR - hauteurBaton(u),
+    rang: Math.abs(i - (NOMBRE_BATONS - 1) / 2),
+  };
+});
+
+function Batons() {
   return (
     <svg
-      className="cordes"
-      viewBox="0 0 1440 720"
+      className="batons"
+      viewBox={`0 0 ${LARGEUR} ${HAUTEUR}`}
       preserveAspectRatio="none"
       aria-hidden
       focusable="false"
     >
       <defs>
         <linearGradient
-          id="corde-degrade"
+          id="baton-degrade"
           gradientUnits="userSpaceOnUse"
           x1="0"
-          y1="0"
-          x2="1440"
-          y2="0"
+          y1={HAUTEUR}
+          x2="0"
+          y2="180"
         >
           <stop offset="0" stopColor="var(--color-blue)" />
-          <stop offset="0.36" stopColor="var(--color-blue-clair)" />
-          <stop offset="0.5" stopColor="var(--color-action)" />
-          <stop offset="0.64" stopColor="var(--color-blue-clair)" />
-          <stop offset="1" stopColor="var(--color-blue)" />
+          <stop offset="0.5" stopColor="var(--color-blue-clair)" />
+          <stop offset="0.82" stopColor="var(--color-action)" />
+          <stop offset="1" stopColor="var(--color-action)" />
         </linearGradient>
       </defs>
-      <g className="cordes-groupe">
-        {/* La lueur de la première corde : le même trait, large et presque transparent. */}
-        <path
-          d={CORDE}
-          className="corde corde--lueur"
-          pathLength={1}
-          vectorEffect="non-scaling-stroke"
-        />
-        {CORDES.map((c, i) => (
-          <path
-            key={c.dy}
-            d={CORDE}
-            className="corde"
-            pathLength={1}
+      <g className="batons-groupe">
+        {BATONS.map((b) => (
+          <line
+            key={b.x}
+            className="baton"
+            x1={b.x}
+            x2={b.x}
+            y1={HAUTEUR}
+            y2={b.sommet}
             vectorEffect="non-scaling-stroke"
-            transform={`translate(0 ${c.dy})`}
-            style={
-              {
-                "--rang": i,
-                strokeWidth: c.epaisseur,
-                opacity: c.opacite,
-              } as React.CSSProperties
-            }
+            style={{ "--rang": b.rang } as React.CSSProperties}
           />
         ))}
       </g>
