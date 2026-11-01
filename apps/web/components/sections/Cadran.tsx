@@ -17,14 +17,14 @@ const PERIMETRE = 2 * Math.PI * RAYON;
  * valeur et sa jauge. Seul l'arc, et les barres, prennent l'accent nuit.
  */
 export function Cadran() {
-  const { ref, vu } = useEnVue<HTMLDivElement>({ une: true, marge: "0px 0px -10% 0px" });
+  const { ref, vu, direct } = useEnVue<HTMLDivElement>({ une: true, marge: "0px 0px -10% 0px" });
   const { note, lignes, reste } = DECOMPOSITION;
   const max = Math.max(...lignes.map((l) => l.delta));
 
   return (
     <div
       ref={ref}
-      data-joue={vu ? "oui" : "non"}
+      data-joue={!vu ? "non" : direct ? "deja" : "oui"}
       className="instrument border border-night-rule bg-night-2 p-6 sm:p-8"
     >
       <div className="flex items-center gap-6 sm:gap-8">

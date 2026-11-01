@@ -14,6 +14,10 @@ import { useEffect, useRef, useState } from "react";
  * qui manquaient : l'impression, où rien ne défile donc rien n'entrerait
  * jamais dans l'écran, et `prefers-reduced-motion`, où l'on a demandé à ne
  * rien voir bouger. Dans les deux, tout est visible d'emblée.
+ *
+ * `direct` dit que le bloc est entré par le haut de l'écran : on remonte.
+ * L'appelant le montre alors dans son état final, sans rejouer l'animation
+ * (règle du 1er novembre : rien ne s'anime quand on remonte).
  */
 export function useEnVue<T extends HTMLElement>({
   une = true,
@@ -21,6 +25,7 @@ export function useEnVue<T extends HTMLElement>({
 }: { une?: boolean; marge?: string } = {}) {
   const ref = useRef<T>(null);
   const [vu, setVu] = useState(false);
+  const [direct, setDirect] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -43,6 +48,7 @@ export function useEnVue<T extends HTMLElement>({
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          if (une) setDirect(entry.boundingClientRect.top < 0);
           setVu(true);
           if (une) obs.disconnect();
         } else if (!une) {
@@ -59,5 +65,5 @@ export function useEnVue<T extends HTMLElement>({
     };
   }, [une, marge]);
 
-  return { ref, vu };
+  return { ref, vu, direct };
 }

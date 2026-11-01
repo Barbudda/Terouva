@@ -164,7 +164,7 @@ deux fois de suite.
 | | Coquille | Sur l'accueil |
 |---|---|---|
 | A | `PleinCadre` : visuel bord à bord, panneau chevauchant, ligne de base | l'accueil (annonce composée en HTML, pas de photographie) |
-| B | `PapierLarge` : énoncé en colonne 2 ou 3, seconde voix plus bas à droite | le problème, la confidentialité |
+| B | `PapierLarge` : énoncé en colonne 2 ou 3, seconde voix dans un cadre à droite, cadre illustré dessous | le problème (la vie d'une annonce), la confidentialité (où vivent vos données) |
 | C | `IndexFilets` : lignes numérotées à filets, mention à droite | ce que fait l'outil, guides et outils |
 | D | `BandeNuit` : fond encre, densité, un élément qui dépasse | l'instrument (cadran, décomposition, annonces, vidéo), questions et inscription |
 | E | `Mosaique` : tuiles de tailles inégales, défilantes | les messages |
@@ -176,11 +176,21 @@ intitulées, non collant ; une barre compacte revient après 70 vh. Sur petit
 
 ## Mouvement
 
-Une courbe, `--ease-terouva: cubic-bezier(0.22, 0.75, 0.3, 1)`. Trois gestes :
-le filet se trace (`.filet-trace`, lié au défilement), le bloc monte (`.monte`,
-cinq frères au plus), le cadran se remplit (une fois, 900 ms, décomposition à
-80 ms d'écart). Au survol, une seule chose bouge par élément. `@media print`
-révèle tout et rend le monde nuit clair ; `prefers-reduced-motion` éteint tout.
+Une courbe, `--ease-terouva: cubic-bezier(0.22, 0.75, 0.3, 1)`. Quatre gestes :
+le filet se trace (`.filet-trace`), le bloc monte (`.monte`, cinq ensemble au
+plus, 80 ms d'écart), le cadre entre (`.encadre` : il monte, son arête bleue
+puis orange se trace, son contenu arrive pièce par pièce), le cadran se remplit
+(une fois, 900 ms, décomposition à 80 ms d'écart). Au survol, une seule chose
+bouge par élément. `@media print` révèle tout et rend le monde nuit clair ;
+`prefers-reduced-motion` éteint tout.
+
+**Tout ne joue qu'en descendant** (Hugo, 1er novembre : « pour éviter la
+friction quand on remonte »). Les apparitions étaient liées au défilement et
+se rejouaient à l'envers en remontant. Un seul observateur
+(`components/ui/Revelateur.tsx`) les déclenche désormais, une fois, quand le
+bloc entre dans l'écran pendant qu'on descend. Ce qui entre pendant qu'on
+remonte, ou ce qui est déjà à l'écran à l'ouverture, est là sans animation.
+Sans JavaScript, rien n'est caché.
 
 ## Imagerie
 

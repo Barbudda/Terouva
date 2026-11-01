@@ -107,6 +107,13 @@ export const PROBLEM = {
     "Dans beaucoup de villes, les bonnes annonces partent en quelques heures. Entre le moment où une annonce est publiée et celui où vous écrivez votre message, d'autres candidats sont souvent déjà passés.",
     "Un bon dossier compte, et répondre tôt aussi. Terouva vous aide à répondre vite, sans rester devant votre écran toute la journée.",
   ],
+  /** Le cadre de la section : la vie d'une annonce, et où l'on arrive avec ou sans Terouva. Aucun chiffre : ils varient trop d'une ville à l'autre. */
+  vie: {
+    titre: "La vie d'une bonne annonce",
+    etapes: ["Publiée", "Premiers messages", "Visites complètes", "Retirée"],
+    avec: { nom: "Avec Terouva", texte: "Vous la voyez tôt, votre message est déjà rédigé." },
+    sans: { nom: "Sans Terouva", texte: "Vous la découvrez trop tard, les visites sont pleines." },
+  },
 };
 
 export const STEPS = [
@@ -176,6 +183,14 @@ export const PRIVACY = {
     { label: "Publicité et suivi", value: "Aucun." },
     { label: "Changer d'ordinateur", value: "Vous enregistrez vos données dans un fichier, puis vous le rouvrez ailleurs." },
   ],
+  /** Le cadre de la section : ce qui reste sur la machine, et le serveur qui n'existe pas. */
+  schema: {
+    titre: "Où vivent vos données",
+    machine: "Votre ordinateur",
+    contenus: ["Vos recherches", "Vos annonces", "Votre dossier", "Vos messages"],
+    serveur: "Un serveur Terouva",
+    absent: "Il n'existe pas.",
+  },
 };
 
 export const FAQ_ITEMS = [

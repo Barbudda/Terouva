@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, DM_Mono, Fraunces } from "next/font/google";
 import { getSiteUrl } from "@/lib/site";
+import { Revelateur } from "@/components/ui/Revelateur";
 import "./globals.css";
 
 /**
@@ -133,6 +134,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <Revelateur />
       </body>
     </html>
   );

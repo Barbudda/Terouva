@@ -149,6 +149,9 @@
     radial-gradient(58% 42% at 50% 42%, rgb(22 142 236 / 0.95) 0%, rgb(12 100 212 / 0.65) 48%, transparent 86%),
     linear-gradient(180deg, #030814 0%, #071a40 14%, #0b3a80 30%, #0e5cc0 45%, #3d7fd6 56%, #c98a9a 66%, #ff8a5c 78%, #ffa47e 88%);
   animation: derive 22s var(--ease-terouva) infinite alternate;
+  /* Le bord bas se fond : coupé net, il traçait une ligne claire en travers de
+     la section suivante (relevé le 1er novembre). */
+  mask-image: linear-gradient(to bottom, #000 0 84%, transparent 99%);
 }
 /* Les stries : de fins traits verticaux sur toute la hauteur, plus clairs et
    plus sombres que le champ, à des pas irréguliers. Discrètes au sommet,
@@ -730,27 +733,111 @@ details > summary::-webkit-details-marker {
   to { opacity: 1; transform: none; }
 }
 
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .filet-trace {
-      animation: trace linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
-    }
-    /* La plage se termine quand l'élément est presque entièrement entré :
-       un bloc qu'on voit en entier est opaque, y compris sur un petit écran
-       et dans une capture pleine page. */
-    .monte {
-      animation: monte linear both;
-      animation-timeline: view();
-      animation-range: entry 8% entry 80%;
-    }
-    /* Frères décalés de 60 ms, cinq au maximum. Au défilement, le décalage
-       devient un léger retard de plage. */
-    .monte:nth-child(2) { animation-range: entry 12% entry 84%; }
-    .monte:nth-child(3) { animation-range: entry 16% entry 88%; }
-    .monte:nth-child(4) { animation-range: entry 20% entry 92%; }
-    .monte:nth-child(5) { animation-range: entry 24% entry 96%; }
+/* Les apparitions ne jouent qu'en descendant (`Revelateur`, demande d'Hugo
+   du 1er novembre). Elles étaient liées au défilement (`animation-timeline:
+   view()`) et se rejouaient à l'envers quand on remontait : une friction à
+   chaque retour en arrière. Le révélateur pose `data-revele` sur la racine
+   une fois prêt, puis `data-vu="joue"` sur un bloc qui arrive par le bas, ou
+   `data-vu="direct"` sur un bloc déjà à l'écran ou qui arrive par le haut.
+   Sans lui, rien n'est caché. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  [data-revele] :is(.monte, .encadre):not([data-vu]) {
+    opacity: 0;
+  }
+  [data-revele] .filet-trace:not([data-vu]),
+  [data-revele] .encadre:not([data-vu])::before,
+  [data-revele] .encadre:not([data-vu]) .encadre-trait {
+    transform: scaleX(0);
+  }
+  [data-revele] .encadre:not([data-vu]) .encadre-pas {
+    opacity: 0;
+  }
+
+  /* Les blocs entrés ensemble se suivent de 80 ms (`--decalage`, cinq au plus). */
+  .monte[data-vu="joue"] {
+    animation: monte 720ms var(--ease-terouva) both;
+    animation-delay: calc(var(--decalage, 0) * 80ms);
+  }
+  .filet-trace[data-vu="joue"] {
+    animation: trace 900ms var(--ease-terouva) both;
+    animation-delay: calc(var(--decalage, 0) * 80ms);
+  }
+  /* Le cadre monte, son arête de lumière se trace, puis son contenu arrive
+     pièce par pièce (`--rang` sur chaque pièce). */
+  .encadre[data-vu="joue"] {
+    animation: encadre-entre 820ms var(--ease-terouva) both;
+    animation-delay: calc(var(--decalage, 0) * 80ms);
+  }
+  .encadre[data-vu="joue"]::before {
+    animation: trace 1100ms var(--ease-terouva) both;
+    animation-delay: calc(var(--decalage, 0) * 80ms + 180ms);
+  }
+  .encadre[data-vu="joue"] .encadre-pas {
+    animation: monte 620ms var(--ease-terouva) both;
+    animation-delay: calc(var(--decalage, 0) * 80ms + 320ms + var(--rang, 0) * 90ms);
+  }
+  .encadre[data-vu="joue"] .encadre-trait {
+    animation: trace 900ms var(--ease-terouva) both;
+    animation-delay: calc(var(--decalage, 0) * 80ms + 320ms + var(--rang, 0) * 90ms);
+  }
+}
+@keyframes encadre-entre {
+  from { opacity: 0; transform: translateY(28px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Les cadres : une surface de verre sombre, une arête de lumière bleue
+   puis orange sur le haut, comme l'aurore de l'accueil, et une lueur chaude
+   au pied. Ils donnent un corps aux sections de papier large, qui
+   paraissaient vides (Hugo, 1er novembre). */
+.encadre {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  border: 1px solid rgb(255 255 255 / 0.09);
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(255 255 255 / 0.015) 60%),
+    var(--color-paper-2);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    0 28px 56px -32px rgb(0 0 0 / 0.75);
+}
+.encadre::before,
+.encadre::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+.encadre::before {
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-blue) 22%, var(--color-blue-clair) 50%, var(--color-action) 78%, transparent);
+  transform-origin: left center;
+}
+.encadre::after {
+  inset: auto 0 0 0;
+  height: 70%;
+  background: radial-gradient(60% 90% at 50% 100%, rgb(252 115 77 / 0.1), transparent 72%);
+}
+.encadre-trait {
+  transform-origin: left center;
+}
+/* La piste d'une annonce : chaude au moment où elle paraît, éteinte quand
+   elle est retirée. */
+.piste-annonce {
+  background: linear-gradient(90deg, var(--color-action), var(--color-blue-clair) 38%, var(--color-rule-fort) 85%);
+}
+/* La liaison coupée entre l'ordinateur et le serveur absent : un pointillé,
+   vertical, puis horizontal quand le cadre a la place d'aligner les trois
+   pièces. */
+.liaison {
+  background: repeating-linear-gradient(180deg, var(--color-ink-3) 0 4px, transparent 4px 9px);
+}
+@container (width >= 35rem) {
+  .liaison {
+    background: repeating-linear-gradient(90deg, var(--color-ink-3) 0 4px, transparent 4px 9px);
   }
 }
 
@@ -804,6 +891,10 @@ details > summary::-webkit-details-marker {
 @media print {
   .monte,
   .filet-trace,
+  .encadre,
+  .encadre::before,
+  .encadre-pas,
+  .encadre-trait,
   .decomp-ligne,
   .instrument-jauge {
     animation: none !important;
