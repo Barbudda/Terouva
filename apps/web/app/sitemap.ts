@@ -30,8 +30,9 @@ const MODIFIE_LE: Record<string, string> = {
   "/": "2026-10-21", // refonte typographique, chiffres clés réécrits
   "/outils": "2026-10-21",
   "/guides": "2026-10-21",
-  "/confidentialite": "2026-10-30", // flux de données réécrit après la migration vers Blob
+  "/confidentialite": "2026-11-02", // responsable du traitement et e-mail de contact
   "/cgu": "2026-10-30",
+  "/mentions-legales": "2026-11-02", // création, éditeur Blue Lake Dev
 };
 
 /** La rubrique change quand son contenu change : on prend la page la plus récente. */
@@ -91,6 +92,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${base}/cgu`,
       lastModified: new Date(MODIFIE_LE["/cgu"]!),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${base}/mentions-legales`,
+      lastModified: new Date(MODIFIE_LE["/mentions-legales"]!),
       changeFrequency: "yearly",
       priority: 0.3,
     },

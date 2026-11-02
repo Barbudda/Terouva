@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { EDITEUR } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
@@ -33,7 +34,7 @@ export default function Confidentialite() {
           Politique de confidentialité
         </h1>
         <p className="mt-3 text-sm text-ink-3">
-          Mise à jour en octobre 2026. Elle s'applique au site Terouva, à
+          Mise à jour en novembre 2026. Elle s'applique au site Terouva, à
           l'application et à l'extension de navigateur.
         </p>
 
@@ -154,9 +155,14 @@ export default function Confidentialite() {
 
         <Section title="Contact">
           <p>
-            Pour toute question relative à cette politique ou à vos données, vous
-            pouvez contacter le développeur via la fiche de l'extension sur le
-            Chrome Web Store, ou via la page du projet.
+            Le responsable du traitement est {EDITEUR.nom}, entrepreneur individuel
+            ({EDITEUR.marque}), {EDITEUR.adresse.join(", ")}. Pour toute question
+            relative à cette politique ou à vos données, écrivez à{" "}
+            <a href={`mailto:${EDITEUR.email}`} className="lien">
+              {EDITEUR.email}
+            </a>
+            . Si notre réponse ne vous satisfait pas, vous pouvez adresser une
+            réclamation à la CNIL.
           </p>
         </Section>
       </main>

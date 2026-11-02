@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { FOOTER } from "@/lib/content";
+import { EDITEUR, FOOTER } from "@/lib/content";
 import { PiedLogotype } from "@/components/layout/coquilles/PiedLogotype";
 
 /**
  * Le pied de page consomme la coquille F. Les quatre colonnes viennent de
- * `FOOTER.columns` ; la ligne du bas dit l'éditeur, renvoie aux textes
- * légaux (les mentions légales manquent encore, voir PROMPT-VISIBILITE.md) et
- * rappelle que Terouva n'a aucun lien avec Leboncoin.
+ * `FOOTER.columns` ; la ligne du bas nomme l'éditeur, renvoie aux textes
+ * légaux et rappelle que Terouva n'a aucun lien avec Leboncoin.
  */
 export function Footer() {
   return (
@@ -14,8 +13,11 @@ export function Footer() {
       colonnes={FOOTER.columns.map((c) => ({ titre: c.title, liens: c.links }))}
       ligne={
         <>
-          <p>Terouva, éditeur du site · {FOOTER.local}</p>
+          <p>Édité par {EDITEUR.marque} · {FOOTER.local}</p>
           <p className="flex flex-wrap gap-x-4">
+            <Link href="/mentions-legales" className="hover:text-ink">
+              Mentions légales
+            </Link>
             <Link href="/confidentialite" className="hover:text-ink">
               Confidentialité
             </Link>

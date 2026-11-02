@@ -58,10 +58,12 @@ ${GUIDES.map(
 - [Outils gratuits](${base}/outils)
 - [Guides](${base}/guides)
 - [Confidentialité](${base}/confidentialite)
+- [Mentions légales](${base}/mentions-legales)
 
 ## Contact
 
-Terouva, projet indépendant. Les informations juridiques citées dans les guides renvoient
+Terouva est édité par Blue Lake Dev, entreprise individuelle de Hugo Moëne (voir les
+mentions légales). Les informations juridiques citées dans les guides renvoient
 à service-public.gouv.fr et à Légifrance ; vérifier la version en vigueur avant de s'en servir.
 `;
 

@@ -224,6 +224,24 @@ export const FAQ_ITEMS = [
   },
 ];
 
+/**
+ * L'éditeur du site, d'après la synthèse du guichet unique (formalité
+ * J00295677454, validée le 28 octobre 2026). Affiché dans les mentions
+ * légales et le pied de page : un seul endroit à corriger s'il change.
+ * Hugo a choisi le 2 novembre de publier son adresse et son téléphone, que
+ * la LCEN exige d'une entreprise individuelle.
+ */
+export const EDITEUR = {
+  marque: "Blue Lake Dev",
+  nom: "Hugo Moëne",
+  siren: "132 159 203",
+  siret: "132 159 203 00018",
+  adresse: ["60 chemin des Fours à Chaux", "74320 Sévrier, France"],
+  telephone: "06 24 51 09 09",
+  telephoneLien: "+33624510909",
+  email: "hugo8.m@outlook.fr",
+} as const;
+
 export const FOOTER = {
   signature: "Conçu pour vous aider à trouver votre logement plus sereinement.",
   local: "Conçu en local · tourne en local · vous appartient",
@@ -267,6 +285,7 @@ export const FOOTER = {
     {
       title: "Mentions légales",
       links: [
+        { label: "Mentions légales", href: "/mentions-legales" },
         { label: "Confidentialité", href: "/confidentialite" },
         { label: "Conditions d'utilisation", href: "/cgu" },
         { label: "Questions fréquentes", href: "/#questions" },
