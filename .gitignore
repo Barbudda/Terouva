@@ -88,3 +88,74 @@ desktop.ini
 
 # Dossiers de build mis de côté quand OneDrive corrompt .next (à supprimer à la main).
 apps/web/.next-corrompu-*
+
+# --- Runtime du démon ruflo (claude-flow) ---
+# État et métriques réécrits à chaque passage du démon : du bruit dans chaque
+# diff, aucune valeur dans l'historique. La configuration (config.yaml,
+# CAPABILITIES.md) reste versionnée.
+.claude-flow/daemon-state.json
+.claude-flow/daemon.pid
+.claude-flow/metrics/
+.claude-flow/security/
+
+# Copie de sauvegarde écrite par BONDS ; .mcp.json lui-même est déjà ignoré.
+.mcp.json.bak
+
+# --- Loadout BONDS (copies de skills et d'agents tiers, ~31 Mo) ---
+# Ce qui est installé, avec sa source et son hash, est tracé dans
+# bonds-lock.json (versionné) ; « /bonds update » réinstalle ces copies à
+# l'identique. On versionne le lock, pas 1 600 fichiers copiés.
+.claude/design-md/
+.claude/agents/creative-director.md
+.claude/agents/design-craft-expert.md
+.claude/agents/interaction-designer.md
+.claude/agents/motion-designer.md
+.claude/agents/visual-qa.md
+.claude/skills/avoid-ai-writing/
+.claude/skills/brainstorming/
+.claude/skills/clear-writing/
+.claude/skills/creative-direction/
+.claude/skills/ecc-backend-patterns/
+.claude/skills/ecc-coding-standards/
+.claude/skills/ecc-frontend-patterns/
+.claude/skills/ecc-security-review/
+.claude/skills/emil-animate/
+.claude/skills/emil-animation-vocabulary/
+.claude/skills/emil-review-animations/
+.claude/skills/executing-plans/
+.claude/skills/frontend-design/
+.claude/skills/grill-me/
+.claude/skills/gsap-core/
+.claude/skills/gsap-performance/
+.claude/skills/gsap-react/
+.claude/skills/gsap-scrolltrigger/
+.claude/skills/hermes-humanizer/
+.claude/skills/image-transformation-lab/
+.claude/skills/img2threejs/
+.claude/skills/immersive-landing-page/
+.claude/skills/impeccable/
+.claude/skills/interaction-lab/
+.claude/skills/luxury-design-system/
+.claude/skills/modern-web-guidance/
+.claude/skills/motion-audit/
+.claude/skills/no-ai-slop/
+.claude/skills/playwright-cli/
+.claude/skills/react-design-craft/
+.claude/skills/scroll-craft/
+.claude/skills/sepia/
+.claude/skills/sheleg-design/
+.claude/skills/signaux-vibecodes/
+.claude/skills/systematic-debugging/
+.claude/skills/taste-skill/
+.claude/skills/test-driven-development/
+.claude/skills/threejs-r3f-scene/
+.claude/skills/token-economy/
+.claude/skills/ui-slop-audit/
+.claude/skills/ui-ux-pro-max/
+.claude/skills/ux-writing/
+.claude/skills/verification-before-completion/
+.claude/skills/visual-performance-optimizer/
+.claude/skills/web-performance/
+.claude/skills/webgl-hero/
+.claude/skills/writing-plans/
+.claude/skills/zero-slop/
