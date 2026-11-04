@@ -1,10 +1,10 @@
 {
   "version": 1,
   "bondsHome": "C:\\Users\\hugo8\\OneDrive\\Desktop\\BONDS",
-  "bondsCommit": "5d88a1c4445f8b5a2471634e1903b2ecf3ded300",
+  "bondsCommit": "b337023d22a2aa00bc16d2baedda10e79bfe5e45",
   "loadout": "app-premium",
   "equipeLe": "2026-09-15T15:56:31.694Z",
-  "misAJourLe": "2026-11-04T14:00:01.395Z",
+  "misAJourLe": "2026-11-04T14:43:43.084Z",
   "poles": {
     "seo-geo": {
       "installeLe": "2026-11-04T12:07:48.925Z",
@@ -547,9 +547,9 @@
     "skill:pole-seo-geo": {
       "type": "skill",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "64836e5ce4b3edf327e0f21fe3b75305f5a84d23",
+      "hash": "9f7c920d6999f102bb821e3f2646d4642f9f20ad",
       "cible": ".claude/skills/pole-seo-geo",
-      "installeLe": "2026-11-04T14:00:01.395Z"
+      "installeLe": "2026-11-04T14:43:43.084Z"
     },
     "skill:septune-audit": {
       "type": "skill",
