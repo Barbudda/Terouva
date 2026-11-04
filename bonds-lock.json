@@ -1,10 +1,10 @@
 {
   "version": 1,
   "bondsHome": "C:\\Users\\hugo8\\OneDrive\\Desktop\\BONDS",
-  "bondsCommit": "2b51aaf9a521cb5c5aaf7eb4d8d95a349c1d54ac",
+  "bondsCommit": "b4bad8bcd767658561525fb99f05e5b39c943e98",
   "loadout": "app-premium",
   "equipeLe": "2026-09-15T15:56:31.694Z",
-  "misAJourLe": "2026-11-04T12:29:04.187Z",
+  "misAJourLe": "2026-11-04T12:34:02.844Z",
   "poles": {
     "seo-geo": {
       "installeLe": "2026-11-04T12:07:48.925Z",
@@ -554,9 +554,9 @@
     "skill:septune-audit": {
       "type": "skill",
       "source": "local:RankForge",
-      "hash": "4256d08d449281672df64e1968c1a6952e64862f",
+      "hash": "c231db617f6d4054c0f2f31b771dfef6c6871d52",
       "cible": ".claude/skills/septune-audit",
-      "installeLe": "2026-11-04T12:07:48.925Z"
+      "installeLe": "2026-11-04T12:34:02.844Z"
     },
     "skill:seo-technique": {
       "type": "skill",
@@ -659,9 +659,9 @@
     "agent:seo-analyste": {
       "type": "agent",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "61b2fd65b893d92e6619853cc792e688cc99a909",
+      "hash": "fe78b5e8adeda5c32195aa2d390a3d22caa3b91f",
       "cible": ".claude/agents/seo-analyste.md",
-      "installeLe": "2026-11-04T12:07:48.925Z"
+      "installeLe": "2026-11-04T12:34:02.844Z"
     },
     "agent:seo-registre": {
       "type": "agent",
