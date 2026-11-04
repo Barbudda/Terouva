@@ -25,9 +25,18 @@ export function Problem() {
             {PROBLEM.titreLead} <em className="font-normal italic text-blue-clair">{PROBLEM.titreTail}</em>
           </h2>
         </div>
-        <p className="max-w-[32rem] text-[16px] leading-relaxed text-ink-2 lg:col-span-5 lg:pb-2">
-          {PROBLEM.texte}
-        </p>
+        <div className="max-w-[32rem] lg:col-span-5 lg:pb-2">
+          <p className="text-[16px] leading-relaxed text-ink-2">{PROBLEM.texte}</p>
+          {/* Le chiffre du titre se vérifie en un clic : c'est ce qui le distingue d'une accroche. */}
+          <a
+            href={PROBLEM.source.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="lien mt-3 inline-block text-[13px] text-ink-3"
+          >
+            Source : {PROBLEM.source.label}
+          </a>
+        </div>
       </div>
 
       <div className="mt-12 grid items-stretch gap-5 lg:grid-cols-2 lg:gap-6">

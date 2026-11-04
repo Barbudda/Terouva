@@ -143,9 +143,9 @@ export default function Cgu() {
 
         <Section title="L'application à venir">
           <p>
-            L&apos;application n&apos;est pas disponible au téléchargement à la date de ces
-            conditions. Son prix annoncé, environ 12 € par mois avec un essai gratuit, est une
-            indication : le prix définitif, les modalités d&apos;abonnement et les conditions de
+            L&apos;application n&apos;est pas encore ouverte au public à la date de ces
+            conditions. Le modèle annoncé, une base gratuite et des options payantes, est une
+            indication : les prix, les modalités de paiement et les conditions de
             vente seront publiés au lancement et feront l&apos;objet de conditions distinctes.
           </p>
           <p>

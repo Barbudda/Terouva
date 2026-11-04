@@ -19,7 +19,7 @@ export function Inscription() {
         <div className="col-span-12 lg:col-span-3">
           <p className="champ text-night-ink-2">Questions fréquentes</p>
           <h2 className="mt-3 text-nuit-titre leading-[1.05] font-medium tracking-[-0.01em]">
-            Ce qu&apos;on nous demande.
+            Avant de vous inscrire.
           </h2>
         </div>
         <div className="col-span-12 mt-8 lg:col-span-8 lg:col-start-5 lg:mt-0">

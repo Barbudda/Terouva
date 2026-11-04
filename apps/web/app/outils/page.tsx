@@ -15,7 +15,7 @@ const CHEMIN = "/outils";
 export const metadata = pageMetadata({
   titre: "Outils gratuits pour votre recherche de logement",
   description:
-    "Des outils qui tournent dans votre navigateur, sans compte et sans limite. Rien n'est envoyé à un serveur, rien n'est conservé.",
+    "Des outils gratuits pour écrire votre message de candidature et préparer votre dossier, sans compte et sans limite. Ce que vous saisissez ne quitte pas votre ordinateur.",
   chemin: CHEMIN,
 });
 
@@ -217,7 +217,7 @@ export default function Outils() {
             <ul className="mt-5 grid gap-4 md:grid-cols-3">
               {[
                 {
-                  titre: "Aucune requête ne part",
+                  titre: "Rien ne quitte votre ordinateur",
                   texte: "Le calcul se fait dans la page. Coupez votre connexion après le chargement : l'outil fonctionne toujours.",
                 },
                 {

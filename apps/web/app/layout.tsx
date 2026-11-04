@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     template: "%s · Terouva",
   },
   description:
-    "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste sur votre ordinateur.",
+    "Terouva trie vos alertes Leboncoin et écrit votre message de candidature : vous répondez parmi les premiers. Tout reste sur votre ordinateur.",
   keywords: [
     "Leboncoin",
     "alerte Leboncoin",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Terouva · Trouvez votre logement sans y passer vos journées",
     description:
-      "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste chez vous.",
+      "Terouva trie vos alertes Leboncoin et écrit votre message de candidature : vous répondez parmi les premiers. Tout reste sur votre ordinateur.",
     type: "website",
     locale: "fr_FR",
     siteName: "Terouva",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Terouva · Trouvez votre logement sans y passer vos journées",
     description:
-      "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste chez vous.",
+      "Terouva trie vos alertes Leboncoin et écrit votre message de candidature : vous répondez parmi les premiers. Tout reste sur votre ordinateur.",
     images: ["/opengraph-image"],
   },
   robots: {
@@ -112,7 +112,7 @@ export default function RootLayout({
         url: `${siteUrl}/`,
         name: "Terouva",
         description:
-          "Terouva surveille Leboncoin pour vous et prépare votre message. Vous êtes prévenu dès qu'une annonce vous correspond. Tout reste sur votre ordinateur.",
+          "Terouva trie vos alertes Leboncoin et écrit votre message de candidature : vous répondez parmi les premiers. Tout reste sur votre ordinateur.",
         inLanguage: "fr-FR",
         publisher: { "@id": `${siteUrl}/#organization` },
       },

@@ -22,7 +22,7 @@ export function Outils() {
         <div>
           <p className="mention">Gratuit, dès aujourd&apos;hui</p>
           <h2 id="outils-titre" className="titre mt-3 max-w-[24ch] text-titre-2 text-ink">
-            Votre dossier et vos droits, <em className="font-normal italic text-blue-clair">sans attendre.</em>
+            Votre message et votre dossier, dès aujourd&apos;hui.
           </h2>
         </div>
         <Link href="/outils" className="lien text-[15px]">

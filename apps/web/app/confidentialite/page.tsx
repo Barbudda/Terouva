@@ -59,7 +59,7 @@ export default function Confidentialite() {
             Dans ce cas précis, et seulement si vous remplissez le formulaire,
             votre <strong className="text-ink">adresse e-mail</strong> nous est
             transmise. Elle sert uniquement à vous envoyer un message le jour où
-            Terouva devient téléchargeable. Pas de publicité, pas de revente,
+            Terouva ouvre. Pas de publicité, pas de revente,
             aucun autre envoi.
           </p>
           <p>

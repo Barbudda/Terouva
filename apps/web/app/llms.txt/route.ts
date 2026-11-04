@@ -33,18 +33,18 @@ export function GET() {
 
   const corps = `# Terouva
 
-> Outil local qui aide un particulier à trouver une location : il repère les annonces
-> qui correspondent à sa recherche, les note, et prépare le message de candidature.
-> L'application tourne sur l'ordinateur de l'utilisateur. Pas de compte, pas de serveur,
-> aucune donnée transmise.
+> Outil qui aide un particulier à répondre parmi les premiers aux annonces de location
+> Leboncoin : il trie les annonces des alertes que l'utilisateur reçoit, dit lesquelles
+> valent le coup, et prépare le message de candidature et le dossier. Il s'ouvre dans le
+> navigateur, sur l'ordinateur de l'utilisateur. Pas de compte, aucune donnée transmise.
 
 ## État du produit
 
-L'application n'est pas encore téléchargeable (novembre 2026). Une liste
-d'attente prévient du lancement.
+L'application n'est pas encore ouverte au public (novembre 2026). Une liste
+d'attente prévient de l'ouverture.
 
-Elle sera payante par abonnement, autour de 12 € par mois, avec un essai gratuit.
-Le prix définitif sera annoncé au lancement. Les outils de ce site (générateur de
+Modèle prévu : une base gratuite et des options payantes, dont le prix sera
+annoncé avant tout paiement. Les outils de ce site (générateur de
 message, checklist de dossier) restent gratuits et sans inscription.
 
 ## Ce que Terouva ne fait pas
