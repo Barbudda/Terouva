@@ -12,14 +12,14 @@ export default article({
   description:
     "À 18 ans, ou dès 16 ans pour un mineur émancipé. Le cas du mineur logé par ses parents, Visale ouverte avant 18 ans, et le dossier d'un jeune majeur.",
   chapeau:
-    "À 18 ans : c'est l'âge auquel on signe seul un bail. Avant, seul un mineur émancipé, ce qui n'est possible qu'après 16 ans, peut le faire comme un majeur. Un mineur non émancipé est logé par ses parents. À 18 ans, le dossier tient avec vos revenus ou votre bourse, un garant et souvent la garantie Visale.",
+    "À 18 ans : c'est l'âge auquel on signe seul un bail. Avant, seul un mineur émancipé, ce qui n'est possible qu'après 16 ans, peut le faire comme un majeur. Un mineur non émancipé est logé par ses parents. À 18 ans, le dossier tient avec vos revenus ou votre bourse, et un garant ou la garantie Visale.",
   publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/garantie-visale", "/guides/garant-caution"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "à quel âge peut-on avoir un appartement",
   faits: [
     {

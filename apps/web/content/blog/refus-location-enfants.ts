@@ -17,7 +17,7 @@ export default article({
   guidePilier: "/guides/refus-de-dossier",
   guidesLies: ["/guides/dossier-de-location"],
   outilLie: "/outils/message-de-candidature",
-  statut: "brouillon",
+  statut: "publie",
   requete: "refus de location à cause des enfants",
   faits: [
     {

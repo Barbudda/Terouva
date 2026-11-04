@@ -13,7 +13,7 @@ export default article({
   format: "question",
   guidePilier: "/guides/preavis-location",
   guidesLies: ["/guides/depot-de-garantie"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "contrat de location meublé étudiant 9 mois",
   faits: [
     {

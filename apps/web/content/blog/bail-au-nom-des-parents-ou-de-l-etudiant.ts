@@ -14,7 +14,7 @@ export default article({
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/garantie-visale", "/guides/dossier-de-location"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "mes parents peuvent-ils louer pour moi",
   faits: [
     {

@@ -18,7 +18,7 @@ export default article({
   format: "question",
   guidePilier: "/guides/depot-de-garantie",
   guidesLies: ["/guides/dossier-de-location"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "exigence de payer 2 mois et demi de loyer d'avance",
   faits: [
     {

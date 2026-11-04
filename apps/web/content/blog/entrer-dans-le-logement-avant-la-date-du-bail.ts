@@ -13,7 +13,7 @@ export default article({
   format: "question",
   guidePilier: "/guides/etat-des-lieux",
   guidesLies: ["/guides/depot-de-garantie", "/guides/dossier-de-location"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "remise des clés avant début du bail",
   faits: [
     {

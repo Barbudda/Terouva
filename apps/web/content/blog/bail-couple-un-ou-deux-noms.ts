@@ -21,7 +21,7 @@ export default article({
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/preavis-location"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "dossier de location seul ou en couple",
   faits: [
     {
@@ -106,9 +106,9 @@ En le demandant. Si un seul partenaire a signé, vous pouvez demander ensemble a
 Si vous signez le bail à deux dès le départ, cette demande n'a pas lieu d'être : vous êtes cotitulaires par votre signature.
 
 ## En concubinage, que risque celui qui n'est pas sur le bail ? {#concubins}
-Tout dépend du bail. Seul le concubin qui a signé est titulaire et locataire ; l'autre n'a aucun droit ni titre sur le logement, même s'il paie la moitié du loyer. Si le signataire part, ou si le couple se sépare, celui qui n'a pas signé n'a rien à faire valoir face au propriétaire.
+Tout dépend du bail. Seul le concubin qui a signé est titulaire et locataire ; l'autre n'a aucun droit ni titre sur le logement, même s'il paie la moitié du loyer. Si le signataire donne congé, l'autre doit partir au plus tard en même temps, sauf si le propriétaire accepte de signer un nouveau bail avec lui.
 
-À l'inverse, il ne doit rien au propriétaire : celui-ci ne peut réclamer le loyer qu'au signataire, sauf si l'autre s'est porté caution. Signer à deux protège donc le concubin qui vit dans le logement.
+À l'inverse, il ne doit rien au propriétaire : celui-ci ne peut réclamer le loyer qu'au signataire, sauf si l'autre s'est porté caution. Signer à deux protège donc le concubin qui vit dans le logement. Sans signature, seuls un abandon brutal du logement ou le décès du signataire lui ouvrent un transfert du bail, sous conditions.
 
 ## Peut-on ajouter un nom au bail après la signature ? {#ajouter}
 Oui, avec l'accord du propriétaire, sauf pour un couple marié ou pacsé qui a ses propres règles. Un concubin peut demander à être ajouté, mais le propriétaire est libre d'accepter ou de refuser. S'il accepte, l'ajout se fait par un avenant signé de tous, ou par un nouveau bail qui remplace l'ancien.

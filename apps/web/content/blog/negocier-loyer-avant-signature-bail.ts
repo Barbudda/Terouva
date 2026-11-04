@@ -14,7 +14,7 @@ export default article({
   guidePilier: "/guides/repondre-a-une-annonce-de-location",
   guidesLies: ["/guides/dossier-de-location"],
   outilLie: "/outils/message-de-candidature",
-  statut: "brouillon",
+  statut: "publie",
   requete: "négocier son loyer",
   faits: [
     {
@@ -80,6 +80,8 @@ Si le montant change, demandez par écrit pourquoi et comparez-le au loyer de l'
 
 ## Que vérifier dans une ville où les loyers sont plafonnés ? {#plafonds}
 L'annonce elle-même, car elle y suit des règles spécifiques sur ce qu'elle doit afficher. Si le loyer proposé dépasse le plafond applicable, vous avez un argument de négociation fondé sur la loi plutôt que sur votre budget. Vérifiez le loyer de référence de la commune et du type de logement avant de signer, puis gardez la trace de l'échange.
+
+Ce plafonnement est une expérimentation à durée limitée : vérifiez qu'il s'applique encore à la date de votre bail.
 
 Le montant à discuter se lit hors charges : un loyer « charges comprises » qui baisse peut cacher des charges qui montent. Le point est détaillé dans l'article sur les [annonces charges comprises](/blog/annonce-location-charges-comprises).
 `,

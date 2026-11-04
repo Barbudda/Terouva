@@ -16,7 +16,7 @@ export default article({
   format: "question",
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/louer-sans-garant"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "se porter caution alors qu'on est marié",
   faits: [
     {
@@ -72,7 +72,7 @@ export default article({
 ## Le conjoint doit-il signer l'acte de caution ? {#signer}
 Non. Un époux peut se porter caution seul, sans la signature de l'autre. Mais la signature du conjoint change l'étendue de l'engagement : marié sans contrat, celui qui signe seul n'engage que ses biens propres et ses revenus. Les biens communs du couple ne sont engagés que si le conjoint donne son consentement exprès à la caution.
 
-Le reste de l'acte ne change pas : il s'écrit, porte le montant du loyer et la durée de l'engagement, comme le décrit le guide du [garant et de la caution](/guides/garant-caution).
+Le reste de l'acte ne change pas : il s'écrit, porte le montant du loyer et la mention que la caution appose elle-même, comme le décrit le guide du [garant et de la caution](/guides/garant-caution).
 
 ## Qu'engage un époux qui se porte caution seul ? {#seul}
 Marié sans contrat, sous le régime de la communauté réduite aux acquêts, il engage ses biens propres, ceux qu'il avait avant le mariage ou qu'il a reçus par donation ou héritage, et ses revenus. En cas d'impayés, le propriétaire peut se tourner vers ces biens et ces revenus, pas vers la maison ou l'épargne communes.

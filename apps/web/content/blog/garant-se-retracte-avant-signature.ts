@@ -7,13 +7,13 @@ export default article({
   description:
     "Tant que l'acte de caution n'est pas signé, votre garant peut renoncer. Ce que risque votre candidature et les solutions, dans l'ordre où les essayer.",
   chapeau:
-    "Un garant ne s'engage qu'en signant l'acte de cautionnement : avant, il peut changer d'avis sans formalité. Votre dossier perd sa garantie, pas sa valeur. Prévenez le propriétaire tout de suite, puis cherchez dans cet ordre : un autre garant, la garantie Visale, demandée en ligne avant le bail, et la question de l'assurance du propriétaire.",
+    "Un garant ne s'engage qu'en signant l'acte de cautionnement : avant, il peut changer d'avis sans formalité. Votre dossier perd sa garantie, pas sa valeur. Prévenez le propriétaire tout de suite, puis menez trois pistes de front : un autre garant, la garantie Visale, demandée en ligne avant le bail, et la question de l'assurance du propriétaire.",
   publieLe: "2026-11-04",
   pilier: "C",
   format: "cas-pratique",
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/louer-sans-garant", "/guides/garantie-visale"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "garant veux se rétracter",
   faits: [
     {

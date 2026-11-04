@@ -19,7 +19,7 @@ export default article({
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/refus-de-dossier"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "attestation de bon payeur",
   faits: [
     {

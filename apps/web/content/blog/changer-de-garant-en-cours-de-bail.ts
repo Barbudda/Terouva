@@ -13,7 +13,7 @@ export default article({
   format: "cas-pratique",
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/louer-sans-garant", "/guides/garantie-visale"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "changement de garant en cours de bail",
   faits: [
     {

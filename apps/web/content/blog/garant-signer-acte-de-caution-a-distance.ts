@@ -13,7 +13,7 @@ export default article({
   format: "question",
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/dossier-de-location"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "signature du bail à distance pour le garant",
   faits: [
     {
@@ -69,7 +69,7 @@ export default article({
 ## Le garant peut-il signer l'acte de caution à distance ? {#a-distance}
 Oui. Rien n'oblige votre garant à se déplacer le jour de la signature du bail. Son engagement prend la forme d'un écrit à part, l'acte de cautionnement, qu'il signe lui-même. Cet écrit peut circuler par courrier ou par voie électronique : service-public cite, parmi les textes de la caution, les articles du Code civil sur l'acte sous forme électronique.
 
-Le bail, lui, se signe entre vous et le propriétaire. Votre garant n'a pas besoin d'être présent, seulement d'avoir signé son acte avant que vous remettiez le dossier complet. Ce qu'il signe et ce qui l'engage est détaillé dans le guide [garant et caution](/guides/garant-caution).
+Le bail, lui, se signe entre vous et le propriétaire. Votre garant n'a pas besoin d'être présent, seulement d'avoir signé son acte au plus tard le jour où vous signez le bail. Ce qu'il signe et ce qui l'engage est détaillé dans le guide [garant et caution](/guides/garant-caution).
 
 ## Signature électronique ou papier : comment faire ? {#comment}
 Deux façons, à choisir avec le propriétaire ou l'agence. Par voie électronique, l'agence envoie l'acte par un service de signature en ligne, et votre garant le remplit, appose sa mention et signe depuis chez lui. Sur papier, l'acte part par courrier, votre garant le complète, le signe et le renvoie, en recommandé si les délais le permettent.
@@ -80,7 +80,7 @@ Deux façons, à choisir avec le propriétaire ou l'agence. Par voie électroniq
 Dans les deux cas, l'acte doit reprendre le montant du loyer et les conditions de révision du bail : il se prépare donc une fois le bail rédigé, pas avant.
 
 ## Quelle mention le garant doit-il apposer ? {#mention}
-Depuis le 1er janvier 2022, l'article 2297 du Code civil exige que la caution appose elle-même la mention de son engagement : elle s'engage à payer ce que vous devez si vous ne payez pas, dans la limite d'un montant écrit en lettres et en chiffres. Sans cette mention, l'engagement est nul. Elle peut être tapée dans un acte électronique.
+Depuis le 1er janvier 2022, l'article 2297 du Code civil exige que la caution appose elle-même la mention de son engagement : elle s'engage à payer ce que vous devez si vous ne payez pas, dans la limite d'un montant écrit en lettres et en chiffres. Sans cette mention, l'engagement est nul. Elle n'a plus à être manuscrite : elle peut être tapée, y compris dans un acte électronique.
 
 C'est le point à surveiller à distance : la mention doit venir de votre garant, pas être remplie à sa place par l'agence, par vous ou par un proche. Si l'acte arrive prérempli, il la relit et la complète lui-même.
 

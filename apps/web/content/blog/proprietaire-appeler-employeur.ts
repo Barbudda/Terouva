@@ -14,7 +14,7 @@ export default article({
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/refus-de-dossier"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "droit du bailleur à contacter l'employeur",
   faits: [
     {

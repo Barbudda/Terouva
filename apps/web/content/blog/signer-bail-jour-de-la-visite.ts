@@ -13,7 +13,7 @@ export default article({
   format: "cas-pratique",
   guidePilier: "/guides/repondre-a-une-annonce-de-location",
   guidesLies: ["/guides/etat-des-lieux", "/guides/preavis-location"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "signature du bail le jour de la visite",
   faits: [
     {

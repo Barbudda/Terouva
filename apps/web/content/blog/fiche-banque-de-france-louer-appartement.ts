@@ -19,7 +19,7 @@ export default article({
   guidePilier: "/guides/refus-de-dossier",
   guidesLies: ["/guides/dossier-de-location", "/guides/louer-sans-garant"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "fichage FICP refus location logement",
   faits: [
     {

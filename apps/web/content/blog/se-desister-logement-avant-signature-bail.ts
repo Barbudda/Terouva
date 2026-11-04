@@ -13,7 +13,7 @@ export default article({
   format: "question",
   guidePilier: "/guides/repondre-a-une-annonce-de-location",
   guidesLies: ["/guides/dossier-de-location"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "se désister pour un logement",
   faits: [
     {

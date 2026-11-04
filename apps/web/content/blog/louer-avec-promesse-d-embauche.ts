@@ -14,7 +14,7 @@ export default article({
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/garantie-visale", "/guides/louer-sans-garant"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "louer un logement avec une promesse d'embauche",
   faits: [
     {

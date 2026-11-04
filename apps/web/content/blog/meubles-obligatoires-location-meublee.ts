@@ -13,7 +13,7 @@ export default article({
   format: "question",
   guidePilier: "/guides/repondre-a-une-annonce-de-location",
   guidesLies: ["/guides/etat-des-lieux", "/guides/depot-de-garantie"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "obligations des meubles en location meublée",
   faits: [
     {

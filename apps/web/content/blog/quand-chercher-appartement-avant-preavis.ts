@@ -17,7 +17,7 @@ export default article({
   guidePilier: "/guides/repondre-a-une-annonce-de-location",
   guidesLies: ["/guides/preavis-location"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "chercher location 3 mois à l'avance",
   faits: [
     {
@@ -76,7 +76,7 @@ Réglez-vous sur les annonces plutôt que sur une règle. Relevez la date de dis
 Le bon moment commence quand les dates affichées croisent la vôtre. Avant, le temps n'est pas perdu : préparez le dossier complet, votre message type et la liste des quartiers. C'est ce qui fait gagner les premières heures quand le bon logement paraît, et la [méthode pour répondre à une annonce](/guides/repondre-a-une-annonce-de-location) détaille cette préparation.
 
 ## Faut-il donner son préavis avant de trouver ? {#preavis-avant}
-Non. Envoyez votre congé une fois le nouveau bail signé, pas avant. Service-public le rappelle : après avoir donné congé, vous ne pouvez plus changer d'avis sans l'accord du propriétaire. Un congé envoyé trop tôt peut vous laisser sans logement à la fin du préavis ; un congé tardif coûte quelques semaines de double loyer, rien de plus.
+Non. Envoyez votre congé une fois le nouveau bail signé, pas avant. Service-public le rappelle : après avoir donné congé, vous ne pouvez plus changer d'avis sans l'accord du propriétaire. Un congé envoyé trop tôt peut vous laisser sans logement à la fin du préavis ; un congé tardif coûte un double loyer pendant une partie du préavis, rien de plus.
 
 Ce double loyer est le prix de la sécurité. Pour le réduire, envoyez la lettre le jour même de la signature, et gardez votre lettre de congé prête à l'avance, adresse du propriétaire comprise.
 
@@ -98,6 +98,6 @@ Prenons un logement vide hors zone tendue et une entrée souhaitée début févr
 3. Signature du nouveau bail le 10 janvier ; la lettre de congé part le jour même.
 4. Le propriétaire la reçoit le 12 janvier : votre préavis court jusqu'au 12 avril, et les deux loyers se cumulent de février à mi-avril.
 
-En meublé, ou avec un motif de préavis réduit, le chevauchement tombe à un mois. Si vous devez trouver en quelques jours, la méthode est dans [trouver un appartement rapidement](/blog/trouver-un-appartement-rapidement).
+En meublé, ou avec un motif de préavis réduit, le chevauchement tombe à un mois au plus. Si vous devez trouver en quelques jours, la méthode est dans [trouver un appartement rapidement](/blog/trouver-un-appartement-rapidement).
 `,
 });

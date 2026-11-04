@@ -7,14 +7,14 @@ export default article({
   description:
     "Refusé parce qu'intérimaire ? Les pièces qui montrent vos revenus, la garantie Visale ouverte à l'intérim, et l'aide au logement du FASTT.",
   chapeau:
-    "Être intérimaire n'interdit pas de louer : le propriétaire doit choisir sur des critères objectifs comme vos revenus, pas sur le type de contrat. Montrez des revenus réguliers avec vos contrats de mission et vos bulletins de salaire, puis ajoutez une garantie. Visale cite l'intérim parmi les contrats acceptés, et le FASTT accompagne les intérimaires qui cherchent un logement.",
+    "Être intérimaire n'interdit pas de louer : le propriétaire doit choisir sur des critères objectifs comme votre situation financière, que vos missions peuvent montrer. Montrez des revenus réguliers avec vos contrats de mission et vos bulletins de salaire, puis ajoutez une garantie. Visale cite l'intérim parmi les contrats acceptés, et le FASTT accompagne les intérimaires qui cherchent un logement.",
   publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/garantie-visale", "/guides/louer-sans-garant"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "refus de location car intérimaire",
   faits: [
     {
