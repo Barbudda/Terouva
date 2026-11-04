@@ -2,7 +2,7 @@ import { FEATURES } from "@/lib/content";
 import { IndexFilets } from "@/components/layout/coquilles/IndexFilets";
 
 /**
- * Ce que fait l'outil, coquille C : un seul index numéroté, 01 à 06.
+ * Ce que fait l'outil, coquille C : un seul index numéroté, 01 à 05.
  *
  * La mention de droite porte l'état, et c'est ce qui rend la liste honnête.
  * « Disponible » : ça marche aujourd'hui, dans l'outil gratuit ou par
@@ -12,7 +12,6 @@ import { IndexFilets } from "@/components/layout/coquilles/IndexFilets";
  * dire dans une carte avec une coche verte ressemble à une promesse.
  */
 const ETAT: Record<(typeof FEATURES)[number]["icon"], string> = {
-  inbox: "En démo",
   bell: "Bientôt",
   gauge: "En démo",
   pen: "Disponible",
@@ -29,7 +28,7 @@ export function Fonctions() {
           <div className="grid grid-cols-12 gap-x-4 pb-10 sm:gap-x-6">
             <p className="mention col-span-12 sm:col-span-4 sm:col-start-2">Ce que fait Terouva</p>
             <h2 className="titre col-span-12 mt-3 text-titre-2 text-ink sm:col-span-7 sm:col-start-2 sm:mt-0">
-              Peu de choses, celles qui font gagner du temps.
+              Moins de recherche, plus de visites.
             </h2>
           </div>
         }

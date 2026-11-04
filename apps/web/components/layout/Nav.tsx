@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 /** Les quatre destinations de la barre. Les sous-liens vivent dans le menu et le pied. */
 const LIENS = [
-  { href: "#comment", label: "Comment ça marche" },
+  { href: "#gains", label: "Ce que vous y gagnez" },
   { href: "#fonctions", label: "Ce que fait Terouva" },
   { href: "/outils", label: "Outils gratuits" },
   { href: "/guides", label: "Guides" },

@@ -32,14 +32,10 @@ export function Outils() {
         ariaLabel="Outils gratuits et guides"
         entete={
           <div className="grid grid-cols-12 gap-x-4 pb-10 sm:gap-x-6">
-            <p className="mention col-span-12 sm:col-span-5 sm:col-start-3">En attendant l&apos;application</p>
+            <p className="mention col-span-12 sm:col-span-5 sm:col-start-3">Gratuit, dès aujourd&apos;hui</p>
             <h2 className="titre col-span-12 mt-3 text-titre-2 text-ink sm:col-span-8 sm:col-start-3 sm:mt-0">
-              Deux outils qui servent déjà, et neuf guides sourcés.
+              Un dossier complet et vos droits, sans attendre l&apos;application.
             </h2>
-            <p className="marge col-span-12 mt-4 sm:col-span-4 sm:col-start-8">
-              Les outils tournent dans votre navigateur, sans compte et sans rien envoyer. Les
-              guides citent leurs sources et affichent leur date de vérification.
-            </p>
           </div>
         }
         lignes={lignes}

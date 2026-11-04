@@ -24,13 +24,11 @@ export function Messages() {
     <section id="messages" className="py-pas">
       <div className="grille">
         <div className="col-span-12 md:col-span-6 md:col-start-5">
-          <p className="mention">Le plus pénible, en moins</p>
-          <h2 className="titre mt-3 text-titre-2 text-ink">Terouva écrit le message, vous le relisez.</h2>
+          <p className="mention">Le message</p>
+          <h2 className="titre mt-3 text-titre-2 text-ink">Un message qui donne envie de vous répondre.</h2>
           <p className="mt-5 max-w-[34rem] leading-relaxed text-ink-2">
-            Il ne récite pas l&apos;annonce à celui qui l&apos;a écrite. Il donne ce avec quoi un
-            propriétaire trie vraiment : qui vous êtes, ce que vaut votre dossier, combien vous
-            serez, à partir de quand, et quand vous pouvez visiter. Trois tons au choix, et vous
-            gardez la main sur le texte.
+            Qui vous êtes, votre dossier, votre date d&apos;entrée, quand vous pouvez visiter : ce
+            que le propriétaire cherche, dans le ton de votre choix.
           </p>
         </div>
       </div>
@@ -48,8 +46,7 @@ export function Messages() {
       <div className="grille mt-8">
         <div className="col-span-12 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 md:col-span-6 md:col-start-5">
           <p className="marge">
-            Six brouillons, écrits par Terouva pour les annonces d&apos;exemple. Aucun n&apos;est
-            envoyé sans vous.
+            Six messages écrits par Terouva pour les annonces d&apos;exemple.
           </p>
           <Link href="/outils/message-de-candidature" className="lien text-[15px]">
             Écrire le vôtre, gratuitement

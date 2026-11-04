@@ -89,9 +89,6 @@ export const ANNONCES: AnnonceExemple[] = [
   },
 ];
 
-/** Les quatre premières suffisent à la scène d'accueil. */
-export const ANNONCES_SCENE = ANNONCES.slice(0, 4);
-
 export type MessageExemple = {
   /** L'annonce à laquelle ce message répond. */
   annonce: string;

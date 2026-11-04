@@ -2,35 +2,30 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Problem } from "@/components/sections/Problem";
-import { Instrument } from "@/components/sections/Instrument";
 import { Fonctions } from "@/components/sections/Fonctions";
 import { Messages } from "@/components/sections/Messages";
 import { Outils } from "@/components/sections/Outils";
-import { Privacy } from "@/components/sections/Privacy";
 import { Inscription } from "@/components/sections/Inscription";
-import { getSiteUrl } from "@/lib/site";
 import { FAQ_ITEMS } from "@/lib/content";
 import { DonneesStructurees } from "@/lib/seo";
 
 /**
- * L'accueil : neuf blocs, six coquilles, et l'alternance des deux mondes.
+ * L'accueil : sept blocs, ce que l'on gagne d'abord.
  *
- *   A plein cadre  (Hero)        papier
- *   B papier large (Problem)     papier
- *   D bande nuit   (Instrument)  nuit
- *   C index        (Fonctions)   papier
- *   E mosaïque     (Messages)    papier
- *   C index        (Outils)      papier
- *   B papier large (Privacy)     papier
- *   D bande nuit   (Inscription) nuit
- *   F pied logotype (Footer)     papier
+ *   A plein cadre  (Hero)        le parcours, de l'annonce à l'envoi
+ *   B papier large (Problem)     le gain : écrire parmi les premiers
+ *   C index        (Fonctions)   ce que fait l'outil, ligne par ligne
+ *   E mosaïque     (Messages)    les messages qu'il écrit
+ *   C index        (Outils)      ce qui sert déjà, gratuitement
+ *   D bande nuit   (Inscription) questions et liste d'attente
+ *   F pied logotype (Footer)
  *
- * Aucune coquille deux fois de suite, aucune plus de deux fois. Deux sections
- * consécutives ne démarrent jamais à la même colonne (voir chaque composant).
+ * Le 4 novembre, Hugo : le visiteur veut savoir ce qu'il gagne, pas comment
+ * c'est fait. L'explication du fonctionnement (la note et ce qui la compose,
+ * la vidéo) sort de la page ; la section sur les données aussi, réduite à une
+ * ligne des fonctions et à une question de la FAQ.
  */
 export default function Home() {
-  const siteUrl = getSiteUrl();
-
   // Les questions fréquentes balisées remontent parfois directement dans les
   // résultats de recherche, sous le lien du site. C'est le balisage qui rapporte
   // le plus pour le moins d'effort, à condition que les réponses soient les
@@ -45,23 +40,8 @@ export default function Home() {
     })),
   };
 
-  // Une vidéo balisée peut ressortir dans les résultats de recherche avec sa
-  // vignette. La durée suit la norme ISO 8601 : PT29S, vingt-neuf secondes.
-  const videoJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: "Terouva en 29 secondes",
-    description:
-      "Comment Terouva repère les annonces de location qui vous correspondent, les note, et prépare votre message de candidature. Animation sans son.",
-    thumbnailUrl: [`${siteUrl}/promo/affiche.jpg`],
-    contentUrl: `${siteUrl}/promo/terouva.mp4`,
-    // Refaite le 31 octobre avec le nouveau design de l'accueil.
-    uploadDate: "2026-10-31",
-    duration: "PT29S",
-    inLanguage: "fr-FR",
-    isFamilyFriendly: true,
-    publisher: { "@id": `${siteUrl}/#organization` },
-  };
+  // Plus de balisage VideoObject : la vidéo a quitté l'accueil, et Google
+  // n'accepte une vidéo balisée que si elle est visible sur la page.
 
   /**
    * Pas de nœud `SoftwareApplication` ici, et c'est une décision.
@@ -76,16 +56,13 @@ export default function Home() {
   return (
     <>
       <DonneesStructurees data={faqJsonLd} />
-      <DonneesStructurees data={videoJsonLd} />
       <Nav />
       <main className="overflow-x-clip">
         <Hero />
         <Problem />
-        <Instrument />
         <Fonctions />
         <Messages />
         <Outils />
-        <Privacy />
         <Inscription />
       </main>
       <Footer />

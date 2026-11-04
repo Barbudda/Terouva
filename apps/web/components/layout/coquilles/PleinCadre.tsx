@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
  *   au milieu avec un faisceau cyan, orange et rose au pied (`.halo`).
  * - Les stries : de fins traits verticaux sur toute la hauteur (`.stries`),
  *   et au centre le rideau en dôme d'égaliseur, plus clair, sous le bouton.
- * - La composition : le titre seul au sommet ; dessous, une rangée flèche et
- *   chiffres à gauche, texte et bouton rond au centre, chiffres et flèche à
- *   droite ; en bas, trois panneaux en perspective qui mordent sur la suite.
+ * - La composition : le titre seul au sommet ; dessous, une rangée flèche à
+ *   gauche, texte et bouton rond au centre, flèche à droite ; en bas, les
+ *   panneaux en perspective qui mordent sur la suite.
  *
  * Le rideau n'est que du CSS : un champ de couleur masqué deux fois, par une
  * silhouette SVG en escalier (chaque marche est un trait, avec sa propre
@@ -58,9 +58,11 @@ export function PleinCadre({
             <div className="relative col-span-2 h-52 sm:h-64 lg:hidden">
               <Rideau className="rideau rideau--bande" bande />
             </div>
+            {/* Les côtés ne portent plus que les flèches, cachées sur petit
+                écran : leurs cases ne doivent pas y creuser un vide. */}
             {gauche && (
               <div
-                className="entree lg:order-1"
+                className="entree max-lg:hidden lg:order-1"
                 style={{ "--rang": 4 } as React.CSSProperties}
               >
                 {gauche}
@@ -68,7 +70,7 @@ export function PleinCadre({
             )}
             {droite && (
               <div
-                className="entree lg:order-3"
+                className="entree max-lg:hidden lg:order-3"
                 style={{ "--rang": 5 } as React.CSSProperties}
               >
                 {droite}
@@ -84,15 +86,15 @@ export function PleinCadre({
 
       {panneaux && panneaux.length > 0 && (
         <div className="grille relative z-10 -mb-12 lg:-mb-20">
-          <div className="col-span-12 grid gap-6 lg:grid-cols-12 lg:[perspective:1600px]">
+          {/* Quatre panneaux : deux par rangée sur tablette, en ligne sur grand
+              écran, les deux du bord inclinés vers le centre. */}
+          <div className="col-span-12 grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:[perspective:1600px]">
             {panneaux.map((p, i) => (
               <div
                 key={p.legende}
                 className={cn(
                   "entree flex min-w-0 flex-col",
-                  i === 0 && "lg:col-span-4",
-                  i === 1 && "flotte lg:col-span-5",
-                  i === 2 && "lg:col-span-3",
+                  i === 1 && "flotte",
                 )}
                 style={{ "--rang": 7 + i } as React.CSSProperties}
               >
@@ -107,7 +109,7 @@ export function PleinCadre({
                   className={cn(
                     "panneau-incline",
                     i === 0 && "panneau-incline--gauche",
-                    i === 2 && "panneau-incline--droite",
+                    i === panneaux.length - 1 && "panneau-incline--droite",
                   )}
                 >
                   {p.contenu}

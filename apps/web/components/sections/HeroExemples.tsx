@@ -94,40 +94,34 @@ export function ControlesMobiles() {
   );
 }
 
-/** L'annonce lue : une feuille claire, ce que Terouva en retient. */
+/**
+ * L'annonce telle qu'elle paraît : titre, loyer, surface, lieu, fraîcheur.
+ * Pas une copie de l'interface de Leboncoin : ni son logo ni sa mise en page,
+ * et aucune vraie annonce, dont les photos et le texte appartiennent à leur
+ * auteur. Le nom du site suffit à dire d'où elle vient.
+ */
 export function PanneauAnnonce() {
   const { index, annonce: a } = useExemple();
-  const lignes = [
-    { champ: "Loyer", valeur: euros(a.prix) },
-    { champ: "Surface", valeur: `${a.surface} m²` },
-    { champ: "Au m²", valeur: euros(a.prix / a.surface, 1) },
-    { champ: "Annonceur", valeur: a.auteur },
-  ];
   return (
     <article className="monde-papier h-full rounded-[0.875rem] border border-rule bg-card p-5 text-ink">
       <p className="sr-only" aria-live="polite">
         Exemple {index + 1} sur {TOTAL} : {a.titre}, note {a.note} sur 100.
       </p>
       <div key={index} className="bascule">
-        <div className="flex items-start justify-between gap-4">
-          <p className="text-[15px] leading-snug font-medium">{a.titre}</p>
+        <div className="flex items-baseline justify-between gap-4">
+          <p className="champ text-ink-3">Leboncoin · {a.publie}</p>
           <p className="champ shrink-0 text-ink-3 tabular-nums">
             {index + 1}/{TOTAL}
           </p>
         </div>
-        <p className="marge mt-1">
-          {a.ville} · {a.publie}
+        <p className="mt-3 text-[15px] leading-snug font-medium">{a.titre}</p>
+        <p className="mt-2 font-mono text-[1.375rem] leading-none tabular-nums">
+          {euros(a.prix)}
+          <span className="text-[13px] text-ink-3"> / mois</span>
         </p>
-        <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5">
-          {lignes.map((l) => (
-            <div key={l.champ}>
-              <dt className="champ text-ink-3">{l.champ}</dt>
-              <dd className="mt-0.5 text-[14px] font-medium tabular-nums">
-                {l.valeur}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <p className="marge mt-3">
+          {a.surface} m² · {a.ville} · {a.auteur}
+        </p>
       </div>
     </article>
   );
@@ -225,7 +219,7 @@ export function PanneauNote() {
         })}
       </div>
       <p className="marge mt-2">
-        Les six annonces de la démonstration, classées par note.
+        Six annonces d&apos;exemple, classées pour vous.
       </p>
     </article>
   );
@@ -249,6 +243,59 @@ export function PanneauMessage() {
         <p className="champ mt-4 text-night-ink-2">
           Vous relisez, vous l&apos;envoyez
         </p>
+      </div>
+    </article>
+  );
+}
+
+/**
+ * La fin du parcours : la candidature est partie, envoyée par la personne
+ * elle-même, et Terouva en tient le suivi. Le premier pas est fait, les deux
+ * suivants attendent le propriétaire.
+ */
+export function PanneauEnvoi() {
+  const { index, annonce: a } = useExemple();
+  const suivi = [
+    { etape: "Envoyée", fait: true },
+    { etape: "Réponse", fait: false },
+    { etape: "Visite", fait: false },
+  ];
+  return (
+    <article className="monde-papier h-full rounded-[0.875rem] border border-rule bg-card p-5 text-ink">
+      <div key={index} className="bascule">
+        <p className="champ inline-flex items-center gap-2 text-accent-ink">
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden
+            className="size-3.5"
+          >
+            <path d="M3 8.5l3 3 7-7" />
+          </svg>
+          Candidature envoyée
+        </p>
+        <p className="mt-3 line-clamp-2 text-[14px] leading-snug font-medium">
+          {a.titre}
+        </p>
+        <ol className="mt-4 grid grid-cols-3 gap-2">
+          {suivi.map((s) => (
+            <li key={s.etape}>
+              <span
+                aria-hidden
+                className={cn(
+                  "block h-1 rounded-full",
+                  s.fait ? "bg-action" : "bg-rule",
+                )}
+              />
+              <span className="champ mt-1.5 block text-ink-3">{s.etape}</span>
+            </li>
+          ))}
+        </ol>
+        <p className="marge mt-3">Suivie dans Terouva jusqu&apos;à la visite.</p>
       </div>
     </article>
   );
