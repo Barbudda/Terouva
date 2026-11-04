@@ -56,3 +56,13 @@ prouvées par le script.
 5. **L'historique des sessions conservées** (530 000 à 630 000 tokens) repart à chaque tour : c'est le
    coût fixe le plus lourd. → Moins de tours : 3 rédacteurs à 8 articles plutôt que 6 à 4. Et, si Hugo
    l'accepte, des sessions de série neuves, dédiées à l'écriture, à côté des douze conservées.
+
+## Vague 7 (sessions neuves) — départ le 2026-11-04 vers 19 h 05
+
+| Mesure | Départ | Arrivée | Écart |
+|---|---|---|---|
+| Forfait, fenêtre de 5 h | 37 % (avant écriture ; plan et refonte de /blog : 31 → 37) | | |
+| Forfait, semaine | 21 % | | |
+
+Travail : 22 articles, 3 rédacteurs neufs (8, 8, 6), consigne de 3 lignes ; plan fait par une
+session neuve. Session du chef : 877 000 tokens (88 %), à relayer par une session neuve après la vague.
