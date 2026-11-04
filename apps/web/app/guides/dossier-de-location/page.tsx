@@ -27,7 +27,9 @@ export default function GuideDossier() {
       <h2 id="ce-qui-peut-etre-demande">Ce qu&apos;un propriétaire peut demander</h2>
       <p>
         Les pièces se rangent en quatre catégories. Dans deux d&apos;entre elles, le propriétaire ne
-        peut réclamer qu&apos;un seul document.
+        peut réclamer qu&apos;un seul document. Pour ne garder que celles qui vous concernent, la{" "}
+        <Link href="/outils/dossier-de-location">checklist de dossier de location</Link> fait le tri
+        selon votre situation, en trois questions.
       </p>
 
       <h3>1. Votre identité : une seule pièce</h3>
@@ -152,7 +154,8 @@ export default function GuideDossier() {
           votre nom. Pas douze pièces jointes, pas de photos de documents prises de travers.
         </li>
         <li>
-          <strong>Un garant déjà réglé.</strong> Si vous n&apos;avez pas de garant physique, la{" "}
+          <strong>Un garant déjà réglé.</strong> Si vous n&apos;avez pas de{" "}
+          <Link href="/guides/garant-caution">garant physique</Link>, la{" "}
           <Link href="/guides/garantie-visale">garantie Visale</Link> est gratuite et se demande en
           quelques jours, avant même d&apos;avoir trouvé le logement.
         </li>

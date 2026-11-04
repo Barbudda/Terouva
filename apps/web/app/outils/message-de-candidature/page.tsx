@@ -136,7 +136,11 @@ export default function OutilMessage() {
                 <li>
                   <strong className="text-ink">Répondre vite.</strong> Sur les annonces de
                   particuliers, les premiers messages sont lus avec attention, les suivants en
-                  diagonale.
+                  diagonale. Le guide pour{" "}
+                  <Link href="/guides/repondre-a-une-annonce-de-location" className="lien">
+                    répondre à une annonce de location
+                  </Link>{" "}
+                  dit à quel moment envoyer, et quand relancer.
                 </li>
               </ul>
             </section>
