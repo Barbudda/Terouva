@@ -80,11 +80,11 @@ export function Fleche({
   );
 }
 
-/** Sur petit écran, les flèches descendent au-dessus des panneaux, avec le compteur. */
-export function ControlesMobiles() {
+/** Les deux flèches et le compteur, au-dessus des panneaux du parcours. */
+export function Controles({ className }: { className?: string }) {
   const { index } = useExemple();
   return (
-    <div className="flex items-center justify-center gap-4 lg:hidden">
+    <div className={cn("flex items-center gap-4", className)}>
       <Fleche sens={-1} className="fleche-ronde--petite inline-flex" />
       <p className="rounded-full bg-paper/70 px-3 py-1.5 font-mono text-[13px] text-ink tabular-nums backdrop-blur-sm">
         {index + 1} / {TOTAL}

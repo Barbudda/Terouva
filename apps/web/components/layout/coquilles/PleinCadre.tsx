@@ -50,7 +50,8 @@ export function PleinCadre({
         <div className="cadre flex flex-col pt-14 pb-10 sm:pt-20 lg:min-h-[calc(100svh-15rem)] lg:justify-center lg:pt-8 lg:pb-20">
           <div className="text-center">{entete}</div>
           <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 lg:mt-12 lg:grid-cols-[1fr_minmax(0,40rem)_1fr] lg:items-center lg:gap-x-10">
-            <div className="col-span-2 text-center lg:order-2 lg:col-span-1">
+            {/* Calé sur la colonne du milieu, avec ou sans flèches sur les côtés. */}
+            <div className="col-span-2 text-center lg:order-2 lg:col-span-1 lg:col-start-2 lg:row-start-1">
               {children}
             </div>
             {/* Sur petit écran, le rideau prend place entre le centre et les

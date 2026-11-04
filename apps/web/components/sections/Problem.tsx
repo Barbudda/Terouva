@@ -17,7 +17,6 @@ export function Problem() {
       secondeVoix={<p>{reserve}</p>}
       illustration={<VieAnnonce />}
       disposition="dessous"
-      className="pt-[calc(var(--spacing-pas)+3rem)]"
     >
       <p>{enonce}</p>
     </PapierLarge>

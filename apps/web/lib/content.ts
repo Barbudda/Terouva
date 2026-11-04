@@ -43,10 +43,27 @@ export const HERO = {
   eyebrow: "Bientôt disponible",
   titleLead: "Les bonnes locations,",
   titleTail: "avant les autres.",
-  panneau:
-    "Terouva vous signale les locations Leboncoin qui vous correspondent dès qu'elles paraissent, avec votre message de candidature déjà écrit. Vous n'avez plus qu'à l'envoyer.",
-  /** Les quatre panneaux racontent le parcours, de l'annonce à l'envoi. */
-  etapes: ["Publiée sur Leboncoin", "Repérée pour vous", "Votre message, déjà écrit", "Envoyé par vous"],
+  /** La proposition de valeur, en deux phrases : ce que fait Terouva, ce que vous y gagnez. */
+  description: [
+    "Terouva vous prévient dès qu'une location qui vous correspond paraît sur Leboncoin, avec votre message de candidature déjà écrit.",
+    "Vous l'envoyez en une minute, parmi les premiers, et la visite est plus facile à obtenir.",
+  ],
+};
+
+/**
+ * Le parcours, juste sous le haut de page (Hugo, 4 novembre) : quatre
+ * étapes numérotées, chacune avec son panneau, de l'annonce publiée à la
+ * candidature envoyée. Chaque phrase dit ce qui se passe pour vous.
+ */
+export const PARCOURS = {
+  mention: "Le parcours",
+  titre: "De l'annonce publiée à votre message envoyé.",
+  etapes: [
+    { nom: "Publiée sur Leboncoin", texte: "Une location qui correspond à vos critères vient de paraître." },
+    { nom: "Repérée pour vous", texte: "Terouva vous prévient, et vous dit si elle vaut le coup." },
+    { nom: "Votre message, déjà écrit", texte: "Adapté à l'annonce et à votre dossier. Vous le relisez." },
+    { nom: "Envoyé par vous", texte: "Vous l'envoyez en une minute, et Terouva suit la réponse." },
+  ],
 };
 
 export const SIGNUP = {

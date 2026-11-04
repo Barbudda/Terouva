@@ -1,6 +1,7 @@
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { Parcours } from "@/components/sections/Parcours";
 import { Problem } from "@/components/sections/Problem";
 import { Fonctions } from "@/components/sections/Fonctions";
 import { Messages } from "@/components/sections/Messages";
@@ -12,7 +13,8 @@ import { DonneesStructurees } from "@/lib/seo";
 /**
  * L'accueil : sept blocs, ce que l'on gagne d'abord.
  *
- *   A plein cadre  (Hero)        le parcours, de l'annonce à l'envoi
+ *   A plein cadre  (Hero)        le titre et la proposition de valeur
+ *     parcours     (Parcours)    les quatre étapes, de l'annonce à l'envoi
  *   B papier large (Problem)     le gain : écrire parmi les premiers
  *   C index        (Fonctions)   ce que fait l'outil, ligne par ligne
  *   E mosaïque     (Messages)    les messages qu'il écrit
@@ -59,6 +61,7 @@ export default function Home() {
       <Nav />
       <main className="overflow-x-clip">
         <Hero />
+        <Parcours />
         <Problem />
         <Fonctions />
         <Messages />

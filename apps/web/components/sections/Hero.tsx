@@ -1,28 +1,19 @@
 import Link from "next/link";
 import { HERO } from "@/lib/content";
 import { PleinCadre } from "@/components/layout/coquilles/PleinCadre";
-import {
-  ControlesMobiles,
-  Fleche,
-  PanneauAnnonce,
-  PanneauEnvoi,
-  PanneauMessage,
-  PanneauNote,
-} from "@/components/sections/HeroExemples";
 
 /**
  * L'accueil, sur la référence d'Hugo (31 octobre) : le titre en deux lignes
- * au sommet, finissant en italique ; dessous, la phrase et le bouton rond,
- * entre deux flèches ; en bas, les panneaux en perspective qui mordent sur la
- * section suivante.
+ * au sommet, finissant en italique ; dessous, la proposition de valeur et le
+ * bouton rond.
  *
- * Le 4 novembre, les chiffres de part et d'autre (« 0 compte, 0 serveur… »)
- * laissent la place au parcours lui-même : quatre panneaux, de l'annonce
- * publiée sur Leboncoin à la candidature envoyée. Les flèches font défiler
- * les six annonces de la démonstration, et les quatre panneaux suivent.
+ * Le 4 novembre, Hugo veut un haut de page encore plus clair : deux phrases,
+ * ce que fait Terouva puis ce que vous y gagnez, dans le corps de lecture et
+ * non plus en monospace. Les quatre panneaux du parcours descendent dans la
+ * section suivante (`Parcours`).
  */
 export function Hero() {
-  const [annonce, reperee, message, envoi] = HERO.etapes;
+  const [quoi, gain] = HERO.description;
   return (
     <PleinCadre
       entete={
@@ -42,25 +33,13 @@ export function Hero() {
           </h1>
         </>
       }
-      gauche={<Fleche sens={-1} className="hidden lg:inline-flex" />}
-      droite={
-        <div className="flex justify-end">
-          <Fleche sens={1} className="hidden lg:inline-flex" />
-        </div>
-      }
-      controles={<ControlesMobiles />}
-      panneaux={[
-        { legende: annonce, contenu: <PanneauAnnonce /> },
-        { legende: reperee, contenu: <PanneauNote /> },
-        { legende: message, contenu: <PanneauMessage /> },
-        { legende: envoi, contenu: <PanneauEnvoi /> },
-      ]}
     >
       <p
-        className="entree mx-auto max-w-[40rem] font-mono text-[13px] leading-relaxed text-ink sm:text-sm"
+        // L'ombre garde la phrase lisible là où elle passe sur la lueur claire du champ.
+        className="entree mx-auto max-w-[38rem] text-[1.125rem] leading-relaxed text-balance text-ink [text-shadow:0_1px_14px_rgb(8_17_32/0.7),0_0_2px_rgb(8_17_32/0.35)] sm:text-[1.25rem]"
         style={{ "--rang": 2 } as React.CSSProperties}
       >
-        {HERO.panneau}
+        {quoi} {gain}
       </p>
       <div
         className="entree mt-10 flex justify-center"
