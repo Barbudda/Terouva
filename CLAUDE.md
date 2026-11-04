@@ -334,7 +334,7 @@ appeler en chaîne, passer par le chef.
 - geo-citabilite — Rend un site citable par les assistants IA : intertitres en questions, réponses autonomes de 40 à 60 mots, faits datés, schéma JSON-LD, llms.txt, entité cohérente et sameAs.
 - seo-gardien-technique — Métadonnées, canoniques, sitemap, robots, rendu, Core Web Vitals, IndexNow, et la porte anti-régression Septune compare_sites avant un push sensible.
 - seo-maillage — Pose le maillage interne (paires manquantes, contenu vers outil, hubs, fil d’Ariane) et trace le chemin page d’entrée organique vers inscription ou installation.
-- seo-outils — Transforme une intention « calculer » ou « générer » du registre en outil web gratuit, rendu serveur, calcul côté client testé, relié au guide et au produit.
+- seo-outils — Transforme une intention « calculer » ou « générer » du registre en outil web gratuit, rendu serveur, calcul côté client testé, schéma WebPage honnête, relié au guide et au produit.
 - seo-fiches-stores — Prépare les fiches de stores (Chrome Web Store, Edge, Firefox) : nom, descriptions, permissions justifiées, confidentialité, plan des captures. Ne publie jamais.
 - seo-autorite — Cartographie où le produit mérite d’être mentionné et lié, tient le plan de liens entrants et les profils d’entité, prépare des brouillons. Ne poste ni n’envoie rien.
 - seo-fraicheur — Repère pages en déclin, faits vieillissants et quasi-doublons, tient la file de rafraîchissement et met à jour les faits et dates des pages.
@@ -348,6 +348,7 @@ appeler en chaîne, passer par le chef.
 
 ### Skills du pôle
 - pole-seo-geo — Chef du pôle SEO & GEO : mesure, choisit le chantier le plus rentable, le confie à dix-sept sous-agents (seo-*, geo-*, blog-*) en petits lots visibles dans la session, vérifie (Septune compare_sites), commite et tient le journal.
+- blog-en-serie — Produire des articles en masse au moindre coût : un fichier par article en Markdown aux champs déduits, faits cités mot pour mot, vérificateur automatique, contrôle des citations par script, relecture réduite à ce qu’une machine ne juge pas.
 - septune-audit — Auditer le SEO technique par la mesure avec le MCP Septune (sans clé ni IA) : 69 règles (au 2026-11-04), audit d'un site ou d'une page sur une URL publique (le serveur hébergé refuse localhost), comparaison production / prévisualisation pour attraper une régression avant le push, patchs par framework, audit des robots IA et génération de llms.txt.
 - seo-technique — SEO technique : balises, sitemap, robots, performance, données structurées.
 - seo-aeo-best-practices — Métadonnées, Open Graph, sitemap, robots.txt, hreflang, JSON-LD et EEAT pour moteurs classiques et réponses IA (vitrine, SaaS).

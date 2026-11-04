@@ -1,14 +1,14 @@
 {
   "version": 1,
   "bondsHome": "C:\\Users\\hugo8\\OneDrive\\Desktop\\BONDS",
-  "bondsCommit": "87482964d776832ad59e619c37e11abac3c2cdf3",
+  "bondsCommit": "88b139727dd62ed4f4fbe187d1faafe0498a70fa",
   "loadout": "app-premium",
   "equipeLe": "2026-09-15T15:56:31.694Z",
-  "misAJourLe": "2026-11-04T15:15:18.116Z",
+  "misAJourLe": "2026-11-04T15:40:43.050Z",
   "poles": {
     "seo-geo": {
       "installeLe": "2026-11-04T12:07:48.925Z",
-      "misAJourLe": "2026-11-04T13:34:41.477Z"
+      "misAJourLe": "2026-11-04T15:40:43.050Z"
     }
   },
   "assets": {
@@ -547,9 +547,9 @@
     "skill:pole-seo-geo": {
       "type": "skill",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "9f7c920d6999f102bb821e3f2646d4642f9f20ad",
+      "hash": "4abf71a483719bcc3c6b71e156a9d7484d9dc9e4",
       "cible": ".claude/skills/pole-seo-geo",
-      "installeLe": "2026-11-04T14:43:43.084Z"
+      "installeLe": "2026-11-04T15:40:43.050Z"
     },
     "skill:septune-audit": {
       "type": "skill",
@@ -673,9 +673,9 @@
     "agent:seo-redacteur": {
       "type": "agent",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "45027eb5110549ac226747de18ba151da18d0ffa",
+      "hash": "4fcbde6db71601e3c3f118e22121616b82639320",
       "cible": ".claude/agents/seo-redacteur.md",
-      "installeLe": "2026-11-04T12:07:48.925Z"
+      "installeLe": "2026-11-04T15:40:43.050Z"
     },
     "agent:geo-citabilite": {
       "type": "agent",
@@ -778,9 +778,9 @@
     "agent:blog-relecteur": {
       "type": "agent",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "3b2f3e8a1d2d745e497421efaf1d742eca0d5212",
+      "hash": "6746a2f13665865f25c4ed6c54e5671b02f110e3",
       "cible": ".claude/agents/blog-relecteur.md",
-      "installeLe": "2026-11-04T12:20:30.896Z"
+      "installeLe": "2026-11-04T15:40:43.050Z"
     },
     "agent:blog-diffusion": {
       "type": "agent",
@@ -823,6 +823,13 @@
       "hash": "11e8e34da903da6c3818f47d320c014c74dc4918",
       "cible": ".claude/skills/figma-designer",
       "installeLe": "2026-11-04T12:29:04.187Z"
+    },
+    "skill:blog-en-serie": {
+      "type": "skill",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "08e6564602d6cb029dc049fff9b31609e2c01786",
+      "cible": ".claude/skills/blog-en-serie",
+      "installeLe": "2026-11-04T15:40:43.050Z"
     }
   },
   "derogations": [
