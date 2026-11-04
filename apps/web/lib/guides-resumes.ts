@@ -65,7 +65,7 @@ export const RESUMES: Record<string, ResumeGuide> = {
       { valeur: "1 ou 2 mois", libelle: "de loyer hors charges au plus, en vide ou en meublé" },
       { valeur: "1 mois", libelle: "pour vous le rendre si l'état des lieux de sortie est conforme" },
       { valeur: "10 %", libelle: "du loyer hors charges en plus, par mois de retard commencé" },
-      { valeur: "3 ans", libelle: "pour le réclamer, à compter du jour où il était dû" },
+      { valeur: "3 ans", libelle: "pour le réclamer, à compter du jour où il aurait dû vous être rendu" },
     ],
   },
   "/guides/garant-caution": {
@@ -114,23 +114,23 @@ export const RESUMES: Record<string, ResumeGuide> = {
   },
   "/guides/etat-des-lieux": {
     aRetenir: [
-      "Tout ce qui n'est pas noté le jour de l'entrée sera réputé en bon état à la sortie : décrivez chaque pièce, sols, murs, plafonds et équipements.",
+      "Un défaut qui n'est pas noté le jour de l'entrée sera difficile à contester à la sortie : décrivez chaque pièce, sols, murs, plafonds et équipements.",
       "Venez de jour, testez robinets, volets, radiateurs et prises, prenez des photos datées et relevez vous-même les compteurs d'eau, de gaz et d'électricité.",
       "Vous avez dix jours après l'état des lieux pour en demander la modification, et le premier mois de la saison de chauffe pour le chauffage.",
       "À la sortie, vous ne payez rien pour les honoraires de l'agence, et l'usure normale due au temps ne peut donner lieu à aucune retenue.",
-      "Si le propriétaire ne vient pas à la sortie, rendez les clés par lettre recommandée avec accusé de réception : le logement est considéré comme rendu en bon état.",
+      "Si le propriétaire ne vient pas à la sortie, faites appel à un commissaire de justice : son constat s'impose à vous deux. Rendez ensuite les clés par lettre recommandée.",
     ],
     enChiffres: [
       { valeur: "10 jours", libelle: "pour faire corriger l'état des lieux d'entrée" },
       { valeur: "Gratuit", libelle: "quand vous le faites à deux, à l'entrée comme à la sortie" },
       { valeur: "3,03 €/m²", libelle: "TTC au plus à votre charge, avec un professionnel à l'entrée" },
-      { valeur: "30 min à 1 h", libelle: "pour un deux-pièces, fait sérieusement" },
+      { valeur: "7 jours", libelle: "de délai au moins quand un commissaire de justice vous convoque" },
     ],
   },
   "/guides/preavis-location": {
     aRetenir: [
       "Le préavis réduit à un mois n'est jamais automatique : invoquez le motif dans la lettre et joignez le justificatif, sinon le délai reste de trois mois.",
-      "Pour la zone tendue, vérifiez votre commune sur le simulateur officiel de service-public.gouv.fr, à la date de signature ou de renouvellement de votre bail.",
+      "Pour la zone tendue, vérifiez votre commune sur le simulateur officiel de service-public.gouv.fr, à la date de signature, de renouvellement ou de reconduction de votre bail.",
       "Envoyez le congé par lettre recommandée avec avis de réception, acte de commissaire de justice ou remise en main propre contre émargement ; un courriel n'est pas valable.",
       "Le préavis court du jour où le propriétaire reçoit la lettre : comptez quelques jours d'acheminement dans votre calendrier.",
       "Le congé est irrévocable une fois reçu, sauf accord du propriétaire : ne l'envoyez pas avant d'avoir une solution de relogement ferme.",

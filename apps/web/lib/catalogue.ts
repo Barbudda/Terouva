@@ -179,7 +179,7 @@ export const GUIDES: Guide[] = [
     titre: "Dépôt de garantie : le montant, les retenues, et le délai pour le récupérer",
     titreSeo: "Dépôt de garantie : montant et restitution",
     resume:
-      "C'est la somme la plus souvent mal rendue de toute la location. Le montant est plafonné, les retenues doivent être justifiées pièce par pièce, et le retard du propriétaire se paie. Les trois règles qui comptent tiennent en une page.",
+      "Le montant est plafonné, les retenues doivent être justifiées pièce par pièce, et le retard du propriétaire se paie. Les trois règles qui comptent tiennent en une page.",
     description:
       "Un mois de loyer en vide, deux en meublé, rendu sous un mois si l'état des lieux est conforme. Les retenues autorisées, et la pénalité en cas de retard.",
     publieLe: "2026-10-19",
@@ -207,7 +207,7 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Le dépôt de garantie est-il encaissé ?",
-        a: "Oui. Le propriétaire l'encaisse et le conserve pendant toute la durée du bail ; il n'est pas bloqué sur un compte dédié et ne produit aucun intérêt pour vous. Il vous est restitué après l'état des lieux de sortie, diminué des sommes qu'il est en droit de retenir.",
+        a: "Oui. Le propriétaire l'encaisse et le conserve pendant toute la durée du bail ; il ne produit aucun intérêt pour vous. Il vous est restitué après l'état des lieux de sortie, diminué des sommes qu'il est en droit de retenir.",
       },
       {
         q: "Quand faut-il payer le dépôt de garantie ?",
@@ -387,6 +387,7 @@ export const GUIDES: Guide[] = [
       { id: "societes", titre: "Les sociétés de cautionnement" },
       { id: "etudiant", titre: "Le cas des étudiants" },
       { id: "dire", titre: "Quoi répondre en visite" },
+      { id: "refus", titre: "Un refus à cause du garant" },
     ],
     titre: "Louer sans garant : les trois solutions, et ce qu'elles coûtent",
     titreSeo: "Louer sans garant : les trois solutions",
@@ -462,7 +463,7 @@ export const GUIDES: Guide[] = [
     titre: "État des lieux de location : la demi-heure qui décide de votre dépôt de garantie",
     titreSeo: "État des lieux de location : entrée et sortie",
     resume:
-      "C'est le document le plus sous-estimé de toute la location, et le seul qui protège votre dépôt de garantie. Ce qu'il doit contenir, qui le paie, et les dix jours pendant lesquels on peut encore le corriger.",
+      "C'est le document qui protège votre dépôt de garantie. Ce qu'il doit contenir, qui le paie, et les dix jours pendant lesquels on peut encore le corriger.",
     description:
       "Ce que l'état des lieux doit contenir, qui le paie, les dix jours pour le corriger, et pourquoi la vétusté ne peut pas être retenue sur votre dépôt.",
     publieLe: "2026-10-19",
@@ -482,7 +483,7 @@ export const GUIDES: Guide[] = [
     questions: [
       {
         q: "Comment faire un état des lieux ?",
-        a: "À deux, propriétaire et locataire présents, au moment de la remise des clés et en pleine lumière. Le document décrit pièce par pièce l'état des sols, des murs, des plafonds et des équipements, relève les compteurs et liste les clés remises. Les photos datées sont autorisées et vivement conseillées : elles tranchent les désaccords mieux qu'un adjectif.",
+        a: "À deux, propriétaire et locataire présents, au moment de la remise des clés et en pleine lumière. Le document décrit pièce par pièce l'état des sols, des murs, des plafonds et des équipements, relève les compteurs et liste les clés remises. L'état des lieux peut être illustré d'images : des photos datées tranchent les désaccords mieux qu'un adjectif.",
       },
       {
         q: "Combien coûte un état des lieux ?",
@@ -490,7 +491,7 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Combien de temps dure un état des lieux ?",
-        a: "Aucun texte ne fixe de durée. Comptez trente minutes à une heure pour un deux-pièces si vous le faites sérieusement. Un état des lieux expédié en dix minutes est celui qui coûte cher à la sortie, parce que tout ce qui n'a pas été noté à l'entrée sera réputé en bon état.",
+        a: "Aucun texte ne fixe de durée. Prenez le temps de décrire chaque pièce : un défaut qui n'a pas été noté à l'entrée sera difficile à contester à la sortie.",
       },
       {
         q: "Peut-on modifier un état des lieux après l'avoir signé ?",
@@ -502,7 +503,7 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Qu'est-ce que la vétusté, et que change-t-elle ?",
-        a: "C'est l'usure normale due au temps et à un usage normal : une moquette fatiguée après huit ans, une peinture ternie. Elle ne peut donner lieu à aucune retenue sur le dépôt de garantie. Le bail peut prévoir une grille de vétusté, qui fixe à l'avance la durée de vie des équipements et évite la discussion au départ.",
+        a: "C'est l'usure due au temps ou à l'usage normal des matériaux et des équipements. Elle ne peut donner lieu à aucune retenue sur le dépôt de garantie. Le bail peut prévoir une grille de vétusté : pour les principaux matériaux et équipements, elle fixe une durée de vie théorique et un abattement annuel sur le prix des réparations, ce qui évite la discussion au départ.",
       },
       {
         q: "Que se passe-t-il s'il n'y a pas d'état des lieux d'entrée ?",
@@ -524,7 +525,7 @@ export const GUIDES: Guide[] = [
     titre: "Préavis de location : combien de temps, et ce que la lettre doit dire",
     titreSeo: "Préavis de location : durée et lettre",
     resume:
-      "Trois mois en logement vide, un mois en meublé. Entre les deux, une dizaine de situations font tomber le préavis à un mois, à condition de les invoquer dans la lettre et de joindre le justificatif. Oublier cette phrase coûte deux mois de loyer.",
+      "Trois mois en logement vide, un mois en meublé. Entre les deux, neuf situations font tomber le préavis à un mois, à condition de les invoquer dans la lettre et de joindre le justificatif. Oublier cette phrase coûte deux mois de loyer.",
     description:
       "Trois mois en logement vide, un mois en meublé ou en zone tendue. Ce que la lettre doit contenir, et pourquoi le préavis part à la réception.",
     publieLe: "2026-10-19",
@@ -552,11 +553,11 @@ export const GUIDES: Guide[] = [
     questions: [
       {
         q: "Quelle est la durée du préavis pour quitter un logement ?",
-        a: "Trois mois pour un logement vide, un mois pour un meublé, quel que soit le motif et sans justificatif à fournir. En logement vide, une dizaine de situations font tomber le préavis à un mois, dont la zone tendue, une mutation, une perte d'emploi, un premier emploi, le RSA ou l'AAH.",
+        a: "Trois mois pour un logement vide, un mois pour un meublé, quel que soit le motif et sans justificatif à fournir. En logement vide, neuf situations font tomber le préavis à un mois, dont la zone tendue, une mutation, une perte d'emploi, un premier emploi, le RSA ou l'AAH.",
       },
       {
         q: "Comment passer d'un préavis de trois mois à un mois ?",
-        a: "En l'invoquant dans la lettre de congé et en joignant le justificatif correspondant. Le délai réduit n'est jamais automatique : une lettre qui ne mentionne pas le motif vaut préavis de trois mois, même si vous remplissiez la condition. C'est l'erreur la plus coûteuse du sujet.",
+        a: "En l'invoquant dans la lettre de congé et en joignant le justificatif correspondant. Le délai réduit n'est jamais automatique : une lettre qui ne mentionne pas le motif vaut préavis de trois mois, même si vous remplissiez la condition.",
       },
       {
         q: "Comment savoir si mon logement est en zone tendue ?",

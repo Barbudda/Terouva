@@ -17,11 +17,10 @@ export default function GuideEtatDesLieux() {
   return (
     <CadreGuide guide={GUIDE}>
       <p>
-        L&apos;état des lieux est le document le plus expédié de toute la location, et le seul qui
-        protège votre <Link href="/guides/depot-de-garantie">dépôt de garantie</Link>. Tout ce qui
-        n&apos;est pas noté le jour de l&apos;entrée sera réputé en bon état le jour de la sortie.
-        La demi-heure que vous y passez se compte en centaines d&apos;euros, dans un sens ou dans
-        l&apos;autre.
+        L&apos;état des lieux est le document qui protège votre{" "}
+        <Link href="/guides/depot-de-garantie">dépôt de garantie</Link> : à la sortie, c&apos;est à
+        lui qu&apos;on compare le logement. Un défaut qui n&apos;est pas noté le jour de
+        l&apos;entrée sera difficile à contester le jour de la sortie.
       </p>
 
       <h2 id="pourquoi">Ce qui se joue</h2>
@@ -34,7 +33,7 @@ export default function GuideEtatDesLieux() {
       <p>
         C&apos;est aussi pour ça qu&apos;il n&apos;existe pas de « petit » état des lieux. Une
         rayure sur un parquet, une trace sur un mur, un joint noirci : notés à l&apos;entrée, ce
-        sont des faits acquis. Oubliés, ce sont vos dégradations.
+        sont des faits acquis. Oubliés, ils risquent d&apos;être portés à votre compte.
       </p>
 
       <h2 id="entree">L&apos;état des lieux d&apos;entrée</h2>
@@ -46,21 +45,22 @@ export default function GuideEtatDesLieux() {
         par lettre recommandée au moins sept jours à l&apos;avance.
       </p>
       <p>
-        Quelques réflexes qui ne coûtent rien et changent tout :
+        Quelques réflexes utiles :
       </p>
       <ul>
         <li>
-          <strong>Venir de jour.</strong> Un état des lieux fait le soir, à la lampe du téléphone,
-          ne montre ni les taches ni les fissures.
+          <strong>Venir de jour.</strong> L&apos;état des lieux doit se faire dans de bonnes
+          conditions d&apos;éclairage : à la lampe du téléphone, on ne voit ni les taches ni les
+          fissures.
         </li>
         <li>
           <strong>Ouvrir et tester.</strong> Robinets, chasse d&apos;eau, volets, radiateurs,
-          prises, plaques. Un équipement en panne noté à l&apos;entrée est une réparation du
-          propriétaire, découvert plus tard c&apos;est une discussion.
+          prises, plaques. Un équipement en panne noté à l&apos;entrée ne pourra pas vous être
+          reproché à la sortie.
         </li>
         <li>
-          <strong>Photographier.</strong> Les photos datées sont autorisées et peuvent être
-          annexées. Elles tranchent un désaccord mieux que l&apos;adjectif « bon état », qui ne
+          <strong>Photographier.</strong> L&apos;état des lieux peut être illustré d&apos;images.
+          Des photos datées tranchent un désaccord mieux que l&apos;adjectif « bon état », qui ne
           veut rien dire deux ans plus tard.
         </li>
         <li>
@@ -71,8 +71,7 @@ export default function GuideEtatDesLieux() {
 
       <h2 id="contenu">Ce qu&apos;il doit contenir</h2>
       <p>
-        Le contenu minimum est fixé par décret. Un document qui n&apos;en fait pas le tour est
-        contestable :
+        Le contenu minimum est fixé par décret. L&apos;état des lieux mentionne :
       </p>
       <ul>
         <li>le type d&apos;état des lieux et sa date ;</li>
@@ -157,16 +156,16 @@ export default function GuideEtatDesLieux() {
 
       <h2 id="vetuste">La vétusté n&apos;est pas une dégradation</h2>
       <p>
-        L&apos;usure normale, due au temps et à un usage normal, <strong>ne peut donner lieu à
-        aucune retenue</strong> sur le dépôt de garantie. Une moquette fatiguée après huit ans, une
-        peinture ternie, un joint de silicone à refaire relèvent de la vétusté, pas de votre
-        responsabilité.
+        La vétusté, c&apos;est l&apos;usure due au temps ou à l&apos;usage normal des matériaux
+        et des équipements. Elle <strong>ne peut donner lieu à aucune retenue</strong> sur le dépôt
+        de garantie. Ce qui relève de l&apos;usure et ce qui relève d&apos;une dégradation se
+        discute au cas par cas, d&apos;où l&apos;intérêt d&apos;en convenir à l&apos;avance.
       </p>
       <p>
         Pour éviter la discussion au départ, le bail peut prévoir une <strong>grille de
-        vétusté</strong> : elle fixe à l&apos;avance la durée de vie des équipements et la part qui
-        reste à la charge de chacun selon l&apos;ancienneté. Si le bail en contient une, lisez-la à
-        l&apos;entrée, pas à la sortie.
+        vétusté</strong> : pour les principaux matériaux et équipements, elle fixe une durée de vie
+        théorique et un abattement annuel sur le prix des réparations qui seraient à votre charge.
+        Si le bail en contient une, lisez-la à l&apos;entrée, pas à la sortie.
       </p>
 
       <h2 id="absence">S&apos;il n&apos;y a pas d&apos;état des lieux d&apos;entrée</h2>
@@ -185,8 +184,9 @@ export default function GuideEtatDesLieux() {
         </li>
       </ul>
       <p>
-        Autrement dit : l&apos;absence d&apos;état des lieux profite presque toujours au
-        propriétaire. S&apos;il ne le propose pas, demandez-le par écrit.
+        Autrement dit : sans état des lieux d&apos;entrée, la présomption joue contre vous, sauf si
+        le propriétaire a refusé de le faire malgré votre mise en demeure. S&apos;il ne le propose
+        pas, demandez-le par écrit.
       </p>
 
       <h2 id="litige">En cas de désaccord</h2>

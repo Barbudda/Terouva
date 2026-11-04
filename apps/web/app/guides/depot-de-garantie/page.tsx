@@ -46,8 +46,8 @@ export default function GuideDepotDeGarantie() {
         <p>
           Le dépôt de garantie n&apos;est pas la caution. La caution est une <em>personne</em> qui
           s&apos;engage à payer si vous ne payez pas : c&apos;est le{" "}
-          <Link href="/guides/garant-caution">garant</Link>. Les deux mots sont employés l&apos;un
-          pour l&apos;autre dans les annonces, ce qui entretient la confusion.
+          <Link href="/guides/garant-caution">garant</Link>. Le dépôt est parfois appelé
+          « caution » par erreur, ce qui entretient la confusion.
         </p>
       </div>
 
@@ -99,9 +99,8 @@ export default function GuideDepotDeGarantie() {
           comparaison de sortie se fait contre cette présomption. Elle ne joue pas contre vous si
           c&apos;est le propriétaire qui a refusé de l&apos;établir malgré votre mise en demeure :
           le guide de l&apos;<Link href="/guides/etat-des-lieux">état des lieux</Link> détaille
-          ce cas. Un quart d&apos;heure à noter les
-          défauts le jour de l&apos;entrée vaut souvent plusieurs centaines d&apos;euros à la
-          sortie.
+          ce cas. Notez les défauts le jour de l&apos;entrée : c&apos;est cette description
+          qui sert de comparaison à la sortie.
         </p>
       </div>
 
@@ -125,7 +124,7 @@ export default function GuideDepotDeGarantie() {
         s&apos;applique pas.
       </p>
       <p>
-        Dernier point, souvent tenté et toujours refusé : le dépôt ne peut pas servir à payer le
+        Dernier point : le dépôt ne peut pas servir à payer le
         dernier mois de loyer. Ce loyer est dû normalement, et le dépôt vous revient après
         l&apos;état des lieux.
       </p>
@@ -149,7 +148,7 @@ export default function GuideDepotDeGarantie() {
       <ol>
         <li>
           Une lettre recommandée avec accusé de réception qui réclame la somme, rappelle la date de
-          remise des clés et calcule la majoration. Beaucoup de dossiers s&apos;arrêtent là.
+          remise des clés et calcule la majoration.
         </li>
         <li>
           Jusqu&apos;à 5&nbsp;000&nbsp;€ inclus, une tentative de règlement amiable est{" "}
@@ -158,12 +157,12 @@ export default function GuideDepotDeGarantie() {
         </li>
         <li>
           Puis le tribunal, saisi directement au-delà de 5&nbsp;000&nbsp;€. Vous avez trois ans à
-          compter du jour où le dépôt était dû.
+          compter du jour où le dépôt aurait dû vous être rendu.
         </li>
       </ol>
 
       <h2 id="et-apres">Comment éviter un litige sur le dépôt de garantie ?</h2>
-      <p>En soignant l&apos;état des lieux d&apos;entrée, seule preuve de l&apos;état du logement à votre arrivée, et en vérifiant que le bail mentionne le montant exact du dépôt. Tout ce qui se règle à la sortie se prépare à l&apos;entrée.</p>
+      <p>En soignant l&apos;état des lieux d&apos;entrée, le document auquel celui de sortie sera comparé, et en vérifiant que le bail mentionne le montant exact du dépôt. Tout ce qui se règle à la sortie se prépare à l&apos;entrée.</p>
       <p>
         Tout ce qui précède se joue à la sortie, mais se prépare à l&apos;entrée : un état des
         lieux détaillé, un bail qui mentionne le montant exact, et un dossier qui tient debout pour

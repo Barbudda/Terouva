@@ -17,9 +17,9 @@ export default function GuidePreavisLocation() {
   return (
     <CadreGuide guide={GUIDE}>
       <p>
-        Partir d&apos;un logement se prépare deux à trois mois à l&apos;avance, et la plupart des
-        erreurs coûtent exactement deux mois de loyer. Elles tiennent toutes à la même chose : une
-        lettre envoyée trop tard, ou qui ne dit pas ce qu&apos;elle devait dire.
+        Partir d&apos;un logement se prépare deux à trois mois à l&apos;avance. Une lettre envoyée
+        trop tard, ou qui oublie le motif du délai réduit, peut coûter deux mois de loyer : trois
+        mois de préavis au lieu d&apos;un.
       </p>
 
       <h2 id="duree">La durée du préavis</h2>
@@ -29,8 +29,8 @@ export default function GuidePreavisLocation() {
           à fournir. Y compris pour un bail étudiant de neuf mois.
         </li>
         <li>
-          <strong>Logement vide</strong> : trois mois par défaut, réduits à un mois dans une
-          dizaine de situations.
+          <strong>Logement vide</strong> : trois mois par défaut, réduits à un mois dans neuf
+          situations.
         </li>
       </ul>
       <p>
@@ -74,17 +74,15 @@ export default function GuidePreavisLocation() {
       <div className="note">
         <p>
           Une lettre qui ne mentionne pas le motif vaut préavis de <strong>trois mois</strong>,
-          même si vous remplissiez la condition au moment de l&apos;envoi. C&apos;est l&apos;erreur
-          la plus fréquente et la plus chère du sujet : deux mois de loyer pour une phrase
-          manquante.
+          même si vous remplissiez la condition au moment de l&apos;envoi. Une phrase manquante peut
+          ainsi coûter deux mois de loyer.
         </p>
       </div>
 
       <h2 id="zone-tendue">La zone tendue</h2>
       <p>
-        C&apos;est le motif le plus utilisé, et celui sur lequel on se trompe le plus, parce que la
-        liste des communes concernées est fixée par décret et <strong>elle change</strong>. Elle a
-        encore été revue fin 2025.
+        La liste des communes concernées est fixée par décret, et <strong>elle change</strong>.
+        Elle a encore été revue fin 2025.
       </p>
       <p>
         Ne vous fiez pas à une liste recopiée sur un blog :{" "}
@@ -146,7 +144,7 @@ export default function GuidePreavisLocation() {
       </p>
       <p>
         Conséquence pratique : comptez quelques jours d&apos;acheminement dans votre calendrier.
-        Une lettre postée le 30 pour un départ calculé depuis le 30 vous fait perdre une semaine.
+        Si la lettre arrive ou est remise en retard, la fin du préavis est repoussée d&apos;autant.
       </p>
 
       <h2 id="loyer">Le loyer pendant le préavis</h2>
@@ -169,16 +167,16 @@ export default function GuidePreavisLocation() {
       <h2 id="erreurs">Les erreurs qui coûtent deux mois</h2>
       <ol>
         <li>
-          <strong>Ne pas mentionner le motif du délai réduit.</strong> Le préavis passe à trois
-          mois, sans recours.
+          <strong>Ne pas mentionner le motif du délai réduit.</strong> Le préavis est alors de
+          trois mois.
         </li>
         <li>
           <strong>Compter depuis la date d&apos;envoi.</strong> Le préavis part de la réception, et
           l&apos;écart se paie en jours de loyer.
         </li>
         <li>
-          <strong>Envoyer un courriel.</strong> Il ne vaut rien, et le temps perdu ne se rattrape
-          pas.
+          <strong>Envoyer un courriel.</strong> Ce n&apos;est pas un mode de remise valable : le
+          préavis ne commence pas.
         </li>
         <li>
           <strong>Donner congé avant d&apos;avoir une solution ferme.</strong> Le congé est{" "}
@@ -186,8 +184,8 @@ export default function GuidePreavisLocation() {
         </li>
         <li>
           <strong>Partir sans état des lieux de sortie.</strong> Voir le guide de l&apos;
-          <Link href="/guides/etat-des-lieux">état des lieux</Link> : c&apos;est lui qui décide de
-          ce qu&apos;on vous retiendra.
+          <Link href="/guides/etat-des-lieux">état des lieux</Link> : c&apos;est en le comparant à
+          celui d&apos;entrée que se décident les retenues sur votre dépôt.
         </li>
       </ol>
 
