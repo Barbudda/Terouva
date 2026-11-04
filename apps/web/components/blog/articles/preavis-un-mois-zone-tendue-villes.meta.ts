@@ -80,7 +80,7 @@ const meta: ArticleMeta = {
     { id: "2027", titre: "Ce qui change en 2027" },
     { id: "methode", titre: "Méthode" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

@@ -154,8 +154,8 @@ export default function QuestionsAPoserVisiteAppartement() {
       <p>
         La dernière question compte plus qu&apos;elle n&apos;en a l&apos;air : nous expliquons
         pourquoi dans{" "}
-        <Link href="/blog/etre-le-premier-a-repondre-a-une-annonce">
-          être le premier à répondre à une annonce
+        <Link href="/blog/trouver-un-appartement-rapidement">
+          trouver un appartement rapidement
         </Link>
         . L&apos;<Link href="/outils/dossier-de-location">outil de préparation du dossier</Link>{" "}
         vous aide à l&apos;avoir prêt avant la visite.
@@ -177,8 +177,8 @@ export default function QuestionsAPoserVisiteAppartement() {
         <li>Pièces demandées, garant accepté, date de décision.</li>
       </ol>
       <p>
-        Après la visite, notre article sur le{" "}
-        <Link href="/blog/mail-apres-visite-appartement">message à envoyer après une visite</Link>{" "}
+        Après la visite, notre article sur{" "}
+        <Link href="/blog/apres-la-visite-dossier-retenu">ce qui se passe après la visite</Link>{" "}
         prend le relais, et le guide{" "}
         <Link href="/guides/repondre-a-une-annonce-de-location">répondre à une annonce de location</Link>{" "}
         montre comment relancer sans insister.

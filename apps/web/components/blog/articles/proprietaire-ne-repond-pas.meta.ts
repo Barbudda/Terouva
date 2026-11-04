@@ -10,7 +10,7 @@ const meta: ArticleMeta = {
     "Votre message à un propriétaire reste sans réponse ? Les raisons probables, quand relancer, et comment répondre plus tôt à la prochaine annonce.",
   chapeau:
     "Un propriétaire qui ne répond pas a peut-être déjà assez de candidats, ou votre message ne lui donnait pas de quoi décider. Vous ne pouvez pas le vérifier, mais vous pouvez relancer une fois, brièvement, avec une information utile. Le vrai levier reste le message suivant : envoyé plus tôt, et complet dès la première ligne.",
-  publieLe: "2026-11-16",
+  publieLe: "2026-11-04",
   pilier: "A",
   format: "cas-pratique",
   lecture: 5,
@@ -57,7 +57,7 @@ const meta: ArticleMeta = {
     { id: "argent", titre: "Une demande d'argent" },
     { id: "prochaine-fois", titre: "Répondre plus tôt" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

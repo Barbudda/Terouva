@@ -100,9 +100,9 @@ export default function PreavisUnMoisZoneTendueVilles() {
         <span className="loi">article 15 de la loi du 6 juillet 1989</span>. Sans cette mention, le
         délai de trois mois s&apos;applique. Le{" "}
         <Link href="/guides/preavis-location">guide du préavis de location</Link> détaille les délais
-        et les modes d&apos;envoi, et notre{" "}
-        <Link href="/blog/modele-lettre-preavis-logement">modèle de lettre de préavis</Link> vous
-        donne le texte à adapter.
+        et les modes d&apos;envoi, et sa partie sur{" "}
+        <Link href="/guides/preavis-location#lettre">la lettre de congé</Link> dit ce qu&apos;elle doit
+        contenir.
       </p>
 
       <h2 id="touristiques">Les communes « touristiques et tendues » donnent-elles un préavis d&apos;un mois ?</h2>

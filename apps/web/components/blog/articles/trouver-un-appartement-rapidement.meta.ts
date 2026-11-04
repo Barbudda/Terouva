@@ -10,7 +10,7 @@ const meta: ArticleMeta = {
     "Trouver un appartement vite commence avant la première annonce : dossier prêt, garant réglé, message préparé, critères élargis, fausses annonces évitées.",
   chapeau:
     "Préparez tout avant de chercher : un dossier complet avec les seules pièces autorisées, la question du garant réglée, par exemple avec la garantie Visale demandée à l'avance, et un message prêt à adapter. Activez ensuite des alertes aux critères assez larges, et répondez dans l'heure. Méfiez-vous des annonces qui demandent de l'argent avant le bail.",
-  publieLe: "2026-11-16",
+  publieLe: "2026-11-04",
   pilier: "A",
   format: "question",
   lecture: 5,
@@ -66,7 +66,7 @@ const meta: ArticleMeta = {
     { id: "arnaques", titre: "Les fausses annonces" },
     { id: "urgence", titre: "Une solution d'attente" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

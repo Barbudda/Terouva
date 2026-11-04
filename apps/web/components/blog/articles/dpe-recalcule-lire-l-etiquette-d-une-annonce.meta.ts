@@ -10,7 +10,7 @@ const meta: ArticleMeta = {
     "Classe énergie, classe climat, dépenses estimées : ce que l'étiquette d'une annonce dit au locataire, et ce que le DPE recalculé change en janvier 2027.",
   chapeau:
     "Une annonce de location affiche la classe énergie, la classe climat et les dépenses d'énergie estimées. Un logement classé G ne peut plus être loué en métropole, et le loyer d'un logement F ou G ne peut pas être révisé. Au 1er janvier 2027, le nouveau calcul peut améliorer l'étiquette des logements chauffés à l'électricité.",
-  publieLe: "2026-12-07",
+  publieLe: "2026-11-04",
   pilier: "D",
   format: "actualite",
   lecture: 5,
@@ -70,7 +70,7 @@ const meta: ArticleMeta = {
     { id: "verifier", titre: "Vérifier le DPE d'un logement" },
     { id: "repondre", titre: "Répondre à une annonce F ou G" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

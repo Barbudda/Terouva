@@ -58,7 +58,7 @@ const meta: ArticleMeta = {
     { id: "candidature", titre: "La candidature" },
     { id: "liste", titre: "La liste à garder" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

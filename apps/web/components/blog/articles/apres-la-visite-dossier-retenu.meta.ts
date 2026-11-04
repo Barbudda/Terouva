@@ -11,7 +11,7 @@ const meta: ArticleMeta = {
     "Les signes qu'un dossier de location est accepté, quand relancer, ce qu'on ne peut pas vous demander et ce qu'il faut vérifier avant de signer.",
   chapeau:
     "Votre dossier est retenu quand on vous propose de signer : envoi du projet de bail, date d'état des lieux, ou demande de votre visa Visale. Avant cela, un accord de principe ne garantit rien. Gardez vos autres candidatures en cours, relancez une seule fois, et ne payez rien : aucune somme ne peut vous être demandée avant le bail.",
-  publieLe: "2027-01-18",
+  publieLe: "2026-11-04",
   pilier: "A",
   format: "cas-pratique",
   lecture: 5,
@@ -71,7 +71,7 @@ const meta: ArticleMeta = {
     { id: "oui", titre: "On vous dit oui : que vérifier" },
     { id: "non", titre: "Un refus ou un silence" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

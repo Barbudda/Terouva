@@ -10,7 +10,7 @@ const meta: ArticleMeta = {
     "DossierFacile, le service public gratuit du dossier de location : comment il marche, ce que voit le propriétaire avec votre lien, et ses limites.",
   chapeau:
     "DossierFacile est un service public gratuit, financé par l'État, qui aide à monter un dossier de location complet et à le partager par un lien. Vos pièces reçoivent un filigrane, et vous choisissez ce que voit le propriétaire : le dossier avec ou sans justificatifs, pour une durée limitée, avec un accès que vous pouvez couper.",
-  publieLe: "2026-12-14",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   lecture: 5,
@@ -82,7 +82,7 @@ const meta: ArticleMeta = {
     { id: "quand", titre: "Quand s'en servir" },
     { id: "recherche", titre: "Ce que ça change pour votre recherche" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

@@ -12,7 +12,7 @@ const meta: ArticleMeta = {
     "Un propriétaire peut-il écarter un candidat parce qu'il est au chômage ? Ce que dit la loi, ce qui reste permis, et comment présenter vos ressources.",
   chapeau:
     "Le chômage ne figure pas en tant que tel parmi les critères de discrimination du Code pénal : un propriétaire peut écarter un dossier aux ressources trop faibles. Mais la vulnérabilité économique est un critère interdit, et le Défenseur des droits a jugé discriminatoire, au titre du handicap, le refus d'un candidat qui touchait une pension d'invalidité.",
-  publieLe: "2026-11-30",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   lecture: 6,
@@ -69,7 +69,7 @@ const meta: ArticleMeta = {
     { id: "signaler", titre: "Un refus qui semble discriminatoire" },
     { id: "recherche", titre: "Ce que ça change pour vous" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;
