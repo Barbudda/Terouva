@@ -1,19 +1,16 @@
 import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
-import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
-import { FiltresPiliers } from "@/components/blog/FiltresPiliers";
-import { ListeArticles } from "@/components/blog/ListeArticles";
+import { Rubrique, type FicheGuide } from "@/components/guides/Rubrique";
 import {
-  APERCU_PILIER,
   BLOG,
   PILIERS,
-  articlesDuPilier,
   articlesPublies,
   blogOuvert,
   cheminArticle,
   cheminPilier,
+  dateLongue,
   piliersAvecPage,
   piliersHabites,
 } from "@/lib/blog";
@@ -41,18 +38,27 @@ const ARIANE = [
 ];
 
 /**
- * La rubrique, tenue pour vingt articles et plus : une section par pilier,
- * dans l'ordre de la ligne éditoriale, chacune du plus récent au plus ancien.
- * Un pilier qui a sa page (`SEUIL_PAGE_PILIER` articles) n'en montre ici que
- * les derniers, avec le lien vers la liste complète ; les autres montrent tout.
- * Les filtres sont des liens rendus côté serveur : pas de JavaScript, et chaque
- * filtre est une adresse qu'un moteur peut suivre.
+ * La rubrique, refaite le 4 novembre sur la demande d'Hugo comme celle des guides (modèle des
+ * blogs de Rushlot et FanClaw) : chaque article en carte, titre et sous-titre accrocheurs et une
+ * image, le clic mène à l'article. Filtres par pilier, l'article le plus récent à la une. Les pages
+ * de pilier restent liées en bas pour les moteurs.
  */
 export default function Blog() {
   const siteUrl = getSiteUrl();
   const articles = articlesPublies();
   const piliers = piliersHabites();
   const avecPage = new Set(piliersAvecPage());
+  const fiches: FicheGuide[] = articles.map((a) => ({
+    chemin: cheminArticle(a),
+    titre: a.titre,
+    description: a.description,
+    rubrique: PILIERS[a.pilier],
+    etape: a.pilier,
+    date: dateLongue(a.modifieLe ?? a.publieLe),
+    lecture: a.lecture,
+    photo: { src: `${cheminArticle(a)}/opengraph-image`, alt: a.titre },
+  }));
+  const rubriques = Object.fromEntries(piliers.map((p) => [p, PILIERS[p]]));
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -81,13 +87,20 @@ export default function Blog() {
 
       <main className="pb-16">
         <div className="cadre pt-10 md:pt-20">
-          <Ariane etapes={ARIANE} />
-          <h1 className="titre mt-6 max-w-[18ch] text-[clamp(2.75rem,1.6rem+4.6vw,5rem)] text-ink">
-            Ce qui change quand on cherche un logement
+          <p className="champ flex items-center gap-3 text-accent-ink">
+            <span aria-hidden className="h-px w-8 bg-accent-ink" />
+            Le blog Terouva
+          </p>
+          <h1 className="titre mt-6 max-w-[16ch] text-[clamp(3rem,1.6rem+5.4vw,6rem)] text-ink">
+            Les questions qu&apos;on se pose <em className="font-normal italic text-accent-ink">avant de signer.</em>
           </h1>
-          <p className="mt-6 max-w-[38rem] text-[1.1875rem] leading-relaxed text-ink-2">
-            Les règles, les chiffres officiels et les situations concrètes du moment, du côté de la
-            personne qui candidate. Chaque article est daté et cite ses sources.
+          <p className="mt-8 max-w-[38rem] text-[1.1875rem] leading-relaxed text-ink-2">
+            Un cas précis, une réponse nette : ce que le propriétaire peut demander, ce qu&apos;il ne
+            peut pas refuser, ce qui change cette année. Chaque article est daté et cite ses{" "}
+            <Link href="/guides" className="lien font-medium">
+              sources officielles
+            </Link>
+            .
           </p>
 
           {articles.length === 0 ? (
@@ -103,34 +116,23 @@ export default function Blog() {
             </section>
           ) : (
             <>
-              <FiltresPiliers piliers={piliers} avecPage={avecPage} className="mt-10" />
+              {/* Même présentation que la rubrique des guides (modèle Rushlot et FanClaw) :
+                  filtres par pilier, article à la une, liste numérotée à vignettes. La vignette
+                  est l'image de partage de l'article, qui porte déjà son titre. */}
+              <div id="liste" className="scroll-mt-24">
+                <Rubrique guides={fiches} rubriques={rubriques} libelle="Filtrer les articles" />
+              </div>
 
-              {piliers.map((p) => {
-                const duPilier = articlesDuPilier(p);
-                const tronque = avecPage.has(p);
-                return (
-                  <section
-                    key={p}
-                    id={`pilier-${p.toLowerCase()}`}
-                    aria-labelledby={`titre-${p}`}
-                    className="mt-16 scroll-mt-24"
-                  >
-                    <h2 id={`titre-${p}`} className="champ text-accent-ink">
+              {avecPage.size > 0 && (
+                <nav aria-label="Les articles par thème" className="mt-12 flex flex-wrap gap-x-6 gap-y-2">
+                  <span className="champ text-ink-3">Par thème :</span>
+                  {[...avecPage].map((p) => (
+                    <Link key={p} href={cheminPilier(p)} className="lien text-[15px]">
                       {PILIERS[p]}
-                    </h2>
-                    <div className="mt-4">
-                      <ListeArticles articles={tronque ? duPilier.slice(0, APERCU_PILIER) : duPilier} />
-                    </div>
-                    {tronque && (
-                      <p className="mt-4">
-                        <Link href={cheminPilier(p)} className="lien text-[15px]">
-                          Les {duPilier.length} articles sur ce thème : {PILIERS[p].toLowerCase()}
-                        </Link>
-                      </p>
-                    )}
-                  </section>
-                );
-              })}
+                    </Link>
+                  ))}
+                </nav>
+              )}
             </>
           )}
 

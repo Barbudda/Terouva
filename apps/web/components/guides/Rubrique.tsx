@@ -10,13 +10,14 @@ export type FicheGuide = {
   titre: string;
   description: string;
   rubrique: string;
-  etape: "avant" | "candidature" | "apres";
+  /** La catégorie de filtre : l'étape du parcours pour un guide, le pilier pour un article. */
+  etape: string;
   date: string;
   lecture: number;
   photo?: { src: string; alt: string };
 };
 
-type Filtre = "tous" | FicheGuide["etape"];
+type Filtre = string;
 
 /**
  * La liste de la rubrique, sur le modèle de Rushlot et FanClaw : des filtres
@@ -30,10 +31,13 @@ type Filtre = "tous" | FicheGuide["etape"];
 export function Rubrique({
   guides,
   rubriques,
+  libelle = "Filtrer les guides",
 }: {
   /** Du plus récent au plus ancien. */
   guides: FicheGuide[];
-  rubriques: Record<FicheGuide["etape"], string>;
+  rubriques: Record<string, string>;
+  /** Nom du groupe de filtres, pour les lecteurs d'écran. */
+  libelle?: string;
 }) {
   const [filtre, setFiltre] = useState<Filtre>("tous");
   const visibles = filtre === "tous" ? guides : guides.filter((g) => g.etape === filtre);
@@ -41,7 +45,7 @@ export function Rubrique({
 
   const onglets: { cle: Filtre; nom: string; compte: number }[] = [
     { cle: "tous", nom: "Tous", compte: guides.length },
-    ...(Object.keys(rubriques) as FicheGuide["etape"][]).map((cle) => ({
+    ...Object.keys(rubriques).map((cle) => ({
       cle,
       nom: rubriques[cle],
       compte: guides.filter((g) => g.etape === cle).length,
@@ -55,7 +59,7 @@ export function Rubrique({
             repoussaient l'article à la une sous le pli. */}
         <div
           role="group"
-          aria-label="Filtrer les guides"
+          aria-label={libelle}
           className="-mx-4 flex gap-2.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
         >
           <Link
@@ -209,7 +213,7 @@ function Pastille({ actif, children }: { actif?: boolean; children: React.ReactN
   );
 }
 
-const ICONES: Record<Filtre, React.ReactNode> = {
+const ICONES: Record<string, React.ReactNode> = {
   tous: (
     <>
       <rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1" />
@@ -234,4 +238,17 @@ const ICONES: Record<Filtre, React.ReactNode> = {
       <path d="M7.7 8.3l5.8-5.8M11.5 4.5l1.5 1.5" />
     </>
   ),
+  // Piliers du blog. A, répondre vite : l'éclair.
+  A: <path d="M9 1.5L3.5 9H8l-1 5.5L12.5 7H8l1-5.5z" strokeLinejoin="round" />,
+  // B, le dossier et vos droits : la feuille.
+  B: (
+    <>
+      <path d="M4 1.5h5l3 3v10H4z" strokeLinejoin="round" />
+      <path d="M6 8h4M6 10.5h4" />
+    </>
+  ),
+  // C, garant et garanties : le bouclier.
+  C: <path d="M8 1.5l5 2v4c0 3-2.2 5.3-5 6.5-2.8-1.2-5-3.5-5-6.5v-4z" strokeLinejoin="round" />,
+  // D, le bail et le loyer : la maison.
+  D: <path d="M2.5 7.5L8 2.5l5.5 5V14h-11z" strokeLinejoin="round" />,
 };
