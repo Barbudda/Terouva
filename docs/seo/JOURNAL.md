@@ -190,3 +190,18 @@ Gains :
 - Suivant : effet en Search Console et test de visibilité LLM dans 2 à 3 semaines (`seo-analyste`) ;
   publication de l'article sur l'encadrement des loyers après revérification de l'état du texte à
   l'Assemblée ; lot 3 des guides en questions-réponses (dépôt, état des lieux, préavis).
+
+## 2026-11-04 (nuit) — Le blog s'ouvre : lot 1 en production
+
+- Livré : `main` avancé de `b83cbd3` à `f1c048f`. Sept articles publiés (nouveau modèle de bail,
+  révision du loyer avec l'IRL, frais d'agence, arnaques à la location, lettre de motivation,
+  filigrane sur le dossier, Visale refusée), le troisième outil `/outils/quel-salaire-pour-un-loyer`,
+  le blog relié au site (nav, pied de page, « Articles liés » dans les guides, flux RSS).
+- Contrôle en ligne : `/blog` en `index, follow`, sept articles et l'outil en 200, brouillons en 404,
+  plan du site de 17 à 26 adresses ; 26 adresses soumises à IndexNow (HTTP 200).
+- Relu avant publication par trois relecteurs qui n'en étaient pas les auteurs
+  (`docs/seo/relectures/blog/`) ; porte du lot sur la prévisualisation (`docs/seo/portes/2026-11-04-lot1.md`).
+- En attente : six brouillons corrigés en contre-relecture (lot 2 avec « après la visite » et le
+  DPE) ; quatre retenus pour cannibalisation ; l'article sur l'encadrement des loyers après le vote
+  de l'Assemblée du 18 novembre.
+- Suivant : vérifier l'indexation du lot 1 une semaine après (`seo-analyste`), avant le lot 2.
