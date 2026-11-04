@@ -1,0 +1,110 @@
+# Veille juridique et fraîcheur — Terouva
+
+> Propriétaire : `blog-veille-juridique` (entrées datées) et `seo-fraicheur` (section « À mettre à
+> jour », file de rafraîchissement des guides). On n'y modifie aucune page : on signale. Sources
+> officielles seulement (service-public.gouv.fr, legifrance.gouv.fr, visale.fr, anil.org, insee.fr,
+> senat.fr et assemblee-nationale.fr pour l'état d'un texte) ; la presse alerte, elle ne prouve pas.
+> Chaque entrée repart de la date de la précédente. Une semaine sans nouveauté s'écrit aussi.
+
+## 2026-11-04 — Veille de départ
+
+### Nouveau (publié ou en vigueur depuis septembre 2026, ou annoncé avec une date)
+
+| Changement | Source | Publié le | En vigueur le |
+|---|---|---|---|
+| **Encadrement du niveau des loyers** (Paris, Est Ensemble, Plaine Commune, Lille-Hellemmes-Lomme, Lyon-Villeurbanne, Bordeaux, Montpellier, partie de Grenoble-Alpes Métropole, Pays basque) : l'expérimentation de la loi Elan, prolongée en 2022, « arrive à son terme le 23 novembre 2026 ». Le Sénat a adopté le 21 octobre 2026, en première lecture, la proposition de loi Echaniz modifiée pour **prolonger de deux ans à périmètre constant**, permettre aux collectivités d'en sortir et porter à un an le délai pour contester un complément de loyer. Texte transmis à l'Assemblée nationale : **pas encore adopté définitivement**. | [senat.fr, la loi en clair](https://www.senat.fr/travaux-parlementaires/textes-legislatifs/la-loi-en-clair/proposition-de-loi-pour-retrouver-la-confiance-et-lequilibre-dans-les-rapports-locatifs.html) ; liste des communes : [service-public F1314](https://www.service-public.gouv.fr/particuliers/vosdroits/F1314), vérifié le 2026-11-01 | 2026-10-21 (vote Sénat) | terme 2026-11-23 sauf loi |
+| **Encadrement de l'évolution des loyers** en zone tendue reconduit par un décret du 20 juillet 2026, du 1er août 2026 au 31 juillet 2027. Nouveaux loyers de référence 2026 : 1er juillet à Paris et Montpellier, 15 juillet à Bordeaux. | [service-public A17566](https://www.service-public.gouv.fr/particuliers/actualites/A17566) | 2026-07-27 | 2026-08-01 → 2027-07-31 |
+| **Nouveaux modèles de bail** (vide, meublé, colocation à bail unique) au 1er octobre 2026 : clause résolutoire intégrée pour loyer, charges **ou dépôt de garantie non versé** (après commandement de payer resté sans effet 6 semaines ; obligation issue de la loi du 27 juillet 2023), mention de l'obligation de résidence principale, téléphone portable facultatif. Notice d'information entièrement révisée par un arrêté du 9 octobre 2026, à annexer aux baux conclus ou renouvelés depuis le 18 octobre 2026. | [service-public A19067](https://www.service-public.gouv.fr/particuliers/actualites/A19067) | 2026-09-23, mis à jour 2026-10-22 | 2026-10-01 et 2026-10-18 |
+| **IRL du 3e trimestre 2026** : 148,06, +1,57 % sur un an (après +1,15 % au T2). Outre-mer (art. 73) 145,21 ; Corse 143,80. | [insee.fr 9081853](https://www.insee.fr/fr/statistiques/9081853) | 2026-10-15 | — |
+| **APL, ALF, ALS revalorisées de 1,15 %** au 1er octobre 2026 (IRL du T2), arrêté du 28 septembre 2026. | [service-public A16807](https://www.service-public.gouv.fr/particuliers/actualites/A16807) | 2026-09-11, mis à jour 2026-09-30 | 2026-10-01 |
+| **Trêve hivernale 2026-2027** : du 1er novembre 2026 au 31 mars 2027. | [service-public A14632](https://www.service-public.gouv.fr/particuliers/actualites/A14632) | 2026-10-02 | 2026-11-01 |
+| **Nouveau calcul du DPE** : facteur de conversion de l'électricité ramené de 1,9 à 1,7 ; certaines étiquettes s'améliorent d'une classe (rarement deux), aucune ne se dégrade ; mise à jour gratuite possible sur l'Observatoire DPE-Audit de l'Ademe. Rappel du calendrier en métropole : G non louable depuis le 1er janvier 2025, F à partir du 1er janvier 2028, E à partir du 1er janvier 2034. | [service-public A18446](https://www.service-public.gouv.fr/particuliers/actualites/A18446) | 2026-09-01 | 2027-01-01 |
+| **Gel des loyers F et G** (rappel, pas nouveau) : majoration interdite en métropole pour un logement classé F ou G dont le bail est signé, renouvelé ou reconduit depuis le 24 août 2022 (outre-mer : depuis le 1er juillet 2024). | [service-public F36511](https://www.service-public.gouv.fr/particuliers/vosdroits/F36511/0_1?idFicheParent=F1311), vérifié le 2025-08-08 | — | — |
+| **Visale au 6 janvier 2026** : garantie limitée aux trois premières années d'occupation (contrats antérieurs inchangés), plafond de ressources des salariés de plus de 30 ans porté de 1 500 € à 1 710 € nets par mois, plafonds de loyer sur trois catégories de communes (Île-de-France, agglomérations de plus de 100 000 habitants, autres), critère de mobilité géographique supprimé pour les saisonniers, expérimentation en cohabitation intergénérationnelle. Montants des plafonds de loyer : dans un tableau image, à relever via le simulateur Visale. | [visale.fr, ce qui change en 2026](https://www.visale.fr/evolution_visale_2026/) | 2026-01-06 | 2026-01-06 |
+
+### Rendez-vous des 12 prochains mois
+
+| Date | Rendez-vous | Source de la date | Article prévisible |
+|---|---|---|---|
+| 2026-11-23 | Terme de l'expérimentation de l'encadrement du niveau des loyers, sauf adoption définitive de la prolongation | senat.fr (ci-dessus) | oui, à publier dès le vote de l'Assemblée ou le 23/11 |
+| 2026-12-17 | Ouverture de Parcoursup 2026-2027 : début du calendrier logement des futurs étudiants | [service-public, échéances](https://www.service-public.gouv.fr/particuliers/actualites/agenda/echeances) | signal saisonnier |
+| 2027-01-01 | Nouveau calcul du DPE (électricité 1,7) | A18446 | oui |
+| 2027-01-01 | Abrogation du décret 2013-392 (annexe : liste des communes en zone tendue), remplacé pour la taxe sur la vacance par le décret 2026-831 ; vérifier quelle liste sert ensuite au préavis réduit et à l'encadrement de l'évolution des loyers | [Légifrance JORFTEXT000054761859](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054761859), JO du 2026-08-29 | oui si la liste change ; guide préavis à revoir |
+| 2027-01-15 | IRL du 4e trimestre 2026, 8 h 45 | insee.fr 9081853 (« Prochaine publication ») | oui, court |
+| 2027-03-31 | Fin de la trêve hivernale 2026-2027 | A14632 | non (hors cible) |
+| mi-avril, mi-juillet, mi-octobre 2027 | IRL T1, T2, T3 2027 (dates exactes à prendre dans chaque publication INSEE) | insee.fr, rythme trimestriel | oui, court |
+| été 2027 | Nouveaux arrêtés de loyers de référence (en 2026 : 1er juillet Paris et Montpellier, 15 juillet Bordeaux) | A17566 | oui si l'encadrement est prolongé |
+| 2027-07-31 | Fin du décret d'encadrement de l'évolution des loyers en zone tendue (reconduction annuelle à surveiller) | A17566 | oui |
+| 2027-10-01 | Revalorisation annuelle des APL sur l'IRL du T2 | A16807 | oui, court |
+| 2027-11-01 | Début de la trêve hivernale 2027-2028 (période fixée par la loi) | A14632 | non |
+| 2028-01-01 (hors fenêtre, à préparer à l'automne 2027) | Logements classés F non louables en métropole | A18446 | oui, gros sujet |
+
+### Sujets d'articles proposés
+
+| # | Titre de travail | Format | Publier avant le | Pilier et guide à mettre à jour en même temps |
+|---|---|---|---|---|
+| 1 | Encadrement des loyers après le 23 novembre 2026 : ce qui change pour votre prochain bail | actualité | 2026-11-23 (puis mise à jour au vote final) | préavis et zones tendues ; dossier |
+| 2 | Nouveaux modèles de bail : ce qu'un locataire vérifie avant de signer depuis le 1er octobre 2026 | actualité | 2026-11-20 | dépôt de garantie ; état des lieux |
+| 3 | Visale en 2026 : trois ans de garantie, nouveau plafond de ressources, et ce que ça change pour votre dossier | actualité | 2026-11-30 | garantie Visale ; louer sans garant |
+| 4 | DPE recalculé au 1er janvier 2027 : un logement « passoire » peut-il redevenir louable ? | actualité | 2026-12-15 | dossier ; répondre à une annonce (repérer l'étiquette dans l'annonce) |
+| 5 | IRL de janvier 2027 : de combien votre loyer peut-il augmenter cette année ? | rendez-vous trimestriel | 2027-01-15 (jour J) | à rattacher au futur guide sur le loyer (absent du site) |
+| 6 | Logement étudiant 2027 : le calendrier pour chercher, de Parcoursup à la rentrée | saisonnier | 2027-03-31 | dossier ; garant ; Visale |
+| 7 | Mutation ou nouvel emploi : louer vite dans une ville où l'on ne connaît personne | saisonnier (pic de l'été) | 2027-05-31 | répondre à une annonce ; préavis |
+| 8 | Logements classés F interdits à la location en 2028 : ce que le locataire doit savoir dès maintenant | actualité anticipée | 2027-10-15 | dossier |
+
+Sujets écartés : trêve hivernale et expulsions (public déjà locataire en impayé, hors de ce que sert
+le produit) ; taxe sur les logements vacants (propriétaires).
+
+### À mettre à jour (file de rafraîchissement des 9 guides)
+
+Vérification au 2026-11-04 des 9 guides (`apps/web/app/guides/*/page.tsx` et leurs entrées dans
+`apps/web/lib/catalogue.ts`) contre les sources officielles. Les points 1 à 4 ont été relus à la
+source par `blog-veille-juridique` (Légifrance, articles 2297 C. civ., 22-1 et 22-2 de la loi de
+1989). Les autres sont relevés par la vérification guide par guide, avec leur source, et sont à
+relire une fois au moment de corriger. Aucune page modifiée ; correction par `seo-fraicheur` (faits,
+dates, liens) ou `seo-redacteur` (passage à réécrire), puis `blog-relecteur`.
+
+Priorité : un fait faux passe avant tout ; puis ce qui touche plusieurs guides ; puis l'imprécis.
+Trafic : non mesuré (Search Console non branchée dans cette session), priorité par gravité seule.
+
+| # | Page · ligne | Raison | Priorité | Action | Statut |
+|---|---|---|---|---|---|
+| 1 | `garant-caution/page.tsx:82-84` | **Faux.** « il est d'usage d'y plafonner le montant garanti » : le plafond est obligatoire. La caution personne physique appose elle-même une mention « dans la limite d'un montant en principal et accessoires exprimé en toutes lettres et en chiffres », à peine de nullité. [Art. 2297 C. civ.](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044071230), en vigueur depuis le 2022-01-01, lu le 2026-11-04 | 1 | Réécrire le paragraphe | à faire |
+| 2 | `garant-caution/page.tsx:86-92` | **Faux.** L'encadré dit que la mention à recopier concerne le crédit à la consommation, pas la location. Or l'art. 22-1 dit : « La caution doit apposer la mention prévue par l'article 2297 du code civil », à peine de nullité (elle n'a plus à être manuscrite, mais la caution l'appose elle-même). [Art. 22-1](https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000044073458), en vigueur depuis le 2022-01-01, lu le 2026-11-04 | 1 | Supprimer l'encadré, le remplacer par la règle | à faire |
+| 3 | `garant-caution/page.tsx:73-74`, `:65-67`, `:42-43` | Imprécis, même source. L'acte reproduit l'avant-dernier alinéa de l'art. 22-1 (ce n'est pas une « reconnaissance ») ; le bailleur remet à la caution un exemplaire **du bail** ; la caution simple ou solidaire se lit dans la mention de l'art. 2297 (renonciation aux bénéfices de discussion et de division, sinon la caution les conserve) | 1 | Corriger avec 1 et 2 | à faire |
+| 4 | `garant-caution/page.tsx:140-142`, `louer-sans-garant/page.tsx:41-42` et `:105-108`, `catalogue.ts:277` et `:413` | Imprécis, trois pages. Le bailleur personne morale (hors SCI familiale jusqu'au 4e degré) ne peut demander une caution que si elle vient d'un organisme agréé (Visale par exemple) ou si le locataire est un étudiant **non** boursier. Le site ne cite que l'interdiction pour un étudiant boursier, et « ne peut rien exiger d'un boursier » est trop large (dossier et dépôt de garantie restent dus). [Art. 22-1](https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000044073458), lu le 2026-11-04 | 1 | Reformuler sur les trois pages, ajouter l'art. 22-1 aux sources | à faire |
+| 5 | `dossier-de-location/page.tsx:88-89` | Périmé. « La loi nomme en plus explicitement une série de documents » : la liste nominative a disparu de l'art. 22-2 au 2014-03-27 (loi ALUR). L'article en vigueur renvoie au décret et interdit seulement d'imposer la cosignature d'un ascendant ou d'un descendant. Les pièces restent interdites puisqu'elles sont hors liste. [Art. 22-2](https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000028806691), lu le 2026-11-04 | 2 | Réécrire l'introduction de la liste | à faire |
+| 6 | `dossier-de-location/page.tsx:108-111` | Périmé et contradictoire avec les lignes 43 et 51. L'attestation du précédent bailleur et celle de l'employeur figurent dans la liste autorisée du décret 2015-1437 (annexe I). [Décret 2015-1437](https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031444493), annexes en vigueur depuis le 2023-01-01 | 2 | Retirer l'item | à faire |
+| 7 | `catalogue.ts:42` | La source « Article 22-2 » pointe sur une ancienne version (`LEGIARTI000022962988`) | 2 | Remplacer par `LEGIARTI000028806691` | à faire |
+| 8 | `garantie-visale/page.tsx:46`, `:50`, `:58` ; `louer-sans-garant/page.tsx:105-107` ; `catalogue.ts:413` | Imprécis. « Moins de 30 ans » puis « 31 ans et plus » : la personne de 30 ans n'entre dans aucune case. Service-public : « 30 ans et moins ». Et « en priorité aux moins de 30 ans » : c'est un critère d'éligibilité, pas une priorité. [SP F33453](https://www.service-public.gouv.fr/particuliers/vosdroits/F33453), vérifié le 2026-01-23 | 2 | Écrire « 30 ans au plus » ; retirer « en priorité » | à faire |
+| 9 | `garantie-visale/page.tsx:39-65` | Oublis : le bail mobilité ouvre Visale à tout âge (meublé) ; exception de la cohabitation intergénérationnelle solidaire à la règle sur les liens familiaux. [actionlogement.fr](https://www.actionlogement.fr/la-garantie-visale) (non daté) et F33453 (2026-01-23) | 3 | Ajouter deux lignes | à faire |
+| 10 | `garant-caution/page.tsx:204-206`, `refus-de-dossier/page.tsx:59-61`, `louer-sans-garant/page.tsx:149-151`, `catalogue.ts:409` | Imprécis. L'art. 22-1 interdit de refuser une caution parce qu'elle n'a pas la nationalité française ou ne réside pas en métropole. Aucune source officielle lue ne vise « une autre région » ni « une commune jugée indésirable ». [Art. 22-1](https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000044073458) ; [Défenseur des droits, décision 2024-095](https://juridique.defenseurdesdroits.fr/doc_num.php?explnum_id=22401) | 2 | Restreindre à l'étranger et à l'outre-mer, citer l'art. 22-1 | à faire |
+| 11 | `depot-de-garantie/page.tsx:89-91` | Imprécis, et contredit `etat-des-lieux/page.tsx:170-184`, qui est juste. La présomption de bon état ne joue pas contre le locataire si le bailleur a fait obstacle à l'état des lieux. [SP F31270](https://www.service-public.gouv.fr/particuliers/vosdroits/F31270), vérifié le 2026-03-10 ; art. 3-2 | 2 | Aligner sur le guide état des lieux | à faire |
+| 12 | `etat-des-lieux/page.tsx:150-153`, `catalogue.ts:475` | Imprécis. Si le propriétaire ne vient pas, on passe d'abord par un commissaire de justice ; la remise des clés par lettre recommandée vient ensuite. [SP F33671](https://www.service-public.gouv.fr/particuliers/vosdroits/F33671), vérifié le 2026-03-10 | 2 | Ajouter l'étape | à faire |
+| 13 | `depot-de-garantie/page.tsx:145-146`, `catalogue.ts:224` | Imprécis. « C'est gratuit » : vrai pour le conciliateur et la commission de conciliation, pas pour le médiateur. [SP F31269](https://www.service-public.gouv.fr/particuliers/vosdroits/F31269), vérifié le 2026-06-09 | 2 | Préciser | à faire |
+| 14 | `preavis-location/page.tsx:98-99`, `catalogue.ts:536` | Imprécis. « À la date de signature ou de renouvellement » : le simulateur retient aussi la reconduction tacite, cas le plus courant. [Simulateur zones tendues](https://www.service-public.gouv.fr/simulateur/calcul/zones-tendues), vérifié le 2026-01-15 | 2 | Ajouter « ou de reconduction » | à faire |
+| 15 | `preavis-location/page.tsx:86-87`, `catalogue.ts:536` | **À dater, rendez-vous du 1er janvier 2027.** Exact aujourd'hui (liste revue par le décret 2025-1267 du 22 décembre 2025, pour les baux depuis le 2025-12-24, d'après l'ANIL et le simulateur). Mais le décret 2026-831 du 25 août 2026 **abroge au 1er janvier 2027** le décret 2013-392 dont l'annexe porte cette liste, et en fixe une nouvelle pour la taxe sur la vacance. La liste qui servira au préavis réduit et à l'encadrement de l'évolution des loyers à partir de cette date reste à vérifier. [Décret 2026-831](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054761859), JO du 2026-08-29, art. 2 et 3 | 2 | Revérifier le 2027-01-04 ; mettre à jour le guide et sa FAQ | en attente |
+| 16 | `refus-de-dossier/page.tsx:92-105`, `catalogue.ts:357` | Imprécis (portée). Le partage de la charge de la preuve vaut « en cas de litige » devant le juge civil (art. 1er de la loi de 1989), pas pour la plainte pénale qui suit dans le texte. [Loi 89-462](https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000509310) | 3 | Distinguer civil et pénal | à faire |
+| 17 | `refus-de-dossier/page.tsx:114-116` | Mineur. « Trois ans et 45 000 € » : écrire « jusqu'à » (5 ans et 75 000 € dans un lieu accueillant du public, art. 225-2) | 3 | Préciser | à faire |
+| 18 | `garant-caution/page.tsx:113` | À dater. « Extrait D1 » : le décret consolidé cite désormais la fiche d'immatriculation au registre national des entreprises (RNE) ; la fiche F1169 (vérifiée le 2025-04-10) dit encore « D1 » | 3 | Écrire « fiche d'immatriculation au RNE (ex-extrait D1) » | à faire |
+| 19 | `dossier-de-location/page.tsx:67` | Mineur. « Deux derniers bilans » : le décret ajoute « ou, à défaut, une attestation de ressources pour l'exercice en cours » | 3 | Compléter | à faire |
+| 20 | `depot-de-garantie/page.tsx:83`, `:68` ; `depot-de-garantie/page.tsx:144`, `etat-des-lieux/page.tsx:192` | Mineurs. « En copropriété » : la loi dit « immeuble collectif ». « Trois choses » retenables : l'art. 22 vise aussi les sommes dues à la place du locataire. « En dessous de 5 000 € » : F33671 dit « inférieur ou égal », F31269 « inférieur » (citer les deux) | 3 | Préciser | à faire |
+| 21 | `louer-sans-garant/page.tsx:51` et sources du catalogue (lignes 384-397) | L'art. 22-1, base de la page, et la fiche Loca-Pass [SP F18490](https://www.service-public.gouv.fr/particuliers/vosdroits/F18490) (vérifiée le 2026-09-11) ne sont pas cités | 3 | Ajouter aux sources | à faire |
+| 22 | `repondre-a-une-annonce-de-location/page.tsx:128-131`, `:152-154` ; sources `catalogue.ts:131-134` | Aucune source officielle : PAP, Vestae et une agence seulement. Les pièces interdites (relevés de compte, attestation de bonne tenue de compte) relèvent de l'art. 22-2 et du décret 2015-1437 ; Visale avant d'avoir le logement relève de SP F33453 | 3 | Ajouter les sources officielles | à faire |
+| 23 | `depot-de-garantie` (absent) | Ajout utile : depuis le 2026-10-01, le bail type porte la clause résolutoire en cas de dépôt de garantie non versé (après commandement de payer resté sans effet 6 semaines). [SP A19067](https://www.service-public.gouv.fr/particuliers/actualites/A19067) | 3 | Une phrase et la source | à faire |
+| 24 | `garantie-visale` (catalogue `:109`) | À confirmer avant ajout : durée de validité du visa (3 mois, 6 pour étudiants et alternants, d'après des extraits de recherche ; visale.fr renvoie 403 aux robots) | 3 | Lire la FAQ Visale dans un navigateur, puis ajouter | en attente |
+
+Non vérifiés faute de source officielle lue, à ne pas présenter comme des règles : coût des sociétés
+de cautionnement (`louer-sans-garant:92-101`, `catalogue.ts:281` et `:417`), « trois fois le
+loyer » (`catalogue.ts:289`), cumul Visale + Loca-Pass + APL (`louer-sans-garant:114`), Défenseur
+des droits « seule voie » en logement social (`refus-de-dossier:137-138`), effacement du dossier et
+CNIL (`dossier-de-location:165-171`). Ce sont des pratiques ou des déductions : les dire comme telles.
+
+Faits confirmés à la source pendant cette vérification (environ 70, avec URL et date de la source) :
+dans `docs/seo/blog/faits-confirmes-2026-11-04.md`, pour alimenter `docs/seo/FAITS.md`, que
+`geo-citabilite` tient. Dates des fiches citées : F1169 et F31267 vérifiées le 2025-04-10, F14750 le
+2025-08-12, F33453 le 2026-01-23, F31270 et F33671 le 2026-03-10, F32360 le 2026-04-14, F1168 le
+2026-04-16, F31269 le 2026-06-09, F18490 le 2026-09-11.
+
+Accès : visale.fr répond 403 aux outils automatiques (lu dans le navigateur de la session pour la
+page « ce qui change en 2026 ») ; Légifrance répond par WebFetch et navigateur, pas par `curl`.
