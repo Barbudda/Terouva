@@ -78,7 +78,7 @@ Une réponse autonome, que Google ou un assistant peut reprendre telle quelle.
 - Les trois étapes :
   > 1. Installez l'extension depuis le Chrome Web Store, puis épinglez son icône à côté de la barre d'adresse.
   > 2. Ouvrez l'application Terouva (terouva.com/app) et indiquez ce que vous cherchez : ville, budget, surface.
-  > 3. Ouvrez votre recherche de location sur leboncoin.fr et gardez l'onglet ouvert. Les nouvelles annonces arrivent dans l'application, déjà notées.
+  > 3. Ouvrez votre recherche de location sur leboncoin.fr et gardez l'onglet ouvert. Quand de nouvelles annonces s'ajoutent à cette page restée ouverte, elles arrivent dans l'application, déjà notées.
 - Contrôle : `Dans l'application, la pastille « Extension » passe au vert quand tout est relié.`
   Le libellé exact de cette pastille est à reprendre de `/app` au moment de l'écriture finale
   (`docs/LANCEMENT.md` parle de la page « État extension »).
@@ -92,7 +92,7 @@ présent décrit un code qui existe déjà).
 - Colonne « Ce qu'elle fait » :
   > - Elle lit les pages de recherche et d'annonces que vous ouvrez vous-même : titre, prix, surface, ville, photos et lien de chaque annonce.
   > - Elle transmet ces annonces à l'application Terouva ouverte dans votre navigateur. L'application les note sur 100 selon vos critères.
-  > - Quand une annonce dépasse votre seuil, une notification s'affiche. Un clic ouvre l'annonce.
+  > - Si une annonce dépasse votre seuil pendant que l'application est ouverte, une notification s'affiche. Un clic ouvre l'annonce.
   > - Sur la page d'une annonce, un bouton place dans le formulaire de contact le message que vous avez copié depuis Terouva. Vous relisez, puis vous cliquez vous-même sur « Envoyer ».
 - Colonne « Ce qu'elle ne fait jamais » :
   > - Aucune requête automatique vers le site d'annonces : elle lit ce qui est déjà affiché.

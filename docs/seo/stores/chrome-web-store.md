@@ -16,21 +16,21 @@ Lues dans la documentation officielle le jour même. Elles changent : les relire
 | Nom | 75 caractères au plus, texte brut. Il s'affiche dans la boîte d'installation, `chrome://extensions` et le store. Il vient du champ `name` du manifest. | [manifest name](https://developer.chrome.com/docs/extensions/reference/manifest/name) (2013-05-12) |
 | Titre | Clair, court, décrit la fonction ; ne pas le bourrer de mots-clés. | [best-listing](https://developer.chrome.com/docs/webstore/best-listing) (2024-08-02) |
 | Résumé (description courte) | 132 caractères au plus, texte brut. C'est le texte montré dans les résultats de recherche et les pages de catégorie. Il vient du champ `description` du manifest. Pas de superlatifs, pas de référence aux concurrents. | [manifest description](https://developer.chrome.com/docs/extensions/reference/manifest/description) (2013-05-12), [best-listing](https://developer.chrome.com/docs/webstore/best-listing) |
-| Description longue | Commencer par ce que fait l'extension, puis les fonctions. Pas de témoignages anonymes. | [cws-dashboard-listing](https://developer.chrome.com/docs/webstore/cws-dashboard-listing), [listing-requirements](https://developer.chrome.com/docs/webstore/program-policies/listing-requirements) (2024-07-10) |
+| Description longue | Commencer par ce que fait l'extension, puis les fonctions. Pas de témoignages anonymes. | [cws-dashboard-listing](https://developer.chrome.com/docs/webstore/cws-dashboard-listing) (2020-12-07, version française lue), [listing-requirements](https://developer.chrome.com/docs/webstore/program-policies/listing-requirements) (2024-07-10) |
 | Mots-clés | Interdit : listes de sites, de marques ou de mots-clés sans valeur ajoutée, listes de lieux, et répétition d'un même mot-clé plus de 5 fois. | [listing-requirements](https://developer.chrome.com/docs/webstore/program-policies/listing-requirements) (2024-07-10) |
 | Marques tierces | Ne pas laisser croire que le produit est autorisé, approuvé ou produit par une autre entreprise. Ne pas porter atteinte aux marques d'autrui. | [impersonation-and-intellectual-property](https://developer.chrome.com/docs/webstore/program-policies/impersonation-and-intellectual-property) (2022-11-01) |
 | Objectif unique | Un seul objectif, étroit et facile à comprendre ; un champ du formulaire le décrit. | [quality-guidelines](https://developer.chrome.com/docs/webstore/program-policies/quality-guidelines) (2024-07-10), [cws-dashboard-privacy](https://developer.chrome.com/docs/webstore/cws-dashboard-privacy) (2020-06-12) |
 | Permissions | Les plus étroites possible. Pas de permission « pour plus tard ». Chaque permission du manifest a son champ de justification ; une permission inutile doit être retirée avant de continuer. | [permissions](https://developer.chrome.com/docs/webstore/program-policies/permissions) (2022-11-01), [cws-dashboard-privacy](https://developer.chrome.com/docs/webstore/cws-dashboard-privacy) |
 | Envoi de messages | Interdit d'envoyer des messages au nom de l'utilisateur sans lui laisser confirmer le contenu et le destinataire. | [spam-and-abuse](https://developer.chrome.com/docs/webstore/program-policies/spam-and-abuse) (2022-11-01) |
-| Données traitées en local | Elles se déclarent quand même. Une politique de confidentialité est obligatoire dès que l'extension traite des données, même stockées en local. | [user-data-faq](https://developer.chrome.com/docs/webstore/program-policies/user-data-faq), questions 3 et 14 |
-| Information visible et consentement | Avant la collecte, l'extension doit dire clairement quelles données elle lit et à quoi elles servent, et obtenir l'accord de l'utilisateur. D'après la FAQ, cet avis doit figurer dans l'interface de l'extension : la fiche du store ne suffit pas. | [disclosure-requirements](https://developer.chrome.com/docs/webstore/program-policies/disclosure-requirements) (2022-11-01), [user-data-faq](https://developer.chrome.com/docs/webstore/program-policies/user-data-faq), question 10 |
+| Données traitées en local | Elles se déclarent quand même. Une politique de confidentialité est obligatoire dès que l'extension traite des données, même stockées en local. | [user-data-faq](https://developer.chrome.com/docs/webstore/program-policies/user-data-faq) (date non relevée), questions 3 et 14 |
+| Information visible et consentement | Avant la collecte, l'extension doit dire clairement quelles données elle lit et à quoi elles servent, et obtenir l'accord de l'utilisateur. D'après la FAQ, cet avis doit figurer dans l'interface de l'extension : la fiche du store ne suffit pas. | [disclosure-requirements](https://developer.chrome.com/docs/webstore/program-policies/disclosure-requirements) (2022-11-01), [user-data-faq](https://developer.chrome.com/docs/webstore/program-policies/user-data-faq) (date non relevée), question 10 |
 | Cohérence | Les champs de confidentialité ne doivent contredire ni la politique de confidentialité ni le comportement de l'extension, sous peine de retrait. | [listing-requirements](https://developer.chrome.com/docs/webstore/program-policies/listing-requirements) |
 | Icône | PNG 128 × 128 dans le ZIP. Dessin de 96 × 96 avec 16 px de marge transparente de chaque côté ; lisible sur fond clair comme sur fond sombre. | [images](https://developer.chrome.com/docs/webstore/images) (2018-06-11) |
 | Captures | 1 au moins, 5 au plus, 1280 × 800 (préféré) ou 640 × 400, coins carrés, sans marge. Elles montrent l'expérience réelle. | [images](https://developer.chrome.com/docs/webstore/images), [best-listing](https://developer.chrome.com/docs/webstore/best-listing) |
 | Vignette promotionnelle | 440 × 280, PNG ou JPEG. Facultative, mais les extensions sans vignette s'affichent après celles qui en ont une. Peu de texte, couleurs saturées, rendu lisible même réduit de moitié. | [images](https://developer.chrome.com/docs/webstore/images) |
 | Bannière | 1400 × 560, facultative ; elle ne sert que si le store met l'extension en avant dans son carrousel. | [images](https://developer.chrome.com/docs/webstore/images) |
 | Classement | Calculé par une heuristique : notes des utilisateurs, téléchargements, désinstallations dans le temps. | [best-listing](https://developer.chrome.com/docs/webstore/best-listing) |
-| Catégories | 18 catégories listées (l'annonce de mi-2023 en comptait 17 ; liste au § 5). | [best-practices](https://developer.chrome.com/docs/webstore/best-practices#choose-category-well) |
+| Catégories | 18 catégories listées (l'annonce de mi-2023 en comptait 17 ; liste au § 5). | [best-practices](https://developer.chrome.com/docs/webstore/best-practices#choose-category-well) (la page affiche 2017-08-30, alors qu'elle décrit les catégories de 2023 : date peu fiable) |
 | Compte | Inscription avec des frais uniques ; l'adresse e-mail du compte ne peut plus être changée ensuite. | [register](https://developer.chrome.com/docs/webstore/register) (2026-11-02) |
 
 Non vérifié : le **montant** des frais d'inscription. La page officielle ne l'affiche plus ;
@@ -82,8 +82,8 @@ Terouva repère les nouvelles annonces de location qui correspondent à votre re
 Comment ça marche
 - Ouvrez votre recherche de location sur leboncoin.fr comme d'habitude, et gardez l'onglet ouvert.
 - Ouvrez l'application Terouva (terouva.com/app) dans un autre onglet et indiquez ce que vous cherchez : ville, budget, surface.
-- Quand de nouvelles annonces apparaissent sur votre page de recherche, par exemple après un rechargement, l'extension les transmet à l'application, qui les note selon vos critères.
-- Si une annonce dépasse votre seuil, une notification s'affiche. Un clic ouvre l'annonce.
+- Quand de nouvelles annonces s'ajoutent à votre page de recherche restée ouverte, l'extension les transmet à l'application, qui les note selon vos critères.
+- Si une annonce dépasse votre seuil pendant que l'application est ouverte, une notification s'affiche. Un clic ouvre l'annonce.
 
 Sur la page d'une annonce
 Quand vous ouvrez une annonce, l'extension lit son détail (description, ville, surface, nombre de pièces) pour affiner la note. Un bouton « Remplir mon message Terouva » colle dans le formulaire de contact le message de candidature que vous avez copié depuis l'application. L'envoi reste toujours manuel : vous relisez, puis vous cliquez vous-même sur « Envoyer ».
@@ -185,7 +185,7 @@ des cases du tableau de bord n'ont pas été vus : cocher ceux qui correspondent
 | Contenu de sites web | **Oui** | Titre, prix, surface, ville, description, photos et lien des annonces ; nom et type d'annonceur (particulier ou professionnel) lus sur la page d'annonce (`content/content.js`, `ad.owner`). |
 | Activité de navigation | **Oui** | Adresses des pages de recherche et d'annonces leboncoin.fr ouvertes, et adresse de l'onglet actif quand l'utilisateur ouvre le menu. |
 | Contenu créé par l'utilisateur ou communications personnelles | **Oui**, tant que `clipboardRead` existe | Le message de candidature lu dans le presse-papiers au clic sur « Remplir mon message ». Variante sans le presse-papiers : **Non**. |
-| Données d'identification personnelle | Non | L'extension ne lit ni le nom, ni l'e-mail, ni le téléphone de l'utilisateur. Le nom d'annonceur lu sur une annonce relève du contenu de la page. |
+| Données d'identification personnelle | **Oui**, tant que `clipboardRead` existe | Le message de candidature lu au clic peut contenir le prénom et le téléphone que l'utilisateur y a mis (le générateur les demande : `components/outils/GenerateurMessage.tsx`). Il est placé dans le formulaire de contact, ni conservé ni transmis. Le nom d'annonceur lu sur une annonce relève du contenu de la page. Variante sans le presse-papiers : **Non**. |
 | Authentification | Non | Le code qui relie l'extension à l'application est généré par l'application, n'est pas un identifiant de compte et reste dans le navigateur. Aucun mot de passe, aucun cookie. |
 | Données financières, de santé, localisation | Non | Aucune. La ville d'une annonce n'est pas la position de l'utilisateur. |
 
@@ -320,6 +320,17 @@ Passe anti-IA des textes publics de la fiche (§ 3, 4, 6) : `zero-slop` le 2026-
    (`127.0.0.1:8765`, jeton de jumelage, onglet Réglages), retiré du code. Il contient aussi des
    tirets cadratins. Ne pas l'inclure dans le ZIP tant qu'il n'est pas réécrit.
 10. **Icône** : voir § 7 (marge de 16 px, couleur hors identité), pôle Design.
+11. **Tiret cadratin dans le menu.** `popup/popup.js:74` affiche « — » quand une annonce n'a ni
+    prix ni surface. Remplacer par un texte (« Prix et surface non indiqués ») ou laisser vide.
+12. **Question : quand la détection a-t-elle lieu ?** `content/watch.js` range comme déjà vues
+    toutes les annonces présentes au chargement de la page (`indexExisting`) et ne transmet que
+    celles que le site ajoute ensuite (`MutationObserver`). Après un rechargement, les nouvelles
+    annonces visibles ne sont donc pas transmises. La liste de résultats de leboncoin.fr se
+    met-elle à jour seule, sans rechargement ? Si non, la détection n'a lieu qu'au changement de
+    page ou de filtre (navigation interne du site), et la fiche (§ 4, puce 3 de « Comment ça
+    marche ») ainsi que `docs/seo/stores/telecharger.md` devront le dire. Si c'est voulu, une
+    autre piste consiste à comparer les annonces vues au chargement avec celles déjà connues de
+    l'application, plutôt que de toutes les ignorer.
 
 ## 10. Concurrence observée sur le store
 
