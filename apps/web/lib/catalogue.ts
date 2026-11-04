@@ -628,4 +628,16 @@ export const OUTILS: Outil[] = [
     description:
       "Écrivez le message qui accompagne votre dossier de location. Gratuit, sans inscription, trois tons. Rien n'est envoyé : tout reste dans votre navigateur.",
   },
+  {
+    chemin: "/outils/quel-salaire-pour-un-loyer",
+    titre: "Quel salaire pour un loyer : calculateur et règles Visale",
+    // Requête-mère P1 du registre (2026-11-04) : l'autocomplétion propose dix
+    // montants, de 600 à 1 300 €, et aucun calculateur n'est en top 10.
+    titreSeo: "Quel salaire pour un loyer : le calcul",
+    court: "Salaire et loyer",
+    resume:
+      "Le loyer que vos ressources permettent, avec le repère des trois fois le loyer et les règles de la garantie Visale.",
+    description:
+      "Le salaire attendu pour un loyer, ou le loyer que vos ressources permettent, avec les règles Visale. Gratuit, rien n'est envoyé.",
+  },
 ];
