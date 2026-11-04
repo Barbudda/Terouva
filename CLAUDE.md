@@ -73,6 +73,9 @@ Décisions qui valent pour tous les pôles :
   compatible local-first). Paliers et prix à fixer par le pôle CTO & Commerce ; `llms.txt` annonce
   encore « abonnement autour de 12 € par mois » et sera aligné quand ils le seront.
 - **Leboncoin d'abord** : pas d'autre site d'annonces avant le lancement sur Leboncoin.
+- **Pôle SEO & GEO : le site web seulement** (Hugo, 2026-11-04 au soir). On ne travaille pas sur
+  l'extension ; l'objectif est la visibilité du site, d'abord par un blog en volume (voir
+  `docs/seo/BRIEF.md`, « Blog en volume »).
 - **Git** : commits et push autorisés sans validation préalable (le push déploie sur Vercel : la
   porte Septune `compare_sites` passe avant tout push qui touche au site). Achats, comptes et
   publications externes restent à Hugo.

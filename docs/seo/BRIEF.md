@@ -20,9 +20,13 @@ d'annonces à la place de l'utilisateur.
 
 | Surface | État au 2026-11-04 | Rôle pour le pôle |
 |---|---|---|
-| `apps/web` (Next.js 15, Vercel) | En ligne : accueil, 9 guides, 2 outils gratuits, démo `/app`, liste d'attente, pages légales | Le site à référencer |
-| `apps/extension` (Chrome MV3, v0.2) | Fonctionne, **pas publiée** sur le Chrome Web Store | Fiche de store à préparer |
+| `apps/web` (Next.js 15, Vercel) | En ligne : accueil, 9 guides, 2 outils gratuits, démo `/app`, liste d'attente, pages légales, rubrique `/blog` prête | **Le seul périmètre du pôle** |
+| `apps/extension` (Chrome MV3, v0.2) | Pas publiée | **Hors périmètre** (décision d'Hugo du 2026-11-04 : on ne travaille pas sur l'extension). Le dossier de fiche store reste en archive dans `docs/seo/stores/` |
 | `apps/desktop` (Tauri) | Gelé (maintenance) | Hors périmètre |
+
+**Objectif du pôle (Hugo, 2026-11-04)** : maximiser la visibilité du site sur le web, dans Google et
+dans les assistants IA. Le levier principal est **un blog en volume** : beaucoup d'articles, chacun
+utile, sourcé et relu.
 
 - **Domaine de production** : `https://terouva.com` (référence de Septune `compare_sites`). L'URL
   absolue vient de `getSiteUrl()` dans `apps/web/lib/site.ts`.
@@ -40,21 +44,32 @@ refus de dossier.
 
 ## Conversion visée (dans cet ordre)
 
-1. **Aujourd'hui** : inscription à la liste d'attente, et usage des outils gratuits.
-2. **Dès publication** : installation de l'extension depuis le Chrome Web Store.
-3. **En continu** : lecture régulière du blog et des guides (retour direct, flux RSS, liste).
+1. **Inscription à la liste d'attente** et usage des outils gratuits.
+2. **Lecture régulière** du blog et des guides (retour direct, flux RSS, liste).
 
-## Blog
+Un appel à l'action dit ce qu'il fait vraiment aujourd'hui : rien n'est téléchargeable, donc « Être
+prévenu », jamais « Télécharger ».
 
-Le site a des **guides** (permanents, mis à jour) mais pas encore de **blog** (articles datés :
-actualité des règles de location, études de données publiques, cas pratiques, saisonnalité de la
-recherche de logement). Le blog nourrit les guides et les outils, jamais l'inverse : chaque article
-se rattache à un pilier et renvoie vers le guide et l'outil voisins. La ligne éditoriale et le
-calendrier sont dans `docs/seo/blog/` (`blog-redacteur-en-chef`). Un flux RSS des guides existe déjà
-(`apps/web/app/flux.xml/route.ts`).
+## Blog en volume
 
-Un appel à l'action dit ce qu'il fait vraiment aujourd'hui : rien n'est téléchargeable tant que
-l'extension n'est pas publiée, donc « Être prévenu », jamais « Télécharger ».
+Les **guides** sont permanents et se mettent à jour ; les **articles** sont datés et nombreux :
+actualité des règles de location, questions précises de locataires, cas pratiques, études de données
+publiques, saisonnalité de la recherche. Chaque article se rattache à un pilier
+(`docs/seo/blog/LIGNE-EDITORIALE.md`) et renvoie vers le guide et l'outil voisins.
+
+**Volume sans contenu de masse.** Google sanctionne le contenu produit à la chaîne pour se classer
+(« scaled content abuse »), qu'il soit écrit par une IA ou non : ce qui le déclenche, c'est la page
+qui n'apporte rien. Le volume tient donc à trois conditions, non négociables :
+1. **une requête réelle par article** (registre), jamais deux articles sur la même intention ;
+2. **un apport propre** : réponse directe, faits sourcés et datés, exemple concret, ce que les trois
+   premiers résultats ne disent pas ;
+3. **relu par un autre que l'auteur** avant publication, et publié par lots (5 à 10), avec une mesure
+   de l'indexation entre deux lots.
+
+Mécanique : un article = deux fichiers à son nom dans `apps/web/components/blog/articles/`
+(`<slug>.tsx` pour le corps, `<slug>.meta.ts` pour la fiche), puis `npm run blog:index`. Plusieurs
+rédacteurs écrivent donc en parallèle sans fichier commun. Le statut `brouillon` cache l'article ;
+`publie` le met partout (page, plan du site, flux, `llms.txt`).
 
 ## Prix et offre : hors périmètre
 
@@ -72,9 +87,8 @@ cadratin dans les textes publics, pas de promesse commerciale ni de chiffre mark
 - On **observe** Leboncoin, on ne le **pilote** pas : pas de bot, pas d'envoi automatique, pas
   d'évasion anti-détection. Aucun texte ne doit laisser croire à un envoi automatique.
 - **Aucun lien avec Leboncoin** : jamais « Leboncoin » dans le nom du produit ni dans une ancre de
-  lien. Sur une fiche de store, la marque tierce n'apparaît que si la politique du store l'autorise,
-  avec « non affilié ». Le nom actuel de l'extension (« Terouva — alertes Leboncoin ») est à
-  revoir par `seo-fiches-stores` à la lumière de cette règle et de la politique du store.
+  lien. Un article peut nommer le site quand il en parle (comment répondre à une annonce qui y est
+  publiée), toujours comme un site tiers, sans affiliation suggérée.
 - **Leboncoin d'abord** (décision du 2026-11-04) : pas de pages qui promettent d'autres sites
   d'annonces tant que le produit ne les sert pas.
 - Rien d'inventé : SIREN, adresse, profils, avis, chiffres juridiques. Les profils `sameAs` n'existent
