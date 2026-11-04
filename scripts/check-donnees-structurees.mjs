@@ -71,14 +71,22 @@ function valider(n, chemin, source) {
 }
 
 const xml = await (await fetch(`${BASE}/sitemap.xml`)).text();
-const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+// Les <loc> portent le domaine du build (NEXT_PUBLIC_SITE_URL), y compris sur un
+// serveur local construit avec l'URL de production : sans cette réécriture, un
+// contrôle lancé sur localhost vérifiait en silence la production.
+const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+const urls = locs.map((loc) => {
+  const u = new URL(loc);
+  return new URL(u.pathname + u.search, BASE).href;
+});
 
 // Le plan du site doit annoncer exactement les adresses vers lesquelles le site
 // pointe. L'accueil sans barre finale est vu comme une seconde adresse, donc
-// comme une page orpheline.
-for (const u of urls) {
-  if (new URL(u).pathname === "") {
-    defauts.push(`${u} → plan du site : l'accueil doit s'écrire avec sa barre finale`);
+// comme une page orpheline. Le contrôle porte sur le texte brut des <loc> :
+// `new URL()` rajoute la barre, et le défaut devenait invisible.
+for (const loc of locs) {
+  if (/^https?:\/\/[^/]+$/.test(loc)) {
+    defauts.push(`${loc} → plan du site : l'accueil doit s'écrire avec sa barre finale`);
   }
 }
 

@@ -1,5 +1,20 @@
+import { articlesPublies, cheminArticle } from "@/lib/blog";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
 import { getSiteUrl } from "@/lib/site";
+
+/**
+ * Les dix derniers articles publiés, avec leur date. Rien tant que le blog est
+ * vide : une section sans entrée annoncerait un contenu qui n'existe pas.
+ */
+function sectionArticles(base: string): string {
+  const recents = articlesPublies().slice(0, 10);
+  if (recents.length === 0) return "";
+  return `## Articles récents
+
+${recents.map((a) => `- [${a.titre}](${base}${cheminArticle(a)}) (${a.publieLe}) : ${a.description}`).join("\n")}
+
+`;
+}
 
 /**
  * `llms.txt` : une description du site en texte clair, pour les assistants qui
@@ -52,7 +67,7 @@ ${GUIDES.map(
     }`,
 ).join("\n")}
 
-## Pages
+${sectionArticles(base)}## Pages
 
 - [Accueil](${base}/)
 - [Outils gratuits](${base}/outils)

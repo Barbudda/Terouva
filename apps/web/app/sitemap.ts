@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { BLOG, articlesPublies, blogModifieLe, cheminArticle } from "@/lib/blog";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
 import { getSiteUrl } from "@/lib/site";
 
@@ -46,6 +47,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const datesGuides = GUIDES.map((g) => g.modifieLe ?? g.publieLe);
 
+  // Le blog n'entre au plan du site qu'avec son premier article publié : la
+  // rubrique vide reste en `noindex` (voir `blogOuvert`), et un plan du site
+  // qui liste une page `noindex` se contredit.
+  const articles = articlesPublies();
+  const blogModifie = blogModifieLe();
+  const blog: MetadataRoute.Sitemap = blogModifie
+    ? [
+        {
+          url: `${base}${BLOG}`,
+          lastModified: new Date(blogModifie),
+          changeFrequency: "weekly",
+          priority: 0.7,
+        },
+        ...articles.map((a) => ({
+          url: `${base}${cheminArticle(a)}`,
+          lastModified: new Date(a.modifieLe ?? a.publieLe),
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+        })),
+      ]
+    : [];
+
   return [
     // La barre finale n'est pas cosmétique. Sans elle, le plan du site annonce
     // « https://domaine » quand tous les liens de la page et la canonique
@@ -83,6 +106,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
+    ...blog,
     {
       url: `${base}/confidentialite`,
       lastModified: new Date(MODIFIE_LE["/confidentialite"]!),

@@ -18,6 +18,7 @@ export function pageMetadata({
   publieLe,
   modifieLe,
   indexable = true,
+  flux = false,
 }: {
   /** Sans « · Terouva » : le gabarit du layout l'ajoute. */
   titre: string;
@@ -28,6 +29,12 @@ export function pageMetadata({
   publieLe?: string;
   modifieLe?: string;
   indexable?: boolean;
+  /**
+   * Déclare le flux RSS dans le `<head>`. Le `layout` le déclare déjà, mais
+   * Next remplace l'objet `alternates` en entier dès qu'une page pose sa
+   * canonique : sans cette option, la déclaration du layout disparaît.
+   */
+  flux?: boolean;
 }): Metadata {
   const url = `${getSiteUrl()}${chemin}`;
   const image = `${chemin === "/" ? "" : chemin}/opengraph-image`;
@@ -35,7 +42,10 @@ export function pageMetadata({
   return {
     title: titre,
     description,
-    alternates: { canonical: chemin },
+    alternates: {
+      canonical: chemin,
+      ...(flux ? { types: { "application/rss+xml": "/flux.xml" } } : {}),
+    },
     robots: indexable ? { index: true, follow: true } : { index: false, follow: false },
     openGraph: {
       title: `${titre} · Terouva`,
