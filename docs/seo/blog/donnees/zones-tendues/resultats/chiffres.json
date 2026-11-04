@@ -1,0 +1,81 @@
+{
+  "communes_total": 34875,
+  "communes_zone_tendue": 1430,
+  "part_communes_zone_tendue_pct": 4.1,
+  "population_totale_hors_mayotte": 68094280,
+  "population_zone_tendue": 26524985,
+  "part_population_zone_tendue_pct": 39.0,
+  "communes_touristiques_tendues": 2259,
+  "population_touristiques_tendues": 3014735,
+  "grandes_villes": 42,
+  "grandes_villes_preavis_1_mois": 25,
+  "grandes_villes_preavis_3_mois": 17,
+  "departements_sans_commune_tendue": 61,
+  "departements_total": 100,
+  "changements_decret_2025": [
+    {
+      "code": "01187",
+      "commune": "Haut Valromey",
+      "avant": "2. Zone touristique et tendue",
+      "apres": "3. Non tendue"
+    },
+    {
+      "code": "25390",
+      "commune": "Pays-de-Montbenoît",
+      "avant": "2. Zone touristique et tendue",
+      "apres": "3. Non tendue"
+    },
+    {
+      "code": "30329",
+      "commune": "Thoiras-Corbès",
+      "avant": "2. Zone touristique et tendue",
+      "apres": "3. Non tendue"
+    },
+    {
+      "code": "74037",
+      "commune": "Boëge",
+      "avant": "1. Zone tendue",
+      "apres": "3. Non tendue"
+    },
+    {
+      "code": "74226",
+      "commune": "Saint-André-de-Boëge",
+      "avant": "1. Zone tendue",
+      "apres": "2. Zone touristique et tendue"
+    }
+  ],
+  "controle_codes_zonage_sans_population": [
+    "97601",
+    "97602",
+    "97603",
+    "97604",
+    "97605",
+    "97606",
+    "97607",
+    "97608",
+    "97609",
+    "97610",
+    "97611",
+    "97612",
+    "97613",
+    "97614",
+    "97615",
+    "97616",
+    "97617"
+  ],
+  "controle_codes_population_sans_zonage": [],
+  "par_categorie": {
+    "3. Non tendue": {
+      "communes": 31186,
+      "population": 38554560
+    },
+    "1. Zone tendue": {
+      "communes": 1430,
+      "population": 26524985
+    },
+    "2. Zone touristique et tendue": {
+      "communes": 2259,
+      "population": 3014735
+    }
+  }
+}

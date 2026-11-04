@@ -3,6 +3,20 @@
 > Rédacteur en chef : `blog-redacteur-en-chef`, 2026-11-04. Rédaction : `seo-redacteur`. Relecture :
 > `blog-relecteur`. Publication semaine du 2026-11-16, après l'article 2 ou le même jour.
 
+## Entrée `apps/web/lib/blog.ts` (ajout du 2026-11-04, rubrique créée par le commit 045a395)
+
+| Champ | Valeur proposée | Contrôle |
+|---|---|---|
+| `slug` | `proprietaire-ne-repond-pas` | |
+| `titre` (h1) | « Le propriétaire ne répond pas à votre message : pourquoi, et quoi faire » | |
+| `titreSeo` | « Le propriétaire ne répond pas : que faire ? » | 53 signes avec « · Terouva » (≤ 60) |
+| `description` | « Votre message à un propriétaire reste sans réponse ? Les raisons probables, quand relancer, et comment répondre plus tôt à la prochaine annonce. » | 144 signes (70 à 155) |
+| `chapeau` | « Un propriétaire qui ne répond pas a souvent déjà assez de candidats, ou votre message ne lui donnait pas de quoi décider. Vous ne pouvez pas le vérifier, mais vous pouvez relancer une fois, brièvement, avec une information utile. Le vrai levier reste le message suivant : envoyé plus tôt, et complet dès la première ligne. » | 56 mots (40 à 60). « Souvent » n'est pas une mesure : `blog-relecteur` décide s'il passe ou s'il devient « peut-être » |
+| `pilier` · `format` · `lecture` | `A` · `cas-pratique` · 5 | |
+| `guidePilier` | `/guides/repondre-a-une-annonce-de-location` | |
+| `guidesLies` | `/guides/dossier-de-location`, `/guides/refus-de-dossier` | |
+| `outilLie` | `/outils/message-de-candidature` | |
+
 ## Fiche
 
 | Champ | Valeur |

@@ -3,6 +3,20 @@
 > Rédacteur en chef : `blog-redacteur-en-chef`, 2026-11-04. Rédaction : `seo-redacteur`. Relecture :
 > `blog-relecteur`. Publication au plus tard le **2026-11-19** (veille : avant le 20 novembre).
 
+## Entrée `apps/web/lib/blog.ts` (ajout du 2026-11-04, rubrique créée par le commit 045a395)
+
+| Champ | Valeur proposée | Contrôle |
+|---|---|---|
+| `slug` | `nouveau-modele-de-bail-2026` | |
+| `titre` (h1) | « Nouveau modèle de bail : ce qu'un locataire vérifie avant de signer » | |
+| `titreSeo` | « Nouveau bail 2026 : quoi vérifier avant de signer » | 59 signes avec « · Terouva » (≤ 60) |
+| `description` | « Depuis le 1er octobre 2026, les baux de location suivent un nouveau modèle. Les cinq points à vérifier avant de signer, et ce qui ne change pas. » | 144 signes (70 à 155) |
+| `chapeau` | « Depuis le 1er octobre 2026, tout bail de résidence principale, vide ou meublé, suit un nouveau modèle. Il ajoute une clause résolutoire qui vise aussi le dépôt de garantie non versé, rappelle que le logement doit être votre résidence principale et rend le numéro de portable facultatif. Les baux déjà signés ne changent pas. » | 54 mots (40 à 60). « Tout bail » attend le fait n° 3 (renouvellement, reconduction) |
+| `pilier` · `format` · `lecture` | `D` · `actualite` · 5 | |
+| `guidePilier` | `/guides/depot-de-garantie` (page du cluster D la plus proche, voir « Liens ») | |
+| `guidesLies` | `/guides/etat-des-lieux`, `/guides/dossier-de-location` | |
+| `outilLie` | `/outils/dossier-de-location` | |
+
 ## Fiche
 
 | Champ | Valeur |

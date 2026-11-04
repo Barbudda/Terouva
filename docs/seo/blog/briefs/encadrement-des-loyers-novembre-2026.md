@@ -4,6 +4,22 @@
 > `blog-relecteur`. Suivi du texte : `blog-veille-juridique`. Urgence : **publication au plus tard le
 > vendredi 2026-11-13**, mises à jour le jour du vote et le jour du terme.
 
+## Entrée `apps/web/lib/blog.ts` (ajout du 2026-11-04, rubrique créée par le commit 045a395)
+
+| Champ | Valeur proposée | Contrôle |
+|---|---|---|
+| `slug` | `encadrement-des-loyers-apres-novembre-2026` | ne change pas après le vote |
+| `titreSeo`, version 0 | « Encadrement des loyers après le 23 novembre 2026 » | 58 signes avec « · Terouva » (≤ 60) ; à corriger si le terme est le 24 (fait n° 1) |
+| `titreSeo`, version A | « Encadrement des loyers prolongé jusqu'en 2028 » | 55 signes ; année de fin à prendre dans le texte promulgué |
+| `titreSeo`, version B | « Fin de l'encadrement des loyers : ce qui reste » | 56 signes |
+| `description`, version 0 | « Le plafonnement des loyers arrive à son terme en novembre 2026. Ce qui est déjà sûr, ce qui dépend du vote, et comment vérifier le loyer d'une annonce. » | 151 signes (70 à 155) ; réécrite pour A et B |
+| `chapeau`, version 0 | « L'encadrement du niveau des loyers, expérimenté dans neuf territoires dont Paris, Lyon et Bordeaux, arrive à son terme le 23 novembre 2026. Le Sénat a voté sa prolongation de deux ans ; l'Assemblée nationale ne s'est pas encore prononcée. Quoi qu'il arrive, la hausse de loyer entre deux locataires reste limitée en zone tendue jusqu'au 31 juillet 2027. » | 58 mots (40 à 60). « Neuf territoires » : compte de la liste F1314 dans `VEILLE.md`, à recompter sur la fiche le jour de la publication |
+| `pilier` · `format` · `lecture` | `D` · `actualite` · 6 | |
+| `guidePilier` | `/guides/preavis-location` | |
+| `guidesLies` | `/guides/repondre-a-une-annonce-de-location`, `/guides/dossier-de-location` | |
+| `outilLie` | aucun | |
+| `misesAJour` | une entrée par mise à jour du tableau « Mises à jour prévues », avec `modifieLe` | |
+
 ## Fiche
 
 | Champ | Valeur |

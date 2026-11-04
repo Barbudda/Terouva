@@ -12,10 +12,10 @@ relecture humaine à plein temps : chaque article passe par `seo-redacteur`, `bl
 `geo-citabilite`, `seo-maillage`, puis le commit du chef. Douze semaines tenues valent mieux qu'un
 mois chargé suivi de rien. Les mises à jour d'un article existant ne comptent pas dans la cadence.
 
-**Préalable** : la rubrique `/blog` n'existe pas (spécification dans `LIGNE-EDITORIALE.md`, section 9).
-L'article 1 a une date dure (23 novembre). Si la rubrique ne peut pas être en ligne avant le
-2026-11-13, le chef décide : soit une construction minimale d'abord (gabarit, sitemap, flux), soit
-une publication provisoire de l'article 1 comme guide daté sous `/guides`, à ne pas faire sans son accord.
+**Préalable levé le 2026-11-04** : la rubrique `/blog` existe (commit 045a395), invisible tant
+qu'aucun article n'est publié. Un article s'ajoute dans `apps/web/lib/blog.ts` ; chaque brief donne
+son entrée (slug, `titreSeo` de 50 signes au plus avant « · Terouva », description de 70 à 155
+signes, chapeau de 40 à 60 mots, pilier, format), mesurée au moment du brief.
 
 ## Saisonnalité : ce qui est mesuré et ce qui ne l'est pas
 
@@ -40,8 +40,8 @@ registre, pas par une saisonnalité qu'on n'a pas mesurée.
 | 2 | 2026-11-16 | Nouveau modèle de bail : ce qu'un locataire vérifie avant de signer depuis le 1er octobre | actualité | D | nouveau bail 1er octobre 2026 (actualité, hors registre) | Les baux signés cet automne sont les premiers sur le nouveau modèle ; veille : publier avant le 20 novembre | [briefs/nouveaux-modeles-de-bail-2026.md](briefs/nouveaux-modeles-de-bail-2026.md) | brief prêt ; publier au plus tard le 2026-11-19 |
 | 2 | 2026-11-16 | Le propriétaire ne répond pas à votre message : pourquoi, et quoi faire | cas pratique | A | propriétaire ne répond pas (registre, P2) | Angle mort : aucune page du web ne traite le côté candidat ; pilier le plus proche du produit | [briefs/proprietaire-ne-repond-pas.md](briefs/proprietaire-ne-repond-pas.md) | brief prêt |
 | 3 | 2026-11-23 | *Mise à jour de l'article 1* : version définitive selon le vote, le jour du terme | mise à jour | D | — | Le 23 ou le 24 novembre (date à trancher, voir le brief) | brief 1, section « Mises à jour » | prévu |
-| 3 | 2026-11-23 | Visale refusée : les raisons possibles et ce que vous pouvez faire | question précise | C | garantie visale refusée (variante de « garantie visale conditions ») | Les changements Visale de janvier 2026 vont dans le guide (file de fraîcheur n° 8, 9, 24) ; l'article prend la variante que le guide ne traite pas | à écrire semaine 2 | prévu |
-| 4 | 2026-11-30 | Un propriétaire peut-il refuser un candidat au chômage ? | question précise | B | refus de louer à un chômeur (variante de « refus dossier location ») | Grappe « refus » : la page la plus vue du site (25 impressions) ; renforce `/guides/refus-de-dossier` sans le copier | à écrire semaine 3 | prévu |
+| 3 | 2026-11-23 | Visale refusée : les raisons possibles et ce que vous pouvez faire | question précise | C | garantie visale refusée (variante de « garantie visale conditions ») | Les changements Visale de janvier 2026 vont dans le guide (file de fraîcheur n° 8, 9, 24) ; l'article prend la variante que le guide ne traite pas | [briefs/visale-refusee.md](briefs/visale-refusee.md) | brief prêt ; SERP google.fr à lire par `seo-registre` |
+| 4 | 2026-11-30 | Un propriétaire peut-il refuser un candidat au chômage ? | question précise | B | refus de louer à un chômeur (variante de « refus dossier location ») | Grappe « refus » : la page la plus vue du site (25 impressions) ; renforce `/guides/refus-de-dossier` sans le copier | [briefs/refus-location-chomage.md](briefs/refus-location-chomage.md) | brief prêt ; SERP google.fr à lire par `seo-registre` |
 | 5 | 2026-12-07 | DPE recalculé au 1er janvier 2027 : lire l'étiquette d'une annonce avant de répondre | actualité anticipée | D (angle A) | DPE location 2027 (actualité, hors registre) | Changement au 2027-01-01 ; veille : publier avant le 15 décembre | à écrire semaine 4 | prévu |
 | 6 | 2026-12-14 | DossierFacile : ce que c'est, ce que voit le propriétaire, et quand s'en servir | question précise | B | DossierFacile (registre, P3) | Service public cité dans les réponses des assistants (test LLM du 2026-11-04) ; SERP à lire avant le brief | à écrire semaine 5 | prévu, sous réserve de la SERP |
 | 7 | 2026-12-21 | Se porter garant : y a-t-il un âge limite ? | question précise, court | C | âge limite pour se porter garant (PAA de « garant location ») | Semaine de fêtes : article court écrit à l'avance ; grappe « garant », 44 impressions en position 41,6 | à écrire semaine 5 | prévu, sous réserve d'une source officielle |
@@ -66,8 +66,7 @@ dont 2 la semaine 2 et 2 la semaine 3 ; aucune semaine au-dessus de deux.
 
 | Qui | Quoi | Pour quand |
 |---|---|---|
-| Chef | Décision sur la rubrique `/blog` (construction minimale avant le 13 novembre, ou plan B) | 2026-11-06 |
-| `seo-gardien-technique` | Rubrique, gabarit, sitemap, flux, `llms.txt`, schéma (`LIGNE-EDITORIALE.md`, section 9) | 2026-11-12 |
+| `seo-gardien-technique` | Rubrique, gabarit, sitemap, flux, `llms.txt`, schéma | fait (commit 045a395) |
 | `blog-veille-juridique` | Suivi quotidien du texte sur l'encadrement à l'Assemblée jusqu'au 23 novembre ; alerte le jour du vote | dès maintenant |
 | `seo-fraicheur` | Mises à jour des guides dans le même lot que les articles 2 (dépôt de garantie, n° 23), 3 bis (Visale, n° 8, 9, 24), 9 (préavis, n° 15) | avec chaque article |
 | `seo-registre` | SERP de « DossierFacile », « âge limite garant », « refus de louer chômeur », « visale refusée » ; Trends saisonniers | semaines 2 à 5 |

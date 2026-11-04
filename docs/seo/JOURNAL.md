@@ -119,3 +119,46 @@ Faux positifs connus :
   sujet de la page.
 - `img-dimensions-missing` sur les `next/image` en `fill` : le conteneur porte les dimensions, CLS
   mesuré à 0,00.
+
+### Mesures vague 3 (prévisualisation)
+
+**Prévisualisation de `second/auto` :**
+https://terouva-git-second-auto-hugopoene74-1336s-projects.vercel.app (alias de branche Vercel,
+build du commit 47bd484, statut GitHub « Deployment has completed »). Publique, sans
+authentification : 200 sur `/` et `/guides`. Elle sert bien la vague 3 (nouveau titre de « répondre
+à une annonce »). Vercel y ajoute `X-Robots-Tag: noindex`. Canoniques et sitemap pointent vers
+terouva.com, comme prévu.
+
+| Métrique | Production (2026-11-04) | Prévisualisation | Outil |
+|---|---|---|---|
+| Intertitres h2/h3 finissant par « ? », `repondre-a-une-annonce-de-location` | 0 sur 15 | **4 sur 15** | curl, comptage du HTML servi |
+| Idem `garant-caution` | 0 sur 13 | **6 sur 13** | idem |
+| Idem `refus-de-dossier` | 0 sur 13 | **7 sur 13** | idem |
+| Schéma JSON-LD des 3 guides | Article + FAQPage (4, 9, 4 Q/R) + Breadcrumb | identique | idem |
+| Nombre de mots (répondre / garant / refus) | 1 629 / 2 325 / 1 719 | 1 741 / 2 636 / 1 943 | Septune audit_page |
+| Titre de « répondre » | Répondre à une annonce de location · Terouva | Répondre à une annonce de location : modèle · Terouva | Septune audit_page |
+| Description de « répondre » | Comment écrire un message de candidature… | « Bonjour, je suis intéressé par votre annonce » ne suffit pas… | Septune audit_page |
+| metadata, structure, schema, internal-linking (3 guides) | 100 | 100 | Septune audit_page |
+| performance (3 guides) | 92 (`perf-render-blocking` : 1 script, 2 CSS) | **100** (1 seule CSS dans `<head>`) | Septune audit_page + curl |
+| images (3 guides) | 84 | 84 (inchangé, `alt=""` décoratifs) | Septune audit_page |
+| indexing (3 guides) | 100 | 66 | Septune audit_page |
+| GEO du site | 96 | non mesurable (65, 0 page lue) | Septune geo_audit |
+
+Régressions : aucune imputable au code.
+- `indexing` 66 et `indexing-sitemap-hygiene` viennent de l'environnement : `X-Robots-Tag: noindex`
+  posé par Vercel sur toute prévisualisation, et sitemap sur terouva.com. Septune ne les classe pas
+  à part en `audit_page`. Ils disparaissent en production.
+- `geo_audit` sur la prévisualisation est inutilisable : il lit 0 page (« 0/0 page(s) ») et rend
+  65, probablement parce que les pages en `noindex` sont écartées. Le score GEO de la vague 3 se
+  mesurera après mise en production.
+
+Gains :
+- 17 intertitres en question sur les 3 guides, contre 0 en production (comptage des « ? » ; le
+  chiffre de 16 du `geo_audit` en production suit une autre règle, par mots interrogatifs, et ne se
+  compare pas à ce comptage).
+- performance 92 → 100 sur les 3 guides : une feuille de style bloquante de moins dans `<head>`.
+  Cause non vérifiée : la vague 3 ne touche pas `layout.tsx`, c'est donc sans doute un autre commit
+  de la branche.
+
+À mesurer après mise en production : `geo_audit` (titres en question, attendu > 16), `audit_site`
+(performance, images), Search Console sur « répondre » (CTR, à J+14 au plus tôt), test LLM.
