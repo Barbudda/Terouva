@@ -76,6 +76,8 @@ export type Article = {
    * premier paragraphe. Déjà visibles dans le corps, donc balisées sans bloc en double (R81).
    */
   faqCorps?: Array<{ q: string; a: string }>;
+  /** Photo propre à l'article (carte du blog). Sans elle, une photo du site est attribuée. */
+  photo?: { src: string; alt: string };
   /** Titres de section, dans l'ordre. `id` doit exister dans le corps. */
   sommaire?: Array<{ id: string; titre: string }>;
   statut: "brouillon" | "publie";

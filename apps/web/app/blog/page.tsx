@@ -3,6 +3,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { Rubrique, type FicheGuide } from "@/components/guides/Rubrique";
+import { FACADES, PHOTOS } from "@/lib/guides-resumes";
 import {
   BLOG,
   PILIERS,
@@ -43,6 +44,20 @@ const ARIANE = [
  * image, le clic mène à l'article. Filtres par pilier, l'article le plus récent à la une. Les pages
  * de pilier restent liées en bas pour les moteurs.
  */
+/**
+ * Une photo pour la carte d'un article qui n'a pas la sienne : prise dans les photos du site
+ * (guides et façades), choisie d'après l'adresse pour rester la même d'un build à l'autre et
+ * répartir les répétitions. L'image de partage ne convient pas : au format 1,9:1, recadrée dans une
+ * vignette, elle coupe et rend illisible le titre qu'elle porte.
+ */
+const LOT_PHOTOS = [...Object.values(PHOTOS), ...FACADES];
+function photoParDefaut(slug: string): { src: string; alt: string } {
+  let h = 0;
+  for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  const p = LOT_PHOTOS[h % LOT_PHOTOS.length];
+  return { src: p.src, alt: p.alt };
+}
+
 export default function Blog() {
   const siteUrl = getSiteUrl();
   const articles = articlesPublies();
@@ -56,7 +71,7 @@ export default function Blog() {
     etape: a.pilier,
     date: dateLongue(a.modifieLe ?? a.publieLe),
     lecture: a.lecture,
-    photo: { src: `${cheminArticle(a)}/opengraph-image`, alt: a.titre },
+    photo: a.photo ?? photoParDefaut(a.slug),
   }));
   const rubriques = Object.fromEntries(piliers.map((p) => [p, PILIERS[p]]));
 
