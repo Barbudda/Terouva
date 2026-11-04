@@ -228,3 +228,14 @@ Gains :
 - Optimisations pour la vague 7 : trois pièges récurrents devenus règles du vérificateur, relecteur
   qui applique et vérifie ses propres corrections, sources lisibles par le script de préférence,
   réutilisation des faits déjà validés, 3 rédacteurs à 8 articles.
+
+## 2026-11-04 (soir) — Vague 8 publiée, chef relayé par une session neuve
+
+- Livré : 22 articles (bail avant signature, paiement, situation du candidat, garanties, entrée dans
+  les lieux), relus par une session distincte (22 publiables, 220 citations sur 220 retrouvées) :
+  **84 articles en ligne**, plan du site à 107 adresses soumises à IndexNow (HTTP 200).
+- Coût : ≈ 22 points de la fenêtre de 5 h plan compris, 15 sans le plan ; essai de Sonnet sur un
+  rédacteur, exact mais d'une voix plus faible (`docs/seo/blog/MESURES-TOKENS.md`).
+- Vérificateur : le récit de la recherche (« fiches officielles lues ») est désormais refusé.
+- Suivant : vérifier que le plan du site est déclaré dans la Search Console ; mesurer l'indexation
+  et la visibilité LLM d'ici une à deux semaines.

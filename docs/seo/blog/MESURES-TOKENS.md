@@ -82,3 +82,32 @@ prouvées par le script.
    sur la « mention » de la caution a levé quatre faux positifs et a été abandonnée.
 4. Le chef lui-même pèse 880 000 tokens : relayer le pilotage par une session neuve
    (`docs/seo/RELAIS-CHEF.md`).
+
+## Vague 8 (chef relayé, sessions neuves) — départ le 2026-11-04 vers 18 h 25
+
+| Mesure | Départ | Après le plan | Arrivée | Écart |
+|---|---|---|---|---|
+| Forfait, fenêtre de 5 h | 53 % | 60 % | 72 % après écriture, 75 % en ligne | plan +7, écriture +12, relecture et publication +3 |
+| Forfait, semaine | 23 % | 24 % | 26 % | +3 points |
+
+Travail : 22 articles (plan à 22, les autres candidats recouvraient une page en ligne), 3 rédacteurs
+neufs (8, 8, 6), le rédacteur C sur Sonnet à l'essai pour comparer qualité et coût. Chef relayé par
+une session neuve (contexte de départ : 123 000 tokens, 191 000 en fin de vague).
+
+**Bilan de la vague 8** : 22 articles en ligne pour 22 points de fenêtre, plan compris (≈ 1 point par
+article), 15 sans le plan (≈ 0,68, contre 0,55 en vague 7). La fenêtre est celle du compte entier :
+le pôle CTO & Commerce travaillait en même temps (commit « plus de paraphrase hors de l'accueil »),
+l'écart avec la vague 7 n'est donc pas imputable au seul blog. Relecture : 22 publiables, 220
+citations sur 220 retrouvées, zéro intervention du chef sur les articles.
+
+### Ce qu'on apprend, et l'optimisation pour la vague 9
+1. **Le plan a coûté 7 points**, presque autant que la relecture et la publication réunies : la
+   session lit de nombreux fils de forum. → Pour la vague 9, donner au planificateur la liste
+   « Écartés » des vagues 7 et 8 pour qu'il ne les relise pas, et plafonner à trois fils par requête.
+2. **Sonnet (bloc C) : exact sur le droit, voix plus faible.** Quatre articles sur six ont demandé une
+   retouche de forme (récit de la recherche, attributions répétées, phrases de remplissage) ; A et B
+   aucune. Le gain ne se mesure pas séparément (fenêtre commune). → Garder Opus pour écrire tant que
+   le gain n'est pas prouvé ; la tournure la plus fréquente est devenue une règle du vérificateur.
+3. **Règle ajoutée au vérificateur** : « fiches / pages / sources (officielles) lues » interdit, essayée
+   d'abord sur les 84 articles (aucun faux positif). Proposée et non adoptée : un avertissement quand
+   la source d'un fait n'est pas un site officiel (à essayer sur le corpus avant).

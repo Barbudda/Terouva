@@ -7,8 +7,9 @@
 
 - **Périmètre** : le site seulement (terouva.com), objectif de visibilité par un blog en volume. Pas
   d'extension, pas de prix ni d'offre (pôle CTO & Commerce). Brief : `docs/seo/BRIEF.md`.
-- **En ligne** : 62 articles de blog (15 au format JSX, 47 au format série), 9 guides (dont 6 en
-  questions-réponses), 3 outils (dont « quel salaire pour un loyer »), plan du site à 85 adresses.
+- **En ligne** (après la vague 8, le 2026-11-04 au soir) : 84 articles de blog (15 au format JSX,
+  69 au format série), 9 guides (dont 6 en questions-réponses), 3 outils (dont « quel salaire pour un
+  loyer »), plan du site à 107 adresses, toutes soumises à IndexNow.
   `/blog` présenté comme `/guides` (modèle Rushlot / FanClaw), une photo par carte (13 photos du site
   réparties ; champ `photo` facultatif pour une photo propre).
 - **Branches** : on travaille sur `second/auto` et on avance `main` en avance rapide pour mettre en
@@ -32,6 +33,11 @@
   chaque défaut récurrent en règle du vérificateur après l'avoir essayé sur tout le corpus.
 
 ## Ouvert
+
+- Vague 9 : lire d'abord le bilan de la vague 8 dans `MESURES-TOKENS.md` (plan trop coûteux, Sonnet
+  moins bon à l'écriture). Les plans 7 et 8 listent déjà les sujets écartés.
+- Search Console : vérifier avec Hugo que `https://terouva.com/sitemap.xml` est déclaré (menu
+  Sitemaps) ; Google ne reçoit pas IndexNow.
 
 - Photos : 13 pour 62 articles ; proposer une photo libre de droits par article (accord d'Hugo
   requis pour les téléchargements).
