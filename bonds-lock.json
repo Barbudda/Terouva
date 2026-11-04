@@ -1,10 +1,10 @@
 {
   "version": 1,
   "bondsHome": "C:\\Users\\hugo8\\OneDrive\\Desktop\\BONDS",
-  "bondsCommit": "b449b1ef2c72dc49c79addc1c592bb8bb69a8b0d",
+  "bondsCommit": "115814db6ae7f7577614bffae39bc1310515a9ce",
   "loadout": "app-premium",
   "equipeLe": "2026-09-15T15:56:31.694Z",
-  "misAJourLe": "2026-11-04T17:55:20.994Z",
+  "misAJourLe": "2026-11-04T18:22:51.824Z",
   "poles": {
     "seo-geo": {
       "installeLe": "2026-11-04T12:07:48.925Z",
@@ -831,9 +831,9 @@
     "skill:blog-en-serie": {
       "type": "skill",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "a3100535c3ee6c32957fdae6e4a3b8557e1c6137",
+      "hash": "f286e0fd8b922378dd2485285135a335f1f39e06",
       "cible": ".claude/skills/blog-en-serie",
-      "installeLe": "2026-11-04T17:44:08.491Z"
+      "installeLe": "2026-11-04T18:22:51.824Z"
     },
     "skill:pole-cto-commerce": {
       "type": "skill",
@@ -845,9 +845,9 @@
     "skill:ecrire-pour-le-client": {
       "type": "skill",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "fa20b1ae1850aeaff95a0913a8d21ed80d270a3d",
+      "hash": "bca42935e09b4768765b0d0e39dadb1f7938c6ab",
       "cible": ".claude/skills/ecrire-pour-le-client",
-      "installeLe": "2026-11-04T17:55:20.994Z"
+      "installeLe": "2026-11-04T18:22:51.824Z"
     },
     "agent:commerce-audit-textes": {
       "type": "agent",
