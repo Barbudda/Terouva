@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 
 /**
@@ -21,14 +20,6 @@ export function FinDePage({
       <div className="mt-6 max-w-xl">
         <WaitlistForm />
       </div>
-
-      <p className="mt-5 text-sm text-ink-3">
-        Vous pouvez aussi{" "}
-        <Link href="/app?demo=1" className="lien">
-          essayer la démonstration
-        </Link>{" "}
-        tout de suite, sans rien installer.
-      </p>
     </aside>
   );
 }

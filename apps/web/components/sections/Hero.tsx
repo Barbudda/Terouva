@@ -1,11 +1,11 @@
-import Link from "next/link";
 import { HERO } from "@/lib/content";
 import { PleinCadre } from "@/components/layout/coquilles/PleinCadre";
 
 /**
  * L'accueil, sur la référence d'Hugo (31 octobre) : le titre en deux lignes
  * au sommet, finissant en italique ; dessous, la proposition de valeur et le
- * bouton rond.
+ * bouton rond, qui mène à la liste d'attente (Hugo, 4 novembre : la
+ * démonstration ne doit plus être mise en avant).
  *
  * Le 4 novembre, Hugo veut un haut de page encore plus clair : deux phrases,
  * ce que fait Terouva puis ce que vous y gagnez, dans le corps de lecture et
@@ -47,17 +47,22 @@ export function Hero() {
         className="entree mt-10 flex justify-center"
         style={{ "--rang": 3 } as React.CSSProperties}
       >
-        <Link href="/app?demo=1" className="bouton-rond">
+        <a href="#inscription" className="bouton-rond">
           <svg
             viewBox="0 0 24 24"
-            fill="currentColor"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             aria-hidden
             className="size-5"
           >
-            <path d="M8 5.5v13a.75.75 0 0 0 1.14.64l10.4-6.5a.75.75 0 0 0 0-1.28L9.14 4.86A.75.75 0 0 0 8 5.5Z" />
+            <path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15L6 16Z" />
+            <path d="M10 20.5a2 2 0 0 0 4 0" />
           </svg>
-          <span className="mt-1.5 text-[13px] font-medium">Essayer</span>
-        </Link>
+          <span className="mt-1.5 text-[13px] font-medium">Être prévenu</span>
+        </a>
       </div>
     </PleinCadre>
   );

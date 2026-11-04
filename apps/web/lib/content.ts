@@ -152,7 +152,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Quand est-ce que ça sort ?",
-    a: "Bientôt. Laissez votre adresse : vous serez prévenu le jour du lancement. En attendant, la démonstration fonctionne déjà dans votre navigateur.",
+    a: "Bientôt. Laissez votre adresse : vous serez prévenu le jour du lancement. En attendant, les deux outils gratuits du site fonctionnent déjà.",
   },
   {
     q: "Combien ça coûte ?",
@@ -196,7 +196,6 @@ export const FOOTER = {
       links: [
         { label: "Ce que vous y gagnez", href: "/#gains" },
         { label: "Ce que fait Terouva", href: "/#fonctions" },
-        { label: "Voir la démonstration", href: "/app?demo=1" },
         { label: "Vos données", href: "/confidentialite" },
       ],
     },

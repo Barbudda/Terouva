@@ -82,12 +82,6 @@ export function Nav({ home = true }: { home?: boolean }) {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Link
-            href="/app?demo=1"
-            className="bouton bouton--filet h-10 px-4 text-[14px]"
-          >
-            Voir la démo
-          </Link>
           <a
             href={href("#inscription")}
             className="bouton bouton--clair h-10 px-4 text-[14px]"

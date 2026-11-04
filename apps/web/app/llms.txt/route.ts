@@ -25,8 +25,8 @@ export function GET() {
 
 ## État du produit
 
-L'application n'est pas encore téléchargeable (octobre 2026). Une démonstration
-fonctionne dans le navigateur, et une liste d'attente prévient du lancement.
+L'application n'est pas encore téléchargeable (novembre 2026). Une liste
+d'attente prévient du lancement.
 
 Elle sera payante par abonnement, autour de 12 € par mois, avec un essai gratuit.
 Le prix définitif sera annoncé au lancement. Les outils de ce site (générateur de
