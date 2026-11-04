@@ -159,3 +159,33 @@ apps/web/.next-corrompu-*
 .claude/skills/webgl-hero/
 .claude/skills/writing-plans/
 .claude/skills/zero-slop/
+
+# --- Pôle SEO & GEO de BONDS (equip --pole=seo-geo, 2026-11-04) ---
+# Même règle que le loadout : bonds-lock.json (versionné) trace les copies,
+# « /bonds update » les réinstalle. Le contexte du pôle, lui, est versionné
+# dans docs/seo/.
+.claude/agents/seo-analyste.md
+.claude/agents/seo-registre.md
+.claude/agents/seo-redacteur.md
+.claude/agents/geo-citabilite.md
+.claude/agents/seo-gardien-technique.md
+.claude/agents/seo-maillage.md
+.claude/agents/seo-outils.md
+.claude/agents/seo-fiches-stores.md
+.claude/agents/seo-autorite.md
+.claude/skills/pole-seo-geo/
+.claude/skills/septune-audit/
+.claude/skills/seo-technique/
+.claude/skills/seo-aeo-best-practices/
+.claude/skills/ai-seo/
+.claude/skills/seo-audit-canaux/
+.claude/skills/seo-vagues-sourcees/
+.claude/skills/recherche-mots-cles/
+.claude/skills/ecart-concurrentiel/
+.claude/skills/metriques-seo/
+.claude/skills/semrush-mcp/
+.claude/skills/verif-site-en-ligne/
+.claude/skills/seo-landing/
+.claude/skills/cro/
+.claude/skills/copywriting/
+.claude/skills/launch/

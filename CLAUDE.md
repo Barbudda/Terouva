@@ -33,169 +33,6 @@ ce que tu fais et inversement.
 - Keep files under 500 lines
 - Validate input at system boundaries
 
-## Agent Comms (SendMessage-First Coordination)
-
-Named agents coordinate via `SendMessage`, not polling or shared state.
-
-```
-Lead (you) ←→ architect ←→ developer ←→ tester ←→ reviewer
-              (named agents message each other directly)
-```
-
-### Spawning a Coordinated Team
-
-```javascript
-// ALL agents in ONE message, each knows WHO to message next
-Agent({ prompt: "Research the codebase. SendMessage findings to 'architect'.",
-  subagent_type: "researcher", name: "researcher", run_in_background: true })
-Agent({ prompt: "Wait for 'researcher'. Design solution. SendMessage to 'coder'.",
-  subagent_type: "system-architect", name: "architect", run_in_background: true })
-Agent({ prompt: "Wait for 'architect'. Implement it. SendMessage to 'tester'.",
-  subagent_type: "coder", name: "coder", run_in_background: true })
-Agent({ prompt: "Wait for 'coder'. Write tests. SendMessage results to 'reviewer'.",
-  subagent_type: "tester", name: "tester", run_in_background: true })
-Agent({ prompt: "Wait for 'tester'. Review code quality and security.",
-  subagent_type: "reviewer", name: "reviewer", run_in_background: true })
-
-// Kick off the pipeline
-SendMessage({ to: "researcher", summary: "Start", message: "[task context]" })
-```
-
-### Patterns
-
-| Pattern | Flow | Use When |
-|---------|------|----------|
-| **Pipeline** | A → B → C → D | Sequential dependencies (feature dev) |
-| **Fan-out** | Lead → A, B, C → Lead | Independent parallel work (research) |
-| **Supervisor** | Lead ↔ workers | Ongoing coordination (complex refactor) |
-
-### Rules
-
-- ALWAYS name agents — `name: "role"` makes them addressable
-- ALWAYS include comms instructions in prompts — who to message, what to send
-- Spawn ALL agents in ONE message with `run_in_background: true`
-- After spawning: STOP, tell user what's running, wait for results
-- NEVER poll status — agents message back or complete automatically
-
-## Swarm & Routing
-
-### Config
-- **Topology**: hierarchical-mesh (anti-drift)
-- **Max Agents**: 15
-- **Memory**: hybrid
-- **HNSW**: Enabled
-- **Neural**: Enabled
-
-```bash
-npx @claude-flow/cli@latest swarm init --topology hierarchical --max-agents 8 --strategy specialized
-```
-
-### Agent Routing
-
-| Task | Agents | Topology |
-|------|--------|----------|
-| Bug Fix | researcher, coder, tester | hierarchical |
-| Feature | architect, coder, tester, reviewer | hierarchical |
-| Refactor | architect, coder, reviewer | hierarchical |
-| Performance | perf-engineer, coder | hierarchical |
-| Security | security-architect, auditor | hierarchical |
-
-### When to Swarm
-- **YES**: 3+ files, new features, cross-module refactoring, API changes, security, performance
-- **NO**: single file edits, 1-2 line fixes, docs updates, config changes, questions
-
-### 3-Tier Model Routing
-
-| Tier | Handler | Use Cases |
-|------|---------|-----------|
-| 1 | Agent Booster (WASM) | Simple transforms — skip LLM, use Edit directly |
-| 2 | Haiku | Simple tasks, low complexity |
-| 3 | Sonnet/Opus | Architecture, security, complex reasoning |
-
-## Memory & Learning
-
-### Before Any Task
-```bash
-npx @claude-flow/cli@latest memory search --query "[task keywords]" --namespace patterns
-npx @claude-flow/cli@latest hooks route --task "[task description]"
-```
-
-### After Success
-```bash
-npx @claude-flow/cli@latest memory store --namespace patterns --key "[name]" --value "[what worked]"
-npx @claude-flow/cli@latest hooks post-task --task-id "[id]" --success true --store-results true
-```
-
-### MCP Tools (use `ToolSearch("keyword")` to discover)
-
-| Category | Key Tools |
-|----------|-----------|
-| **Memory** | `memory_store`, `memory_search`, `memory_search_unified` |
-| **Bridge** | `memory_import_claude`, `memory_bridge_status` |
-| **Swarm** | `swarm_init`, `swarm_status`, `swarm_health` |
-| **Agents** | `agent_spawn`, `agent_list`, `agent_status` |
-| **Hooks** | `hooks_route`, `hooks_post-task`, `hooks_worker-dispatch` |
-| **Security** | `aidefence_scan`, `aidefence_is_safe`, `aidefence_has_pii` |
-| **Hive-Mind** | `hive-mind_init`, `hive-mind_consensus`, `hive-mind_spawn` |
-
-### Background Workers
-
-| Worker | When |
-|--------|------|
-| `audit` | After security changes |
-| `optimize` | After performance work |
-| `testgaps` | After adding features |
-| `map` | Every 5+ file changes |
-| `document` | After API changes |
-
-```bash
-npx @claude-flow/cli@latest hooks worker dispatch --trigger audit
-```
-
-## Agents
-
-**Core**: `coder`, `reviewer`, `tester`, `planner`, `researcher`
-**Architecture**: `system-architect`, `backend-dev`, `mobile-dev`
-**Security**: `security-architect`, `security-auditor`
-**Performance**: `performance-engineer`, `perf-analyzer`
-**Coordination**: `hierarchical-coordinator`, `mesh-coordinator`, `adaptive-coordinator`
-**GitHub**: `pr-manager`, `code-review-swarm`, `issue-tracker`, `release-manager`
-
-Any string works as a custom agent type.
-
-## Build & Test
-
-- ALWAYS run tests after code changes
-- ALWAYS verify build succeeds before committing
-
-```bash
-npm run build && npm test
-```
-
-## CLI Quick Reference
-
-```bash
-npx @claude-flow/cli@latest init --wizard           # Setup
-npx @claude-flow/cli@latest swarm init --v3-mode     # Start swarm
-npx @claude-flow/cli@latest memory search --query "" # Vector search
-npx @claude-flow/cli@latest hooks route --task ""    # Route to agent
-npx @claude-flow/cli@latest doctor --fix             # Diagnostics
-npx @claude-flow/cli@latest security scan            # Security scan
-npx @claude-flow/cli@latest performance benchmark    # Benchmarks
-```
-
-26 commands, 140+ subcommands. Use `--help` on any command for details.
-
-## Setup
-
-```bash
-claude mcp add claude-flow -- npx -y @claude-flow/cli@latest
-npx @claude-flow/cli@latest daemon start
-npx @claude-flow/cli@latest doctor --fix
-```
-
-**Agent tool** handles execution (agents, files, code, git). **MCP tools** handle coordination (swarm, memory, hooks). **CLI** is the same via Bash.
-
 ## Équipement BONDS (2026-09-15)
 
 Terouva a trois surfaces : `apps/web` (site Next.js, vitrine et SEO du produit), `apps/desktop`
@@ -210,15 +47,35 @@ pour les deux premières ; l'extension suit les mêmes règles de craft à son �
   écran, `/impeccable audit` puis `/bonds audit` à chaque livraison.
 - Les **lignes rouges Terouva** plus haut priment sur tout skill ou agent : observer Leboncoin, jamais
   le piloter ; l'humain valide et envoie.
-- Les sections « Agent Comms », « Swarm & Routing » et « Memory & Learning » viennent de l'outillage
-  claude-flow/ruflo installé en juin ; elles restent valables, mais ne créent ni swarm ni essaim pour
-  une tâche de design ou de front : les agents BONDS (`design-craft-expert`, `creative-director`,
-  `motion-designer`, `interaction-designer`, `visual-qa`) suffisent, en petits lots séquentiels.
+- L'outillage claude-flow/ruflo installé en juin a été retiré le 2026-11-04 (agents, commandes,
+  helpers, hooks, 34 skills, serveurs MCP `ruflo`, `ruv-swarm`, `flow-nexus`) : il n'était pas
+  utilisé et ses hooks tournaient à chaque appel d'outil. Il reste dans l'historique git si besoin.
+  Les agents BONDS suffisent, en petits lots séquentiels.
 - Le bus Second (`.claude/second/`, `/second-sync`) est en pause avec Second : lire l'inbox si elle
   contient quelque chose, ne pas attendre de réponse.
-- `bonds-lock.json` trace ce que BONDS a installé ; `/bonds update` le met à jour, `/skill-doctor`
-  dit quels skills ne servent jamais (83 skills présents, dont 35 de claude-flow : élaguer).
+- `bonds-lock.json` trace ce que BONDS a installé ; `/bonds update` le met à jour (loadout et pôles).
   L'inventaire complet et commenté est dans `docs/ARSENAL-BONDS.md`.
+
+## Organisation en pôles (décisions d'Hugo du 2026-11-04)
+
+Le travail est réparti en **trois pôles**, chacun piloté depuis sa propre session par un chef (un
+skill qui tourne dans la session principale, parce qu'un sous-agent ne peut pas en lancer d'autres)
+et ses sous-agents installés par `/bonds pole <id>` :
+
+| Pôle | Chef | État |
+|---|---|---|
+| SEO & GEO | `/pole-seo-geo`, neuf agents `seo-*` / `geo-*`, contexte dans `docs/seo/` | installé |
+| CTO & Commerce | à créer dans BONDS sur le modèle de `pole-seo-geo` | session à part |
+| Design | à créer dans BONDS sur le modèle de `pole-seo-geo` | session à part |
+
+Décisions qui valent pour tous les pôles :
+- **Modèle économique** : freemium avec clé de licence (base gratuite, fonctions avancées payantes,
+  compatible local-first). Paliers et prix à fixer par le pôle CTO & Commerce ; `llms.txt` annonce
+  encore « abonnement autour de 12 € par mois » et sera aligné quand ils le seront.
+- **Leboncoin d'abord** : pas d'autre site d'annonces avant le lancement sur Leboncoin.
+- **Git** : commits et push autorisés sans validation préalable (le push déploie sur Vercel : la
+  porte Septune `compare_sites` passe avant tout push qui touche au site). Achats, comptes et
+  publications externes restent à Hugo.
 
 ### Mise à jour du 2026-10-06
 
@@ -446,3 +303,59 @@ emojis, commits crédibles. Perf / a11y : la barre ci-dessus.
 - memory — Graphe de connaissances persistant entre sessions (entités, relations, observations).
 - git — Opérations git (status, diff, log, commit, branches) sur le dépôt du projet.
 <!-- bonds:end -->
+
+<!-- bonds:pole:seo-geo:start -->
+## Pôle SEO & GEO
+
+> Installé par BONDS le 2026-11-04 (`equip --pole=seo-geo`). Bloc régénéré par `/bonds update` : écrire
+> les règles propres au projet hors des balises `bonds:pole:seo-geo`.
+
+**Point d'entrée : `/pole-seo-geo`.** Le chef tourne dans la session principale, mesure, choisit le
+chantier, le confie aux sous-agents (trois en parallèle au plus, jamais deux sur le même fichier),
+vérifie, commite et tient le journal. Un sous-agent ne lance pas d'autres sous-agents : ne pas les
+appeler en chaîne, passer par le chef.
+
+- Contexte du projet : `docs/seo/BRIEF.md` (obligatoire), `docs/seo/REGISTRE.md`, `docs/seo/FAITS.md`,
+  `docs/seo/JOURNAL.md`. Contrat commun des agents : `.claude/skills/pole-seo-geo/CONTRAT.md`.
+- Rien d'inventé : chaque chiffre ou fait juridique publié a sa source et sa date dans `FAITS.md`.
+- Porte anti-régression avant tout push qui touche routes, métadonnées, robots ou sitemap : Septune
+  `compare_sites`, production en référence, serveur local en candidat.
+- Aucune action externe par les agents (store, forum, réseau, e-mail) : brouillons dans
+  `docs/seo/brouillons/`, Hugo publie.
+
+### Sous-agents
+- seo-analyste — Mesure l’état réel d’un site (Septune technique et GEO, Search Console, GA4, trafic IA, test de visibilité dans les LLM) et tient la section Mesures du journal SEO.
+- seo-registre — Construit et tient le registre unique des requêtes et des pages : questions réellement tapées, intention, lien produit, page cible, écart concurrentiel et priorité.
+- seo-redacteur — Écrit ou réécrit une page de contenu à partir du registre : structure question-réponse, faits sourcés et datés, liens vers l’outil, voix humaine sans tics d’IA.
+- geo-citabilite — Rend un site citable par les assistants IA : intertitres en questions, réponses autonomes de 40 à 60 mots, faits datés, schéma JSON-LD, llms.txt, entité cohérente et sameAs.
+- seo-gardien-technique — Métadonnées, canoniques, sitemap, robots, rendu, Core Web Vitals, IndexNow, et la porte anti-régression Septune compare_sites avant un push sensible.
+- seo-maillage — Pose le maillage interne (paires manquantes, contenu vers outil, hubs, fil d’Ariane) et trace le chemin page d’entrée organique vers inscription ou installation.
+- seo-outils — Transforme une intention « calculer » ou « générer » du registre en outil web gratuit, rendu serveur, calcul côté client testé, relié au guide et au produit.
+- seo-fiches-stores — Prépare les fiches de stores (Chrome Web Store, Edge, Firefox) : nom, descriptions, permissions justifiées, confidentialité, plan des captures. Ne publie jamais.
+- seo-autorite — Cartographie où le produit mérite d’être mentionné et lié, tient le plan de liens entrants et les profils d’entité, prépare des brouillons. Ne poste ni n’envoie rien.
+
+### Skills du pôle
+- pole-seo-geo — Chef du pôle SEO & GEO : mesure, choisit le chantier le plus rentable, le confie aux neuf sous-agents seo-* et geo-* en petits lots, vérifie (Septune compare_sites), commite et tient le journal.
+- septune-audit — Auditer le SEO technique par la mesure avec le MCP Septune (sans clé ni IA) : 62 règles en 8 catégories, audit d'un site ou d'une page y compris sur un serveur de dev local, comparaison production / préproduction pour attraper une régression avant le push, patchs par framework, audit des robots IA et génération de llms.txt.
+- seo-technique — SEO technique : balises, sitemap, robots, performance, données structurées.
+- seo-aeo-best-practices — Métadonnées, Open Graph, sitemap, robots.txt, hreflang, JSON-LD et EEAT pour moteurs classiques et réponses IA (vitrine, SaaS).
+- ai-seo — Référencement dans les réponses IA (AEO/GEO) en complément du SEO classique.
+- seo-audit-canaux — Audite et corrige un site sur cinq canaux (SEO, AEO, GEO, LLMO) avec score, sans clé.
+- seo-vagues-sourcees — Faire monter un site sans budget pub, dans Google et dans les assistants IA : registre unique des pages, vagues écrites par des agents en parallèle avec faits sourcés et datés, pages produit par plateforme, llms.txt, pricing.md, robots IA, IndexNow, et guides pour le propriétaire.
+- recherche-mots-cles — Construire un registre de requêtes cibles sans abonnement : sources gratuites (Search Console, autocomplétion, questions posées, Trends, Keyword Planner, forums), lecture de SERP en six questions à la place de l'indice de difficulté, classement par intention, priorisation par gain sur effort.
+- ecart-concurrentiel — Trouver ce que les concurrents captent et qu'on ne capte pas : identifier les vrais concurrents par la SERP, relever leur arborescence par sitemap et titres, regrouper par thème, croiser avec son registre, choisir l'angle d'attaque. Recettes d'algèbre d'ensembles de domain_domains quand le MCP Semrush est là.
+- metriques-seo — Ce que mesure vraiment chaque métrique SEO et comment la lire : volume, CPC, densité concurrentielle, difficulté, intention, score d'autorité, domaines référents, ancres, visibilité, CTR par position. Chaque entrée donne l'ordre de grandeur utile et le contresens classique.
+- semrush-mcp — Piloter le MCP Semrush sans gaspiller d'unités : les 10 toolkits et 66 rapports, le parcours découverte / schéma / exécution, la grammaire des paramètres (bases régionales, filtres serveur, colonnes), l'algèbre d'ensembles de l'écart de mots-clés, les appels groupés jusqu'à 100 requêtes, et la lecture des codes d'erreur.
+- verif-site-en-ligne — Deux scripts Node sans dépendance : un parcours du site en ligne qui détecte liens morts, titres et descriptions hors limites, canoniques hors domaine, h1 manquants et images sans alt ; et une soumission IndexNow (Bing, Yandex, Seznam, Naver).
+- seo-landing — SEO technique de landing page visant 100/100 PageSpeed : Core Web Vitals, sémantique, Schema.org, AVIF (vitrine).
+- cro — Optimisation du taux de conversion d'une page : hiérarchie, friction, preuve sociale.
+- copywriting — Rédaction de pages marketing (titres, propositions de valeur, preuves) pour une vitrine.
+- zero-slop — Skill d'édition plus scoreur hors-ligne (294 motifs pondérés, lexique de 96 termes, Python stdlib) et CLI `npx zero-slop score` qui repèrent les tournures IA, réécrivent en préservant noms, chiffres, liens et citations, et notent la prose de 0 à 100 ; pour la passe texte pas-IA de tout projet.
+- launch — Plan de lancement d'un produit ou d'un site.
+
+### MCP du pôle
+- septune — Audit SEO technique déterministe sans clé ni IA : 62 règles mesurées, comparaison production / préproduction pour attraper une régression avant le push, audit des robots IA et génération de llms.txt.
+- playwright — Pilotage d'un navigateur (navigation, captures, formulaires) pour tester et vérifier visuellement.
+- chrome-devtools — Chrome DevTools en MCP : audits Lighthouse, traces de performance, réseau, console et captures pour mesurer LCP/CLS/INP.
+- semrush — Recherche de mots-clés, positions et analyse de concurrence par le serveur officiel Semrush en HTTP.
+<!-- bonds:pole:seo-geo:end -->

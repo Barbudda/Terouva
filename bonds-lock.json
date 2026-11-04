@@ -1,10 +1,16 @@
 {
   "version": 1,
   "bondsHome": "C:\\Users\\hugo8\\OneDrive\\Desktop\\BONDS",
-  "bondsCommit": "dbb8ec10e3795dde98ccb1e58a06f4355d7351e8",
+  "bondsCommit": "66b3ff5073935ed3960dfc8541cdb8f9176f1dfb",
   "loadout": "app-premium",
   "equipeLe": "2026-09-15T15:56:31.694Z",
-  "misAJourLe": "2026-10-06T16:45:32.961Z",
+  "misAJourLe": "2026-11-04T12:07:48.925Z",
+  "poles": {
+    "seo-geo": {
+      "installeLe": "2026-11-04T12:07:48.925Z",
+      "misAJourLe": "2026-11-04T12:07:48.925Z"
+    }
+  },
   "assets": {
     "skill:taste-skill": {
       "type": "skill",
@@ -537,6 +543,195 @@
       "hash": "a4a42aac08c5553fb0726ff331787dad87907c06",
       "cible": ".claude/skills/avoid-ai-writing",
       "installeLe": "2026-10-06T16:45:32.961Z"
+    },
+    "skill:pole-seo-geo": {
+      "type": "skill",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "cbd8ee9f37eb7cecaaa5983c78319840cbbdadea",
+      "cible": ".claude/skills/pole-seo-geo",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:septune-audit": {
+      "type": "skill",
+      "source": "local:RankForge",
+      "hash": "4256d08d449281672df64e1968c1a6952e64862f",
+      "cible": ".claude/skills/septune-audit",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:seo-technique": {
+      "type": "skill",
+      "source": "https://github.com/rampstackco/claude-skills/tree/HEAD/skills/seo-technical",
+      "hash": "5bb1e74f75d909afb5b6688e50e6f0bf0d4bb6b4",
+      "cible": ".claude/skills/seo-technique",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:seo-aeo-best-practices": {
+      "type": "skill",
+      "source": "https://github.com/sanity-io/agent-toolkit/tree/HEAD/skills/seo-aeo-best-practices",
+      "hash": "95f0942f72e470b4b39464f6583df0dfc66ef334",
+      "cible": ".claude/skills/seo-aeo-best-practices",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:ai-seo": {
+      "type": "skill",
+      "source": "https://github.com/coreyhaines31/marketingskills/tree/HEAD/skills/ai-seo",
+      "hash": "5ce626973cc67007eb9db55fb616c97e0a254016",
+      "cible": ".claude/skills/ai-seo",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:seo-audit-canaux": {
+      "type": "skill",
+      "source": "https://github.com/leopard627/fire-your-seo-agency",
+      "hash": "5e1d671dcf911260d99b555cfef044738420b9a0",
+      "cible": ".claude/skills/seo-audit-canaux",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:seo-vagues-sourcees": {
+      "type": "skill",
+      "source": "local:RushPilot",
+      "hash": "05cbc060a2bb4bee7e7866061e73c9a2ecdc4a32",
+      "cible": ".claude/skills/seo-vagues-sourcees",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:recherche-mots-cles": {
+      "type": "skill",
+      "source": "local:BONDS",
+      "hash": "2d9ccfdd8d82b37c532ea800e3fb12a6695826bb",
+      "cible": ".claude/skills/recherche-mots-cles",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:ecart-concurrentiel": {
+      "type": "skill",
+      "source": "local:BONDS",
+      "hash": "4af4dfe9b6b8930e5f359a2a388d6f61e5f271b3",
+      "cible": ".claude/skills/ecart-concurrentiel",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:metriques-seo": {
+      "type": "skill",
+      "source": "local:BONDS",
+      "hash": "6d4edc45773c5f38f6bd9bef7e4df097b67f22b6",
+      "cible": ".claude/skills/metriques-seo",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:semrush-mcp": {
+      "type": "skill",
+      "source": "local:BONDS",
+      "hash": "dddb2eb51c064306167b7094f08adfa7bd79d44e",
+      "cible": ".claude/skills/semrush-mcp",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:verif-site-en-ligne": {
+      "type": "skill",
+      "source": "local",
+      "hash": "f7d65880f3ce74641b09bcb45f22245eeb7c8b5d",
+      "cible": ".claude/skills/verif-site-en-ligne",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:seo-landing": {
+      "type": "skill",
+      "source": "https://github.com/aleksandr-alhoff/seo-landing",
+      "hash": "ceb19f2c64b714a743822cd75510fcc157cdb7f7",
+      "cible": ".claude/skills/seo-landing",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:cro": {
+      "type": "skill",
+      "source": "https://github.com/coreyhaines31/marketingskills/tree/HEAD/skills/cro",
+      "hash": "016a52fab3793b7162cf48a7eeb21e67c0254963",
+      "cible": ".claude/skills/cro",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:copywriting": {
+      "type": "skill",
+      "source": "https://github.com/coreyhaines31/marketingskills/tree/HEAD/skills/copywriting",
+      "hash": "8b9d809a507f358c2fc330271970abd1ab707b63",
+      "cible": ".claude/skills/copywriting",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "skill:launch": {
+      "type": "skill",
+      "source": "https://github.com/coreyhaines31/marketingskills/tree/HEAD/skills/launch",
+      "hash": "42f40522da099acc3b42b560d1c1e53b2bbc46fd",
+      "cible": ".claude/skills/launch",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:seo-analyste": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "61b2fd65b893d92e6619853cc792e688cc99a909",
+      "cible": ".claude/agents/seo-analyste.md",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:seo-registre": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "c5871bbd44f5f0270c04ead5a0ab597ef04d1033",
+      "cible": ".claude/agents/seo-registre.md",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:seo-redacteur": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "45027eb5110549ac226747de18ba151da18d0ffa",
+      "cible": ".claude/agents/seo-redacteur.md",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:geo-citabilite": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "3df4cd6a049682f63077e26a5cda6abd9f556c3b",
+      "cible": ".claude/agents/geo-citabilite.md",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:seo-gardien-technique": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "b93d97d29921c7417a3c73a627f77e4f006aeb37",
+      "cible": ".claude/agents/seo-gardien-technique.md",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:seo-maillage": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "1bc43a6246dc1b358041c67a4d22f85908cde04d",
+      "cible": ".claude/agents/seo-maillage.md",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:seo-outils": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "8b60795e8ad71e4ee1155c71792b475cba10c029",
+      "cible": ".claude/agents/seo-outils.md",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:seo-fiches-stores": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "b0da0462b547fa2242d7bfb2687c246a25b68ebe",
+      "cible": ".claude/agents/seo-fiches-stores.md",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:seo-autorite": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "5d6ded6133d45aa73400594c24b6dd525de8cd6e",
+      "cible": ".claude/agents/seo-autorite.md",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "mcp:septune": {
+      "type": "mcp",
+      "source": "core/mcp/servers.json#septune",
+      "hash": "c89b91f61fdc45af86f4576419b0bda0dacef5dc",
+      "cible": ".mcp.json#septune",
+      "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "mcp:semrush": {
+      "type": "mcp",
+      "source": "core/mcp/servers.json#semrush",
+      "hash": "6eaa38d19233de090d7f811fac97cc7551ca50bd",
+      "cible": ".mcp.json#semrush",
+      "installeLe": "2026-11-04T12:07:48.925Z"
     }
   },
   "derogations": [
