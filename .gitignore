@@ -159,6 +159,11 @@ apps/web/.next-corrompu-*
 .claude/skills/webgl-hero/
 .claude/skills/writing-plans/
 .claude/skills/zero-slop/
+.claude/skills/banques-references/
+.claude/skills/copie-de-reference/
+.claude/skills/figma-designer/
+.claude/skills/rendu-serveur/
+.claude/skills/rideau-de-lumiere/
 
 # --- Pôle SEO & GEO de BONDS (equip --pole=seo-geo, 2026-11-04) ---
 # Même règle que le loadout : bonds-lock.json (versionné) trace les copies,
