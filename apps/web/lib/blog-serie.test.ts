@@ -26,6 +26,9 @@ const INTERDITS: Array<[RegExp, string]> = [
   [/en (conclusion|résumé),/i, "conclusion qui répète"],
   [/\b(incontournable|crucial|primordial)\b/i, "mot creux"],
   [/plongeons|découvrons ensemble/i, "tournure d'introduction générée"],
+  // Vague 8 : le rédacteur racontait sa recherche (« les fiches officielles lues ») ; le lecteur
+  // veut la règle. « décision lue » reste permis : la méthode l'enseigne pour borner une décision.
+  [/\b(fiches?|pages?|sources?) (officielles? )?lues?\b/i, "le rédacteur raconte sa recherche"],
   [/lorem ipsum|TODO|à compléter/i, "texte provisoire"],
   // Pièges juridiques déjà relevés plusieurs fois en relecture : chaque erreur qui revient devient une
   // règle ici, pour ne plus coûter une relecture (METHODE-SERIE.md, « Pièges connus »).

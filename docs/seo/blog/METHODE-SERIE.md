@@ -66,6 +66,10 @@ Erreurs déjà relevées plusieurs fois. Les trois premières sont aussi des rè
   faire valoir » ou « ne peut jamais », relire la rubrique « exceptions », « décès » ou « abandon » de
   la fiche citée, et la nommer au moins en une phrase.
 
+- **Donner la règle, pas le récit de la recherche** : « les fiches officielles lues ne disent pas »
+  devient « aucune règle ne nomme… » (vague 8, quatre articles ; règle du vérificateur). Et seule une
+  source officielle se nomme dans le texte, jamais « un cabinet d'avocats ».
+
 Une règle du vérificateur ne s'adopte qu'après avoir tourné sur tous les articles publiés : en vague 7,
 une règle sur la « mention » de la caution a levé quatre faux positifs sur des articles justes et a été
 abandonnée.
