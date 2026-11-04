@@ -319,7 +319,8 @@ appeler en chaîne, passer par le chef.
   `docs/seo/JOURNAL.md`. Contrat commun des agents : `.claude/skills/pole-seo-geo/CONTRAT.md`.
 - Rien d'inventé : chaque chiffre ou fait juridique publié a sa source et sa date dans `FAITS.md`.
 - Porte anti-régression avant tout push qui touche routes, métadonnées, robots ou sitemap : Septune
-  `compare_sites`, production en référence, serveur local en candidat.
+  `compare_sites`, production en référence, prévisualisation publique de la branche en candidat
+  (Septune hébergé refuse `localhost`, retour R112 de BONDS).
 - Aucune action externe par les agents (store, forum, réseau, e-mail) : brouillons dans
   `docs/seo/brouillons/`, Hugo publie.
 
@@ -344,7 +345,7 @@ appeler en chaîne, passer par le chef.
 
 ### Skills du pôle
 - pole-seo-geo — Chef du pôle SEO & GEO : mesure, choisit le chantier le plus rentable, le confie à dix-sept sous-agents (seo-*, geo-*, blog-*) en petits lots visibles dans la session, vérifie (Septune compare_sites), commite et tient le journal.
-- septune-audit — Auditer le SEO technique par la mesure avec le MCP Septune (sans clé ni IA) : 62 règles en 8 catégories, audit d'un site ou d'une page y compris sur un serveur de dev local, comparaison production / préproduction pour attraper une régression avant le push, patchs par framework, audit des robots IA et génération de llms.txt.
+- septune-audit — Auditer le SEO technique par la mesure avec le MCP Septune (sans clé ni IA) : 69 règles (au 2026-11-04), audit d'un site ou d'une page sur une URL publique (le serveur hébergé refuse localhost), comparaison production / prévisualisation pour attraper une régression avant le push, patchs par framework, audit des robots IA et génération de llms.txt.
 - seo-technique — SEO technique : balises, sitemap, robots, performance, données structurées.
 - seo-aeo-best-practices — Métadonnées, Open Graph, sitemap, robots.txt, hreflang, JSON-LD et EEAT pour moteurs classiques et réponses IA (vitrine, SaaS).
 - ai-seo — Référencement dans les réponses IA (AEO/GEO) en complément du SEO classique.
@@ -362,7 +363,7 @@ appeler en chaîne, passer par le chef.
 - launch — Plan de lancement d'un produit ou d'un site.
 
 ### MCP du pôle
-- septune — Audit SEO technique déterministe sans clé ni IA : 62 règles mesurées, comparaison production / préproduction pour attraper une régression avant le push, audit des robots IA et génération de llms.txt.
+- septune — Audit SEO technique déterministe sans clé ni IA : 69 règles (au 2026-11-04) mesurées, comparaison production / préproduction pour attraper une régression avant le push, audit des robots IA et génération de llms.txt.
 - playwright — Pilotage d'un navigateur (navigation, captures, formulaires) pour tester et vérifier visuellement.
 - chrome-devtools — Chrome DevTools en MCP : audits Lighthouse, traces de performance, réseau, console et captures pour mesurer LCP/CLS/INP.
 - semrush — Recherche de mots-clés, positions et analyse de concurrence par le serveur officiel Semrush en HTTP.
