@@ -162,3 +162,31 @@ Gains :
 
 À mesurer après mise en production : `geo_audit` (titres en question, attendu > 16), `audit_site`
 (performance, images), Search Console sur « répondre » (CTR, à J+14 au plus tôt), test LLM.
+
+## 2026-11-04 (soir) — Mise en production des vagues 1 à 4
+
+- Livré : `main` avancé de `10a593b` à `b83cbd3` (71 commits, avance rapide, sans conflit), déployé
+  sur terouva.com ; 17 adresses soumises à IndexNow (HTTP 200). Portes passées sur la
+  prévisualisation Vercel pour les vagues 3 et 4 (`docs/seo/portes/`), relectures dans
+  `docs/seo/relectures/`.
+- Contrôle en ligne : `/blog` en `noindex`, absent du sitemap (17 URL) ; images de partage de `/cgu`
+  et `/mentions-legales` en 200 ; adresse d'article inconnue en 404.
+
+### Mesures production 2026-11-04 (soir)
+| Métrique | 30/10 | 4/11 matin | 4/11 soir | Outil |
+|---|---|---|---|---|
+| Titres formulés en question | 4 | 16 | **43** | Septune geo_audit |
+| GEO | 96 | 96 | 96 (seul avertissement : `sameAs`) | Septune geo_audit |
+| Pages avec schéma de réponse | non relevé | 12/17 | 12/17 | Septune geo_audit |
+| Pages avec faits chiffrés | 6/12 | non relevé | 9/17 | Septune geo_audit |
+| performance | 100 | 92 | **100** | Septune audit_site |
+| images | 98 | 84 | 84 | Septune audit_site |
+| internal-linking | 92 | 100 | 100 | Septune audit_site |
+| metadata, indexing, structure, schema, framework | 99-100 | 99-100 | 99-100 | Septune audit_site |
+
+- Reste ouvert : `images` 84 (56 vignettes décoratives en `alt=""` comptées comme absentes, 5 JPEG
+  servis en 3 840 px) ; `sameAs` (profils à créer par Hugo, bios prêtes dans
+  `docs/seo/autorite/PROFILS.md`) ; extension à corriger par le pôle CTO avant la fiche store.
+- Suivant : effet en Search Console et test de visibilité LLM dans 2 à 3 semaines (`seo-analyste`) ;
+  publication de l'article sur l'encadrement des loyers après revérification de l'état du texte à
+  l'Assemblée ; lot 3 des guides en questions-réponses (dépôt, état des lieux, préavis).
