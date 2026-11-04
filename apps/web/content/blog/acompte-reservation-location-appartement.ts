@@ -8,13 +8,13 @@ export default article({
     "Non : aucune somme ne peut être demandée avant la signature du bail. Ce qui est permis à la signature, et quoi répondre au propriétaire qui insiste.",
   chapeau:
     "Non. Un propriétaire ou une agence n'a pas le droit de vous demander de l'argent pour réserver un logement, ni aucune somme avant la signature du bail. À la signature seulement, il peut demander un dépôt de garantie, plafonné à 1 mois de loyer hors charges en location vide et à 2 mois en meublé.",
-  publieLe: "2026-12-23",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/depot-de-garantie", "/guides/repondre-a-une-annonce-de-location"],
   outilLie: "/outils/message-de-candidature",
-  statut: "brouillon",
+  statut: "publie",
   requete: "acompte réservation location appartement",
   faits: [
     {

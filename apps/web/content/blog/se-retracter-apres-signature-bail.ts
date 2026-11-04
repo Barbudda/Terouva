@@ -8,12 +8,12 @@ export default article({
     "Aucun délai de rétractation n'existe pour un bail d'habitation. Une fois signé, il faut donner congé et respecter le préavis. Ce qui reste possible.",
   chapeau:
     "Non. Un bail d'habitation signé ne prévoit aucun délai de rétractation, même le lendemain et avant d'avoir reçu les clés. Pour en sortir, le locataire doit donner congé au propriétaire et respecter un préavis : trois mois en logement vide, sauf motif de délai réduit, un mois en meublé et en bail mobilité.",
-  publieLe: "2026-11-23",
+  publieLe: "2026-11-04",
   pilier: "D",
   format: "question",
   guidePilier: "/guides/preavis-location",
   guidesLies: ["/guides/etat-des-lieux", "/guides/depot-de-garantie"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "se rétracter après signature bail location",
   faits: [
     {

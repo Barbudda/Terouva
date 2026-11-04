@@ -7,14 +7,14 @@ export default article({
   description:
     "Ce que la liste prévoit pour un indépendant : justificatif d'activité, bilans ou attestation comptable, avis d'imposition, et la limite de Visale.",
   chapeau:
-    "Oui, on peut louer en auto-entrepreneur. Pour l'activité, le propriétaire peut demander un justificatif d'immatriculation ou, à défaut, tout document récent qui l'atteste. Pour les ressources, la liste prévoit les deux derniers bilans ou, si nécessaire, une attestation de ressources de l'exercice en cours délivrée par un comptable, et l'avis d'imposition. Visale, elle, ne vous couvre qu'avant 30 ans.",
-  publieLe: "2026-12-08",
+    "Oui, on peut louer en auto-entrepreneur. Pour l'activité, le propriétaire peut demander un justificatif d'immatriculation ou, à défaut, tout document récent qui l'atteste. Pour les ressources, la liste prévoit les deux derniers bilans ou, si nécessaire, une attestation de ressources de l'exercice en cours délivrée par un comptable, et l'avis d'imposition. Visale ne vous couvre qu'à 30 ans ou moins.",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/louer-sans-garant"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "louer un appartement auto-entrepreneur",
   faits: [
     {
@@ -89,7 +89,7 @@ Les deux derniers bilans ou, si nécessaire, une attestation de ressources pour 
 Si vous démarrez, vous n'avez ni bilan ni avis d'imposition portant sur l'activité. C'est l'attestation de ressources de l'exercice en cours qui prend le relais, à condition qu'un comptable la délivre : prévoyez-la avant de chercher. Le cas d'un dossier sans avis d'imposition est traité dans l'article [louer sans avis d'imposition](/blog/louer-sans-avis-d-imposition).
 
 ## La garantie Visale couvre-t-elle un auto-entrepreneur ? {#visale}
-Avant 30 ans, oui : Visale est ouverte à tous les locataires de 17 ans et 10 mois à moins de 30 ans, quel que soit leur statut, sous conditions de loyer et de ressources. À partir de 31 ans, elle vise les salariés du secteur privé et les travailleurs saisonniers. Un indépendant de plus de 30 ans n'entre dans aucune de ces deux catégories.
+À 30 ans ou moins, oui : Visale est ouverte à tous les locataires de 17 ans et 10 mois à 30 ans, quel que soit leur statut, sous conditions de loyer et de ressources. À partir de 31 ans, elle vise les salariés du secteur privé et les travailleurs saisonniers. Un indépendant de 31 ans et plus n'entre dans aucune de ces deux catégories.
 
 Il reste alors le garant physique, le propriétaire déjà assuré contre les impayés, ou une société de cautionnement payante : le guide [louer sans garant](/guides/louer-sans-garant) les compare.
 

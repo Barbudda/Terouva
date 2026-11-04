@@ -8,12 +8,12 @@ export default article({
     "Un bail de résidence principale ne peut pas interdire les animaux, sauf les chiens de 1re catégorie. Le choix du locataire, lui, est une autre question.",
   chapeau:
     "Deux règles différentes. Dans le bail d'une résidence principale, vide ou meublée, le propriétaire ne peut pas interdire les animaux de compagnie, sauf les chiens dangereux de 1re catégorie. Au moment de choisir un locataire, en revanche, les animaux ne figurent pas parmi les critères que la loi interdit d'utiliser.",
-  publieLe: "2026-12-30",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/refus-de-dossier",
   guidesLies: ["/guides/etat-des-lieux", "/guides/repondre-a-une-annonce-de-location"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "un propriétaire peut-il refuser un chat",
   faits: [
     {

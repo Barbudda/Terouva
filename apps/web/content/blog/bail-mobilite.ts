@@ -8,12 +8,12 @@ export default article({
     "Un meublé loué de 1 à 10 mois à un étudiant, un stagiaire ou un salarié en mission, sans dépôt de garantie ni renouvellement. Les règles pour le locataire.",
   chapeau:
     "Le bail mobilité est un bail de logement meublé de 1 à 10 mois, non renouvelable, réservé aux locataires en études, formation, apprentissage, stage, service civique, mutation ou mission temporaire. Le propriétaire ne peut pas demander de dépôt de garantie, mais peut demander une caution, y compris Visale. Le préavis du locataire est d'un mois.",
-  publieLe: "2026-11-23",
+  publieLe: "2026-11-04",
   pilier: "D",
   format: "question",
   guidePilier: "/guides/depot-de-garantie",
   guidesLies: ["/guides/preavis-location", "/guides/garantie-visale"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "bail mobilité",
   faits: [
     {

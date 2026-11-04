@@ -15,14 +15,14 @@ export default article({
   description:
     "Un garant étranger ou vivant hors de France ne peut pas être refusé pour ce motif. Les pièces qu'il fournit, traduites et converties en euros.",
   chapeau:
-    "Non. Un propriétaire qui demande un garant ne peut pas refuser le vôtre parce qu'il n'a pas la nationalité française ou qu'il vit hors de l'Hexagone. Votre garant fournit les mêmes pièces qu'un garant en France, avec l'avis d'imposition de son pays, une traduction en français et des montants convertis en euros.",
+    "Non. Un propriétaire qui demande un garant ne peut pas refuser le vôtre parce qu'il n'a pas la nationalité française ou qu'il vit hors de la métropole. Votre garant fournit les mêmes pièces qu'un garant en France, avec l'avis d'imposition de son pays, une traduction en français et des montants convertis en euros.",
   publieLe: "2026-11-04",
   pilier: "C",
   format: "question",
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/dossier-de-location", "/guides/refus-de-dossier", "/guides/louer-sans-garant"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "garant étranger location",
   faits: [
     {
@@ -79,7 +79,7 @@ export default article({
   ],
   corps: `
 ## Un propriétaire peut-il refuser un garant parce qu'il est étranger ? {#refus}
-Non. Le propriétaire qui exige un garant ne peut pas refuser celui que vous proposez parce qu'il n'a pas la nationalité française, ni parce qu'il habite hors de l'Hexagone. L'ANIL le rappelle dans sa fiche sur la caution. Le [guide du garant](/guides/garant-caution) reprend cette règle avec les autres conditions de l'acte de cautionnement.
+Non. Le propriétaire qui exige un garant ne peut pas refuser celui que vous proposez parce qu'il n'a pas la nationalité française, ni parce qu'il habite hors de la métropole. L'ANIL le rappelle dans sa fiche sur la caution. Le [guide du garant](/guides/garant-caution) reprend cette règle avec les autres conditions de l'acte de cautionnement.
 
 La règle vise le motif du refus. Un propriétaire reste libre de juger qu'un dossier ne le rassure pas, mais il ne peut pas écarter un garant pour sa nationalité ou son pays de résidence. Si un refus vous est donné pour cette raison, gardez le message écrit : c'est ce qui permet ensuite de le contester. Le guide [refus de dossier](/guides/refus-de-dossier) explique vers qui se tourner.
 

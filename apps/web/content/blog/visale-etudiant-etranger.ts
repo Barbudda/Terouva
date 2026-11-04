@@ -8,12 +8,12 @@ export default article({
     "Hors Union européenne, Visale demande un visa ou un titre de séjour portant la mention étudiant, en cours de validité. Loyer garanti et date de demande.",
   chapeau:
     "Un étudiant étranger peut obtenir Visale. Hors Union européenne, il faut un visa long séjour valant titre de séjour mention étudiant, ou un titre de séjour étudiant, en cours de validité. Jusqu'à un loyer forfaitaire, aucune ressource n'est demandée. La demande ne peut partir qu'une fois le visa valide.",
-  publieLe: "2026-11-23",
+  publieLe: "2026-11-04",
   pilier: "C",
   format: "question",
   guidePilier: "/guides/garantie-visale",
   guidesLies: ["/guides/louer-sans-garant", "/guides/dossier-de-location"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "visale étudiant étranger",
   faits: [
     {

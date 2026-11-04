@@ -8,13 +8,13 @@ export default article({
     "Hébergé chez vos parents ou un ami ? L'attestation d'hébergement vaut justificatif de domicile dans un dossier de location. Ce qu'elle dit, et un modèle.",
   chapeau:
     "Si vous vivez chez vos parents, un proche ou un ami, l'attestation sur l'honneur de la personne qui vous héberge fait partie des justificatifs de domicile qu'un propriétaire peut demander. Elle dit que vous résidez chez elle, depuis quand et à quelle adresse. Un seul justificatif de domicile suffit, et une copie est acceptée.",
-  publieLe: "2026-12-21",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/garant-caution"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "attestation d'hébergement dossier location",
   faits: [
     {

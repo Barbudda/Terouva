@@ -7,14 +7,14 @@ export default article({
   description:
     "Les APL ne justifient pas un refus : la loi interdit de choisir un locataire sur sa situation économique. Ce qui reste permis, et l'argument qui rassure.",
   chapeau:
-    "Refuser un candidat parce qu'il touche les APL le désavantage pour sa situation économique, ce que la loi interdit dans le choix d'un locataire. Le propriétaire peut en revanche juger votre solvabilité, aides comprises. Et l'argument qui rassure le plus est simple : en règle générale, l'APL est versée directement au propriétaire, qui la déduit du loyer.",
-  publieLe: "2026-12-28",
+    "Écarter un candidat parce qu'il touche les APL peut relever d'un critère que la loi interdit, la vulnérabilité liée à la situation économique, mais nous n'avons pas lu de décision qui le tranche. Il peut juger votre solvabilité, aides comprises. Argument qui rassure : en règle générale, l'APL est versée directement au propriétaire.",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/refus-de-dossier",
   guidesLies: ["/guides/dossier-de-location", "/guides/garantie-visale"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "propriétaire refuse APL",
   faits: [
     {
@@ -52,7 +52,7 @@ export default article({
   ],
   corps: `
 ## Un propriétaire a-t-il le droit de refuser un locataire qui touche les APL ?
-Pas pour ce seul motif. La loi interdit de rejeter une candidature sur certains critères, parmi lesquels la vulnérabilité particulière liée à la situation économique. Écarter un dossier parce qu'il contient des APL, sans regarder s'il permet de payer le loyer, revient à choisir sur ce critère. Les autres motifs interdits et leurs sanctions sont dans notre [guide du refus de dossier](/guides/refus-de-dossier).
+Pas forcément pour ce seul motif. La loi interdit de rejeter une candidature sur certains critères, parmi lesquels la vulnérabilité particulière liée à la situation économique. Écarter un dossier parce qu'il contient des APL, sans regarder s'il permet de payer le loyer, peut relever de ce critère ; aucune décision lue ne le dit pour les APL. Les autres motifs interdits : [guide du refus de dossier](/guides/refus-de-dossier).
 
 Le propriétaire n'a pas à motiver un refus. C'est ce qui rend ces situations difficiles à prouver, et c'est pourquoi un refus écrit qui cite les APL compte.
 

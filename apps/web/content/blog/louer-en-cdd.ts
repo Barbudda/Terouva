@@ -7,14 +7,14 @@ export default article({
   description:
     "Un CDD n'empêche pas de louer. Les pièces que le propriétaire peut demander, la garantie Visale ouverte aux salariés en CDD, et les autres garanties.",
   chapeau:
-    "Oui, on peut louer en CDD : aucune règle n'exige un CDI, et la liste des pièces autorisées ne fixe aucune durée de contrat. Le propriétaire juge votre situation financière. Pour le rassurer sans garant, la garantie Visale vise expressément les salariés en CDD, avant 30 ans comme après, sous conditions de délai ou de salaire.",
-  publieLe: "2026-12-01",
+    "Oui, on peut louer en CDD : aucune règle n'exige un CDI, et la liste des pièces autorisées ne fixe aucune durée de contrat. Le propriétaire juge votre situation financière. Pour le rassurer sans garant, la garantie Visale vise expressément les salariés en CDD, à 30 ans ou moins comme après, sous conditions de délai ou de salaire.",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/louer-sans-garant", "/guides/garantie-visale"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "louer un appartement en CDD",
   faits: [
     {
@@ -78,7 +78,7 @@ Le dire, et y répondre par une garantie. Un bail dure souvent plus longtemps qu
 Si un renouvellement ou une embauche est déjà prévu, une attestation de l'employeur l'écrit mieux que vous. Sinon, la garantie fait le travail.
 
 ## La garantie Visale accepte-t-elle les salariés en CDD ? {#visale}
-Oui. Service-public cite le salarié « en CDD » parmi les salariés du secteur privé qui peuvent obtenir Visale à partir de 31 ans, avec un contrat en cours et une demande faite dans les six mois après l'embauche, ou un salaire net mensuel de 1710 € maximum. Avant 30 ans, Visale est ouverte quel que soit le statut, sous conditions de loyer et de ressources.
+Oui. Service-public cite le salarié « en CDD » parmi les salariés du secteur privé qui peuvent obtenir Visale à partir de 31 ans, avec un contrat en cours et une demande faite dans les six mois après l'embauche, ou un salaire net mensuel de 1710 € maximum. À 30 ans ou moins, Visale est ouverte quel que soit le statut, sous conditions de loyer et de ressources.
 
 Les travailleurs saisonniers ont leur propre condition : un contrat de travail en cours portant la mention « saisonnier », ou une promesse d'embauche dans les trois mois. Le détail est dans le guide de la [garantie Visale](/guides/garantie-visale).
 

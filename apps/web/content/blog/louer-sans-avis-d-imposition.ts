@@ -8,13 +8,13 @@ export default article({
     "L'avis d'imposition n'est qu'une pièce de ressources parmi d'autres. Ce qui le remplace pour un primo-déclarant, un étudiant ou un arrivant de l'étranger.",
   chapeau:
     "Oui. L'avis d'imposition n'est qu'une des pièces de ressources de la liste officielle : le propriétaire peut en demander une ou plusieurs, pas toutes. Fiches de paie, attestation de l'employeur, justificatif de prestations, indemnités de stage ou avis de bourse peuvent prouver vos revenus. Si vos revenus ont été imposés à l'étranger, l'avis équivalent de ce pays est prévu.",
-  publieLe: "2026-12-15",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/garantie-visale"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "louer sans avis d'imposition",
   faits: [
     {
@@ -97,7 +97,7 @@ L'avis équivalent de ce pays. La liste prévoit, pour des revenus imposés hors
 Le propriétaire peut demander à voir l'original. Préparez donc la traduction avant de candidater : c'est elle qui prend du temps, pas la recherche du document.
 
 ## Que faire si c'est votre premier emploi ? {#premier-emploi}
-Remplacer l'historique par le présent : contrat de travail ou attestation de l'employeur, première fiche de paie dès qu'elle existe, et une garantie. La garantie Visale est ouverte avant 30 ans quel que soit le statut, et à partir de 31 ans aux salariés récemment embauchés : le guide de la [garantie Visale](/guides/garantie-visale) donne les conditions.
+Remplacer l'historique par le présent : contrat de travail ou attestation de l'employeur, première fiche de paie dès qu'elle existe, et une garantie. La garantie Visale est ouverte à 30 ans ou moins quel que soit le statut, et à partir de 31 ans aux salariés récemment embauchés : le guide de la [garantie Visale](/guides/garantie-visale) donne les conditions.
 
 L'absence d'avis d'imposition se dit en une ligne dans votre message, avec ce qui le remplace. La [checklist de dossier](/outils/dossier-de-location) donne la liste de vos pièces selon votre situation.
 `,

@@ -14,7 +14,7 @@ export default article({
   guidePilier: "/guides/repondre-a-une-annonce-de-location",
   guidesLies: ["/guides/dossier-de-location"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "visite groupée appartement",
   faits: [
     {

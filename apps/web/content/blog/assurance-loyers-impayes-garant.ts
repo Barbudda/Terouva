@@ -8,12 +8,12 @@ export default article({
     "Un propriétaire assuré contre les impayés ne peut pas exiger de caution, sauf d'un étudiant ou d'un apprenti. La règle, ses limites, et quoi répondre.",
   chapeau:
     "Non, en principe. Un propriétaire qui a souscrit une assurance contre les loyers impayés ne peut pas vous demander de caution, à peine de nullité. Deux exceptions : l'étudiant et l'apprenti, à qui il peut demander les deux. La règle ne touche pas le dépôt de garantie, qui reste dû.",
-  publieLe: "2026-11-23",
+  publieLe: "2026-11-04",
   pilier: "C",
   format: "question",
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/louer-sans-garant", "/guides/dossier-de-location"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "assurance loyer impayé garant",
   faits: [
     {

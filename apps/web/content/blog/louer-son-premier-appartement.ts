@@ -14,7 +14,7 @@ export default article({
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/garantie-visale", "/guides/repondre-a-une-annonce-de-location"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "louer son premier appartement",
   faits: [
     {

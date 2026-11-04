@@ -14,7 +14,7 @@ export default article({
   guidePilier: "/guides/repondre-a-une-annonce-de-location",
   guidesLies: ["/guides/dossier-de-location", "/guides/garantie-visale"],
   outilLie: "/outils/message-de-candidature",
-  statut: "brouillon",
+  statut: "publie",
   requete: "location appartement pour stage",
   faits: [
     {

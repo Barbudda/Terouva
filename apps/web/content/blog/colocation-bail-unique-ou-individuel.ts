@@ -14,7 +14,7 @@ export default article({
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/garantie-visale"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "colocation bail unique ou individuel",
   faits: [
     {

@@ -11,13 +11,13 @@ export default article({
     "RSA et AAH comptent comme ressources du dossier. Ce que le propriétaire peut juger, ce que la loi lui interdit, et ce qu'a décidé le Défenseur des droits.",
   chapeau:
     "Oui. Le RSA et l'AAH se justifient par une pièce de la liste officielle, et le propriétaire juge votre situation financière comme pour tout candidat. Il ne peut pas fonder un refus sur la vulnérabilité économique ni sur le handicap : le Défenseur des droits a jugé discriminatoire un refus opposé à deux candidats qui touchaient l'AAH.",
-  publieLe: "2026-12-15",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/refus-de-dossier",
   guidesLies: ["/guides/dossier-de-location", "/guides/garantie-visale"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "louer un appartement avec le RSA",
   faits: [
     {
@@ -107,7 +107,7 @@ Non, et le Défenseur des droits l'a jugé. Dans sa décision 2017-056, une agen
 L'assurance en cause ne retenait l'AAH qu'à hauteur de 30%. Le Défenseur des droits a relevé que ni l'assureur ni le courtier n'expliquaient pourquoi cette prise en compte partielle était nécessaire. Si une agence vous oppose « l'assurance n'accepte pas l'AAH », cette décision est la référence à citer.
 
 ## Quelles garanties sont possibles ? {#garanties}
-Avant 30 ans, la garantie Visale compte le RSA parmi les ressources prises en compte pour calculer le loyer maximum, sous conditions. À partir de 31 ans, elle vise les salariés et les travailleurs saisonniers. Restent le garant physique et le propriétaire déjà assuré, qui ne peut alors demander de caution qu'à un étudiant ou un apprenti.
+À 30 ans ou moins, la garantie Visale compte le RSA parmi les ressources prises en compte pour calculer le loyer maximum, sous conditions. À partir de 31 ans, elle vise les salariés et les travailleurs saisonniers. Restent le garant physique et le propriétaire déjà assuré, qui ne peut alors demander de caution qu'à un étudiant ou un apprenti.
 
 Le détail est dans le guide de la [garantie Visale](/guides/garantie-visale), et la [checklist de dossier](/outils/dossier-de-location) donne vos pièces selon votre situation.
 `,

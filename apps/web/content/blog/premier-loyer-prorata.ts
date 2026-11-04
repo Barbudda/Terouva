@@ -13,7 +13,7 @@ export default article({
   format: "question",
   guidePilier: "/guides/depot-de-garantie",
   guidesLies: ["/guides/etat-des-lieux"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "calcul prorata loyer entrée",
   faits: [
     {

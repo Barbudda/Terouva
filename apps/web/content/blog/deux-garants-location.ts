@@ -20,7 +20,7 @@ export default article({
   format: "question",
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/garantie-visale", "/guides/louer-sans-garant", "/guides/dossier-de-location"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "deux garants location",
   faits: [
     {
@@ -93,12 +93,12 @@ Non. Selon l'ANIL, la garantie Visale est un contrat de cautionnement exclusif d
 C'est un argument utile quand vous n'avez pas deux garants à proposer : un visa Visale remplace l'ensemble. Les conditions d'âge, de ressources et de loyer sont dans le [guide Visale](/guides/garantie-visale).
 
 ### Le cas des propriétaires en société
-Quand le bailleur est une société, hors société civile familiale, les règles sont plus strictes. Service-public indique par exemple qu'il ne peut pas demander de caution à un étudiant boursier de l'enseignement supérieur. Demander deux garants à ce locataire revient à en demander deux de trop.
+Quand le bailleur est une société, hors société civile familiale, les règles sont plus strictes. Il ne peut demander une caution que si elle est apportée par un organisme dont la liste est fixée par décret, comme Visale, ou si le logement est loué à un étudiant non boursier. À tout autre locataire, il ne peut demander ni un garant personne physique, ni deux.
 
 ## Que risque chaque garant quand il y en a deux ? {#risque}
 Tout dépend de l'acte de cautionnement. Avec deux cautions solidaires, le propriétaire peut réclamer toute la dette à l'une ou à l'autre, au choix, dans la limite de ce que chacune a signé. Avec deux cautions simples, chacune n'est poursuivie que pour sa part, et la dette se répartit entre elles.
 
-Avant de signer, chacun de vos garants doit donc lire son propre acte : la mention manuscrite, la durée et le plafond de l'engagement le concernent personnellement. Deux garants ne divisent pas le risque par deux quand la clause de solidarité est présente.
+Avant de signer, chacun de vos garants doit donc lire son propre acte : la mention qu'il appose lui-même, la durée et le plafond de l'engagement le concernent personnellement. Deux garants ne divisent pas le risque par deux quand la clause de solidarité est présente.
 
 ## Comment répondre à un propriétaire qui demande deux garants ? {#repondre}
 Vérifiez d'abord s'il est assuré contre les impayés, puis proposez ce que vous avez : un garant au dossier complet, ou un visa Visale qui exclut tout autre garant. Si vous avez deux garants, envoyez les pièces des deux en même temps, rangées dans le même ordre, pour qu'il compare sans attendre.

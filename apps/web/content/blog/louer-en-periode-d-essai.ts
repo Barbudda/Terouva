@@ -8,13 +8,13 @@ export default article({
     "Oui : le propriétaire peut demander une attestation de l'employeur qui mentionne la période d'essai, et Visale couvre les salariés pendant celle-ci.",
   chapeau:
     "Oui. Aucune règle n'interdit de louer pendant une période d'essai. Le propriétaire peut demander votre contrat ou une attestation de l'employeur qui indique l'emploi, la rémunération et la durée de l'essai. Et la garantie Visale vise expressément les salariés en période d'essai d'un CDI, à condition de la demander dans les six mois qui suivent l'embauche.",
-  publieLe: "2026-12-01",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   guidePilier: "/guides/dossier-de-location",
   guidesLies: ["/guides/garantie-visale"],
   outilLie: "/outils/dossier-de-location",
-  statut: "brouillon",
+  statut: "publie",
   requete: "louer un appartement en période d'essai",
   faits: [
     {
@@ -42,7 +42,7 @@ export default article({
       citation: "faire la demande de la garantie Visale dans les 6 mois qui suivent l'embauche",
     },
     {
-      fait: "Avant 30 ans, Visale est ouverte quel que soit le statut",
+      fait: "À 30 ans ou moins, Visale est ouverte quel que soit le statut",
       valeur: "de 17 ans et 10 mois à moins de 30 ans, salarié ou sans emploi",
       source: "https://www.service-public.gouv.fr/particuliers/vosdroits/F33453",
       titreSource: "Service-public.gouv.fr · Garantie Visale : caution pour le locataire",
@@ -70,7 +70,7 @@ Le contrat de travail, ou une attestation de l'employeur. La liste des justifica
 Demandez-la à votre service du personnel dès la signature du contrat, en même temps que votre premier bulletin. Le propriétaire ne peut pas exiger autre chose pour cette rubrique : un document hors liste l'expose à une amende pouvant aller jusqu'à 3 000 €.
 
 ## La garantie Visale couvre-t-elle un salarié en période d'essai ? {#visale}
-Oui. Service-public cite le salarié « durant la période d'essai du CDI » parmi les salariés du secteur privé qui peuvent l'obtenir à partir de 31 ans, à condition de faire la demande dans les six mois qui suivent l'embauche. Avant 30 ans, Visale est ouverte quel que soit le statut, sous conditions de loyer et de ressources.
+Oui. Service-public cite le salarié « durant la période d'essai du CDI » parmi les salariés du secteur privé qui peuvent l'obtenir à partir de 31 ans, à condition de faire la demande dans les six mois qui suivent l'embauche. À 30 ans ou moins, Visale est ouverte quel que soit le statut, sous conditions de loyer et de ressources.
 
 C'est souvent la meilleure réponse à l'hésitation du propriétaire : si l'essai se rompt et que vous ne payez plus, Action Logement paie à votre place. Les plafonds et la démarche sont dans le guide de la [garantie Visale](/guides/garantie-visale).
 

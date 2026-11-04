@@ -7,14 +7,14 @@ export default article({
   description:
     "Étudiant ou muté dans une autre ville : candidater à distance, faire visiter par un proche ou en vidéo, et ce qu'on ne paie jamais avant d'avoir vu.",
   chapeau:
-    "On peut louer depuis une autre ville, à condition que quelqu'un voie le logement pour vous : une visite en vidéo menée par le propriétaire, ou un proche qui visite à votre place. Envoyez votre dossier à distance, mais aucune somme ne peut vous être demandée avant la signature du bail, et aucune pièce d'identité avant la visite.",
+    "On peut louer depuis une autre ville si quelqu'un voit le logement pour vous : visite en vidéo menée par le propriétaire, ou un proche sur place. Envoyez votre dossier à distance, mais aucune somme ne peut vous être demandée avant la signature du bail, et une demande de carte d'identité avant toute visite est un signe de fausse annonce.",
   publieLe: "2026-11-04",
   pilier: "A",
   format: "cas-pratique",
   guidePilier: "/guides/repondre-a-une-annonce-de-location",
   guidesLies: ["/guides/dossier-de-location"],
   outilLie: "/outils/message-de-candidature",
-  statut: "brouillon",
+  statut: "publie",
   requete: "louer sans visiter",
   faits: [
     {

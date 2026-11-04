@@ -22,7 +22,7 @@ export default article({
   guidePilier: "/guides/garant-caution",
   guidesLies: ["/guides/dossier-de-location", "/guides/garantie-visale", "/guides/louer-sans-garant"],
   outilLie: "/outils/quel-salaire-pour-un-loyer",
-  statut: "brouillon",
+  statut: "publie",
   requete: "garant location revenu minimum",
   faits: [
     {

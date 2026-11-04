@@ -8,12 +8,12 @@ export default article({
     "À deux sur un bail unique, un colocataire éligible suffit. À trois ou plus, Visale recommande un bail par colocataire. Ce que ça change pour le loyer.",
   chapeau:
     "Visale couvre la colocation. À deux sur un même bail, il suffit qu'un des colocataires soit éligible, et les ressources des deux comptent pour le loyer maximum. À partir de trois, Visale recommande un bail indépendant par colocataire, chacun avec son propre visa et son propre loyer maximum.",
-  publieLe: "2026-11-23",
+  publieLe: "2026-11-04",
   pilier: "C",
   format: "question",
   guidePilier: "/guides/garantie-visale",
   guidesLies: ["/guides/garant-caution", "/guides/louer-sans-garant"],
-  statut: "brouillon",
+  statut: "publie",
   requete: "visale colocation",
   faits: [
     {
