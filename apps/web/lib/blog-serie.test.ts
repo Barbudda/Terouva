@@ -27,6 +27,11 @@ const INTERDITS: Array<[RegExp, string]> = [
   [/\b(incontournable|crucial|primordial)\b/i, "mot creux"],
   [/plongeons|découvrons ensemble/i, "tournure d'introduction générée"],
   [/lorem ipsum|TODO|à compléter/i, "texte provisoire"],
+  // Pièges juridiques déjà relevés plusieurs fois en relecture : chaque erreur qui revient devient une
+  // règle ici, pour ne plus coûter une relecture (METHODE-SERIE.md, « Pièges connus »).
+  [/(?:moins de|avant(?: ses)?) 30 ans/i, "âge Visale : écrire « 30 ans ou moins » (visale.fr), sinon la personne de 30 ans n'entre dans aucune case"],
+  [/mention manuscrite/i, "la mention de la caution (art. 2297 C. civ.) n'est plus manuscrite depuis le 1er janvier 2022"],
+  [/hors de l['’]Hexagone/i, "art. 22-1 : « territoire métropolitain », qui comprend la Corse"],
   // `\b` ne connaît pas les lettres accentuées (« bâton » contiendrait « ton ») : bornes Unicode.
   [/(?<!\p{L})(?:tu|ton|ta|tes|toi)(?!\p{L})/iu, "tutoiement (le brief impose le vouvoiement)"],
 ];

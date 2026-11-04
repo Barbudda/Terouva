@@ -218,3 +218,13 @@ Gains :
 - Reste en brouillon : 4 articles retenus pour cannibalisation, l'article sur l'encadrement des
   loyers (vote de l'Assemblée le 18 novembre). Vague 6 planifiée (25 articles).
 - Suivant : mesurer l'indexation des 15 articles (Search Console) d'ici une à deux semaines.
+
+## 2026-11-04 (soir) — Vague 6 publiée, premier passage de la méthode série
+
+- Livré : 25 articles écrits au format série par 6 rédacteurs, relus (lot entier, un article tiré au
+  sort étant tombé), publiés : **40 articles en ligne**, plan du site à 63 adresses soumises à IndexNow.
+- Coût : ≈ 26 points de la fenêtre de 5 h pour toute la vague, zéro aller-retour auteur-relecteur
+  (`docs/seo/blog/MESURES-TOKENS.md`).
+- Optimisations pour la vague 7 : trois pièges récurrents devenus règles du vérificateur, relecteur
+  qui applique et vérifie ses propres corrections, sources lisibles par le script de préférence,
+  réutilisation des faits déjà validés, 3 rédacteurs à 8 articles.

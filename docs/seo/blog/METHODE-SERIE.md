@@ -21,7 +21,7 @@
 | Étape | Qui | Lit | Produit |
 |---|---|---|---|
 | Mission | chef | `PLAN-VAGUE-N.md` | une ligne par article : `slug · requête · pilier · format · guide pilier · angle` |
-| Écriture | rédacteur | **cette page**, `apps/web/content/blog/_gabarit.ts`, ses lignes de mission, les intertitres du guide pilier, les 3 premiers résultats Google | `content/blog/<slug>.ts`, 5 à 6 articles par tour |
+| Écriture (3 rédacteurs à 8 articles : moins de tours) | rédacteur | **cette page**, `apps/web/content/blog/_gabarit.ts`, ses lignes de mission, les intertitres du guide pilier, les 3 premiers résultats Google | `content/blog/<slug>.ts`, 5 à 6 articles par tour |
 | Contrôle mécanique | le rédacteur, par script | rien | `npm run blog:verifier` au vert |
 | Contrôle des sources | le rédacteur, par script | rien | `npm run blog:sources` : citations retrouvées |
 | Relecture | relecteur | voir plus bas | une ligne de verdict par article |
@@ -47,6 +47,26 @@ une requête-mère par article.
 `npm run blog:sources` : télécharge chaque source et y cherche la citation. Trouvée, le fait est
 prouvé ; introuvable (texte changé, site qui bloque les robots comme visale.fr), il part en relecture.
 
+## Pièges connus (à vérifier avant d'écrire)
+
+Erreurs déjà relevées plusieurs fois. Les trois premières sont aussi des règles du vérificateur.
+- **Âge Visale** : « 30 ans ou moins », puis « à partir de 31 ans » (jamais « moins de 30 ans »).
+- **Mention de la caution** (art. 2297 du Code civil) : apposée par la caution elle-même, plus
+  manuscrite depuis le 1er janvier 2022.
+- **Territoire de la caution** (art. 22-1) : « métropolitain », qui comprend la Corse ; pas
+  « l'Hexagone ».
+- **Caution personne morale** : seulement un organisme dont la liste est fixée par décret, ou si le
+  logement est loué à un étudiant non boursier (art. 22-1) ; pas « l'étudiant boursier » seul.
+- **Une décision n'est citée que pour ce qu'elle dit** : la décision 2019-001 du Défenseur des droits
+  retient le handicap, pas la nature des revenus ; aucune décision lue ne tranche le refus pour APL.
+
+## Réutiliser avant de chercher
+
+Avant de sourcer une règle, chercher si un article publié la porte déjà (`grep` sur la valeur dans
+`apps/web/content/blog/`) : reprendre son fait, même source, même citation. Quand une fiche
+service-public dit la même règle qu'une page visale.fr ou Légifrance, citer la fiche service-public :
+le script peut la lire, les deux autres le refusent.
+
 ## La relecture (ce qu'elle lit, et rien d'autre)
 
 Un relecteur ne reçoit que des articles **verts** aux deux scripts. Il lit :
@@ -55,6 +75,11 @@ Un relecteur ne reçoit que des articles **verts** aux deux scripts. Il lit :
    est-il réel ? une nuance juridique est-elle trahie ?) ;
 3. **un article sur trois en entier**, tiré à tour de rôle ; si l'un d'eux tombe, le lot entier est
    relu en entier.
+
+Une correction exacte (remplacement mot pour mot), le relecteur l'**applique lui-même** et repasse
+`npm run blog:verifier` avant de rendre : « À CORRIGER » ne reste que pour ce qui demande l'auteur.
+Chaque défaut qui revient d'une vague à l'autre est signalé au chef pour devenir une règle du
+vérificateur.
 
 Verdicts dans **un seul fichier par vague**, `docs/seo/relectures/blog/VAGUE-N.md`, une ligne par
 article : `slug · PUBLIABLE | À CORRIGER : <correction exacte> | REFUSÉ : <raison>`. Une
