@@ -60,12 +60,13 @@ export function CadreArticle({ article, children }: { article: Article; children
           ? { citation: article.sources.map((s) => ({ "@type": "CreativeWork", name: s.titre, url: s.url })) }
           : {}),
       },
-      // Balisées parce qu'affichées plus bas par `Questions`, qui lit la même liste.
-      ...(article.questions?.length
+      // Balisées parce qu'affichées : plus bas par `Questions` (format JSX), ou dans le corps
+      // lui-même, sous les intertitres-questions (format série, `faqCorps`).
+      ...((article.questions?.length ? article.questions : article.faqCorps)?.length
         ? [
             {
               "@type": "FAQPage",
-              mainEntity: article.questions.map((item) => ({
+              mainEntity: (article.questions?.length ? article.questions : article.faqCorps ?? []).map((item) => ({
                 "@type": "Question",
                 name: item.q,
                 acceptedAnswer: { "@type": "Answer", text: item.a },

@@ -13,7 +13,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "blog:index": "node scripts/blog-index.mjs",
-    "prebuild": "node scripts/blog-index.mjs"
+    "prebuild": "node scripts/blog-index.mjs",
+    "blog:verifier": "node scripts/blog-index.mjs && vitest run lib/blog-serie.test.ts lib/blog.test.ts -t \"^(?!.*corps qui se charge)\"",
+    "blog:sources": "vitest run lib/blog-sources.test.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2",

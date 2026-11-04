@@ -71,6 +71,11 @@ export type Article = {
   sources: Array<{ titre: string; url: string; releveLe: string }>;
   /** Affichées dans la page ; balisées en `FAQPage` seulement parce qu'elles le sont. */
   questions?: Array<{ q: string; a: string }>;
+  /**
+   * Format série : questions tirées des intertitres du corps qui finissent par « ? » et de leur
+   * premier paragraphe. Déjà visibles dans le corps, donc balisées sans bloc en double (R81).
+   */
+  faqCorps?: Array<{ q: string; a: string }>;
   /** Titres de section, dans l'ordre. `id` doit exister dans le corps. */
   sommaire?: Array<{ id: string; titre: string }>;
   statut: "brouillon" | "publie";
