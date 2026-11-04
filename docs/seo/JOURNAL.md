@@ -37,7 +37,9 @@ Faux positif connu : `content-keyword-alignment` sur `/confidentialite`.
   4. internal-linking ≥ 98.
   5. GEO 100 : `sameAs` réel (URL à demander à Hugo), schéma sur toutes les pages.
   6. `compare_sites` sans régression.
-- À valider par Hugo : URL des profils publics (GitHub, X, LinkedIn, Product Hunt) pour `sameAs` ;
-  paliers et prix du freemium (pôle CTO & Commerce) pour aligner `llms.txt`.
+- À valider par Hugo : URL des profils publics (GitHub, X, LinkedIn, Product Hunt) pour `sameAs`.
+- Ajout le même jour de huit agents (blog et contenu) : `blog-redacteur-en-chef`,
+  `blog-veille-juridique`, `blog-donnees`, `blog-relecteur`, `blog-diffusion`, `seo-fraicheur`,
+  `seo-pages-villes`, `seo-visuels`. Le prix et l'offre sortent du périmètre du pôle.
 - Suivant : `seo-analyste` pour une mesure fraîche, puis le chantier « guides en questions-réponses »
   (`geo-citabilite`, trois lots de trois guides) en parallèle de `seo-fiches-stores`.

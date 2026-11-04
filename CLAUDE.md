@@ -64,7 +64,7 @@ et ses sous-agents installés par `/bonds pole <id>` :
 
 | Pôle | Chef | État |
 |---|---|---|
-| SEO & GEO | `/pole-seo-geo`, neuf agents `seo-*` / `geo-*`, contexte dans `docs/seo/` | installé |
+| SEO & GEO | `/pole-seo-geo`, dix-sept agents `seo-*` / `geo-*` / `blog-*`, contexte dans `docs/seo/` | installé |
 | CTO & Commerce | à créer dans BONDS sur le modèle de `pole-seo-geo` | session à part |
 | Design | à créer dans BONDS sur le modèle de `pole-seo-geo` | session à part |
 
@@ -310,7 +310,7 @@ emojis, commits crédibles. Perf / a11y : la barre ci-dessus.
 > Installé par BONDS le 2026-11-04 (`equip --pole=seo-geo`). Bloc régénéré par `/bonds update` : écrire
 > les règles propres au projet hors des balises `bonds:pole:seo-geo`.
 
-**Point d'entrée : `/pole-seo-geo`.** Le chef tourne dans la session principale, mesure, choisit le
+**Point d'entrée : `/pole-seo-geo`.** Le chef tourne dans la session principale (ses agents y sont visibles), mesure, choisit le
 chantier, le confie aux sous-agents (trois en parallèle au plus, jamais deux sur le même fichier),
 vérifie, commite et tient le journal. Un sous-agent ne lance pas d'autres sous-agents : ne pas les
 appeler en chaîne, passer par le chef.
@@ -333,9 +333,17 @@ appeler en chaîne, passer par le chef.
 - seo-outils — Transforme une intention « calculer » ou « générer » du registre en outil web gratuit, rendu serveur, calcul côté client testé, relié au guide et au produit.
 - seo-fiches-stores — Prépare les fiches de stores (Chrome Web Store, Edge, Firefox) : nom, descriptions, permissions justifiées, confidentialité, plan des captures. Ne publie jamais.
 - seo-autorite — Cartographie où le produit mérite d’être mentionné et lié, tient le plan de liens entrants et les profils d’entité, prépare des brouillons. Ne poste ni n’envoie rien.
+- seo-fraicheur — Repère pages en déclin, faits vieillissants et quasi-doublons, tient la file de rafraîchissement et met à jour les faits et dates des pages.
+- seo-pages-villes — SEO programmatique et local : une page par lieu seulement si le lieu change la réponse, données publiques datées, seuil anti-contenu mince, déploiement par lots mesurés.
+- seo-visuels — Images de partage, schémas et infographies en SVG ou code, graphiques de données, textes alternatifs et formats, dans la direction artistique du projet.
+- blog-redacteur-en-chef — Fixe la ligne éditoriale du blog (piliers, clusters, formats), tient le calendrier saisonnier, écrit un brief par article et pousse les signaux de confiance (politique éditoriale, pages auteur).
+- blog-veille-juridique — Suit les changements de règles et de chiffres officiels depuis les sources officielles, propose les articles d’actualité et signale les guides et faits devenus faux.
+- blog-donnees — Produit des études originales sur données publiques ouvertes, avec script reproductible et méthode publiée : les chiffres que les assistants et la presse citent.
+- blog-relecteur — Relit avant publication, distinct de l’auteur : faits contre leur source, lignes rouges, inventions, structure question-réponse, cannibalisation, liens, voix. Rend un verdict.
+- blog-diffusion — Décline chaque article publié en brouillons pour e-mail, LinkedIn, X, forums et flux, et tient le calendrier de diffusion. Ne publie ni n’envoie rien.
 
 ### Skills du pôle
-- pole-seo-geo — Chef du pôle SEO & GEO : mesure, choisit le chantier le plus rentable, le confie aux neuf sous-agents seo-* et geo-* en petits lots, vérifie (Septune compare_sites), commite et tient le journal.
+- pole-seo-geo — Chef du pôle SEO & GEO : mesure, choisit le chantier le plus rentable, le confie à dix-sept sous-agents (seo-*, geo-*, blog-*) en petits lots visibles dans la session, vérifie (Septune compare_sites), commite et tient le journal.
 - septune-audit — Auditer le SEO technique par la mesure avec le MCP Septune (sans clé ni IA) : 62 règles en 8 catégories, audit d'un site ou d'une page y compris sur un serveur de dev local, comparaison production / préproduction pour attraper une régression avant le push, patchs par framework, audit des robots IA et génération de llms.txt.
 - seo-technique — SEO technique : balises, sitemap, robots, performance, données structurées.
 - seo-aeo-best-practices — Métadonnées, Open Graph, sitemap, robots.txt, hreflang, JSON-LD et EEAT pour moteurs classiques et réponses IA (vitrine, SaaS).

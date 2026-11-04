@@ -173,6 +173,14 @@ apps/web/.next-corrompu-*
 .claude/agents/seo-outils.md
 .claude/agents/seo-fiches-stores.md
 .claude/agents/seo-autorite.md
+.claude/agents/seo-fraicheur.md
+.claude/agents/seo-pages-villes.md
+.claude/agents/seo-visuels.md
+.claude/agents/blog-redacteur-en-chef.md
+.claude/agents/blog-veille-juridique.md
+.claude/agents/blog-donnees.md
+.claude/agents/blog-relecteur.md
+.claude/agents/blog-diffusion.md
 .claude/skills/pole-seo-geo/
 .claude/skills/septune-audit/
 .claude/skills/seo-technique/

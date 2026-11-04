@@ -42,19 +42,25 @@ refus de dossier.
 
 1. **Aujourd'hui** : inscription à la liste d'attente, et usage des outils gratuits.
 2. **Dès publication** : installation de l'extension depuis le Chrome Web Store.
-3. **Plus tard** : passage à l'offre payante (voir « Modèle économique »).
+3. **En continu** : lecture régulière du blog et des guides (retour direct, flux RSS, liste).
+
+## Blog
+
+Le site a des **guides** (permanents, mis à jour) mais pas encore de **blog** (articles datés :
+actualité des règles de location, études de données publiques, cas pratiques, saisonnalité de la
+recherche de logement). Le blog nourrit les guides et les outils, jamais l'inverse : chaque article
+se rattache à un pilier et renvoie vers le guide et l'outil voisins. La ligne éditoriale et le
+calendrier sont dans `docs/seo/blog/` (`blog-redacteur-en-chef`). Un flux RSS des guides existe déjà
+(`apps/web/app/flux.xml/route.ts`).
 
 Un appel à l'action dit ce qu'il fait vraiment aujourd'hui : rien n'est téléchargeable tant que
 l'extension n'est pas publiée, donc « Être prévenu », jamais « Télécharger ».
 
-## Modèle économique (décision d'Hugo du 2026-11-04)
+## Prix et offre : hors périmètre
 
-**Freemium avec clé de licence** : une base gratuite, des fonctions avancées payantes, compatible
-avec le fonctionnement local. Paliers et prix : à définir par le pôle CTO & Commerce.
-
-**Incohérence à résoudre** : `llms.txt` annonce encore « payante par abonnement, autour de 12 € par
-mois, avec un essai gratuit ». Ne pas réécrire ce passage avant que les paliers soient fixés ; dès
-qu'ils le sont, `geo-citabilite` aligne `llms.txt`, le schéma et l'accueil le même jour.
+Le prix, l'offre et la monétisation appartiennent au pôle CTO & Commerce. Le pôle SEO & GEO n'écrit
+aucun prix, aucune offre et aucun palier dans les pages qu'il produit, et ne touche pas aux passages
+existants qui en parlent : il parle de ce que le produit fait.
 
 ## Ton
 

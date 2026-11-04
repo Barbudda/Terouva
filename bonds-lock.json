@@ -1,14 +1,14 @@
 {
   "version": 1,
   "bondsHome": "C:\\Users\\hugo8\\OneDrive\\Desktop\\BONDS",
-  "bondsCommit": "66b3ff5073935ed3960dfc8541cdb8f9176f1dfb",
+  "bondsCommit": "9f6021881fbc53f9513f10384f5326fc0458412c",
   "loadout": "app-premium",
   "equipeLe": "2026-09-15T15:56:31.694Z",
-  "misAJourLe": "2026-11-04T12:07:48.925Z",
+  "misAJourLe": "2026-11-04T12:20:30.896Z",
   "poles": {
     "seo-geo": {
       "installeLe": "2026-11-04T12:07:48.925Z",
-      "misAJourLe": "2026-11-04T12:07:48.925Z"
+      "misAJourLe": "2026-11-04T12:20:30.896Z"
     }
   },
   "assets": {
@@ -547,9 +547,9 @@
     "skill:pole-seo-geo": {
       "type": "skill",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "cbd8ee9f37eb7cecaaa5983c78319840cbbdadea",
+      "hash": "f5ab5c548d7ae52a8be34e1fd0392e76b197eec6",
       "cible": ".claude/skills/pole-seo-geo",
-      "installeLe": "2026-11-04T12:07:48.925Z"
+      "installeLe": "2026-11-04T12:20:30.896Z"
     },
     "skill:septune-audit": {
       "type": "skill",
@@ -732,6 +732,62 @@
       "hash": "6eaa38d19233de090d7f811fac97cc7551ca50bd",
       "cible": ".mcp.json#semrush",
       "installeLe": "2026-11-04T12:07:48.925Z"
+    },
+    "agent:seo-fraicheur": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "2d9a641d72fe9940e309e54c9cf31eb76fd96e62",
+      "cible": ".claude/agents/seo-fraicheur.md",
+      "installeLe": "2026-11-04T12:20:30.896Z"
+    },
+    "agent:seo-pages-villes": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "e4702353ce5cfd08ee4bf71b21955108923e43a3",
+      "cible": ".claude/agents/seo-pages-villes.md",
+      "installeLe": "2026-11-04T12:20:30.896Z"
+    },
+    "agent:seo-visuels": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "26290e95627bb6b15234890763211dba0f99b38a",
+      "cible": ".claude/agents/seo-visuels.md",
+      "installeLe": "2026-11-04T12:20:30.896Z"
+    },
+    "agent:blog-redacteur-en-chef": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "3cb02f3ef75faea2c8d618d584e3107ecbe4d8e7",
+      "cible": ".claude/agents/blog-redacteur-en-chef.md",
+      "installeLe": "2026-11-04T12:20:30.896Z"
+    },
+    "agent:blog-veille-juridique": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "9ebeed68e52d206909f57094a92c5cf48c9b3ca9",
+      "cible": ".claude/agents/blog-veille-juridique.md",
+      "installeLe": "2026-11-04T12:20:30.896Z"
+    },
+    "agent:blog-donnees": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "b8866a1bab203e12232ba6ef1c7120c84e02dd62",
+      "cible": ".claude/agents/blog-donnees.md",
+      "installeLe": "2026-11-04T12:20:30.896Z"
+    },
+    "agent:blog-relecteur": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "3b2f3e8a1d2d745e497421efaf1d742eca0d5212",
+      "cible": ".claude/agents/blog-relecteur.md",
+      "installeLe": "2026-11-04T12:20:30.896Z"
+    },
+    "agent:blog-diffusion": {
+      "type": "agent",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "e047aaf61e363487f21addd758445e1391a292da",
+      "cible": ".claude/agents/blog-diffusion.md",
+      "installeLe": "2026-11-04T12:20:30.896Z"
     }
   },
   "derogations": [
