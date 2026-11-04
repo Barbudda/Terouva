@@ -6,8 +6,8 @@ import { WaitlistForm } from "@/components/ui/WaitlistForm";
  * propose la suite. Pas de bandeau criard : un bloc sobre, et le lecteur décide.
  */
 export function FinDePage({
-  titre = "Les bonnes locations, avant les autres.",
-  texte = "Terouva vous signale les locations Leboncoin qui vous correspondent dès qu'elles paraissent, avec votre message de candidature déjà écrit. Il sort bientôt : laissez votre adresse pour être prévenu.",
+  titre = "Les bons logements, avant les autres.",
+  texte = "Terouva vous signale les logements Leboncoin qui vous correspondent dès qu'ils paraissent, avec votre message de candidature déjà écrit. Il sort bientôt : laissez votre adresse pour être prévenu.",
 }: {
   titre?: string;
   texte?: string;

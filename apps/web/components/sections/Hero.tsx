@@ -34,9 +34,10 @@ export function Hero() {
         </>
       }
     >
+      {/* La phrase dans une vitre sombre et floutée (Hugo, 4 novembre) : sur la
+          lueur claire du champ, même avec une ombre, elle se lisait mal. */}
       <p
-        // L'ombre garde la phrase lisible là où elle passe sur la lueur claire du champ.
-        className="entree mx-auto max-w-[38rem] text-[1.125rem] leading-relaxed text-balance text-ink [text-shadow:0_1px_14px_rgb(8_17_32/0.7),0_0_2px_rgb(8_17_32/0.35)] sm:text-[1.25rem]"
+        className="entree mx-auto max-w-[44rem] rounded-[1.5rem] border border-white/15 bg-night/55 px-6 py-5 text-[1.25rem] leading-relaxed text-balance text-ink shadow-[0_24px_60px_-30px_rgb(0_0_0/0.7)] backdrop-blur-md sm:px-8 sm:py-6 sm:text-[1.5rem]"
         style={{ "--rang": 2 } as React.CSSProperties}
       >
         {quoi} {gain}

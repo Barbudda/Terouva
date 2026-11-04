@@ -37,15 +37,15 @@ export const NAV_COLONNES = [
  * L'accueil dit ce que l'on gagne, pas comment l'outil marche (Hugo, 4
  * novembre, sur le modèle de Rushlot et FanClaw). Le titre porte le gain :
  * écrire parmi les premiers, c'est ce qui décroche une visite. Il garde le
- * mot « locations », celui que l'on tape.
+ * mot « logement », celui que l'on cherche (Hugo, 4 novembre).
  */
 export const HERO = {
   eyebrow: "Bientôt disponible",
-  titleLead: "Les bonnes locations,",
+  titleLead: "Les bons logements,",
   titleTail: "avant les autres.",
   /** La proposition de valeur, en deux phrases : ce que fait Terouva, ce que vous y gagnez. */
   description: [
-    "Terouva vous prévient dès qu'une location qui vous correspond paraît sur Leboncoin, avec votre message de candidature déjà écrit.",
+    "Terouva vous prévient dès qu'un logement qui vous correspond paraît sur Leboncoin, avec votre message de candidature déjà écrit.",
     "Vous l'envoyez en une minute, parmi les premiers, et la visite est plus facile à obtenir.",
   ],
 };
@@ -59,7 +59,7 @@ export const PARCOURS = {
   mention: "Le parcours",
   titre: "De l'annonce publiée à votre message envoyé.",
   etapes: [
-    { nom: "Publiée sur Leboncoin", texte: "Une location qui correspond à vos critères vient de paraître." },
+    { nom: "Publiée sur Leboncoin", texte: "Un logement qui correspond à vos critères vient de paraître." },
     { nom: "Repérée pour vous", texte: "Terouva vous prévient, et vous dit si elle vaut le coup." },
     { nom: "Votre message, déjà écrit", texte: "Adapté à l'annonce et à votre dossier. Vous le relisez." },
     { nom: "Envoyé par vous", texte: "Vous l'envoyez en une minute, et Terouva suit la réponse." },
@@ -90,7 +90,7 @@ export const PROBLEM = {
   titreLead: "Écrivez parmi les premiers,",
   titreTail: "sans surveiller votre téléphone.",
   texte:
-    "Une bonne location reçoit ses premiers messages en quelques heures. Écrire tôt, avec un message complet, c'est ce qui décroche une visite. Terouva s'occupe des deux.",
+    "Un bon logement reçoit ses premiers messages en quelques heures. Écrire tôt, avec un message complet, c'est ce qui décroche une visite. Terouva s'occupe des deux.",
   /** La même annonce, deux arrivées : la position est en pourcentage de sa vie. */
   vie: {
     etapes: ["Publiée", "Premiers messages", "Visites complètes", "Retirée"],
@@ -117,7 +117,7 @@ export const FEATURES = [
   {
     icon: "bell" as const,
     title: "Vous ne ratez plus une annonce",
-    body: "Chaque location qui correspond à vos critères vous est signalée, avec une notification.",
+    body: "Chaque logement qui correspond à vos critères vous est signalé, avec une notification.",
   },
   {
     icon: "gauge" as const,
@@ -144,7 +144,7 @@ export const FEATURES = [
 export const FAQ_ITEMS = [
   {
     q: "Qu'est-ce que Terouva fait pour moi ?",
-    a: "Il vous signale les locations Leboncoin qui correspondent à vos critères dès qu'elles paraissent, vous dit lesquelles valent le coup, et écrit votre message de candidature. Vous écrivez parmi les premiers, sans y passer vos journées.",
+    a: "Il vous signale les logements Leboncoin qui correspondent à vos critères dès qu'ils paraissent, vous dit lesquelles valent le coup, et écrit votre message de candidature. Vous écrivez parmi les premiers, sans y passer vos journées.",
   },
   {
     q: "Est-ce que Terouva envoie les messages à ma place ?",
