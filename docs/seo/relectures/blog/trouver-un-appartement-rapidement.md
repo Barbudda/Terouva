@@ -42,3 +42,12 @@ Remarques (non bloquantes) :
 - `#urgence` : la « location meublée de courte durée » peut renvoyer au bail mobilité, que le site
   ne traite pas encore. Rien à corriger, une piste pour le registre.
 - Voix : `zero-slop` en inspection, un seul signal (variété lexicale) ; aucun interdit du brief.
+
+## Contre-relecture du 2026-11-04 (commit be23d1e)
+
+Verdict : PUBLIABLE
+
+Le bloquant est levé : « dès qu'elles paraissent » a disparu, la phrase reprend `llms.txt` (« il
+repère les annonces qui correspondent à votre recherche et prépare votre réponse »). La source ANIL
+est ajoutée (`.meta.ts:42-43`) et fonde le corps (`:42-43`) comme la FAQ. Remarque non reprise : pas
+de lien vers `/blog/etre-le-premier-a-repondre-a-une-annonce`.

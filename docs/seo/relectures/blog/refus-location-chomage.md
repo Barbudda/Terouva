@@ -46,3 +46,23 @@ cannibalisation : le guide refus garde la liste des critères.
 Voix : vouvoiement, aucun tiret cadratin ni emoji, appel à l'action honnête.
 
 Faits : non reportés dans `FAITS.md` tant que l'article n'est pas publiable.
+
+## Contre-relecture du 2026-11-04 (commit be23d1e)
+
+Verdict : PUBLIABLE
+
+Les trois corrections sont faites, fidèles à la décision 2019-001 :
+- Chapeau : « le Défenseur des droits a jugé discriminatoire, au titre du handicap, le refus d'un
+  candidat qui touchait une pension d'invalidité » (§ 36).
+- Section « nature » : la décision est citée pour ce qu'elle dit (discrimination fondée sur le
+  handicap, parce que la pratique désavantageait les candidats handicapés, § 34), avec sa limite :
+  privilégier des revenus d'activité n'est pas en soi un critère interdit (§ 28). Ce qui se discute
+  est le montant des ressources. Le nouvel intitulé « Peut-il préférer un salaire à vos
+  allocations ? » reçoit une réponse honnête : aucune source lue ne l'interdit pour le chômage.
+- `:108-109` : l'exemple « les chômeurs » ou « les allocations » est retiré.
+La correction Visale (« ou aux personnes qui ont une promesse d'embauche ») est faite aussi. Rien
+d'autre n'a bougé.
+
+Faits reportés dans `FAITS.md` : 4 (critère de vulnérabilité économique, choix du candidat, décision
+2019-001 dans sa version corrigée, justificatif d'allocations), retirés de
+`faits-a-integrer/geo-citabilite.md`.

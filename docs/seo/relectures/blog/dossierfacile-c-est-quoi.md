@@ -54,3 +54,13 @@ Remarques (non bloquantes) :
   et `arnaque-location-reconnaitre-fausse-annonce`) ne se lient pas entre eux. Un lien de cet article
   vers l'article filigrane, dans la puce « chaque document reçoit un filigrane », servirait le lecteur.
 - FAQ « Est-ce que DossierFacile est fiable ? » : 38 mots, juste sous la cible de 40.
+
+## Contre-relecture (2026-11-04, seo-analyste, commit be23d1e)
+
+Verdict : PUBLIABLE
+
+- Correction 1 faite, dans le corps et dans la FAQ : sous-traitants tenus à la confidentialité,
+  rien n'est revendu ni transmis sans accord. C'est conforme à la page « Gestion des données ».
+- Correction 2 faite : les trois pages d'aide sont dans `sources`, avec le relevé du 2026-11-04.
+- Ajout : un lien vers `/blog/filigrane-documents-dossier-location`, qui répond 200 en production,
+  avec une ancre descriptive. La FAQ « fiable » passe de 38 à 53 mots. Aucun tiret cadratin.

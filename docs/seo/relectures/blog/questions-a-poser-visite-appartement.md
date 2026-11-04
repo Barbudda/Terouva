@@ -43,3 +43,16 @@ Remarques (non bloquantes) :
   état sans état des lieux), sans source dans la fiche ; un lien vers `/guides/etat-des-lieux`
   suffirait.
 - Voix : `zero-slop` en inspection, un seul signal (variété lexicale) ; aucun interdit du brief.
+
+## Contre-relecture du 2026-11-04 (commit be23d1e)
+
+Verdict : PUBLIABLE, sous une condition de publication
+
+La correction demandée est faite : « en métropole » dans le corps (`:74`), dans la FAQ (`.meta.ts:44`)
+et dans la liste (`:169`). Les plafonds corrigés par le relecteur sont intacts (12,10 / 10,09 / 8,07 /
+3,03 €, 403,60 €). Les deux remarques sont reprises : la phrase sans source sur « celui qui envoie le
+premier » est remplacée par un lien, et la fin renvoie à l'article sur le mail après visite.
+
+Condition : ces deux liens (`:157` vers `/blog/etre-le-premier-a-repondre-a-une-annonce`, `:181` vers
+`/blog/mail-apres-visite-appartement`) pointent sur deux articles encore en `brouillon`. Publier les
+trois dans le même lot, ou retirer les deux liens d'ici là, sinon ce sont deux liens morts.

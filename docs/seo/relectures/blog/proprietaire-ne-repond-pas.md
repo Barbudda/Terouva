@@ -46,3 +46,13 @@ Remarques (non bloquantes) :
 - La deuxième réponse de la FAQ fait 38 mots (cible 40 à 60).
 - Voix : `zero-slop` en inspection, un seul signal (variété lexicale, normal pour un texte court
   en français) ; aucun tiret cadratin, aucun emoji, aucune tournure « ce n'est pas X, c'est Y ».
+
+## Contre-relecture du 2026-11-04 (commit be23d1e)
+
+Verdict : PUBLIABLE
+
+La correction demandée est faite : la source ANIL « Caution et garanties » figure dans la fiche
+(`.meta.ts:32-33`) et fonde la phrase sur Visale (`:115`). La promesse produit reste conforme à
+`llms.txt`. Remarques non reprises (non bloquantes, laissées au chef) : pas encore de lien vers
+`/blog/etre-le-premier-a-repondre-a-une-annonce`, délai de relance « quelques jours » au lieu des
+« deux ou trois jours » du guide.

@@ -69,3 +69,19 @@ Remarques (non bloquantes) :
 - Pas d'`outilLie` : il n'existe pas d'outil de préavis aujourd'hui. Un lien vers l'article voisin
   `modele-lettre-preavis-logement` servirait le lecteur qui doit écrire sa lettre.
 - `publieLe` « 2026-11-04 » est provisoire (commentaire de la fiche) : à fixer par le chef.
+
+## Contre-relecture (2026-11-04, seo-analyste, commit be23d1e)
+
+Verdict : PUBLIABLE, à une condition de publication
+
+- Bloquant 1 levé : le titre, le `titreSeo` (« Zones tendues : 17 grandes villes hors liste »), la
+  description, le chapeau et la première question de la FAQ portent maintenant sur les villes. La
+  requête « préavis 1 mois zone tendue » reste au guide, vers lequel l'article renvoie.
+- Correction 2 faite : la date qui compte est partout celle du bail (section « 2027 »).
+- Correction 3 faite : l'abrogation au 1er janvier 2027 et la reprise du périmètre du décret 2026-831
+  sont conformes à ce que j'ai lu sur Légifrance ; le commentaire en tête du fichier est à jour.
+- Rien d'autre n'a bougé dans les chiffres. FAQ de 39 à 61 mots, chapeau de 59 mots, aucun tiret
+  cadratin.
+- **Condition** : le nouveau lien `/blog/modele-lettre-preavis-logement` vise un article encore en
+  brouillon (404 en production à cette heure). Publier les deux ensemble, ou celui-ci après.
+- Reste en remarque (non bloquante) : METHODE.md dit encore l'abrogation « non revérifiée ».
