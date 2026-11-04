@@ -1,74 +1,68 @@
 # Calendrier éditorial du blog — Terouva
 
-> Propriétaire : `blog-redacteur-en-chef`. Version 1 du 2026-11-04, douze semaines à partir du lundi
-> 2026-11-09. Ligne éditoriale : `LIGNE-EDITORIALE.md`. Dates officielles : `VEILLE.md`.
-> Revu chaque mois après la mesure (`seo-analyste`) et la file de fraîcheur (`seo-fraicheur`) ; la
-> prochaine revue donne les semaines 13 à 16.
+> Propriétaire : `blog-redacteur-en-chef`. Version 2 du 2026-11-04 (la version 1, douze semaines à
+> un article par semaine, est remplacée après la décision d'Hugo d'un **blog en volume**, `BRIEF.md`).
+> Ligne éditoriale : `LIGNE-EDITORIALE.md`. Vague 6 : `PLAN-VAGUE-6.md`. Dates officielles : `VEILLE.md`.
 
-## Cadence
+## Rythme : par lots, avec une mesure entre deux lots
 
-**Un article par semaine, deux quand l'actualité l'impose, jamais plus.** Il n'y a ni rédaction ni
-relecture humaine à plein temps : chaque article passe par `seo-redacteur`, `blog-relecteur`,
-`geo-citabilite`, `seo-maillage`, puis le commit du chef. Douze semaines tenues valent mieux qu'un
-mois chargé suivi de rien. Les mises à jour d'un article existant ne comptent pas dans la cadence.
+- **Un lot toutes les deux semaines, 7 articles au plus.** Le brief demande des lots de 5 à 10 ; je
+  retiens le bas de la fourchette haute parce que le site est jeune (17 pages indexables, Domain
+  Rating 0) et qu'un lot de 7 en double déjà la partie éditoriale en quatre lots. Ce qui limite
+  vraiment, c'est la relecture : chaque article passe par `blog-relecteur`, distinct de l'auteur.
+- **Porte entre deux lots** (`seo-analyste`, une semaine après chaque lot) : inspection d'URL et
+  couverture dans Search Console. Le lot suivant part si la plupart des articles du lot précédent
+  sont indexés, ou au moins explorés. S'ils sont surtout « explorés, actuellement non indexés », on
+  arrête, on relit le lot (apport propre, cannibalisation) et on espace.
+- **Les actualités ne suivent pas les lots** : elles partent à leur date (encadrement, IRL) et
+  comptent dans le lot de leur quinzaine.
+- **Pause des fêtes** : rien entre le 2026-12-18 et le 2027-01-06 (la mesure y serait illisible).
 
-**Préalable levé le 2026-11-04** : la rubrique `/blog` existe (commit 045a395), invisible tant
-qu'aucun article n'est publié. Un article s'ajoute dans `apps/web/lib/blog.ts` ; chaque brief donne
-son entrée (slug, `titreSeo` de 50 signes au plus avant « · Terouva », description de 70 à 155
-signes, chapeau de 40 à 60 mots, pilier, format), mesurée au moment du brief.
+## Les lots
 
-## Saisonnalité : ce qui est mesuré et ce qui ne l'est pas
+| Lot | Mise en ligne | Articles | Vague | Porte de mesure |
+|---|---|---|---|---|
+| 1 | jeudi 2026-11-12 | Encadrement des loyers (slug `encadrement-des-loyers-fin-ou-prolongation`, **au plus tard le 13**) · Nouveau modèle de bail · Le propriétaire ne répond pas · Visale refusée · Louer au chômage · DossierFacile · Arnaque à la location | 5 | 2026-11-19 |
+| — | jour du vote (annoncé le 19/11) et jour du terme (23 ou 24/11) | Mises à jour de l'article encadrement (brief 1, « Mises à jour prévues ») | 5 | — |
+| 2 | jeudi 2026-11-26 | Trouver un appartement rapidement · Lettre de motivation · Questions à poser en visite · Savoir si son dossier est retenu · Frais d'agence · Filigrane · DPE 2027 (avant le 15/12) | 5 | 2026-12-03 |
+| 3 | jeudi 2026-12-10 | Les quatre articles de la vague 5 en attente de décision (voir plus bas), **seulement s'ils sont tranchés** ; sinon remplacés par les n° 19, 12 et 10 du plan vague 6 · plus les n° 5, 20 et 22 du plan vague 6 | 5 et 6 | 2026-12-17 |
+| — | pause des fêtes | — | — | — |
+| 4 | jeudi 2027-01-07 | Vague 6 : n° 1, 6, 11, 14, 17, 21, 24 | 6 | 2027-01-14 |
+| — | vendredi 2027-01-15, 8 h 45 | Révision IRL (chiffre de l'INSEE le jour même) | 5 | avec le lot 5 |
+| 5 | jeudi 2027-01-21 | Étude zones tendues (après la vérification du 2027-01-04 sur la liste au 1er janvier) · vague 6 : n° 2, 7, 13, 15, 18, 25 | 5 et 6 | 2027-01-28 |
+| 6 | jeudi 2027-02-04 | Vague 6 : n° 3, 4, 8, 16, 23 | 6 | 2027-02-11 |
+| 7 | jeudi 2027-02-18 | Vague 6 : n° 9, puis les n° 10, 12, 19 s'ils ne sont pas partis au lot 3, et les articles glissés des lots précédents | 6 | 2027-02-25 |
 
-- **Mesuré** : rien. Search Console n'a que trois semaines de données (premières le 2026-10-13, 261
-  impressions) et Semrush n'a plus d'unités. Aucune courbe Trends n'a été lue.
-- **Daté par la loi ou l'INSEE** (`VEILLE.md`) : terme de l'encadrement le 23 novembre, nouveau DPE
-  et abrogation de la liste des zones tendues le 1er janvier, IRL le 15 janvier, Parcoursup le 17 décembre.
-- **Supposé, à vérifier** : pic de recherche étudiante au printemps et en été, mutations d'été.
-  Demande à `seo-registre` : lire Google Trends (France, 5 ans) sur « logement étudiant », « location
-  appartement », « garant location », « dossier de location » avant la revue de février. Le calendrier
-  de février à juin en dépend (articles « logement étudiant » et « mutation » de la veille, à
-  publier 4 à 6 semaines avant le pic).
+Règles de composition : chaque lot mêle au moins trois piliers ; jamais deux articles de la série
+« peut-on louer quand… » (vague 6, n° 5 à 9) dans le même lot ; un article dont la source officielle
+n'a pas été lue glisse au lot suivant au lieu de partir sans elle.
 
-Le calendrier de ces douze semaines est donc tiré par l'**actualité** et par les **angles morts** du
-registre, pas par une saisonnalité qu'on n'a pas mesurée.
+## Vague 5 : quatre articles en attente de décision du chef
 
-## Les douze semaines
+Risque de cannibalisation relevé le 2026-11-04 (détail dans le compte rendu au chef). Ils ne partent
+pas au lot 1 ni au lot 2.
 
-| Sem. | Semaine du | Titre de travail | Format | Pilier | Requête-mère | Pourquoi maintenant | Brief | Statut |
-|---|---|---|---|---|---|---|---|---|
-| 1 | 2026-11-09 | Encadrement des loyers après le 23 novembre 2026 : ce qui est sûr, ce qui dépend du vote | actualité | D | encadrement des loyers fin / prolongation (actualité, hors registre) | Terme légal le 23 novembre ; examen à l'Assemblée annoncé par la presse pour le 19 | [briefs/encadrement-des-loyers-novembre-2026.md](briefs/encadrement-des-loyers-novembre-2026.md) | brief prêt ; publier au plus tard le 2026-11-13 |
-| 2 | 2026-11-16 | Nouveau modèle de bail : ce qu'un locataire vérifie avant de signer depuis le 1er octobre | actualité | D | nouveau bail 1er octobre 2026 (actualité, hors registre) | Les baux signés cet automne sont les premiers sur le nouveau modèle ; veille : publier avant le 20 novembre | [briefs/nouveaux-modeles-de-bail-2026.md](briefs/nouveaux-modeles-de-bail-2026.md) | brief prêt ; publier au plus tard le 2026-11-19 |
-| 2 | 2026-11-16 | Le propriétaire ne répond pas à votre message : pourquoi, et quoi faire | cas pratique | A | propriétaire ne répond pas (registre, P2) | Angle mort : aucune page du web ne traite le côté candidat ; pilier le plus proche du produit | [briefs/proprietaire-ne-repond-pas.md](briefs/proprietaire-ne-repond-pas.md) | brief prêt |
-| 3 | 2026-11-23 | *Mise à jour de l'article 1* : version définitive selon le vote, le jour du terme | mise à jour | D | — | Le 23 ou le 24 novembre (date à trancher, voir le brief) | brief 1, section « Mises à jour » | prévu |
-| 3 | 2026-11-23 | Visale refusée : les raisons possibles et ce que vous pouvez faire | question précise | C | garantie visale refusée (variante de « garantie visale conditions ») | Les changements Visale de janvier 2026 vont dans le guide (file de fraîcheur n° 8, 9, 24) ; l'article prend la variante que le guide ne traite pas | [briefs/visale-refusee.md](briefs/visale-refusee.md) | brief prêt ; SERP google.fr à lire par `seo-registre` |
-| 4 | 2026-11-30 | Un propriétaire peut-il refuser un candidat au chômage ? | question précise | B | refus de louer à un chômeur (variante de « refus dossier location ») | Grappe « refus » : la page la plus vue du site (25 impressions) ; renforce `/guides/refus-de-dossier` sans le copier | [briefs/refus-location-chomage.md](briefs/refus-location-chomage.md) | brief prêt ; SERP google.fr à lire par `seo-registre` |
-| 5 | 2026-12-07 | DPE recalculé au 1er janvier 2027 : lire l'étiquette d'une annonce avant de répondre | actualité anticipée | D (angle A) | DPE location 2027 (actualité, hors registre) | Changement au 2027-01-01 ; veille : publier avant le 15 décembre | à écrire semaine 4 | prévu |
-| 6 | 2026-12-14 | DossierFacile : ce que c'est, ce que voit le propriétaire, et quand s'en servir | question précise | B | DossierFacile (registre, P3) | Service public cité dans les réponses des assistants (test LLM du 2026-11-04) ; SERP à lire avant le brief | à écrire semaine 5 | prévu, sous réserve de la SERP |
-| 7 | 2026-12-21 | Se porter garant : y a-t-il un âge limite ? | question précise, court | C | âge limite pour se porter garant (PAA de « garant location ») | Semaine de fêtes : article court écrit à l'avance ; grappe « garant », 44 impressions en position 41,6 | à écrire semaine 5 | prévu, sous réserve d'une source officielle |
-| 8 | 2026-12-28 | — (pas d'article) | — | — | — | Fêtes. Revue mensuelle : mesure, file de fraîcheur, briefs de janvier | — | — |
-| 9 | 2027-01-04 | Zones tendues au 1er janvier 2027 : votre préavis d'un mois change-t-il ? | actualité, conditionnelle | D | zone tendue préavis (variante du registre) | Abrogation du décret 2013-392 au 2027-01-01 (veille, fraîcheur n° 15). **Article seulement si la liste applicable au préavis change** ; sinon mise à jour du guide préavis seule | à écrire semaine 8, après vérification du 2027-01-04 | conditionnel |
-| 10 | 2027-01-11 | IRL du 4e trimestre 2026 : de combien votre loyer peut-il augmenter ? | rendez-vous | D | IRL 2027 (actualité, hors registre) | Publication INSEE le 2027-01-15 à 8 h 45 ; article préparé, chiffre posé le jour même | à écrire semaine 9 | prévu, publication le 2027-01-15 |
-| 11 | 2027-01-18 | Après la visite : comment savoir si votre dossier est retenu | cas pratique | A | comment savoir si votre dossier de location est accepté ? (PAA de « comment répondre à une annonce ») | Suite naturelle de l'article « ne répond pas » ; ne vise pas « mail après visite », qui revient à l'outil | à écrire semaine 10 | prévu |
-| 12 | 2027-01-25 | Étude : où le loyer des annonces dépasse-t-il le plafond ? (titre provisoire) | étude de données | D | encadrement des loyers + ville (registre, P3) | Première étude de `blog-donnees`, seulement si une source ouverte et réutilisable existe ; sinon remplacée par le brief « logement étudiant 2027 » | proposition à `blog-donnees` semaine 6 | à confirmer |
+| Article | Conflit | Proposition |
+|---|---|---|
+| Âge limite pour se porter garant | Même requête que `/guides/garant-caution`, qui la reçoit déjà (registre, pos. 43) | Recentrer sur « garant retraité : quels documents fournir » (dix suggestions AC au registre), ou verser la réponse dans la FAQ du guide |
+| Lettre de préavis | Variante « lettre de préavis logement 1 mois » de la ligne du guide `/guides/preavis-location`, qui a sa section « La lettre de congé » ; le registre prévoit aussi un modèle couplé au simulateur de préavis | Publier comme modèle seulement si le guide réduit sa section à un renvoi ; sinon, intégrer le modèle au guide |
+| Mail après visite | Le registre l'attribue à l'outil message (mode « après la visite ») et à une section du guide pilier A ; voisin direct de « Savoir si son dossier est retenu » | Article seulement s'il vise le modèle (« exemple mail après visite appartement »), renvoie à l'outil, et laisse « délai de réponse » à l'article « dossier retenu » |
+| Être le premier à répondre | Demande non prouvée (registre, P3) et même intention que « Trouver un appartement rapidement » | Seulement avec une donnée publique réelle (étude) ; sinon fusion dans « Trouver rapidement » |
 
-Total : 11 articles nouveaux en douze semaines (12 si l'article conditionnel de la semaine 9 part),
-dont 2 la semaine 2 et 2 la semaine 3 ; aucune semaine au-dessus de deux.
+## Saisonnalité
 
-## Ce qui arrive au trimestre suivant (pour mémoire, non planifié)
-
-- Logement étudiant 2027 : le calendrier, de Parcoursup à la rentrée (veille n° 6, avant le 2027-03-31).
-- Mutation ou nouvel emploi : louer vite dans une ville où l'on ne connaît personne (veille n° 7, avant le 2027-05-31).
-- IRL du 1er trimestre 2027 (mi-avril) : même adresse que l'article de janvier, mise à jour.
-- Logements classés F interdits en 2028 (veille n° 8, avant le 2027-10-15).
-- « Être le premier à répondre » en données : seulement si une source publique existe (registre, P3).
+Toujours **non mesurée** : Search Console trop jeune, Trends non lu, Semrush sans unités. Les dates
+du calendrier viennent des textes (`VEILLE.md`) et du rythme de mesure, pas d'un pic supposé. La
+revue de février (semaine du 2027-02-01) reprend les sujets saisonniers de la veille (logement
+étudiant, mutation) quand `seo-registre` aura lu Google Trends.
 
 ## Dépendances
 
 | Qui | Quoi | Pour quand |
 |---|---|---|
-| `seo-gardien-technique` | Rubrique, gabarit, sitemap, flux, `llms.txt`, schéma | fait (commit 045a395) |
-| `blog-veille-juridique` | Suivi quotidien du texte sur l'encadrement à l'Assemblée jusqu'au 23 novembre ; alerte le jour du vote | dès maintenant |
-| `seo-fraicheur` | Mises à jour des guides dans le même lot que les articles 2 (dépôt de garantie, n° 23), 3 bis (Visale, n° 8, 9, 24), 9 (préavis, n° 15) | avec chaque article |
-| `seo-registre` | SERP de « DossierFacile », « âge limite garant », « refus de louer chômeur », « visale refusée » ; Trends saisonniers | semaines 2 à 5 |
-| `seo-visuels` | Visuels demandés dans chaque brief | avec chaque article |
-| Hugo | Qui signe les articles (page auteur), et accord sur la page « Comment nous écrivons » | avant l'article 1 si possible |
+| Chef | Décision sur les quatre articles en attente | avant le lot 3 (2026-12-10) |
+| `blog-veille-juridique` | Suivi du texte sur l'encadrement jusqu'au terme ; vérification de la liste des zones tendues le 2027-01-04 | en continu |
+| `seo-registre` | SERP google.fr des 25 requêtes de la vague 6, avant chaque brief ; Trends saisonniers | au fil des lots |
+| `seo-analyste` | Porte de mesure une semaine après chaque lot | dates du tableau |
+| `blog-redacteur-en-chef` | Briefs de la vague 6, lot par lot (7 briefs par quinzaine) | deux semaines avant chaque lot |
+| Hugo | Signature des articles et page « Comment nous écrivons » (`CONFIANCE.md`) | avant le lot 2 si possible |

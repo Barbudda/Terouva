@@ -6,6 +6,29 @@
 > senat.fr et assemblee-nationale.fr pour l'état d'un texte) ; la presse alerte, elle ne prouve pas.
 > Chaque entrée repart de la date de la précédente. Une semaine sans nouveauté s'écrit aussi.
 
+## 2026-11-04 (après-midi) — Encadrement des loyers : état du texte à l'Assemblée nationale
+
+Proposition de loi « pour retrouver la confiance et l'équilibre dans les rapports locatifs »
+(Echaniz), relevé le 2026-11-04 sur les deux sites officiels :
+- **Deuxième lecture à l'Assemblée nationale** : texte n° 3393, modifié par le Sénat le 2026-10-21
+  (T.A. n° 14), transmis le 2026-10-22, renvoyé à la commission des affaires économiques.
+- **Commission** : rapport n° 3432 et texte de la commission n° 3432-A0 déposés le **2026-11-04**.
+  Les deux articles restant en discussion, l'article 1er et l'article 1er bis A, y figurent
+  « (Non modifié) », c'est-à-dire dans la rédaction du Sénat. L'article 1er remplace « huit » par
+  « dix » dans l'article 140 de la loi Elan (durée de l'expérimentation), ouvre la sortie anticipée
+  du dispositif aux collectivités, et porte à un an le délai pour contester un complément de loyer
+  (au lieu de trois mois) et la prescription de l'action en diminution.
+- **Séance publique : mercredi 18 novembre 2026** (texte examiné : n° 3432-A0).
+- Ce qui n'est **pas** acquis : le vote en séance. Si l'Assemblée adopte le texte sans modification
+  le 18 novembre, l'adoption est définitive et il restera la promulgation et la publication au
+  Journal officiel ; si elle le modifie, la navette continue. Le terme actuel reste le
+  23 novembre 2026 (Sénat) ou le 24 novembre 2026 (F1314, Paris).
+- Sources : [dossier législatif, Assemblée nationale](https://www.assemblee-nationale.fr/dyn/17/dossiers/retrouver_confiance_equilibre_rapports_locatifs_17e) ;
+  [texte de la commission n° 3432-A0](https://www.assemblee-nationale.fr/dyn/docs/PIONANR5L17BTC3432.raw) ;
+  [dossier législatif, Sénat](https://www.senat.fr/dossier-legislatif/ppl25-217.html).
+- À refaire : le 2026-11-18 au soir (résultat du vote), puis au Journal officiel. L'article
+  `encadrement-des-loyers-fin-ou-prolongation` doit citer la date de séance du 18 novembre.
+
 ## 2026-11-04 — Veille de départ
 
 ### Nouveau (publié ou en vigueur depuis septembre 2026, ou annoncé avec une date)

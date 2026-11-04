@@ -44,6 +44,21 @@ Si l'angle candidat n'existe pas, le sujet part en simple mise à jour de guide,
 « Le loyer d'une annonce est-il légal ? » (encadrement, complément de loyer, révision IRL, gel des
 F et G), à décider après le vote sur l'encadrement (voir le brief `encadrement-des-loyers-novembre-2026`).
 
+### Blog en volume (décision d'Hugo, 2026-11-04 au soir)
+
+Les poids ci-dessus valaient pour un article par semaine. Avec le volume (`BRIEF.md`, « Blog en
+volume »), ils deviennent une borne : sur les vagues 5 et 6 (45 articles), A 12, B 13, C 8, D 12.
+Le pilier B gagne parce que c'est là que sont les questions précises réellement tapées (« peut-on
+louer quand on est… »). Trois règles s'ajoutent, pour que le volume ne devienne pas du contenu de masse :
+
+1. Une série d'articles de même forme (« peut-on louer en CDD, en période d'essai… ») ne passe que si
+   chaque article a des faits qui lui sont propres ; deux articles d'une même série ne partent jamais
+   dans le même lot.
+2. Deux situations dont la réponse est presque la même tiennent dans une seule page (exemple : RSA et
+   AAH, `PLAN-VAGUE-6.md`, n° 8).
+3. Publication par lots de 7 au plus, toutes les deux semaines, avec une mesure d'indexation entre
+   deux lots (`CALENDRIER.md`).
+
 ## 3. Guide ou article : la règle
 
 | | Guide | Article de blog |
