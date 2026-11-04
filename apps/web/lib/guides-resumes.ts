@@ -243,3 +243,20 @@ export const FACADES: Photo[] = [
     url: "https://unsplash.com/photos/un-grand-batiment-avec-beaucoup-de-fenetres-et-de-volets-o7XvWqYKBto",
   },
 ];
+
+/**
+ * La capture de chaque outil gratuit, prise sur la page de l'outil et posée sur
+ * le dégradé `.fond-capture`. Un outil ajouté au catalogue sans capture
+ * montrerait le dégradé seul (Hugo, 4 novembre : « c'est quoi ce fond rose ») :
+ * `captureOutil` rend alors une photo de façade à la place.
+ */
+export const CAPTURES_OUTILS: Record<string, string> = {
+  "/outils/dossier-de-location": "/outils/dossier-de-location.jpg",
+  "/outils/message-de-candidature": "/outils/message-de-candidature.jpg",
+  "/outils/quel-salaire-pour-un-loyer": "/outils/quel-salaire-pour-un-loyer.jpg",
+};
+
+export function captureOutil(chemin: string): { src: string; capture: boolean } {
+  const src = CAPTURES_OUTILS[chemin];
+  return src ? { src, capture: true } : { src: FACADES[0].src, capture: false };
+}

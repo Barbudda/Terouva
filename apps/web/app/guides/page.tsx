@@ -6,7 +6,7 @@ import { FinDePage } from "@/components/layout/FinDePage";
 import { RUBRIQUES, dateCourte } from "@/components/guides/CadreGuide";
 import { Rubrique, type FicheGuide } from "@/components/guides/Rubrique";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
-import { FACADES, PHOTOS } from "@/lib/guides-resumes";
+import { FACADES, PHOTOS, captureOutil } from "@/lib/guides-resumes";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
@@ -24,11 +24,6 @@ const ARIANE = [
   { nom: "Guides", chemin: CHEMIN },
 ];
 
-/** La capture de chaque outil gratuit, prise sur la page de l'outil. */
-const CAPTURES: Record<string, string> = {
-  "/outils/dossier-de-location": "/outils/dossier-de-location.jpg",
-  "/outils/message-de-candidature": "/outils/message-de-candidature.jpg",
-};
 
 /**
  * La rubrique, refaite le 4 novembre sur le modèle des blogs de Rushlot et de
@@ -119,17 +114,17 @@ export default function Guides() {
               Chacun tourne dans votre navigateur. Rien de ce que vous saisissez ne quitte votre
               ordinateur.
             </p>
-            <ul className="mt-8 grid gap-5 md:grid-cols-2">
+            <ul className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {OUTILS.map((o) => (
                 <li key={o.chemin}>
                   <Link
                     href={o.chemin}
                     className="group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-rule bg-card transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-rule-fort focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
                   >
-                    {CAPTURES[o.chemin] && (
+                    {(
                       <span className="relative block aspect-[16/9] overflow-hidden border-b border-rule bg-[color-mix(in_oklch,var(--color-action)_10%,var(--color-paper-2))]">
                         <Image
-                          src={CAPTURES[o.chemin]}
+                          src={captureOutil(o.chemin).src}
                           alt=""
                           fill
                           sizes="(min-width: 768px) 560px, 100vw"

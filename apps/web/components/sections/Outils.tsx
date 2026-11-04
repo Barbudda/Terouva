@@ -2,15 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { CarteGuide } from "@/components/guides/CarteGuide";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
+import { captureOutil } from "@/lib/guides-resumes";
 
-/** La capture de chaque outil, la même que sur la page des outils. */
-const CAPTURES: Record<string, string> = {
-  "/outils/dossier-de-location": "/outils/dossier-de-location.jpg",
-  "/outils/message-de-candidature": "/outils/message-de-candidature.jpg",
-};
 
 /**
- * Ce qui sert déjà, gratuitement : les deux outils en grandes cartes à
+ * Ce qui sert déjà, gratuitement : les outils en grandes cartes à
  * capture, puis les trois guides les plus récents en cartes à photo (Hugo,
  * 4 novembre : la liste de onze lignes ne guidait pas l'œil). Les neuf
  * guides restent liés depuis le pied de page et depuis la rubrique.
@@ -34,7 +30,7 @@ export function Outils() {
         </Link>
       </div>
 
-      <ul className="mt-10 grid gap-5 md:grid-cols-2">
+      <ul className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {OUTILS.map((o) => (
           <li key={o.chemin}>
             <Link
@@ -42,10 +38,12 @@ export function Outils() {
               className="group carte-levee flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-rule bg-card transition-transform duration-300 ease-[var(--ease-terouva)] hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
             >
               <span className="fond-capture relative block aspect-[16/9] overflow-hidden">
-                {CAPTURES[o.chemin] && (
+                {captureOutil(o.chemin).capture ? (
                   <span className="absolute top-[14%] left-[7%] block aspect-[16/9] w-full overflow-hidden rounded-[0.75rem] border border-white/20 shadow-[0_24px_48px_-18px_rgb(0_0_0/0.65)] transition-transform duration-500 ease-[var(--ease-terouva)] group-hover:-translate-y-1">
-                    <Image src={CAPTURES[o.chemin]} alt="" fill sizes="(min-width: 768px) 560px, 100vw" className="object-cover object-top" />
+                    <Image src={captureOutil(o.chemin).src} alt="" fill sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw" className="object-cover object-top" />
                   </span>
+                ) : (
+                  <Image src={captureOutil(o.chemin).src} alt="" fill sizes="(min-width: 1024px) 420px, 100vw" className="object-cover" />
                 )}
                 <span className="champ absolute top-4 left-4 z-10 rounded-full bg-night px-3 py-1.5 text-night-ink">
                   Outil gratuit

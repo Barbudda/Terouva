@@ -152,7 +152,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Quand est-ce que ça sort ?",
-    a: "Bientôt. Laissez votre adresse : vous serez prévenu le jour du lancement. En attendant, les deux outils gratuits du site fonctionnent déjà.",
+    a: "Bientôt. Laissez votre adresse : vous serez prévenu le jour du lancement. En attendant, les outils gratuits du site fonctionnent déjà.",
   },
   {
     q: "Combien ça coûte ?",

@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { CarteGuide } from "@/components/guides/CarteGuide";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
+import { CAPTURES_OUTILS, captureOutil } from "@/lib/guides-resumes";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -28,9 +29,8 @@ const ETAPES = [
  * page de l'outil. L'ordre est celui du catalogue, qui est celui d'une
  * candidature : le dossier d'abord, le message ensuite.
  */
-const VITRINE: Record<string, { capture: string; gain: string; points: string[] }> = {
+const VITRINE: Record<string, { gain: string; points: string[] }> = {
   "/outils/dossier-de-location": {
-    capture: "/outils/dossier-de-location.jpg",
     gain: "La liste exacte de votre dossier, en trois questions.",
     points: [
       "Les pièces à réunir pour votre situation",
@@ -39,7 +39,6 @@ const VITRINE: Record<string, { capture: string; gain: string; points: string[] 
     ],
   },
   "/outils/message-de-candidature": {
-    capture: "/outils/message-de-candidature.jpg",
     gain: "Le message qui accompagne votre dossier, écrit en une minute.",
     points: [
       "Trois tons : direct, chaleureux, professionnel",
@@ -47,12 +46,20 @@ const VITRINE: Record<string, { capture: string; gain: string; points: string[] 
       "Prêt à copier dans Leboncoin",
     ],
   },
+  "/outils/quel-salaire-pour-un-loyer": {
+    gain: "Le loyer que vos ressources permettent, en un calcul.",
+    points: [
+      "Le repère des trois fois le loyer",
+      "Les plafonds de la garantie Visale",
+      "Une phrase prête pour votre dossier",
+    ],
+  },
 };
 
 /**
  * La page des outils, sur le format de la rubrique des guides (Hugo,
  * 4 novembre), mais dans le monde sombre du site : la mention, le grand titre
- * et la pile des deux captures ; puis chaque outil en grande carte, capture
+ * et la pile des captures ; puis chaque outil en grande carte, capture
  * d'un côté, promesse de l'autre ; trois lignes sur la confidentialité au lieu
  * de trois paragraphes ; enfin les neuf guides en cartes à photo.
  */
@@ -73,7 +80,7 @@ export default function Outils() {
       description: o.description,
       url: `${siteUrl}${o.chemin}`,
       isAccessibleForFree: true,
-      ...(VITRINE[o.chemin] ? { image: `${siteUrl}${VITRINE[o.chemin].capture}` } : {}),
+      ...(CAPTURES_OUTILS[o.chemin] ? { image: `${siteUrl}${CAPTURES_OUTILS[o.chemin]}` } : {}),
     })),
   };
 
@@ -95,9 +102,10 @@ export default function Outils() {
                 Un dossier complet, <em className="font-normal italic text-blue-clair">un message prêt.</em>
               </h1>
               <p className="mt-8 max-w-[36rem] text-[1.1875rem] leading-relaxed text-ink-2">
-                Deux outils pour préparer votre candidature avant même de visiter : la liste des
-                pièces à réunir selon votre situation, et le message qui accompagne votre dossier.
-                Sans compte, sans limite, et rien ne quitte votre ordinateur.
+                Trois outils pour préparer votre candidature avant même de visiter : la liste des
+                pièces à réunir, le loyer que vos ressources permettent, et le message qui
+                accompagne votre dossier. Sans compte, sans limite, et rien ne quitte votre
+                ordinateur.
               </p>
             </div>
             <PileDeCaptures />
@@ -130,6 +138,7 @@ export default function Outils() {
           <ol className="mt-10 space-y-14">
             {OUTILS.map((o, i) => {
               const v = VITRINE[o.chemin];
+              const c = captureOutil(o.chemin);
               return (
                 <li key={o.chemin}>
                   <Link href={o.chemin} className="group grid items-center focus-visible:outline-none lg:grid-cols-12">
@@ -141,10 +150,10 @@ export default function Outils() {
                         i % 2 === 0 ? "lg:col-start-1" : "lg:col-start-6",
                       )}
                     >
-                      {v && (
+                      {c.capture ? (
                         <span className="absolute top-[14%] left-[7%] block aspect-[16/9] w-[100%] overflow-hidden rounded-[0.875rem] border border-white/20 shadow-[0_30px_60px_-20px_rgb(0_0_0/0.65)] transition-transform duration-700 ease-[var(--ease-terouva)] group-hover:-translate-y-1">
                           <Image
-                            src={v.capture}
+                            src={c.src}
                             alt={`Capture de l'outil « ${o.court} »`}
                             fill
                             priority={i === 0}
@@ -152,6 +161,8 @@ export default function Outils() {
                             className="object-cover object-top"
                           />
                         </span>
+                      ) : (
+                        <Image src={c.src} alt="" fill sizes="(min-width: 1024px) 720px, 100vw" className="object-cover" />
                       )}
                       <span className="champ absolute top-4 left-4 z-10 rounded-full bg-night px-3 py-1.5 text-night-ink">
                         Gratuit
@@ -266,16 +277,24 @@ export default function Outils() {
   );
 }
 
-/** Les deux captures, inclinées l'une sur l'autre, comme la pile de photos des guides. */
+/** Les captures des outils, inclinées les unes sur les autres, comme la pile de photos des guides. */
 function PileDeCaptures() {
+  const places = [
+    "top-[6%] left-[4%] w-[66%] -rotate-[7deg]",
+    "top-[28%] left-[26%] z-10 w-[66%] rotate-[4deg]",
+    "top-[52%] left-[10%] z-20 w-[66%] -rotate-[2deg]",
+  ];
+  const captures = Object.values(CAPTURES_OUTILS).slice(0, places.length);
   return (
     <figure aria-hidden className="fond-capture relative mx-auto hidden aspect-[5/4] w-full max-w-[32rem] overflow-hidden rounded-[2rem] lg:col-span-5 lg:block">
-      <span className="absolute top-[10%] left-[6%] block aspect-[16/10] w-[70%] -rotate-[6deg] overflow-hidden rounded-[1rem] border border-white/25 shadow-[0_30px_60px_-24px_rgb(0_0_0/0.7)]">
-        <Image src="/outils/dossier-de-location.jpg" alt="" fill sizes="360px" className="object-cover object-top" />
-      </span>
-      <span className="absolute top-[40%] left-[24%] z-10 block aspect-[16/10] w-[70%] rotate-[5deg] overflow-hidden rounded-[1rem] border border-white/25 shadow-[0_30px_60px_-24px_rgb(0_0_0/0.7)]">
-        <Image src="/outils/message-de-candidature.jpg" alt="" fill sizes="360px" className="object-cover object-top" />
-      </span>
+      {captures.map((src, i) => (
+        <span
+          key={src}
+          className={`absolute block aspect-[16/10] overflow-hidden rounded-[1rem] border border-white/25 shadow-[0_30px_60px_-24px_rgb(0_0_0/0.7)] ${places[i]}`}
+        >
+          <Image src={src} alt="" fill sizes="360px" className="object-cover object-top" />
+        </span>
+      ))}
     </figure>
   );
 }
