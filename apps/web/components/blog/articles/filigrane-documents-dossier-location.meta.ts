@@ -10,7 +10,7 @@ const meta: ArticleMeta = {
     "Quoi écrire dans le filigrane de votre dossier de location, où le placer, et comment l'ajouter avec Filigrane Facile ou sans rien envoyer en ligne.",
   chapeau:
     "Un filigrane protège les copies de votre dossier de location : écrivez en travers de chaque pièce à qui vous l'envoyez, la date et l'usage. La copie ne peut plus resservir telle quelle, et vous savez d'où vient une fuite. Le service public Filigrane Facile le fait gratuitement, et un simple logiciel ou un stylo suffisent aussi.",
-  publieLe: "2026-12-16",
+  publieLe: "2026-11-04",
   pilier: "B",
   format: "question",
   lecture: 5,
@@ -64,7 +64,7 @@ const meta: ArticleMeta = {
     { id: "refus", titre: "Le propriétaire peut-il refuser ?" },
     { id: "recherche", titre: "Ce que ça change pour votre recherche" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

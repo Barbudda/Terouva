@@ -25,8 +25,8 @@ const meta: ArticleMeta = {
       releveLe: "2026-11-04",
     },
     {
-      titre: "ANIL · Les frais d'agence mis à la charge du locataire : comment vérifier ?",
-      url: "https://www.anil.org/parole-expert-logement-location-frais-agence-locataire/",
+      titre: "Service-public.gouv.fr · Frais d'agence immobilière à la location d'un logement (F375)",
+      url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F375",
       releveLe: "2026-11-04",
     },
   ],
@@ -45,7 +45,7 @@ const meta: ArticleMeta = {
     },
     {
       q: "Combien une agence peut-elle facturer au locataire ?",
-      a: "Pour la visite, le dossier et le bail, au plus 12 € par mètre carré habitable en zone très tendue, 10 € en zone tendue et 8 € ailleurs, sans dépasser la part payée par le propriétaire. L'état des lieux d'entrée est plafonné à 3 € par mètre carré.",
+      a: "Pour la visite, le dossier et le bail, au plus 12,10 € par mètre carré habitable en zone très tendue, 10,09 € en zone tendue et 8,07 € ailleurs, sans dépasser la part payée par le propriétaire. L'état des lieux d'entrée est plafonné à 3,03 € par mètre carré.",
     },
   ],
   sommaire: [

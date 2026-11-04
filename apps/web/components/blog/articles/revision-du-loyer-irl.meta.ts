@@ -11,7 +11,7 @@ const meta: ArticleMeta = {
     "IRL du 3e trimestre 2026 : 148,06, soit + 1,57 % sur un an. Le calcul de votre nouveau loyer, le délai du bailleur et les cas où la révision est interdite.",
   chapeau:
     "Si votre bail prévoit une révision, le loyer peut augmenter une fois par an, au plus de la variation de l'indice de référence des loyers. Celui du 3e trimestre 2026 vaut 148,06, en hausse de 1,57 % sur un an : 700 € deviennent 711 €. La révision est interdite pour un logement classé F ou G.",
-  publieLe: "2026-11-20",
+  publieLe: "2026-11-04",
   pilier: "D",
   format: "rendez-vous",
   lecture: 4,
@@ -75,7 +75,7 @@ const meta: ArticleMeta = {
     { id: "interdit", titre: "Les cas où la révision est interdite" },
     { id: "locataire", titre: "Ce que ça change pour vous" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

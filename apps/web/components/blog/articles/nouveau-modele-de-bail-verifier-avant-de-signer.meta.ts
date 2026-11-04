@@ -11,7 +11,7 @@ const meta: ArticleMeta = {
     "Depuis le 1er octobre 2026, les baux suivent un nouveau modèle. Ce qui change pour le locataire, ce qui reste, et cinq points à relire avant de signer.",
   chapeau:
     "Depuis le 1er octobre 2026, les baux de résidence principale conclus ou renouvelés suivent un nouveau modèle. Il écrit la clause résolutoire, qui vise aussi le dépôt de garantie non versé, ajoute la mention de résidence principale quand elle s'impose et un numéro de portable facultatif. Les baux déjà signés ne changent pas.",
-  publieLe: "2026-11-16",
+  publieLe: "2026-11-04",
   pilier: "D",
   format: "actualite",
   lecture: 5,
@@ -67,7 +67,7 @@ const meta: ArticleMeta = {
     { id: "inchange", titre: "Ce qui ne change pas" },
     { id: "verifier", titre: "Les cinq points à relire" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

@@ -30,3 +30,15 @@ l'Assemblée nationale » de `FAITS.md`.
 
 Faits : déjà dans `docs/seo/FAITS.md` (vague 4). Aucun fichier d'attente pour cet article, rien à
 reporter.
+
+## Mise à jour du 2026-11-04 (vague 5) : verdict ramené à À CORRIGER
+
+La condition ci-dessus est déjà remplie. `docs/seo/faits-a-integrer/blog-veille.md` (dernière ligne)
+relève sur assemblee-nationale.fr un dossier, le texte n° 3393 transmis le 2026-10-22, le texte de la
+commission n° 3432-A0 du 2026-11-04 et une séance publique le 2026-11-18. L'article (`:76`) dit
+pourtant « nous n'avons trouvé sur le site de l'Assemblée ni dossier ni date d'examen », et `FAITS.md`
+(« Examen à l'Assemblée nationale ») aussi.
+Correction : remplacer la phrase de `:76-78` par l'état relevé par la veille, avec la date de la séance
+publique, en laissant intacte la règle « tant qu'il ne l'est pas, rien de ce qu'il prévoit ne
+s'applique ». Puis remplacer la ligne de `FAITS.md` par celle de la veille, que je n'ai pas encore
+reportée : elle attend cette correction. Je relirai ces deux endroits seulement.

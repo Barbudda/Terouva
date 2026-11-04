@@ -12,7 +12,7 @@ const meta: ArticleMeta = {
     "Visa Visale refusé ou propriétaire qui n'en veut pas : deux refus différents. Les causes vérifiables, ce que vous pouvez corriger, les autres garanties.",
   chapeau:
     "Un refus de Visale a deux origines. Action Logement refuse le visa quand une condition manque : âge, situation, ressources, loyer trop élevé ou dossier incomplet. Le propriétaire, lui, doit souscrire le contrat et peut ne pas le faire. Dans le premier cas, corrigez la demande ou visez un loyer plus bas ; dans le second, proposez une autre garantie.",
-  publieLe: "2026-11-23",
+  publieLe: "2026-11-04",
   pilier: "C",
   format: "question",
   lecture: 6,
@@ -65,7 +65,7 @@ const meta: ArticleMeta = {
     { id: "sans-visale", titre: "Sans Visale" },
     { id: "recherche", titre: "Ce que ça change pour vous" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

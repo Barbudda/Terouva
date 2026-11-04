@@ -10,7 +10,7 @@ const meta: ArticleMeta = {
     "Ce que doit dire une lettre de motivation pour une location, pourquoi le propriétaire ne peut pas l'exiger, et quatre modèles à compléter.",
   chapeau:
     "Un propriétaire ne peut pas exiger de lettre de motivation : elle ne figure pas dans la liste des pièces autorisées. Une lettre courte aide pourtant à sortir du lot. Elle dit qui vous êtes, votre revenu, votre garantie, votre date d'emménagement et ce qui vous plaît dans le logement. Quatre modèles à compléter suivent.",
-  publieLe: "2026-12-02",
+  publieLe: "2026-11-04",
   pilier: "A",
   format: "modele",
   lecture: 5,
@@ -55,7 +55,7 @@ const meta: ArticleMeta = {
     { id: "message-ou-lettre", titre: "Lettre ou message ?" },
     { id: "recherche", titre: "Ce que ça change pour votre recherche" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

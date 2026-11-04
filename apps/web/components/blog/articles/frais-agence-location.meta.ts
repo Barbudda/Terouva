@@ -12,7 +12,7 @@ const meta: ArticleMeta = {
     "Plafonds 2026 des frais d'agence pour le locataire : 12,10 €, 10,09 € ou 8,07 € le m² selon la zone, plus 3,03 € pour l'état des lieux. Calcul et règles.",
   chapeau:
     "Le locataire paie au plus la moitié des frais de visite, de dossier et de bail, et jamais plus qu'un plafond au mètre carré : 12,10 € en zone très tendue, 10,09 € en zone tendue, 8,07 € ailleurs en 2026. L'état des lieux d'entrée s'ajoute, plafonné à 3,03 € le m². Le reste revient au propriétaire.",
-  publieLe: "2026-11-30",
+  publieLe: "2026-11-04",
   pilier: "D",
   format: "question",
   lecture: 5,
@@ -58,7 +58,7 @@ const meta: ArticleMeta = {
     { id: "verifier", titre: "Vérifier et réagir" },
     { id: "recherche", titre: "Ce que ça change pour vous" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;

@@ -116,8 +116,8 @@ export default function VisaleRefusee() {
         jouent en votre faveur. Un propriétaire déjà assuré contre les loyers impayés ne peut pas
         exiger de caution, sauf d&apos;un étudiant ou d&apos;un apprenti : demandez-lui s&apos;il
         l&apos;est. Et un bailleur personne morale, hors société civile familiale, ne peut demander
-        qu&apos;une caution apportée par un organisme dont la liste est fixée par décret, ou celle
-        d&apos;un étudiant non boursier. Le détail est dans le guide{" "}
+        une caution que si elle est apportée par un organisme dont la liste est fixée par décret,
+        ou si le logement est loué à un étudiant non boursier. Le détail est dans le guide{" "}
         <Link href="/guides/garant-caution">garant et caution</Link>.
       </p>
 

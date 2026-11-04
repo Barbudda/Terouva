@@ -10,8 +10,10 @@ import Link from "next/link";
  *
  * Seuls trois faits sont juridiques, tous sourcés dans la fiche : la décence
  * (Service-public F2042, vérifiée le 21 mars 2025), la classe énergie louable
- * (même fiche) et les plafonds d'honoraires (ANIL, page à jour au
- * 10 décembre 2019). Tout le reste est une question à poser, pas une règle.
+ * (même fiche) et les plafonds d'honoraires (Service-public F375, vérifiée le
+ * 12 janvier 2026, comme FAITS.md ; la page ANIL citée d'abord, à jour au
+ * 10 décembre 2019, donnait les plafonds d'avant leur révision). Tout le reste
+ * est une question à poser, pas une règle.
  */
 export default function QuestionsAPoserVisiteAppartement() {
   return (
@@ -127,13 +129,14 @@ export default function QuestionsAPoserVisiteAppartement() {
       <p>
         Quand une agence s&apos;occupe de la location, la part des honoraires payée par le locataire
         ne peut jamais dépasser celle du propriétaire. Elle est aussi plafonnée par mètre carré
-        habitable pour la visite, la constitution du dossier et la rédaction du bail : 12 € en zone
-        très tendue, 10 € en zone tendue et 8 € ailleurs. L&apos;état des lieux d&apos;entrée ne peut
-        pas vous être facturé plus de 3 € le mètre carré (ANIL, page à jour au 10 décembre 2019).
+        habitable pour la visite, la constitution du dossier et la rédaction du bail : 12,10 € en
+        zone très tendue, 10,09 € en zone tendue et 8,07 € ailleurs. L&apos;état des lieux
+        d&apos;entrée ne peut pas vous être facturé plus de 3,03 € le mètre carré (Service-public,
+        fiche vérifiée le 12 janvier 2026).
       </p>
       <p>
-        Pour un deux-pièces de 40 m² en zone tendue, cela fait au plus 400 € pour la visite, le
-        dossier et le bail, et 120 € pour l&apos;état des lieux. Demandez le détail avant de vous
+        Pour un deux-pièces de 40 m² en zone tendue, cela fait au plus 403,60 € pour la visite, le
+        dossier et le bail, et 121,20 € pour l&apos;état des lieux. Demandez le détail avant de vous
         engager.
       </p>
 

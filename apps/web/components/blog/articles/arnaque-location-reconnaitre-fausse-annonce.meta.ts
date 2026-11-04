@@ -12,7 +12,7 @@ const meta: ArticleMeta = {
     "Loyer trop bas, propriétaire injoignable, argent demandé pour réserver : les signes d'une fausse annonce de location, et que faire si vous avez déjà payé.",
   chapeau:
     "Une fausse annonce de location se trahit presque toujours de la même façon : un loyer trop bas pour le quartier, un propriétaire qui ne peut pas vous rencontrer, et une demande d'argent ou de papiers d'identité avant la visite. Aucune somme ne peut vous être réclamée avant la signature du bail : refusez tout paiement pour « réserver ».",
-  publieLe: "2026-12-09",
+  publieLe: "2026-11-04",
   pilier: "A",
   format: "question",
   lecture: 6,
@@ -64,7 +64,7 @@ const meta: ArticleMeta = {
     { id: "victime", titre: "Si vous avez déjà payé ou envoyé vos papiers" },
     { id: "loi", titre: "Ce que dit la loi" },
   ],
-  statut: "brouillon",
+  statut: "publie",
 };
 
 export default meta;
