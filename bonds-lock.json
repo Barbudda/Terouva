@@ -1,10 +1,10 @@
 {
   "version": 1,
   "bondsHome": "C:\\Users\\hugo8\\OneDrive\\Desktop\\BONDS",
-  "bondsCommit": "b337023d22a2aa00bc16d2baedda10e79bfe5e45",
+  "bondsCommit": "87482964d776832ad59e619c37e11abac3c2cdf3",
   "loadout": "app-premium",
   "equipeLe": "2026-09-15T15:56:31.694Z",
-  "misAJourLe": "2026-11-04T14:43:43.084Z",
+  "misAJourLe": "2026-11-04T15:15:18.116Z",
   "poles": {
     "seo-geo": {
       "installeLe": "2026-11-04T12:07:48.925Z",
@@ -680,9 +680,9 @@
     "agent:geo-citabilite": {
       "type": "agent",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "0f8724947d3fbc3418bbd4e3d2467375da589ccb",
+      "hash": "6227a6e9713724d9deabcbf38040fb5eebd20d06",
       "cible": ".claude/agents/geo-citabilite.md",
-      "installeLe": "2026-11-04T12:29:04.187Z"
+      "installeLe": "2026-11-04T15:15:18.116Z"
     },
     "agent:seo-gardien-technique": {
       "type": "agent",
@@ -701,9 +701,9 @@
     "agent:seo-outils": {
       "type": "agent",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "8b60795e8ad71e4ee1155c71792b475cba10c029",
+      "hash": "986c19794bf01cebeb5f979641a010c713fdab5a",
       "cible": ".claude/agents/seo-outils.md",
-      "installeLe": "2026-11-04T12:07:48.925Z"
+      "installeLe": "2026-11-04T15:15:18.116Z"
     },
     "agent:seo-fiches-stores": {
       "type": "agent",
