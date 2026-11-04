@@ -372,3 +372,39 @@ appeler en chaîne, passer par le chef.
 - chrome-devtools — Chrome DevTools en MCP : audits Lighthouse, traces de performance, réseau, console et captures pour mesurer LCP/CLS/INP.
 - semrush — Recherche de mots-clés, positions et analyse de concurrence par le serveur officiel Semrush en HTTP.
 <!-- bonds:pole:seo-geo:end -->
+
+<!-- bonds:pole:cto-commerce:start -->
+## Pôle CTO & Commerce
+
+> Installé par BONDS le 2026-11-04 (`equip --pole=cto-commerce`). Bloc régénéré par `/bonds update` :
+> écrire les règles propres au projet hors des balises `bonds:pole:cto-commerce`.
+
+**Point d'entrée : `/pole-cto-commerce`.** Le chef tourne dans la session principale, lance les
+études (un fichier plafonné chacune), condense tout en `docs/commerce/MESSAGE.md`, écrit lui-même les
+textes, les fait relire par `commerce-relecteur`, vérifie à l'écran et commite.
+
+- **Avant d'écrire un texte public, lire `docs/commerce/MESSAGE.md` et rien d'autre** : il remplace
+  la relecture des études. Méthode : skill `ecrire-pour-le-client`.
+- On dit ce que le client gagne, jamais comment l'outil est fait. Chaque chiffre a sa source en un clic.
+- La description du produit est la même partout : page, FAQ, description du site, `llms.txt`, pages
+  légales, onboarding.
+- Pas de faux témoignage, pas d'urgence fabriquée, pas de promesse hors des lignes rouges du projet.
+
+### Sous-agents
+- commerce-audit-textes — Audite les textes d'un site comme un client pressé : verdict par section, objections sans réponse, contradictions entre page, FAQ, description et llms.txt, dix changements classés.
+- commerce-references — Décortique les sites de référence du client : squelette, formules, preuve, prix, objections, microcopie, quinze motifs transférables et ce qu'il ne faut pas reprendre.
+- commerce-veille — Veille sourcée sur ce qui marche pour présenter un produit : principes et gabarits (METHODE.md) ou résultats mesurés et mots du client (CE-QUI-MARCHE.md).
+- commerce-relecteur — Relit les textes en une passe avec la grille de 15 points et le diff, distinct de l'auteur : seulement les échecs, réécriture proposée, verdict.
+
+### Skills du pôle
+- pole-cto-commerce — Chef du pôle CTO & Commerce : lance quatre agents d'étude et de relecture, condense leurs fichiers en un MESSAGE.md, réécrit lui-même les textes du site, fait relire, vérifie à l'écran, commite et nourrit BONDS.
+- ecrire-pour-le-client — Écrire les textes d'un site pour que le client voie ce qu'il gagne : un MESSAGE.md d'une page, règles justifiées par des résultats mesurés, ordre de page en liste d'attente, références Rushlot et FanClaw, grille de 15 points en une lecture.
+- copywriting — Rédaction de pages marketing (titres, propositions de valeur, preuves) pour une vitrine.
+- cro — Optimisation du taux de conversion d'une page : hiérarchie, friction, preuve sociale.
+- ux-writing — Sept skills UI/UX anti-slop (audit en lecture seule avec preuves, refonte visuelle, flux et états, UX writing, porte qualité) qui diagnostiquent puis corrigent une interface au look générique en respectant la marque existante, pour les loadouts vitrine-premium et saas-webapp.
+- zero-slop — Skill d'édition plus scoreur hors-ligne (294 motifs pondérés, lexique de 96 termes, Python stdlib) et CLI `npx zero-slop score` qui repèrent les tournures IA, réécrivent en préservant noms, chiffres, liens et citations, et notent la prose de 0 à 100 ; pour la passe texte pas-IA de tout projet.
+- launch — Plan de lancement d'un produit ou d'un site.
+
+### MCP du pôle
+- playwright — Pilotage d'un navigateur (navigation, captures, formulaires) pour tester et vérifier visuellement.
+<!-- bonds:pole:cto-commerce:end -->
