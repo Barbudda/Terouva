@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
@@ -6,6 +7,7 @@ import { FinDePage } from "@/components/layout/FinDePage";
 import { Questions } from "@/components/ui/Questions";
 import { Sommaire } from "@/components/guides/Sommaire";
 import { GUIDES } from "@/lib/catalogue";
+import { PHOTOS, RESUMES } from "@/lib/guides-resumes";
 import { DonneesStructurees, filAriane } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
@@ -34,22 +36,32 @@ export type Guide = {
   sommaire?: Array<{ id: string; titre: string }>;
 };
 
-/** La rubrique affichée en mention, au-dessus du titre. */
-const RUBRIQUES: Record<Guide["etape"], string> = {
+/** La rubrique affichée en mention, au-dessus du titre, et sur les filtres de la rubrique. */
+export const RUBRIQUES: Record<Guide["etape"], string> = {
   avant: "Avant de visiter",
   candidature: "Au moment de candidater",
   apres: "Une fois le logement trouvé",
 };
 
+/** Date courte, comme sur une liste d'articles : « 11 oct. 2026 ». */
+export function dateCourte(guide: Guide) {
+  return new Date(guide.modifieLe ?? guide.publieLe).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 /**
- * Cadre commun des guides : le monde papier à l'état pur, sur un site
- * désormais sombre. Le scope `.monde-papier` enveloppe toute la page.
+ * Le gabarit d'un guide, sur le modèle des articles de Rushlot et de FanClaw
+ * (Hugo, 4 novembre : « le texte est posé là sans attraction »).
  *
- * Un en-tête d'article (rubrique en `.champ`, titre, chapeau en énoncé, ligne
- * de métadonnées à filets), puis trois colonnes sur grand écran : le sommaire
- * collé à gauche, la prose au centre sur 44 rem, et une marge de droite qui ne
- * sert qu'aux notes (les `.note` y flottent, voir `globals.css`). Cette
- * troisième colonne est ce qui donne au guide l'allure d'un ouvrage.
+ * De haut en bas : la rubrique et le retour à la liste, le titre, le chapô, la
+ * ligne de métadonnées, puis la photo en bandeau. Dessous, le sommaire
+ * numéroté collé à gauche ; au centre, ce qu'il faut retenir, les chiffres
+ * clés, le produit en une ligne, puis la prose, ouverte par une lettrine et
+ * coupée en sections numérotées comme le sommaire. En bas : sources, questions,
+ * trois guides à lire ensuite, l'inscription.
  *
  * La date de vérification n'est pas décorative. Ces pages citent du droit qui
  * change ; afficher quand on l'a relu, et d'où ça vient, c'est ce qui distingue
@@ -57,6 +69,8 @@ const RUBRIQUES: Record<Guide["etape"], string> = {
  */
 export function CadreGuide({ guide, children }: { guide: Guide; children: React.ReactNode }) {
   const siteUrl = getSiteUrl();
+  const photo = PHOTOS[guide.chemin];
+  const resume = RESUMES[guide.chemin];
   const etapes = [
     { nom: "Accueil", chemin: "/" },
     { nom: "Guides", chemin: "/guides" },
@@ -71,9 +85,12 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
         "@id": `${siteUrl}${guide.chemin}#article`,
         headline: guide.titre,
         description: guide.description,
-        // Un `Article` sans image est incomplet pour Google. Chaque guide a
-        // son image de partage générée au build ; c'est elle qu'on déclare.
-        image: [`${siteUrl}${guide.chemin}/opengraph-image`],
+        // Un `Article` sans image est incomplet pour Google : la photo du
+        // bandeau d'abord, l'image de partage générée au build ensuite.
+        image: [
+          ...(photo ? [`${siteUrl}${photo.src}`] : []),
+          `${siteUrl}${guide.chemin}/opengraph-image`,
+        ],
         inLanguage: "fr-FR",
         datePublished: guide.publieLe,
         dateModified: guide.modifieLe ?? guide.publieLe,
@@ -112,44 +129,137 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
       <Nav home={false} />
 
       <main className="pb-16">
-        <header className="grille pt-4 md:pt-6">
-          <div className="col-span-12 lg:col-span-9">
-            <Ariane etapes={etapes} />
-            <p className="champ mt-8 text-ink-3">{RUBRIQUES[guide.etape]}</p>
-            <h1 className="titre mt-4 max-w-[22ch] text-titre-2 text-ink">{guide.titre}</h1>
-            <p className="enonce mt-6 text-ink-2">{guide.resume}</p>
+        <header className="cadre pt-8 md:pt-14">
+          <div className="flex items-center justify-between gap-4">
+            <p className="champ text-accent-ink">{RUBRIQUES[guide.etape]}</p>
+            <Link
+              href="/guides"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-rule-fort bg-card px-4 text-[14px] text-ink transition-colors duration-200 hover:border-ink-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
+            >
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden className="size-4 text-accent-ink">
+                <path d="M13 8H3M7 4L3 8l4 4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span className="hidden sm:inline">Retour aux guides</span>
+              <span className="sm:hidden">Guides</span>
+            </Link>
           </div>
-          <dl className="col-span-12 mt-8 flex flex-wrap gap-x-10 gap-y-3 border-y border-rule py-3 lg:col-span-9">
+          <h1 className="titre mt-6 max-w-[20ch] text-[clamp(2.25rem,1.3rem+3.6vw,4rem)] text-ink">
+            {guide.titre}
+          </h1>
+          <p className="mt-6 max-w-[42rem] text-[1.1875rem] leading-relaxed text-ink-2">{guide.resume}</p>
+          <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-rule pt-4">
             <Meta nom="Mis à jour le" valeur={verifieLe} />
             <Meta nom="Lecture" valeur={`${guide.lecture} min`} />
             {guide.sources && guide.sources.length > 0 && (
               <Meta nom="Sources" valeur={`${guide.sources.length} officielle${guide.sources.length > 1 ? "s" : ""}`} />
             )}
           </dl>
-          {/* Le produit en une ligne, avant la lecture, comme sur les articles
-              de FanClaw et de Rushlot : le lecteur venu pour une question sait
-              tout de suite ce que Terouva peut faire pour sa recherche. */}
-          <p className="col-span-12 mt-5 text-[15px] leading-relaxed text-ink-2 lg:col-span-9">
-            <span className="champ mr-2 text-accent-ink">Terouva</span>
-            Les locations qui vous correspondent, signalées dès qu&apos;elles paraissent, avec
-            votre message déjà écrit.{" "}
-            <a href="#prevenu" className="lien">
-              Être prévenu du lancement
-            </a>
-          </p>
+
+          {photo && (
+            <figure className="mt-8 md:mt-10">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-paper-2 shadow-[0_24px_48px_-28px_rgb(23_24_26/0.45)] sm:aspect-[16/8] md:rounded-[1.75rem]">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1280px) 1200px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-2.5 text-right text-[13px] text-ink-3">
+                Photo :{" "}
+                <a href={photo.url} target="_blank" rel="noopener" className="hover:text-ink hover:underline">
+                  {photo.auteur}, Unsplash
+                </a>
+              </figcaption>
+            </figure>
+          )}
         </header>
 
         <div className="grille mt-10 lg:mt-14">
           {guide.sommaire && guide.sommaire.length > 0 && (
-            <aside className="hidden lg:col-span-2 lg:block">
-              <div className="sticky top-20">
+            <aside className="hidden lg:col-span-3 lg:block">
+              <div className="sticky top-24 pr-4">
                 <Sommaire entrees={guide.sommaire} />
               </div>
             </aside>
           )}
 
           <div className="col-span-12 lg:col-span-9 lg:col-start-4">
-            <article className="article article--marge">{children}</article>
+            <Ariane etapes={etapes} />
+
+            {guide.sommaire && guide.sommaire.length > 0 && (
+              <details className="group mt-6 rounded-[1rem] border border-rule bg-card lg:hidden">
+                <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between px-5 text-[15px] font-medium text-ink">
+                  Sur cette page
+                  <span aria-hidden className="text-ink-3 transition-transform duration-200 group-open:rotate-45">+</span>
+                </summary>
+                <ol className="border-t border-rule px-5 py-3">
+                  {guide.sommaire.map((e, i) => (
+                    <li key={e.id}>
+                      <a href={`#${e.id}`} className="flex gap-3 py-2 text-[15px] text-ink-2 hover:text-ink">
+                        <span className="champ pt-0.5 text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
+                        {e.titre}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </details>
+            )}
+
+            {resume && (
+              <>
+                <section
+                  aria-labelledby="a-retenir"
+                  className="mt-6 max-w-[48rem] rounded-[1.25rem] border border-rule bg-[color-mix(in_oklch,var(--color-action)_7%,var(--color-card))] p-6 sm:p-8"
+                >
+                  <h2 id="a-retenir" className="champ flex items-center gap-3 text-accent-ink">
+                    <span aria-hidden className="h-px w-6 bg-accent-ink" />
+                    À retenir
+                  </h2>
+                  <ul className="mt-5 space-y-3.5">
+                    {resume.aRetenir.map((point) => (
+                      <li key={point} className="flex gap-3.5 text-[16px] leading-relaxed text-ink">
+                        <span aria-hidden className="mt-1 flex size-5 shrink-0 items-center justify-center rounded-md bg-action text-action-ink">
+                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.25" className="size-3">
+                            <path d="M3.5 8.5l3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </span>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+
+                <section aria-labelledby="en-chiffres" className="mt-10 max-w-[48rem]">
+                  <h2 id="en-chiffres" className="champ text-ink-3">En chiffres</h2>
+                  <dl className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
+                    {resume.enChiffres.map((c) => (
+                      <div key={c.valeur + c.libelle} className="flex flex-col rounded-[1rem] border border-rule bg-card p-4 sm:p-6">
+                        <dt className="order-2 mt-2 text-[14px] leading-snug text-ink-2">{c.libelle}</dt>
+                        <dd className="titre order-1 text-[clamp(1.75rem,1.2rem+2vw,2.75rem)] text-accent-ink">
+                          {souder(c.valeur)}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </section>
+              </>
+            )}
+
+            {/* Le produit en une ligne, avant la lecture : le lecteur venu pour
+                une question sait tout de suite ce que Terouva peut faire pour
+                sa recherche. */}
+            <p className="mt-8 max-w-[48rem] border-l-2 border-action pl-4 text-[15px] leading-relaxed text-ink-2">
+              <strong className="font-medium text-ink">Terouva</strong> vous signale les locations
+              qui vous correspondent dès qu&apos;elles paraissent, avec votre message déjà écrit.{" "}
+              <a href="#prevenu" className="lien">
+                Être prévenu du lancement
+              </a>
+            </p>
+
+            <article className="article article--marge article--lettrine mt-12">{children}</article>
 
             <div className="max-w-[44rem]">
               {guide.sources && guide.sources.length > 0 && (
@@ -170,9 +280,11 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
               {/* Affichées, et pas seulement balisées : c'est la condition posée
                   par Google pour un bloc `FAQPage`. */}
               <Questions questions={guide.questions ?? []} className="mt-16" />
+            </div>
 
-              <ALireAussi chemin={guide.chemin} etape={guide.etape} />
+            <ALireAussi chemin={guide.chemin} etape={guide.etape} />
 
+            <div className="max-w-[44rem]">
               <FinDePage />
             </div>
           </div>
@@ -185,9 +297,10 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
 }
 
 /**
- * Trois guides à lire ensuite : ceux du même moment du parcours d'abord, puis
- * les plus récents. C'est le maillage qui fait passer d'un article à l'autre,
- * et chaque nouveau guide en reçoit des liens sans qu'on retouche les anciens.
+ * Trois guides à lire ensuite, en cartes à photo : ceux du même moment du
+ * parcours d'abord, puis les plus récents. C'est le maillage qui fait passer
+ * d'un article à l'autre, et chaque nouveau guide en reçoit des liens sans
+ * qu'on retouche les anciens.
  */
 function ALireAussi({ chemin, etape }: { chemin: string; etape: Guide["etape"] }) {
   const autres = GUIDES.filter((g) => g.chemin !== chemin);
@@ -199,20 +312,52 @@ function ALireAussi({ chemin, etape }: { chemin: string; etape: Guide["etape"] }
   ].slice(0, 3);
   if (suite.length === 0) return null;
   return (
-    <nav aria-label="À lire aussi" className="mt-16">
-      <h2 className="champ text-ink-3">À lire aussi</h2>
-      <ul className="mt-4 border-t border-rule">
-        {suite.map((g) => (
-          <li key={g.chemin} className="border-b border-rule">
-            <Link href={g.chemin} className="group block py-4">
-              <span className="block font-medium text-ink group-hover:underline">{g.titreSeo}</span>
-              <span className="mt-1 block text-[15px] leading-snug text-ink-2">{g.description}</span>
-            </Link>
-          </li>
-        ))}
+    <nav aria-labelledby="a-lire-aussi" className="mt-16">
+      <h2 id="a-lire-aussi" className="titre titre--petit text-[1.75rem] text-ink">
+        À lire aussi
+      </h2>
+      <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {suite.map((g) => {
+          const photo = PHOTOS[g.chemin];
+          return (
+            <li key={g.chemin}>
+              <Link
+                href={g.chemin}
+                className="group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-rule bg-card transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-rule-fort focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
+              >
+                {photo && (
+                  <div className="relative aspect-[16/10] overflow-hidden bg-paper-2">
+                    <Image
+                      src={photo.src}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-500 ease-[var(--ease-terouva)] group-hover:scale-[1.03]"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="champ text-accent-ink">{RUBRIQUES[g.etape]}</p>
+                  <p className="mt-2 text-[17px] leading-snug font-medium text-ink">{g.titreSeo}</p>
+                  <p className="mt-2 line-clamp-3 text-[14px] leading-relaxed text-ink-2">{g.description}</p>
+                  <p className="champ mt-auto pt-4 text-ink-3">{g.lecture} min de lecture</p>
+                </div>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
+}
+
+/**
+ * Les espaces d'un chiffre ne doivent jamais casser : « 1 940 € » ou « 10 % »
+ * sur deux lignes ne se lisent plus. Les autres espaces restent sécables, pour
+ * qu'une valeur en mots comme « Une vingtaine » tienne dans sa tuile.
+ */
+function souder(valeur: string) {
+  return valeur.replace(/(\d) (?=[\d€%])/g, "$1\u00a0");
 }
 
 function Meta({ nom, valeur }: { nom: string; valeur: string }) {

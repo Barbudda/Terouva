@@ -35,23 +35,24 @@ export function Sommaire({ entrees }: { entrees: Array<{ id: string; titre: stri
   return (
     <nav aria-label="Sommaire">
       <p className="champ text-ink-3">Sur cette page</p>
-      <span aria-hidden className="mt-2 block h-px bg-rule" />
-      <ul className="mt-3 space-y-2 text-[14px] leading-snug">
-        {entrees.map((e) => (
-          <li key={e.id}>
+      {/* Numérotées comme les sections de la prose : 01, 02… */}
+      <ol className="mt-3 text-[14px] leading-snug">
+        {entrees.map((e, i) => (
+          <li key={e.id} className="border-b border-rule last:border-b-0">
             <a
               href={`#${e.id}`}
               aria-current={actif === e.id ? "location" : undefined}
               className={cn(
-                "inline-block py-0.5 transition-colors duration-150",
+                "flex gap-3 py-2.5 transition-colors duration-150",
                 actif === e.id ? "font-medium text-accent-ink" : "text-ink-3 hover:text-ink",
               )}
             >
+              <span className="champ shrink-0 pt-px text-[11px]">{String(i + 1).padStart(2, "0")}</span>
               {e.titre}
             </a>
           </li>
         ))}
-      </ul>
+      </ol>
     </nav>
   );
 }

@@ -1045,6 +1045,36 @@ details > summary::-webkit-details-marker {
   font-size: var(--text-corps);
   line-height: 1.75;
   color: var(--color-ink-2);
+  counter-reset: section;
+}
+/* Chaque section porte son numéro, le même que dans le sommaire : la page se
+   lit comme une suite d'étapes, et l'œil sait où il en est. */
+.article h2 {
+  counter-increment: section;
+}
+.article h2::before {
+  content: counter(section, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.625rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variation-settings: normal;
+  letter-spacing: 0.02em;
+  color: var(--color-accent-ink);
+}
+/* La lettrine du premier paragraphe, comme sur les articles de Rushlot. */
+.article--lettrine > p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 144;
+  font-size: 4.4em;
+  line-height: 0.78;
+  color: var(--color-accent-ink);
+}
+.article--lettrine > p:first-child {
+  font-size: 1.125em;
+  color: var(--color-ink);
 }
 .article > * + * {
   margin-top: 1.25rem;
