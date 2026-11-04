@@ -1,9 +1,11 @@
+import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { Questions } from "@/components/ui/Questions";
 import { Sommaire } from "@/components/guides/Sommaire";
+import { GUIDES } from "@/lib/catalogue";
 import { DonneesStructurees, filAriane } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
@@ -124,6 +126,17 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
               <Meta nom="Sources" valeur={`${guide.sources.length} officielle${guide.sources.length > 1 ? "s" : ""}`} />
             )}
           </dl>
+          {/* Le produit en une ligne, avant la lecture, comme sur les articles
+              de FanClaw et de Rushlot : le lecteur venu pour une question sait
+              tout de suite ce que Terouva peut faire pour sa recherche. */}
+          <p className="col-span-12 mt-5 text-[15px] leading-relaxed text-ink-2 lg:col-span-9">
+            <span className="champ mr-2 text-accent-ink">Terouva</span>
+            Les locations qui vous correspondent, signalées dès qu&apos;elles paraissent, avec
+            votre message déjà écrit.{" "}
+            <a href="#prevenu" className="lien">
+              Être prévenu du lancement
+            </a>
+          </p>
         </header>
 
         <div className="grille mt-10 lg:mt-14">
@@ -158,6 +171,8 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
                   par Google pour un bloc `FAQPage`. */}
               <Questions questions={guide.questions ?? []} className="mt-16" />
 
+              <ALireAussi chemin={guide.chemin} etape={guide.etape} />
+
               <FinDePage />
             </div>
           </div>
@@ -166,6 +181,37 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
 
       <Footer />
     </div>
+  );
+}
+
+/**
+ * Trois guides à lire ensuite : ceux du même moment du parcours d'abord, puis
+ * les plus récents. C'est le maillage qui fait passer d'un article à l'autre,
+ * et chaque nouveau guide en reçoit des liens sans qu'on retouche les anciens.
+ */
+function ALireAussi({ chemin, etape }: { chemin: string; etape: Guide["etape"] }) {
+  const autres = GUIDES.filter((g) => g.chemin !== chemin);
+  const suite = [
+    ...autres.filter((g) => g.etape === etape),
+    ...autres
+      .filter((g) => g.etape !== etape)
+      .sort((a, b) => (b.modifieLe ?? b.publieLe).localeCompare(a.modifieLe ?? a.publieLe)),
+  ].slice(0, 3);
+  if (suite.length === 0) return null;
+  return (
+    <nav aria-label="À lire aussi" className="mt-16">
+      <h2 className="champ text-ink-3">À lire aussi</h2>
+      <ul className="mt-4 border-t border-rule">
+        {suite.map((g) => (
+          <li key={g.chemin} className="border-b border-rule">
+            <Link href={g.chemin} className="group block py-4">
+              <span className="block font-medium text-ink group-hover:underline">{g.titreSeo}</span>
+              <span className="mt-1 block text-[15px] leading-snug text-ink-2">{g.description}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 
