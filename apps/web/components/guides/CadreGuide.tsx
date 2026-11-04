@@ -6,6 +6,7 @@ import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { Questions } from "@/components/ui/Questions";
 import { Sommaire } from "@/components/guides/Sommaire";
+import { CarteGuide } from "@/components/guides/CarteGuide";
 import { GUIDES } from "@/lib/catalogue";
 import { PHOTOS, RESUMES } from "@/lib/guides-resumes";
 import { DonneesStructurees, filAriane } from "@/lib/seo";
@@ -317,35 +318,11 @@ function ALireAussi({ chemin, etape }: { chemin: string; etape: Guide["etape"] }
         À lire aussi
       </h2>
       <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {suite.map((g) => {
-          const photo = PHOTOS[g.chemin];
-          return (
-            <li key={g.chemin}>
-              <Link
-                href={g.chemin}
-                className="group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-rule bg-card transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-rule-fort focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
-              >
-                {photo && (
-                  <div className="relative aspect-[16/10] overflow-hidden bg-paper-2">
-                    <Image
-                      src={photo.src}
-                      alt=""
-                      fill
-                      sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-500 ease-[var(--ease-terouva)] group-hover:scale-[1.03]"
-                    />
-                  </div>
-                )}
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="champ text-accent-ink">{RUBRIQUES[g.etape]}</p>
-                  <p className="mt-2 text-[17px] leading-snug font-medium text-ink">{g.titreSeo}</p>
-                  <p className="mt-2 line-clamp-3 text-[14px] leading-relaxed text-ink-2">{g.description}</p>
-                  <p className="champ mt-auto pt-4 text-ink-3">{g.lecture} min de lecture</p>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
+        {suite.map((g) => (
+          <li key={g.chemin}>
+            <CarteGuide guide={g} />
+          </li>
+        ))}
       </ul>
     </nav>
   );
