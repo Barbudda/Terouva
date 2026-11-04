@@ -40,9 +40,11 @@ navigateur (sauf pour dire où ça s'ouvre), IA, algorithme, fonctionnalité.
 2. **Le gain d'abord, puis une phrase de preuve**. Jamais le « comment c'est fait ».
 3. **Chaque chose dite une fois.** « Parmi les premiers » et « message déjà écrit » apparaissaient
    cinq fois chacun ; les objections, zéro. Une section = une idée qui n'a pas encore été dite.
-4. **Une seule action principale** (« Être prévenu ») et une seconde porte qui marche aujourd'hui
-   (l'outil gratuit de message), jamais la démo en avant (décision d'Hugo du 2026-11-04).
-5. **Réassurance collée au bouton** : gratuit pour commencer, rien ne part sans vous.
+4. **Une seule action principale** (« Être prévenu »), jamais la démo en avant (décision d'Hugo du
+   2026-11-04). L'essai gratuit a sa section, il n'a pas besoin d'un second lien sous le bouton.
+5. **Aucune paraphrase** (Hugo, 2026-11-04) : pas de ligne de réassurance, de légende, de mention ou
+   de phrase qui redit ce qu'un titre, un bouton, une illustration ou la FAQ disent déjà. Avant
+   d'ajouter une ligne, chercher où la page le dit déjà ; si c'est dit, on n'ajoute pas.
 6. **Les objections dans les mots du locataire** : « Mon compte Leboncoin risque-t-il quelque
    chose ? », « Ça marche dans ma ville ? », « Que se passe-t-il après mon inscription ? ».
 7. **Preuve d'avant lancement = le produit montré** (vrais exemples de messages), jamais un compteur

@@ -125,7 +125,7 @@ Un « non » = à corriger. Lire le texte de haut en bas une fois, cocher au fil
 7. L'alternative actuelle du client est-elle nommée au moins une fois ?
 8. L'objection principale est-elle levée avant le premier défilement ?
 9. Chaque bouton dit-il ce qu'on obtient en cliquant (pas « Commencer », « Envoyer », « En savoir plus ») ?
-10. Une ligne de réassurance se trouve-t-elle sous chaque champ e-mail ou bouton d'achat ?
+10. Chaque ligne dit-elle une chose que la page ne dit nulle part ailleurs (aucune paraphrase, règle d'Hugo du 2026-11-04) ?
 11. Toute preuve sociale est-elle réelle, datée ou vérifiable (aucun avis, logo ou chiffre inventé) ?
 12. Le prix, ou la façon dont il sera fixé, est-il dit sans cliquer ailleurs ?
 13. L'usage des données personnelles est-il dit en une phrase claire près du formulaire ?

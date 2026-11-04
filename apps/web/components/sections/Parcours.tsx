@@ -34,8 +34,7 @@ export function Parcours() {
       <div className="scene px-5 py-10 sm:px-10 lg:px-12 lg:py-14">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="mention">{PARCOURS.mention}</p>
-            <h2 id="parcours-titre" className="titre mt-3 max-w-[22ch] text-titre-2 text-ink">
+            <h2 id="parcours-titre" className="titre max-w-[22ch] text-titre-2 text-ink">
               {PARCOURS.titre}
             </h2>
           </div>

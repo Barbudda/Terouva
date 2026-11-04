@@ -295,7 +295,6 @@ export function PanneauEnvoi() {
             </li>
           ))}
         </ol>
-        <p className="marge mt-3">Suivie dans Terouva jusqu&apos;à la visite.</p>
       </div>
     </article>
   );

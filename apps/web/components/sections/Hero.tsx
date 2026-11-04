@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { HERO } from "@/lib/content";
 import { PleinCadre } from "@/components/layout/coquilles/PleinCadre";
 
@@ -64,18 +63,6 @@ export function Hero() {
           </svg>
           <span className="mt-1.5 text-[13px] font-medium">Être prévenu</span>
         </a>
-      </div>
-      {/* Pôle Commerce, 4 novembre : une seconde porte qui marche déjà (pas la
-          démo, qu'Hugo ne veut plus en avant), et l'état du produit dit une
-          fois, sous le bouton, au lieu d'ouvrir la page. */}
-      <div
-        className="entree mx-auto mt-6 flex w-fit max-w-[22rem] flex-col items-center gap-2 rounded-[1.25rem] border border-white/20 bg-night/35 px-5 py-3 text-center backdrop-blur-[3px] [text-shadow:0_1px_10px_rgb(8_17_32/0.55)] sm:max-w-none"
-        style={{ "--rang": 4 } as React.CSSProperties}
-      >
-        <Link href={HERO.essai.href} className="lien text-[15px] text-ink">
-          {HERO.essai.label}
-        </Link>
-        <p className="champ text-ink">{HERO.reassurance}</p>
       </div>
     </PleinCadre>
   );

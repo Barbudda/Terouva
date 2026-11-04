@@ -23,7 +23,7 @@ export function Footer() {
       colonnes={colonnes}
       ligne={
         <>
-          <p>Édité par {EDITEUR.marque} · {FOOTER.local}</p>
+          <p>Édité par {EDITEUR.marque}</p>
           <p className="flex flex-wrap gap-x-4">
             <Link href="/mentions-legales" className="hover:text-ink">
               Mentions légales

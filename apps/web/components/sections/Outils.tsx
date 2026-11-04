@@ -20,13 +20,12 @@ export function Outils() {
     <section id="outils" aria-labelledby="outils-titre" className="cadre scroll-mt-20 py-demi-pas">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="mention">Gratuit, sans inscription</p>
-          <h2 id="outils-titre" className="titre mt-3 max-w-[24ch] text-titre-2 text-ink">
+          <h2 id="outils-titre" className="titre max-w-[24ch] text-titre-2 text-ink">
             Votre message et votre dossier, gratuitement.
           </h2>
         </div>
         <Link href="/outils" className="lien text-[15px]">
-          Les outils gratuits
+          Tous les outils
         </Link>
       </div>
 
@@ -45,9 +44,6 @@ export function Outils() {
                 ) : (
                   <Image src={captureOutil(o.chemin).src} alt="" fill sizes="(min-width: 1024px) 420px, 100vw" className="object-cover" />
                 )}
-                <span className="champ absolute top-4 left-4 z-10 rounded-full bg-night px-3 py-1.5 text-night-ink">
-                  Outil gratuit
-                </span>
               </span>
               <span className="flex flex-1 flex-col p-6">
                 <span className="text-[19px] leading-snug font-medium text-ink">{o.court}</span>

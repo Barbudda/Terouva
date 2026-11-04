@@ -63,10 +63,9 @@ export const HERO = {
     "Vous recevez une alerte Leboncoin. Terouva vous dit si le logement vaut le coup et écrit votre message.",
     "Vous n'avez plus qu'à l'envoyer, parmi les premiers.",
   ],
-  /** La seconde porte, pour qui veut essayer avant de laisser son e-mail : un outil qui marche déjà. */
-  essai: { label: "Écrire mon message, gratuitement", href: "/outils/message-de-candidature" },
-  // Terouva ouvre par vagues (Hugo, 4 novembre) : ni date, ni « bientôt ».
-  reassurance: "Ouverture par vagues · gratuit pour commencer · rien ne part sans vous",
+  // Plus de ligne de réassurance ni de seconde porte sous le bouton (Hugo, 4
+  // novembre) : elles redisaient ce que la phrase, la section outils et
+  // l'inscription disent déjà. Une chose se dit une fois, à sa place.
 };
 
 /**
@@ -75,16 +74,13 @@ export const HERO = {
  * candidature envoyée. Chaque phrase dit ce qui se passe pour vous.
  */
 export const PARCOURS = {
-  // « Votre soirée, rendue » faisait une jolie formule et ne disait rien : la
-  // mention annonce simplement ce qu'on va voir.
-  mention: "En pratique",
   titre: "De l'alerte à votre réponse, sans y passer la soirée.",
   // Chaque étape dit ce que vous vivez, pas ce que fait l'outil ; la dernière
   // rappelle que l'envoi reste le vôtre, une fois, ici seulement.
   etapes: [
     { nom: "L'alerte arrive", texte: "Leboncoin vous envoie une annonce, comme aujourd'hui." },
     { nom: "Vous savez si elle vaut le coup", texte: "Prix, surface, quartier : vous le voyez d'un coup d'œil." },
-    { nom: "Votre message est prêt", texte: "Écrit pour ce logement, avec les infos de votre dossier. Vous le relisez." },
+    { nom: "Votre message est prêt", texte: "Écrit pour ce logement, avec les infos de votre dossier." },
     { nom: "Vous l'envoyez", texte: "Sur Leboncoin, vous-même. Ensuite, vous notez la réponse dans Terouva." },
   ],
 };
@@ -95,20 +91,14 @@ export const PARCOURS = {
  * histoire du fondateur : Hugo n'en veut pas.
  */
 export const SIGNUP = {
-  eyebrow: "Liste d'attente",
   titleLead: "Terouva ouvre par vagues.",
   titleTail: "Prenez place dans la prochaine.",
-  body: "Laissez votre adresse. Quand votre tour arrive, vous recevez un e-mail pour commencer. La base est gratuite.",
-  // « Désinscription en un clic » promettait un lien qui n'existe pas : aucun
-  // e-mail n'est encore parti. Le retrait se fait sur demande, et c'est ce que
-  // dit la politique de confidentialité. La ligne sous le champ dit déjà
-  // « un e-mail quand votre tour arrive » : on ne le répète pas ici.
-  assurances: ["Retrait sur simple demande", "Aucune donnée revendue"],
+  // Pas de phrase sous le titre : il dit tout, et la FAQ juste au-dessus
+  // répond déjà au prix, au retrait de l'adresse et à ce qui suit.
   // « Mac » et « Windows » annonçaient une application à télécharger, gelée
   // depuis juin : Terouva s'ouvre dans le navigateur (pôle Commerce, 4 novembre).
   platforms: [
     { name: "Sur ordinateur", detail: "Dans votre navigateur, sans installation" },
-    { name: "Leboncoin", detail: "Les locations, partout en France" },
   ],
 };
 
@@ -122,7 +112,7 @@ export const PROBLEM = {
   titreLead: "Près de deux candidats sur trois",
   titreTail: "écrivent dans l'heure.",
   texte:
-    "C'est ce que montrent les enquêtes de leboncoin immo menées en 2026. Les professionnels interrogés ajoutent que sur dix candidatures reçues, moins de quatre sont complètes. Avec Terouva, vous écrivez dans la première heure, avec un dossier complet.",
+    "Et selon les professionnels interrogés, sur dix candidatures reçues, moins de quatre sont complètes.",
   source: {
     label: "Enquêtes leboncoin immo 2026, rapportées par MySweetImmo",
     href: "https://www.mysweetimmo.com/2026/09/24/location-1-candidat-sur-3-repond-en-moins-de-15-minutes/",
@@ -139,7 +129,7 @@ export const PROBLEM = {
     avec: {
       nom: "Avec Terouva",
       titre: "Vous répondez dès l'alerte.",
-      texte: "Vous écrivez dans l'heure, comme les candidats les plus rapides.",
+      texte: "Votre message et votre dossier sont prêts : vous écrivez dans l'heure.",
       position: 7,
     },
   },
@@ -173,7 +163,7 @@ export const FEATURES = [
   {
     icon: "lock" as const,
     title: "Votre dossier reste à vous",
-    body: "Pas de compte à créer, rien à confier à personne.",
+    body: "Rien à confier à personne.",
   },
 ];
 
@@ -184,10 +174,6 @@ export const FEATURES = [
  * n'avaient aucune réponse (audit du pôle Commerce, 4 novembre).
  */
 export const FAQ_ITEMS = [
-  {
-    q: "Qu'est-ce que Terouva fait pour moi ?",
-    a: "Il vous fait gagner le temps entre l'alerte et votre réponse : vous savez tout de suite si l'annonce vaut la peine, et votre message est déjà écrit. Vous gardez la main sur l'envoi.",
-  },
   {
     q: "Est-ce légal ? Mon compte Leboncoin risque-t-il quelque chose ?",
     a: "Terouva travaille sur les alertes que Leboncoin vous envoie déjà et sur les annonces que vous ouvrez vous-même. Il ne vous demande jamais vos identifiants, ne se connecte pas à votre compte et n'agit jamais sur Leboncoin à votre place.",
@@ -234,7 +220,6 @@ export const EDITEUR = {
 
 export const FOOTER = {
   signature: "Conçu pour vous aider à trouver votre logement plus sereinement.",
-  local: "Aucun compte · aucune publicité",
   disclaimer: "Terouva n'a aucun lien avec Leboncoin.",
   columns: [
     {

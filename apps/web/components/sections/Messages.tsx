@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { MESSAGES, type MessageExemple } from "@/lib/exemples";
 import { Mosaique, gabarit } from "@/components/layout/coquilles/Mosaique";
 import { useEnVue } from "@/components/ui/useEnVue";
@@ -24,8 +23,7 @@ export function Messages() {
     <section id="messages" className="py-pas">
       <div className="grille">
         <div className="col-span-12 md:col-span-6 md:col-start-5">
-          <p className="mention">Le message</p>
-          <h2 className="titre mt-3 text-titre-2 text-ink">Un message qui donne envie de vous répondre.</h2>
+          <h2 className="titre text-titre-2 text-ink">Un message qui donne envie de vous répondre.</h2>
           <p className="mt-5 max-w-[34rem] leading-relaxed text-ink-2">
             Qui vous êtes, vos revenus, votre garant, quand vous pouvez visiter : tout ce que le
             propriétaire veut savoir, en quelques lignes.
@@ -42,17 +40,6 @@ export function Messages() {
           <Fiche key={m.annonce} message={m} rang={i} />
         ))}
       />
-
-      <div className="grille mt-8">
-        <div className="col-span-12 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 md:col-span-6 md:col-start-5">
-          <p className="marge">
-            Six messages écrits par Terouva pour des annonces d&apos;exemple.
-          </p>
-          <Link href="/outils/message-de-candidature" className="lien text-[15px]">
-            Écrire le vôtre, gratuitement
-          </Link>
-        </div>
-      </div>
     </section>
   );
 }
