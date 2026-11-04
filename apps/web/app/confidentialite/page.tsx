@@ -38,13 +38,7 @@ export default function Confidentialite() {
           l'application et à l'extension de navigateur.
         </p>
 
-        <p className="mt-8 text-lg leading-relaxed text-ink-2">
-          Terouva est conçu pour respecter votre vie privée par construction.
-          En résumé : <strong className="text-ink">vos données restent sur votre
-          ordinateur</strong>, il n'y a ni compte, ni publicité, ni suivi. La
-          seule information qui nous parvient est votre adresse e-mail, et
-          uniquement si vous demandez à être prévenu de l'ouverture.
-        </p>
+        {/* « En résumé » retiré : chaque point est le titre d'une section ci-dessous. */}
 
         <Section title="L'application ne collecte rien">
           <p>

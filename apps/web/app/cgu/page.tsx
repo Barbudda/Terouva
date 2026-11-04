@@ -33,12 +33,11 @@ export default function Cgu() {
           gratuits et à sa liste d&apos;attente.
         </p>
 
+        {/* L'inventaire du site redisait la ligne de date juste au-dessus (et comptait
+            deux outils sur trois) : reste ce qu'elle ne dit pas. */}
         <p className="mt-8 text-lg leading-relaxed text-ink-2">
-          Terouva n&apos;est pas encore sorti. Ce site propose aujourd&apos;hui des{" "}
-          <strong className="text-ink">guides</strong>, deux{" "}
-          <strong className="text-ink">outils gratuits</strong> et une{" "}
-          <strong className="text-ink">liste d&apos;attente</strong>. Ces conditions décrivent ce
-          qui existe à cette date, pas ce qui est annoncé.
+          Terouva n&apos;est pas encore sorti. Ces conditions décrivent ce qui existe à cette date,
+          pas ce qui est annoncé.
         </p>
 
         <Section title="Utiliser le site vaut acceptation">

@@ -19,14 +19,13 @@ export default function GuideEtatDesLieux() {
       <p>
         L&apos;état des lieux est le document qui protège votre{" "}
         <Link href="/guides/depot-de-garantie">dépôt de garantie</Link> : à la sortie, c&apos;est à
-        lui qu&apos;on compare le logement. Un défaut qui n&apos;est pas noté le jour de
-        l&apos;entrée sera difficile à contester le jour de la sortie.
+        lui qu&apos;on compare le logement.
       </p>
 
       <h2 id="pourquoi">Ce qui se joue</h2>
       <p>
-        À la fin du bail, le propriétaire compare les deux états des lieux. L&apos;écart entre les
-        deux détermine ce qu&apos;il peut retenir sur votre dépôt. Un état des lieux
+        L&apos;écart entre les deux états des lieux détermine ce que le propriétaire peut retenir
+        sur votre dépôt. Un état des lieux
         d&apos;entrée vague ne décrit rien, donc ne prouve rien, et l&apos;écart se lit contre
         vous.
       </p>
@@ -129,8 +128,7 @@ export default function GuideEtatDesLieux() {
       </p>
       <p>
         Si le propriétaire refuse la modification, la commission départementale de conciliation
-        peut être saisie, gratuitement. C&apos;est la soupape à retenir quand on a signé trop vite,
-        le jour du déménagement, entre deux cartons.
+        peut être saisie, gratuitement.
       </p>
 
       <h2 id="sortie">L&apos;état des lieux de sortie</h2>
@@ -184,9 +182,7 @@ export default function GuideEtatDesLieux() {
         </li>
       </ul>
       <p>
-        Autrement dit : sans état des lieux d&apos;entrée, la présomption joue contre vous, sauf si
-        le propriétaire a refusé de le faire malgré votre mise en demeure. S&apos;il ne le propose
-        pas, demandez-le par écrit.
+        S&apos;il ne le propose pas, demandez-le par écrit.
       </p>
 
       <h2 id="litige">En cas de désaccord</h2>

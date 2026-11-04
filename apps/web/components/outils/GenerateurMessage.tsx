@@ -162,10 +162,8 @@ export function GenerateurMessage() {
         onSubmit={(e) => e.preventDefault()}
         aria-label="Vos informations"
       >
+        {/* La réassurance est sous le titre de la page, et dans la FAQ. */}
         <p className="champ text-night-ink-2">Vos informations</p>
-        <p className="mt-3 text-[15px] leading-relaxed text-night-ink-2">
-          Elles ne quittent pas votre navigateur : cette page n&apos;envoie rien, à personne.
-        </p>
 
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
           <Champ label="Prénom" value={champs.prenom} onChange={set("prenom")} placeholder="Camille" />
@@ -271,8 +269,8 @@ export function GenerateurMessage() {
             </select>
           </label>
           <p className="mt-2 text-[13px] leading-relaxed text-night-ink-2">
-            Une seule phrase l&apos;évoquera. Le message ne répète jamais la surface, le prix ni le
-            quartier : la personne qui le reçoit a écrit l&apos;annonce.
+            {/* Le pourquoi (ne pas récapituler l'annonce) est dans la FAQ et sous l'outil. */}
+            Une seule phrase l&apos;évoquera.
           </p>
         </div>
       </form>

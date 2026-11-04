@@ -172,13 +172,8 @@ function ALaUne({ guide: g }: { guide: FicheGuide }) {
         </span>
       </span>
       <div className="relative z-10 -mt-10 mx-3 rounded-[1.5rem] border border-rule bg-card p-6 shadow-[0_24px_48px_-30px_rgb(23_24_26/0.4)] sm:mx-6 sm:p-8 lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:mx-0 lg:mt-0 lg:p-10 group-focus-visible:outline-2 group-focus-visible:outline-offset-2 group-focus-visible:outline-accent-ink">
-        <span className="champ flex items-center gap-2 text-action">
-          <svg viewBox="0 0 16 16" aria-hidden className="size-3.5 fill-current">
-            <path d="M8 1.5l1.9 4 4.4.5-3.3 3 .9 4.3L8 11.1l-3.9 2.2.9-4.3-3.3-3 4.4-.5z" />
-          </svg>
-          <span className="text-accent-ink">À la une</span>
-        </span>
-        <h2 className="titre mt-4 text-[clamp(1.875rem,1.3rem+2vw,2.75rem)] text-ink">{g.titre}</h2>
+        {/* Sans étiquette « À la une » : la taille de la carte le dit déjà. */}
+        <h2 className="titre text-[clamp(1.875rem,1.3rem+2vw,2.75rem)] text-ink">{g.titre}</h2>
         <span className="mt-4 block text-[16px] leading-relaxed text-ink-2">{g.description}</span>
         <span className="mt-6 flex items-center gap-4">
           <span className="champ text-ink-3">{g.lecture} min de lecture</span>

@@ -27,8 +27,7 @@ export default function GuideGarantCaution() {
         « Avez-vous un garant ? » arrive presque toujours avant la visite. Le garant, ou{" "}
         <strong>caution</strong>, est la personne qui s&apos;engage par écrit à payer vos dettes
         locatives si vous ne les payez pas : loyer, charges, intérêts de retard et réparations
-        locatives. Beaucoup le signent comme une pièce de dossier parmi d&apos;autres, alors que
-        l&apos;engagement peut survivre de plusieurs mois à votre départ du logement.
+        locatives.
       </p>
 
       <h2 id="qui">Qui peut se porter garant pour une location ?</h2>
@@ -42,7 +41,7 @@ export default function GuideGarantCaution() {
         Beaucoup d&apos;annonces réclament pourtant un garant propriétaire, ou qui vit dans la même
         région : le bailleur peut le préférer, aucun texte ne l&apos;exige. Pour qui n&apos;a
         personne à solliciter, la <Link href="/guides/garantie-visale">garantie Visale</Link> est
-        la voie la plus courante, et elle se demande avant d&apos;avoir trouvé le logement.
+        la voie la plus courante.
       </p>
 
       <h2 id="simple-ou-solidaire">
@@ -218,9 +217,8 @@ export default function GuideGarantCaution() {
           qui se demande avant d&apos;avoir trouvé le logement.
         </li>
         <li>
-          <strong>L&apos;assurance du propriétaire</strong> : s&apos;il est déjà couvert contre
-          les loyers impayés, il ne peut plus exiger de caution, sauf d&apos;un étudiant ou
-          d&apos;un apprenti.
+          <strong>L&apos;assurance du propriétaire</strong>, s&apos;il est déjà couvert contre
+          les loyers impayés.
         </li>
         <li>
           <strong>Une société de cautionnement</strong>, payante, qui se porte garant à la place

@@ -58,10 +58,8 @@ export function ListeDossier() {
         onSubmit={(e) => e.preventDefault()}
         aria-label="Votre situation"
       >
+        {/* La réassurance vit sous le titre de la page, une seule fois. */}
         <p className="champ text-night-ink-2">Votre situation</p>
-        <p className="mt-3 text-[15px] leading-relaxed text-night-ink-2">
-          Trois questions. Rien n&apos;est envoyé, rien n&apos;est conservé.
-        </p>
 
         <Choix
           legende="Vous êtes"

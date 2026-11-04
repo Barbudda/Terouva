@@ -96,10 +96,10 @@ export default function OutilSalaireLoyer() {
           <h1 className="titre mt-5 max-w-[22ch] text-titre-2 text-ink">
             Le loyer que vos ressources permettent, et ce que les propriétaires regardent.
           </h1>
+          {/* La consigne est déjà l'état vide du calculateur, et ce qu'il affiche
+              se voit juste dessous : reste la réassurance. */}
           <p className="enonce mt-6 text-ink-2">
-            Indiquez un loyer, vos ressources, ou les deux. Vous voyez votre taux d&apos;effort, le
-            repère des trois fois le loyer et les règles de la garantie Visale. Gratuit, sans
-            inscription, et rien ne quitte votre navigateur.
+            Gratuit, sans inscription, et rien ne quitte votre navigateur.
           </p>
         </div>
 

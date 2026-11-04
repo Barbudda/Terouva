@@ -60,8 +60,7 @@ export function dateCourte(guide: Guide) {
  *
  * De haut en bas : la rubrique et le retour à la liste, le titre, le chapô, la
  * ligne de métadonnées, puis la photo en bandeau. Dessous, le sommaire
- * numéroté collé à gauche ; au centre, ce qu'il faut retenir, les chiffres
- * clés, le produit en une ligne, puis la prose, ouverte par une lettrine et
+ * numéroté collé à gauche ; au centre, les chiffres clés, puis la prose, ouverte par une lettrine et
  * coupée en sections numérotées comme le sommaire. En bas : sources, questions,
  * trois guides à lire ensuite, l'inscription.
  *
@@ -210,56 +209,22 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
               </details>
             )}
 
+            {/* Ni « À retenir » (il recopiait les réponses) ni ligne produit (FinDePage la dit). */}
             {resume && (
-              <>
-                <section
-                  aria-labelledby="a-retenir"
-                  className="mt-6 max-w-[48rem] rounded-[1.25rem] border border-rule bg-[color-mix(in_oklch,var(--color-action)_7%,var(--color-card))] p-6 sm:p-8"
-                >
-                  <h2 id="a-retenir" className="champ flex items-center gap-3 text-accent-ink">
-                    <span aria-hidden className="h-px w-6 bg-accent-ink" />
-                    À retenir
-                  </h2>
-                  <ul className="mt-5 space-y-3.5">
-                    {resume.aRetenir.map((point) => (
-                      <li key={point} className="flex gap-3.5 text-[16px] leading-relaxed text-ink">
-                        <span aria-hidden className="mt-1 flex size-5 shrink-0 items-center justify-center rounded-md bg-action text-action-ink">
-                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.25" className="size-3">
-                            <path d="M3.5 8.5l3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-
-                <section aria-labelledby="en-chiffres" className="mt-10 max-w-[48rem]">
-                  <h2 id="en-chiffres" className="champ text-ink-3">En chiffres</h2>
-                  <dl className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
-                    {resume.enChiffres.map((c) => (
-                      <div key={c.valeur + c.libelle} className="flex flex-col rounded-[1rem] border border-rule bg-card p-4 sm:p-6">
-                        <dt className="order-2 mt-2 text-[14px] leading-snug text-ink-2">{c.libelle}</dt>
-                        <dd className="titre order-1 text-[clamp(1.75rem,1.2rem+2vw,2.75rem)] text-accent-ink">
-                          {souder(c.valeur)}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </section>
-              </>
+              <section aria-labelledby="en-chiffres" className="mt-6 max-w-[48rem]">
+                <h2 id="en-chiffres" className="champ text-ink-3">En chiffres</h2>
+                <dl className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
+                  {resume.enChiffres.map((c) => (
+                    <div key={c.valeur + c.libelle} className="flex flex-col rounded-[1rem] border border-rule bg-card p-4 sm:p-6">
+                      <dt className="order-2 mt-2 text-[14px] leading-snug text-ink-2">{c.libelle}</dt>
+                      <dd className="titre order-1 text-[clamp(1.75rem,1.2rem+2vw,2.75rem)] text-accent-ink">
+                        {souder(c.valeur)}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
             )}
-
-            {/* Le produit en une ligne, avant la lecture : le lecteur venu pour
-                une question sait tout de suite ce que Terouva peut faire pour
-                sa recherche. */}
-            <p className="mt-8 max-w-[48rem] border-l-2 border-action pl-4 text-[15px] leading-relaxed text-ink-2">
-              <strong className="font-medium text-ink">Terouva</strong> vous signale les locations
-              qui vous correspondent dès qu&apos;elles paraissent, avec votre message déjà écrit.{" "}
-              <a href="#prevenu" className="lien">
-                Être prévenu du lancement
-              </a>
-            </p>
 
             <article className="article article--marge article--lettrine mt-12">{children}</article>
 

@@ -102,11 +102,7 @@ export default function Blog() {
 
       <main className="pb-16">
         <div className="cadre pt-10 md:pt-20">
-          <p className="champ flex items-center gap-3 text-accent-ink">
-            <span aria-hidden className="h-px w-8 bg-accent-ink" />
-            Le blog Terouva
-          </p>
-          <h1 className="titre mt-6 max-w-[16ch] text-[clamp(3rem,1.6rem+5.4vw,6rem)] text-ink">
+          <h1 className="titre max-w-[16ch] text-[clamp(3rem,1.6rem+5.4vw,6rem)] text-ink">
             Les questions qu&apos;on se pose <em className="font-normal italic text-accent-ink">avant de signer.</em>
           </h1>
           <p className="mt-8 max-w-[38rem] text-[1.1875rem] leading-relaxed text-ink-2">
@@ -132,8 +128,7 @@ export default function Blog() {
           ) : (
             <>
               {/* Même présentation que la rubrique des guides (modèle Rushlot et FanClaw) :
-                  filtres par pilier, article à la une, liste numérotée à vignettes. La vignette
-                  est l'image de partage de l'article, qui porte déjà son titre. */}
+                  filtres par pilier, article à la une, liste numérotée à vignettes. */}
               <div id="liste" className="scroll-mt-24">
                 <Rubrique guides={fiches} rubriques={rubriques} libelle="Filtrer les articles" />
               </div>

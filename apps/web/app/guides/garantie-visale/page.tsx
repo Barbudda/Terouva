@@ -27,8 +27,7 @@ export default function GuideVisale() {
       <p>
         « Avez-vous un garant ? » est la question qui élimine le plus de candidatures. Si vous
         n&apos;avez pas de parents propriétaires ou de proche prêt à s&apos;engager sur trois ans,
-        la garantie Visale répond à la question à leur place. Elle est gratuite, elle est portée par
-        Action Logement, et elle se demande <strong>avant</strong> d&apos;avoir trouvé le logement.
+        la garantie Visale répond à la question à leur place.
       </p>
 
       <h2 id="principe">Qu&apos;est-ce que la garantie Visale ?</h2>
@@ -41,8 +40,7 @@ export default function GuideVisale() {
       </p>
       <p>
         La dette reste donc la vôtre : Visale rassure le propriétaire et vous remet dans la course,
-        sans effacer ce que vous devez. Sur ces trois années, la prise en charge des loyers et
-        charges impayés va jusqu&apos;à 36 mois.
+        sans effacer ce que vous devez.
       </p>
 
       <h2 id="qui">Qui peut obtenir la garantie Visale ?</h2>
@@ -123,9 +121,7 @@ export default function GuideVisale() {
         valide l&apos;acte de cautionnement. Après la signature du bail, il est trop tard.
       </p>
       <p>
-        Côté propriétaire, la saisie demande aussi les caractéristiques du logement. Le visa
-        s&apos;obtenant sans logement trouvé, rien n&apos;empêche de le demander dès le début de la
-        recherche : c&apos;est ce qui évite de courir entre la visite et la signature.
+        Côté propriétaire, la saisie demande aussi les caractéristiques du logement.
       </p>
 
       <h2 id="duree">Combien de temps dure la garantie Visale ?</h2>
@@ -139,8 +135,7 @@ export default function GuideVisale() {
       <p>
         En le disant dès le premier message, en une ligne : « Je bénéficie de la garantie
         Visale. » Placez-la juste après votre situation et votre revenu, au moment où le
-        propriétaire se demande qui paiera si vous ne payez pas. Un visa déjà obtenu répond à la
-        question du garant avant qu&apos;elle soit posée.
+        propriétaire se demande qui paiera si vous ne payez pas.
       </p>
       <p>
         Notre{" "}

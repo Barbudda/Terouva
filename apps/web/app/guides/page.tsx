@@ -79,11 +79,7 @@ export default function Guides() {
         <div className="cadre pt-10 md:pt-20">
           <div className="grid items-center gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <p className="champ flex items-center gap-3 text-accent-ink">
-                <span aria-hidden className="h-px w-8 bg-accent-ink" />
-                Les guides Terouva
-              </p>
-              <h1 className="titre mt-6 text-[clamp(3rem,1.6rem+5.4vw,6rem)] text-ink">
+              <h1 className="titre text-[clamp(3rem,1.6rem+5.4vw,6rem)] text-ink">
                 Louez en connaissant <em className="font-normal italic text-accent-ink">vos droits.</em>
               </h1>
               <p className="mt-8 max-w-[36rem] text-[1.1875rem] leading-relaxed text-ink-2">
@@ -111,8 +107,7 @@ export default function Guides() {
               Préparez votre candidature pendant votre lecture
             </h2>
             <p className="mt-3 max-w-[40rem] leading-relaxed text-ink-2">
-              Chacun tourne dans votre navigateur. Rien de ce que vous saisissez ne quitte votre
-              ordinateur.
+              Rien de ce que vous saisissez ne quitte votre ordinateur.
             </p>
             <ul className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {OUTILS.map((o) => (
@@ -121,20 +116,16 @@ export default function Guides() {
                     href={o.chemin}
                     className="group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-rule bg-card transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-rule-fort focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
                   >
-                    {(
-                      <span className="relative block aspect-[16/9] overflow-hidden border-b border-rule bg-[color-mix(in_oklch,var(--color-action)_10%,var(--color-paper-2))]">
-                        <Image
-                          src={captureOutil(o.chemin).src}
-                          alt=""
-                          fill
-                          sizes="(min-width: 768px) 560px, 100vw"
-                          className="object-cover object-top transition-transform duration-500 ease-[var(--ease-terouva)] group-hover:scale-[1.02]"
-                        />
-                        <span className="champ absolute top-4 left-4 rounded-full bg-action px-3 py-1.5 text-action-ink">
-                          Gratuit
-                        </span>
-                      </span>
-                    )}
+                    {/* Pas de pastille « Gratuit » : la mention de la section le dit. */}
+                    <span className="relative block aspect-[16/9] overflow-hidden border-b border-rule bg-[color-mix(in_oklch,var(--color-action)_10%,var(--color-paper-2))]">
+                      <Image
+                        src={captureOutil(o.chemin).src}
+                        alt=""
+                        fill
+                        sizes="(min-width: 768px) 560px, 100vw"
+                        className="object-cover object-top transition-transform duration-500 ease-[var(--ease-terouva)] group-hover:scale-[1.02]"
+                      />
+                    </span>
                     <span className="flex flex-1 flex-col p-6">
                       <span className="titre titre--petit text-[1.5rem] text-ink">{o.court}</span>
                       <span className="mt-2 leading-relaxed text-ink-2">{o.resume}</span>

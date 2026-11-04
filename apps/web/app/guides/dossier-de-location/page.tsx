@@ -24,9 +24,7 @@ export default function GuideDossier() {
     <CadreGuide guide={GUIDE}>
       <p>
         Quand on cherche un logement, on finit par envoyer son dossier sans trop regarder ce
-        qu&apos;on y met. C&apos;est une erreur : la liste des pièces qu&apos;un propriétaire peut
-        exiger est fixée par un décret, elle est <strong>limitative</strong>, et tout ce qui
-        n&apos;y figure pas est interdit. Le savoir sert deux fois. Vous préparez un dossier
+        qu&apos;on y met. Connaître la liste officielle sert deux fois : vous préparez un dossier
         complet du premier coup, et vous reconnaissez les demandes abusives.
       </p>
 
@@ -177,7 +175,6 @@ export default function GuideDossier() {
         du garant réglée avant de visiter ; et un premier message court qui annonce que le dossier
         est prêt, sans le joindre.
       </p>
-      <p>Le détail de chacun des trois :</p>
       <ol>
         <li>
           <strong>Le fichier</strong> : pas douze pièces jointes, pas de photos de documents prises

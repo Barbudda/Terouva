@@ -74,8 +74,7 @@ export default function GuidePreavisLocation() {
       <div className="note">
         <p>
           Une lettre qui ne mentionne pas le motif vaut préavis de <strong>trois mois</strong>,
-          même si vous remplissiez la condition au moment de l&apos;envoi. Une phrase manquante peut
-          ainsi coûter deux mois de loyer.
+          même si vous remplissiez la condition au moment de l&apos;envoi.
         </p>
       </div>
 
@@ -143,8 +142,7 @@ export default function GuidePreavisLocation() {
         comptent.
       </p>
       <p>
-        Conséquence pratique : comptez quelques jours d&apos;acheminement dans votre calendrier.
-        Si la lettre arrive ou est remise en retard, la fin du préavis est repoussée d&apos;autant.
+        Comptez donc quelques jours d&apos;acheminement dans votre calendrier.
       </p>
 
       <h2 id="loyer">Le loyer pendant le préavis</h2>

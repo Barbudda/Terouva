@@ -85,10 +85,8 @@ export function CalculLoyer() {
         onSubmit={(e) => e.preventDefault()}
         aria-label="Votre loyer et vos ressources"
       >
+        {/* La consigne est l'état vide du chiffre, la réassurance est sous le titre de la page. */}
         <p className="champ text-night-ink-2">Vos montants</p>
-        <p className="mt-3 text-[15px] leading-relaxed text-night-ink-2">
-          Le loyer, vos ressources, ou les deux. Rien n&apos;est envoyé, rien n&apos;est conservé.
-        </p>
 
         <div className="mt-6 space-y-6">
           <Montant

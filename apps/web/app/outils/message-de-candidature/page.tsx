@@ -93,9 +93,8 @@ export default function OutilMessage() {
             écrit en une minute.
           </h1>
           <p className="enonce mt-6 text-ink-2">
-            Remplissez vos informations, choisissez un ton, copiez. C&apos;est gratuit, il n&apos;y
-            a rien à installer et rien à créer. Les champs restent dans votre navigateur : cette
-            page n&apos;envoie aucune donnée.
+            Remplissez vos informations, choisissez un ton, copiez. Gratuit, sans inscription, et
+            rien ne quitte votre navigateur.
           </p>
 
         </div>
@@ -212,23 +211,15 @@ export default function OutilMessage() {
                 messagerie du site, ce qui ajoute un délai.
               </li>
             </ol>
-            <p className="mt-6 leading-relaxed text-ink-2">
-              Rien n&apos;est écrit à votre place sur ce que vous valez comme locataire : le
-              générateur n&apos;emploie ni superlatif, ni promesse, ni formule du type
-              « intéressé(e) ». Il met vos faits dans l&apos;ordre où ils se lisent le mieux, et
-              vous relisez avant d&apos;envoyer.
-            </p>
+            {/* Conclusion retirée : « Ce qui dessert un message » et la consigne de
+                relecture sous le générateur disaient déjà la même chose. */}
           </section>
 
           <Questions questions={QUESTIONS} className="mt-20" />
 
           <section className="mt-20 max-w-[44rem]">
             <h2 className="titre titre--petit text-[1.75rem] text-ink">Après le message</h2>
-            <p className="mt-4 leading-relaxed text-ink-2">
-              Un message qui marche déclenche une réponse dans l&apos;heure, et la conversation
-              passe aussitôt à des sujets qu&apos;il vaut mieux avoir réglés d&apos;avance. Les
-              trois qui reviennent toujours :
-            </p>
+            {/* Plus de phrase d'annonce : les trois questions entre guillemets se lisent seules. */}
             <ul className="mt-6 space-y-5 leading-relaxed text-ink-2">
               <li>
                 <strong className="text-ink">« Pouvez-vous m&apos;envoyer votre dossier ? »</strong>{" "}

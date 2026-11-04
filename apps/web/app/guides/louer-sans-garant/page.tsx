@@ -25,10 +25,7 @@ export default function GuideLouerSansGarant() {
     <CadreGuide guide={GUIDE}>
       <p>
         « Il me faut un garant » est la phrase qui arrête le plus de candidatures, souvent avant la
-        visite. Elle est présentée comme une règle, alors qu&apos;
-        <strong>aucun texte n&apos;oblige un locataire à présenter une caution</strong>. Le
-        propriétaire est libre de l&apos;exiger, et trois dispositifs permettent d&apos;y répondre
-        sans mobiliser un proche.
+        visite, et elle est présentée comme une règle.
       </p>
 
       <h2 id="pas-obligatoire">Un garant est-il obligatoire pour louer ?</h2>
@@ -55,8 +52,7 @@ export default function GuideLouerSansGarant() {
         </li>
       </ul>
       <p>
-        Le reste du temps, la question se contourne plutôt qu&apos;elle ne se conteste. Les trois
-        voies suivent, dans l&apos;ordre de ce qui aboutit.
+        Le reste du temps, la question se contourne plutôt qu&apos;elle ne se conteste.
       </p>
 
       <h2 id="visale">La garantie Visale remplace-t-elle un garant ?</h2>
@@ -127,8 +123,8 @@ export default function GuideLouerSansGarant() {
       </p>
       <p>
         Trois dispositifs à demander dans cet ordre : Visale pour le garant, Loca-Pass pour le
-        dépôt, et les aides au logement une fois installé. Chacun a ses propres conditions :
-        vérifiez-les auprès d&apos;Action Logement et de la Caf avant de compter sur les trois.
+        dépôt, et les aides au logement une fois installé. Vérifiez les conditions auprès
+        d&apos;Action Logement et de la Caf avant de compter sur les trois.
       </p>
 
       <h2 id="dire">Que répondre quand on vous demande un garant ?</h2>
@@ -138,7 +134,6 @@ export default function GuideLouerSansGarant() {
         mieux qu&apos;une intention. Enfin le reste du dossier, métier, contrat et revenu, qui
         décide une fois la question du garant écartée.
       </p>
-      <p>Ce que cela donne, phrase par phrase :</p>
       <ol>
         <li>« Je n&apos;ai pas de garant personnel. »</li>
         <li>

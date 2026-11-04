@@ -101,11 +101,10 @@ export default function Outils() {
               <h1 className="titre mt-6 text-[clamp(3rem,1.6rem+5.4vw,6rem)] text-ink">
                 Un dossier complet, <em className="font-normal italic text-blue-clair">un message prêt.</em>
               </h1>
+              {/* Les trois outils sont décrits par leurs cartes, la confidentialité
+                  par sa section : il ne reste que ce qu'aucune n'annonce. */}
               <p className="mt-8 max-w-[36rem] text-[1.1875rem] leading-relaxed text-ink-2">
-                Trois outils pour préparer votre candidature avant même de visiter : la liste des
-                pièces à réunir, le loyer que vos ressources permettent, et le message qui
-                accompagne votre dossier. Sans compte, sans limite, et rien ne quitte votre
-                ordinateur.
+                Pour préparer votre candidature avant même de visiter. Sans compte et sans limite.
               </p>
             </div>
             <PileDeCaptures />
@@ -164,9 +163,7 @@ export default function Outils() {
                       ) : (
                         <Image src={c.src} alt="" fill sizes="(min-width: 1024px) 720px, 100vw" className="object-cover" />
                       )}
-                      <span className="champ absolute top-4 left-4 z-10 rounded-full bg-night px-3 py-1.5 text-night-ink">
-                        Gratuit
-                      </span>
+                      {/* Plus de pastille « Gratuit » par carte : le titre de la page le dit déjà. */}
                     </span>
                     <div
                       className={cn(
@@ -235,9 +232,9 @@ export default function Outils() {
                 </li>
               ))}
             </ul>
+            {/* « N'envoient rien à votre place » redisait la troisième carte. */}
             <p className="marge mt-4">
-              Ces outils ne cherchent pas d&apos;annonces et n&apos;envoient rien à votre place. Le
-              détail est dans la{" "}
+              Le détail est dans la{" "}
               <Link href="/confidentialite" className="lien">
                 page de confidentialité
               </Link>

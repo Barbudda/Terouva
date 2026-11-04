@@ -24,10 +24,7 @@ export default function GuideRefusDeDossier() {
     <CadreGuide guide={GUIDE}>
       <p>
         Après dix candidatures sans réponse, la question vient toujours : a-t-on le droit de me
-        refuser comme ça ? La réponse courte est oui. Un propriétaire choisit son locataire et
-        n&apos;a pas à motiver un refus. Ce que la loi encadre, c&apos;est la{" "}
-        <strong>raison</strong> du refus, et la liste des raisons interdites est plus longue
-        qu&apos;on ne le croit.
+        refuser comme ça ?
       </p>
 
       <h2 id="principe">Le propriétaire doit-il justifier un refus de dossier ?</h2>
@@ -116,7 +113,7 @@ export default function GuideRefusDeDossier() {
         <span className="loi">article 1er</span> de la loi de 1989.
       </p>
       <p>
-        Pratiquement, cela veut dire une chose : gardez les échanges écrits. Un refus formulé au
+        Gardez les échanges écrits. Un refus formulé au
         téléphone ne laisse rien ; la même phrase par message vaut un début de preuve.
       </p>
 

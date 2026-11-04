@@ -94,10 +94,10 @@ export default function OutilDossier() {
             Les pièces de votre dossier,{" "}
             et celles qu&apos;on ne peut pas vous demander.
           </h1>
+          {/* Le décret et la liste limitative sont expliqués sous l'outil, les trois
+              questions se voient dans l'outil : reste la seule réassurance de la page. */}
           <p className="enonce mt-6 text-ink-2">
-            La liste est fixée par décret, et elle est limitative. Répondez à trois questions :
-            vous obtenez exactement ce qu&apos;il vous faut réunir, sans les pièces qui ne vous
-            concernent pas. Gratuit, sans inscription, et rien ne quitte votre navigateur.
+            Gratuit, sans inscription, et rien ne quitte votre navigateur.
           </p>
 
         </div>
@@ -125,8 +125,7 @@ export default function OutilDossier() {
               <p>
                 Dans deux catégories, l&apos;identité et le domicile, le propriétaire ne peut
                 exiger qu&apos;<strong className="text-ink">un seul</strong> document. Dans les deux
-                autres, il peut en demander plusieurs. C&apos;est pour cela que la liste
-                ci-dessus indique la règle à côté de chaque catégorie.
+                autres, il peut en demander plusieurs.
               </p>
               <p>
                 Les listes toutes faites qu&apos;on trouve ailleurs mélangent souvent les
@@ -147,11 +146,7 @@ export default function OutilDossier() {
 
           <section className="mt-16 max-w-3xl">
             <h2 className="titre titre--petit text-[1.75rem] text-ink">Une fois la liste réunie</h2>
-            <p className="mt-4 leading-relaxed text-ink-2">
-              Un dossier complet ne suffit pas à obtenir une visite : il faut encore arriver tôt,
-              et avoir réglé d&apos;avance les deux questions qui éliminent le plus de
-              candidatures.
-            </p>
+            {/* Plus de phrase d'annonce : elle résumait la liste qui suit. */}
             <ul className="mt-6 space-y-5 leading-relaxed text-ink-2">
               <li>
                 <strong className="text-ink">« Qui est votre garant ? »</strong> C&apos;est la

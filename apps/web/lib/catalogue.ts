@@ -86,7 +86,7 @@ export const GUIDES: Guide[] = [
     titre: "Garantie Visale : qui peut l'avoir, et comment l'obtenir avant de visiter",
     titreSeo: "Garantie Visale : conditions et démarche",
     resume:
-      "C'est une caution gratuite, accordée par Action Logement, qui remplace un garant physique. Elle se demande avant d'avoir trouvé le logement, et c'est précisément ce qui la rend utile.",
+      "C'est une caution gratuite, accordée par Action Logement, qui remplace un garant physique. Elle se demande avant d'avoir trouvé le logement.",
     description:
       "Qui peut obtenir la garantie Visale, les plafonds de loyer, ce qu'elle couvre, et comment recevoir son visa avant même de visiter.",
     publieLe: "2026-10-11",
@@ -140,7 +140,7 @@ export const GUIDES: Guide[] = [
     // promet, la description cite sa phrase et dit pourquoi elle ne suffit pas.
     titreSeo: "Répondre à une annonce de location : modèle",
     resume:
-      "Sur un marché tendu, la visite va souvent au dossier qui arrive tôt et se lit en dix secondes, pas au meilleur dossier. Voici ce qui se joue vraiment dans un premier message.",
+      "Sur un marché tendu, la visite va souvent au dossier qui arrive tôt et se lit en dix secondes, pas au meilleur dossier.",
     description:
       "« Bonjour, je suis intéressé par votre annonce » ne suffit pas : les six informations à donner, un modèle à copier et les erreurs à éviter.",
     publieLe: "2026-10-11",
@@ -179,7 +179,7 @@ export const GUIDES: Guide[] = [
     titre: "Dépôt de garantie : le montant, les retenues, et le délai pour le récupérer",
     titreSeo: "Dépôt de garantie : montant et restitution",
     resume:
-      "Le montant est plafonné, les retenues doivent être justifiées pièce par pièce, et le retard du propriétaire se paie. Les trois règles qui comptent tiennent en une page.",
+      "Le montant est plafonné, les retenues doivent être justifiées pièce par pièce, et le retard du propriétaire se paie.",
     description:
       "Un mois de loyer en vide, deux en meublé, rendu sous un mois si l'état des lieux est conforme. Les retenues autorisées, et la pénalité en cas de retard.",
     publieLe: "2026-10-19",
@@ -252,7 +252,7 @@ export const GUIDES: Guide[] = [
     // « garant » sans « location » : il ratait la requête de peu.
     titreSeo: "Garant de location : qui peut l'être",
     resume:
-      "Un garant ne signe pas une formalité : il s'engage sur une dette qui peut courir des années après votre départ. Ce que l'acte doit contenir, ce qu'on peut lui demander, et quand son engagement s'arrête vraiment.",
+      "Un garant ne signe pas une formalité : il s'engage sur une dette qui peut courir des années après votre départ.",
     description:
       "Qui peut se porter garant d'une location, ce que contient l'acte de cautionnement, les documents exigibles, et comment louer sans garant.",
     publieLe: "2026-10-19",
@@ -392,7 +392,7 @@ export const GUIDES: Guide[] = [
     titre: "Louer sans garant : les trois solutions, et ce qu'elles coûtent",
     titreSeo: "Louer sans garant : les trois solutions",
     resume:
-      "Aucun texte n'oblige un locataire à présenter un garant. C'est une exigence du propriétaire, pas une condition légale, et trois dispositifs permettent d'y répondre sans mobiliser un proche.",
+      "Aucun texte n'oblige un locataire à présenter un garant, et trois dispositifs permettent d'y répondre sans mobiliser un proche.",
     description:
       "Aucune loi n'oblige à fournir un garant. Visale, l'assurance du propriétaire, les sociétés de cautionnement : les trois voies, et leur coût réel.",
     publieLe: "2026-10-19",
@@ -463,7 +463,7 @@ export const GUIDES: Guide[] = [
     titre: "État des lieux de location : la demi-heure qui décide de votre dépôt de garantie",
     titreSeo: "État des lieux de location : entrée et sortie",
     resume:
-      "C'est le document qui protège votre dépôt de garantie. Ce qu'il doit contenir, qui le paie, et les dix jours pendant lesquels on peut encore le corriger.",
+      "C'est le document qui protège votre dépôt de garantie, et il peut encore être complété pendant dix jours.",
     description:
       "Ce que l'état des lieux doit contenir, qui le paie, les dix jours pour le corriger, et pourquoi la vétusté ne peut pas être retenue sur votre dépôt.",
     publieLe: "2026-10-19",
