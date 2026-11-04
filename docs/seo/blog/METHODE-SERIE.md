@@ -60,6 +60,16 @@ Erreurs déjà relevées plusieurs fois. Les trois premières sont aussi des rè
 - **Une décision n'est citée que pour ce qu'elle dit** : la décision 2019-001 du Défenseur des droits
   retient le handicap, pas la nature des revenus ; aucune décision lue ne tranche le refus pour APL.
 
+- **Le chapeau s'écrit en dernier**, en relisant la première phrase de chaque section : en vague 7,
+  trois chapeaux disaient autre chose que leur corps (« et » au lieu de « ou », un ordre inversé).
+- **Une règle absolue garde l'exception de sa source** : avant d'écrire « aucun recours », « rien à
+  faire valoir » ou « ne peut jamais », relire la rubrique « exceptions », « décès » ou « abandon » de
+  la fiche citée, et la nommer au moins en une phrase.
+
+Une règle du vérificateur ne s'adopte qu'après avoir tourné sur tous les articles publiés : en vague 7,
+une règle sur la « mention » de la caution a levé quatre faux positifs sur des articles justes et a été
+abandonnée.
+
 ## Réutiliser avant de chercher
 
 Avant de sourcer une règle, chercher si un article publié la porte déjà (`grep` sur la valeur dans

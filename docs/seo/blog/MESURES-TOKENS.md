@@ -61,8 +61,24 @@ prouvées par le script.
 
 | Mesure | Départ | Arrivée | Écart |
 |---|---|---|---|
-| Forfait, fenêtre de 5 h | 37 % (avant écriture ; plan et refonte de /blog : 31 → 37) | | |
-| Forfait, semaine | 21 % | | |
+| Forfait, fenêtre de 5 h | 37 % (avant écriture ; plan et refonte de /blog : 31 → 37) | 45 % après écriture, 49 % en ligne | **+12 points pour 22 articles** |
+| Forfait, semaine | 21 % | 23 % | +2 points |
 
 Travail : 22 articles, 3 rédacteurs neufs (8, 8, 6), consigne de 3 lignes ; plan fait par une
 session neuve. Session du chef : 877 000 tokens (88 %), à relayer par une session neuve après la vague.
+
+**Bilan de la vague 7** : ≈ 0,36 point par article à l'écriture (0,72 en vague 6) et ≈ 0,55 de bout
+en bout (1,04 en vague 6) : **coût divisé par deux**. Une session neuve finit à 230 000 à 250 000
+tokens de contexte, contre 535 000 à 632 000 pour une session conservée. Le relecteur a appliqué
+lui-même ses dix corrections : zéro intervention du chef sur les articles. 98 citations sur 99
+prouvées par le script.
+
+### Optimisations pour la vague 8
+1. Garder des **sessions neuves** pour écrire et relire ; vider le contexte d'une session avant de la
+   réutiliser (autorisé par Hugo).
+2. Deux consignes de rédaction ajoutées à la méthode : **chapeau écrit en dernier** (trois chapeaux
+   contredisaient leur corps), **exception de la source nommée** avant toute règle absolue.
+3. Une règle proposée par le relecteur ne s'adopte qu'après avoir tourné sur tout le corpus : celle
+   sur la « mention » de la caution a levé quatre faux positifs et a été abandonnée.
+4. Le chef lui-même pèse 880 000 tokens : relayer le pilotage par une session neuve
+   (`docs/seo/RELAIS-CHEF.md`).
