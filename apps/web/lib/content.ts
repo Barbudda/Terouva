@@ -87,15 +87,25 @@ export const SIGNUP = {
  */
 export const PROBLEM = {
   eyebrow: "Ce que vous y gagnez",
-  body: [
-    "Une bonne location reçoit ses premiers messages en quelques heures. Avec Terouva, le vôtre en fait partie, sans que vous surveilliez votre téléphone toute la journée.",
-    "Écrire tôt, avec un message complet : c'est ce qui décroche une visite. Terouva s'occupe des deux.",
-  ],
+  titreLead: "Écrivez parmi les premiers,",
+  titreTail: "sans surveiller votre téléphone.",
+  texte:
+    "Une bonne location reçoit ses premiers messages en quelques heures. Écrire tôt, avec un message complet, c'est ce qui décroche une visite. Terouva s'occupe des deux.",
+  /** La même annonce, deux arrivées : la position est en pourcentage de sa vie. */
   vie: {
-    titre: "La vie d'une bonne annonce",
     etapes: ["Publiée", "Premiers messages", "Visites complètes", "Retirée"],
-    avec: { nom: "Avec Terouva", texte: "Prévenu à sa parution, votre message est prêt." },
-    sans: { nom: "Sans Terouva", texte: "Vous la découvrez le soir, les visites sont pleines." },
+    sans: {
+      nom: "Sans Terouva",
+      titre: "Vous la découvrez le soir.",
+      texte: "Les premiers messages sont partis, les visites sont déjà pleines.",
+      position: 80,
+    },
+    avec: {
+      nom: "Avec Terouva",
+      titre: "Vous êtes prévenu à sa parution.",
+      texte: "Votre message est prêt : vous l'envoyez parmi les premiers.",
+      position: 7,
+    },
   },
 };
 

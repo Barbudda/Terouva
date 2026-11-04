@@ -13,19 +13,20 @@ import { DonneesStructurees } from "@/lib/seo";
 /**
  * L'accueil : sept blocs, ce que l'on gagne d'abord.
  *
- *   A plein cadre  (Hero)        le titre et la proposition de valeur
- *     parcours     (Parcours)    les quatre étapes, de l'annonce à l'envoi
- *   B papier large (Problem)     le gain : écrire parmi les premiers
- *   C index        (Fonctions)   ce que fait l'outil, ligne par ligne
- *   E mosaïque     (Messages)    les messages qu'il écrit
- *   C index        (Outils)      ce qui sert déjà, gratuitement
- *   D bande nuit   (Inscription) questions et liste d'attente
- *   F pied logotype (Footer)
+ *   plein cadre   (Hero)        le titre et la proposition de valeur
+ *   scène         (Parcours)    les quatre étapes sur un rail, de l'annonce à l'envoi
+ *   avant, après  (Problem)     le gain : la même annonce, sans et avec Terouva
+ *   mosaïque      (Fonctions)   ce que fait l'outil, chaque carte illustrée
+ *   ruban         (Messages)    les messages qu'il écrit
+ *   cartes        (Outils)      les deux outils et les derniers guides
+ *   bande nuit    (Inscription) questions et liste d'attente
  *
  * Le 4 novembre, Hugo : le visiteur veut savoir ce qu'il gagne, pas comment
  * c'est fait. L'explication du fonctionnement (la note et ce qui la compose,
  * la vidéo) sort de la page ; la section sur les données aussi, réduite à une
- * ligne des fonctions et à une question de la FAQ.
+ * ligne des fonctions et à une question de la FAQ. Le même jour, chaque
+ * section reçoit un cadre et un sens de lecture : rail, avant et après,
+ * mosaïque, cartes.
  */
 export default function Home() {
   // Les questions fréquentes balisées remontent parfois directement dans les

@@ -1062,6 +1062,39 @@ details > summary::-webkit-details-marker {
   letter-spacing: 0.02em;
   color: var(--color-accent-ink);
 }
+/* La scène : le cadre des sections de l'accueil (Hugo, 4 novembre : « l'info
+   manque de cadrage, il faut de la profondeur et guider l'œil »). Trois
+   plans : le fond nuit, une lueur bleue en haut à gauche qui reprend le haut
+   de page, une lueur orange en bas à droite là où la lecture se termine ;
+   un filet clair en haut, comme une arête, et une ombre portée vers le bas.
+   L'œil entre par le bleu et sort par l'orange. */
+.scene {
+  position: relative;
+  isolation: isolate;
+  border-radius: 2rem;
+  border: 1px solid color-mix(in oklch, var(--color-ink) 9%, transparent);
+  background:
+    radial-gradient(55% 70% at 0% 0%, color-mix(in oklch, var(--color-blue) 20%, transparent), transparent 72%),
+    radial-gradient(50% 70% at 100% 100%, color-mix(in oklch, var(--color-action) 15%, transparent), transparent 72%),
+    linear-gradient(180deg, var(--color-paper-2), var(--color-paper));
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch, var(--color-ink) 9%, transparent),
+    0 50px 90px -50px rgb(0 0 0 / 0.75);
+}
+/* Une carte posée sur la scène : elle se lève un peu plus que la scène. */
+.carte-levee {
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-ink) 6%, transparent) inset,
+    0 28px 50px -28px rgb(0 0 0 / 0.7);
+}
+/* Le rail du parcours : du bleu de l'entrée à l'orange de l'envoi. */
+.rail {
+  background: linear-gradient(90deg, var(--color-blue), var(--color-blue-clair) 45%, var(--color-action));
+}
+.rail--vertical {
+  background: linear-gradient(180deg, var(--color-blue), var(--color-blue-clair) 45%, var(--color-action));
+}
+
 /* Le fond des captures d'outils : le bleu et l'orange du haut de l'accueil,
    assourdis vers le fond nuit. Une capture sombre posée dessus se détache,
    comme les captures de Rushlot sur leur fond coloré. */
