@@ -181,7 +181,7 @@ export default function OutilSalaireLoyer() {
           <div className="max-w-3xl">
             <FinDePage
               titre="Et une fois le dossier prêt ?"
-              texte="Reste à repérer les bonnes annonces et à écrire le message. C'est ce que fait Terouva, sur votre ordinateur. L'application sort bientôt : laissez votre adresse pour être prévenu."
+              texte="Reste à repérer les bonnes annonces et à écrire le message. C'est ce que fait Terouva, sur votre ordinateur. Terouva ouvre par vagues : laissez votre adresse pour prendre place."
             />
           </div>
         </div>

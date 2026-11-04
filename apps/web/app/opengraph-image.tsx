@@ -42,7 +42,7 @@ export default async function OG() {
               display: "flex",
             }}
           >
-            Bientôt disponible
+            Ouverture par vagues
           </div>
         </div>
 

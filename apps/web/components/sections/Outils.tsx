@@ -20,9 +20,9 @@ export function Outils() {
     <section id="outils" aria-labelledby="outils-titre" className="cadre scroll-mt-20 py-demi-pas">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="mention">Gratuit, dès aujourd&apos;hui</p>
+          <p className="mention">Gratuit, sans inscription</p>
           <h2 id="outils-titre" className="titre mt-3 max-w-[24ch] text-titre-2 text-ink">
-            Votre message et votre dossier, dès aujourd&apos;hui.
+            Votre message et votre dossier, gratuitement.
           </h2>
         </div>
         <Link href="/outils" className="lien text-[15px]">

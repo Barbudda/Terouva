@@ -249,7 +249,7 @@ function Menu({
               onClick={() => setOuvert(false)}
               className="bouton bouton--accent mt-10 w-full"
             >
-              Être prévenu du lancement
+              Être prévenu
             </a>
           </nav>
         </div>

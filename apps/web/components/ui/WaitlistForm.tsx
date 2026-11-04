@@ -60,7 +60,7 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
           className,
         )}
       >
-        C&apos;est noté. Vous recevrez un e-mail le jour du lancement.
+        C&apos;est noté. Vous recevrez un e-mail quand votre tour arrivera.
       </p>
     );
   }
@@ -123,7 +123,7 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
       )}
 
       <p className={cn("champ mt-4", dark ? "text-night-ink-2" : "text-ink-3")}>
-        Un seul e-mail · au lancement · pas de publicité ·{" "}
+        Un e-mail quand votre tour arrive · pas de publicité ·{" "}
         <Link href="/confidentialite" className="underline underline-offset-4 hover:opacity-80">
           Confidentialité
         </Link>

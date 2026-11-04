@@ -125,8 +125,8 @@ export default function Cgu() {
 
         <Section title="La liste d'attente">
           <p>
-            S&apos;inscrire revient à nous confier une adresse e-mail pour être prévenu du
-            lancement, et rien d&apos;autre. Aucune publicité, aucune revente, aucun autre envoi.
+            S&apos;inscrire revient à nous confier une adresse e-mail pour être prévenu quand
+            votre accès ouvre, et rien d&apos;autre. Aucune publicité, aucune revente, aucun autre envoi.
           </p>
           <p>
             Vous pouvez demander son retrait à tout moment : il est immédiat et définitif. Le
@@ -146,7 +146,7 @@ export default function Cgu() {
             L&apos;application n&apos;est pas encore ouverte au public à la date de ces
             conditions. Le modèle annoncé, une base gratuite et des options payantes, est une
             indication : les prix, les modalités de paiement et les conditions de
-            vente seront publiés au lancement et feront l&apos;objet de conditions distinctes.
+            vente seront publiés avant tout paiement et feront l&apos;objet de conditions distinctes.
           </p>
           <p>
             Aucune inscription à la liste d&apos;attente n&apos;emporte commande, réservation ni
@@ -190,7 +190,7 @@ export default function Cgu() {
 
         <Section title="Modification de ces conditions">
           <p>
-            Ces conditions peuvent évoluer, en particulier au lancement de l&apos;application. La
+            Ces conditions peuvent évoluer, en particulier à l&apos;ouverture de l&apos;application. La
             date de mise à jour figure en haut de cette page, et la version applicable est celle
             publiée au moment où vous utilisez le service.
           </p>

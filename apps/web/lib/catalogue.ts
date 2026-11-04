@@ -624,7 +624,7 @@ export const OUTILS: Outil[] = [
     titreSeo: "Générateur de message de candidature",
     court: "Message de candidature",
     resume:
-      "Le message qui accompagne votre dossier, écrit en une minute. Trois tons, six formulations, rien d'envoyé nulle part.",
+      "Le message qui accompagne votre dossier, écrit en une minute. Trois tons au choix.",
     description:
       "Écrivez le message qui accompagne votre dossier de location. Gratuit, sans inscription, trois tons. Rien n'est envoyé : tout reste dans votre navigateur.",
   },

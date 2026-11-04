@@ -27,8 +27,8 @@ export function Messages() {
           <p className="mention">Le message</p>
           <h2 className="titre mt-3 text-titre-2 text-ink">Un message qui donne envie de vous répondre.</h2>
           <p className="mt-5 max-w-[34rem] leading-relaxed text-ink-2">
-            Qui vous êtes, votre dossier, votre date d&apos;entrée, quand vous pouvez visiter : ce
-            que le propriétaire cherche, dans le ton de votre choix.
+            Qui vous êtes, vos revenus, votre garant, quand vous pouvez visiter : tout ce que le
+            propriétaire veut savoir, en quelques lignes.
           </p>
         </div>
       </div>
@@ -46,7 +46,7 @@ export function Messages() {
       <div className="grille mt-8">
         <div className="col-span-12 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 md:col-span-6 md:col-start-5">
           <p className="marge">
-            Six messages écrits par Terouva pour les annonces d&apos;exemple.
+            Six messages écrits par Terouva pour des annonces d&apos;exemple.
           </p>
           <Link href="/outils/message-de-candidature" className="lien text-[15px]">
             Écrire le vôtre, gratuitement

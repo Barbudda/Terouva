@@ -10,16 +10,17 @@ type Cle = (typeof FEATURES)[number]["icon"];
  * haute : c'est le gain principal, ne plus rater une annonce. Chaque carte
  * montre la chose avant de la dire, avec les annonces de la démonstration.
  *
- * La mention d'état reste, et c'est ce qui rend la liste honnête :
- * « Disponible » marche aujourd'hui, « En démo » se voit dans la
- * démonstration, « Bientôt » attend l'application.
+ * La mention d'état reste, et c'est ce qui rend la liste honnête. Elle dit
+ * quand le visiteur en profite, dans ses mots à lui (pôle Commerce, 4
+ * novembre) : « En démo » renvoyait à une démonstration qui n'est plus
+ * montrée sur l'accueil, et ne disait rien à qui ne l'avait pas vue.
  */
 const ETAT: Record<Cle, string> = {
-  bell: "Bientôt",
-  gauge: "En démo",
-  pen: "Disponible",
-  send: "En démo",
-  lock: "Disponible",
+  bell: "Après l'ouverture",
+  gauge: "À l'ouverture",
+  pen: "Gratuit aujourd'hui",
+  send: "À l'ouverture",
+  lock: "Dès aujourd'hui",
 };
 
 const PLACE: Record<Cle, string> = {
@@ -57,7 +58,7 @@ export function Fonctions() {
               <Illustration cle={f.icon} />
             </div>
             <div className="p-6">
-              <p className={cn("champ", ETAT[f.icon] === "Bientôt" ? "text-ink-3" : "text-action")}>{ETAT[f.icon]}</p>
+              <p className={cn("champ", ETAT[f.icon] === "Après l'ouverture" ? "text-ink-3" : "text-action")}>{ETAT[f.icon]}</p>
               <h3 className="mt-2 text-[19px] leading-snug font-medium text-ink">{f.title}</h3>
               <p className="mt-1.5 text-[15px] leading-relaxed text-ink-2">{f.body}</p>
             </div>

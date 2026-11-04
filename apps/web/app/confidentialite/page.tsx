@@ -43,7 +43,7 @@ export default function Confidentialite() {
           En résumé : <strong className="text-ink">vos données restent sur votre
           ordinateur</strong>, il n'y a ni compte, ni publicité, ni suivi. La
           seule information qui nous parvient est votre adresse e-mail, et
-          uniquement si vous demandez à être prévenu du lancement.
+          uniquement si vous demandez à être prévenu de l'ouverture.
         </p>
 
         <Section title="L'application ne collecte rien">
@@ -54,12 +54,12 @@ export default function Confidentialite() {
           </p>
         </Section>
 
-        <Section title="Si vous demandez à être prévenu du lancement">
+        <Section title="Si vous demandez à être prévenu de l'ouverture">
           <p>
             Dans ce cas précis, et seulement si vous remplissez le formulaire,
             votre <strong className="text-ink">adresse e-mail</strong> nous est
-            transmise. Elle sert uniquement à vous envoyer un message le jour où
-            Terouva ouvre. Pas de publicité, pas de revente,
+            transmise. Elle sert uniquement à vous prévenir quand votre accès à
+            Terouva ouvre, puisque l'ouverture se fait par vagues. Pas de publicité, pas de revente,
             aucun autre envoi.
           </p>
           <p>
@@ -72,7 +72,7 @@ export default function Confidentialite() {
             données UE–États-Unis.
           </p>
           <p>
-            Nous conservons votre adresse jusqu'au lancement, puis au maximum un an. Nous
+            Nous conservons votre adresse jusqu'à l'ouverture de votre accès, puis au maximum un an. Nous
             n'enregistrons avec elle que la date de votre inscription, rien d'autre : ni adresse
             IP, ni navigateur, ni page d'origine.
           </p>

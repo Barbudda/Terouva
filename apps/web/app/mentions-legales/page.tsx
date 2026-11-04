@@ -108,7 +108,7 @@ export default function MentionsLegales() {
         <Section title="Vos données">
           <p>
             L&apos;application garde tout sur votre appareil. Seule votre adresse e-mail nous
-            parvient, et seulement si vous demandez à être prévenu du lancement. Le détail est
+            parvient, et seulement si vous demandez à être prévenu de l&apos;ouverture. Le détail est
             dans la{" "}
             <Link href="/confidentialite" className="lien">
               politique de confidentialité

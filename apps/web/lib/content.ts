@@ -44,19 +44,29 @@ export const NAV_COLONNES = [
  * d'où viennent les annonces (vos alertes, pas un robot qui surveille
  * Leboncoin) et ce qui nous distingue des alertes : on aide à répondre en
  * premier, pas seulement à recevoir. L'état du produit descend sous le bouton.
+ *
+ * Seconde passe, même soir : la phrase est découpée comme une division du
+ * travail (vous, Terouva, vous), sur le modèle de Rushlot. Trois phrases
+ * courtes se lisent d'un regard ; la phrase de quarante mots ne se lisait pas.
+ *
+ * Fil de lecture de toute la page : les titres seuls racontent l'histoire
+ * (le gain, comment ça se passe, pourquoi vite, ce qu'on y gagne, la preuve,
+ * l'essai gratuit, les questions, l'inscription). Chaque section dit une
+ * chose qui n'a pas encore été dite.
  */
 export const HERO = {
   eyebrow: "Pour votre location sur Leboncoin",
   titleLead: "Les bons logements,",
   titleTail: "avant les autres.",
-  /** La proposition de valeur, en deux phrases : ce que fait Terouva, ce que vous y gagnez. */
+  /** Vous, Terouva, vous : qui fait quoi, et ce que vous y gagnez à la fin. */
   description: [
-    "Terouva trie les alertes Leboncoin que vous recevez, vous dit quels logements valent le coup et écrit votre message de candidature.",
-    "Vous répondez en une minute, avec un dossier complet, pendant que l'annonce est encore fraîche.",
+    "Vous recevez une alerte Leboncoin. Terouva vous dit si le logement vaut le coup et écrit votre message.",
+    "Vous n'avez plus qu'à l'envoyer, parmi les premiers.",
   ],
   /** La seconde porte, pour qui veut essayer avant de laisser son e-mail : un outil qui marche déjà. */
   essai: { label: "Écrire mon message, gratuitement", href: "/outils/message-de-candidature" },
-  reassurance: "Ouverture prochaine · gratuit pour commencer · rien ne part sans vous",
+  // Terouva ouvre par vagues (Hugo, 4 novembre) : ni date, ni « bientôt ».
+  reassurance: "Ouverture par vagues · gratuit pour commencer · rien ne part sans vous",
 };
 
 /**
@@ -65,27 +75,35 @@ export const HERO = {
  * candidature envoyée. Chaque phrase dit ce qui se passe pour vous.
  */
 export const PARCOURS = {
-  mention: "Votre soirée, rendue",
+  // « Votre soirée, rendue » faisait une jolie formule et ne disait rien : la
+  // mention annonce simplement ce qu'on va voir.
+  mention: "En pratique",
   titre: "De l'alerte à votre réponse, sans y passer la soirée.",
   // Chaque étape dit ce que vous vivez, pas ce que fait l'outil ; la dernière
   // rappelle que l'envoi reste le vôtre, une fois, ici seulement.
   etapes: [
     { nom: "L'alerte arrive", texte: "Leboncoin vous envoie une annonce, comme aujourd'hui." },
-    { nom: "Vous savez si elle vaut le coup", texte: "Budget, surface, quartier : la réponse d'un coup d'œil." },
-    { nom: "Votre message est prêt", texte: "Écrit pour ce logement, avec votre dossier. Vous le relisez." },
-    { nom: "Vous l'envoyez", texte: "Sur Leboncoin, vous-même. Vous notez ensuite la réponse dans Terouva." },
+    { nom: "Vous savez si elle vaut le coup", texte: "Prix, surface, quartier : vous le voyez d'un coup d'œil." },
+    { nom: "Votre message est prêt", texte: "Écrit pour ce logement, avec les infos de votre dossier. Vous le relisez." },
+    { nom: "Vous l'envoyez", texte: "Sur Leboncoin, vous-même. Ensuite, vous notez la réponse dans Terouva." },
   ],
 };
 
+/**
+ * Terouva ouvre par vagues (Hugo, 4 novembre) : l'inscription réserve une
+ * place, et l'e-mail part quand le tour de la personne arrive. Ni date, ni
+ * histoire du fondateur : Hugo n'en veut pas.
+ */
 export const SIGNUP = {
   eyebrow: "Liste d'attente",
-  titleLead: "Essayez Terouva",
-  titleTail: "dès le jour de l'ouverture.",
-  body: "Laissez votre adresse : vous recevrez un seul e-mail, le jour où Terouva ouvre. La base sera gratuite.",
+  titleLead: "Terouva ouvre par vagues.",
+  titleTail: "Prenez place dans la prochaine.",
+  body: "Laissez votre adresse. Quand votre tour arrive, vous recevez un e-mail pour commencer. La base est gratuite.",
   // « Désinscription en un clic » promettait un lien qui n'existe pas : aucun
   // e-mail n'est encore parti. Le retrait se fait sur demande, et c'est ce que
-  // dit la politique de confidentialité.
-  assurances: ["Un seul e-mail, à l'ouverture", "Retrait sur simple demande", "Aucune donnée revendue"],
+  // dit la politique de confidentialité. La ligne sous le champ dit déjà
+  // « un e-mail quand votre tour arrive » : on ne le répète pas ici.
+  assurances: ["Retrait sur simple demande", "Aucune donnée revendue"],
   // « Mac » et « Windows » annonçaient une application à télécharger, gelée
   // depuis juin : Terouva s'ouvre dans le navigateur (pôle Commerce, 4 novembre).
   platforms: [
@@ -104,7 +122,7 @@ export const PROBLEM = {
   titreLead: "Près de deux candidats sur trois",
   titreTail: "écrivent dans l'heure.",
   texte:
-    "C'est ce que montrent les enquêtes de leboncoin immo menées en 2026. Les professionnels interrogés y ajoutent que sur dix candidatures reçues, moins de quatre sont complètes. Avec Terouva, votre message et votre dossier sont prêts quand l'alerte arrive.",
+    "C'est ce que montrent les enquêtes de leboncoin immo menées en 2026. Les professionnels interrogés ajoutent que sur dix candidatures reçues, moins de quatre sont complètes. Avec Terouva, vous écrivez dans la première heure, avec un dossier complet.",
   source: {
     label: "Enquêtes leboncoin immo 2026, rapportées par MySweetImmo",
     href: "https://www.mysweetimmo.com/2026/09/24/location-1-candidat-sur-3-repond-en-moins-de-15-minutes/",
@@ -115,13 +133,13 @@ export const PROBLEM = {
     sans: {
       nom: "Sans Terouva",
       titre: "Vous la découvrez le soir.",
-      texte: "Les premiers messages sont partis, les visites sont déjà pleines.",
+      texte: "Les premiers messages sont partis. Les visites sont déjà pleines.",
       position: 80,
     },
     avec: {
       nom: "Avec Terouva",
       titre: "Vous répondez dès l'alerte.",
-      texte: "Vous écrivez dans la première heure, parmi les premiers candidats.",
+      texte: "Vous écrivez dans l'heure, comme les candidats les plus rapides.",
       position: 7,
     },
   },
@@ -135,22 +153,22 @@ export const FEATURES = [
   {
     icon: "bell" as const,
     title: "Vous ne ratez plus une annonce",
-    body: "Les annonces de vos alertes arrivent au même endroit, et les nouvelles vous sont signalées.",
+    body: "Toutes vos alertes au même endroit. Les nouvelles annonces vous sont signalées.",
   },
   {
     icon: "gauge" as const,
     title: "Vous écrivez d'abord aux bonnes",
-    body: "Chaque annonce est comparée à votre recherche, avec la raison en clair : trop cher, trop loin, ou à saisir.",
+    body: "Chaque annonce est comparée à ce que vous cherchez : trop chère, trop loin, ou à saisir.",
   },
   {
     icon: "pen" as const,
     title: "Vous avez toujours les mots",
-    body: "Un message différent pour chaque logement, dans le ton que vous choisissez, qui donne envie de vous répondre.",
+    body: "Un message pour chaque logement, dans le ton que vous choisissez.",
   },
   {
     icon: "send" as const,
     title: "Vous savez où vous en êtes",
-    body: "Les réponses que vous notez, les visites prévues : toutes vos candidatures tiennent sur une page.",
+    body: "Vous notez chaque réponse et chaque visite : vos candidatures tiennent sur une page.",
   },
   {
     icon: "lock" as const,
@@ -187,12 +205,12 @@ export const FAQ_ITEMS = [
     a: "La base sera gratuite. Des options payantes viendront pour aller plus loin, et leur prix sera annoncé avant tout paiement. Les outils de ce site restent gratuits.",
   },
   {
-    q: "Quand est-ce que ça sort, et que se passe-t-il si je m'inscris ?",
-    a: "La date n'est pas encore fixée. Si vous laissez votre adresse, vous recevez un seul e-mail, le jour de l'ouverture, et rien d'autre d'ici là. En attendant, les outils gratuits du site fonctionnent déjà.",
+    q: "Quand est-ce que ça ouvre, et que se passe-t-il si je m'inscris ?",
+    a: "Par vagues. Laissez votre adresse : vous recevez un e-mail quand votre tour arrive, et rien d'autre d'ici là. En attendant, les outils gratuits du site fonctionnent déjà.",
   },
   {
     q: "Où vont mes données ?",
-    a: "Nulle part. Vos papiers et vos messages restent sur votre ordinateur : pas de compte, pas de publicité. Votre adresse e-mail, si vous la laissez, sert seulement à vous prévenir de l'ouverture.",
+    a: "Nulle part. Vos papiers et vos messages restent sur votre ordinateur : pas de compte, pas de publicité. Votre adresse e-mail, si vous la laissez, sert seulement à vous prévenir quand votre tour arrive.",
   },
 ];
 

@@ -55,11 +55,27 @@ navigateur (sauf pour dire où ça s'ouvre), IA, algorithme, fonctionnalité.
 avant tout paiement. » Plus de « 12 € par mois » nulle part. Forme du produit : **sur ordinateur,
 dans votre navigateur, sans installation** ; plus de « téléchargeable », « Mac », « Windows ».
 
-## Ce qui reste à Hugo
+## L'ouverture (Hugo, 2026-11-04)
 
-- Une ligne humaine près de l'inscription (qui fait Terouva et pourquoi) : la méthode et l'audit la
-  recommandent, mais elle ne s'invente pas. Il faut l'histoire d'Hugo, en deux phrases.
-- La date d'ouverture, même approximative (« au printemps 2027 ») : « bientôt » ne rassure personne.
+**Terouva ouvre par vagues.** L'inscription réserve une place ; l'e-mail part quand le tour de la
+personne arrive. Jamais de date, jamais « bientôt » ni « lancement ». Pas d'histoire du fondateur sur
+le site : Hugo n'en veut pas.
+
+## Le fil de lecture de l'accueil
+
+Celui qui ne lit que les titres doit avoir toute l'histoire, dans cet ordre :
+
+1. Les bons logements, avant les autres. *(le gain)*
+2. De l'alerte à votre réponse, sans y passer la soirée. *(comment ça se passe pour vous)*
+3. Près de deux candidats sur trois écrivent dans l'heure. *(pourquoi aller vite, sourcé)*
+4. Moins de recherche, plus de visites. *(ce que vous y gagnez, fonction par fonction)*
+5. Un message qui donne envie de vous répondre. *(la preuve : de vrais messages)*
+6. Votre message et votre dossier, gratuitement. *(l'essai, sans attendre)*
+7. Avant de vous inscrire. *(les objections)*
+8. Terouva ouvre par vagues. Prenez place dans la prochaine. *(l'action)*
+
+Le corps sous chaque titre ne dit qu'une chose nouvelle, en phrases courtes. Les mentions en capitales
+annoncent la section (« En pratique »), elles ne font pas de formule.
 
 ## Relire en une passe
 
