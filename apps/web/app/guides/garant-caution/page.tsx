@@ -11,8 +11,15 @@ export const metadata = pageMetadata({
   chemin: GUIDE.chemin,
   type: "article",
   publieLe: GUIDE.publieLe,
+  modifieLe: GUIDE.modifieLe,
 });
 
+/*
+ * Intertitres en questions, telles qu'elles sont tapées (docs/seo/REGISTRE.md),
+ * et sous chacune une réponse autonome de 40 à 60 mots, puis le détail sans
+ * redite. « Louer sans garant » reste une section : la question appartient au
+ * guide voisin, vers lequel elle renvoie.
+ */
 export default function GuideGarantCaution() {
   return (
     <CadreGuide guide={GUIDE}>
@@ -24,36 +31,41 @@ export default function GuideGarantCaution() {
         l&apos;engagement peut survivre de plusieurs mois à votre départ du logement.
       </p>
 
-      <h2 id="qui">Qui peut se porter garant</h2>
+      <h2 id="qui">Qui peut se porter garant pour une location ?</h2>
       <p>
-        N&apos;importe quelle <strong>personne physique</strong>, sans condition de lien de famille :
-        un parent, un proche, un ami. Aucune règle n&apos;impose qu&apos;il soit propriétaire, ni
-        qu&apos;il habite la même région, même si beaucoup d&apos;annonces le réclament.
+        N&apos;importe quelle personne physique, sans condition de lien de famille : un parent, un
+        proche, un ami. Aucune règle n&apos;impose qu&apos;elle soit propriétaire ni qu&apos;elle
+        habite votre région. Une personne morale peut aussi s&apos;engager : Action Logement avec
+        la garantie Visale, un employeur ou une banque.
       </p>
       <p>
-        Ou une <strong>personne morale</strong> : Action Logement par la{" "}
-        <Link href="/guides/garantie-visale">garantie Visale</Link>, un employeur, une banque. Pour
-        qui n&apos;a personne à solliciter, Visale est la voie la plus courante, et elle se demande
-        avant d&apos;avoir trouvé le logement.
+        Beaucoup d&apos;annonces réclament pourtant un garant propriétaire, ou qui vit dans la même
+        région : le bailleur peut le préférer, aucun texte ne l&apos;exige. Pour qui n&apos;a
+        personne à solliciter, la <Link href="/guides/garantie-visale">garantie Visale</Link> est
+        la voie la plus courante, et elle se demande avant d&apos;avoir trouvé le logement.
       </p>
 
-      <h2 id="simple-ou-solidaire">Caution simple ou caution solidaire</h2>
+      <h2 id="simple-ou-solidaire">
+        Caution simple ou solidaire : quand le propriétaire peut-il actionner le garant ?
+      </h2>
       <p>
-        C&apos;est la distinction la plus lourde de conséquences, et elle se lit dans la mention
-        que la caution appose elle-même. Si elle y renonce aux bénéfices de discussion et de
-        division, elle est solidaire. Sinon, elle les conserve, et la caution est simple.
+        Avec une caution solidaire, le propriétaire peut réclamer l&apos;impayé à votre garant dès
+        le premier impayé, sans passer par vous. Avec une caution simple, il doit d&apos;abord
+        vous le réclamer par un commandement de payer. La caution est solidaire si, dans la
+        mention qu&apos;elle appose elle-même, elle renonce aux bénéfices de discussion et de
+        division.
       </p>
+      <p>Deux conséquences pratiques :</p>
       <ul>
         <li>
-          <strong>Caution simple</strong> : le propriétaire doit d&apos;abord réclamer la somme au
-          locataire, par un commandement de payer. Le commissaire de justice doit en adresser une
-          copie à la caution ; sans cette copie, la caution n&apos;est pas tenue des intérêts de
-          retard.
+          <strong>En caution simple</strong>, le commissaire de justice qui délivre le commandement
+          de payer doit en adresser une copie à la caution ; sans cette copie, la caution n&apos;est
+          pas tenue des intérêts de retard.
         </li>
         <li>
-          <strong>Caution solidaire</strong> : le propriétaire peut se tourner vers la caution dès
-          le premier impayé, sans passer par le locataire. C&apos;est la formule que demandent la
-          plupart des bailleurs.
+          <strong>En caution solidaire</strong>, la formule que demandent la plupart des
+          bailleurs, rien ne s&apos;intercale entre l&apos;impayé et votre garant. C&apos;est la
+          mention, plus que le titre de l&apos;acte, qu&apos;il faut lire avant de signer.
         </li>
       </ul>
       <p>
@@ -61,49 +73,62 @@ export default function GuideGarantCaution() {
         loyers et charges impayés.
       </p>
 
-      <h2 id="acte">L&apos;acte de cautionnement</h2>
+      <h2 id="acte">Que doit contenir l&apos;acte de cautionnement ?</h2>
       <p>
-        Il doit être <strong>écrit</strong>, sous seing privé ou devant notaire, et signé par la
-        caution. Le propriétaire remet aussi à la caution un exemplaire du bail. Ce que
-        l&apos;acte contient :
+        Il doit être écrit et signé par la caution. Il reprend le montant du loyer et ses
+        conditions de révision, reproduit un alinéa de l&apos;article 22-1 de la loi de 1989 et
+        porte la mention de l&apos;article 2297 du Code civil, avec un montant maximal écrit en
+        lettres et en chiffres. Sans ces formalités, l&apos;engagement est nul.
       </p>
+      <p>Chaque élément a sa raison :</p>
       <ul>
-        <li>le montant du loyer et ses conditions de révision, tels qu&apos;ils figurent au bail ;</li>
         <li>
-          la reproduction de l&apos;avant-dernier alinéa de l&apos;<span className="loi">article 22-1</span>{" "}
-          de la <span className="loi">loi du 6 juillet 1989</span>, celui qui permet de résilier un
+          le montant du loyer et ses conditions de révision sont ceux qui figurent au bail, et le
+          propriétaire remet à la caution un exemplaire de ce bail ;
+        </li>
+        <li>
+          l&apos;alinéa reproduit est l&apos;avant-dernier de l&apos;
+          <span className="loi">article 22-1</span> de la{" "}
+          <span className="loi">loi du 6 juillet 1989</span>, celui qui permet de résilier un
           engagement sans durée ;
         </li>
         <li>
-          la mention de l&apos;<span className="loi">article 2297</span> du Code civil, apposée par
-          la caution elle-même : elle s&apos;engage à payer ce que vous devez si vous ne payez pas,
-          dans la limite d&apos;un montant écrit en toutes lettres et en chiffres ;
+          la mention de l&apos;<span className="loi">article 2297</span> est apposée par la caution
+          elle-même : elle s&apos;engage à payer ce que vous devez si vous ne payez pas, et en cas
+          d&apos;écart entre les deux montants, c&apos;est la somme en lettres qui compte ;
         </li>
         <li>
-          en colocation, le nom du colocataire dont le départ mettra fin à l&apos;engagement du
-          garant.
+          en colocation, l&apos;acte nomme le colocataire dont le départ mettra fin à
+          l&apos;engagement du garant.
         </li>
       </ul>
       <p>
-        L&apos;acte indique aussi si l&apos;engagement est à <strong>durée déterminée</strong> ou{" "}
-        <strong>indéterminée</strong>. Le montant maximal, lui, est obligatoire : la caution
-        l&apos;écrit dans sa mention, et en cas d&apos;écart, c&apos;est la somme en lettres qui
-        compte. Ces deux lignes décident de tout ce qui suit.
+        L&apos;acte peut être sous seing privé ou passé devant notaire. Il indique aussi si
+        l&apos;engagement est à <strong>durée déterminée</strong> ou{" "}
+        <strong>indéterminée</strong> : avec le montant maximal, c&apos;est la ligne qui décide de
+        tout ce qui suit.
       </p>
       <div className="note">
         <p>
-          <strong>Sans ces formalités, le cautionnement est nul.</strong> Depuis le 1er janvier
-          2022, l&apos;<span className="loi">article 22-1</span> renvoie à la mention de
-          l&apos;<span className="loi">article 2297</span> du Code civil. Une mention absente, un
-          acte sans le montant du loyer ou sans l&apos;alinéa reproduit, ou une caution qui
-          n&apos;a pas reçu le bail : l&apos;engagement ne tient pas.
+          <strong>Ce qui rend l&apos;acte nul.</strong> Une mention absente, un acte sans le
+          montant du loyer ou sans l&apos;alinéa reproduit, ou une caution qui n&apos;a pas reçu le
+          bail. La règle vaut depuis le 1er janvier 2022, date à laquelle l&apos;
+          <span className="loi">article 22-1</span> renvoie à la mention de l&apos;
+          <span className="loi">article 2297</span> du Code civil.
         </p>
       </div>
 
-      <h2 id="justificatifs">Les justificatifs du garant</h2>
+      <h2 id="justificatifs">Quels documents fournir pour se porter garant ?</h2>
       <p>
-        La liste est fixée par le <span className="loi">décret du 5 novembre 2015</span>, elle est <strong>limitative</strong>,
-        et elle n&apos;est pas la même que celle du locataire. Pour une caution personne physique :
+        Une pièce d&apos;identité, un justificatif de domicile, un justificatif de situation
+        professionnelle et un justificatif de ressources, choisis dans une liste fixée par le
+        décret du 5 novembre 2015. Cette liste est limitative et diffère de celle du locataire :
+        tout document qui n&apos;y figure pas peut être refusé. Une caution personne morale ne
+        fournit que deux pièces.
+      </p>
+      <p>
+        Le détail pour une caution personne physique, selon le{" "}
+        <span className="loi">décret du 5 novembre 2015</span> :
       </p>
       <ul>
         <li>
@@ -129,52 +154,47 @@ export default function GuideGarantCaution() {
         </li>
       </ul>
       <p>
-        Pour une caution personne morale, deux pièces seulement : un extrait K bis original de moins
-        de trois mois, ou les statuts, et une pièce d&apos;identité du représentant.
+        Les deux pièces d&apos;une caution personne morale : un extrait K bis original de moins de
+        trois mois, ou les statuts, et une pièce d&apos;identité du représentant.
       </p>
       <p>
-        Tout ce qui sort de cette liste peut être refusé. Les pièces interdites, la sanction
-        encourue et la façon de les décliner sans perdre le logement sont détaillées dans le guide
-        du <Link href="/guides/dossier-de-location">dossier de location</Link>.
+        Les pièces interdites, la sanction encourue et la façon de les décliner sans perdre le
+        logement sont détaillées dans le guide du{" "}
+        <Link href="/guides/dossier-de-location">dossier de location</Link>.
       </p>
 
-      <h2 id="cumul">Garant et assurance loyers impayés</h2>
-      <p>Un propriétaire ne peut pas toujours cumuler les deux :</p>
-      <ul>
-        <li>
-          <strong>Propriétaire particulier</strong> déjà couvert par une assurance contre les
-          risques locatifs : il ne peut demander une caution que si le locataire est{" "}
-          <strong>étudiant ou apprenti</strong>.
-        </li>
-        <li>
-          <strong>Bailleur personne morale</strong> : il ne peut demander une caution que si elle
-          est apportée par un organisme dont la liste est fixée par décret, ou si le logement est
-          loué à un étudiant qui ne touche pas de bourse de l&apos;enseignement supérieur. La règle
-          ne vaut pas pour une société civile constituée uniquement entre parents et alliés
-          jusqu&apos;au quatrième degré inclus.
-        </li>
-      </ul>
+      <h2 id="cumul">Un propriétaire assuré contre les impayés peut-il demander un garant ?</h2>
+      <p>
+        Un propriétaire particulier couvert par une assurance contre les risques locatifs ne peut
+        demander une caution que si le locataire est étudiant ou apprenti. Un bailleur personne
+        morale ne peut en demander une que si elle vient d&apos;un organisme dont la liste est
+        fixée par décret, ou si le logement est loué à un étudiant non boursier.
+      </p>
+      <p>
+        La règle des personnes morales ne vaut pas pour une société civile constituée uniquement
+        entre parents et alliés jusqu&apos;au quatrième degré inclus. Pour les autres cas, il peut
+        valoir la peine de demander au propriétaire s&apos;il est déjà assuré : la question du
+        garant tombe alors d&apos;elle-même, sauf si vous êtes étudiant ou apprenti.
+      </p>
 
-      <h2 id="fin">Jusqu&apos;à quand il s&apos;engage</h2>
+      <h2 id="fin">Un garant peut-il résilier son engagement ?</h2>
+      <p>
+        Seulement si l&apos;acte ne fixe aucune durée : la caution peut alors résilier à tout
+        moment par lettre recommandée, mais la résiliation ne prend effet qu&apos;à la fin du bail
+        en cours, et elle reste tenue des dettes nées pendant ce bail. Si l&apos;acte fixe une
+        durée, elle va jusqu&apos;au bout.
+      </p>
+      <p>En dehors de la résiliation, l&apos;engagement prend fin dans trois situations :</p>
       <ul>
         <li>
-          <strong>Vous partez</strong> : l&apos;engagement prend fin à l&apos;expiration de votre
-          préavis.
+          <strong>Vous partez</strong> : il s&apos;arrête à l&apos;expiration de votre préavis.
         </li>
         <li>
-          <strong>Le propriétaire donne congé</strong> : il prend fin à l&apos;expiration du bail.
+          <strong>Le propriétaire donne congé</strong> : il s&apos;arrête à l&apos;expiration du
+          bail.
         </li>
         <li>
-          <strong>Engagement à durée déterminée</strong> : la caution ne peut pas y mettre fin plus
-          tôt.
-        </li>
-        <li>
-          <strong>Engagement à durée indéterminée</strong> : la caution peut résilier à tout moment
-          par lettre recommandée, mais la résiliation ne prend effet qu&apos;à l&apos;expiration du
-          bail en cours. Elle reste tenue des dettes nées pendant ce bail.
-        </li>
-        <li>
-          <strong>Décès de la caution</strong> : si l&apos;acte ne prévoit rien, l&apos;engagement
+          <strong>La caution décède</strong> : si l&apos;acte ne prévoit rien, l&apos;engagement
           passe aux héritiers pour les dettes nées avant le décès.
         </li>
       </ul>

@@ -122,11 +122,11 @@ export const GUIDES: Guide[] = [
   {
     chemin: "/guides/repondre-a-une-annonce-de-location",
     sommaire: [
-      { id: "ordre", titre: "Les six informations qui comptent" },
+      { id: "ordre", titre: "Que mettre dans le message" },
       { id: "modele", titre: "Un modèle complet" },
-      { id: "ne-pas-faire", titre: "Ce qui vous dessert" },
+      { id: "ne-pas-faire", titre: "Se démarquer" },
       { id: "rapidite", titre: "L'heure d'envoi" },
-      { id: "apres", titre: "Après l'envoi" },
+      { id: "apres", titre: "Relancer" },
     ],
     titre: "Répondre à une annonce de location : ce qui fait la différence",
     sources: [
@@ -134,12 +134,17 @@ export const GUIDES: Guide[] = [
       { nom: "Vestae · Sélectionner un locataire : critères légaux et bons réflexes", url: "https://vestae.fr/selectionner-locataire-criteres-legaux-bons-reflexes/" },
       { nom: "La Parisienne Immobilière · Sélection du locataire", url: "https://laparisienneimmobiliere.fr/selection-locataire/" },
     ],
-    titreSeo: "Répondre à une annonce de location",
+    // Search Console, 2026-10-05 au 11-01 : 92 impressions en position 6,7 et
+    // aucun clic, sur « bonjour je suis intéressé par votre annonce de
+    // location ». La personne cherche un modèle de message : le titre le
+    // promet, la description cite sa phrase et dit pourquoi elle ne suffit pas.
+    titreSeo: "Répondre à une annonce de location : modèle",
     resume:
       "Sur un marché tendu, la visite va souvent au dossier qui arrive tôt et se lit en dix secondes, pas au meilleur dossier. Voici ce qui se joue vraiment dans un premier message.",
     description:
-      "Comment écrire un message de candidature pour une location : quoi mettre, dans quel ordre, ce qui dessert, et un modèle gratuit à copier.",
+      "« Bonjour, je suis intéressé par votre annonce » ne suffit pas : les six informations à donner, un modèle à copier et les erreurs à éviter.",
     publieLe: "2026-10-11",
+    modifieLe: "2026-11-04",
     lecture: 6,
     etape: "candidature",
     questions: [
@@ -236,9 +241,9 @@ export const GUIDES: Guide[] = [
       { id: "qui", titre: "Qui peut se porter garant" },
       { id: "simple-ou-solidaire", titre: "Caution simple ou solidaire" },
       { id: "acte", titre: "L'acte de cautionnement" },
-      { id: "justificatifs", titre: "Les justificatifs du garant" },
+      { id: "justificatifs", titre: "Les documents du garant" },
       { id: "cumul", titre: "Garant et assurance" },
-      { id: "fin", titre: "Jusqu'à quand il s'engage" },
+      { id: "fin", titre: "Résilier, et jusqu'à quand" },
       { id: "sans-garant", titre: "Louer sans garant" },
     ],
     titre: "Garant de location : qui peut s'engager, pour combien, et jusqu'à quand",
@@ -321,9 +326,10 @@ export const GUIDES: Guide[] = [
       { id: "principe", titre: "Le principe" },
       { id: "interdits", titre: "Les critères interdits" },
       { id: "legitimes", titre: "Ce qui reste légitime" },
-      { id: "preuve", titre: "La charge de la preuve" },
+      { id: "preuve", titre: "Prouver une discrimination" },
       { id: "sanctions", titre: "Les sanctions" },
       { id: "recours", titre: "Où signaler" },
+      { id: "entre-temps", titre: "Après un refus" },
     ],
     titre: "Un propriétaire peut-il refuser votre dossier sans donner de motif ?",
     titreSeo: "Refus de dossier : ce qui est permis",
@@ -360,7 +366,7 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Quels critères de refus sont interdits ?",
-        a: "L'article 225-1 du Code pénal en liste une vingtaine, parmi lesquels l'origine, le sexe, la situation de famille, la grossesse, l'apparence physique, la vulnérabilité économique, le nom, le lieu de résidence, l'état de santé, le handicap, les mœurs, l'orientation sexuelle, l'âge, les opinions politiques, les activités syndicales, la langue parlée et la religion.",
+        a: "L'article 225-1 du Code pénal en liste vingt-cinq, parmi lesquels l'origine, le sexe, la situation de famille, la grossesse, l'apparence physique, la vulnérabilité économique, le nom, le lieu de résidence, l'état de santé, le handicap, les mœurs, l'orientation sexuelle, l'âge, les opinions politiques, les activités syndicales, la langue parlée et la religion.",
       },
       {
         q: "Qui doit prouver qu'il y a eu discrimination ?",

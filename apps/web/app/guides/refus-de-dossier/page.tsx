@@ -11,8 +11,14 @@ export const metadata = pageMetadata({
   chemin: GUIDE.chemin,
   type: "article",
   publieLe: GUIDE.publieLe,
+  modifieLe: GUIDE.modifieLe,
 });
 
+/*
+ * Chaque section s'ouvre sur la question telle qu'on la tape et sur sa réponse
+ * autonome, de 40 à 60 mots ; le développement qui suit apporte le détail et
+ * les références sans redire la réponse.
+ */
 export default function GuideRefusDeDossier() {
   return (
     <CadreGuide guide={GUIDE}>
@@ -24,23 +30,29 @@ export default function GuideRefusDeDossier() {
         qu&apos;on ne le croit.
       </p>
 
-      <h2 id="principe">Le principe</h2>
+      <h2 id="principe">Le propriétaire doit-il justifier un refus de dossier ?</h2>
       <p>
-        Le propriétaire est libre de retenir la candidature qu&apos;il veut, à partir de critères
-        objectifs liés à la location et aux garanties de paiement. Aucune obligation
-        d&apos;expliquer, aucun délai de réponse, aucun classement à justifier.
+        Non. Il choisit librement son locataire, sur des critères objectifs liés à la location et
+        aux garanties de paiement, sans obligation d&apos;expliquer sa décision, de répondre dans
+        un délai ni de classer les candidats. La loi encadre seulement la raison du refus : elle
+        lui interdit de refuser de louer pour un motif discriminatoire.
       </p>
       <p>
-        L&apos;<span className="loi">article 1er</span> de la <span className="loi">loi du 6 juillet 1989</span> lui interdit en revanche de refuser de louer
-        pour un motif discriminatoire. Et selon le Défenseur des droits, cette interdiction
+        Cette interdiction est posée par l&apos;<span className="loi">article 1er</span> de la{" "}
+        <span className="loi">loi du 6 juillet 1989</span>. Et selon le Défenseur des droits, elle
         s&apos;applique même sans intention de discriminer : un réflexe de tri, une consigne
         d&apos;agence, une habitude suffisent.
       </p>
 
-      <h2 id="interdits">Les critères interdits</h2>
+      <h2 id="interdits">Quels sont les motifs de refus interdits ?</h2>
       <p>
-        L&apos;<span className="loi">article 225-1</span> du Code pénal en liste une vingtaine. Un refus fondé sur l&apos;un
-        d&apos;eux est une discrimination :
+        L&apos;article 225-1 du Code pénal en liste vingt-cinq. Parmi eux : l&apos;origine, le
+        sexe, la situation de famille, la grossesse, l&apos;âge, le nom, le lieu de résidence,
+        l&apos;état de santé, le handicap, la religion et la vulnérabilité économique. Un refus
+        fondé sur l&apos;un d&apos;eux est une discrimination.
+      </p>
+      <p>
+        La liste complète, telle que l&apos;<span className="loi">article 225-1</span> la regroupe :
       </p>
       <ul>
         <li>l&apos;origine, l&apos;appartenance vraie ou supposée à une ethnie, une nation, une prétendue race ;</li>
@@ -55,27 +67,27 @@ export default function GuideRefusDeDossier() {
         <li>la qualité de lanceur d&apos;alerte.</li>
       </ul>
       <p>
-        Deux points reviennent souvent dans les dossiers du Défenseur des droits.{" "}
-        <strong>Le lieu de résidence fait partie des critères protégés</strong>. Pour le garant, la
-        loi de 1989 est plus précise : un propriétaire qui exige une caution ne peut pas la refuser
-        parce qu&apos;elle n&apos;a pas la nationalité française ou qu&apos;elle ne réside pas en
-        métropole (<span className="loi">article 22-1</span>). Et un refus justifié par la nature « non
-        professionnelle » d&apos;une partie des revenus, comme une pension d&apos;invalidité, a déjà
-        été qualifié de discriminatoire.
+        Deux points reviennent souvent dans les dossiers du Défenseur des droits. Pour le garant,
+        la loi de 1989 est plus précise que le Code pénal : un propriétaire qui exige une caution
+        ne peut pas la refuser parce qu&apos;elle n&apos;a pas la nationalité française ou
+        qu&apos;elle ne réside pas en métropole (<span className="loi">article 22-1</span>). Et un
+        refus justifié par la nature « non professionnelle » d&apos;une partie des revenus, comme
+        une pension d&apos;invalidité, a déjà été qualifié de discriminatoire.
       </p>
 
-      <h2 id="legitimes">Ce qui reste légitime</h2>
+      <h2 id="legitimes">Quels motifs de refus restent légitimes ?</h2>
       <p>
-        Le propriétaire peut apprécier votre <strong>situation financière</strong> et la solidité
-        des garanties. Il peut demander les pièces de la liste autorisée : identité, situation
-        professionnelle, ressources. Il ne peut pas réclamer un relevé de compte bancaire ni un
-        contrat de mariage, et refuser quelqu&apos;un qui veut exercer une activité
-        professionnelle dans le logement n&apos;est pas une discrimination.
+        Ceux qui tiennent à la location elle-même et à votre capacité à payer : le propriétaire
+        peut apprécier votre situation financière et la solidité de vos garanties, à partir des
+        pièces de la liste autorisée. Un dossier moins solide qu&apos;un autre peut donc être
+        écarté sans que la loi ait rien à dire. C&apos;est le cas de la plupart des refus.
       </p>
       <p>
-        Un dossier moins solide qu&apos;un autre peut donc être écarté sans que la loi ait quoi que
-        ce soit à dire. C&apos;est la limite de ce guide : la plupart des refus sont légitimes, et
-        ce qui se joue alors est sur le terrain du{" "}
+        Les pièces qu&apos;il peut demander portent sur votre identité, votre situation
+        professionnelle et vos ressources. Il ne peut pas réclamer un relevé de compte bancaire ni
+        un contrat de mariage. Refuser quelqu&apos;un qui veut exercer une activité
+        professionnelle dans le logement n&apos;est pas une discrimination. Quand le refus est
+        légitime, ce qui se joue est sur le terrain du{" "}
         <Link href="/guides/dossier-de-location">dossier</Link> et du{" "}
         <Link href="/guides/garant-caution">garant</Link>.
       </p>
@@ -88,88 +100,75 @@ export default function GuideRefusDeDossier() {
         </p>
       </div>
 
-      <h2 id="preuve">La charge de la preuve</h2>
+      <h2 id="preuve">Comment prouver une discrimination au logement ?</h2>
       <p>
-        Elle se partage en deux temps, et c&apos;est ce qui rend l&apos;action possible. À vous
-        d&apos;abord de réunir des éléments <strong>datés</strong> qui laissent supposer un motif
-        interdit :
-      </p>
-      <ul>
-        <li>les messages, courriels et captures d&apos;écran, avec l&apos;identité de l&apos;auteur ;</li>
-        <li>des témoignages, ou le résultat d&apos;un testing ;</li>
-        <li>un certificat médical, si le motif touche à la santé ou au handicap.</li>
-      </ul>
-      <p>
-        Dès lors que ces éléments existent, c&apos;est au propriétaire de démontrer que sa décision
-        repose sur des éléments objectifs, étrangers à toute discrimination. Le testing lui-même est
-        encadré par l&apos;<span className="loi">article 225-3-1</span> du Code pénal.
+        En réunissant des éléments datés qui laissent supposer un motif interdit : messages,
+        courriels et captures d&apos;écran avec l&apos;identité de leur auteur, témoignages,
+        résultat d&apos;un testing. Devant le juge civil, c&apos;est ensuite au propriétaire de
+        démontrer que sa décision repose sur des éléments objectifs. Ce partage de la preuve ne
+        vaut pas pour la plainte pénale.
       </p>
       <p>
-        Ce partage de la preuve vaut en cas de litige devant le juge civil, celui à qui vous
-        demandez réparation (<span className="loi">article 1er</span> de la loi de 1989). Il ne
-        s&apos;applique pas à la plainte pénale.
+        Si le motif touche à la santé ou au handicap, un certificat médical s&apos;ajoute à ces
+        éléments. Le testing lui-même est encadré par l&apos;
+        <span className="loi">article 225-3-1</span> du Code pénal. Le juge civil est celui à qui
+        vous demandez réparation, et le partage de la preuve devant lui vient de l&apos;
+        <span className="loi">article 1er</span> de la loi de 1989.
       </p>
       <p>
         Pratiquement, cela veut dire une chose : gardez les échanges écrits. Un refus formulé au
         téléphone ne laisse rien ; la même phrase par message vaut un début de preuve.
       </p>
 
-      <h2 id="sanctions">Les sanctions</h2>
-      <ul>
-        <li>
-          Un refus de louer fondé sur un critère interdit expose son auteur, propriétaire ou
-          professionnel de l&apos;immobilier, à <strong>trois ans d&apos;emprisonnement et
-          45&nbsp;000&nbsp;€ d&apos;amende</strong> au plus, et jusqu&apos;à cinq ans et
-          75&nbsp;000&nbsp;€ quand les faits ont lieu dans un lieu accueillant du public.
-        </li>
-        <li>
-          Demander une pièce qui ne figure pas dans la liste autorisée est passible d&apos;une
-          amende pouvant aller jusqu&apos;à <strong>3&nbsp;000&nbsp;€</strong> pour un particulier.
-        </li>
-        <li>
-          Si la victime se constitue partie civile, elle peut aussi demander des dommages et
-          intérêts.
-        </li>
-      </ul>
+      <h2 id="sanctions">Que risque un propriétaire qui refuse un dossier pour un motif interdit ?</h2>
       <p>
-        Quand c&apos;est le propriétaire qui discrimine, l&apos;agent immobilier qui a transmis sa
-        consigne ne peut pas être poursuivi pénalement à sa place.
+        Jusqu&apos;à trois ans d&apos;emprisonnement et 45&nbsp;000&nbsp;€ d&apos;amende, et
+        jusqu&apos;à cinq ans et 75&nbsp;000&nbsp;€ quand les faits ont lieu dans un lieu
+        accueillant du public. La peine vise l&apos;auteur du refus, propriétaire ou professionnel
+        de l&apos;immobilier. La victime qui se constitue partie civile peut aussi demander des
+        dommages et intérêts.
+      </p>
+      <p>
+        Une autre sanction vise le dossier lui-même : demander une pièce qui ne figure pas dans la
+        liste autorisée est passible d&apos;une amende pouvant aller jusqu&apos;à{" "}
+        <strong>3&nbsp;000&nbsp;€</strong> pour un particulier. Et quand c&apos;est le propriétaire
+        qui discrimine, l&apos;agent immobilier qui a transmis sa consigne ne peut pas être
+        poursuivi pénalement à sa place.
       </p>
 
-      <h2 id="recours">Où signaler</h2>
-      <ul>
-        <li>
-          <strong>Le Défenseur des droits</strong>, gratuitement. Il peut proposer une médiation,
-          une transaction validée par le procureur, ou saisir la justice. C&apos;est souvent la
-          voie la plus simple.
-        </li>
-        <li>
-          <strong>Une plainte pénale</strong>, dans n&apos;importe quel commissariat ou brigade de
-          gendarmerie, dans les six ans suivant les faits. Un signalement en ligne n&apos;est pas
-          une plainte.
-        </li>
-      </ul>
+      <h2 id="recours">Où signaler un refus de location discriminatoire ?</h2>
       <p>
-        Les démarches, les coordonnées à jour et les décisions publiées se trouvent sur{" "}
+        Au Défenseur des droits, gratuitement : il peut proposer une médiation, une transaction
+        validée par le procureur, ou saisir la justice. Vous pouvez aussi porter plainte dans
+        n&apos;importe quel commissariat ou brigade de gendarmerie, dans les six ans suivant les
+        faits. Un signalement en ligne ne vaut pas plainte.
+      </p>
+      <p>
+        Le Défenseur des droits est souvent la voie la plus simple. Ses démarches, ses coordonnées à
+        jour et les décisions qu&apos;il a publiées se trouvent sur{" "}
         <a
           href="https://www.defenseurdesdroits.fr/discriminations-la-location-de-logement-338"
           target="_blank"
           rel="noopener"
         >
-          la page du Défenseur des droits consacrée à la location
+          sa page consacrée à la location
         </a>
         .
       </p>
 
-      <h2 id="entre-temps">Entre-temps, le dossier</h2>
+      <h2 id="entre-temps">Que faire après un refus de dossier de location ?</h2>
       <p>
-        Une procédure prend des mois et ne vous loge pas. Pendant ce temps, ce qui fait la
-        différence reste le nombre de candidatures bien ciblées et la qualité du premier message.
-        La <Link href="/outils/dossier-de-location">checklist de dossier</Link> dit quelles pièces
+        Si le refus vous semble discriminatoire, signalez-le, mais une procédure prend des mois et
+        ne vous loge pas. Dans la plupart des cas, la suite se joue sur la candidature suivante :
+        un dossier complet prêt à partir, un premier message envoyé tôt, et la question du garant
+        réglée avant la visite.
+      </p>
+      <p>
+        Pour chacun de ces trois points, un outil : la{" "}
+        <Link href="/outils/dossier-de-location">checklist de dossier</Link> dit quelles pièces
         réunir, le <Link href="/outils/message-de-candidature">générateur de message</Link> écrit
-        la candidature, et la{" "}
-        <Link href="/guides/garantie-visale">garantie Visale</Link> répond à la question du garant
-        avant qu&apos;elle soit posée.
+        la candidature, et la <Link href="/guides/garantie-visale">garantie Visale</Link> répond à
+        la question du garant avant qu&apos;elle soit posée.
       </p>
     </CadreGuide>
   );
