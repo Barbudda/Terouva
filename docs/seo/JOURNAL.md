@@ -205,3 +205,16 @@ Gains :
   DPE) ; quatre retenus pour cannibalisation ; l'article sur l'encadrement des loyers après le vote
   de l'Assemblée du 18 novembre.
 - Suivant : vérifier l'indexation du lot 1 une semaine après (`seo-analyste`), avant le lot 2.
+
+## 2026-11-04 (nuit, suite) — Lot 2 en production, sur décision d'Hugo
+
+- Livré : huit articles de plus (refus au chômage, étude des zones tendues, DossierFacile,
+  propriétaire qui ne répond pas, trouver un appartement rapidement, questions à poser en visite,
+  après la visite, DPE recalculé), soit **15 articles publiés**. Hugo a choisi de ne pas attendre la
+  mesure d'indexation du lot 1 que prévoyait le brief.
+- Trois liens vers des brouillons retenus redirigés vers des pages publiées ; contrôle : aucun lien
+  vers un brouillon sur les 15 articles. En ligne : les 8 en 200, brouillon retenu en 404, plan du
+  site à 36 adresses, soumises à IndexNow.
+- Reste en brouillon : 4 articles retenus pour cannibalisation, l'article sur l'encadrement des
+  loyers (vote de l'Assemblée le 18 novembre). Vague 6 planifiée (25 articles).
+- Suivant : mesurer l'indexation des 15 articles (Search Console) d'ici une à deux semaines.
