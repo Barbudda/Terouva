@@ -7,11 +7,21 @@ import { GET as llms } from "@/app/llms.txt/route";
 import {
   ARTICLES,
   BLOG,
+  PAGES_PILIERS,
+  SEUIL_PAGE_PILIER,
   articlePublie,
+  articlesDuPilier,
+  articlesLies,
   articlesPublies,
   blogModifieLe,
   blogOuvert,
   cheminArticle,
+  cheminPilier,
+  lienBlog,
+  piliersAvecPage,
+  piliersHabites,
+  pilierModifieLe,
+  pilierParSlug,
   type Article,
 } from "./blog";
 import { GUIDES, OUTILS } from "./catalogue";
@@ -98,8 +108,84 @@ describe("blog : rien n'est annoncé avant le premier article", () => {
     const fichiers = [...lister(join(racine, "app")), ...lister(join(racine, "components"))].filter(
       (f) => !/[\\/](app|components)[\\/]blog[\\/]/.test(f),
     );
-    const fautifs = fichiers.filter((f) => /href=\{?["'`]\/blog/.test(readFileSync(f, "utf8")));
+    // Le pied de page tient ses liens dans `lib/content.ts`, sous la forme `href: "/blog"` : les
+    // deux formes sont cherchées, sinon un lien posé là sans condition passerait.
+    fichiers.push(join(racine, "lib", "content.ts"));
+    const fautifs = fichiers.filter((f) => /href(=\{?|:\s*)["'`]\/blog/.test(readFileSync(f, "utf8")));
     expect(fautifs).toEqual([]);
+  });
+
+  it("aucune page de pilier n'existe ni n'est au plan du site", () => {
+    const chemins = sitemap().map((e) => new URL(e.url).pathname);
+    const attendues = piliersAvecPage().map(cheminPilier);
+    expect(chemins.filter((c) => c.startsWith(`${BLOG}/pilier/`))).toEqual(attendues);
+    if (!ouvert) expect(attendues).toEqual([]);
+  });
+
+  it("le pied de page et les guides ne montrent rien du blog", () => {
+    if (ouvert) return;
+    expect(lienBlog()).toBeNull();
+    for (const g of GUIDES) expect(articlesLies(g.chemin)).toEqual([]);
+  });
+});
+
+describe("blog : liens depuis le reste du site", () => {
+  const dossier = "/guides/dossier-de-location";
+  const garant = "/guides/garant-caution";
+  const fiche = (slug: string, pilier: Article["pilier"], publieLe: string, extra: Partial<Article> = {}): Article => ({
+    ...base,
+    slug,
+    pilier,
+    publieLe,
+    ...extra,
+  });
+
+  it("le lien de navigation n'apparaît qu'avec un article publié", () => {
+    expect(lienBlog([])).toBeNull();
+    expect(lienBlog([fiche("a", "A", "2026-11-20", { statut: "brouillon" })])).toBeNull();
+    expect(lienBlog([fiche("a", "A", "2026-11-20")])).toEqual({ label: "Le blog", href: BLOG });
+  });
+
+  it("un guide liste ses articles : pilier d'abord, voisins ensuite, brouillons jamais", () => {
+    const liste = [
+      fiche("voisin", "C", "2026-11-25", { guidePilier: garant, guidesLies: [dossier] }),
+      fiche("pilier-ancien", "B", "2026-11-10", { guidePilier: dossier }),
+      fiche("pilier-recent", "B", "2026-11-20", { guidePilier: dossier }),
+      fiche("brouillon", "B", "2026-11-30", { guidePilier: dossier, statut: "brouillon" }),
+      fiche("ailleurs", "A", "2026-11-28"),
+    ];
+    expect(articlesLies(dossier, liste).map((a) => a.slug)).toEqual(["pilier-recent", "pilier-ancien", "voisin"]);
+    expect(articlesLies(dossier, liste, 2)).toHaveLength(2);
+    expect(articlesLies("/guides/etat-des-lieux", liste)).toEqual([]);
+  });
+
+  it("un pilier n'a sa page qu'à partir du seuil", () => {
+    const sous = Array.from({ length: SEUIL_PAGE_PILIER - 1 }, (_, i) => fiche(`b${i}`, "B", `2026-11-1${i}`));
+    expect(piliersHabites(sous)).toEqual(["B"]);
+    expect(piliersAvecPage(sous)).toEqual([]);
+    const au = [...sous, fiche("b-dernier", "B", "2026-11-19", { modifieLe: "2026-11-27" })];
+    expect(piliersAvecPage(au)).toEqual(["B"]);
+    expect(pilierModifieLe("B", au)).toBe("2026-11-27");
+    expect(articlesDuPilier("A", au)).toEqual([]);
+  });
+
+  it("chaque page de pilier a une adresse, un titre et une description dans les limites", () => {
+    const slugs = new Set<string>();
+    for (const p of Object.keys(PAGES_PILIERS) as Array<keyof typeof PAGES_PILIERS>) {
+      const page = PAGES_PILIERS[p];
+      expect(page.slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+      slugs.add(page.slug);
+      expect(pilierParSlug(page.slug)).toBe(p);
+      expect(page.titreSeo.length + " · Terouva".length).toBeLessThanOrEqual(60);
+      expect(page.description.length).toBeGreaterThanOrEqual(70);
+      expect(page.description.length).toBeLessThanOrEqual(155);
+      expect(GUIDES.some((g) => g.chemin === page.guide)).toBe(true);
+    }
+    expect(slugs.size).toBe(4);
+  });
+
+  it("aucun article ne prend l'adresse réservée aux pages de pilier", () => {
+    expect(ARTICLES.some((a) => a.slug === "pilier")).toBe(false);
   });
 });
 

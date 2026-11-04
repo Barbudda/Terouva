@@ -3,14 +3,27 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Ariane } from "@/components/layout/Ariane";
 import { FinDePage } from "@/components/layout/FinDePage";
-import { BLOG, PILIERS, articlesPublies, blogOuvert, cheminArticle, dateLongue, type Pilier } from "@/lib/blog";
+import { FiltresPiliers } from "@/components/blog/FiltresPiliers";
+import { ListeArticles } from "@/components/blog/ListeArticles";
+import {
+  APERCU_PILIER,
+  BLOG,
+  PILIERS,
+  articlesDuPilier,
+  articlesPublies,
+  blogOuvert,
+  cheminArticle,
+  cheminPilier,
+  piliersAvecPage,
+  piliersHabites,
+} from "@/lib/blog";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
 /*
  * Tant qu'aucun article n'est publié, la rubrique existe mais ne s'annonce
  * pas : `noindex`, hors du plan du site, et aucun lien n'y mène. La même
- * condition (`blogOuvert`) décide des quatre.
+ * condition (`blogOuvert`) décide de tout.
  */
 export const metadata = pageMetadata({
   // 60 signes au plus avec le suffixe « · Terouva » (test du blog).
@@ -28,14 +41,18 @@ const ARIANE = [
 ];
 
 /**
- * La rubrique : les articles du plus récent au plus ancien, regroupés par
- * pilier. Le « filtre » est une ancre par pilier, rendue côté serveur : à
- * moins de quinze articles, des pages de catégorie seraient des pages minces.
+ * La rubrique, tenue pour vingt articles et plus : une section par pilier,
+ * dans l'ordre de la ligne éditoriale, chacune du plus récent au plus ancien.
+ * Un pilier qui a sa page (`SEUIL_PAGE_PILIER` articles) n'en montre ici que
+ * les derniers, avec le lien vers la liste complète ; les autres montrent tout.
+ * Les filtres sont des liens rendus côté serveur : pas de JavaScript, et chaque
+ * filtre est une adresse qu'un moteur peut suivre.
  */
 export default function Blog() {
   const siteUrl = getSiteUrl();
   const articles = articlesPublies();
-  const piliers = (Object.keys(PILIERS) as Pilier[]).filter((p) => articles.some((a) => a.pilier === p));
+  const piliers = piliersHabites();
+  const avecPage = new Set(piliersAvecPage());
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -86,50 +103,34 @@ export default function Blog() {
             </section>
           ) : (
             <>
-              {piliers.length > 1 && (
-                <nav aria-label="Piliers" className="mt-10">
-                  <ul className="flex flex-wrap gap-2">
-                    {piliers.map((p) => (
-                      <li key={p}>
-                        <a
-                          href={`#pilier-${p.toLowerCase()}`}
-                          className="inline-flex min-h-11 items-center rounded-full border border-rule-fort bg-card px-4 text-[14px] text-ink transition-colors duration-200 hover:border-ink-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
-                        >
-                          {PILIERS[p]}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              )}
+              <FiltresPiliers piliers={piliers} avecPage={avecPage} className="mt-10" />
 
-              {piliers.map((p) => (
-                <section key={p} id={`pilier-${p.toLowerCase()}`} aria-labelledby={`titre-${p}`} className="mt-16 scroll-mt-24">
-                  <h2 id={`titre-${p}`} className="champ text-accent-ink">
-                    {PILIERS[p]}
-                  </h2>
-                  <ol className="mt-4 border-t border-rule">
-                    {articles
-                      .filter((a) => a.pilier === p)
-                      .map((a) => (
-                        <li key={a.slug} className="border-b border-rule">
-                          <Link
-                            href={cheminArticle(a)}
-                            className="group flex flex-col gap-2 py-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
-                          >
-                            <time dateTime={a.publieLe} className="champ text-ink-3">
-                              {dateLongue(a.publieLe)}
-                            </time>
-                            <span className="titre titre--petit text-[1.5rem] text-ink transition-colors duration-200 group-hover:text-accent-ink">
-                              {a.titre}
-                            </span>
-                            <span className="max-w-[44rem] leading-relaxed text-ink-2">{a.description}</span>
-                          </Link>
-                        </li>
-                      ))}
-                  </ol>
-                </section>
-              ))}
+              {piliers.map((p) => {
+                const duPilier = articlesDuPilier(p);
+                const tronque = avecPage.has(p);
+                return (
+                  <section
+                    key={p}
+                    id={`pilier-${p.toLowerCase()}`}
+                    aria-labelledby={`titre-${p}`}
+                    className="mt-16 scroll-mt-24"
+                  >
+                    <h2 id={`titre-${p}`} className="champ text-accent-ink">
+                      {PILIERS[p]}
+                    </h2>
+                    <div className="mt-4">
+                      <ListeArticles articles={tronque ? duPilier.slice(0, APERCU_PILIER) : duPilier} />
+                    </div>
+                    {tronque && (
+                      <p className="mt-4">
+                        <Link href={cheminPilier(p)} className="lien text-[15px]">
+                          Les {duPilier.length} articles sur ce thème : {PILIERS[p].toLowerCase()}
+                        </Link>
+                      </p>
+                    )}
+                  </section>
+                );
+              })}
             </>
           )}
 

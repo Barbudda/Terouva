@@ -1,4 +1,4 @@
-import { BLOG, articlesPublies, cheminArticle } from "@/lib/blog";
+import { BLOG, PILIERS, articlesPublies, cheminArticle } from "@/lib/blog";
 import { GUIDES } from "@/lib/catalogue";
 import { getSiteUrl } from "@/lib/site";
 
@@ -24,7 +24,15 @@ function echappe(s: string): string {
     .replace(/"/g, "&quot;");
 }
 
-type Entree = { titre: string; chemin: string; description: string; publieLe: string; modifieLe?: string };
+type Entree = {
+  titre: string;
+  chemin: string;
+  description: string;
+  publieLe: string;
+  modifieLe?: string;
+  /** Le pilier d'un article, en `<category>` : les lecteurs de flux savent filtrer dessus. */
+  categorie?: string;
+};
 
 export function GET() {
   const base = getSiteUrl();
@@ -47,6 +55,7 @@ export function GET() {
           chemin: cheminArticle(a),
           description: a.description,
           publieLe: a.publieLe,
+          categorie: PILIERS[a.pilier],
           modifieLe: a.modifieLe,
         })),
       ].sort((a, b) => b.publieLe.localeCompare(a.publieLe))
@@ -65,7 +74,9 @@ export function GET() {
       <link>${base}${e.chemin}</link>
       <guid isPermaLink="true">${base}${e.chemin}</guid>
       <description>${echappe(e.description)}</description>
-      <pubDate>${new Date(e.publieLe).toUTCString()}</pubDate>
+      <pubDate>${new Date(e.publieLe).toUTCString()}</pubDate>${
+        e.categorie ? `\n      <category>${echappe(e.categorie)}</category>` : ""
+      }
     </item>`,
     )
     .join("\n");

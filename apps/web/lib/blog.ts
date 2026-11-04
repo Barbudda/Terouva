@@ -124,6 +124,104 @@ export function blogModifieLe(liste: Article[] = ARTICLES): string | undefined {
     .at(-1);
 }
 
+/**
+ * Le lien de navigation vers la rubrique, ou rien tant qu'elle est vide. Le pied de page le lit :
+ * le même déploiement qui publie le premier article allume le lien, et aucun lien ne mène avant à
+ * une page en `noindex`.
+ */
+export function lienBlog(liste: Article[] = ARTICLES): { label: string; href: string } | null {
+  return blogOuvert(liste) ? { label: "Le blog", href: BLOG } : null;
+}
+
+/**
+ * Les articles publiés qui se rattachent à un guide : ceux dont il est le pilier d'abord, puis ceux
+ * qui le citent comme guide voisin, chaque groupe du plus récent au plus ancien. C'est le lien retour
+ * du guide vers ses satellites ; l'article, lui, lie déjà son pilier.
+ */
+export function articlesLies(cheminGuide: string, liste: Article[] = ARTICLES, max = 4): Article[] {
+  const publies = articlesPublies(liste);
+  return [
+    ...publies.filter((a) => a.guidePilier === cheminGuide),
+    ...publies.filter((a) => a.guidePilier !== cheminGuide && a.guidesLies.includes(cheminGuide)),
+  ].slice(0, max);
+}
+
+/**
+ * Pages de pilier. Une page par pilier n'existe qu'à partir de `SEUIL_PAGE_PILIER` articles publiés :
+ * en dessous, ce serait une page mince qui répète la liste de `/blog`. Au-delà, elle porte le pilier
+ * entier, et `/blog` n'en montre que les derniers.
+ */
+export const SEUIL_PAGE_PILIER = 5;
+
+/** Combien d'articles `/blog` montre par pilier quand le pilier a sa page. */
+export const APERCU_PILIER = 4;
+
+export const PAGES_PILIERS: Record<
+  Pilier,
+  { slug: string; titreSeo: string; description: string; intro: string; guide: string }
+> = {
+  A: {
+    slug: "repondre-vite",
+    titreSeo: "Répondre à une annonce de location : articles",
+    description:
+      "Le premier message, la relance, le bon moment pour écrire : les articles du blog pour répondre plus vite et mieux à une annonce de location.",
+    intro: "Ce qui fait qu'un propriétaire répond à votre message, et ce qui le fait passer au suivant.",
+    guide: "/guides/repondre-a-une-annonce-de-location",
+  },
+  B: {
+    slug: "dossier-et-droits",
+    titreSeo: "Dossier de location et droits du candidat",
+    description:
+      "Les pièces qu'on peut vous demander, celles qu'on ne peut pas exiger, et ce que prévoit la loi quand un dossier est refusé : les articles du blog.",
+    intro: "Ce qu'un propriétaire peut vous demander, et ce que vous pouvez refuser.",
+    guide: "/guides/dossier-de-location",
+  },
+  C: {
+    slug: "garant-et-garanties",
+    titreSeo: "Garant, caution et Visale : articles",
+    description:
+      "Trouver un garant, s'en passer, obtenir la garantie Visale : les articles du blog sur les garanties demandées aux candidats à une location.",
+    intro: "Les solutions quand un propriétaire demande un garant, et ce que chacune engage.",
+    guide: "/guides/garant-caution",
+  },
+  D: {
+    slug: "bail-et-loyer",
+    titreSeo: "Bail et loyer : l'actualité pour les locataires",
+    description:
+      "Encadrement des loyers, révision, modèles de bail, zones tendues : ce qui change dans les règles de la location, daté et sourcé, pour les candidats.",
+    intro: "Les règles du bail et du loyer qui changent, et ce qu'elles changent pour votre recherche.",
+    guide: "/guides/preavis-location",
+  },
+};
+
+export function cheminPilier(p: Pilier): string {
+  return `${BLOG}/pilier/${PAGES_PILIERS[p].slug}`;
+}
+
+export function pilierParSlug(slug: string): Pilier | undefined {
+  return (Object.keys(PAGES_PILIERS) as Pilier[]).find((p) => PAGES_PILIERS[p].slug === slug);
+}
+
+/** Les articles publiés d'un pilier, du plus récent au plus ancien. */
+export function articlesDuPilier(p: Pilier, liste: Article[] = ARTICLES): Article[] {
+  return articlesPublies(liste).filter((a) => a.pilier === p);
+}
+
+/** Les piliers qui ont au moins un article publié, dans l'ordre de la ligne éditoriale. */
+export function piliersHabites(liste: Article[] = ARTICLES): Pilier[] {
+  return (Object.keys(PILIERS) as Pilier[]).filter((p) => articlesDuPilier(p, liste).length > 0);
+}
+
+/** Les piliers assez fournis pour avoir leur page. */
+export function piliersAvecPage(liste: Article[] = ARTICLES): Pilier[] {
+  return piliersHabites(liste).filter((p) => articlesDuPilier(p, liste).length >= SEUIL_PAGE_PILIER);
+}
+
+/** Date de dernière modification d'un pilier : son article le plus récemment modifié. */
+export function pilierModifieLe(p: Pilier, liste: Article[] = ARTICLES): string | undefined {
+  return blogModifieLe(articlesDuPilier(p, liste));
+}
+
 /** Date longue affichée : « 23 novembre 2026 ». */
 export function dateLongue(iso: string): string {
   return new Date(iso).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });

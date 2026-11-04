@@ -1,5 +1,13 @@
 import type { MetadataRoute } from "next";
-import { BLOG, articlesPublies, blogModifieLe, cheminArticle } from "@/lib/blog";
+import {
+  BLOG,
+  articlesPublies,
+  blogModifieLe,
+  cheminArticle,
+  cheminPilier,
+  piliersAvecPage,
+  pilierModifieLe,
+} from "@/lib/blog";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
 import { getSiteUrl } from "@/lib/site";
 
@@ -60,6 +68,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
           changeFrequency: "weekly",
           priority: 0.7,
         },
+        // Les pages de pilier n'existent qu'au-delà du seuil (`piliersAvecPage`).
+        ...piliersAvecPage().map((p) => ({
+          url: `${base}${cheminPilier(p)}`,
+          lastModified: new Date(pilierModifieLe(p)!),
+          changeFrequency: "weekly" as const,
+          priority: 0.6,
+        })),
         ...articles.map((a) => ({
           url: `${base}${cheminArticle(a)}`,
           lastModified: new Date(a.modifieLe ?? a.publieLe),

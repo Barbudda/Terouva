@@ -7,6 +7,7 @@ import { FinDePage } from "@/components/layout/FinDePage";
 import { Questions } from "@/components/ui/Questions";
 import { Sommaire } from "@/components/guides/Sommaire";
 import { CarteGuide } from "@/components/guides/CarteGuide";
+import { ArticlesLies } from "@/components/blog/ArticlesLies";
 import { GUIDES } from "@/lib/catalogue";
 import { PHOTOS, RESUMES } from "@/lib/guides-resumes";
 import { DonneesStructurees, filAriane } from "@/lib/seo";
@@ -282,6 +283,10 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
                   par Google pour un bloc `FAQPage`. */}
               <Questions questions={guide.questions ?? []} className="mt-16" />
             </div>
+
+            {/* Les articles du blog rattachés à ce guide, s'il y en a : le
+                lien retour du pilier vers ses satellites. */}
+            <ArticlesLies chemin={guide.chemin} />
 
             <ALireAussi chemin={guide.chemin} etape={guide.etape} />
 
