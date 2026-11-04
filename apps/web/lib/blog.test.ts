@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import sitemap from "@/app/sitemap";
@@ -15,6 +15,7 @@ import {
   type Article,
 } from "./blog";
 import { GUIDES, OUTILS } from "./catalogue";
+import { DOSSIER as DOSSIER_ARTICLES, SORTIE as SORTIE_INDEX, genererIndex, slugs as slugsFiches } from "../scripts/blog-index.mjs";
 
 /**
  * Garde-fous du blog.
@@ -111,6 +112,17 @@ describe("blog : chaque article tient les règles", () => {
   it("les adresses sont uniques", () => {
     const slugs = ARTICLES.map((a) => a.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
+  });
+
+  it("l'index généré est à jour avec les fiches (sinon : npm run blog:index)", () => {
+    expect(readFileSync(SORTIE_INDEX, "utf8")).toBe(genererIndex());
+  });
+
+  it("chaque fiche porte le slug de son fichier et a un corps à côté", () => {
+    for (const s of slugsFiches()) {
+      expect(ARTICLES.find((a) => a.slug === s), s).toBeDefined();
+      expect(existsSync(join(DOSSIER_ARTICLES, `${s}.tsx`)), `${s}.tsx`).toBe(true);
+    }
   });
 
   for (const a of ARTICLES) {
