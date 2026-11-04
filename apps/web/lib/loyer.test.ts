@@ -102,6 +102,21 @@ describe("Visale (F33453)", () => {
     });
   });
 
+  it("compte les aides au logement dans les ressources Visale (F33453)", () => {
+    const r = calculerLoyer({
+      ...BASE,
+      profil: "etudiant",
+      zone: "idf",
+      loyer: 1100,
+      ressources: 1800,
+      aides: 250,
+    });
+    expect(r.visale).toMatchObject({ statut: "accordable", remplie: true });
+    // Le repère du bailleur, lui, reste calculé sans les aides.
+    expect(r.tauxEffort).toBe(61);
+    expect(calculerLoyer({ ...BASE, ressources: 1300, aides: 200 }).loyerVisale).toBe(750);
+  });
+
   it("outre-mer : mêmes seuils que le plafond de 1 575 €", () => {
     const r = calculerLoyer({ ...BASE, profil: "etudiant", zone: "outre-mer", loyer: 840, ressources: 0 });
     expect(r.visale.statut).toBe("sans-condition");

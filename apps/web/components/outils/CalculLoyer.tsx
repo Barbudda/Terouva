@@ -107,7 +107,7 @@ export function CalculLoyer() {
           />
           <Montant
             label="Aides au logement (facultatif)"
-            aide="Le montant de votre simulation Caf ou MSA. Comptées à part."
+            aide="Le montant de votre simulation Caf ou MSA. Visale les compte ; le propriétaire, à son choix."
             valeur={aides}
             onChange={modifie(setAides)}
             erreur={saisies.aides.erreur}

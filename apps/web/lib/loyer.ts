@@ -104,7 +104,7 @@ export type Entrees = {
   loyer: number | null;
   /** Ressources nettes mensuelles, colocataires compris, aides exclues. */
   ressources: number | null;
-  /** Aides au logement simulées, comptées à part : le bailleur choisit. */
+  /** Aides au logement simulées : comptées par Visale, à part pour le repère du bailleur. */
   aides: number | null;
   ressourcesGarant: number | null;
   zone: ZoneVisale;
@@ -129,7 +129,7 @@ export type Resultat = {
   manqueRepere: number | null;
   /** Loyer qui respecte le repère, quand seules les ressources sont connues. */
   loyerRepere: number | null;
-  /** Loyer le plus haut que Visale couvre pour ces ressources (hors étudiant). */
+  /** Loyer le plus haut que Visale couvre pour ces ressources, aides comprises (hors étudiant). */
   loyerVisale: number | null;
   visale: Visale;
   /** Ressources du garant face au même repère. */
@@ -147,6 +147,11 @@ export function calculerLoyer(e: Entrees): Resultat {
   const ressources = e.ressources && e.ressources > 0 ? e.ressources : null;
   const aides = e.aides && e.aides > 0 ? e.aides : null;
 
+  // Visale compte l'allocation logement dans les « ressources prises en
+  // compte » (F33453, tous les tableaux). Le repère des trois fois le loyer,
+  // lui, reste sans les aides : là, c'est le bailleur qui choisit.
+  const ressourcesVisale = ressources !== null ? ressources + (aides ?? 0) : null;
+
   const ressourcesAttendues = loyer ? versLeHaut(loyer * MULTIPLE_USAGE) : null;
   const manqueRepere =
     ressourcesAttendues !== null && e.ressources !== null
@@ -160,10 +165,10 @@ export function calculerLoyer(e: Entrees): Resultat {
     manqueRepere,
     loyerRepere: ressources ? versLeBas(ressources / MULTIPLE_USAGE) : null,
     loyerVisale:
-      ressources && e.profil === "autre"
-        ? Math.min(zone.plafond, versLeBas(ressources * PART_MAX_VISALE))
+      ressourcesVisale && e.profil === "autre"
+        ? Math.min(zone.plafond, versLeBas(ressourcesVisale * PART_MAX_VISALE))
         : null,
-    visale: regleVisale(loyer, ressources, e.profil, zone),
+    visale: regleVisale(loyer, ressourcesVisale, e.profil, zone),
     garant:
       ressourcesAttendues !== null && e.ressourcesGarant !== null
         ? {

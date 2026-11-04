@@ -36,7 +36,7 @@ const QUESTIONS = [
   },
   {
     q: "Quel salaire pour un loyer de 700 € ?",
-    a: "Avec le repère courant, 2 100 € nets par mois pour 700 € charges comprises. Pour la garantie Visale, hors étudiants, le loyer ne doit pas dépasser la moitié de vos ressources : 1 400 € par mois suffisent, si le loyer reste sous le plafond de votre zone. Le calculateur fait le compte pour tout montant.",
+    a: "Avec le repère courant, 2 100 € nets par mois pour 700 € charges comprises. Pour la garantie Visale, hors étudiants, le loyer ne doit pas dépasser la moitié de vos ressources : 1 400 € par mois suffisent, si vous êtes éligible à Visale et que le loyer reste sous le plafond de votre zone. Le calculateur fait le compte pour tout montant.",
   },
   {
     q: "Les APL comptent-elles dans les revenus ?",
@@ -58,21 +58,17 @@ export default function OutilSalaireLoyer() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      // `WebApplication` à la demande du pôle SEO (2026-11-04), rempli
-      // seulement de ce qui est vrai : pas d'`offers` (le site n'affiche aucun
-      // prix) et pas d'`aggregateRating` (l'outil n'a ni note ni avis). Google
-      // ne donnera donc pas de résultat enrichi « application » ; les deux
-      // autres outils ont choisi `WebPage` pour cette raison. Inventer une
-      // note pour le remplir est exclu.
+      // `WebPage` et non `WebApplication`, comme les deux autres outils : Google
+      // exige pour ce dernier une note ou un avis en plus de l'offre, et l'outil
+      // n'en a pas. Rempli à moitié, il est signalé invalide à chaque audit (porte
+      // du lot 1, 2026-11-04) ; inventer une note est exclu.
       {
-        "@type": "WebApplication",
+        "@type": "WebPage",
         "@id": `${siteUrl}${CHEMIN}#outil`,
         name: OUTIL.titre,
         url: `${siteUrl}${CHEMIN}`,
-        description: OUTIL.description,
         inLanguage: "fr-FR",
-        applicationCategory: "FinanceApplication",
-        operatingSystem: "Tout navigateur",
+        description: OUTIL.description,
         isAccessibleForFree: true,
         isPartOf: { "@id": `${siteUrl}/#website` },
       },
