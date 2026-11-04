@@ -39,6 +39,21 @@ const meta: ArticleMeta = {
       releveLe: "2026-11-04",
     },
     {
+      titre: "DossierFacile · Aide : Gestion des données",
+      url: "https://aide.dossierfacile.logement.gouv.fr/fr/article/gestion-des-donnees-f7zd4h/",
+      releveLe: "2026-11-04",
+    },
+    {
+      titre: "DossierFacile · Aide : Supprimer son compte",
+      url: "https://aide.dossierfacile.logement.gouv.fr/fr/article/supprimer-son-compte-ccyu3l/",
+      releveLe: "2026-11-04",
+    },
+    {
+      titre: "DossierFacile · Aide : Traduction simplifiée en français",
+      url: "https://aide.dossierfacile.logement.gouv.fr/fr/article/traduction-simplifiee-en-francais-1wo4sm8/",
+      releveLe: "2026-11-04",
+    },
+    {
       titre:
         "Service-public.gouv.fr · Futur locataire d'un logement privé : justificatifs à donner au propriétaire (F1169)",
       url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F1169",
@@ -52,7 +67,7 @@ const meta: ArticleMeta = {
     },
     {
       q: "Est-ce que DossierFacile est fiable ?",
-      a: "C'est un service de l'État. D'après ses pages, les données sont hébergées en France, les pièces sont supprimées après 45 jours d'inactivité du compte, seuls ses opérateurs y accèdent pour les vérifier, et son code source est public.",
+      a: "C'est un service de l'État. D'après ses pages, les données sont hébergées en France, les pièces sont supprimées après 45 jours d'inactivité du compte, seuls ses opérateurs les consultent pour les vérifier, des sous-traitants tenus à la confidentialité peuvent les traiter, et rien n'est revendu ni transmis à des tiers sans votre accord.",
     },
     {
       q: "Que voit le propriétaire avec un lien DossierFacile ?",

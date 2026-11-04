@@ -67,10 +67,11 @@ contrôle croisé (voir plus bas).
 - **La liste qui compte dépend de la date du bail** (signature, reconduction ou renouvellement,
   intitulé des listes sur F1168). L'étude décrit la liste en vigueur depuis le décret du
   22 décembre 2025, pas celle d'un bail plus ancien.
-- **Date de péremption connue** : selon la veille du pôle (`docs/seo/blog/VEILLE.md`, décret
-  n° 2026-831 du 25 août 2026, JO du 29 août 2026), le décret 2013-392 est abrogé au 1er janvier
-  2027. Fait non revérifié dans cette étude. La liste qui servira ensuite au préavis reste à
-  confirmer : **relancer l'étude dès que la nouvelle liste est publiée** (rendez-vous du
+- **Date de péremption connue** : le décret n° 2026-831 du 25 août 2026 (JORF n° 0201 du
+  29 août 2026, lu sur Légifrance le 2026-11-04) abroge le décret 2013-392 au 1er janvier 2027
+  (art. 2 et 3). Sa notice dit qu'il « reprend le périmètre » de 2013-392 tel que modifié par le
+  décret 2025-1267 : les communes ne devraient pas changer. Reste inconnu : le texte auquel le
+  préavis renverra ensuite. **Relancer l'étude si une nouvelle liste paraît** (rendez-vous du
   2027-01-04 dans la veille).
 - **Échelle de la commune** : une commune est entièrement dedans ou dehors ; aucune nuance par
   quartier.

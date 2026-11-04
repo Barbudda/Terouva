@@ -3,12 +3,13 @@ import Link from "next/link";
 /**
  * Corps de l'article « refuser un candidat au chômage ». Il trace une frontière
  * étroite : le propriétaire peut juger le montant des ressources, il ne peut
- * pas fonder sa décision sur la vulnérabilité économique ni, selon le
- * Défenseur des droits, sur la nature d'un revenu.
+ * pas fonder sa décision sur la vulnérabilité économique.
  *
  * Prudence de relecture : la décision 2019-001 portait sur une pension
- * d'invalidité, analysée sous l'angle du handicap. Elle est citée pour ce
- * qu'elle dit (un refus motivé par la nature des revenus), sans prétendre
+ * d'invalidité, analysée sous l'angle du handicap. Relecture du
+ * 2026-11-04 : discrimination retenue au titre du handicap (§ 36), privilégier
+ * des revenus d'activité n'étant pas en soi un critère prohibé (§ 28). Elle
+ * est citée pour cela seulement, sans prétendre
  * qu'une décision existe sur les allocations chômage : nous n'en avons lu
  * aucune au 2026-11-04. Aucun chiffre de refus, aucun testing, aucun seuil de
  * revenu « suffisant » (la règle des trois fois le loyer n'est pas légale).
@@ -52,19 +53,20 @@ export default function RefusLocationChomage() {
         s&apos;expose alors à une amende pouvant atteindre 3&nbsp;000&nbsp;€.
       </p>
 
-      <h2 id="nature">Peut-il refuser vos allocations parce que ce n&apos;est pas un salaire ?</h2>
+      <h2 id="nature">Peut-il préférer un salaire à vos allocations ?</h2>
       <p>
-        C&apos;est là que la frontière se resserre. Le Défenseur des droits a été saisi par un
-        candidat écarté « en raison de la nature de ses revenus », une pension
-        d&apos;invalidité. Dans sa décision n°&nbsp;2019-001 du 28 janvier 2019, il a retenu une
-        discrimination et rappelé que cette pension est saisissable dans les mêmes conditions que
-        le salaire.
+        Aucune source que nous avons lue ne le lui interdit pour des allocations chômage. Le cas
+        le plus proche est celui d&apos;un candidat écarté « en raison de la nature de ses
+        revenus », une pension d&apos;invalidité. Dans sa décision n°&nbsp;2019-001 du 28 janvier
+        2019, le Défenseur des droits a retenu une discrimination fondée sur le handicap, parce que
+        cette pratique désavantageait les candidats handicapés.
       </p>
       <p>
-        Cette décision portait sur le handicap, pas sur le chômage, et nous n&apos;avons pas lu de
-        décision sur les allocations chômage. Elle dessine pourtant une ligne utile : le montant de
-        vos ressources peut être discuté, leur origine ne devrait pas suffire à vous écarter. Si un
-        refus vous est expliqué par écrit en ces termes, gardez le message.
+        Cette décision portait sur le handicap, pas sur le chômage, et elle précise que privilégier
+        des revenus d&apos;activité n&apos;est pas en soi un critère de discrimination interdit. Nous
+        n&apos;avons pas lu de décision sur les allocations chômage. Ce qui se discute avec le
+        propriétaire, c&apos;est donc le montant de vos ressources, pièces à l&apos;appui. Si un
+        refus vous est expliqué par écrit, gardez le message.
       </p>
 
       <h2 id="pieces">Quelles pièces prouvent des allocations chômage ?</h2>
@@ -87,8 +89,8 @@ export default function RefusLocationChomage() {
         <li>
           <strong>La garantie Visale</strong>, si vous avez 30 ans ou moins : elle ne pose pas de
           condition d&apos;emploi, mais des conditions de loyer et de ressources. À partir de 31
-          ans, elle est réservée aux salariés du secteur privé sous conditions, sauf promesse
-          d&apos;embauche avec prise de fonction dans les trois mois. Le détail est dans le guide{" "}
+          ans, elle est réservée aux salariés du secteur privé sous conditions, ou aux personnes
+          qui ont une promesse d&apos;embauche avec prise de fonction dans les trois mois. Le détail est dans le guide{" "}
           <Link href="/guides/garantie-visale">garantie Visale</Link>.
         </li>
         <li>
@@ -106,8 +108,7 @@ export default function RefusLocationChomage() {
       <p>
         Un refus sans explication n&apos;est pas une preuve : le propriétaire n&apos;a pas à motiver
         sa décision. Ce qui compte, ce sont les éléments écrits et datés qui laissent supposer un
-        motif interdit, comme un message qui écarte « les chômeurs » ou « les allocations » quel
-        que soit leur montant. Devant le juge civil, c&apos;est ensuite au propriétaire de prouver
+        motif interdit. Devant le juge civil, c&apos;est ensuite au propriétaire de prouver
         que sa décision repose sur des éléments objectifs.
       </p>
       <p>

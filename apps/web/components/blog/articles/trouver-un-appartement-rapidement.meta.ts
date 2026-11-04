@@ -38,6 +38,11 @@ const meta: ArticleMeta = {
       url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F34092",
       releveLe: "2026-11-04",
     },
+    {
+      titre: "ANIL · Caution et garanties : la garantie Visale",
+      url: "https://www.anil.org/votre-besoin/louer/trouver-un-logement/caution-et-garanties/",
+      releveLe: "2026-11-04",
+    },
   ],
   questions: [
     {

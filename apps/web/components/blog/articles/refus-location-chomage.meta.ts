@@ -11,7 +11,7 @@ const meta: ArticleMeta = {
   description:
     "Un propriétaire peut-il écarter un candidat parce qu'il est au chômage ? Ce que dit la loi, ce qui reste permis, et comment présenter vos ressources.",
   chapeau:
-    "Le chômage ne figure pas en tant que tel parmi les critères de discrimination du Code pénal : un propriétaire peut écarter un dossier aux ressources trop faibles. Mais la vulnérabilité économique est un critère interdit, et le Défenseur des droits a déjà jugé discriminatoire un refus fondé sur la nature des revenus plutôt que sur leur montant.",
+    "Le chômage ne figure pas en tant que tel parmi les critères de discrimination du Code pénal : un propriétaire peut écarter un dossier aux ressources trop faibles. Mais la vulnérabilité économique est un critère interdit, et le Défenseur des droits a jugé discriminatoire, au titre du handicap, le refus d'un candidat qui touchait une pension d'invalidité.",
   publieLe: "2026-11-30",
   pilier: "B",
   format: "question",
@@ -63,7 +63,7 @@ const meta: ArticleMeta = {
   sommaire: [
     { id: "interdit", titre: "Le chômage, motif interdit ?" },
     { id: "permis", titre: "Ce que le propriétaire peut regarder" },
-    { id: "nature", titre: "La nature des revenus" },
+    { id: "nature", titre: "Salaire ou allocations" },
     { id: "pieces", titre: "Prouver vos allocations" },
     { id: "garanties", titre: "Les garanties possibles" },
     { id: "signaler", titre: "Un refus qui semble discriminatoire" },

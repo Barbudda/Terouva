@@ -102,9 +102,8 @@ export default function TrouverUnAppartementRapidement() {
         l&apos;adresse provisoire vous laisse le temps de bien choisir le suivant.
       </p>
       <p>
-        Terouva fait la veille à votre place : il vous signale les annonces qui correspondent à
-        votre recherche dès qu&apos;elles paraissent, et prépare votre réponse. Vous la relisez et
-        vous l&apos;envoyez vous-même.{" "}
+        Terouva fait la veille à votre place : il repère les annonces qui correspondent à votre
+        recherche et prépare votre réponse. Vous la relisez et vous l&apos;envoyez vous-même.{" "}
         <a href="#prevenu" className="lien">
           Être prévenu du lancement
         </a>

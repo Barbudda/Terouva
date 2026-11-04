@@ -41,7 +41,7 @@ const meta: ArticleMeta = {
     },
     {
       q: "Un logement classé G peut-il être loué ?",
-      a: "Non, pour un bail signé, renouvelé ou reconduit entre 2025 et 2027 : seuls les logements classés de A à F au diagnostic de performance énergétique peuvent être loués. À partir de 2028, la limite passe à la classe E, selon Service-public.",
+      a: "En métropole, non, pour un bail signé, renouvelé ou reconduit entre 2025 et 2027 : seuls les logements classés de A à F au diagnostic de performance énergétique peuvent être loués. À partir de 2028, la limite passe à la classe E, selon Service-public.",
     },
     {
       q: "Combien une agence peut-elle facturer au locataire ?",

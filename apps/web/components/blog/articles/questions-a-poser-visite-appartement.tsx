@@ -71,8 +71,8 @@ export default function QuestionsAPoserVisiteAppartement() {
           plafond, ou de 20 m³ ;
         </li>
         <li>
-          <strong>la classe énergie</strong> : pour un bail signé, renouvelé ou reconduit entre 2025
-          et 2027, seul un logement classé de A à F au diagnostic de performance énergétique peut
+          <strong>la classe énergie</strong> : en métropole, pour un bail signé, renouvelé ou
+          reconduit entre 2025 et 2027, seul un logement classé de A à F au diagnostic de performance énergétique peut
           être loué. Demandez à voir le diagnostic.
         </li>
       </ul>
@@ -94,7 +94,8 @@ export default function QuestionsAPoserVisiteAppartement() {
       </ul>
       <p className="note">
         Un défaut repéré à la visite ne vous empêche pas de candidater. Notez-le : il devra figurer
-        dans l&apos;état des lieux d&apos;entrée, sinon il pourrait vous être reproché au départ.
+        dans l&apos;état des lieux d&apos;entrée, sinon il pourrait vous être reproché au départ (voir
+        le <Link href="/guides/etat-des-lieux">guide de l&apos;état des lieux</Link>).
       </p>
 
       <h2 id="immeuble">Que demander sur l&apos;immeuble et le quartier ?</h2>
@@ -151,11 +152,13 @@ export default function QuestionsAPoserVisiteAppartement() {
         <li>Puis-je vous envoyer mon dossier ce soir ?</li>
       </ul>
       <p>
-        La dernière question compte plus qu&apos;elle n&apos;en a l&apos;air. Quand plusieurs
-        candidats ont un dossier solide, celui qui l&apos;envoie le premier, complet et bien
-        présenté, a souvent l&apos;avantage. L&apos;
-        <Link href="/outils/dossier-de-location">outil de préparation du dossier</Link> vous aide à
-        l&apos;avoir prêt avant la visite.
+        La dernière question compte plus qu&apos;elle n&apos;en a l&apos;air : nous expliquons
+        pourquoi dans{" "}
+        <Link href="/blog/etre-le-premier-a-repondre-a-une-annonce">
+          être le premier à répondre à une annonce
+        </Link>
+        . L&apos;<Link href="/outils/dossier-de-location">outil de préparation du dossier</Link>{" "}
+        vous aide à l&apos;avoir prêt avant la visite.
       </p>
 
       <h2 id="liste">La liste à garder sur votre téléphone</h2>
@@ -163,7 +166,7 @@ export default function QuestionsAPoserVisiteAppartement() {
         <li>Loyer, charges, et ce que les charges couvrent.</li>
         <li>Dernière régularisation de charges et coût du chauffage en hiver.</li>
         <li>Surface de la pièce principale et hauteur sous plafond.</li>
-        <li>Classe énergie du diagnostic, de A à F.</li>
+        <li>Classe énergie du diagnostic, de A à F en métropole.</li>
         <li>Humidité, fenêtres, eau chaude, prises, réseau mobile.</li>
         <li>Bruit et exposition, fenêtres fermées.</li>
         <li>Travaux prévus dans le logement ou l&apos;immeuble.</li>
@@ -174,9 +177,11 @@ export default function QuestionsAPoserVisiteAppartement() {
         <li>Pièces demandées, garant accepté, date de décision.</li>
       </ol>
       <p>
-        Pour la suite, le guide{" "}
+        Après la visite, notre article sur le{" "}
+        <Link href="/blog/mail-apres-visite-appartement">message à envoyer après une visite</Link>{" "}
+        prend le relais, et le guide{" "}
         <Link href="/guides/repondre-a-une-annonce-de-location">répondre à une annonce de location</Link>{" "}
-        montre comment écrire au propriétaire et relancer sans insister.
+        montre comment relancer sans insister.
       </p>
     </>
   );

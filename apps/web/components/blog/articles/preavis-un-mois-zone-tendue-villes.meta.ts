@@ -6,12 +6,14 @@ const meta: ArticleMeta = {
   // docs/seo/blog/donnees/zones-tendues/ (script, méthode, chiffres). La date de
   // publication est provisoire : le chef la fixe au passage en « publie ».
   slug: "preavis-un-mois-zone-tendue-villes",
-  titre: "Préavis d'un mois en zone tendue : 17 grandes villes restent à trois mois",
-  titreSeo: "Préavis d'un mois : les villes en zone tendue",
+  // Angle recentré sur les villes (relecture du 2026-11-04) : la requête « préavis 1 mois
+  // zone tendue » appartient au guide /guides/preavis-location, d'après le registre.
+  titre: "Zones tendues : les 17 grandes villes où le préavis reste de trois mois",
+  titreSeo: "Zones tendues : 17 grandes villes hors liste",
   description:
-    "1 430 communes en zone tendue, 26,5 millions d'habitants : où le préavis d'une location vide tombe à un mois, et les 17 grandes villes restées à trois.",
+    "Reims, Dijon, Angers, Tours, Rouen : 17 des 42 plus grandes villes sont hors zone tendue. La liste compte 1 430 communes et 26,5 millions d'habitants.",
   chapeau:
-    "En location vide, le préavis tombe de trois mois à un mois dans 1 430 communes classées en zone tendue, où vivent 26,5 millions d'habitants, soit 39 % de la population. Mais 17 des 42 villes de plus de 100 000 habitants n'en font pas partie, dont Reims, Dijon, Angers, Tours et Rouen. Chiffres relevés le 4 novembre 2026.",
+    "Dix-sept des 42 villes de plus de 100 000 habitants ne figurent pas sur la liste des zones tendues, dont Reims, Dijon, Angers, Tours et Rouen : le préavis d'une location vide y reste de trois mois. La liste compte 1 430 communes, où vivent 26,5 millions d'habitants, soit 39 % de la population. Relevé du 4 novembre 2026.",
   publieLe: "2026-11-04",
   pilier: "D",
   format: "etude",
@@ -52,7 +54,7 @@ const meta: ArticleMeta = {
   ],
   questions: [
     {
-      q: "Combien de communes sont en zone tendue pour le préavis ?",
+      q: "Combien de communes sont en zone tendue ?",
       a: "1 430 communes sur 34 875, depuis le décret du 22 décembre 2025. Elles réunissent 26,5 millions d'habitants, soit 39 % de la population hors Mayotte. Dans ces communes, le locataire d'un logement vide peut donner un préavis d'un mois au lieu de trois, à condition de l'indiquer dans sa lettre de congé.",
     },
     {
@@ -65,7 +67,7 @@ const meta: ArticleMeta = {
     },
     {
       q: "La liste des zones tendues change-t-elle en 2027 ?",
-      a: "Oui. Un décret du 25 août 2026 fixe une nouvelle liste pour la taxe sur la vacance des logements à partir de 2027 et abroge l'ancienne au 1er janvier 2027. Au 4 novembre 2026, la liste qui servira ensuite au préavis n'est pas encore précisée : vérifiez votre commune sur le simulateur officiel au moment d'écrire votre lettre.",
+      a: "Les communes restent les mêmes, mais le texte qui les liste change. Un décret du 25 août 2026 abroge l'ancien décret au 1er janvier 2027 et reprend le même périmètre pour la nouvelle taxe sur la vacance des logements. Au 4 novembre 2026, le texte auquel le préavis renverra ensuite n'est pas précisé : vérifiez votre commune sur le simulateur officiel.",
     },
   ],
   sommaire: [

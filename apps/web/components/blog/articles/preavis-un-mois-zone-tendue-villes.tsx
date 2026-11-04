@@ -9,11 +9,15 @@ import { GraphiquePreavisGrandesVilles } from "./preavis-un-mois-zone-tendue-vil
  * empreintes des fichiers sont dans METHODE.md à côté. Rien n'est arrondi ici
  * qui ne le soit déjà dans CHIFFRES.md.
  *
- * Date de péremption : la liste change au 1er janvier 2027 (décret n° 2026-831,
- * relayé par Service-public A18896 ; l'abrogation du décret 2013-392 à cette
- * date vient de la veille du pôle, Légifrance refusant la lecture automatique).
- * Le jour où la nouvelle liste est connue : relancer l'étude, mettre à jour ce
- * corps et ajouter une entrée `misesAJour` à la fiche.
+ * Angle : les villes. La requête « préavis 1 mois zone tendue » appartient au
+ * guide /guides/preavis-location (registre) ; cet article y renvoie sans la viser.
+ *
+ * Date de péremption : le décret n° 2026-831 du 25 août 2026 (JORF du 29 août,
+ * lu sur Légifrance le 2026-11-04, art. 2 et 3) abroge le décret 2013-392 au
+ * 1er janvier 2027 ; sa notice dit qu'il en reprend le périmètre, tel que
+ * modifié en décembre 2025. Inconnu au 2026-11-04 : le texte auquel le préavis
+ * renverra ensuite. À ce moment-là : relancer l'étude si la liste change,
+ * mettre à jour ce corps et ajouter une entrée `misesAJour` à la fiche.
  */
 export default function PreavisUnMoisZoneTendueVilles() {
   return (
@@ -95,8 +99,10 @@ export default function PreavisUnMoisZoneTendueVilles() {
         bénéficiez d&apos;un préavis réduit à un mois, en citant l&apos;
         <span className="loi">article 15 de la loi du 6 juillet 1989</span>. Sans cette mention, le
         délai de trois mois s&apos;applique. Le{" "}
-        <Link href="/guides/preavis-location">guide du préavis de location</Link> détaille la lettre
-        et les modes d&apos;envoi.
+        <Link href="/guides/preavis-location">guide du préavis de location</Link> détaille les délais
+        et les modes d&apos;envoi, et notre{" "}
+        <Link href="/blog/modele-lettre-preavis-logement">modèle de lettre de préavis</Link> vous
+        donne le texte à adapter.
       </p>
 
       <h2 id="touristiques">Les communes « touristiques et tendues » donnent-elles un préavis d&apos;un mois ?</h2>
@@ -118,16 +124,19 @@ export default function PreavisUnMoisZoneTendueVilles() {
 
       <h2 id="2027">Que change le 1er janvier 2027 ?</h2>
       <p>
-        Un décret du 25 août 2026 a fixé une nouvelle liste de communes en zone tendue pour la taxe
-        sur la vacance des logements, qui s&apos;applique à partir de 2027. Selon le texte publié au
-        Journal officiel du 29 août 2026, il abroge à cette date le décret du 10 mai 2013 qui porte
-        la liste utilisée aujourd&apos;hui pour le préavis. Au 4 novembre 2026, Service-public
-        n&apos;indique pas encore quelle liste servira ensuite au préavis réduit.
+        Un décret du 25 août 2026, publié au Journal officiel du 29 août, fixe la liste des
+        communes en zone tendue pour la nouvelle taxe sur la vacance des logements, qui
+        s&apos;applique à partir de 2027. Il abroge au 1er janvier 2027 le décret du 10 mai 2013 qui
+        porte la liste utilisée aujourd&apos;hui pour le préavis. Sa notice précise qu&apos;il en
+        reprend le périmètre, tel que modifié en décembre 2025 : les communes restent donc les
+        mêmes. Ce qui n&apos;est pas encore connu au 4 novembre 2026, c&apos;est le texte auquel le
+        préavis réduit renverra ensuite.
       </p>
       <p>
-        Si vous donnez votre congé en décembre, les chiffres de cette page valent. Pour un congé en
-        2027, vérifiez votre commune sur le simulateur le jour où vous écrivez votre lettre. Nous
-        referons le calcul dès que la nouvelle liste sera publiée, à la même adresse.
+        Si votre bail a été signé, reconduit ou renouvelé avant le 1er janvier 2027, les chiffres
+        de cette page valent. Pour un bail signé ou reconduit ensuite, vérifiez votre commune sur le
+        simulateur au moment d&apos;écrire votre lettre. Nous mettrons cette page à jour dès que la
+        règle sera précisée, à la même adresse.
       </p>
 
       <h2 id="methode">Méthode</h2>

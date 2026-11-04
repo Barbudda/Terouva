@@ -48,8 +48,19 @@ export default function DossierfacileCEstQuoi() {
           vos pièces sont supprimées automatiquement après 45 jours d&apos;inactivité sur votre compte,
           et toutes, dès que vous supprimez le compte ;
         </li>
-        <li>seuls ses opérateurs et son équipe technique accèdent à vos documents, pour les vérifier ;</li>
-        <li>chaque document reçoit un filigrane, pour limiter l&apos;usurpation d&apos;identité ;</li>
+        <li>
+          seuls ses opérateurs et son équipe technique consultent vos documents, pour les vérifier ;
+          des sous-traitants tenus à la confidentialité peuvent traiter vos données, qui ne sont ni
+          revendues ni transmises à des tiers sans votre accord ;
+        </li>
+        <li>
+          chaque document reçoit un filigrane, pour limiter l&apos;usurpation d&apos;identité (nous
+          expliquons comment{" "}
+          <Link href="/blog/filigrane-documents-dossier-location">
+            mettre un filigrane sur les documents de votre dossier
+          </Link>{" "}
+          quand vous les envoyez vous-même) ;
+        </li>
         <li>son code source est public.</li>
       </ul>
       <p>
