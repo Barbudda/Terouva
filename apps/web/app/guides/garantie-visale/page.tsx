@@ -11,8 +11,16 @@ export const metadata = pageMetadata({
   chemin: GUIDE.chemin,
   type: "article",
   publieLe: GUIDE.publieLe,
+  modifieLe: GUIDE.modifieLe,
 });
 
+/*
+ * Intertitres en questions, celles du registre (« garantie visale c'est
+ * quoi », « conditions », « demande »), et sous chacune une réponse autonome de
+ * 40 à 60 mots. Le développement donne le détail chiffré sans redire la
+ * réponse. Les montants viennent de Service-public et sont datés dans
+ * docs/seo/FAITS.md.
+ */
 export default function GuideVisale() {
   return (
     <CadreGuide guide={GUIDE}>
@@ -23,23 +31,29 @@ export default function GuideVisale() {
         Action Logement, et elle se demande <strong>avant</strong> d&apos;avoir trouvé le logement.
       </p>
 
-      <h2 id="principe">Ce que c&apos;est</h2>
+      <h2 id="principe">Qu&apos;est-ce que la garantie Visale ?</h2>
       <p>
-        Une caution locative. Action Logement se porte garant pour vous auprès du propriétaire. Si
-        vous ne payez pas, l&apos;organisme paie à votre place, puis vous demande de le rembourser.
-        La dette reste donc la vôtre : Visale rassure le propriétaire et vous remet dans la
-        course, sans effacer ce que vous devez.
+        Une caution locative gratuite : Action Logement se porte garant pour vous auprès du
+        propriétaire. Si vous ne payez pas, l&apos;organisme paie à votre place, puis vous demande
+        de le rembourser. Dans le parc privé, elle couvre les loyers et charges impayés pendant les
+        trois premières années du bail, et les dégradations locatives jusqu&apos;à deux mois de
+        loyer et de charges.
       </p>
-      <p>Pour le propriétaire du parc privé, la couverture annoncée est la suivante :</p>
-      <ul>
-        <li>Les loyers et charges impayés, jusqu&apos;à 36 mois, pendant les trois premières années du bail.</li>
-        <li>Les dégradations locatives, jusqu&apos;à deux mois de loyer et de charges.</li>
-      </ul>
-
-      <h2 id="qui">Qui peut l&apos;obtenir</h2>
       <p>
-        Les conditions dépendent de votre âge et de votre situation. Dans les grandes lignes, telles
-        que Service-public les présente :
+        La dette reste donc la vôtre : Visale rassure le propriétaire et vous remet dans la course,
+        sans effacer ce que vous devez. Sur ces trois années, la prise en charge des loyers et
+        charges impayés va jusqu&apos;à 36 mois.
+      </p>
+
+      <h2 id="qui">Qui peut obtenir la garantie Visale ?</h2>
+      <p>
+        Toute personne de 30 ans et moins, étudiants et alternants compris, les travailleurs
+        saisonniers, et à partir de 31 ans les salariés du secteur privé qui viennent d&apos;être
+        embauchés ou mutés, ou dont le salaire reste sous un plafond. Chaque profil a ses
+        conditions de loyer ou de ressources, et le simulateur de visale.fr tranche.
+      </p>
+      <p>
+        Le détail, tel que Service-public le présente :
       </p>
       <ul>
         <li>
@@ -65,74 +79,68 @@ export default function GuideVisale() {
         grand-parent, parent ou enfant l&apos;un de l&apos;autre.
       </p>
 
-      <h2 id="plafonds">Les plafonds de loyer</h2>
+      <h2 id="plafonds">Quel loyer maximum pour obtenir la garantie Visale ?</h2>
       <p>
         Le loyer charges comprises doit rester sous un plafond qui dépend de la région et, hors
-        Île-de-France, de la commune. Les ordres de grandeur publiés par Service-public :
+        Île-de-France, de la commune. Selon Service-public : jusqu&apos;à 1 940 € en
+        Île-de-France, 1 575 € ou 1 365 € dans les autres régions de métropole, 1 575 € en
+        outre-mer et à Saint-Martin. Ces montants sont revus régulièrement.
+      </p>
+      <p>
+        Les étudiants et alternants ont en plus un seuil de loyer en dessous duquel l&apos;accès
+        se fait sans condition de ressources :
       </p>
       <ul>
         <li>
-          <strong>Île-de-France</strong> : jusqu&apos;à 1 940 € charges comprises. Pour les
-          étudiants et alternants, l&apos;accès est sans condition de ressources jusqu&apos;à
-          1 000 €.
+          <strong>Île-de-France</strong> : 1 000 €.
         </li>
         <li>
-          <strong>Autres régions de métropole</strong> : 1 575 € ou 1 365 € selon la commune, avec
-          un seuil sans condition de ressources de 840 € ou 680 € pour les étudiants et alternants.
+          <strong>Autres régions de métropole</strong> : 840 € ou 680 € selon la commune.
         </li>
         <li>
-          <strong>Outre-mer et Saint-Martin</strong> : 1 575 €, avec 840 € sans condition de
-          ressources pour les étudiants et alternants.
+          <strong>Outre-mer et Saint-Martin</strong> : 840 €.
         </li>
       </ul>
 
       <div className="note">
         <p>
-          <strong>Ces montants bougent.</strong> Ils dépendent de votre commune et sont revus
-          régulièrement. Avant de vous en servir pour écarter un logement, passez par le{" "}
+          <strong>Avant d&apos;écarter un logement sur ces chiffres</strong>, passez par le{" "}
           {/* Le simulateur était lié chez Action Logement, à une adresse qui
               redirige désormais vers une page de maintenance. Il vit sur le
               site officiel du dispositif, qui répond, lui. */}
           <a href="https://www.visale.fr/" target="_blank" rel="noopener">
             simulateur d&apos;éligibilité sur visale.fr
           </a>
-          , qui répond en quelques minutes et fait foi.
+          , qui répond en quelques minutes et fait foi pour votre commune.
         </p>
       </div>
 
-      <h2 id="demarche">La démarche, dans le bon ordre</h2>
-      <ol>
-        <li>
-          <strong>Vous créez votre espace sur visale.fr</strong> et déposez vos justificatifs.
-          Action Logement délivre un <strong>visa</strong> en quelques jours ouvrés.
-        </li>
-        <li>
-          <strong>Vous présentez ce visa au propriétaire</strong> au moment de candidater. C&apos;est
-          là que tout se joue : vous répondez à la question du garant avant qu&apos;elle soit posée.
-        </li>
-        <li>
-          <strong>Le propriétaire crée son espace</strong>, saisit le numéro de visa et les
-          caractéristiques du logement, puis valide l&apos;acte de cautionnement.
-        </li>
-        <li>
-          <strong>Vous signez le bail.</strong> La demande doit être faite avant la signature : après,
-          il est trop tard.
-        </li>
-      </ol>
-
-      <h2 id="duree">Combien de temps elle dure</h2>
+      <h2 id="demarche">Comment demander la garantie Visale ?</h2>
       <p>
-        La garantie couvre les trois premières années du bail. Au-delà, il faut en redemander une.
-        Ce n&apos;est pas un problème en pratique : passé trois ans de loyers payés, un propriétaire
-        demande rarement un nouveau garant.
+        En ligne sur visale.fr, avant de signer le bail. Vous créez votre espace, déposez vos
+        justificatifs et recevez un visa en quelques jours ouvrés. Vous le présentez au
+        propriétaire en candidatant ; il crée son propre espace, saisit le numéro de visa et
+        valide l&apos;acte de cautionnement. Après la signature du bail, il est trop tard.
+      </p>
+      <p>
+        Côté propriétaire, la saisie demande aussi les caractéristiques du logement. Le visa
+        s&apos;obtenant sans logement trouvé, rien n&apos;empêche de le demander dès le début de la
+        recherche : c&apos;est ce qui évite de courir entre la visite et la signature.
       </p>
 
-      <h2 id="utiliser">S&apos;en servir dans une candidature</h2>
+      <h2 id="duree">Combien de temps dure la garantie Visale ?</h2>
       <p>
-        Avoir le visa ne suffit pas, encore faut-il le dire au bon endroit. Une ligne dans le
-        premier message fait le travail : « Je bénéficie de la garantie Visale. » Elle se place
-        juste après votre situation et votre revenu, au moment où le propriétaire se demande qui
-        paiera si vous ne payez pas.
+        Elle couvre les trois premières années du bail, pas au-delà : pour la suite, il faudrait en
+        redemander une. En pratique, la question se pose peu, parce qu&apos;un propriétaire qui a
+        reçu trois ans de loyers payés demande rarement un nouveau garant à son locataire.
+      </p>
+
+      <h2 id="utiliser">Comment utiliser la garantie Visale dans une candidature ?</h2>
+      <p>
+        En le disant dès le premier message, en une ligne : « Je bénéficie de la garantie
+        Visale. » Placez-la juste après votre situation et votre revenu, au moment où le
+        propriétaire se demande qui paiera si vous ne payez pas. Un visa déjà obtenu répond à la
+        question du garant avant qu&apos;elle soit posée.
       </p>
       <p>
         Notre{" "}

@@ -11,8 +11,14 @@ export const metadata = pageMetadata({
   chemin: GUIDE.chemin,
   type: "article",
   publieLe: GUIDE.publieLe,
+  modifieLe: GUIDE.modifieLe,
 });
 
+/*
+ * Intertitres en questions, telles qu'on les tape, et sous chacune une réponse
+ * autonome de 40 à 60 mots, puis le détail sans redite. Les listes du décret
+ * restent en sous-sections : ce sont des références, pas des questions.
+ */
 export default function GuideDossier() {
   return (
     <CadreGuide guide={GUIDE}>
@@ -24,10 +30,18 @@ export default function GuideDossier() {
         complet du premier coup, et vous reconnaissez les demandes abusives.
       </p>
 
-      <h2 id="ce-qui-peut-etre-demande">Ce qu&apos;un propriétaire peut demander</h2>
+      <h2 id="ce-qui-peut-etre-demande">
+        Quelles pièces un propriétaire peut-il demander pour un dossier de location ?
+      </h2>
       <p>
-        Les pièces se rangent en quatre catégories. Dans deux d&apos;entre elles, le propriétaire ne
-        peut réclamer qu&apos;un seul document. Pour ne garder que celles qui vous concernent, la{" "}
+        Des pièces de quatre catégories, choisies dans une liste fixée par le décret du 5 novembre
+        2015 : votre identité, votre domicile actuel, votre activité professionnelle et vos
+        ressources. Pour l&apos;identité et le domicile, il ne peut réclamer qu&apos;un seul
+        document chacun ; pour l&apos;activité et les ressources, un ou plusieurs. Cette liste est
+        limitative.
+      </p>
+      <p>
+        Pour ne garder que les pièces qui vous concernent, la{" "}
         <Link href="/outils/dossier-de-location">checklist de dossier de location</Link> fait le tri
         selon votre situation, en trois questions.
       </p>
@@ -87,12 +101,19 @@ export default function GuideDossier() {
         <li>L&apos;avis d&apos;attribution de bourse, pour un étudiant boursier.</li>
       </ul>
 
-      <h2 id="ce-qui-est-interdit">Ce qu&apos;on ne peut pas vous demander</h2>
+      <h2 id="ce-qui-est-interdit">
+        Quels documents un propriétaire n&apos;a-t-il pas le droit de demander ?
+      </h2>
       <p>
-        Le principe est simple : <strong>tout ce qui n&apos;est pas dans la liste ci-dessus est
-        interdit.</strong> Depuis 2014, la loi ne nomme plus ces documents un par un : elle renvoie
-        à la liste du décret. Voici ceux qu&apos;on réclame encore souvent, et qui n&apos;y figurent
-        pas :
+        Tous ceux qui ne figurent pas dans la liste du décret. Parmi ceux qu&apos;on réclame encore
+        souvent : relevé de compte bancaire, attestation de bonne tenue de compte, carte Vitale,
+        photo d&apos;identité, autorisation de prélèvement, contrat de mariage, extrait de casier
+        judiciaire, chèque de réservation. Le propriétaire qui en demande un s&apos;expose à une
+        amende pouvant atteindre 3&nbsp;000&nbsp;€.
+      </p>
+      <p>
+        Depuis 2014, la loi ne nomme plus ces documents un par un : elle renvoie à la liste du
+        décret. Le relevé complet de ceux qui n&apos;y figurent pas et qu&apos;on rencontre encore :
       </p>
       <ul>
         <li>Une photographie d&apos;identité, sauf celle qui figure sur la pièce d&apos;identité.</li>
@@ -120,17 +141,23 @@ export default function GuideDossier() {
 
       <div className="note">
         <p>
-          <strong>La sanction.</strong> Demander un document hors liste expose le propriétaire à une
-          amende pouvant atteindre 3 000 €, et 15 000 € s&apos;il s&apos;agit d&apos;une personne
-          morale, agence immobilière comprise.
+          <strong>La sanction.</strong> Quand c&apos;est une personne morale qui demande un document
+          hors liste, agence immobilière comprise, l&apos;amende peut atteindre 15&nbsp;000&nbsp;€.
         </p>
       </div>
 
-      <h2 id="refuser">Comment refuser sans perdre le logement</h2>
+      <h2 id="refuser">
+        Comment refuser un document interdit sans perdre le logement ?
+      </h2>
       <p>
-        C&apos;est la vraie difficulté : vous avez le droit pour vous, et en face une file
-        d&apos;attente de candidats. Dans les faits, un refus sec vous élimine. Une réponse qui
-        donne une alternative passe presque toujours :
+        En proposant une alternative plutôt qu&apos;un refus sec. Dites que le document ne fait pas
+        partie de ceux qui peuvent être demandés, puis envoyez aussitôt les pièces autorisées qui
+        montrent la même chose : fiches de paie et avis d&apos;imposition à la place des relevés de
+        compte. Vous rassurez sans céder.
+      </p>
+      <p>
+        Vous avez le droit pour vous, et en face une file d&apos;attente de candidats : dans les
+        faits, un refus sec vous élimine. La formule qui passe presque toujours :
       </p>
       <p>
         « Je ne peux pas transmettre mes relevés de compte, ce document ne fait pas partie de ceux
@@ -139,39 +166,41 @@ export default function GuideDossier() {
         chose. »
       </p>
       <p>
-        Vous rassurez sans céder. Si la demande persiste, c&apos;est un signal sur la façon dont la
-        location se passera ensuite.
+        Si la demande persiste, c&apos;est un signal sur la façon dont la location se passera
+        ensuite.
       </p>
 
-      <h2 id="preparer">Préparer un dossier qui passe devant les autres</h2>
+      <h2 id="preparer">Comment préparer un dossier de location qui passe devant les autres ?</h2>
       <p>
-        À dossier équivalent, ce qui départage, c&apos;est la rapidité et la lisibilité. Trois
-        choses aident vraiment :
+        À dossier équivalent, ce qui départage est la rapidité et la lisibilité. Donc un seul
+        fichier PDF, dans l&apos;ordre des quatre catégories et nommé avec votre nom ; la question
+        du garant réglée avant de visiter ; et un premier message court qui annonce que le dossier
+        est prêt, sans le joindre.
       </p>
+      <p>Le détail de chacun des trois :</p>
       <ol>
         <li>
-          <strong>Un seul fichier PDF</strong>, dans l&apos;ordre des quatre catégories, nommé avec
-          votre nom. Pas douze pièces jointes, pas de photos de documents prises de travers.
+          <strong>Le fichier</strong> : pas douze pièces jointes, pas de photos de documents prises
+          de travers.
         </li>
         <li>
-          <strong>Un garant déjà réglé.</strong> Si vous n&apos;avez pas de{" "}
+          <strong>Le garant</strong> : si vous n&apos;avez pas de{" "}
           <Link href="/guides/garant-caution">garant physique</Link>, la{" "}
           <Link href="/guides/garantie-visale">garantie Visale</Link> est gratuite et se demande en
           quelques jours, avant même d&apos;avoir trouvé le logement.
         </li>
         <li>
-          <strong>Un message court qui dit que le dossier est prêt</strong>, sans le joindre
-          d&apos;emblée. Vous pouvez l&apos;écrire avec notre{" "}
+          <strong>Le message</strong> : vous pouvez l&apos;écrire avec notre{" "}
           <Link href="/outils/message-de-candidature">générateur de message de candidature</Link>,
           gratuit et sans inscription.
         </li>
       </ol>
 
-      <h2 id="apres-refus">Et après un refus, que devient votre dossier ?</h2>
+      <h2 id="apres-refus">Que devient votre dossier après un refus ?</h2>
       <p>
         Vos pièces sont des données personnelles. Si un propriétaire ou une agence a écarté votre
-        candidature, rien ne vous empêche de lui demander par écrit d&apos;effacer ce que vous avez
-        envoyé, et de garder une trace de cette demande.
+        candidature, rien ne vous empêche de lui demander par écrit d&apos;effacer les pièces que
+        vous avez envoyées, et de garder une trace écrite de cette demande.
       </p>
       <p>
         C&apos;est d&apos;ailleurs une des raisons pour lesquelles Terouva ne conserve rien sur un
