@@ -39,8 +39,9 @@ export default function GuideGarantCaution() {
 
       <h2 id="simple-ou-solidaire">Caution simple ou caution solidaire</h2>
       <p>
-        C&apos;est la distinction la plus lourde de conséquences, et elle tient en une ligne dans
-        l&apos;acte. Le type choisi doit y figurer.
+        C&apos;est la distinction la plus lourde de conséquences, et elle se lit dans la mention
+        que la caution appose elle-même. Si elle y renonce aux bénéfices de discussion et de
+        division, elle est solidaire. Sinon, elle les conserve, et la caution est simple.
       </p>
       <ul>
         <li>
@@ -63,15 +64,20 @@ export default function GuideGarantCaution() {
       <h2 id="acte">L&apos;acte de cautionnement</h2>
       <p>
         Il doit être <strong>écrit</strong>, sous seing privé ou devant notaire, et signé par la
-        caution. Le propriétaire doit en remettre un exemplaire au garant, sauf si l&apos;acte est
-        intégré au bail. Ce qu&apos;il contient :
+        caution. Le propriétaire remet aussi à la caution un exemplaire du bail. Ce que
+        l&apos;acte contient :
       </p>
       <ul>
-        <li>le montant du loyer, en lettres et en chiffres, et ses conditions de révision ;</li>
-        <li>s&apos;il s&apos;agit d&apos;une caution simple ou solidaire ;</li>
+        <li>le montant du loyer et ses conditions de révision, tels qu&apos;ils figurent au bail ;</li>
         <li>
-          la reconnaissance, par la caution, de l&apos;avant-dernier alinéa de l&apos;<span className="loi">article 22-1</span>
-          de la <span className="loi">loi du 6 juillet 1989</span> et de l&apos;<span className="loi">article 2297</span> du Code civil ;
+          la reproduction de l&apos;avant-dernier alinéa de l&apos;<span className="loi">article 22-1</span>{" "}
+          de la <span className="loi">loi du 6 juillet 1989</span>, celui qui permet de résilier un
+          engagement sans durée ;
+        </li>
+        <li>
+          la mention de l&apos;<span className="loi">article 2297</span> du Code civil, apposée par
+          la caution elle-même : elle s&apos;engage à payer ce que vous devez si vous ne payez pas,
+          dans la limite d&apos;un montant écrit en toutes lettres et en chiffres ;
         </li>
         <li>
           en colocation, le nom du colocataire dont le départ mettra fin à l&apos;engagement du
@@ -80,14 +86,17 @@ export default function GuideGarantCaution() {
       </ul>
       <p>
         L&apos;acte indique aussi si l&apos;engagement est à <strong>durée déterminée</strong> ou{" "}
-        <strong>indéterminée</strong>, et il est d&apos;usage d&apos;y plafonner le montant garanti.
-        Ces deux lignes décident de tout ce qui suit.
+        <strong>indéterminée</strong>. Le montant maximal, lui, est obligatoire : la caution
+        l&apos;écrit dans sa mention, et en cas d&apos;écart, c&apos;est la somme en lettres qui
+        compte. Ces deux lignes décident de tout ce qui suit.
       </p>
       <div className="note">
         <p>
-          La mention manuscrite que l&apos;on voit souvent recopiée sur les forums concerne le
-          cautionnement d&apos;un crédit à la consommation, pas celui d&apos;une location. Ce qui
-          compte ici, ce sont les mentions ci-dessus et la signature.
+          <strong>Sans ces formalités, le cautionnement est nul.</strong> Depuis le 1er janvier
+          2022, l&apos;<span className="loi">article 22-1</span> renvoie à la mention de
+          l&apos;<span className="loi">article 2297</span> du Code civil. Une mention absente, un
+          acte sans le montant du loyer ou sans l&apos;alinéa reproduit, ou une caution qui
+          n&apos;a pas reçu le bail : l&apos;engagement ne tient pas.
         </p>
       </div>
 
@@ -109,8 +118,9 @@ export default function GuideGarantCaution() {
         </li>
         <li>
           <strong>Situation professionnelle</strong> : contrat de travail ou attestation de
-          l&apos;employeur, carte professionnelle, certificat d&apos;identification Insee, extrait
-          D1 ou K bis de moins de trois mois selon l&apos;activité.
+          l&apos;employeur, carte professionnelle, certificat d&apos;identification Insee, fiche
+          d&apos;immatriculation au registre national des entreprises (l&apos;ancien extrait D1)
+          ou K bis de moins de trois mois selon l&apos;activité.
         </li>
         <li>
           <strong>Ressources</strong> : trois derniers bulletins de salaire, deux derniers bilans,
@@ -137,9 +147,11 @@ export default function GuideGarantCaution() {
           <strong>étudiant ou apprenti</strong>.
         </li>
         <li>
-          <strong>Bailleur personne morale</strong> : il ne peut pas demander de caution à un
-          étudiant boursier de l&apos;enseignement supérieur. L&apos;interdiction ne vaut pas pour
-          une société civile familiale.
+          <strong>Bailleur personne morale</strong> : il ne peut demander une caution que si elle
+          est apportée par un organisme dont la liste est fixée par décret, ou si le logement est
+          loué à un étudiant qui ne touche pas de bourse de l&apos;enseignement supérieur. La règle
+          ne vaut pas pour une société civile constituée uniquement entre parents et alliés
+          jusqu&apos;au quatrième degré inclus.
         </li>
       </ul>
 
@@ -201,9 +213,10 @@ export default function GuideGarantCaution() {
       </p>
       <div className="note">
         <p>
-          Un dernier point, rarement dit : le <strong>lieu de résidence du garant est un critère
-          protégé</strong>. Écarter un dossier parce que la caution habite une autre région, ou une
-          commune jugée indésirable, est une discrimination. Le{" "}
+          Un dernier point, rarement dit : un propriétaire qui exige une caution{" "}
+          <strong>ne peut pas refuser la vôtre</strong> parce qu&apos;elle n&apos;a pas la
+          nationalité française ou qu&apos;elle ne réside pas en métropole. C&apos;est écrit dans
+          l&apos;<span className="loi">article 22-1</span> de la loi de 1989. Le{" "}
           <Link href="/guides/refus-de-dossier">guide sur le refus de dossier</Link> détaille ce
           qui est interdit et comment le prouver.
         </p>

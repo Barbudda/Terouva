@@ -95,8 +95,8 @@ export default function GuidePreavisLocation() {
         >
           le simulateur officiel
         </a>{" "}
-        répond pour votre commune. Vérifiez à la date de signature ou de renouvellement de votre
-        bail, pas à celle du jour.
+        répond pour votre commune. Vérifiez à la date de signature, de renouvellement ou de
+        reconduction de votre bail, pas à celle du jour.
       </p>
       <p>
         Dans la lettre, mentionnez l&apos;adresse du logement et le bénéfice du délai réduit, avec

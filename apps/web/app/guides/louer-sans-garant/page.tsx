@@ -38,8 +38,9 @@ export default function GuideLouerSansGarant() {
           apprenti.
         </li>
         <li>
-          S&apos;il est une personne morale, il ne peut pas demander de caution à un étudiant
-          boursier de l&apos;enseignement supérieur.
+          S&apos;il est une personne morale (hors société civile familiale), il ne peut demander
+          une caution que si elle vient d&apos;un organisme dont la liste est fixée par décret, ou
+          si vous êtes étudiant sans bourse de l&apos;enseignement supérieur.
         </li>
       </ul>
       <p>
@@ -58,7 +59,7 @@ export default function GuideLouerSansGarant() {
       </p>
       <p>
         Les conditions dépendent de l&apos;âge, du statut et du loyer. Elles couvrent largement les
-        moins de 30 ans, les salariés récemment embauchés ou mutés, et les travailleurs
+        locataires de 30 ans et moins, les salariés récemment embauchés ou mutés, et les travailleurs
         saisonniers. Le détail, les plafonds de loyer et la marche à suivre sont dans le guide de la{" "}
         <Link href="/guides/garantie-visale">garantie Visale</Link>.
       </p>
@@ -87,32 +88,34 @@ export default function GuideLouerSansGarant() {
       </p>
 
       <h2 id="societes">Combien coûte une société de cautionnement ?</h2>
-      <p>Ces sociétés se rémunèrent par un pourcentage du loyer annuel, prélevé chaque année du bail. Demandez le coût total sur la durée, pas le tarif mensuel, qui donne une idée fausse de la dépense. Vérifiez aussi que le propriétaire accepte l&apos;organisme avant de payer.</p>
+      <p>Chaque société fixe son propre tarif, et nous n&apos;avons pas de grille officielle à vous donner. Demandez le coût total sur la durée du bail, pas un tarif au mois, qui donne une idée fausse de la dépense. Vérifiez aussi que le propriétaire accepte l&apos;organisme avant de payer.</p>
       <p>
-        Des sociétés privées se portent garant à votre place, contre un pourcentage du loyer
-        annuel, prélevé chaque année du bail. C&apos;est la solution de dernier recours : elle
-        fonctionne quand les deux précédentes ne s&apos;appliquent pas, mais elle est payante et le
-        coût court sur toute la durée de la location.
+        Des sociétés privées se portent garant à votre place, contre rémunération. C&apos;est la
+        solution de dernier recours : elle fonctionne quand les deux précédentes ne
+        s&apos;appliquent pas, mais elle est payante, et vous payez tant que la garantie court.
       </p>
       <p>
         Un réflexe avant de signer : demandez le <strong>coût total sur la durée du bail</strong>,
-        pas le tarif mensuel. Un pourcentage annuel présenté « à partir de quelques euros par
-        mois » se chiffre tout autrement sur trois ans. Vérifiez aussi que le propriétaire accepte
+        pas le tarif mensuel. Un prix présenté « à partir de quelques euros par mois » se chiffre
+        tout autrement sur trois ans. Vérifiez aussi que le propriétaire accepte
         l&apos;organisme : certains refusent les cautions privées, et vous auriez payé pour rien.
       </p>
 
       <h2 id="etudiant">Un étudiant peut-il louer sans garant ?</h2>
-      <p>Oui, et c&apos;est la situation la mieux couverte. Visale s&apos;adresse en priorité aux moins de 30 ans. Un bailleur personne morale ne peut rien exiger d&apos;un boursier de l&apos;enseignement supérieur. Et l&apos;avance Loca-Pass prête jusqu&apos;à 1 200 € sans intérêts pour le dépôt de garantie.</p>
+      <p>Oui, et c&apos;est la situation la mieux couverte. Visale est ouverte aux locataires de 30 ans et moins. Un bailleur personne morale ne peut demander à un étudiant boursier qu&apos;une caution venue d&apos;un organisme dont la liste est fixée par décret. Et l&apos;avance Loca-Pass prête jusqu&apos;à 1 200 € sans intérêts pour le dépôt de garantie.</p>
       <p>
-        C&apos;est la situation la mieux couverte, ce qui surprend souvent. Visale s&apos;adresse
-        en priorité aux moins de 30 ans. Un bailleur personne morale ne peut rien exiger d&apos;un
-        boursier de l&apos;enseignement supérieur. Et pour le dépôt de garantie, l&apos;avance
+        C&apos;est la situation la mieux couverte, ce qui surprend souvent. Visale est ouverte aux
+        locataires de 30 ans et moins, étudiants compris, sous conditions de loyer. Un bailleur
+        personne morale ne peut demander à un étudiant boursier qu&apos;une caution venue d&apos;un
+        organisme dont la liste est fixée par décret ; le dossier et le dépôt de garantie restent
+        dus. Et pour le dépôt de garantie, l&apos;avance
         Loca-Pass d&apos;Action Logement prête jusqu&apos;à 1 200 €, sans intérêts, remboursables
         sur 25 mois au maximum.
       </p>
       <p>
-        Trois dispositifs publics, cumulables, à demander dans cet ordre : Visale pour le garant,
-        Loca-Pass pour le dépôt, et les aides au logement une fois installé.
+        Trois dispositifs à demander dans cet ordre : Visale pour le garant, Loca-Pass pour le
+        dépôt, et les aides au logement une fois installé. Chacun a ses propres conditions :
+        vérifiez-les auprès d&apos;Action Logement et de la Caf avant de compter sur les trois.
       </p>
 
       <h2 id="dire">Que répondre quand on vous demande un garant ?</h2>
@@ -144,12 +147,13 @@ export default function GuideLouerSansGarant() {
       </p>
 
       <h2 id="refus">Peut-on refuser mon dossier à cause de mon garant ?</h2>
-      <p>Pas pour n&apos;importe quelle raison. Le <strong>lieu de résidence du garant est un critère protégé</strong> : écarter une candidature parce que la caution habite une autre région ou une commune jugée indésirable est une discrimination, pas une exigence de gestion.</p>
+      <p>Pas pour n&apos;importe quelle raison. Un propriétaire qui exige une caution <strong>ne peut pas refuser la vôtre</strong> parce qu&apos;elle n&apos;a pas la nationalité française ou qu&apos;elle ne réside pas en métropole : l&apos;article 22-1 de la loi de 1989 l&apos;interdit.</p>
       <p>
-        Dernier point, rarement connu : le <strong>lieu de résidence du garant est un critère
-        protégé</strong>. Écarter une candidature parce que la caution habite une autre région, un
-        département d&apos;outre-mer ou une commune jugée indésirable est une discrimination, pas
-        une exigence de gestion. Ce qui est permis, ce qui ne l&apos;est pas et comment le prouver
+        Dernier point, rarement connu : un propriétaire qui exige une caution{" "}
+        <strong>ne peut pas refuser la vôtre</strong> parce qu&apos;elle n&apos;a pas la
+        nationalité française ou qu&apos;elle habite hors de la métropole, en outre-mer comme à
+        l&apos;étranger. C&apos;est l&apos;<span className="loi">article 22-1</span> de la loi du
+        6 juillet 1989 qui le prévoit. Ce qui est permis, ce qui ne l&apos;est pas et comment le prouver
         sont dans le guide sur le{" "}
         <Link href="/guides/refus-de-dossier">refus de dossier</Link>.
       </p>

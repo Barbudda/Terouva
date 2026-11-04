@@ -59,7 +59,7 @@ export const RESUMES: Record<string, ResumeGuide> = {
       "Il se verse à la signature du bail, qui doit en indiquer le montant ; un propriétaire qui le réclame avant, pour « réserver », sort du cadre.",
       "Chaque retenue doit être justifiée par un devis, une facture ou une photo ; une somme forfaitaire « pour remise en état » n'a pas à être acceptée.",
       "Laissez votre nouvelle adresse par écrit le jour de la remise des clés : sans elle, la majoration de retard ne s'applique pas.",
-      "S'il n'est pas rendu, réclamez-le par lettre recommandée avec accusé de réception ; en dessous de 5 000 €, une tentative de règlement amiable, gratuite, est obligatoire avant le tribunal.",
+      "S'il n'est pas rendu, réclamez-le par lettre recommandée avec accusé de réception ; jusqu'à 5 000 € inclus, une tentative de règlement amiable est obligatoire avant le tribunal : conciliateur ou commission de conciliation, gratuits, ou médiateur, payant.",
     ],
     enChiffres: [
       { valeur: "1 ou 2 mois", libelle: "de loyer hors charges au plus, en vide ou en meublé" },
@@ -85,7 +85,7 @@ export const RESUMES: Record<string, ResumeGuide> = {
   "/guides/refus-de-dossier": {
     aRetenir: [
       "Un propriétaire choisit son locataire et n'a pas à motiver un refus ; la loi lui interdit seulement de le fonder sur un critère discriminatoire.",
-      "Le lieu de résidence est un critère protégé, y compris celui de votre garant : écarter un dossier parce que la caution habite une autre région relève de l'interdit.",
+      "Le lieu de résidence est un critère protégé. Et un propriétaire qui exige une caution ne peut pas refuser la vôtre parce qu'elle n'a pas la nationalité française ou qu'elle ne réside pas en métropole.",
       "Gardez les échanges par écrit : messages, courriels et captures d'écran datés valent un début de preuve, alors qu'un refus au téléphone ne laisse rien.",
       "Si vous apportez des éléments datés qui laissent supposer un motif interdit, c'est au propriétaire de prouver que sa décision repose sur des éléments objectifs.",
       "Vous pouvez saisir gratuitement le Défenseur des droits, ou porter plainte dans n'importe quel commissariat ou brigade de gendarmerie dans les six ans suivant les faits.",

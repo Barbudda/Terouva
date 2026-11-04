@@ -56,9 +56,10 @@ export default function GuideRefusDeDossier() {
       </ul>
       <p>
         Deux points reviennent souvent dans les dossiers du Défenseur des droits.{" "}
-        <strong>Le lieu de résidence est un critère protégé</strong>, y compris celui du garant :
-        écarter une candidature parce que la caution habite une autre région, ou une commune jugée
-        indésirable, relève de l&apos;interdit. Et un refus justifié par la nature « non
+        <strong>Le lieu de résidence fait partie des critères protégés</strong>. Pour le garant, la
+        loi de 1989 est plus précise : un propriétaire qui exige une caution ne peut pas la refuser
+        parce qu&apos;elle n&apos;a pas la nationalité française ou qu&apos;elle ne réside pas en
+        métropole (<span className="loi">article 22-1</span>). Et un refus justifié par la nature « non
         professionnelle » d&apos;une partie des revenus, comme une pension d&apos;invalidité, a déjà
         été qualifié de discriminatoire.
       </p>
@@ -104,6 +105,11 @@ export default function GuideRefusDeDossier() {
         encadré par l&apos;<span className="loi">article 225-3-1</span> du Code pénal.
       </p>
       <p>
+        Ce partage de la preuve vaut en cas de litige devant le juge civil, celui à qui vous
+        demandez réparation (<span className="loi">article 1er</span> de la loi de 1989). Il ne
+        s&apos;applique pas à la plainte pénale.
+      </p>
+      <p>
         Pratiquement, cela veut dire une chose : gardez les échanges écrits. Un refus formulé au
         téléphone ne laisse rien ; la même phrase par message vaut un début de preuve.
       </p>
@@ -113,7 +119,8 @@ export default function GuideRefusDeDossier() {
         <li>
           Un refus de louer fondé sur un critère interdit expose son auteur, propriétaire ou
           professionnel de l&apos;immobilier, à <strong>trois ans d&apos;emprisonnement et
-          45&nbsp;000&nbsp;€ d&apos;amende</strong>.
+          45&nbsp;000&nbsp;€ d&apos;amende</strong> au plus, et jusqu&apos;à cinq ans et
+          75&nbsp;000&nbsp;€ quand les faits ont lieu dans un lieu accueillant du public.
         </li>
         <li>
           Demander une pièce qui ne figure pas dans la liste autorisée est passible d&apos;une
@@ -133,8 +140,8 @@ export default function GuideRefusDeDossier() {
       <ul>
         <li>
           <strong>Le Défenseur des droits</strong>, gratuitement. Il peut proposer une médiation,
-          une transaction validée par le procureur, ou saisir la justice. C&apos;est la voie la
-          plus simple, et la seule pour un refus dans le logement social.
+          une transaction validée par le procureur, ou saisir la justice. C&apos;est souvent la
+          voie la plus simple.
         </li>
         <li>
           <strong>Une plainte pénale</strong>, dans n&apos;importe quel commissariat ou brigade de

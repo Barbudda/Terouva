@@ -27,8 +27,8 @@ export default function GuideVisale() {
       <p>
         Une caution locative. Action Logement se porte garant pour vous auprès du propriétaire. Si
         vous ne payez pas, l&apos;organisme paie à votre place, puis vous demande de le rembourser.
-        Ce n&apos;est donc pas une assurance qui efface la dette : c&apos;est un garant qui rassure
-        le propriétaire et vous remet dans la course.
+        La dette reste donc la vôtre : Visale rassure le propriétaire et vous remet dans la
+        course, sans effacer ce que vous devez.
       </p>
       <p>Pour le propriétaire du parc privé, la couverture annoncée est la suivante :</p>
       <ul>
@@ -43,11 +43,11 @@ export default function GuideVisale() {
       </p>
       <ul>
         <li>
-          <strong>Étudiant ou alternant de moins de 30 ans</strong> : l&apos;accès dépend du loyer,
+          <strong>Étudiant ou alternant de 30 ans et moins</strong> : l&apos;accès dépend du loyer,
           et des ressources au-delà d&apos;un certain seuil.
         </li>
         <li>
-          <strong>Toute personne de moins de 30 ans</strong> : loyer plafonné, et loyer qui ne
+          <strong>Toute personne de 30 ans et moins</strong> : loyer plafonné, et loyer qui ne
           dépasse pas la moitié des ressources prises en compte.
         </li>
         <li>

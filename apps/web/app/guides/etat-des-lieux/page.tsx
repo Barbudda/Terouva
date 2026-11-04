@@ -147,9 +147,11 @@ export default function GuideEtatDesLieux() {
         pas vous envoyer le dépôt, et la majoration de retard ne s&apos;applique pas.
       </p>
       <p>
-        <strong>Si le propriétaire ne se présente pas</strong>, restituez les clés par lettre
-        recommandée avec accusé de réception. En l&apos;absence d&apos;état des lieux de sortie,
-        vous êtes considéré comme ayant rendu le logement en bon état, et le délai de restitution
+        <strong>Si le propriétaire ne se présente pas</strong>, faites appel à un commissaire de
+        justice : il convoque les deux parties par lettre recommandée au moins sept jours avant,
+        et ses frais sont partagés par moitié. Le commissaire de justice établit le constat même
+        en l&apos;absence du propriétaire, et ce constat s&apos;impose à vous deux. Restituez
+        ensuite les clés par lettre recommandée avec accusé de réception : le délai de restitution
         du dépôt court à partir de la remise des clés.
       </p>
 
@@ -189,7 +191,7 @@ export default function GuideEtatDesLieux() {
 
       <h2 id="litige">En cas de désaccord</h2>
       <p>
-        En dessous de <strong>5 000 €</strong>, une tentative de règlement amiable est obligatoire
+        Jusqu&apos;à <strong>5 000 €</strong> inclus, une tentative de règlement amiable est obligatoire
         avant le tribunal, et elle est gratuite : commission départementale de conciliation ou
         conciliateur de justice. Au-delà, le juge des contentieux de la protection peut être saisi
         directement. Dans tous les cas, vous avez <strong>trois ans</strong> à compter du jour où

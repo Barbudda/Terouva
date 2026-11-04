@@ -25,7 +25,7 @@ export const GUIDES: Guide[] = [
     description:
       "La liste officielle des justificatifs qu'un propriétaire peut exiger, ceux qui sont interdits, et la sanction. Sources : service-public et Légifrance.",
     publieLe: "2026-10-11",
-    modifieLe: "2026-10-20",
+    modifieLe: "2026-11-04",
     lecture: 7,
     etape: "avant",
     sources: [
@@ -39,7 +39,7 @@ export const GUIDES: Guide[] = [
       },
       {
         nom: "Légifrance · Article 22-2 de la loi n° 89-462 du 6 juillet 1989",
-        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000022962988",
+        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000028806691",
       },
     ],
     questions: [
@@ -90,6 +90,7 @@ export const GUIDES: Guide[] = [
     description:
       "Qui peut obtenir la garantie Visale, les plafonds de loyer, ce qu'elle couvre, et comment recevoir son visa avant même de visiter.",
     publieLe: "2026-10-11",
+    modifieLe: "2026-11-04",
     lecture: 6,
     etape: "avant",
     sources: [
@@ -177,13 +178,17 @@ export const GUIDES: Guide[] = [
     description:
       "Un mois de loyer en vide, deux en meublé, rendu sous un mois si l'état des lieux est conforme. Les retenues autorisées, et la pénalité en cas de retard.",
     publieLe: "2026-10-19",
-    modifieLe: "2026-10-20",
+    modifieLe: "2026-11-04",
     lecture: 6,
     etape: "apres",
     sources: [
       {
         nom: "Service-public.gouv.fr · Dépôt de garantie d'un logement loué",
         url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31269",
+      },
+      {
+        nom: "Service-public.gouv.fr · Nouveaux modèles de bail au 1er octobre 2026",
+        url: "https://www.service-public.gouv.fr/particuliers/actualites/A19067",
       },
       {
         nom: "Légifrance · Loi n° 89-462 du 6 juillet 1989 (articles 22 et 25-6)",
@@ -221,7 +226,7 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Comment récupérer son dépôt de garantie ?",
-        a: "D'abord une lettre recommandée avec accusé de réception qui réclame la somme, rappelle la date de remise des clés et calcule la majoration de retard. En dessous de 5 000 €, une tentative de règlement amiable est ensuite obligatoire, et gratuite : conciliateur de justice, commission départementale de conciliation ou médiateur. Le tribunal vient en dernier. Vous avez trois ans à compter du jour où le dépôt était dû.",
+        a: "D'abord une lettre recommandée avec accusé de réception qui réclame la somme, rappelle la date de remise des clés et calcule la majoration de retard. Jusqu'à 5 000 € inclus, une tentative de règlement amiable est ensuite obligatoire : conciliateur de justice ou commission départementale de conciliation, qui sont gratuits, ou médiateur, qui est payant. Le tribunal vient en dernier. Vous avez trois ans à compter du jour où le dépôt était dû.",
       },
     ],
   },
@@ -246,7 +251,7 @@ export const GUIDES: Guide[] = [
     description:
       "Qui peut se porter garant d'une location, ce que contient l'acte de cautionnement, les documents exigibles, et comment louer sans garant.",
     publieLe: "2026-10-19",
-    modifieLe: "2026-10-20",
+    modifieLe: "2026-11-04",
     lecture: 8,
     etape: "avant",
     sources: [
@@ -259,8 +264,12 @@ export const GUIDES: Guide[] = [
         url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F1169",
       },
       {
-        nom: "Légifrance · Loi n° 89-462 du 6 juillet 1989 (article 22-1)",
-        url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000509310",
+        nom: "Légifrance · Article 22-1 de la loi n° 89-462 du 6 juillet 1989",
+        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000044073458",
+      },
+      {
+        nom: "Légifrance · Article 2297 du Code civil",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044071230",
       },
       {
         nom: "Légifrance · Décret n° 2015-1437 du 5 novembre 2015",
@@ -274,11 +283,11 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Un propriétaire peut-il demander un garant s'il a déjà une assurance loyers impayés ?",
-        a: "Un propriétaire particulier qui a souscrit une assurance contre les risques locatifs ne peut demander une caution que si le locataire est étudiant ou apprenti. Un bailleur personne morale ne peut pas demander de caution à un étudiant boursier de l'enseignement supérieur.",
+        a: "Un propriétaire qui a souscrit une assurance contre les risques locatifs ne peut demander une caution que si le locataire est étudiant ou apprenti. Un bailleur personne morale, hors société civile familiale, ne peut en demander une que si elle vient d'un organisme dont la liste est fixée par décret, ou si le locataire est un étudiant sans bourse de l'enseignement supérieur.",
       },
       {
         q: "Comment trouver un garant pour une location ?",
-        a: "Dans l'ordre de ce qui aboutit le plus souvent : un proche, qui n'a pas besoin d'être de votre famille ni propriétaire ; la garantie Visale d'Action Logement, gratuite, qui se demande avant d'avoir trouvé le logement ; votre employeur ou votre banque ; enfin les sociétés de cautionnement privées, qui facturent un pourcentage du loyer annuel.",
+        a: "Dans l'ordre de ce qui aboutit le plus souvent : un proche, qui n'a pas besoin d'être de votre famille ni propriétaire ; la garantie Visale d'Action Logement, gratuite, qui se demande avant d'avoir trouvé le logement ; votre employeur ou votre banque ; enfin les sociétés de cautionnement privées, qui sont payantes : comparez leurs tarifs avant de signer.",
       },
       {
         q: "Quels documents doit fournir un garant pour une location ?",
@@ -286,7 +295,7 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Combien doit gagner un garant pour une location ?",
-        a: "Aucun texte ne fixe de seuil. L'usage des propriétaires et des agences est de demander un revenu d'environ trois fois le loyer charges comprises, mais c'est une pratique, pas une règle de droit : vous pouvez la discuter, et un garant qui gagne moins peut être accepté. Ce que la loi encadre, ce sont les documents qui peuvent servir à le vérifier.",
+        a: "Aucun texte ne fixe de seuil. Beaucoup de propriétaires et d'agences demandent un revenu d'environ trois fois le loyer charges comprises : c'est une habitude de leur part, qu'aucune loi n'impose. Vous pouvez la discuter, et un garant qui gagne moins peut être accepté. Ce que la loi encadre, ce sont les documents qui peuvent servir à le vérifier.",
       },
       {
         q: "Peut-on avoir deux garants pour une location ?",
@@ -323,6 +332,7 @@ export const GUIDES: Guide[] = [
     description:
       "Un propriétaire choisit son locataire, mais pas sur n'importe quel critère. Les motifs interdits, la charge de la preuve, les sanctions, et où signaler.",
     publieLe: "2026-10-19",
+    modifieLe: "2026-11-04",
     lecture: 7,
     etape: "candidature",
     sources: [
@@ -354,11 +364,11 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Qui doit prouver qu'il y a eu discrimination ?",
-        a: "Vous réunissez d'abord des éléments datés qui laissent supposer un motif interdit : messages, courriels, captures d'écran, témoignages. C'est ensuite au propriétaire de démontrer que sa décision repose sur des éléments objectifs, étrangers à toute discrimination.",
+        a: "Vous réunissez d'abord des éléments datés qui laissent supposer un motif interdit : messages, courriels, captures d'écran, témoignages. C'est ensuite au propriétaire de démontrer que sa décision repose sur des éléments objectifs, étrangers à toute discrimination. Ce partage vaut en cas de litige devant le juge civil ; il ne s'applique pas à la plainte pénale.",
       },
       {
         q: "Que risque un propriétaire qui refuse un dossier pour un motif interdit ?",
-        a: "Jusqu'à trois ans d'emprisonnement et 45 000 € d'amende. Par ailleurs, demander une pièce qui ne figure pas dans la liste autorisée est passible d'une amende pouvant aller jusqu'à 3 000 € pour un particulier.",
+        a: "Jusqu'à trois ans d'emprisonnement et 45 000 € d'amende, et jusqu'à cinq ans et 75 000 € quand les faits ont lieu dans un lieu accueillant du public. Par ailleurs, demander une pièce qui ne figure pas dans la liste autorisée est passible d'une amende pouvant aller jusqu'à 3 000 € pour un particulier.",
       },
     ],
   },
@@ -379,12 +389,21 @@ export const GUIDES: Guide[] = [
     description:
       "Aucune loi n'oblige à fournir un garant. Visale, l'assurance du propriétaire, les sociétés de cautionnement : les trois voies, et leur coût réel.",
     publieLe: "2026-10-19",
+    modifieLe: "2026-11-04",
     lecture: 7,
     etape: "avant",
     sources: [
       {
         nom: "Service-public.gouv.fr · Caution d'un locataire ou d'un colocataire",
         url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31267",
+      },
+      {
+        nom: "Légifrance · Article 22-1 de la loi n° 89-462 du 6 juillet 1989",
+        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000044073458",
+      },
+      {
+        nom: "Service-public.gouv.fr · Avance Loca-Pass",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F18490",
       },
       {
         nom: "Service-public.gouv.fr · Quels documents le propriétaire peut-il demander ?",
@@ -406,15 +425,15 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Un propriétaire peut-il refuser un dossier parce qu'il n'y a pas de garant ?",
-        a: "Oui, il choisit librement son locataire et n'a pas à motiver son refus. Ce qui lui est interdit, c'est de fonder sa décision sur un critère discriminatoire, et le lieu de résidence du garant en est un : écarter un dossier parce que la caution habite une autre région est illégal.",
+        a: "Oui, il choisit librement son locataire et n'a pas à motiver son refus. Ce qui lui est interdit, c'est de fonder sa décision sur un critère discriminatoire. Et s'il exige une caution, il ne peut pas refuser la vôtre parce qu'elle n'a pas la nationalité française ou qu'elle ne réside pas en métropole.",
       },
       {
         q: "Un étudiant peut-il louer sans garant ?",
-        a: "Oui, et c'est le cas le mieux couvert. La garantie Visale s'adresse en priorité aux étudiants et alternants de moins de 30 ans, sous conditions de loyer et de ressources. Par ailleurs, un bailleur personne morale ne peut pas exiger de caution d'un étudiant boursier de l'enseignement supérieur.",
+        a: "Oui, et c'est le cas le mieux couvert. La garantie Visale est ouverte aux locataires de 30 ans et moins, étudiants et alternants compris, sous conditions de loyer et de ressources. Par ailleurs, un bailleur personne morale ne peut demander à un étudiant boursier de l'enseignement supérieur qu'une caution venue d'un organisme dont la liste est fixée par décret.",
       },
       {
         q: "Combien coûte une société de cautionnement ?",
-        a: "Ces sociétés se rémunèrent par un pourcentage du loyer annuel, prélevé chaque année du bail. Les grilles varient d'une société à l'autre et changent souvent : demandez le coût total sur la durée du bail, pas le tarif mensuel, qui donne une idée fausse de la dépense.",
+        a: "Chaque société fixe son propre tarif, et il varie d'une société à l'autre : demandez le coût total sur la durée du bail, pas le tarif mensuel, qui donne une idée fausse de la dépense.",
       },
       {
         q: "La garantie Visale suffit-elle pour être accepté ?",
@@ -441,6 +460,7 @@ export const GUIDES: Guide[] = [
     description:
       "Ce que l'état des lieux doit contenir, qui le paie, les dix jours pour le corriger, et pourquoi la vétusté ne peut pas être retenue sur votre dépôt.",
     publieLe: "2026-10-19",
+    modifieLe: "2026-11-04",
     lecture: 8,
     etape: "apres",
     sources: [
@@ -472,7 +492,7 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Que faire si le propriétaire ne vient pas à l'état des lieux de sortie ?",
-        a: "Restituez les clés par lettre recommandée avec accusé de réception. En l'absence d'état des lieux de sortie, vous êtes considéré comme ayant rendu le logement en bon état, et le délai de restitution du dépôt de garantie court à partir de la remise des clés.",
+        a: "Faites appel à un commissaire de justice, qui convoque les deux parties au moins sept jours avant. Le commissaire de justice établit le constat même en l'absence du propriétaire, et ce constat s'impose à vous deux. Restituez ensuite les clés par lettre recommandée avec accusé de réception : le délai de restitution du dépôt de garantie court à partir de la remise des clés.",
       },
       {
         q: "Qu'est-ce que la vétusté, et que change-t-elle ?",
@@ -502,6 +522,7 @@ export const GUIDES: Guide[] = [
     description:
       "Trois mois en logement vide, un mois en meublé ou en zone tendue. Ce que la lettre doit contenir, et pourquoi le préavis part à la réception.",
     publieLe: "2026-10-19",
+    modifieLe: "2026-11-04",
     lecture: 7,
     etape: "apres",
     sources: [
@@ -533,7 +554,7 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Comment savoir si mon logement est en zone tendue ?",
-        a: "Par le simulateur officiel de service-public.gouv.fr, en saisissant la commune. La liste des communes concernées est fixée par décret et elle a changé fin 2025 : une page qui recopie une ancienne liste peut vous faire perdre deux mois de loyer. Vérifiez à la date de signature ou de renouvellement de votre bail.",
+        a: "Par le simulateur officiel de service-public.gouv.fr, en saisissant la commune. La liste des communes concernées est fixée par décret et elle a changé fin 2025 : une page qui recopie une ancienne liste peut vous faire perdre deux mois de loyer. Vérifiez à la date de signature, de renouvellement ou de reconduction de votre bail.",
       },
       {
         q: "Que doit contenir la lettre de préavis ?",

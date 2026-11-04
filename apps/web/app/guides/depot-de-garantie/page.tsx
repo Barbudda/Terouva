@@ -59,16 +59,24 @@ export default function GuideDepotDeGarantie() {
         stade, rien ne vous engage et rien ne l&apos;engage.
       </p>
       <p>
+        Une fois le bail signé, le versement n&apos;est pas facultatif. Depuis le 1er octobre 2026,
+        les modèles de bail prévoient sa résiliation si le dépôt n&apos;est pas versé, après un
+        commandement de payer resté sans effet pendant six semaines.
+      </p>
+      <p>
         Le dépôt ne fait pas partie des pièces du dossier. Il n&apos;a pas à être évoqué avant que
         votre candidature soit retenue, et il ne remplace pas les justificatifs de la{" "}
         <Link href="/guides/dossier-de-location">liste autorisée</Link>.
       </p>
 
       <h2 id="retenues">Que peut retenir le propriétaire sur le dépôt de garantie ?</h2>
-      <p>Trois choses, et chacune doit être justifiée par une pièce : les loyers et charges restés impayés, les dégradations constatées par rapport à l&apos;état des lieux d&apos;entrée, et les réparations locatives non faites. Une retenue annoncée sans devis, facture ni photo n&apos;a pas à être acceptée.</p>
+      <p>Trois choses, et chacune doit être justifiée par une pièce : les loyers, les charges et les sommes payées à votre place restés impayés, les dégradations constatées par rapport à l&apos;état des lieux d&apos;entrée, et les réparations locatives non faites. Une retenue annoncée sans devis, facture ni photo n&apos;a pas à être acceptée.</p>
       <p>À la fin du bail, le propriétaire peut déduire du dépôt :</p>
       <ul>
-        <li>les loyers et les charges restés impayés ;</li>
+        <li>
+          les loyers et les charges restés impayés, et les sommes que le propriétaire a dû payer à
+          votre place ;
+        </li>
         <li>
           les dégradations constatées, par comparaison avec l&apos;état des lieux d&apos;entrée ;
         </li>
@@ -80,7 +88,7 @@ export default function GuideDepotDeGarantie() {
         état », n&apos;a pas à être acceptée.
       </p>
       <p>
-        Une exception existe en copropriété : le propriétaire peut conserver une provision
+        Une exception existe dans un immeuble collectif : le propriétaire peut conserver une provision
         n&apos;excédant pas 20&nbsp;% du dépôt, le temps que les comptes annuels de l&apos;immeuble
         soient approuvés. Le solde est alors dû dans le mois qui suit cette approbation.
       </p>
@@ -88,7 +96,10 @@ export default function GuideDepotDeGarantie() {
         <p>
           C&apos;est l&apos;état des lieux d&apos;entrée qui protège le dépôt. S&apos;il n&apos;a
           pas été fait, le locataire est présumé avoir reçu le logement en bon état, et la
-          comparaison de sortie se fait contre cette présomption. Un quart d&apos;heure à noter les
+          comparaison de sortie se fait contre cette présomption. Elle ne joue pas contre vous si
+          c&apos;est le propriétaire qui a refusé de l&apos;établir malgré votre mise en demeure :
+          le guide de l&apos;<Link href="/guides/etat-des-lieux">état des lieux</Link> détaille
+          ce cas. Un quart d&apos;heure à noter les
           défauts le jour de l&apos;entrée vaut souvent plusieurs centaines d&apos;euros à la
           sortie.
         </p>
@@ -133,7 +144,7 @@ export default function GuideDepotDeGarantie() {
       </p>
 
       <h2 id="recuperer">Comment récupérer un dépôt de garantie non rendu ?</h2>
-      <p>D&apos;abord une lettre recommandée avec accusé de réception qui réclame la somme et calcule la majoration. En dessous de 5 000 €, une tentative de règlement amiable est ensuite obligatoire, et gratuite : conciliateur de justice ou commission départementale de conciliation. Le tribunal vient en dernier.</p>
+      <p>D&apos;abord une lettre recommandée avec accusé de réception qui réclame la somme et calcule la majoration. Jusqu&apos;à 5 000 € inclus, une tentative de règlement amiable est ensuite obligatoire, et gratuite : conciliateur de justice ou commission départementale de conciliation. Le tribunal vient en dernier.</p>
       <p>Dans l&apos;ordre, et sans sauter d&apos;étape :</p>
       <ol>
         <li>
@@ -141,9 +152,9 @@ export default function GuideDepotDeGarantie() {
           remise des clés et calcule la majoration. Beaucoup de dossiers s&apos;arrêtent là.
         </li>
         <li>
-          En dessous de 5&nbsp;000&nbsp;€, une tentative de règlement amiable est{" "}
-          <strong>obligatoire</strong> avant le tribunal : conciliateur de justice, commission
-          départementale de conciliation, ou médiateur. C&apos;est gratuit.
+          Jusqu&apos;à 5&nbsp;000&nbsp;€ inclus, une tentative de règlement amiable est{" "}
+          <strong>obligatoire</strong> avant le tribunal : conciliateur de justice ou commission
+          départementale de conciliation, qui sont gratuits, ou médiateur, qui est payant.
         </li>
         <li>
           Puis le tribunal, saisi directement au-delà de 5&nbsp;000&nbsp;€. Vous avez trois ans à

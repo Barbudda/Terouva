@@ -64,7 +64,10 @@ export default function GuideDossier() {
       <ul>
         <li>Le dernier ou l&apos;avant-dernier avis d&apos;imposition ou de non-imposition.</li>
         <li>Les trois dernières fiches de paie.</li>
-        <li>Les deux derniers bilans, pour un professionnel non salarié.</li>
+        <li>
+          Les deux derniers bilans ou, à défaut, une attestation de ressources pour l&apos;exercice
+          en cours, pour un professionnel non salarié.
+        </li>
         <li>
           La justification du versement d&apos;indemnités, retraites, pensions ou prestations
           sociales des trois derniers mois, ou de l&apos;ouverture des droits.
@@ -85,8 +88,9 @@ export default function GuideDossier() {
       <h2 id="ce-qui-est-interdit">Ce qu&apos;on ne peut pas vous demander</h2>
       <p>
         Le principe est simple : <strong>tout ce qui n&apos;est pas dans la liste ci-dessus est
-        interdit.</strong> La loi nomme en plus explicitement une série de documents, parce
-        qu&apos;ils étaient réclamés couramment :
+        interdit.</strong> Depuis 2014, la loi ne nomme plus ces documents un par un : elle renvoie
+        à la liste du décret. Voici ceux qu&apos;on réclame encore souvent, et qui n&apos;y figurent
+        pas :
       </p>
       <ul>
         <li>Une photographie d&apos;identité, sauf celle qui figure sur la pièce d&apos;identité.</li>
@@ -105,13 +109,11 @@ export default function GuideDossier() {
           aux particuliers.
         </li>
         <li>Plus de deux bilans, pour un travailleur indépendant.</li>
-        <li>
-          Une attestation du précédent bailleur ou de l&apos;employeur, quand vous pouvez fournir
-          les justificatifs ordinaires.
-        </li>
       </ul>
       <p>
-        Le propriétaire ne peut pas non plus vous réclamer d&apos;argent avant la signature du bail.
+        Le propriétaire ne peut pas non plus vous réclamer d&apos;argent avant la signature du bail,
+        ni vous imposer qu&apos;un membre de votre famille en ligne directe (parent, grand-parent,
+        enfant) cosigne le bail.
       </p>
 
       <div className="note">
@@ -164,10 +166,9 @@ export default function GuideDossier() {
 
       <h2 id="apres-refus">Et après un refus, que devient votre dossier ?</h2>
       <p>
-        Vos pièces sont des données personnelles. Un propriétaire ou une agence qui a écarté votre
-        candidature n&apos;a plus de raison de les conserver, et vous pouvez demander leur
-        effacement. En cas de refus, la Commission nationale de l&apos;informatique et des libertés
-        peut être saisie.
+        Vos pièces sont des données personnelles. Si un propriétaire ou une agence a écarté votre
+        candidature, rien ne vous empêche de lui demander par écrit d&apos;effacer ce que vous avez
+        envoyé, et de garder une trace de cette demande.
       </p>
       <p>
         C&apos;est d&apos;ailleurs une des raisons pour lesquelles Terouva ne conserve rien sur un
