@@ -6,6 +6,7 @@ import { FinDePage } from "@/components/layout/FinDePage";
 import { Questions } from "@/components/ui/Questions";
 import { Sommaire } from "@/components/guides/Sommaire";
 import { CarteGuide } from "@/components/guides/CarteGuide";
+import { typographier } from "@/components/blog/typographie";
 import { BLOG, PILIERS, cheminArticle, dateLongue, type Article } from "@/lib/blog";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
 import { DonneesStructurees, filAriane } from "@/lib/seo";
@@ -18,9 +19,9 @@ import { getSiteUrl } from "@/lib/site";
  * tête, la date de mise à jour à côté, et ce qui a changé est dit en clair
  * au-dessus du texte, pas enfoui dans un historique.
  *
- * En bas, toujours les trois mêmes suites (le guide pilier, l'outil qui fait
- * le travail, un guide voisin) : un article sans suite laisse le lecteur au
- * milieu de sa question.
+ * En bas, toujours les mêmes suites : l'outil qui fait le travail, en relais
+ * nuit juste sous le texte, puis le guide pilier et un guide voisin. Un
+ * article sans suite laisse le lecteur au milieu de sa question.
  */
 export function CadreArticle({ article, children }: { article: Article; children: React.ReactNode }) {
   const siteUrl = getSiteUrl();
@@ -84,6 +85,7 @@ export function CadreArticle({ article, children }: { article: Article; children
       <DonneesStructurees data={jsonLd} />
       <DonneesStructurees data={filAriane(etapes)} />
       <Nav home={false} />
+      <span aria-hidden className="fil-lecture" />
 
       <main className="pb-16">
         <header className="cadre pt-8 md:pt-14">
@@ -101,9 +103,11 @@ export function CadreArticle({ article, children }: { article: Article; children
             </Link>
           </div>
           <h1 className="titre mt-6 max-w-[22ch] text-[clamp(2.25rem,1.3rem+3.6vw,4rem)] text-ink">
-            {article.titre}
+            {typographier(article.titre)}
           </h1>
-          <p className="mt-6 max-w-[42rem] text-[1.1875rem] leading-relaxed text-ink-2">{article.chapeau}</p>
+          <p className="mt-6 max-w-[36rem] text-[1.1875rem] leading-relaxed text-pretty text-ink-2">
+            {typographier(article.chapeau)}
+          </p>
           <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-rule pt-4">
             <Meta nom="Publié le" iso={article.publieLe} />
             {article.modifieLe && article.modifieLe !== article.publieLe && (
@@ -151,6 +155,26 @@ export function CadreArticle({ article, children }: { article: Article; children
 
             <article className="article article--marge mt-12">{children}</article>
 
+            {/* Le relais : l'outil qui fait ce que le texte décrit, en bande nuit,
+                juste sous le texte. On change de monde au moment d'agir. */}
+            {outil && (
+              <aside aria-label="Outil gratuit" className="relais-outil mt-14 bg-night p-6 text-night-ink sm:p-8">
+                <p className="champ text-blue-clair">Outil gratuit</p>
+                <div className="mt-3 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+                  <div className="max-w-[30rem]">
+                    <p className="text-[1.375rem] leading-tight font-medium">{outil.court}</p>
+                    <p className="mt-2 text-[15px] leading-relaxed text-night-ink-2">{typographier(outil.resume)}</p>
+                  </div>
+                  <Link
+                    href={outil.chemin}
+                    className="inline-flex min-h-12 shrink-0 items-center justify-center self-start rounded-full bg-action px-6 text-[15px] font-medium text-action-ink transition-[filter] duration-200 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-clair sm:self-auto"
+                  >
+                    Ouvrir l&apos;outil
+                  </Link>
+                </div>
+              </aside>
+            )}
+
             <div className="max-w-[44rem]">
               {article.sources.length > 0 && (
                 <section className="mt-14 border-t border-rule-fort pt-5">
@@ -173,32 +197,17 @@ export function CadreArticle({ article, children }: { article: Article; children
               <Questions questions={article.questions ?? []} className="mt-16" />
             </div>
 
-            {(suites.length > 0 || outil) && (
+            {suites.length > 0 && (
               <nav aria-labelledby="pour-aller-plus-loin" className="mt-16">
                 <h2 id="pour-aller-plus-loin" className="titre titre--petit text-[1.75rem] text-ink">
                   Pour aller plus loin
                 </h2>
-                <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <ul className="mt-6 grid gap-5 sm:grid-cols-2">
                   {suites.map((g) => (
                     <li key={g.chemin}>
                       <CarteGuide guide={g} />
                     </li>
                   ))}
-                  {outil && (
-                    <li>
-                      <Link
-                        href={outil.chemin}
-                        className="group flex h-full flex-col rounded-[1.25rem] border border-rule bg-card p-5 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-rule-fort focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
-                      >
-                        <span className="champ text-accent-ink">Outil gratuit</span>
-                        <span className="mt-2 text-[17px] leading-snug font-medium text-ink">{outil.court}</span>
-                        <span className="mt-2 text-[14px] leading-relaxed text-ink-2">{outil.resume}</span>
-                        <span className="mt-auto pt-4 text-[15px] font-medium text-accent-ink">
-                          Ouvrir l&apos;outil
-                        </span>
-                      </Link>
-                    </li>
-                  )}
                 </ul>
               </nav>
             )}

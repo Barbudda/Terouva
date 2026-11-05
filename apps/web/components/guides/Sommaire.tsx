@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { typographier } from "@/components/blog/typographie";
 
 /**
  * Le sommaire d'un guide, collé en colonne de gauche sur grand écran, avec la
@@ -43,12 +44,12 @@ export function Sommaire({ entrees }: { entrees: Array<{ id: string; titre: stri
               href={`#${e.id}`}
               aria-current={actif === e.id ? "location" : undefined}
               className={cn(
-                "flex gap-3 py-2.5 transition-colors duration-150",
+                "sommaire-entree flex gap-3 py-2.5 transition-colors duration-150",
                 actif === e.id ? "font-medium text-accent-ink" : "text-ink-3 hover:text-ink",
               )}
             >
               <span className="champ shrink-0 pt-px text-[11px]">{String(i + 1).padStart(2, "0")}</span>
-              {e.titre}
+              {typographier(e.titre)}
             </a>
           </li>
         ))}

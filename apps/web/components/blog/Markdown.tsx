@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { lireBlocs } from "@/lib/blog-format";
+import { typographier } from "@/components/blog/typographie";
 
 /**
  * Rendu du Markdown restreint des articles au format série (voir `lib/blog-format.ts`).
@@ -50,10 +51,11 @@ const JETON = /(\*\*[^*]+\*\*|\*[^*\s][^*]*\*|\[[^\]]+\]\([^)\s]+\))/g;
 
 function enLigne(texte: string): ReactNode[] {
   return texte.split(JETON).filter((m) => m !== "").map((m, i) => {
-    if (m.startsWith("**")) return <strong key={i}>{m.slice(2, -2)}</strong>;
+    if (m.startsWith("**")) return <strong key={i}>{typographier(m.slice(2, -2))}</strong>;
     const lien = /^\[([^\]]+)\]\(([^)\s]+)\)$/.exec(m);
     if (lien) {
-      const [, txt, href] = lien;
+      const [, brut, href] = lien;
+      const txt = typographier(brut);
       return href.startsWith("/") ? (
         <Link key={i} href={href}>
           {txt}
@@ -64,8 +66,8 @@ function enLigne(texte: string): ReactNode[] {
         </a>
       );
     }
-    if (m.startsWith("*") && m.endsWith("*") && m.length > 2) return <em key={i}>{m.slice(1, -1)}</em>;
-    return m;
+    if (m.startsWith("*") && m.endsWith("*") && m.length > 2) return <em key={i}>{typographier(m.slice(1, -1))}</em>;
+    return typographier(m);
   });
 }
 

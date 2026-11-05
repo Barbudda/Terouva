@@ -1,3 +1,132 @@
 /* Gabarits de lecture longue : guides et blog (session lecture).
    Pôle Design, 5 novembre 2026 : une feuille par zone pour que les sessions
-   parallèles n'écrivent jamais dans le même fichier. Voir docs/design/BRIEF.md. */
+   parallèles n'écrivent jamais dans le même fichier. Voir docs/design/BRIEF.md.
+
+   Cette feuille se charge AVANT les règles de globals.css : à spécificité
+   égale, globals gagne. Les règles d'ici qui reprennent un sélecteur de
+   globals sont donc plus spécifiques exprès (`:has()`, double classe). */
+
+/* ───────── La feuille : modèle de lettre ou de message, posé dans le texte ─────────
+   Un encadré long (quatre blocs et plus : une lettre, un mail) partait en
+   marge et s'empilait loin de sa section ; « Exemple 1 » se retrouvait avec
+   un corps vide. Il reste désormais à sa place, et se lit comme ce qu'il est :
+   une feuille qu'on recopie, posée sur la page. Même traitement pour les
+   `blockquote` des articles, qui n'avaient aucun style.
+   Encre sur carte : 17,2:1 ; ink-2 sur carte : 7,6:1. */
+.article .note:has(> :nth-child(4)),
+.article blockquote {
+  float: none;
+  width: auto;
+  max-width: var(--mesure);
+  margin: 2rem 0 0;
+  padding: 1.5rem 1.5rem 1.75rem;
+  border: 1px solid var(--color-rule);
+  border-radius: 4px;
+  background: var(--color-card);
+  /* Une seule ombre, vers le bas : la feuille repose, elle ne flotte pas. */
+  box-shadow: 0 18px 32px -24px rgb(23 24 26 / 0.35);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink);
+  hyphens: manual;
+}
+.article .note:has(> :nth-child(4)) > * + *,
+.article blockquote > * + * {
+  margin-top: 0.75rem;
+}
+@media (min-width: 40rem) {
+  .article .note:has(> :nth-child(4)),
+  .article blockquote {
+    padding: 2rem 2.25rem 2.25rem;
+  }
+}
+/* En marge sur grand écran, la règle de globals déporte toute note à droite :
+   on l'annule pour la feuille (marge négative, filet seul). */
+@media (min-width: 64rem) {
+  .article--marge .note:has(> :nth-child(4)) {
+    margin-right: 0;
+    border-top: 1px solid var(--color-rule);
+    padding-bottom: 2.25rem;
+  }
+  /* Une note courte de marge ne déborde jamais sur la section suivante :
+     l'intertitre attend qu'elle soit finie. */
+  .article--marge h2 {
+    clear: right;
+  }
+}
+
+/* ───────── Le fil de lecture ─────────
+   Un filet bleu en haut d'écran qui avance avec la lecture : le repère
+   qui suit sur téléphone, où le sommaire n'est pas collé. Piloté par le
+   défilement en CSS, aucun script ; absent sans support ou en mouvement
+   réduit (rien ne s'affiche plutôt qu'un filet figé à zéro). */
+.fil-lecture {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .fil-lecture {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 60;
+      height: 2px;
+      background: var(--color-blue);
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      animation: fil-lecture linear both;
+      animation-timeline: scroll(root block);
+      pointer-events: none;
+    }
+  }
+}
+@keyframes fil-lecture {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ───────── Sommaire : l'entrée active porte un trait ─────────
+   La couleur seule ne suffisait pas à dire « vous êtes ici » ; le trait
+   d'accent à gauche le dit aussi aux daltoniens. */
+.sommaire-entree {
+  position: relative;
+}
+.sommaire-entree[aria-current="location"]::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: -0.875rem;
+  width: 2px;
+  background: var(--color-accent-ink);
+}
+
+/* ───────── Le relais vers l'outil ─────────
+   Sous le texte d'un article, l'outil lié s'ouvre en bande nuit : on change
+   de monde au moment d'agir, comme le veut DESIGN.md (« le papier parle,
+   l'instrument mesure »). night-ink sur night : 15,6:1 ; night-ink-2 : 6,3:1 ;
+   bouton : texte minuit sur orange, 7,42:1. */
+.relais-outil {
+  max-width: 44rem;
+  border-radius: 4px;
+  box-shadow: 0 28px 50px -30px rgb(8 17 32 / 0.6);
+}
+
+/* ───────── Index du blog : la table des matières ─────────
+   Après les premières lignes illustrées, la suite se lit comme le sommaire
+   d'une revue : numéro, titre, rubrique, sans vignette, sur deux colonnes
+   en grand écran. 84 articles tenaient sur 17 600 px. */
+.table-revue {
+  counter-reset: none;
+}
+@media (min-width: 64rem) {
+  .table-revue {
+    column-count: 2;
+    column-gap: 4rem;
+    column-rule: 1px solid var(--color-rule);
+  }
+}
+.table-revue > li {
+  break-inside: avoid;
+}

@@ -8,10 +8,12 @@ import { Questions } from "@/components/ui/Questions";
 import { Sommaire } from "@/components/guides/Sommaire";
 import { CarteGuide } from "@/components/guides/CarteGuide";
 import { ArticlesLies } from "@/components/blog/ArticlesLies";
+import { typographier } from "@/components/blog/typographie";
 import { GUIDES } from "@/lib/catalogue";
 import { PHOTOS, RESUMES } from "@/lib/guides-resumes";
 import { DonneesStructurees, filAriane } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 export type Guide = {
   chemin: string;
@@ -128,6 +130,7 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
       <DonneesStructurees data={jsonLd} />
       <DonneesStructurees data={filAriane(etapes)} />
       <Nav home={false} />
+      <span aria-hidden className="fil-lecture" />
 
       <main className="pb-16">
         <header className="cadre pt-8 md:pt-14">
@@ -145,9 +148,11 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
             </Link>
           </div>
           <h1 className="titre mt-6 max-w-[20ch] text-[clamp(2.25rem,1.3rem+3.6vw,4rem)] text-ink">
-            {guide.titre}
+            {typographier(guide.titre)}
           </h1>
-          <p className="mt-6 max-w-[42rem] text-[1.1875rem] leading-relaxed text-ink-2">{guide.resume}</p>
+          <p className="mt-6 max-w-[36rem] text-[1.1875rem] leading-relaxed text-pretty text-ink-2">
+            {typographier(guide.resume)}
+          </p>
           <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-t border-rule pt-4">
             <Meta nom="Mis à jour le" valeur={verifieLe} />
             <Meta nom="Lecture" valeur={`${guide.lecture} min`} />
@@ -213,7 +218,14 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
             {resume && (
               <section aria-labelledby="en-chiffres" className="mt-6 max-w-[48rem]">
                 <h2 id="en-chiffres" className="champ text-ink-3">En chiffres</h2>
-                <dl className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
+                <dl
+                  className={cn(
+                    "mt-4 grid grid-cols-2 gap-3 sm:gap-4",
+                    // Trois tuiles sur deux colonnes laissaient une orpheline :
+                    // sur téléphone la troisième prend la largeur, ailleurs trois colonnes.
+                    resume.enChiffres.length === 3 && "sm:grid-cols-3 [&>div:last-child]:col-span-2 sm:[&>div:last-child]:col-span-1",
+                  )}
+                >
                   {resume.enChiffres.map((c) => (
                     <div key={c.valeur + c.libelle} className="flex flex-col rounded-[1rem] border border-rule bg-card p-4 sm:p-6">
                       <dt className="order-2 mt-2 text-[14px] leading-snug text-ink-2">{c.libelle}</dt>
