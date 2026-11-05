@@ -36,9 +36,8 @@ inscrits passe en chiffre `.numero`. `actions.ts` non touché.
 ## Captures (`.playwright-mcp/`)
 
 arrivee-375-saisie, -erreur, -envoi, -succes, -liste, -findepage ;
-arrivee-1440-saisie, -deja. 768 px : non prise, le serveur partagé est passé en
-500 sur toutes les pages (favicon compris) pendant la session, sans lien avec
-cette zone (CSS parsé par lightningcss, tsc propre hors `Problem.tsx`).
+arrivee-1440-saisie, -deja ; arrivee-768-saisie (prise sur le serveur 3031,
+le 3030 ayant son cache `.next` corrompu). Pas de débordement horizontal.
 
 ## Pour la cheffe
 
