@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* Feuilles de zone du pôle Design (docs/design/BRIEF.md), une par session. */
+@import "./styles/navigation.css";
+@import "./styles/accueil-recit.css";
+@import "./styles/accueil-produit.css";
+@import "./styles/visuels.css";
+@import "./styles/arrivee.css";
+@import "./styles/lecture.css";
+
 /* ───────────────────────────── Fondations ─────────────────────────────
    Deux mondes, un site. Le monde papier porte le discours, les guides et les
    droits ; le monde nuit porte l'outil, le score et la donnée. Chacun a ses
