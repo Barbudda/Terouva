@@ -1,3 +1,76 @@
 /* Navigation, fil d'Ariane, fin de page et pied (session navigation).
    Pôle Design, 5 novembre 2026 : une feuille par zone pour que les sessions
    parallèles n'écrivent jamais dans le même fichier. Voir docs/design/BRIEF.md. */
+
+/* ── Barre de pouce (téléphone). Elle glisse depuis le bas quand on a passé le
+   premier écran et se range quand le formulaire ou le pied est visible
+   (`data-visible`, posé par NavClient). La marge basse suit l'encoche des
+   téléphones. Le texte posé dessus garde les contrastes de la page : la barre
+   est à 92 % du fond de la page, encre dessus 16,5:1 (nuit) ou 16:1 (papier). */
+.barre-pouce {
+  padding-bottom: env(safe-area-inset-bottom);
+  transform: translateY(calc(100% + 1px));
+  transition: transform 260ms var(--ease-terouva);
+  box-shadow: 0 -18px 36px -28px rgb(0 0 0 / 0.55);
+}
+.barre-pouce[data-visible] {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .barre-pouce {
+    transition: none;
+  }
+}
+
+/* ── Fil d'Ariane : les liens restent à 13 px et à leur hauteur, mais la zone
+   de toucher descend et monte de 8 px (28 + 16 = 44 px). */
+.ariane a {
+  position: relative;
+}
+.ariane a::after {
+  content: "";
+  position: absolute;
+  inset: -8px -4px;
+}
+
+/* ── Fin de page : un cadre de nuit, même posé sur une page de papier.
+   `.monde-papier` redéfinit les jetons de la page ; ici on les repasse au
+   monde nuit à partir des jetons `night-*`, que le papier ne touche pas.
+   Contrastes sur le fond du cadre (#0d1829) :
+   - encre #eef3f8 : 15,6:1 ;
+   - encre 2 et 3 #9fadbd : 6,3:1 ;
+   - liens #5cbcf2 : 8,4:1 ;
+   - filet de champ #9fadbd : 6,3:1 (≥ 3:1 exigé pour un contour de champ) ;
+   - bouton orange, texte minuit : 7,42:1 (inchangé). */
+.fin-de-page {
+  /* Le rouge d'erreur du monde nuit (#ff7b7b, 7,1:1 sur le cadre) : le
+     papier le remplace par un rouge sombre illisible ici. Pas de jeton
+     `night-bad` : variable locale, à remonter dans `@theme` si la cheffe veut. */
+  --fin-erreur: #ff7b7b;
+
+  --color-paper: var(--color-night);
+  --color-paper-2: var(--color-night);
+  --color-ink: var(--color-night-ink);
+  --color-ink-2: var(--color-night-ink-2);
+  --color-ink-3: var(--color-night-ink-2);
+  --color-rule: var(--color-night-rule);
+  --color-rule-fort: var(--color-night-ink-2);
+  --color-accent-ink: var(--color-blue-clair);
+  --color-bad: var(--fin-erreur);
+  color-scheme: dark;
+  color: var(--color-ink);
+}
+
+/* Le repère d'arrivée : le point orange de la barre (« vous êtes ici »)
+   suivi d'un filet court. On est arrivé au bout du chemin. */
+.fin-de-page__repere {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.fin-de-page__repere::after {
+  content: "";
+  height: 1px;
+  width: 4rem;
+  background: var(--color-night-rule);
+}

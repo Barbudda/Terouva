@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { lienBlog } from "@/lib/blog";
 import { EDITEUR, FOOTER } from "@/lib/content";
 import { PiedLogotype } from "@/components/layout/coquilles/PiedLogotype";
@@ -7,6 +6,10 @@ import { PiedLogotype } from "@/components/layout/coquilles/PiedLogotype";
  * Le pied de page consomme la coquille F. Les quatre colonnes viennent de
  * `FOOTER.columns` ; la ligne du bas nomme l'éditeur, renvoie aux textes
  * légaux et rappelle que Terouva n'a aucun lien avec Leboncoin.
+ *
+ * Les trois textes légaux ne sont plus répétés dans la ligne du bas : la
+ * colonne « Mentions légales » les porte déjà, et sur téléphone ces liens
+ * de 13 px serrés sur une ligne étaient trop petits pour le pouce.
  *
  * Le blog s'ajoute à la colonne des guides dès son premier article publié, et
  * pas avant : le pied est sur toutes les pages, c'est le lien qui fait entrer
@@ -25,15 +28,6 @@ export function Footer() {
         <>
           <p>Édité par {EDITEUR.marque}</p>
           <p className="flex flex-wrap gap-x-4">
-            <Link href="/mentions-legales" className="hover:text-ink">
-              Mentions légales
-            </Link>
-            <Link href="/confidentialite" className="hover:text-ink">
-              Confidentialité
-            </Link>
-            <Link href="/cgu" className="hover:text-ink">
-              Conditions d&apos;utilisation
-            </Link>
             <span>{FOOTER.disclaimer}</span>
             <span>{new Date().getFullYear()}</span>
           </p>
