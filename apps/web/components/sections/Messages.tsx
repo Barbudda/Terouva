@@ -58,23 +58,13 @@ function expediteur(texte: string) {
 }
 
 function Lettre({ message, rang, ouvrir }: { message: MessageExemple; rang: number; ouvrir: () => void }) {
-  const bouton = useRef<HTMLButtonElement>(null);
-
-  // La coquille rend les tuiles deux fois pour boucler ; le second jeu est
-  // `aria-hidden` et ne doit pas recevoir le focus clavier.
-  useEffect(() => {
-    if (bouton.current?.closest(".ruban-double")) bouton.current.tabIndex = -1;
-  }, []);
-
   const nom = expediteur(message.texte);
   return (
     <li className="ruban-fiche lettre monde-papier" style={gabarit(rang)}>
       <button
-        ref={bouton}
         type="button"
         onClick={ouvrir}
         aria-haspopup="dialog"
-        aria-label={`Lire le message de ${nom}`}
         className="lettre-feuille flex size-full flex-col p-5 text-left"
       >
         <span className="flex items-baseline justify-between gap-3 border-b border-rule pb-3">
@@ -82,7 +72,10 @@ function Lettre({ message, rang, ouvrir }: { message: MessageExemple; rang: numb
           <span className="shrink-0 text-[12px] text-ink-3">Ton {message.ton.toLowerCase()}</span>
         </span>
 
-        <span className="ruban-texte mt-4 block text-[14px] leading-relaxed whitespace-pre-line text-ink-2">
+        {/* L'extrait est coupé : le lecteur d'écran lit la lettre entière dans
+            le panneau. Le bouton se nomme par ce qu'il affiche (nom, ton,
+            annonce, note), sans étiquette qui le contredise (WCAG 2.5.3). */}
+        <span aria-hidden className="ruban-texte mt-4 block text-[14px] leading-relaxed whitespace-pre-line text-ink-2">
           {message.texte}
         </span>
 

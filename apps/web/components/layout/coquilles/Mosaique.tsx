@@ -57,7 +57,9 @@ export function Mosaique({
     >
       <div className="ruban-piste">
         <ul className="ruban-jeu">{tuiles}</ul>
-        <ul className="ruban-jeu ruban-double" aria-hidden>
+        {/* `inert` : ni focus clavier ni lecteur d'écran sur les copies, sans
+            que chaque tuile ait à savoir qu'elle est dans le second jeu. */}
+        <ul className="ruban-jeu ruban-double" aria-hidden inert>
           {tuiles}
         </ul>
       </div>
