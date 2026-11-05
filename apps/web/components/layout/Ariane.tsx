@@ -15,15 +15,20 @@ export function Ariane({ etapes }: { etapes: Array<{ nom: string; chemin: string
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {etapes.map((e, i) => (
           <li key={e.chemin} className="flex min-w-0 max-w-full items-center gap-2">
-            {i > 0 && <span aria-hidden>/</span>}
             {i === etapes.length - 1 ? (
               <span aria-current="page" className="truncate">
                 {e.nom}
               </span>
             ) : (
-              <Link href={e.chemin} className="inline-block py-1 transition-colors hover:text-accent-ink">
-                {e.nom}
-              </Link>
+              <>
+                <Link href={e.chemin} className="inline-block py-1 transition-colors hover:text-accent-ink">
+                  {e.nom}
+                </Link>
+                {/* Le séparateur ferme l'étape au lieu d'ouvrir la suivante : quand le
+                    titre courant passe à la ligne sur téléphone, la ligne commence par
+                    le titre, pas par un « / » orphelin. */}
+                <span aria-hidden>/</span>
+              </>
             )}
           </li>
         ))}
