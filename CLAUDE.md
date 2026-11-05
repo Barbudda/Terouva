@@ -66,7 +66,7 @@ et ses sous-agents installés par `/bonds pole <id>` :
 |---|---|---|
 | SEO & GEO | `/pole-seo-geo`, dix-sept agents `seo-*` / `geo-*` / `blog-*`, contexte dans `docs/seo/` | installé |
 | CTO & Commerce | à créer dans BONDS sur le modèle de `pole-seo-geo` | session à part |
-| Design | à créer dans BONDS sur le modèle de `pole-seo-geo` | session à part |
+| Design | `/pole-design`, une session par zone du site, brief commun dans `docs/design/BRIEF.md` | installé le 2026-11-05 |
 
 Décisions qui valent pour tous les pôles :
 - **Modèle économique** : freemium avec clé de licence (base gratuite, fonctions avancées payantes,
