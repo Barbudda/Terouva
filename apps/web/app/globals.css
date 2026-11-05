@@ -33,6 +33,7 @@
   --color-night-ink: #eef3f8;
   --color-night-ink-2: #9fadbd;   /* sur panneau : 6,3:1 */
   --color-night-rule: #22324a;
+  --color-night-bad: #ff7b7b;     /* rouge d'erreur du monde nuit, que le papier ne redéfinit pas : 7,1:1 sur panneau */
 
   /* ── Deux accents, et pas un troisième.
      Le bleu électrique est l'accent d'interface : liens, focus, état actif,
@@ -1048,12 +1049,22 @@ details > summary::-webkit-details-marker {
    Le monde papier à l'état pur. Mesure de 44 rem pour la prose, titres en
    Fraunces, références de loi en monospace, et les encadrés deviennent des
    notes de marge sur grand écran. */
+/* Mesure (session lecture, 5 novembre) : à 17 px sur 44 rem, Archivo, large,
+   donnait 90 signes par ligne, mesurés. À 18 px sur 34 rem on tombe à ~68,
+   la mesure d'une revue ; la césure française évite les lignes en escalier. */
 .article {
-  max-width: 44rem;
-  font-size: var(--text-corps);
-  line-height: 1.75;
+  --mesure: 34rem;
+  max-width: var(--mesure);
+  font-size: 1.125rem;
+  line-height: 1.7;
   color: var(--color-ink-2);
   counter-reset: section;
+  hyphens: auto;
+  hyphenate-limit-chars: 7 3 3;
+}
+.article p,
+.article li {
+  text-wrap: pretty;
 }
 /* Chaque section porte son numéro, le même que dans le sommaire : la page se
    lit comme une suite d'étapes, et l'œil sait où il en est. */
@@ -1200,7 +1211,7 @@ details > summary::-webkit-details-marker {
     padding-right: calc(var(--marge-largeur) + var(--marge-ecart));
   }
   .article--marge > :not(.note) {
-    max-width: 44rem;
+    max-width: var(--mesure);
   }
   .article--marge .note {
     float: right;

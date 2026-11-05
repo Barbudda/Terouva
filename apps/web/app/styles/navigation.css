@@ -43,11 +43,6 @@
    - filet de champ #9fadbd : 6,3:1 (≥ 3:1 exigé pour un contour de champ) ;
    - bouton orange, texte minuit : 7,42:1 (inchangé). */
 .fin-de-page {
-  /* Le rouge d'erreur du monde nuit (#ff7b7b, 7,1:1 sur le cadre) : le
-     papier le remplace par un rouge sombre illisible ici. Pas de jeton
-     `night-bad` : variable locale, à remonter dans `@theme` si la cheffe veut. */
-  --fin-erreur: #ff7b7b;
-
   --color-paper: var(--color-night);
   --color-paper-2: var(--color-night);
   --color-ink: var(--color-night-ink);
@@ -56,7 +51,8 @@
   --color-rule: var(--color-night-rule);
   --color-rule-fort: var(--color-night-ink-2);
   --color-accent-ink: var(--color-blue-clair);
-  --color-bad: var(--fin-erreur);
+  /* Le papier remplace --color-bad par un rouge sombre illisible sur ce cadre. */
+  --color-bad: var(--color-night-bad);
   color-scheme: dark;
   color: var(--color-ink);
 }
