@@ -1,3 +1,262 @@
 /* Accueil, rail des étapes et avant/après (session recit).
    Pôle Design, 5 novembre 2026 : une feuille par zone pour que les sessions
-   parallèles n'écrivent jamais dans le même fichier. Voir docs/design/BRIEF.md. */
+   parallèles n'écrivent jamais dans le même fichier. Voir docs/design/BRIEF.md.
+
+   Deux matières qui ne sont pas la carte bleu nuit du bas de page :
+   - Parcours : la lumière. Un rail qui se trace et luit, une lueur d'horizon.
+   - Problem : l'instrument. Une règle graduée, deux pistes, un intervalle
+     hachuré. Aucune surface, seulement des traits sur la nuit.
+   Les apparitions passent par le révélateur commun (`.filet-trace`, `.monte`,
+   `--decalage`) : elles ne jouent qu'en descendant et s'éteignent sous
+   `prefers-reduced-motion`. */
+
+/* ── Parcours : la ligne de lumière ─────────────────────────────────────── */
+
+.recit-rail {
+  isolation: isolate;
+}
+/* La lueur d'horizon derrière le rail : bleue au départ, chaude à l'envoi.
+   Très basse (14 % et 16 %), elle éclaire sans faire de tache. */
+.recit-rail::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-inline: calc(-1 * var(--marge-cadre));
+  top: -4.5rem;
+  height: 10rem;
+  pointer-events: none;
+  background:
+    radial-gradient(45% 50% at 20% 50%, color-mix(in oklch, var(--color-blue) 14%, transparent), transparent 75%),
+    radial-gradient(35% 50% at 82% 50%, color-mix(in oklch, var(--color-action) 16%, transparent), transparent 75%);
+  /* Les ellipses débordent de la boîte : le masque efface les bords francs. */
+  mask-image:
+    linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent),
+    linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
+  mask-composite: intersect;
+}
+@media (width < 64rem) {
+  /* Sur téléphone, le rail est vertical : la lueur se couche le long de lui. */
+  .recit-rail::before {
+    inset-inline: auto;
+    left: -2rem;
+    top: 0;
+    bottom: 0;
+    width: 7rem;
+    height: auto;
+    background: linear-gradient(180deg,
+      color-mix(in oklch, var(--color-blue) 12%, transparent),
+      color-mix(in oklch, var(--color-action) 12%, transparent));
+    filter: blur(28px);
+    mask-image: none;
+  }
+}
+
+/* Chaque tronçon luit de sa propre teinte (`--lueur`, posée par le composant). */
+.recit-troncon {
+  border-radius: 999px;
+  box-shadow: 0 0 12px 0 color-mix(in oklch, var(--lueur, var(--color-blue)) 55%, transparent);
+}
+.recit-pastille {
+  box-shadow: 0 0 18px -2px color-mix(in oklch, var(--lueur, var(--color-blue)) 45%, transparent);
+}
+/* L'envoi : la seule pastille pleine, et la plus lumineuse. */
+.recit-pastille--envoi {
+  box-shadow:
+    0 0 0 6px color-mix(in oklch, var(--color-action) 18%, transparent),
+    0 0 36px 2px color-mix(in oklch, var(--color-action) 50%, transparent);
+}
+
+/* Après l'envoi, la lumière file jusqu'au bord de l'écran et s'y éteint.
+   Le début de la quatrième colonne tombe à 75 % + 1,125rem (grille de quatre,
+   gouttières de 1,5rem) ; la pastille y occupe 2,5rem, plus 0,5rem d'air. */
+.recit-rail-fuite {
+  position: absolute;
+  top: 1.25rem;
+  margin-top: -1px;
+  height: 2px;
+  left: calc(75% + 4.125rem);
+  right: calc(-1 * var(--marge-cadre));
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-action), color-mix(in oklch, var(--color-action) 0%, transparent));
+  box-shadow: 0 0 12px 0 color-mix(in oklch, var(--color-action) 40%, transparent);
+}
+
+/* Sur téléphone, le tronçon vertical se trace de haut en bas. */
+.recit-troncon--v.filet-trace {
+  transform-origin: center top;
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  [data-revele] .recit-troncon--v.filet-trace:not([data-vu]) {
+    transform: scaleY(0);
+  }
+  .recit-troncon--v.filet-trace[data-vu="joue"] {
+    animation-name: recit-trace-v;
+  }
+  /* Le rail se trace lentement, un tronçon après l'autre : c'est le récit. */
+  .recit-troncon.filet-trace[data-vu="joue"],
+  .recit-rail-fuite.filet-trace[data-vu="joue"] {
+    animation-duration: 1100ms;
+    animation-delay: calc(var(--decalage, 0) * 220ms + 200ms);
+  }
+  .recit-pastille.monte[data-vu="joue"] {
+    animation-delay: calc(var(--decalage, 0) * 220ms);
+  }
+}
+@keyframes recit-trace-v {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+/* ── Problem : la règle ─────────────────────────────────────────────────── */
+
+/* Les hauteurs sont fixes pour que le trait pointillé tombe juste d'une piste
+   à l'autre. Les étapes tiennent sur deux lignes à 375 px. */
+.recit-regle {
+  --r-graduation: 2.75rem;
+  --r-nom-sans: 4.25rem;
+  --r-piste-sans: 6.5rem;
+  --r-nom-avec: 8.25rem;
+  --r-piste-avec: 10.5rem;
+  --r-etiquette-avec: 11.5rem;
+  --r-piste: 0.625rem;
+  /* De combien « Vous arrivez ici » dépasse son point vers la droite : sur
+     téléphone, assez pour laisser la place au nom « Sans Terouva ». */
+  --r-debord: 4rem;
+  height: 14rem;
+}
+@media (width >= 64rem) {
+  .recit-regle {
+    --r-nom-sans: 4.5rem;
+    --r-piste-sans: 7rem;
+    --r-nom-avec: 9rem;
+    --r-piste-avec: 11.5rem;
+    --r-etiquette-avec: 12.75rem;
+    --r-piste: 0.75rem;
+    --r-debord: 0.75rem;
+    height: 15.5rem;
+  }
+}
+
+.recit-regle-etapes {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 2.25rem;
+}
+
+/* La graduation : un trait tous les vingt-quatrièmes, un repère plus haut à
+   chaque étape de la vie de l'annonce. Filet sur nuit, sans texte. */
+.recit-graduation {
+  position: absolute;
+  inset-inline: 0;
+  top: var(--r-graduation);
+  height: 0.5rem;
+  border-bottom: 1px solid var(--color-rule-fort);
+  background-image: linear-gradient(90deg, var(--color-rule-fort) 1px, transparent 1px);
+  background-size: calc((100% - 1px) / 24) 100%;
+}
+.recit-repere {
+  position: absolute;
+  bottom: -1px;
+  width: 1px;
+  height: 0.875rem;
+  translate: -50% 0;
+  background: var(--color-ink-3);
+}
+.recit-repere:last-child {
+  translate: -100% 0;
+}
+
+.recit-nom {
+  position: absolute;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+.recit-nom--sans { top: var(--r-nom-sans); }
+.recit-nom--avec { top: var(--r-nom-avec); }
+
+.recit-piste {
+  position: absolute;
+  inset-inline: 0;
+  height: var(--r-piste);
+  border-radius: 999px;
+  background: var(--color-rule);
+}
+.recit-piste--sans { top: var(--r-piste-sans); }
+.recit-piste--avec { top: var(--r-piste-avec); }
+
+.recit-plein {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-ink-3) 60%, transparent);
+}
+.recit-plein--chaud {
+  background: linear-gradient(90deg, var(--color-blue), var(--color-action));
+}
+
+/* Le temps gagné : plus épais que la piste, hachuré d'orange. C'est le point
+   focal de la section ; il se trace depuis votre arrivée vers celle d'avant. */
+.recit-gagne {
+  position: absolute;
+  top: -0.5rem;
+  bottom: -0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid color-mix(in oklch, var(--color-action) 55%, transparent);
+  background:
+    repeating-linear-gradient(-45deg,
+      color-mix(in oklch, var(--color-action) 42%, transparent) 0 2px,
+      transparent 2px 7px),
+    color-mix(in oklch, var(--color-action) 10%, transparent);
+}
+
+.recit-point {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: 1rem;
+  height: 1rem;
+  translate: -50% -50%;
+  border-radius: 999px;
+  border: 2px solid var(--color-paper);
+  background: var(--color-ink-3);
+}
+.recit-point--chaud {
+  width: 1.25rem;
+  height: 1.25rem;
+  background: var(--color-action);
+  box-shadow:
+    0 0 0 6px color-mix(in oklch, var(--color-action) 25%, transparent),
+    0 0 24px 2px color-mix(in oklch, var(--color-action) 45%, transparent);
+}
+
+/* Le trait pointillé : de l'arrivée sans Terouva jusqu'à la piste du dessous. */
+.recit-lien {
+  position: absolute;
+  top: calc(var(--r-piste-sans) + var(--r-piste) / 2);
+  height: calc(var(--r-piste-avec) - var(--r-piste-sans));
+  width: 0;
+  border-left: 1px dashed color-mix(in oklch, var(--color-action) 60%, transparent);
+}
+
+.recit-etiquette {
+  position: absolute;
+}
+/* Sur la ligne du nom, côté droit : la piste sans Terouva arrive tard. */
+.recit-etiquette--sans { top: calc(var(--r-nom-sans) - 0.125rem); }
+/* Sous la piste : à gauche, la place est prise par le nom. */
+.recit-etiquette--avec { top: var(--r-etiquette-avec); }
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  /* La piste grise se trace lentement : c'est l'attente. */
+  .recit-plein.filet-trace[data-vu="joue"] {
+    animation-duration: 1400ms;
+  }
+  .recit-gagne.filet-trace[data-vu="joue"] {
+    animation-duration: 1000ms;
+    animation-delay: 700ms;
+  }
+}
