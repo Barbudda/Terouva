@@ -132,16 +132,14 @@ function Etiquette({ position, rang, chaud = false }: { position: number; rang: 
         // action-ink sur action : 7,42:1 ; ink-2 sur paper-2 : environ 9:1.
         chaud ? "bg-action text-action-ink" : "bg-paper-2 text-ink-2",
       )}
-      style={
-        {
-          "--decalage": 4,
-          ...(position < 25
-            ? { left: `max(0px, calc(${position}% - 0.75rem))` }
-            : position > 75
-              ? { right: `max(0px, calc(${100 - position}% - var(--r-debord, 0.75rem)))` }
-              : { left: `${position}%`, translate: "-50% 0" }),
-        } as CSSProperties
-      }
+      style={{
+        ...({ "--decalage": 4 } as CSSProperties),
+        ...(position < 25
+          ? { left: `max(0px, calc(${position}% - 0.75rem))` }
+          : position > 75
+            ? { right: `max(0px, calc(${100 - position}% - var(--r-debord, 0.75rem)))` }
+            : { left: `${position}%`, translate: "-50% 0" }),
+      }}
     >
       Vous arrivez ici
     </span>
