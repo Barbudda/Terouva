@@ -34,6 +34,14 @@ const CSP = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
+  /**
+   * Sous OneDrive, `.next` se corrompt (EPERM, EINVAL, « UNKNOWN: read ») et
+   * reste verrouillé tant qu'un serveur orphelin le tient (BONDS R19). Un
+   * serveur de développement peut partir sur un dossier neuf sans attendre :
+   * `NEXT_DIST_DIR=.next-dev-1 npm run dev`. Le build garde `.next`.
+   */
+  distDir: process.env.NEXT_DIST_DIR || ".next",
+
   async redirects() {
     return [
       /**

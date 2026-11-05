@@ -88,6 +88,7 @@ desktop.ini
 
 # Dossiers de build mis de côté quand OneDrive corrompt .next (à supprimer à la main).
 apps/web/.next-corrompu-*
+apps/web/.next-dev-*
 
 # --- Runtime du démon ruflo (claude-flow) ---
 # État et métriques réécrits à chaque passage du démon : du bruit dans chaque
