@@ -201,7 +201,7 @@ function ALaUne({ guide: g }: { guide: FicheGuide }) {
             fill
             priority
             sizes="(min-width: 1024px) 720px, 100vw"
-            className="object-cover transition-transform duration-700 ease-[var(--ease-terouva)] group-hover:scale-[1.03]"
+            className="object-cover transition-transform duration-500 ease-[var(--ease-terouva)] group-hover:scale-[1.03]"
           />
         )}
         <span className="champ absolute top-4 left-4 rounded-full bg-card/90 px-3 py-1.5 text-accent-ink backdrop-blur-sm">
