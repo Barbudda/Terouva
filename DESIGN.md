@@ -93,6 +93,36 @@ Le reste du document décrit le système tel qu'il tient toujours : trois voix,
 six coquilles, les trois gestes, la grille. Là où il dit « papier chaud » pour
 la page, lire « minuit », sauf dans les guides.
 
+## Révision du 5 novembre : tout le site au niveau du hero
+
+Le pôle Design a fait travailler six sessions de zone, puis une passe finale
+(mouvement, performance, contrôle). Le hero ne bouge pas ; le reste le rejoint
+sans le copier, une matière par section au lieu d'une suite de cartes bleu nuit
+au même grain. Le détail, zone par zone, est dans `docs/design/journal/`.
+
+- **Navigation.** Sur téléphone, passé le premier écran, la barre descend sous le
+  pouce (« Menu » et « Être prévenu ») et se range quand le formulaire est à
+  l'écran. L'action vise le formulaire de la page courante. Le blog entre dans la
+  barre. La fin de page est un cadre de nuit, même sur papier.
+- **Récit** (rail et avant / après). Le rail prend la lumière ; l'avant / après
+  devient une frise sur une seule échelle de temps, l'écart en surface.
+- **Produit.** Les fonctions forment un seul instrument, une plaque ; les
+  messages sont des lettres de papier qu'on ouvre.
+- **Visuels.** Chaque outil et chaque guide a une vignette SVG : l'objet dont il
+  parle, en papier chaud posé sur la nuit, au-dessus d'un petit rideau de bâtons
+  tiré de son chemin. Plus de capture d'écran en carte, plus de zone vide. La règle
+  pour un nouveau guide est dans `docs/design/journal/visuels.md`.
+- **Arrivée.** La FAQ est un index numéroté ; l'inscription répond au hero, un
+  guichet en une pilule, et le succès est un billet.
+- **Lecture.** Une colonne de revue (34 rem, 18 px, césure française), un sommaire
+  qui suit, l'index du blog qui finit en table des matières.
+- **Mouvement et mesure.** `prefers-reduced-motion` donne un rendu statique
+  complet. Lighthouse mobile simulé : performance 88 à 93, accessibilité 100, CLS
+  nul sur les guides et les outils (il était à 0,16 et 0,21), LCP entre 2,9 et
+  3,5 s à confirmer sur la prévisualisation.
+- **Jeton ajouté** : `--color-night-bad`, le rouge d'erreur du monde nuit, que le
+  papier ne redéfinit pas.
+
 ## Le parti pris, en une phrase
 
 **Terouva est un dossier de presse immobilier dans lequel est encastré un
@@ -153,7 +183,7 @@ les valeurs pour les images de partage.
 
 Douze colonnes (`.grille`), 88 rem au plus. **Deux sections consécutives ne
 démarrent jamais à la même colonne.** Mesure de lecture : 38 rem pour l'énoncé,
-44 rem pour la prose des guides. Aucun arrondi au-delà de 4 px.
+34 rem à 18 px pour la prose des guides et des articles (environ 68 signes mesurés, révision du 5 novembre). Aucun arrondi au-delà de 4 px.
 
 ## Six coquilles, pas une de plus
 
