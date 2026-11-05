@@ -1,10 +1,10 @@
 {
   "version": 1,
   "bondsHome": "C:\\Users\\hugo8\\OneDrive\\Desktop\\BONDS",
-  "bondsCommit": "115814db6ae7f7577614bffae39bc1310515a9ce",
+  "bondsCommit": "c213795bb736f33570efdc35a671f843e61dec7e",
   "loadout": "app-premium",
   "equipeLe": "2026-09-15T15:56:31.694Z",
-  "misAJourLe": "2026-11-04T18:22:51.824Z",
+  "misAJourLe": "2026-11-05T08:17:19.393Z",
   "poles": {
     "seo-geo": {
       "installeLe": "2026-11-04T12:07:48.925Z",
@@ -13,6 +13,10 @@
     "cto-commerce": {
       "installeLe": "2026-11-04T17:55:20.994Z",
       "misAJourLe": "2026-11-04T17:55:20.994Z"
+    },
+    "design": {
+      "installeLe": "2026-11-05T08:17:19.393Z",
+      "misAJourLe": "2026-11-05T08:17:19.393Z"
     }
   },
   "assets": {
@@ -876,6 +880,13 @@
       "hash": "fdd303e96a042df95431d8a5f926a9434848ee32",
       "cible": ".claude/agents/commerce-relecteur.md",
       "installeLe": "2026-11-04T17:55:20.994Z"
+    },
+    "skill:pole-design": {
+      "type": "skill",
+      "source": "local:BONDS (créé pour Terouva)",
+      "hash": "e0c01baf1cd26bb9ea74529c6a68b102373b5a04",
+      "cible": ".claude/skills/pole-design",
+      "installeLe": "2026-11-05T08:17:19.393Z"
     }
   },
   "derogations": [

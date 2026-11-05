@@ -408,3 +408,48 @@ textes, les fait relire par `commerce-relecteur`, vérifie à l'écran et commit
 ### MCP du pôle
 - playwright — Pilotage d'un navigateur (navigation, captures, formulaires) pour tester et vérifier visuellement.
 <!-- bonds:pole:cto-commerce:end -->
+
+<!-- bonds:pole:design:start -->
+## Pôle Design
+
+> Installé par BONDS le 2026-11-05 (`equip --pole=design`). Bloc régénéré par `/bonds update` :
+> écrire les règles propres au projet hors des balises `bonds:pole:design`.
+
+**Point d'entrée : `/pole-design`.** La cheffe tourne dans la session principale : elle regarde le
+site une fois, écrit `docs/design/BRIEF.md` (constat, zones aux fichiers disjoints, méthode, sortie),
+lance une session par zone dans le même dossier, intègre leurs journaux, puis lance une session
+finale mouvement, performance et QA.
+
+- **Une session de zone lit `docs/design/BRIEF.md` et ses propres fichiers, rien d'autre.**
+- Une feuille de style par zone ; jetons du thème et coquilles partagées : à la cheffe.
+- Chaque session commite ses chemins seulement, ne pousse pas, écrit `docs/design/journal/<zone>.md`.
+- Pas de texte ajouté (pôle CTO & Commerce), pas de contenu touché (pôle SEO & GEO).
+
+### Sous-agents
+- creative-director — Directeur artistique web premium : direction visuelle, concepts, niveau Awwwards et cohérence esthétique du site.
+- design-craft-expert — Ingénieur front et designer UI : composants React de qualité exposition, conçus et non assemblés, via la skill react-design-craft.
+- interaction-designer — Designer d'interactions : curseur custom, hover, drag, navigation animée, carrousels, transitions de page et micro-feedbacks.
+- motion-designer — Expert animation web (GSAP, Framer Motion, ScrollTrigger, Lenis) : chorégraphie des transitions, micro-interactions et scroll.
+- visual-qa — Contrôle qualité visuelle via Playwright : captures desktop/tablette/mobile, bugs visuels, cohérence design et revue d'animations.
+
+### Skills du pôle
+- pole-design — Cheffe du pôle Design : regarde le site une fois, écrit un brief commun à zones disjointes, lance une session par zone dans le même dossier, intègre, fait passer une session finale mouvement et QA, consolide DESIGN.md et nourrit BONDS.
+- impeccable — Skill /impeccable (Paul Bakaus) : direction artistique et exécution frontend en une commande (shape, audit, critique, polish, animate, colorize, harden, optimize…) avec des agents dédiés et un hook de détection d'anti-patterns design après chaque édition.
+- taste-skill — Skill anti-slop (v2 expérimental) pour landing pages, portfolios et refontes : lit le brief, déduit la direction de design via trois curseurs (VARIANCE / MOTION / DENSITY), impose un pré-vol strict et des squelettes GSAP pour livrer des interfaces qui n'ont pas l'air templatées.
+- signaux-vibecodes — Les 39 signaux qui font dire « site vibecodé » (30 du reel aj.on.ai 2026, 4 relevés sur les projets, 4 de deux reels d'avant/après, 1 du chantier de l'aurore), avec sévérité, raison et alternative, plus un protocole avant / pendant / après pour designer hors défauts.
+- frontend-design — Skill officiel Anthropic de design front-end, réécrit pour lister les tics de page générée (mot accentué, labels en capitales, numéros décoratifs, fade-and-slide-up, trois looks IA) ; graine directe pour signaux-vibecodes.
+- banques-references — Répertoire de banques de références visuelles gratuites rangées par décision : composition, typographie, couleur, mouvement, icônes, texture, 3D, images, primitives accessibles. Chaque entrée dit quel défaut elle aide à fuir, avec licence et coût, plus le protocole des trois sources pour s'en servir sans produire un pastiche.
+- copie-de-reference — La méthode pour copier franchement une image de référence envoyée par le client : inventaire des calques avant le code, traduction dans la matière du projet, fonction donnée au décor, extension à toute la page, composition propre au mobile, et preuve par captures côte à côte.
+- rideau-de-lumiere — La recette mesurée d'un hero en aurore, en CSS pur : champ de couleur plein cadre à huit arrêts, stries verticales à deux pas, rideau d'égaliseur masqué par une silhouette SVG calculée au module, bouton rond en vitre sombre, flèches, panneaux en perspective et écho au pied de page. Aucune image, aucun canevas, aucune bibliothèque.
+- emil-animate — Skills d'animation de référence (animate, review-animations, animation-vocabulary, apple-design, prototype) pour vitrine et SaaS.
+- emil-review-animations — Skills d'animation de référence (animate, review-animations, animation-vocabulary, apple-design, prototype) pour vitrine et SaaS.
+- motion-audit — Audite les animations d'un site : fluidité, durées, easing, cohérence, utilité, performance et prefers-reduced-motion.
+- modern-web-guidance — Guides web modernes de l'équipe Chrome (View Transitions, container queries, subgrid, oklch, text-wrap, accessibilité) au format skill, économes en tokens ; utile au volet perf/a11y du loadout vitrine-premium.
+- ui-slop-audit — Sept skills UI/UX anti-slop (audit en lecture seule avec preuves, refonte visuelle, flux et états, UX writing, porte qualité) qui diagnostiquent puis corrigent une interface au look générique en respectant la marque existante, pour les loadouts vitrine-premium et saas-webapp.
+- playwright-cli — CLI Playwright pilotée depuis le terminal (open, goto, click, snapshot, screenshot, pdf, traces, mocks réseau) qui sert de preuve visuelle desktop/tablette/mobile ; le skill documente les commandes pour l'agent.
+- verification-before-completion — Impose de prouver qu'un travail est terminé (tests, sortie réelle) avant de le déclarer fini.
+
+### MCP du pôle
+- playwright — Pilotage d'un navigateur (navigation, captures, formulaires) pour tester et vérifier visuellement.
+- chrome-devtools — Chrome DevTools en MCP : audits Lighthouse, traces de performance, réseau, console et captures pour mesurer LCP/CLS/INP.
+<!-- bonds:pole:design:end -->
