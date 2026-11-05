@@ -8,6 +8,7 @@ import { Questions } from "@/components/ui/Questions";
 import { Sommaire } from "@/components/guides/Sommaire";
 import { CarteGuide } from "@/components/guides/CarteGuide";
 import { ArticlesLies } from "@/components/blog/ArticlesLies";
+import { RelaisOutil } from "@/components/blog/RelaisOutil";
 import { typographier } from "@/components/blog/typographie";
 import { GUIDES } from "@/lib/catalogue";
 import { PHOTOS, RESUMES } from "@/lib/guides-resumes";
@@ -38,6 +39,8 @@ export type Guide = {
   questions?: Array<{ q: string; a: string }>;
   /** Titres de section, dans l'ordre. `id` doit exister dans la page. */
   sommaire?: Array<{ id: string; titre: string }>;
+  /** L'outil qui fait ce que le guide décrit, comme `outilLie` des articles ; aucun si aucun ne colle. */
+  outilLie?: string;
 };
 
 /** La rubrique affichée en mention, au-dessus du titre, et sur les filtres de la rubrique. */
@@ -239,6 +242,9 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
             )}
 
             <article className="article article--marge article--lettrine mt-12">{children}</article>
+
+            {/* Même relais que sous un article : du guide à l'outil, au moment d'agir. */}
+            <RelaisOutil chemin={guide.outilLie} />
 
             <div className="max-w-[44rem]">
               {guide.sources && guide.sources.length > 0 && (

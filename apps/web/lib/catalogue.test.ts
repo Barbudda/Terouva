@@ -69,4 +69,9 @@ describe("catalogue", () => {
       for (const s of g.sommaire ?? []) expect(s.id).toMatch(/^[a-z0-9-]+$/);
     }
   });
+
+  it("ne relie un guide qu'à un outil qui existe", () => {
+    const outils = new Set(OUTILS.map((o) => o.chemin));
+    for (const g of GUIDES) if (g.outilLie) expect(outils.has(g.outilLie)).toBe(true);
+  });
 });

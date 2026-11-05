@@ -11,6 +11,7 @@ import type { Guide } from "@/components/guides/CadreGuide";
 export const GUIDES: Guide[] = [
   {
     chemin: "/guides/dossier-de-location",
+    outilLie: "/outils/dossier-de-location",
     sommaire: [
       { id: "ce-qui-peut-etre-demande", titre: "Ce qui peut être demandé" },
       { id: "ce-qui-est-interdit", titre: "Ce qui est interdit" },
@@ -75,6 +76,7 @@ export const GUIDES: Guide[] = [
   },
   {
     chemin: "/guides/garantie-visale",
+    outilLie: "/outils/quel-salaire-pour-un-loyer",
     sommaire: [
       { id: "principe", titre: "Ce que c'est" },
       { id: "qui", titre: "Qui peut l'obtenir" },
@@ -121,6 +123,7 @@ export const GUIDES: Guide[] = [
   },
   {
     chemin: "/guides/repondre-a-une-annonce-de-location",
+    outilLie: "/outils/message-de-candidature",
     sommaire: [
       { id: "ordre", titre: "Que mettre dans le message" },
       { id: "modele", titre: "Un modèle complet" },
@@ -237,6 +240,7 @@ export const GUIDES: Guide[] = [
   },
   {
     chemin: "/guides/garant-caution",
+    outilLie: "/outils/dossier-de-location",
     sommaire: [
       { id: "qui", titre: "Qui peut se porter garant" },
       { id: "simple-ou-solidaire", titre: "Caution simple ou solidaire" },
@@ -322,6 +326,7 @@ export const GUIDES: Guide[] = [
   },
   {
     chemin: "/guides/refus-de-dossier",
+    outilLie: "/outils/dossier-de-location",
     sommaire: [
       { id: "principe", titre: "Le principe" },
       { id: "interdits", titre: "Les critères interdits" },
@@ -380,6 +385,7 @@ export const GUIDES: Guide[] = [
   },
   {
     chemin: "/guides/louer-sans-garant",
+    outilLie: "/outils/quel-salaire-pour-un-loyer",
     sommaire: [
       { id: "pas-obligatoire", titre: "Ce n'est pas obligatoire" },
       { id: "visale", titre: "Visale, en premier" },

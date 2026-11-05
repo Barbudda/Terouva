@@ -7,8 +7,9 @@ import { Questions } from "@/components/ui/Questions";
 import { Sommaire } from "@/components/guides/Sommaire";
 import { CarteGuide } from "@/components/guides/CarteGuide";
 import { typographier } from "@/components/blog/typographie";
+import { RelaisOutil } from "@/components/blog/RelaisOutil";
 import { BLOG, PILIERS, cheminArticle, dateLongue, type Article } from "@/lib/blog";
-import { GUIDES, OUTILS } from "@/lib/catalogue";
+import { GUIDES } from "@/lib/catalogue";
 import { DonneesStructurees, filAriane } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
@@ -36,7 +37,6 @@ export function CadreArticle({ article, children }: { article: Article; children
   const voisins = article.guidesLies
     .map((c) => GUIDES.find((g) => g.chemin === c))
     .filter((g): g is NonNullable<typeof g> => g !== undefined);
-  const outil = OUTILS.find((o) => o.chemin === article.outilLie);
   const suites = [...(pilier ? [pilier] : []), ...voisins].slice(0, 2);
 
   const jsonLd = {
@@ -157,23 +157,7 @@ export function CadreArticle({ article, children }: { article: Article; children
 
             {/* Le relais : l'outil qui fait ce que le texte décrit, en bande nuit,
                 juste sous le texte. On change de monde au moment d'agir. */}
-            {outil && (
-              <aside aria-label="Outil gratuit" className="relais-outil mt-14 bg-night p-6 text-night-ink sm:p-8">
-                <p className="champ text-blue-clair">Outil gratuit</p>
-                <div className="mt-3 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
-                  <div className="max-w-[30rem]">
-                    <p className="text-[1.375rem] leading-tight font-medium">{outil.court}</p>
-                    <p className="mt-2 text-[15px] leading-relaxed text-night-ink-2">{typographier(outil.resume)}</p>
-                  </div>
-                  <Link
-                    href={outil.chemin}
-                    className="inline-flex min-h-12 shrink-0 items-center justify-center self-start rounded-full bg-action px-6 text-[15px] font-medium text-action-ink transition-[filter] duration-200 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-clair sm:self-auto"
-                  >
-                    Ouvrir l&apos;outil
-                  </Link>
-                </div>
-              </aside>
-            )}
+            <RelaisOutil chemin={article.outilLie} />
 
             <div className="max-w-[44rem]">
               {article.sources.length > 0 && (
