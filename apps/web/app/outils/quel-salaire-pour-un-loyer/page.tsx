@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Ariane } from "@/components/layout/Ariane";
+import { Vignette, motifDe } from "@/components/visuels/Vignette";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { CalculLoyer } from "@/components/outils/CalculLoyer";
 import { BandeNuit } from "@/components/layout/coquilles/BandeNuit";
@@ -93,14 +94,24 @@ export default function OutilSalaireLoyer() {
         <div className="cadre pt-4 md:pt-6">
           <Ariane etapes={ETAPES} />
 
-          <h1 className="titre mt-5 max-w-[22ch] text-titre-2 text-ink">
-            Le loyer que vos ressources permettent, et ce que les propriétaires regardent.
-          </h1>
-          {/* La consigne est déjà l'état vide du calculateur, et ce qu'il affiche
-              se voit juste dessous : reste la réassurance. */}
-          <p className="enonce mt-6 text-ink-2">
-            Gratuit, sans inscription, et rien ne quitte votre navigateur.
-          </p>
+          {/* La vignette de l'outil mord la bande nuit de l'instrument qui suit :
+              le chevauchement de DESIGN.md. Masquée sous 768 px pour que l'outil
+              reste dans le premier écran du téléphone. */}
+          <div className="mt-5 grid items-end gap-8 md:grid-cols-12">
+            <div className="md:col-span-7 lg:col-span-8">
+              <h1 className="titre max-w-[22ch] text-titre-2 text-ink">
+                Le loyer que vos ressources permettent, et ce que les propriétaires regardent.
+              </h1>
+              {/* La consigne est déjà l'état vide du calculateur, et ce qu'il affiche
+                  se voit juste dessous : reste la réassurance. */}
+              <p className="enonce mt-6 text-ink-2">
+                Gratuit, sans inscription, et rien ne quitte votre navigateur.
+              </p>
+            </div>
+            <span className="en-tete-vignette relative z-10 hidden aspect-[16/10] overflow-hidden rounded-[1.25rem] border border-rule-fort md:col-span-5 md:block lg:col-span-4">
+              <Vignette motif={motifDe("/outils/quel-salaire-pour-un-loyer")} graine="/outils/quel-salaire-pour-un-loyer" />
+            </span>
+          </div>
         </div>
 
         {/* L'outil est un instrument : il vit dans le monde nuit, l'explication

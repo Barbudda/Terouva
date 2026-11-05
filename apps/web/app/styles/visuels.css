@@ -1,3 +1,74 @@
 /* Cartes des outils et des guides, visuels des pages outils (session visuels).
    Pôle Design, 5 novembre 2026 : une feuille par zone pour que les sessions
    parallèles n'écrivent jamais dans le même fichier. Voir docs/design/BRIEF.md. */
+
+/* ---------------------------------------------------------------------------
+   Vignettes (components/visuels/Vignette.tsx). Décoratives (aria-hidden) : pas
+   de seuil de contraste de texte, mais chaque trait garde au moins 3:1 sur ce
+   qui est dessous pour rester lisible comme forme.
+   Variables locales, faute de jeton : la feuille reste en papier chaud dans le
+   monde nuit, comme la feuille d'annonce de l'accueil (DESIGN.md).
+   --------------------------------------------------------------------------- */
+.vg {
+  --vg-fond: var(--color-ash);           /* #0d1829, un cran sous la carte #142137 */
+  --vg-feuille: #f7f3ed;                 /* papier chaud ; sur la nuit : 16:1 */
+  --vg-encre: #17181a;                   /* encre du papier ; sur la feuille : 16:1 */
+  --vg-portee: rgb(0 0 0 / 0.38);        /* ombre d'une seule direction */
+  --vg-baton: color-mix(in oklch, var(--color-blue) 55%, var(--vg-fond));
+  --vg-cadre: var(--color-rule-fort);
+}
+.monde-papier .vg {
+  --vg-feuille: #fdfbf7;                 /* la carte du monde papier, posée sur la cendre #efe9e0 */
+  --vg-portee: rgb(23 24 26 / 0.12);
+  --vg-baton: color-mix(in oklch, var(--color-blue) 40%, var(--vg-fond));
+}
+
+.vg-fond { fill: var(--vg-fond); }
+.vg-baton { fill: var(--vg-baton); }
+.vg-portee * { fill: var(--vg-portee) !important; stroke: none !important; }
+.vg-feuille { fill: var(--vg-feuille); }
+.monde-papier .vg-feuille { stroke: var(--vg-cadre); stroke-width: 1; }
+.vg-feuille-trait { fill: none; stroke: var(--vg-feuille); stroke-linecap: round; stroke-linejoin: round; }
+.vg-ligne { fill: var(--vg-encre); opacity: 0.22; }
+.vg-ligne-forte { fill: var(--vg-encre); opacity: 0.72; }
+.vg-ligne-bleu { fill: var(--vg-feuille); opacity: 0.85; }
+.vg-ligne-claire { fill: var(--color-ink); opacity: 0.4; }
+.vg-encre { fill: var(--vg-encre); }
+.vg-encre-trait { fill: none; stroke: var(--vg-encre); stroke-linecap: round; stroke-linejoin: round; }
+.vg-bleu { fill: var(--color-blue); }
+.vg-bleu-trait { fill: none; stroke: var(--color-blue); stroke-linecap: round; stroke-linejoin: round; }
+.vg-action { fill: var(--color-action); }
+.vg-action-trait { fill: none; stroke: var(--color-action); stroke-linecap: round; stroke-linejoin: round; }
+.vg-trou { fill: var(--vg-feuille); }
+.vg-photo { fill: color-mix(in oklch, var(--color-blue) 22%, var(--vg-feuille)); }
+.vg-fenetre { stroke: var(--vg-encre); stroke-width: 1.5; }
+.vg-case { fill: var(--vg-encre); opacity: 0.08; }
+.vg-case-pleine { fill: color-mix(in oklch, var(--color-blue) 60%, var(--vg-feuille)); }
+.vg-case-trait { fill: none; stroke: var(--vg-encre); opacity: 0.55; }
+.vg-puce { fill: none; stroke: color-mix(in oklch, var(--color-ink) 45%, transparent); }
+.vg-panneau { fill: var(--color-card); stroke: var(--vg-cadre); stroke-width: 1.5; }
+.vg-piste { fill: none; stroke: var(--vg-cadre); stroke-dasharray: 5 4; }
+.vg-repere { stroke: color-mix(in oklch, var(--color-ink) 35%, transparent); stroke-dasharray: 3 4; }
+.vg-glyphe { fill: var(--vg-encre); font-family: var(--font-serif); font-size: 64px; }
+
+/* Au survol de la carte, une seule chose bouge : l'objet se soulève. */
+.vg-objet {
+  transition: transform 300ms var(--ease-terouva);
+}
+.group:hover .vg-objet,
+.group:focus-visible .vg-objet {
+  transform: translateY(-5px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .vg-objet { transition: none; }
+  .group:hover .vg-objet, .group:focus-visible .vg-objet { transform: none; }
+}
+
+/* En-tête des pages outils : la vignette descend mordre la bande nuit de
+   l'instrument (le chevauchement de DESIGN.md), d'environ un tiers de sa hauteur. */
+@media (min-width: 768px) {
+  .en-tete-vignette {
+    translate: 0 4.5rem;
+    box-shadow: 0 30px 60px -28px rgb(0 0 0 / 0.7);
+  }
+}

@@ -1,11 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { FinDePage } from "@/components/layout/FinDePage";
 import { CarteGuide } from "@/components/guides/CarteGuide";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
-import { CAPTURES_OUTILS, captureOutil } from "@/lib/guides-resumes";
+import { CAPTURES_OUTILS } from "@/lib/guides-resumes";
+import { Vignette, motifDe } from "@/components/visuels/Vignette";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -25,7 +25,7 @@ const ETAPES = [
 ];
 
 /**
- * Ce que chaque outil vous donne, en une ligne, et sa capture prise sur la
+ * Ce que chaque outil vous donne, en une ligne, et sa vignette dessinée sur la
  * page de l'outil. L'ordre est celui du catalogue, qui est celui d'une
  * candidature : le dossier d'abord, le message ensuite.
  */
@@ -59,9 +59,9 @@ const VITRINE: Record<string, { gain: string; points: string[] }> = {
 /**
  * La page des outils, sur le format de la rubrique des guides (Hugo,
  * 4 novembre), mais dans le monde sombre du site : la mention, le grand titre
- * et la pile des captures ; puis chaque outil en grande carte, capture
+ * et la pile des vignettes ; puis chaque outil en grande carte, vignette
  * d'un côté, promesse de l'autre ; trois lignes sur la confidentialité au lieu
- * de trois paragraphes ; enfin les neuf guides en cartes à photo.
+ * de trois paragraphes ; enfin les neuf guides en cartes à vignette.
  */
 export default function Outils() {
   const siteUrl = getSiteUrl();
@@ -107,7 +107,7 @@ export default function Outils() {
                 Pour préparer votre candidature avant même de visiter. Sans compte et sans limite.
               </p>
             </div>
-            <PileDeCaptures />
+            <PileDeVignettes />
           </div>
 
           <div className="mt-12 flex flex-wrap gap-2.5 border-t border-rule pt-8">
@@ -137,33 +137,18 @@ export default function Outils() {
           <ol className="mt-10 space-y-14">
             {OUTILS.map((o, i) => {
               const v = VITRINE[o.chemin];
-              const c = captureOutil(o.chemin);
               return (
                 <li key={o.chemin}>
                   <Link href={o.chemin} className="group grid items-center focus-visible:outline-none lg:grid-cols-12">
-                    {/* La capture, sombre comme l'outil, posée sur le dégradé de
-                        l'accueil : sur le fond nuit de la page, elle s'y perdait. */}
+                    {/* La vignette de l'outil, dessinée : la capture, sur le fond
+                        nuit de la page, se perdait et ne se lisait pas. */}
                     <span
                       className={cn(
-                        "fond-capture relative block aspect-[16/10] overflow-hidden rounded-[1.5rem] lg:col-span-7 lg:row-start-1",
+                        "relative block aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-rule lg:col-span-7 lg:row-start-1",
                         i % 2 === 0 ? "lg:col-start-1" : "lg:col-start-6",
                       )}
                     >
-                      {c.capture ? (
-                        <span className="absolute top-[14%] left-[7%] block aspect-[16/9] w-[100%] overflow-hidden rounded-[0.875rem] border border-white/20 shadow-[0_30px_60px_-20px_rgb(0_0_0/0.65)] transition-transform duration-700 ease-[var(--ease-terouva)] group-hover:-translate-y-1">
-                          <Image
-                            src={c.src}
-                            alt={`Capture de l'outil « ${o.court} »`}
-                            fill
-                            priority={i === 0}
-                            sizes="(min-width: 1024px) 720px, 100vw"
-                            className="object-cover object-top"
-                          />
-                        </span>
-                      ) : (
-                        <Image src={c.src} alt="" fill sizes="(min-width: 1024px) 720px, 100vw" className="object-cover" />
-                      )}
-                      {/* Plus de pastille « Gratuit » par carte : le titre de la page le dit déjà. */}
+                      <Vignette motif={motifDe(o.chemin)} graine={o.chemin} />
                     </span>
                     <div
                       className={cn(
@@ -274,22 +259,21 @@ export default function Outils() {
   );
 }
 
-/** Les captures des outils, inclinées les unes sur les autres, comme la pile de photos des guides. */
-function PileDeCaptures() {
+/** Les vignettes des trois outils, inclinées les unes sur les autres, comme une pile de fiches. */
+function PileDeVignettes() {
   const places = [
-    "top-[6%] left-[4%] w-[66%] -rotate-[7deg]",
-    "top-[28%] left-[26%] z-10 w-[66%] rotate-[4deg]",
-    "top-[52%] left-[10%] z-20 w-[66%] -rotate-[2deg]",
+    "top-[6%] left-[2%] -rotate-[6deg]",
+    "top-[28%] left-[30%] z-10 rotate-[4deg]",
+    "top-[52%] left-[8%] z-20 -rotate-[2deg]",
   ];
-  const captures = Object.values(CAPTURES_OUTILS).slice(0, places.length);
   return (
-    <figure aria-hidden className="fond-capture relative mx-auto hidden aspect-[5/4] w-full max-w-[32rem] overflow-hidden rounded-[2rem] lg:col-span-5 lg:block">
-      {captures.map((src, i) => (
+    <figure aria-hidden className="relative mx-auto hidden aspect-[5/4] w-full max-w-[32rem] lg:col-span-5 lg:block">
+      {OUTILS.slice(0, places.length).map((o, i) => (
         <span
-          key={src}
-          className={`absolute block aspect-[16/10] overflow-hidden rounded-[1rem] border border-white/25 shadow-[0_30px_60px_-24px_rgb(0_0_0/0.7)] ${places[i]}`}
+          key={o.chemin}
+          className={`absolute block aspect-[16/10] w-[66%] overflow-hidden rounded-[1rem] border border-rule-fort shadow-[0_30px_60px_-24px_rgb(0_0_0/0.7)] ${places[i]}`}
         >
-          <Image src={src} alt="" fill sizes="360px" className="object-cover object-top" />
+          <Vignette motif={motifDe(o.chemin)} graine={o.chemin} />
         </span>
       ))}
     </figure>
