@@ -1,3 +1,250 @@
 /* Accueil, mosaïque des fonctions et ruban des messages (session produit).
    Pôle Design, 5 novembre 2026 : une feuille par zone pour que les sessions
    parallèles n'écrivent jamais dans le même fichier. Voir docs/design/BRIEF.md. */
+
+/* ───────────────────────── Fonctions : la plaque d'instrument ─────────────────
+   Une seule plaque, cinq modules séparés par des filets d'un pixel (le fond
+   de la grille, vu entre les modules). Elle remplace cinq cartes levées au
+   même grain que le reste de la page : on lit un objet, pas une grille. */
+.instrument {
+  /* Le vert de veille : --color-good (#4fd1a5), décoratif, ne porte aucun texte. */
+  --instrument-fond: color-mix(in oklch, var(--color-paper) 55%, var(--color-paper-2));
+  overflow: hidden;
+  border: 1px solid var(--color-rule-fort);
+  border-radius: 1.25rem;
+  background: var(--color-rule);
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-ink) 7%, transparent) inset,
+    0 40px 70px -40px rgb(0 0 0 / 0.8);
+}
+.instrument-grille {
+  gap: 1px;
+}
+.instrument-module {
+  background: var(--color-paper-2);
+}
+
+/* Le bandeau : voyant, heure, graduations. Une petite et une grande graduation
+   tous les 8 et 40 px, comme la règle d'un appareil de mesure. */
+.instrument-bandeau {
+  height: 2.75rem;
+  border-bottom: 1px solid var(--color-rule);
+  background: var(--instrument-fond);
+}
+.instrument-veille {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  border-radius: 999px;
+  background: var(--color-good);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-good) 18%, transparent);
+}
+.instrument-graduations {
+  background:
+    repeating-linear-gradient(90deg, var(--color-ink-3) 0 1px, transparent 1px 40px) left bottom / 100% 100% no-repeat,
+    repeating-linear-gradient(90deg, var(--color-rule-fort) 0 1px, transparent 1px 8px) left bottom / 100% 45% no-repeat;
+  opacity: 0.8;
+  mask-image: linear-gradient(90deg, transparent, #000 30%);
+}
+.instrument-voyant {
+  width: 0.375rem;
+  height: 0.375rem;
+  flex: none;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+/* Le module vedette prend la lumière : un halo bleu venu du coin haut gauche. */
+.instrument-scene {
+  background: radial-gradient(80% 90% at 0% 0%, color-mix(in oklch, var(--color-blue) 16%, transparent), transparent 70%);
+}
+
+/* ── Le fil : quatre places empilées, la quatrième sort par le fond. ── */
+.fil {
+  --pas: 5.25rem;
+  position: relative;
+  height: calc(var(--pas) * 2 + 4.6rem);
+}
+.fil-notif {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  padding: 1rem;
+  border: 1px solid var(--color-rule-fort);
+  border-radius: 1rem;
+  background: color-mix(in oklch, var(--color-paper-2) 95%, transparent);
+  transform-origin: 50% 0;
+  transition:
+    transform 700ms var(--ease-terouva),
+    opacity 700ms var(--ease-terouva),
+    box-shadow 700ms var(--ease-terouva);
+}
+.fil-notif[data-place="0"] {
+  z-index: 3;
+  box-shadow:
+    0 20px 40px -18px rgb(0 0 0 / 0.85),
+    0 0 0 1px color-mix(in oklch, var(--color-blue-clair) 30%, transparent);
+}
+.fil-notif[data-place="1"] {
+  z-index: 2;
+  transform: translateY(var(--pas)) scale(0.97);
+  opacity: 0.75;
+}
+.fil-notif[data-place="2"] {
+  z-index: 1;
+  transform: translateY(calc(var(--pas) * 2)) scale(0.94);
+  opacity: 0.45;
+}
+.fil-notif[data-place="3"] {
+  transform: translateY(calc(var(--pas) * 2.6)) scale(0.91);
+  opacity: 0;
+}
+@keyframes fil-entre {
+  from {
+    transform: translateY(-1.25rem) scale(1.02);
+    opacity: 0;
+  }
+}
+.fil-arrive {
+  animation: fil-entre 700ms var(--ease-terouva);
+}
+
+/* ── Ce qui se remplit une fois : l'arc du cadran, les barres du suivi. ──
+   Sans attribut (rendu serveur, sans JavaScript) : état final. */
+.cadran-arc {
+  stroke-dashoffset: var(--plein);
+}
+.instrument[data-etat="attente"] .cadran-arc {
+  stroke-dashoffset: 100;
+}
+.instrument[data-etat="joue"] .cadran-arc {
+  transition: stroke-dashoffset 900ms var(--ease-terouva);
+}
+.suivi-barre {
+  transform-origin: 0 50%;
+}
+.instrument[data-etat="attente"] .suivi-barre {
+  transform: scaleX(0);
+}
+.instrument[data-etat="joue"] .suivi-barre {
+  transition: transform 420ms var(--ease-terouva) calc(500ms + var(--rang) * 90ms);
+}
+
+/* ─────────────────────────── Messages : les lettres ───────────────────────────
+   Les fiches du ruban sont des feuilles de papier chaud (.monde-papier
+   redéfinit les jetons) : encre #17181a sur papier #f7f3ed, 16:1 ; gris
+   #4e5154, 7,2:1 ; gris clair #64686b, 5:1. Plus courtes que les gabarits de
+   la coquille : on n'en montre que l'accroche, la lettre entière s'ouvre. */
+#messages .ruban-fiche {
+  height: calc(var(--hauteur, 29rem) * 0.72);
+}
+.lettre {
+  border-radius: 3px;
+  box-shadow: 0 26px 40px -26px rgb(0 0 0 / 0.9);
+  transition: transform 220ms var(--ease-terouva);
+}
+.lettre:hover,
+.lettre:focus-within {
+  transform: translateY(-6px);
+}
+.lettre-feuille {
+  cursor: pointer;
+  border-radius: inherit;
+}
+.lettre-feuille:focus-visible {
+  outline-offset: 4px;
+}
+
+/* Le panneau de lecture. */
+.lecture {
+  width: min(40rem, calc(100vw - 2rem));
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.lecture::backdrop {
+  background: color-mix(in oklch, var(--color-paper) 72%, transparent);
+  backdrop-filter: blur(6px);
+}
+.lecture-feuille {
+  max-height: calc(100dvh - 3rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.9);
+}
+@media (min-width: 640px) {
+  .lecture-feuille {
+    padding: 2.5rem 3rem;
+  }
+}
+.lecture-fermer {
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--color-ink-2);
+  transition: background-color 180ms var(--ease-terouva);
+}
+.lecture-fermer:hover {
+  background: var(--color-muted);
+}
+@keyframes lecture-monte {
+  from {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
+@keyframes lecture-voile {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lecture[open] .lecture-feuille {
+    animation: lecture-monte 320ms var(--ease-terouva);
+  }
+  .lecture[open]::backdrop {
+    animation: lecture-voile 240ms var(--ease-terouva);
+  }
+}
+
+/* Sans mouvement : rien ne se déplace, rien ne se remplit sous les yeux. */
+@media (prefers-reduced-motion: reduce) {
+  .fil-notif,
+  .lettre,
+  .instrument .cadran-arc,
+  .instrument .suivi-barre {
+    transition: none !important;
+  }
+  .fil-arrive {
+    animation: none;
+  }
+  .lettre:hover,
+  .lettre:focus-within {
+    transform: none;
+  }
+}
+
+/* Le ruban de la coquille fond ses bords sur 64 px ; sur du papier, ce fondu se
+   lit comme une ombre sale. Ici, un fondu court : la feuille sort du cadre. */
+#messages .ruban {
+  mask-image: linear-gradient(90deg, transparent, #000 1rem, #000 calc(100% - 1rem), transparent);
+}
+/* Le bleu de lien sur papier (#0a6aa8, 5,2:1) au survol du signe « ouvrir ». */
+.lettre-ouvrir {
+  transition: color 180ms var(--ease-terouva);
+}
+.lettre:hover .lettre-ouvrir,
+.lettre:focus-within .lettre-ouvrir {
+  color: var(--color-accent-ink);
+}
