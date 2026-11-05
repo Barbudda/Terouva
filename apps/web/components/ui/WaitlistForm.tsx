@@ -176,7 +176,7 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
                 requestAnimationFrame(() => champ.current?.focus());
               }}
             >
-              Autre adresse
+              Inscrire une autre adresse
             </button>
           </div>
         </div>

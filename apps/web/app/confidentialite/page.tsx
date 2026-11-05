@@ -71,6 +71,12 @@ export default function Confidentialite() {
             IP, ni navigateur, ni page d'origine.
           </p>
           <p>
+            Après l'inscription, votre navigateur garde une version masquée de votre adresse
+            (ses deux premières lettres et son domaine) pour vous reconnaître à votre retour.
+            Elle reste sur votre appareil, rien n'est envoyé. Le bouton « Inscrire une autre
+            adresse » l'efface.
+          </p>
+          <p>
             Vous pouvez à tout moment demander à consulter ou à supprimer votre adresse, en nous
             écrivant à l'adresse indiquée dans les{" "}
             <a
