@@ -29,7 +29,7 @@ titres coupés avant les deux-points.
 - Prose : 90 → ~68 signes par ligne à 1440 px (mesuré), 40-47 à 375 px. `lecture-apres-art1-1440`.
 - Lettres en feuilles sous leur intertitre (`lecture-z-feuille`, `lecture-m-art2`) ; relais outil en
   nuit (`lecture-z-relais`) ; fil de lecture et trait du sommaire actif visibles.
-- `/blog` : 17 600 → 7 800 px à 1440 (`lecture-z-table`).
+- `/blog` : 17 600 → 7 800 px à 1440 (`lecture-z-table`). Article Markdown vérifié sur 3031 (`lecture-art3-1440`).
 - Guide : trois tuiles « En chiffres » sur trois colonnes, la troisième pleine largeur sur téléphone.
 
 ## Ce qui reste
