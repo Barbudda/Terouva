@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { typographier } from "@/components/blog/typographie";
 
 export type FicheGuide = {
   chemin: string;
@@ -32,16 +33,26 @@ export function Rubrique({
   guides,
   rubriques,
   libelle = "Filtrer les guides",
+  tableApres,
 }: {
   /** Du plus récent au plus ancien. */
   guides: FicheGuide[];
   rubriques: Record<string, string>;
   /** Nom du groupe de filtres, pour les lecteurs d'écran. */
   libelle?: string;
+  /**
+   * Au-delà de ce nombre de lignes illustrées, la suite passe en table des
+   * matières sans vignette. Pour le blog : à 84 articles, la liste illustrée
+   * faisait 17 600 px de haut, et la dixième vignette n'aidait plus à choisir.
+   */
+  tableApres?: number;
 }) {
   const [filtre, setFiltre] = useState<Filtre>("tous");
   const visibles = filtre === "tous" ? guides : guides.filter((g) => g.etape === filtre);
-  const [une, ...suite] = visibles;
+  const [une, ...reste] = visibles;
+  const coupe = tableApres ?? reste.length;
+  const suite = reste.slice(0, coupe);
+  const table = reste.slice(coupe);
 
   const onglets: { cle: Filtre; nom: string; compte: number }[] = [
     { cle: "tous", nom: "Tous", compte: guides.length },
@@ -123,7 +134,7 @@ export function Rubrique({
                 </span>
                 <div className="min-w-0">
                   <h3 className="titre titre--petit text-[1.25rem] text-ink transition-colors group-hover:text-accent-ink sm:text-[1.5rem]">
-                    {g.titre}
+                    {typographier(g.titre)}
                   </h3>
                   <span className="mt-2 hidden text-[15px] leading-relaxed text-ink-2 sm:line-clamp-2">
                     {g.description}
@@ -138,6 +149,32 @@ export function Rubrique({
                   </span>
                   <span className="champ whitespace-nowrap text-ink-3">
                     {g.date} · {g.lecture} min de lecture
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      {table.length > 0 && (
+        <ol className="table-revue mt-12 border-t border-rule-fort pt-2" start={coupe + 1}>
+          {table.map((g, i) => (
+            <li key={g.chemin} className="border-b border-rule">
+              <Link
+                href={g.chemin}
+                className="group grid min-h-11 grid-cols-[2.25rem_1fr] gap-x-3 py-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
+              >
+                {/* ink-3 sur papier : 4,9:1 ; le numéro se lit, il ne crie pas. */}
+                <span aria-hidden className="titre pt-0.5 text-[1.125rem] leading-none text-ink-3 tabular-nums transition-colors group-hover:text-accent-ink">
+                  {String(coupe + i + 1).padStart(2, "0")}
+                </span>
+                <span className="min-w-0">
+                  <span className="titre titre--petit block text-[1.1875rem] leading-snug text-ink text-pretty transition-colors group-hover:text-accent-ink">
+                    {typographier(g.titre)}
+                  </span>
+                  <span className="champ mt-1.5 block text-ink-3">
+                    {g.rubrique} · {g.lecture} min
                   </span>
                 </span>
               </Link>
@@ -173,7 +210,7 @@ function ALaUne({ guide: g }: { guide: FicheGuide }) {
       </span>
       <div className="relative z-10 -mt-10 mx-3 rounded-[1.5rem] border border-rule bg-card p-6 shadow-[0_24px_48px_-30px_rgb(23_24_26/0.4)] sm:mx-6 sm:p-8 lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:mx-0 lg:mt-0 lg:p-10 group-focus-visible:outline-2 group-focus-visible:outline-offset-2 group-focus-visible:outline-accent-ink">
         {/* Sans étiquette « À la une » : la taille de la carte le dit déjà. */}
-        <h2 className="titre text-[clamp(1.875rem,1.3rem+2vw,2.75rem)] text-ink">{g.titre}</h2>
+        <h2 className="titre text-[clamp(1.875rem,1.3rem+2vw,2.75rem)] text-ink">{typographier(g.titre)}</h2>
         <span className="mt-4 block text-[16px] leading-relaxed text-ink-2">{g.description}</span>
         <span className="mt-6 flex items-center gap-4">
           <span className="champ text-ink-3">{g.lecture} min de lecture</span>

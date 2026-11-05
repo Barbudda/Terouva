@@ -130,7 +130,7 @@ export default function Blog() {
               {/* Même présentation que la rubrique des guides (modèle Rushlot et FanClaw) :
                   filtres par pilier, article à la une, liste numérotée à vignettes. */}
               <div id="liste" className="scroll-mt-24">
-                <Rubrique guides={fiches} rubriques={rubriques} libelle="Filtrer les articles" />
+                <Rubrique guides={fiches} rubriques={rubriques} libelle="Filtrer les articles" tableApres={8} />
               </div>
 
               {avecPage.size > 0 && (
