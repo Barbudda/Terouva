@@ -52,6 +52,10 @@ rejoindre sans le copier.
   lignes). Tout style nouveau va dans sa feuille de zone, déjà importée (elle se
   charge avant les règles de `globals.css` : pour changer une règle existante,
   l'éditer sur place plutôt que la surcharger).
+- `globals.css` est le seul fichier partagé : un commit par chemin y emporte aussi les
+  lignes en cours des autres sessions. On le commite **en dernier**, seul, juste après
+  avoir vérifié par `git diff apps/web/app/globals.css` que tout le diff est à soi ;
+  sinon on attend et on le note dans son journal (la cheffe le commitera).
 - **Jetons `@theme`, coquilles (`BandeNuit`, `Mosaique`, `PleinCadre`), `layout.tsx`,
   `page.tsx`** : à la cheffe. Besoin d'un jeton ou d'un changement de coquille :
   variable locale dans sa feuille + une ligne dans son journal.
@@ -60,8 +64,8 @@ rejoindre sans le copier.
 
 ## Méthode (dans cet ordre)
 
-1. Regarder sa zone à 375 px puis 1440 px (Playwright MCP sur `http://localhost:3030`,
-   serveur partagé déjà lancé ; s'il ne répond pas : `preview_start` nom `web`, jamais
+1. Regarder sa zone à 375 px puis 1440 px (Playwright MCP sur `http://localhost:3031`,
+   serveur partagé déjà lancé ; s'il ne répond pas : `preview_start` nom `web-3031`, jamais
    un second serveur). Captures en **jpeg** dans `.playwright-mcp/` (ignoré par git).
 2. `/impeccable critique` sur sa zone, puis décider **un** geste fort par section
    (matière, composition, lumière ou mouvement) et l'écrire en une phrase dans son
