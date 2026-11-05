@@ -239,3 +239,15 @@ Gains :
 - Vérificateur : le récit de la recherche (« fiches officielles lues ») est désormais refusé.
 - Suivant : vérifier que le plan du site est déclaré dans la Search Console ; mesurer l'indexation
   et la visibilité LLM d'ici une à deux semaines.
+
+## 2026-11-06 (nuit) — Audit des mots clés, vague 9 publiée
+
+- Audit (registre, section 10) : autocomplétion Google par script, Search Console, sitemaps de deux
+  concurrents, forums. Semrush sans unités d'API. Aucun volume mesuré : la demande est prouvée, pas chiffrée.
+- Livré : 22 articles, surtout l'entrée dans le logement et les garanties hors du proche, relus par une
+  session distincte (22 publiables, 354 citations sur 374 par le script, les 20 autres lues à la source) :
+  **106 articles en ligne**, plan du site à 129 adresses soumises à IndexNow (HTTP 200).
+- Coût : 14 points de la fenêtre de 5 h, audit compris (`docs/seo/blog/MESURES-TOKENS.md`).
+- Ouvert : âge Visale à trancher sur la source (F33453 écrit « jusqu'à moins de 30 ans » dans son
+  introduction, « 30 ans et moins » dans ses titres) ; demande réelle hors plan sur la moisissure et le
+  loyer impayé (locataire déjà installé), à décider avec Hugo.

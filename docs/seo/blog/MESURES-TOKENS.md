@@ -111,3 +111,30 @@ citations sur 220 retrouvées, zéro intervention du chef sur les articles.
 3. **Règle ajoutée au vérificateur** : « fiches / pages / sources (officielles) lues » interdit, essayée
    d'abord sur les 84 articles (aucun faux positif). Proposée et non adoptée : un avertissement quand
    la source d'un fait n'est pas un site officiel (à essayer sur le corpus avant).
+
+## Vague 9 (audit des mots clés, sessions vidées) — départ le 2026-11-05 vers 23 h 35
+
+| Mesure | Départ | Après l'audit et le plan | Après l'écriture | En ligne |
+|---|---|---|---|---|
+| Forfait, fenêtre de 5 h | 2 % | 5 % | 13 % | 16 % |
+| Forfait, semaine | 39 % | 39 % | 40 % | 40 % |
+
+Travail : audit des mots clés et plan par un agent neuf (286 000 tokens, 97 débuts de requête
+d'autocomplétion, 15 minutes), 22 articles par les 3 sessions de rédaction de la vague 8 **contexte
+vidé** (8, 7, 7, toutes sur Opus), relecture par la session de la vague 8 contexte vidée. Semrush : aucune
+unité d'API, rien de consommé.
+
+**Bilan de la vague 9** : **14 points pour 22 articles, audit compris (≈ 0,64 par article)**, contre
+22 points en vague 8. Audit et plan : 3 points (7 pour le seul plan en vague 8). Écriture : 8 points
+(≈ 0,36 par article, comme la vague 7). Relecture et publication : 3 points. Aucun autre pôle n'a commité
+pendant la vague, ce qui suggère sans le prouver que la fenêtre mesure mieux la vague que les fois précédentes.
+
+### Ce qu'on apprend
+1. **Vider une session vaut une session neuve**, sans carte à faire démarrer par Hugo. C'est aussi la
+   seule façon de lancer une étape depuis un tour que l'app n'attribue pas à Hugo.
+2. **L'autocomplétion par script remplace le plan par les forums** : une requête par seconde, aucun
+   refus, et les forums ne servent plus qu'à prouver. Le plan a coûté moins de la moitié.
+3. **Légifrance se lit dans le panneau de navigation du relecteur** : les 18 citations en 403 au script
+   ont pu être lues mot pour mot, au prix de 20 lectures manuelles.
+4. **Une erreur de push GitHub passagère** (`fatal error in commit_refs`) ne se voit pas si la commande
+   enchaîne une attente derrière : pousser d'abord, attendre dans un second temps.

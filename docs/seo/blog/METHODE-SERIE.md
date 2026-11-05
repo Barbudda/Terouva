@@ -70,6 +70,10 @@ Erreurs déjà relevées plusieurs fois. Les trois premières sont aussi des rè
   devient « aucune règle ne nomme… » (vague 8, quatre articles ; règle du vérificateur). Et seule une
   source officielle se nomme dans le texte, jamais « un cabinet d'avocats ».
 
+- **Une règle de loi se cite dans le texte consolidé**, à défaut sur service-public ; jamais une petite
+  loi ni une circulaire (vague 9, deux rédacteurs). Le relecteur lit Légifrance dans son panneau de
+  navigation quand le script reçoit un 403.
+
 Une règle du vérificateur ne s'adopte qu'après avoir tourné sur tous les articles publiés : en vague 7,
 une règle sur la « mention » de la caution a levé quatre faux positifs sur des articles justes et a été
 abandonnée.

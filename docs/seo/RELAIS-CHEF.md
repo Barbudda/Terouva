@@ -7,9 +7,9 @@
 
 - **Périmètre** : le site seulement (terouva.com), objectif de visibilité par un blog en volume. Pas
   d'extension, pas de prix ni d'offre (pôle CTO & Commerce). Brief : `docs/seo/BRIEF.md`.
-- **En ligne** (après la vague 8, le 2026-11-04 au soir) : 84 articles de blog (15 au format JSX,
-  69 au format série), 9 guides (dont 6 en questions-réponses), 3 outils (dont « quel salaire pour un
-  loyer »), plan du site à 107 adresses, toutes soumises à IndexNow.
+- **En ligne** (après la vague 9, le 2026-11-06) : 106 articles de blog (15 au format JSX,
+  91 au format série), 9 guides (dont 6 en questions-réponses), 3 outils (dont « quel salaire pour un
+  loyer »), plan du site à 129 adresses, toutes soumises à IndexNow.
   `/blog` présenté comme `/guides` (modèle Rushlot / FanClaw), une photo par carte (13 photos du site
   réparties ; champ `photo` facultatif pour une photo propre).
 - **Branches** : on travaille sur `second/auto` et on avance `main` en avance rapide pour mettre en
@@ -34,8 +34,13 @@
 
 ## Ouvert
 
-- Vague 9 : lire d'abord le bilan de la vague 8 dans `MESURES-TOKENS.md` (plan trop coûteux, Sonnet
-  moins bon à l'écriture). Les plans 7 et 8 listent déjà les sujets écartés.
+- Vague 10 : lire d'abord le bilan de la vague 9 dans `MESURES-TOKENS.md` (14 points, sessions vidées,
+  autocomplétion par script). Réutiliser les sessions de rédaction et de relecture, contexte vidé. Les
+  plans 7, 8 et 9 listent les sujets écartés ; l'audit des mots clés est au registre, section 10.
+- Âge Visale à trancher sur la source : F33453 écrit « jusqu'à moins de 30 ans » dans son introduction,
+  « 30 ans et moins » dans ses titres ; les articles suivent la règle « 30 ans ou moins ».
+- Semrush : plus d'unités d'API (à Hugo s'il veut des volumes).
+- Demande réelle hors plan : moisissure et loyer impayé, côté locataire déjà installé (à décider avec Hugo).
 - Search Console : vérifier avec Hugo que `https://terouva.com/sitemap.xml` est déclaré (menu
   Sitemaps) ; Google ne reçoit pas IndexNow.
 
