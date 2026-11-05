@@ -15,8 +15,9 @@ contexte frais, même dossier que toi).
    seulement, puis la révision la plus récente). D'autres pôles écrivent peut-être en ce moment :
    `git log --since="2 days ago" --name-only` montre leurs fichiers, n'y touche pas.
 2. **Une** capture pleine page de l'accueil à 1440 px, en jpeg, lue une fois : elle tient dans une
-   image réduite et suffit pour juger la composition, le rythme et les trous (avant cela, faire
-   défiler la page par script pour déclencher les apparitions). Pas de capture par section.
+   image réduite et suffit pour juger la composition, le rythme et les trous. Émuler
+   `prefers-reduced-motion: reduce` avant, sinon les sections révélées au défilement sortent vides
+   (R123). Pas de pleine page à 375 px (illisible une fois réduite) : captures ciblées.
 3. Repère ce qui ne bouge pas : l'écran qu'Hugo a déjà validé (souvent le hero), les textes (pôle
    Commerce), le contenu (pôle SEO), ce qu'Hugo a mis hors champ.
 
@@ -32,6 +33,13 @@ règles d'économie, la sortie. Gabarit : celui de Terouva (`docs/design/BRIEF.m
 - **Une feuille CSS par zone**, créée vide et importée dans la feuille globale avant le lancement :
   deux sessions n'écrivent jamais dans le même fichier de style. Les feuilles importées se chargent
   avant les règles globales : pour changer une règle existante, l'éditer sur place.
+- **Le fichier partagé** (la feuille globale, où chacune retouche ses règles existantes) se
+  commite seul et en dernier, après un `git diff` qui ne montre que ses lignes : un commit par
+  chemin y emporte les lignes en cours des autres (R113, revu le 2026-11-05).
+- **Infrastructure avant le lancement** (R122) : `distDir: process.env.NEXT_DIST_DIR || ".next"`
+  dans `next.config` pour un serveur de secours sans attendre un verrou ; sous OneDrive,
+  `node_modules` épinglé sur l'appareil ; chaque session capture avec **son propre navigateur**
+  (script `playwright-core` ou Playwright `--isolated`), jamais le MCP partagé, qui n'en a qu'un.
 - Commite le brief et les feuilles **avant** de lancer : les sessions partent d'un état propre.
 
 ## 2. Lancer les sessions de zone
@@ -69,10 +77,26 @@ Une session `fresh` : `motion-audit` et `emil-review-animations` sur tout le sit
    trancher. Puis dans BONDS : chaque leçon transférable va dans `docs/RETOURS.md` (R<n>, datée) et
    corrige le skill ou l'agent concerné ; `npm run manifest` et `npm run doctor`.
 
+## Gestes qui valent ailleurs (R124, à recopier dans le brief)
+
+- Barre compacte au défilement : elle porte la navigation ; sur téléphone, en bas, et elle se range
+  quand le formulaire visé est à l'écran. L'action vise le formulaire de la page courante.
+- Visuel d'un outil ou d'un guide : l'objet qu'il produit, dessiné en SVG, plutôt qu'une capture
+  réduite ; une graine tirée du chemin donne un visuel par page.
+- Avant / après dans le temps : une échelle partagée, l'écart en surface.
+- Champ réutilisé sur plusieurs fonds : teinte tirée de l'encre du contexte (`color-mix`).
+- Lecture longue : mesurer la ligne en signes réels, viser 60 à 70.
+- Grille mobile : `grid-cols-1` explicite, sinon un `truncate` fait déborder la page.
+
 ## Économie de tokens (mesurer, puis corriger cette liste)
 
 - Le brief remplace la conversation de la cheffe ; les journaux remplacent celles des sessions.
 - `grep -n` avant de lire ; jamais une feuille de style de mille lignes en entier.
 - Une capture pleine page en jpeg plutôt que dix captures de section.
 - Pas de Lighthouse ni de trace dans les sessions de zone : une seule fois, à la fin.
+- Des journaux, ne lire que les sections « reste », « cheffe » et « leçon »
+  (`awk '/^## .*(reste|cheffe|Leçon)/{p=1} /^## /{...}'`) : le récit, la session l'a déjà vérifié.
+- Filtrer toute sortie système à la source (`netstat … | grep :3030`, pas la liste des processus) :
+  une liste brute de processus Node a coûté des milliers de tokens pour un seul PID.
+- Une consigne de session tient en six lignes ; tout le reste est dans le brief.
 - Quand ton contexte dépasse les trois quarts : un fichier de relais et une session neuve (R120).
