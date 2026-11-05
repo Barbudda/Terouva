@@ -13,6 +13,20 @@
    droits ; le monde nuit porte l'outil, le score et la donnée. Chacun a ses
    bases, son accent, son échelle. Référence : DESIGN.md et le brief de refonte
    du 30 octobre 2026. Tous les rapports de contraste cités sont calculés. */
+/* Le secours de Fraunces le temps qu'elle arrive, réglé sur les titres
+   (`.titre`, opsz 120, WONK 1) : à 92,4 % la Times New Roman a la largeur
+   médiane de 43 titres du site composés en Fraunces (mesuré le 5 novembre,
+   rapport 0,80 sur le secours de Next). Les lignes tombent au même endroit,
+   la page ne saute plus quand la police se pose. */
+@font-face {
+  font-family: "Fraunces Secours";
+  src: local("Times New Roman");
+  size-adjust: 92.4%;
+  ascent-override: 106%;
+  descent-override: 27.6%;
+  line-gap-override: 0%;
+}
+
 @theme {
   /* ── Base du site : la nuit. Décision d'Hugo du 30 octobre au soir, après
      la refonte du jour : « le fond blanc éblouit », nuit dominante, palette

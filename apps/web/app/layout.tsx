@@ -8,16 +8,24 @@ import "./globals.css";
  * Trois voix, une par fonction. Aucune n'assure le rôle d'une autre.
  *
  * Fraunces porte les titres du monde papier. C'est une serif variable dont
- * deux axes ne servent jamais par défaut : SOFT et WONK. Réglée à WONK 1 dans
- * `globals.css`, elle prend des formes irrégulières sur le g, le a et le y
- * qu'aucune serif d'écran n'a. L'axe opsz fait son travail de taille optique :
- * gros titre réglé gros, petit texte réglé petit.
+ * l'axe WONK ne sert jamais par défaut. Réglée à WONK 1 dans `globals.css`,
+ * elle prend des formes irrégulières sur le g, le a et le y qu'aucune serif
+ * d'écran n'a. L'axe opsz fait son travail de taille optique : gros titre
+ * réglé gros, petit texte réglé petit. L'axe SOFT n'est pas chargé : le site
+ * le règle partout à 0, sa valeur par défaut, et il alourdissait le fichier
+ * préchargé sur chaque page (LCP mobile, 5 novembre).
  */
 const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-fraunces",
-  axes: ["SOFT", "WONK", "opsz"],
+  axes: ["WONK", "opsz"],
+  // Le secours calculé par Next suit la Fraunces par défaut ; réglée en titre
+  // (opsz 120, WONK 1), elle est 20 % plus étroite, et les titres prenaient
+  // une ligne de plus le temps du chargement : CLS 0,2 sur les guides. Le
+  // secours « Fraunces Secours » (`globals.css`) est réglé sur les titres.
+  adjustFontFallback: false,
+  fallback: ["Fraunces Secours", "Georgia", "serif"],
 });
 
 /** Archivo : le texte, la navigation, les boutons, les libellés. */
@@ -37,6 +45,11 @@ const dmMono = DM_Mono({
   weight: ["300", "400", "500"],
   display: "swap",
   variable: "--font-dm-mono",
+  // Secours monospace : Courier New a exactement sa chasse (0,6 em, mesuré le
+  // 5 novembre), là où le secours calculé sur Arial élargissait les capitales
+  // des étiquettes, qui passaient sur deux lignes le temps du chargement.
+  adjustFontFallback: false,
+  fallback: ["Courier New", "monospace"],
 });
 
 export const metadata: Metadata = {
