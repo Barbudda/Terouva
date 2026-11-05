@@ -200,6 +200,7 @@ function ALaUne({ guide: g }: { guide: FicheGuide }) {
             alt={g.photo.alt}
             fill
             priority
+            fetchPriority="high"
             sizes="(min-width: 1024px) 720px, 100vw"
             className="object-cover transition-transform duration-500 ease-[var(--ease-terouva)] group-hover:scale-[1.03]"
           />

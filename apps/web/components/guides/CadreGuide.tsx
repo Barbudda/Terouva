@@ -172,6 +172,7 @@ export function CadreGuide({ guide, children }: { guide: Guide; children: React.
                   alt={photo.alt}
                   fill
                   priority
+                  fetchPriority="high"
                   sizes="(min-width: 1280px) 1200px, 100vw"
                   className="object-cover"
                 />
