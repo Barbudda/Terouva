@@ -252,3 +252,42 @@ pos. 78,8). C'est la recherche d'un prestataire local, pas une règle qui change
 commune. Les deux sont suspendues à une date (2026-11-23 et 2027-01-04). Aucune page par ville à
 produire avant ; `seo-pages-villes` peut préparer le gabarit et la liste des données publiques
 nécessaires, sans publier.
+
+## 10. Audit des mots clés du 2026-11-05
+
+Aucun volume : personne n'en a mesuré. AC = autocomplétion Google par script (97 débuts de requête, aucun
+refus). GSC = Search Console 2026-10-01 → 11-02. C = thème vu dans le sitemap d'un concurrent. F = titre
+de fil de forum. Toutes les lignes sont P1, car elles forment la vague 9 (`blog/PLAN-VAGUE-9.md`, avec les URL).
+
+| Requête | Intention | Demande observée (source) | Page cible | Priorité |
+|---|---|---|---|---|
+| organisme garant location | information | AC : gratuit, logement, garant location etat, caf, crous ; GSC : « organisme qui se porte garant » (1, pos. 94) ; C : smart-garant (3 billets) | à créer : `organisme-garant-location` | P1 |
+| garant étudiant logement | information | AC : garant étudiant crous, garant location etudiant ; F : CCM 4359260 ; C : smart-garant, locservice | à créer : `garant-etudiant-logement` | P1 |
+| garant ami de la famille | information | AC ; GSC : « tiers garant » (1, pos. 65), « garant locataire famille » (3, pos. 38) ; F : CCM 5640539, 5738350, 5537016 | à créer : `garant-ami-hors-famille` | P1 |
+| garant obligatoire quand on est en cdi | information | AC ; F : CCM 7689209, 4589316, 7897165 ; C : smart-garant | à créer : `garant-obligatoire-en-cdi` | P1 |
+| un garant est il obligé de payer | information | AC ; GSC : « actionner le garant » (6, pos. 45) ; F : CCM 3829470, 5347438, alexia 529275 ; C : smart-garant | à créer : `garant-oblige-de-payer` | P1 |
+| caution solidaire modèle | information | AC : location modele, pdf, modèle gratuit word, montant maximum ; C : smart-garant (modèle) | à créer : `modele-acte-caution-solidaire` | P1 |
+| aide dépôt de garantie logement | information | AC : fsl, action logement, caf, étudiant, fsl entrée dans le logement ; C : locservice (3 guides) | à créer : `aide-depot-de-garantie` | P1 |
+| un propriétaire peut il demander un rib | information | AC ; F : CCM 5489146, 5879126 | à créer : `proprietaire-demande-rib` | P1 |
+| location appartement documents à fournir par le propriétaire | information | AC, avec diagnostics location obligatoires, validité ; C : locservice | à créer : `documents-proprietaire-doit-fournir-location` | P1 |
+| état des lieux d'entrée non remis au locataire | information | AC : est-il obligatoire, même document ; F : CCM 5856229, 6454944, 4357336 | à créer : `etat-des-lieux-entree-non-remis` | P1 |
+| procuration état des lieux d'entrée | information | AC : modèle, service public ; C : locservice | à créer : `procuration-etat-des-lieux` | P1 |
+| nouveau locataire que faire | information | AC : electricité, eau, compteur linky, remise des clés entrée location ; C : smart-garant (3 billets) | à créer : `nouveau-locataire-que-faire` | P1 |
+| assurance habitation locataire obligatoire | information | AC : obligatoire ou pas, meublé, étudiant ; C : smart-garant, locservice | à créer : `assurance-habitation-locataire` | P1 |
+| apl premier mois | information | AC : premier mois de loyer, premier versement, premiere demande, date d entrée caf ; C : locservice | à créer : `apl-premier-mois` | P1 |
+| locataire doit il payer taxe ordures ménagères | information | AC : taxe d habitation, eau, assainissement ; C : smart-garant (2 billets), locservice | à créer : `taxe-ordures-menageres-locataire` | P1 |
+| propriétaire garde double des clés | information | AC : peut il garder une clé, entrer chez son locataire, changer serrure ; F : CCM 3972734, 4024582, Net-iris 164751 | à créer : `proprietaire-double-des-cles` | P1 |
+| locataire peut il repeindre les murs | information | AC : droit de repeindre, faire des trous, travaux ; C : smart-garant, locservice | à créer : `repeindre-murs-location` | P1 |
+| chaudière locataire ou propriétaire | information | AC : qui paie, en panne, entretien, emménagement pas d eau chaude ; C : locservice | à créer : `chaudiere-locataire-ou-proprietaire` | P1 |
+| punaise de lit location qui paie | information | AC ; F : CCM 9024909, 8282559, 4947381 | à créer : `punaises-de-lit-location` | P1 |
+| dossier location maison | information | GSC (2, pos. 62) ; AC : particulier, entretien jardin locataire ou propriétaire ; F : CCM 3877956, 7139148, alexia 544068 | à créer : `dossier-location-maison` | P1 |
+| bail 3 ans peut on partir avant | information | AC : locataire peut il partir avant fin bail ; F : CCM 3824982, 7647212, 5285025 | à créer : `bail-3-ans-partir-avant` | P1 |
+| louer meublé ou vide locataire | comparaison | AC : bail 3 ans meublé, meublé 1 an renouvelable ; C : smart-garant (2 billets) | à créer : `meuble-ou-vide-locataire` | P1 |
+
+**GSC vérifiée, sans article** : « un garant est il obligatoire », « qui peut se porter garant… », « trouver un
+garant pour location » et « loi garant location » ont déjà leur réponse dans `garant-caution` et `louer-sans-garant`
+(voir section 5) ; ces pages sont à retravailler, pas à doubler. « documents à demander au locataire » est côté propriétaire.
+
+**Non relevé** : Semrush (pas d'unités d'API), cautioneo (`sitemap.xml` en 404), SERP, Trends. Concurrents lus par
+leurs adresses (slugs), pas leurs titres. F = titres de fils, non lus en entier. Le commentaire de `catalogue.ts`
+(« acte de cautionnement », 2 900 par mois) est une estimation d'origine non retrouvée : elle ne compte pas comme preuve.
