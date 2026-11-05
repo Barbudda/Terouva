@@ -68,28 +68,31 @@ function Porte({ erreur }: { erreur?: string }) {
       </h1>
       <p className="mt-3 text-ink-2">Cette page est privée. Entrez le mot de passe pour la voir.</p>
 
-      <form action={connexion} className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <label className="flex-1">
-          <span className="sr-only">Mot de passe</span>
-          <input
-            type="password"
-            name="motdepasse"
-            required
-            autoComplete="current-password"
-            placeholder="Mot de passe"
-            className="h-12 w-full rounded-full border border-field bg-card px-5 text-base text-ink outline-none placeholder:text-ink-3 focus-visible:border-accent"
-          />
-        </label>
-        <button
-          type="submit"
-          className="h-12 shrink-0 rounded-full bg-accent px-6 font-semibold text-white transition-colors hover:bg-accent-ink"
-        >
-          Entrer
-        </button>
+      {/* Le même guichet que l'inscription (`app/styles/arrivee.css`) : un seul
+          dessin de champ sur le site, erreur comprise. */}
+      <form action={connexion} className="mt-6">
+        <div className="guichet" data-etat={erreur ? "erreur" : undefined}>
+          <label className="guichet-saisie">
+            <span className="sr-only">Mot de passe</span>
+            <input
+              type="password"
+              name="motdepasse"
+              required
+              autoComplete="current-password"
+              placeholder="Mot de passe"
+              aria-invalid={erreur ? true : undefined}
+              aria-describedby={erreur ? "porte-erreur" : undefined}
+              className="guichet-champ"
+            />
+          </label>
+          <button type="submit" className="bouton bouton--accent guichet-bouton shrink-0">
+            Entrer
+          </button>
+        </div>
       </form>
 
       {erreur && (
-        <p role="alert" className="mt-4 text-[15px] text-bad">
+        <p id="porte-erreur" role="alert" className="mt-4 text-[15px] text-bad">
           {MESSAGES[erreur] ?? "Accès impossible."}
         </p>
       )}
@@ -148,7 +151,8 @@ async function Tableau() {
         <div>
           <p className="eyebrow">Liste d&apos;attente</p>
           <h1 className="display mt-2 text-[2rem] text-ink">
-            {actifs.length} {actifs.length > 1 ? "personnes attendent" : "personne attend"}
+            <span className="numero">{actifs.length}</span>{" "}
+            {actifs.length > 1 ? "personnes attendent" : "personne attend"}
           </h1>
           <p className="mt-2 text-ink-2">
             {semaine > 0

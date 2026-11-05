@@ -1,3 +1,323 @@
 /* FAQ, inscription et page liste d'attente (session arrivee).
    Pôle Design, 5 novembre 2026 : une feuille par zone pour que les sessions
-   parallèles n'écrivent jamais dans le même fichier. Voir docs/design/BRIEF.md. */
+   parallèles n'écrivent jamais dans le même fichier. Voir docs/design/BRIEF.md.
+
+   Le geste de la zone : la fin du parcours répond au hero. Titre centré en
+   Fraunces avec sa queue en italique, un guichet unique (champ et bouton dans
+   la même pilule), et un succès qui change de matière : la pilule s'ouvre en
+   billet de place. Aucun jeton nouveau : deux bordures locales, commentées. */
+
+/* ───────────────────────────── Le guichet ───────────────────────────── */
+
+.guichet {
+  /* Le guichet ne connaît pas son fond : bande nuit de l'accueil, papier de
+     la porte /liste, cadre sombre de FinDePage posé sur le papier. Il se
+     teinte donc à partir de l'encre du contexte, jamais de --color-card.
+     Bordure (3:1 au moins, WCAG 1.4.11) : encre-3 à 70 % sur nuit #0d1829 =
+     3,71:1, sur panneau #142137 = 3,50:1. Fond : encre à 5 %, texte 14,2:1,
+     indication 5,6:1. */
+  --guichet-bord: color-mix(in srgb, var(--color-ink-3) 70%, transparent);
+  --guichet-fond: color-mix(in srgb, var(--color-ink) 5%, transparent);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.monde-papier .guichet {
+  /* Papier : encre-3 à 85 % sur #f7f3ed = 3,76:1 ; fond encre à 4 %, texte
+     14,9:1, indication 4,7:1. */
+  --guichet-bord: color-mix(in srgb, var(--color-ink-3) 85%, transparent);
+  --guichet-fond: color-mix(in srgb, var(--color-ink) 4%, transparent);
+}
+
+.guichet-saisie {
+  position: relative;
+  display: block;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Au pouce, d'abord : champ et bouton empilés, 56 px chacun, pleine largeur.
+   Texte du champ : #eef3f8 sur #142137 = 14,4:1 ; indication #9fadbd = 7,05:1. */
+.guichet-champ {
+  display: block;
+  width: 100%;
+  height: 3.5rem;
+  padding-inline: 1.25rem;
+  border: 1px solid var(--guichet-bord);
+  border-radius: 9999px;
+  background: var(--guichet-fond);
+  color: var(--color-ink);
+  font-size: 1rem; /* 16 px : en dessous, iOS zoome à la saisie. */
+  outline: none;
+  transition:
+    border-color 150ms var(--ease-terouva),
+    box-shadow 150ms var(--ease-terouva);
+}
+.guichet-champ::placeholder {
+  color: var(--color-ink-3);
+}
+/* Le champ porte son propre anneau : le contour global du site s'ajouterait. */
+.guichet-champ:focus-visible {
+  outline: none;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-blue) 28%, transparent);
+}
+.guichet-bouton {
+  height: 3.5rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+/* À partir de 640 px, le guichet devient une seule pilule : le champ s'y
+   fond, le bouton s'y loge à droite. Le focus se lit sur la pilule entière. */
+@media (min-width: 640px) {
+  .guichet {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem;
+    border: 1px solid var(--guichet-bord);
+    border-radius: 9999px;
+    background: var(--guichet-fond);
+    transition:
+      border-color 150ms var(--ease-terouva),
+      box-shadow 150ms var(--ease-terouva);
+  }
+  .guichet:focus-within {
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-blue) 28%, transparent);
+  }
+  .guichet-champ,
+  .guichet-champ:focus-visible {
+    height: 3.25rem;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .guichet-bouton {
+    width: auto;
+    height: 3.25rem;
+    padding-inline: 1.75rem;
+  }
+}
+
+/* Erreur : la bordure prend la couleur d'erreur (#ff7b7b sur #142137 = 6,43:1 ;
+   papier #c62f33 sur carte = 5,27:1), le message dit quoi faire. */
+.guichet[data-etat="erreur"] .guichet-champ {
+  border-color: var(--color-bad);
+}
+/* Le focus ne doit pas effacer l'erreur : l'anneau prend la couleur d'erreur. */
+.guichet[data-etat="erreur"] .guichet-champ:focus-visible {
+  border-color: var(--color-bad);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-bad) 28%, transparent);
+}
+@media (min-width: 640px) {
+  .guichet[data-etat="erreur"],
+  .guichet[data-etat="erreur"]:focus-within {
+    border-color: var(--color-bad);
+  }
+  .guichet[data-etat="erreur"]:focus-within {
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-bad) 28%, transparent);
+  }
+  .guichet[data-etat="erreur"] .guichet-champ,
+  .guichet[data-etat="erreur"] .guichet-champ:focus-visible {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
+/* Envoi : un filet bleu court sous la saisie, comme le filet qui se trace
+   ailleurs sur le site. Il remplace le « Loading… » d'un spinner. */
+.guichet[data-etat="envoi"] .guichet-saisie::after {
+  content: "";
+  position: absolute;
+  inset-inline: 1.25rem;
+  bottom: 0.625rem;
+  height: 2px;
+  background: var(--color-blue);
+  transform-origin: left;
+  animation: guichet-trace 1100ms var(--ease-terouva) infinite;
+}
+@keyframes guichet-trace {
+  0% { transform: scaleX(0); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: left; }
+  50.01% { transform: scaleX(1); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+/* Mouvement réduit : le filet reste posé, l'état se lit sans bouger. */
+@media (prefers-reduced-motion: reduce) {
+  .guichet[data-etat="envoi"] .guichet-saisie::after {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* ───────────────────────────── Le billet ───────────────────────────── */
+
+/* Le succès est un objet, pas une phrase : un billet de place, corps à
+   gauche, talon détaché par une perforation, l'adresse (masquée) sur le
+   talon. Arête haute bleue, comme les cadres de l'accueil. */
+.billet {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--color-rule-fort);
+  border-top: 2px solid var(--color-blue);
+  border-radius: 4px;
+  /* Même raison que le guichet : teinte prise sur l'encre du contexte. */
+  background: color-mix(in srgb, var(--color-ink) 5%, transparent);
+  color: var(--color-ink);
+  text-align: left;
+  outline: none;
+}
+.billet:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+.billet-corps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1.25rem 1.25rem 1.125rem;
+}
+/* La coche à l'encre bleue claire (#5cbcf2 sur #142137 = 7,62:1). */
+.billet-coche {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.0625rem;
+  color: var(--color-blue-clair);
+}
+.monde-papier .billet-coche {
+  color: var(--color-accent-ink);
+}
+.billet-message {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.billet-talon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 0.25rem 0.5rem 0.25rem 1.25rem;
+  border-top: 1px dashed var(--color-rule-fort);
+  color: var(--color-ink-3);
+}
+.billet-adresse {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-transform: none;
+}
+.billet-autre {
+  flex: none;
+  min-height: 2.75rem;
+  padding-inline: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-ink-2);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in oklch, currentColor 40%, transparent);
+  border-radius: 9999px;
+  transition: color 150ms var(--ease-terouva), text-decoration-color 150ms var(--ease-terouva);
+}
+.billet-autre:hover {
+  color: var(--color-ink);
+  text-decoration-color: currentColor;
+}
+
+@media (min-width: 640px) {
+  .billet {
+    grid-template-columns: 1fr minmax(0, 13rem);
+  }
+  .billet-corps {
+    padding: 1.5rem 1.5rem 1.5rem 1.375rem;
+  }
+  .billet-talon {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1rem 0.75rem 1rem 1.25rem;
+    border-top: 0;
+    border-left: 1px dashed var(--color-rule-fort);
+  }
+  .billet-autre {
+    margin-left: -0.75rem;
+  }
+}
+
+/* Le moment : la pilule s'ouvre en billet (480 ms), puis la coche se trace,
+   puis le talon arrive. Seulement à l'inscription qu'on vient de faire, pas
+   quand on revient déjà inscrit : un retour n'est pas un événement. */
+@media (prefers-reduced-motion: no-preference) {
+  .billet[data-neuf] {
+    animation: billet-ouvre 520ms var(--ease-terouva) both;
+  }
+  .billet[data-neuf] .billet-coche path {
+    stroke-dasharray: 24;
+    animation: billet-coche 420ms var(--ease-terouva) 360ms both;
+  }
+  .billet[data-neuf] .billet-talon {
+    animation: billet-talon 480ms var(--ease-terouva) 520ms both;
+  }
+}
+@keyframes billet-ouvre {
+  from { clip-path: inset(38% 0 38% 0 round 9999px); opacity: 0.5; }
+  to { clip-path: inset(0 0 0 0 round 4px); opacity: 1; }
+}
+@keyframes billet-coche {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes billet-talon {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ───────────────────────────── L'arrivée (accueil) ───────────────────────────── */
+
+/* Le titre de l'arrivée reprend la voix du hero, à une marche en dessous. */
+.arrivee-titre {
+  font-size: clamp(2.25rem, 1.1rem + 3.9vw, 4rem);
+}
+/* Le filet qui sépare la FAQ de l'arrivée part du centre, vers les bords. */
+.arrivee-filet {
+  transform-origin: center;
+}
+
+/* ───────────────────────────── Les questions ───────────────────────────── */
+
+/* Ouverture animée là où le navigateur sait animer vers `auto` ; ailleurs le
+   `<details>` s'ouvre d'un coup, comme avant. */
+@media (prefers-reduced-motion: no-preference) {
+  .questions details {
+    interpolate-size: allow-keywords;
+  }
+  .questions details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size 280ms var(--ease-terouva),
+      content-visibility 280ms allow-discrete;
+  }
+  .questions details[open]::details-content {
+    block-size: auto;
+  }
+}
+/* Numéro d'index : DM Mono à l'orange, comme les numéros des index de
+   l'accueil (#fc734d sur #0d1829 = 6,53:1). Décoratif pour un lecteur
+   d'écran (`aria-hidden`) : la liste se lit déjà dans l'ordre. */
+.questions-numero {
+  font-family: var(--font-mono);
+  font-size: var(--text-nuit-champ);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-action);
+  padding-top: 0.3rem;
+}

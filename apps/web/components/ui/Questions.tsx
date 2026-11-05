@@ -16,6 +16,11 @@ export type Question = { q: string; a: string };
  * la question est ouverte, il ne change pas de couleur. Le `<details>` natif
  * est délibéré : accessible, navigable au clavier, et son contenu reste dans
  * le HTML même replié.
+ *
+ * Dans le monde nuit (l'accueil), chaque question porte son numéro d'index en
+ * DM Mono orange, comme les autres index de la page. Là où le navigateur sait
+ * animer vers `auto`, la réponse se déplie au lieu d'apparaître d'un coup
+ * (`app/styles/arrivee.css`, classe `questions`).
  */
 export function Questions({
   questions,
@@ -36,7 +41,7 @@ export function Questions({
   const filet = nuit ? "divide-night-rule border-night-rule" : "divide-rule border-rule";
 
   const liste = (
-    <div className={cn("divide-y border-y", filet)}>
+    <div className={cn("questions divide-y border-y", filet)}>
       {questions.map((item, i) => (
         <details key={item.q} className="group" open={ouvrirPremiere && i === 0}>
           <summary
@@ -45,7 +50,14 @@ export function Questions({
               nuit ? "text-night-ink" : "text-ink",
             )}
           >
-            <span>{item.q}</span>
+            <span className="flex items-start gap-4">
+              {nuit && (
+                <span aria-hidden className="questions-numero w-6 shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              )}
+              <span>{item.q}</span>
+            </span>
             <svg
               viewBox="0 0 16 16"
               aria-hidden
@@ -65,6 +77,7 @@ export function Questions({
           <p
             className={cn(
               "max-w-2xl pb-6 text-[15px] leading-relaxed",
+              nuit && "pl-10",
               nuit ? "text-night-ink-2" : "text-ink-2",
             )}
           >
