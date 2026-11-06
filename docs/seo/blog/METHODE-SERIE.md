@@ -27,6 +27,10 @@
 | Relecture | relecteur | voir plus bas | une ligne de verdict par article |
 | Publication | chef | les verdicts | `statut: "publie"` par lot, `npm run blog:verifier`, push |
 
+**Consigne du plan** (Hugo, 2026-11-06, `docs/seo/BRIEF.md`) : le blog reste sur la recherche de logement.
+Moisissure, loyer impayé et autres sujets du locataire déjà installé vont dans « Écartés », même si la
+demande est réelle.
+
 ## Le format (un fichier par article)
 
 `apps/web/content/blog/<slug>.ts`, copié de `_gabarit.ts`. Corps en Markdown restreint. L'auteur ne

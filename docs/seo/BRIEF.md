@@ -57,6 +57,11 @@ actualité des règles de location, questions précises de locataires, cas prati
 publiques, saisonnalité de la recherche. Chaque article se rattache à un pilier
 (`docs/seo/blog/LIGNE-EDITORIALE.md`) et renvoie vers le guide et l'outil voisins.
 
+**Le blog reste sur la recherche de logement (décision d'Hugo, 2026-11-06).** Il ne couvre pas le
+locataire déjà installé : moisissure, loyer impayé et sujets de même nature restent écartés, même si
+la demande est réelle. Les articles déjà publiés qui s'en approchent (double des clés, peinture,
+chaudière, punaises de lit) restent en ligne ; on n'en écrit pas d'autres de ce type.
+
 **Volume sans contenu de masse.** Google sanctionne le contenu produit à la chaîne pour se classer
 (« scaled content abuse »), qu'il soit écrit par une IA ou non : ce qui le déclenche, c'est la page
 qui n'apporte rien. Le volume tient donc à trois conditions, non négociables :
