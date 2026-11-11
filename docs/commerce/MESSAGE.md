@@ -63,10 +63,11 @@ dans votre navigateur, sans installation** ; plus de « téléchargeable », « 
 
 Terouva ne vise plus seulement Leboncoin : le site montre tous les sites où l'on cherche (Leboncoin,
 SeLoger, PAP, Bien'ici…), en tuiles comme fanclaw.ai, avec pour chacun ce que Terouva y change.
-**Honnêteté** : seul Leboncoin est prévu à l'ouverture ; chaque tuile porte son état (« À
-l'ouverture », « Prochaines vagues »), comme les badges « Add-on » de FanClaw. Annoncer un site que
-l'outil ne couvre pas encore serait une pratique commerciale trompeuse. Les marques sont citées pour
-dire où l'outil agit ; le pied de page dit que Terouva n'a de lien avec aucun de ces sites.
+**Pas de badge d'état** (Hugo, 2026-11-11 : « fake it until you make it ») : les tuiles montrent les
+sites visés, sans dire lesquels sont couverts. Risque signalé et accepté par Hugo : afficher un site
+que l'outil ne couvre pas peut être tenu pour une pratique commerciale trompeuse ; la liste d'attente
+l'atténue (personne ne peut encore s'en servir). Les marques sont citées pour dire où l'outil agit ;
+le pied de page dit que Terouva n'a de lien avec aucun de ces sites.
 
 ## L'ouverture (Hugo, 2026-11-04)
 

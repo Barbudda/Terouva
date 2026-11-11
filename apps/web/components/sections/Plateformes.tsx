@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { PLATEFORMES } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
 /**
  * La rangée des sites où l'on cherche, juste sous le plein cadre : le visiteur
@@ -68,7 +67,6 @@ export function Plateformes() {
       >
         {SITES.map((s, i) => {
           const actif = i === choisi;
-          const ouverture = s.etat === "À l'ouverture";
           return (
             <button
               key={s.id}
@@ -96,15 +94,8 @@ export function Plateformes() {
                   className="plateformes-icone"
                 />
               </span>
-              <span className="sr-only">{s.nom}, </span>
-              <span
-                className={cn(
-                  "plateformes-badge",
-                  ouverture && "plateformes-badge--ouverture",
-                )}
-              >
-                {s.etat}
-              </span>
+              {/* Plus de badge d'état (Hugo, 11 novembre) : la tuile seule. */}
+              <span className="sr-only">{s.nom}</span>
             </button>
           );
         })}

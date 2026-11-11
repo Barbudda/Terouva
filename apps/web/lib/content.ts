@@ -81,14 +81,14 @@ export const HERO = {
  * rangée de fanclaw.ai et des plateformes de rushlot.com) : le visiteur voit
  * son site et comprend. Choisir une tuile montre ce que Terouva y change.
  *
- * Honnêteté : seul Leboncoin est prévu à l'ouverture. Chaque tuile porte son
- * état, comme les badges « Add-on » de FanClaw ; annoncer un site que l'outil
- * ne couvre pas encore serait une pratique commerciale trompeuse. Faits relevés
+ * Plus de badge d'état (Hugo, 11 novembre : « fake it until you make it ») :
+ * les tuiles montrent les sites visés. Risque signalé à Hugo et accepté : un
+ * site affiché que l'outil ne couvre pas serait une pratique commerciale
+ * trompeuse si quelqu'un s'en plaignait ; la liste d'attente l'atténue
+ * (personne ne peut encore s'en servir) et le pied de page dit l'absence de lien. Faits relevés
  * dans `docs/commerce/PLATEFORMES.md` (2026-11-11) ; couleurs de marque à
  * relever à l'œil par le pôle Design (les sites refusent la lecture automatique).
  */
-export type EtatPlateforme = "À l'ouverture" | "Prochaines vagues";
-
 export const PLATEFORMES = {
   titre: "Partout où vous cherchez.",
   // Seule ligne d'aide : elle dit quoi faire de la rangée, rien d'autre.
@@ -99,7 +99,6 @@ export const PLATEFORMES = {
       icone: "/plateformes/leboncoin.png",
       nom: "Leboncoin",
       domaine: "leboncoin.fr",
-      etat: "À l'ouverture" as EtatPlateforme,
       gains: [
         "Vous savez d'un coup d'œil si l'annonce vaut le coup.",
         "Votre message est prêt à coller dans la messagerie Leboncoin.",
@@ -110,7 +109,6 @@ export const PLATEFORMES = {
       icone: "/plateformes/seloger.png",
       nom: "SeLoger",
       domaine: "seloger.com",
-      etat: "Prochaines vagues" as EtatPlateforme,
       gains: [
         "Annonces d'agences : votre dossier part complet dès le premier message.",
         "Chaque agence contactée est suivie au même endroit.",
@@ -121,7 +119,6 @@ export const PLATEFORMES = {
       icone: "/plateformes/pap.png",
       nom: "PAP",
       domaine: "pap.fr",
-      etat: "Prochaines vagues" as EtatPlateforme,
       gains: [
         "PAP vous écrit à chaque nouvelle annonce : Terouva vous dit laquelle vaut le coup.",
         "De particulier à particulier : un message qui parle au propriétaire.",
@@ -132,7 +129,6 @@ export const PLATEFORMES = {
       icone: "/plateformes/bienici.png",
       nom: "Bien'ici",
       domaine: "bienici.com",
-      etat: "Prochaines vagues" as EtatPlateforme,
       gains: [
         "Les annonces d'agences qui vous correspondent, triées par ce qui compte pour vous.",
         "Un dossier prêt avant même la visite.",
@@ -143,7 +139,6 @@ export const PLATEFORMES = {
       icone: "/plateformes/logicimmo.png",
       nom: "Logic-Immo",
       domaine: "logic-immo.com",
-      etat: "Prochaines vagues" as EtatPlateforme,
       gains: [
         "Prix, surface, quartier : les annonces qui ne collent pas sont écartées.",
         "Votre message reprend ce que l'agence demande.",
@@ -154,7 +149,6 @@ export const PLATEFORMES = {
       icone: "/plateformes/immojeune.png",
       nom: "ImmoJeune",
       domaine: "immojeune.com",
-      etat: "Prochaines vagues" as EtatPlateforme,
       gains: [
         "Pour une première location : garant, Visale et pièces du dossier, sans rien oublier.",
         "Votre candidature dit l'essentiel en quelques lignes.",
@@ -165,7 +159,6 @@ export const PLATEFORMES = {
       icone: "/plateformes/studapart.ico",
       nom: "Studapart",
       domaine: "studapart.com",
-      etat: "Prochaines vagues" as EtatPlateforme,
       gains: [
         "Logements étudiants : vous repérez ceux qui collent à vos dates et à votre budget.",
         "Votre dossier en ligne est prêt quand l'annonce paraît.",
@@ -176,7 +169,6 @@ export const PLATEFORMES = {
       icone: "/plateformes/cartedescolocs.png",
       nom: "La Carte des Colocs",
       domaine: "lacartedescolocs.fr",
-      etat: "Prochaines vagues" as EtatPlateforme,
       gains: [
         "En colocation, on choisit une personne : votre message dit qui vous êtes.",
         "Vous voyez d'un coup d'œil les colocations dans vos quartiers.",
