@@ -1,6 +1,7 @@
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { Plateformes } from "@/components/sections/Plateformes";
 import { Parcours } from "@/components/sections/Parcours";
 import { Problem } from "@/components/sections/Problem";
 import { Fonctions } from "@/components/sections/Fonctions";
@@ -62,6 +63,7 @@ export default function Home() {
       <Nav />
       <main className="overflow-x-clip">
         <Hero />
+        <Plateformes />
         <Parcours />
         <Problem />
         <Fonctions />

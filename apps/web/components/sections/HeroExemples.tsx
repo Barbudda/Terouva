@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { EXEMPLES_ACCUEIL } from "@/lib/exemples";
+import { PLATEFORMES } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 /**
@@ -95,32 +96,68 @@ export function Controles({ className }: { className?: string }) {
 }
 
 /**
- * L'annonce telle qu'elle paraît : titre, loyer, surface, lieu, fraîcheur.
- * Pas une copie de l'interface de Leboncoin : ni son logo ni sa mise en page,
- * et aucune vraie annonce, dont les photos et le texte appartiennent à leur
- * auteur. Le nom du site suffit à dire d'où elle vient.
+ * Le site d'où vient chaque annonce d'exemple, au rythme des flèches. Les
+ * annonces d'agence passent sur SeLoger, celles de particuliers alternent
+ * entre Leboncoin et PAP (PAP ne publie que des particuliers).
+ */
+const SITE_EXEMPLE = ["leboncoin", "pap", "seloger", "leboncoin", "pap", "seloger"];
+function siteDe(index: number, auteur: string) {
+  const id = auteur === "Agence" ? "seloger" : (SITE_EXEMPLE[index] ?? "leboncoin");
+  return PLATEFORMES.liste.find((p) => p.id === id) ?? PLATEFORMES.liste[0];
+}
+
+/**
+ * L'annonce telle qu'elle paraît sur le site qui l'a publiée : une ligne de
+ * liste vue sur téléphone, vignette à gauche, titre, loyer en gras, badge du
+ * vendeur, lieu et fraîcheur en gris. C'est une reconstitution : la couleur
+ * du site et la grammaire de ses cartes, pas son logo ni ses polices, et
+ * l'annonce est l'une des six annonces fictives de la démo. La vignette est
+ * une fenêtre dessinée, jamais une photo.
  */
 export function PanneauAnnonce() {
   const { index, annonce: a } = useExemple();
+  const site = siteDe(index, a.auteur);
   return (
-    <article className="monde-papier h-full rounded-[0.875rem] border border-rule bg-card p-5 text-ink">
+    <article
+      data-site={site.id}
+      className="annonce-site h-full rounded-[0.875rem] p-4"
+    >
       <p className="sr-only" aria-live="polite">
         Exemple {index + 1} sur {TOTAL} : {a.titre}, note {a.note} sur 100.
       </p>
       <div key={index} className="bascule">
-        <div className="flex items-baseline justify-between gap-4">
-          <p className="champ text-ink-3">Leboncoin · {a.publie}</p>
-          <p className="champ shrink-0 text-ink-3 tabular-nums">
+        <div className="annonce-site-tete">
+          <p className="annonce-site-nom">{site.nom}</p>
+          <p className="font-mono text-[12px] tabular-nums">
             {index + 1}/{TOTAL}
           </p>
         </div>
-        <p className="mt-3 text-[15px] leading-snug font-medium">{a.titre}</p>
-        <p className="mt-2 font-mono text-[1.375rem] leading-none tabular-nums">
-          {euros(a.prix)}
-          <span className="text-[13px] text-ink-3"> / mois</span>
-        </p>
-        <p className="marge mt-3">
-          {a.surface} m² · {a.ville} · {a.auteur}
+        <div className="mt-3 flex gap-3">
+          <div className="annonce-site-vignette" aria-hidden>
+            <svg viewBox="0 0 48 48" fill="none" className="size-8">
+              <rect x="10" y="8" width="28" height="32" rx="2" stroke="currentColor" strokeWidth="2" />
+              <path d="M24 8v32M10 22h28" stroke="currentColor" strokeWidth="2" />
+            </svg>
+            <svg viewBox="0 0 24 24" fill="none" className="annonce-site-coeur">
+              <path
+                d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="annonce-site-titre line-clamp-2">{a.titre}</p>
+            <p className="annonce-site-prix">
+              {euros(a.prix)}
+              <span className="annonce-site-mois"> / mois</span>
+            </p>
+            <p className="annonce-site-badge">{a.auteur}</p>
+          </div>
+        </div>
+        <p className="annonce-site-lieu">
+          {a.surface} m² · {a.ville} · {a.publie}
         </p>
       </div>
     </article>

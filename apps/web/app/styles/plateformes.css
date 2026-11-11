@@ -1,0 +1,298 @@
+/* La rangée des sites (session plateformes, pôle Design, 11 novembre 2026).
+   Voir docs/design/journal/plateformes.md.
+
+   Le geste : des icônes d'app qu'on reconnaît avant de lire, comme l'écran
+   d'accueil d'un téléphone. C'est la seule fois où des couleurs étrangères à
+   Terouva entrent sur la page ; elles restent dans les tuiles, tout le reste
+   garde la nuit, le bleu et l'orange.
+
+   Les couleurs de marque ont été relevées à l'œil sur la page d'accueil de
+   chaque site le 11 novembre 2026 (couleur du logo ou des boutons). Le
+   mot-symbole est blanc quand il tient le contraste, à l'encre de la marque
+   sinon (ImmoJeune, La Carte des Colocs). Le mot-symbole est du grand texte
+   gras : le seuil est 3:1. */
+
+[data-site="leboncoin"] {
+  --site: #ec5a13; /* orange Leboncoin ; blanc dessus : 3,48:1 */
+  --site-mot: #fff;
+}
+[data-site="seloger"] {
+  --site: #e30513; /* rouge SeLoger ; blanc dessus : 4,88:1 */
+  --site-mot: #fff;
+}
+[data-site="pap"] {
+  --site: #2409f1; /* bleu PAP ; blanc dessus : 8,8:1 */
+  --site-mot: #fff;
+}
+[data-site="bienici"] {
+  --site: #009db0; /* bleu canard Bien'ici ; blanc dessus : 3,26:1 */
+  --site-mot: #fff;
+}
+[data-site="logicimmo"] {
+  --site: #017cbc; /* bleu Logic-Immo ; blanc dessus : 4,55:1 */
+  --site-mot: #fff;
+}
+[data-site="immojeune"] {
+  --site: #ffd400; /* jaune ImmoJeune ; le blanc n'y tient pas (1,4:1) */
+  --site-mot: #1d1d1b; /* le noir de son logo : 11,8:1 */
+}
+[data-site="studapart"] {
+  --site: #36417d; /* bleu nuit Studapart ; blanc dessus : 9,6:1 */
+  --site-mot: #fff;
+}
+[data-site="cartedescolocs"] {
+  --site: #44c878; /* vert La Carte des Colocs ; le blanc n'y tient pas (2,1:1) */
+  --site-mot: #1c362b; /* son vert profond : 6,1:1 */
+}
+
+.plateformes {
+  padding-block: var(--spacing-demi-pas);
+}
+
+/* ── La rangée. Sur téléphone elle défile au doigt et déborde jusqu'aux
+   bords de l'écran : la tuile coupée à droite dit qu'il y en a d'autres. */
+.plateformes-rangee {
+  --tuile: 4.75rem; /* 76 px à 375 px : au moins 72 px demandés */
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 2rem;
+  margin-inline: calc(-1 * var(--marge-cadre));
+  padding: 0.75rem var(--marge-cadre) 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--marge-cadre);
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.plateformes-rangee::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 48rem) {
+  .plateformes-rangee {
+    --tuile: 6.5rem;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+}
+@media (min-width: 80rem) {
+  /* Sur grand écran les huit tiennent : plus de défilement, la rangée se cale
+     sur la grille. */
+  .plateformes-rangee {
+    --tuile: 7.5rem;
+    justify-content: space-between;
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+  .plateformes-rangee .plateformes-onglet {
+    width: calc(var(--tuile) + 1.5rem);
+  }
+}
+
+/* L'onglet : la tuile et son badge, empilés. Largeur fixe pour que les
+   badges longs ne poussent pas la rangée. */
+.plateformes-onglet {
+  position: relative;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  width: calc(var(--tuile) + 2.5rem);
+  scroll-snap-align: start;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.plateformes-onglet:focus-visible {
+  outline: 2px solid var(--color-blue-clair);
+  outline-offset: 4px;
+}
+
+/* La tuile : une icône d'app. Le rayon suit celui des icônes de téléphone
+   (22 % du côté) ; c'est la référence qui le demande, pas un arrondi de carte. */
+.plateformes-tuile {
+  container-type: inline-size;
+  display: grid;
+  place-items: center;
+  width: var(--tuile);
+  aspect-ratio: 1;
+  padding: 8%;
+  border-radius: 22%;
+  background: var(--site);
+  color: var(--site-mot);
+  /* Un liseré clair en haut, une ombre d'un seul côté : la tuile est posée. */
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    0 10px 24px -12px rgb(0 0 0 / 0.7);
+  transition:
+    translate 220ms var(--ease-terouva),
+    box-shadow 220ms var(--ease-terouva);
+}
+.plateformes-mot {
+  font-family: var(--font-sans);
+  font-size: var(--mot);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+@media (hover: hover) {
+  .plateformes-onglet:hover .plateformes-tuile {
+    translate: 0 -2px;
+  }
+}
+/* Le site choisi se lève et prend un anneau bleu, séparé de la tuile par un
+   liseré de nuit pour que l'anneau se lise même sur la tuile bleue de PAP. */
+.plateformes-onglet[aria-selected="true"] .plateformes-tuile {
+  translate: 0 -3px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    0 0 0 3px var(--color-paper),
+    0 0 0 5px var(--color-blue-clair),
+    0 14px 28px -12px rgb(0 0 0 / 0.8);
+}
+
+/* ── Le badge d'état, posé sur le bas de la tuile comme les « Add-on » de la
+   référence. « À l'ouverture » à l'orange d'action, texte minuit (7,42:1) ;
+   « Prochaines vagues » en retrait, encre-2 sur panneau (8,6:1). */
+.plateformes-badge {
+  position: relative; /* au-dessus de la tuile et de son anneau */
+  z-index: 1;
+  margin-top: -0.7rem;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--color-rule-fort);
+  border-radius: 999px;
+  background: var(--color-night-2);
+  color: var(--color-ink-2);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.plateformes-badge--ouverture {
+  border-color: transparent;
+  background: var(--color-action);
+  color: var(--color-action-ink);
+  font-weight: 600;
+}
+
+/* ── Les gains du site choisi : un filet à la couleur de sa marque, puis
+   les deux phrases. */
+.plateformes-gains {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--site);
+  max-width: 60rem;
+  transition: border-color 220ms var(--ease-terouva);
+}
+.plateformes-gain {
+  color: var(--color-ink);
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plateformes-tuile,
+  .plateformes-gains {
+    transition: none;
+  }
+  .plateformes-onglet[aria-selected="true"] .plateformes-tuile {
+    translate: none;
+  }
+}
+
+/* ───────── L'annonce du parcours (HeroExemples, panneau « L'alerte arrive ») ─────────
+   Une ligne de liste telle qu'on la voit sur le site d'où vient l'annonce :
+   la même grammaire pour les trois sites (vignette arrondie à gauche, titre,
+   loyer en gras, badge du vendeur, lieu et date en gris), la couleur change
+   avec le site. Le fond blanc est celui des sites eux-mêmes : c'est lui qui
+   fait reconnaître la carte, posée sur la nuit comme un écran de téléphone. */
+.annonce-site {
+  --annonce-fond: #fff;       /* le blanc des listes d'annonces */
+  --annonce-encre: #152233;   /* l'encre de Leboncoin, relevée : 15,9:1 sur blanc */
+  --annonce-gris: #5b6675;    /* lieu et date : 5,8:1 sur blanc */
+  background: var(--annonce-fond);
+  color: var(--annonce-encre);
+  border: 1px solid rgb(21 34 51 / 0.08);
+}
+/* Le texte à la couleur du site : l'orange de Leboncoin ne tient pas 4,5:1 en
+   petit texte sur blanc (3,48:1) ; on prend l'orange foncé que Leboncoin
+   utilise lui-même pour ses liens, relevé sur sa page d'accueil (5,3:1).
+   SeLoger 4,88:1 et PAP 8,8:1 tiennent tels quels. */
+.annonce-site {
+  --site-texte: var(--site);
+}
+.annonce-site[data-site="leboncoin"] {
+  --site-texte: #b84a14;
+}
+.annonce-site-tete {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--annonce-gris);
+}
+.annonce-site-nom {
+  color: var(--site-texte);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.annonce-site-vignette {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 5.5rem;
+  aspect-ratio: 1;
+  border-radius: 0.75rem;
+  /* Une fenêtre dessinée sur une teinte du site : pas de photo. */
+  background: color-mix(in srgb, var(--site) 14%, #f2efe9);
+  color: color-mix(in srgb, var(--site) 55%, var(--annonce-encre));
+}
+.annonce-site-coeur {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.375rem;
+  width: 1.125rem;
+  padding: 0.125rem;
+  border-radius: 999px;
+  background: var(--annonce-fond);
+  color: var(--annonce-encre);
+}
+.annonce-site-titre {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.annonce-site-prix {
+  margin-top: 0.25rem;
+  font-size: 1.125rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.annonce-site-mois {
+  color: var(--annonce-gris);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.annonce-site-badge {
+  display: inline-block;
+  margin-top: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  /* Teinte du site sur blanc, texte à l'encre : 13:1 au moins. */
+  background: color-mix(in srgb, var(--site) 14%, var(--annonce-fond));
+  color: var(--annonce-encre);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.annonce-site-lieu {
+  margin-top: 0.75rem;
+  color: var(--annonce-gris);
+  font-size: 0.8125rem;
+}
