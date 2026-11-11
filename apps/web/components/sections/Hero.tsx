@@ -18,14 +18,18 @@ export function Hero() {
     <PleinCadre
       entete={
         <>
-          <p
-            className="entree champ text-ink"
-            style={{ "--rang": 0 } as React.CSSProperties}
-          >
-            {HERO.eyebrow}
-          </p>
+          {/* La mention au-dessus du titre est facultative : vide, le titre
+              est le premier mot lu (Hugo, 11 novembre). */}
+          {HERO.eyebrow && (
+            <p
+              className="entree champ text-ink"
+              style={{ "--rang": 0 } as React.CSSProperties}
+            >
+              {HERO.eyebrow}
+            </p>
+          )}
           <h1
-            className="entree titre mx-auto mt-6 max-w-[14ch] text-[clamp(2.6rem,1.2rem+4.4vw,4.75rem)] text-ink lg:max-w-none"
+            className={`entree titre mx-auto ${HERO.eyebrow ? "mt-6" : ""} max-w-[14ch] text-[clamp(2.6rem,1.2rem+4.4vw,4.75rem)] text-ink lg:max-w-none`}
             style={{ "--rang": 1 } as React.CSSProperties}
           >
             {HERO.titleLead} <br className="hidden lg:inline" />

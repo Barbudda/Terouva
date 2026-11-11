@@ -54,18 +54,127 @@ export const NAV_COLONNES = [
  * l'essai gratuit, les questions, l'inscription). Chaque section dit une
  * chose qui n'a pas encore été dite.
  */
+/**
+ * Hugo, 11 novembre : « le client a trente secondes pour comprendre à quoi ça
+ * sert ». Le premier mot lu est le titre, qui dit ce qu'il veut entendre ; la
+ * phrase déroule du plus fort (avant tout le monde, la visite) au plus
+ * personnel (ce que Terouva fait, ce qu'il vous reste à faire). Plus de
+ * mention au-dessus du titre : les sites où l'on cherche viennent juste
+ * dessous, dans la rangée des plateformes.
+ */
 export const HERO = {
-  eyebrow: "Pour votre location sur Leboncoin",
-  titleLead: "Les bons logements,",
-  titleTail: "avant les autres.",
-  /** Vous, Terouva, vous : qui fait quoi, et ce que vous y gagnez à la fin. */
+  eyebrow: "",
+  titleLead: "Gagner la course",
+  titleTail: "au logement.",
+  /** Le gain d'abord, puis qui fait quoi. */
   description: [
-    "Vous recevez une alerte Leboncoin. Terouva vous dit si le logement vaut le coup et écrit votre message.",
-    "Vous n'avez plus qu'à l'envoyer, parmi les premiers.",
+    "Répondez aux bonnes annonces avant tout le monde, avec un message qui décroche la visite.",
+    "Terouva fait le tri et l'écrit pour vous. Vous n'avez qu'à l'envoyer.",
   ],
   // Plus de ligne de réassurance ni de seconde porte sous le bouton (Hugo, 4
   // novembre) : elles redisaient ce que la phrase, la section outils et
   // l'inscription disent déjà. Une chose se dit une fois, à sa place.
+};
+
+/**
+ * Les sites où l'on cherche, en tuiles (Hugo, 11 novembre, sur le modèle de la
+ * rangée de fanclaw.ai et des plateformes de rushlot.com) : le visiteur voit
+ * son site et comprend. Choisir une tuile montre ce que Terouva y change.
+ *
+ * Honnêteté : seul Leboncoin est prévu à l'ouverture. Chaque tuile porte son
+ * état, comme les badges « Add-on » de FanClaw ; annoncer un site que l'outil
+ * ne couvre pas encore serait une pratique commerciale trompeuse. Faits relevés
+ * dans `docs/commerce/PLATEFORMES.md` (2026-11-11) ; couleurs de marque à
+ * relever à l'œil par le pôle Design (les sites refusent la lecture automatique).
+ */
+export type EtatPlateforme = "À l'ouverture" | "Prochaines vagues";
+
+export const PLATEFORMES = {
+  titre: "Partout où vous cherchez.",
+  // Seule ligne d'aide : elle dit quoi faire de la rangée, rien d'autre.
+  aide: "Choisissez un site pour voir ce que Terouva y change.",
+  liste: [
+    {
+      id: "leboncoin",
+      nom: "Leboncoin",
+      domaine: "leboncoin.fr",
+      etat: "À l'ouverture" as EtatPlateforme,
+      gains: [
+        "Vous savez d'un coup d'œil si l'annonce vaut le coup.",
+        "Votre message est prêt à coller dans la messagerie Leboncoin.",
+      ],
+    },
+    {
+      id: "seloger",
+      nom: "SeLoger",
+      domaine: "seloger.com",
+      etat: "Prochaines vagues" as EtatPlateforme,
+      gains: [
+        "Annonces d'agences : votre dossier part complet dès le premier message.",
+        "Chaque agence contactée est suivie au même endroit.",
+      ],
+    },
+    {
+      id: "pap",
+      nom: "PAP",
+      domaine: "pap.fr",
+      etat: "Prochaines vagues" as EtatPlateforme,
+      gains: [
+        "PAP vous écrit à chaque nouvelle annonce : Terouva vous dit laquelle vaut le coup.",
+        "De particulier à particulier : un message qui parle au propriétaire.",
+      ],
+    },
+    {
+      id: "bienici",
+      nom: "Bien'ici",
+      domaine: "bienici.com",
+      etat: "Prochaines vagues" as EtatPlateforme,
+      gains: [
+        "Les annonces d'agences qui vous correspondent, triées par ce qui compte pour vous.",
+        "Un dossier prêt avant même la visite.",
+      ],
+    },
+    {
+      id: "logicimmo",
+      nom: "Logic-Immo",
+      domaine: "logic-immo.com",
+      etat: "Prochaines vagues" as EtatPlateforme,
+      gains: [
+        "Prix, surface, quartier : les annonces qui ne collent pas sont écartées.",
+        "Votre message reprend ce que l'agence demande.",
+      ],
+    },
+    {
+      id: "immojeune",
+      nom: "ImmoJeune",
+      domaine: "immojeune.com",
+      etat: "Prochaines vagues" as EtatPlateforme,
+      gains: [
+        "Pour une première location : garant, Visale et pièces du dossier, sans rien oublier.",
+        "Votre candidature dit l'essentiel en quelques lignes.",
+      ],
+    },
+    {
+      id: "studapart",
+      nom: "Studapart",
+      domaine: "studapart.com",
+      etat: "Prochaines vagues" as EtatPlateforme,
+      gains: [
+        "Logements étudiants : vous repérez ceux qui collent à vos dates et à votre budget.",
+        "Votre dossier en ligne est prêt quand l'annonce paraît.",
+      ],
+    },
+    {
+      id: "cartedescolocs",
+      nom: "La Carte des Colocs",
+      domaine: "lacartedescolocs.com",
+      etat: "Prochaines vagues" as EtatPlateforme,
+      gains: [
+        "En colocation, on choisit une personne : votre message dit qui vous êtes.",
+        "Vous voyez d'un coup d'œil les colocations dans vos quartiers.",
+      ],
+    },
+  ],
 };
 
 /**
@@ -78,10 +187,10 @@ export const PARCOURS = {
   // Chaque étape dit ce que vous vivez, pas ce que fait l'outil ; la dernière
   // rappelle que l'envoi reste le vôtre, une fois, ici seulement.
   etapes: [
-    { nom: "L'alerte arrive", texte: "Leboncoin vous envoie une annonce, comme aujourd'hui." },
+    { nom: "L'alerte arrive", texte: "Leboncoin, SeLoger ou PAP vous envoie une annonce, comme aujourd'hui." },
     { nom: "Vous savez si elle vaut le coup", texte: "Prix, surface, quartier : vous le voyez d'un coup d'œil." },
     { nom: "Votre message est prêt", texte: "Écrit pour ce logement, avec les infos de votre dossier." },
-    { nom: "Vous l'envoyez", texte: "Sur Leboncoin, vous-même. Ensuite, vous notez la réponse dans Terouva." },
+    { nom: "Vous l'envoyez", texte: "Sur le site de l'annonce, vous-même. Ensuite, vous notez la réponse dans Terouva." },
   ],
 };
 
@@ -175,16 +284,16 @@ export const FEATURES = [
  */
 export const FAQ_ITEMS = [
   {
-    q: "Est-ce légal ? Mon compte Leboncoin risque-t-il quelque chose ?",
-    a: "Terouva travaille sur les alertes que Leboncoin vous envoie déjà et sur les annonces que vous ouvrez vous-même. Il ne vous demande jamais vos identifiants, ne se connecte pas à votre compte et n'agit jamais sur Leboncoin à votre place.",
+    q: "Est-ce légal ? Mon compte Leboncoin ou SeLoger risque-t-il quelque chose ?",
+    a: "Terouva travaille sur les alertes que les sites d'annonces vous envoient déjà et sur les annonces que vous ouvrez vous-même. Il ne vous demande jamais vos identifiants, ne se connecte pas à votre compte et n'agit jamais sur ces sites à votre place.",
   },
   {
     q: "Est-ce que Terouva envoie les messages à ma place ?",
-    a: "Non. Il prépare le message, et c'est vous qui le collez sur Leboncoin et qui l'envoyez. Rien ne part sans vous.",
+    a: "Non. Il prépare le message, et c'est vous qui le collez sur le site de l'annonce et qui l'envoyez. Rien ne part sans vous.",
   },
   {
     q: "Est-ce que ça marche dans ma ville ?",
-    a: "Oui, partout où Leboncoin publie des locations. Terouva part de votre propre recherche et de vos alertes, quelle que soit la ville.",
+    a: "Oui, partout où les sites d'annonces publient des locations. Terouva part de votre propre recherche et de vos alertes, quelle que soit la ville.",
   },
   {
     q: "Combien ça coûte ?",
@@ -220,7 +329,8 @@ export const EDITEUR = {
 
 export const FOOTER = {
   signature: "Conçu pour vous aider à trouver votre logement plus sereinement.",
-  disclaimer: "Terouva n'a aucun lien avec Leboncoin.",
+  disclaimer:
+    "Terouva n'a aucun lien avec Leboncoin, SeLoger, PAP, Bien'ici, Logic-Immo, ImmoJeune, Studapart ni La Carte des Colocs. Leurs noms appartiennent à leurs propriétaires.",
   columns: [
     {
       title: "Produit",

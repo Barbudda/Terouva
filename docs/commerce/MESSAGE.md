@@ -10,12 +10,14 @@
 
 **Répondre parmi les premiers, avec le bon message et un dossier complet.**
 
-- Le titre d'Hugo reste : « Les bons logements, avant les autres. »
+- Titre d'Hugo (2026-11-11) : « Gagner la course au logement. » Le client a trente secondes pour
+  comprendre à quoi ça sert : on lui dit ce qu'il veut entendre, puis on déroule du plus fort au
+  plus personnel. Ancien titre : « Les bons logements, avant les autres. »
 - Ce qui nous distingue de Jinka et des alertes : eux promettent de **recevoir** l'annonce en
   premier ; Terouva fait **répondre** en premier. L'alerte, le locataire l'a déjà (Leboncoin la lui
   envoie) ; ce qui lui manque, c'est le tri, le message et le dossier prêts quand elle arrive.
-- La seule description honnête de l'arrivée des annonces : **les alertes Leboncoin que vous recevez
-  et les annonces que vous ouvrez vous-même**. Jamais « surveille Leboncoin pour vous », « repère
+- La seule description honnête de l'arrivée des annonces : **les alertes que vos sites d'annonces
+  vous envoient et les annonces que vous ouvrez vous-même**. Jamais « surveille Leboncoin pour vous », « repère
   sur Leboncoin », « au fil de l'eau » : ces mots décrivent un robot, ce que Terouva n'est pas.
 
 ## Les deux faits qui portent l'urgence (sourcés, à citer avec leur source)
@@ -57,6 +59,15 @@ navigateur (sauf pour dire où ça s'ouvre), IA, algorithme, fonctionnalité.
 avant tout paiement. » Plus de « 12 € par mois » nulle part. Forme du produit : **sur ordinateur,
 dans votre navigateur, sans installation** ; plus de « téléchargeable », « Mac », « Windows ».
 
+## Les sites d'annonces (Hugo, 2026-11-11)
+
+Terouva ne vise plus seulement Leboncoin : le site montre tous les sites où l'on cherche (Leboncoin,
+SeLoger, PAP, Bien'ici…), en tuiles comme fanclaw.ai, avec pour chacun ce que Terouva y change.
+**Honnêteté** : seul Leboncoin est prévu à l'ouverture ; chaque tuile porte son état (« À
+l'ouverture », « Prochaines vagues »), comme les badges « Add-on » de FanClaw. Annoncer un site que
+l'outil ne couvre pas encore serait une pratique commerciale trompeuse. Les marques sont citées pour
+dire où l'outil agit ; le pied de page dit que Terouva n'a de lien avec aucun de ces sites.
+
 ## L'ouverture (Hugo, 2026-11-04)
 
 **Terouva ouvre par vagues.** L'inscription réserve une place ; l'e-mail part quand le tour de la
@@ -67,14 +78,15 @@ le site : Hugo n'en veut pas.
 
 Celui qui ne lit que les titres doit avoir toute l'histoire, dans cet ordre :
 
-1. Les bons logements, avant les autres. *(le gain)*
-2. De l'alerte à votre réponse, sans y passer la soirée. *(comment ça se passe pour vous)*
-3. Près de deux candidats sur trois écrivent dans l'heure. *(pourquoi aller vite, sourcé)*
-4. Moins de recherche, plus de visites. *(ce que vous y gagnez, fonction par fonction)*
-5. Un message qui donne envie de vous répondre. *(la preuve : de vrais messages)*
-6. Votre message et votre dossier, gratuitement. *(l'essai, sans attendre)*
-7. Avant de vous inscrire. *(les objections)*
-8. Terouva ouvre par vagues. Prenez place dans la prochaine. *(l'action)*
+1. Gagner la course au logement. *(le gain)*
+2. Partout où vous cherchez. *(les sites : Leboncoin, SeLoger, PAP… en tuiles, c'est ce qui fait « tilt »)*
+3. De l'alerte à votre réponse, sans y passer la soirée. *(comment ça se passe pour vous)*
+4. Près de deux candidats sur trois écrivent dans l'heure. *(pourquoi aller vite, sourcé)*
+5. Moins de recherche, plus de visites. *(ce que vous y gagnez, fonction par fonction)*
+6. Un message qui donne envie de vous répondre. *(la preuve : de vrais messages)*
+7. Votre message et votre dossier, gratuitement. *(l'essai, sans attendre)*
+8. Avant de vous inscrire. *(les objections)*
+9. Terouva ouvre par vagues. Prenez place dans la prochaine. *(l'action)*
 
 Le corps sous chaque titre ne dit qu'une chose nouvelle, en phrases courtes. Les mentions en capitales
 annoncent la section (« En pratique »), elles ne font pas de formule.
