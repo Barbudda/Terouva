@@ -128,14 +128,14 @@
     translate 220ms var(--ease-terouva),
     box-shadow 220ms var(--ease-terouva);
 }
-.plateformes-mot {
-  font-family: var(--font-sans);
-  font-size: var(--mot);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  text-align: center;
-  text-wrap: balance;
+/* L'icône officielle remplit la tuile ; la tuile garde l'arrondi et l'ombre. */
+.plateformes-tuile:has(.plateformes-icone) {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+.plateformes-icone {
+  object-fit: cover;
 }
 
 @media (hover: hover) {

@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import Image from "next/image";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { PLATEFORMES } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -10,29 +11,17 @@ import { cn } from "@/lib/utils";
  * soit. Une tuile d'app par site, à la couleur de sa marque, et sous la rangée
  * les deux gains du site choisi.
  *
- * Aucun des huit sites n'a d'icône dans Simple Icons (vérifié le 11 novembre
- * 2026, versions 15 et 16) : chaque tuile porte donc le nom du site en
- * mot-symbole. Les couleurs ont été relevées sur la page d'accueil de chaque
- * site, elles vivent dans `styles/plateformes.css`.
+ * Chaque tuile porte l'icône officielle du site (Hugo, 11 novembre : « mets
+ * leurs plaquettes »), relevée le même jour dans la balise `apple-touch-icon`
+ * de sa page d'accueil et rangée dans `public/plateformes/`. Les noms sont cités
+ * pour dire où l'outil agit ; le pied de page dit que Terouva n'a de lien avec
+ * aucun de ces sites. La couleur de marque (`styles/plateformes.css`) reste en
+ * fond, derrière les icônes transparentes.
  *
  * Motif onglets accessible : une seule tuile dans l'ordre de tabulation, les
  * flèches passent d'un site à l'autre, Début et Fin vont aux extrémités.
  */
 const SITES = PLATEFORMES.liste;
-
-/**
- * Taille du mot-symbole, en pourcentage de la largeur de la tuile : le mot le
- * plus long doit tenir sur une ligne. Au-delà de deux mots, le nom se répartit
- * sur deux lignes, et c'est la demi-longueur qui compte.
- */
-function tailleMot(nom: string) {
-  const mots = nom.split(" ");
-  const ligne =
-    mots.length > 2
-      ? Math.ceil(nom.length / 2)
-      : Math.max(...mots.map((m) => m.length));
-  return `${Math.min(32, 175 / ligne).toFixed(1)}cqi`;
-}
 
 export function Plateformes() {
   const [choisi, setChoisi] = useState(0);
@@ -98,12 +87,14 @@ export function Plateformes() {
               className="plateformes-onglet"
             >
               <span className="plateformes-tuile" aria-hidden>
-                <span
-                  className="plateformes-mot"
-                  style={{ "--mot": tailleMot(s.nom) } as CSSProperties}
-                >
-                  {s.nom}
-                </span>
+                <Image
+                  src={s.icone}
+                  alt=""
+                  fill
+                  sizes="96px"
+                  unoptimized
+                  className="plateformes-icone"
+                />
               </span>
               <span className="sr-only">{s.nom}, </span>
               <span

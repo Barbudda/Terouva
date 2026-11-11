@@ -64,7 +64,7 @@ export const NAV_COLONNES = [
  */
 export const HERO = {
   eyebrow: "",
-  titleLead: "Gagner la course",
+  titleLead: "Gagnez la course",
   titleTail: "au logement.",
   /** Le gain d'abord, puis qui fait quoi. */
   description: [
@@ -96,6 +96,7 @@ export const PLATEFORMES = {
   liste: [
     {
       id: "leboncoin",
+      icone: "/plateformes/leboncoin.png",
       nom: "Leboncoin",
       domaine: "leboncoin.fr",
       etat: "À l'ouverture" as EtatPlateforme,
@@ -106,6 +107,7 @@ export const PLATEFORMES = {
     },
     {
       id: "seloger",
+      icone: "/plateformes/seloger.png",
       nom: "SeLoger",
       domaine: "seloger.com",
       etat: "Prochaines vagues" as EtatPlateforme,
@@ -116,6 +118,7 @@ export const PLATEFORMES = {
     },
     {
       id: "pap",
+      icone: "/plateformes/pap.png",
       nom: "PAP",
       domaine: "pap.fr",
       etat: "Prochaines vagues" as EtatPlateforme,
@@ -126,6 +129,7 @@ export const PLATEFORMES = {
     },
     {
       id: "bienici",
+      icone: "/plateformes/bienici.png",
       nom: "Bien'ici",
       domaine: "bienici.com",
       etat: "Prochaines vagues" as EtatPlateforme,
@@ -136,6 +140,7 @@ export const PLATEFORMES = {
     },
     {
       id: "logicimmo",
+      icone: "/plateformes/logicimmo.png",
       nom: "Logic-Immo",
       domaine: "logic-immo.com",
       etat: "Prochaines vagues" as EtatPlateforme,
@@ -146,6 +151,7 @@ export const PLATEFORMES = {
     },
     {
       id: "immojeune",
+      icone: "/plateformes/immojeune.png",
       nom: "ImmoJeune",
       domaine: "immojeune.com",
       etat: "Prochaines vagues" as EtatPlateforme,
@@ -156,6 +162,7 @@ export const PLATEFORMES = {
     },
     {
       id: "studapart",
+      icone: "/plateformes/studapart.ico",
       nom: "Studapart",
       domaine: "studapart.com",
       etat: "Prochaines vagues" as EtatPlateforme,
@@ -166,6 +173,7 @@ export const PLATEFORMES = {
     },
     {
       id: "cartedescolocs",
+      icone: "/plateformes/cartedescolocs.png",
       nom: "La Carte des Colocs",
       domaine: "lacartedescolocs.fr",
       etat: "Prochaines vagues" as EtatPlateforme,

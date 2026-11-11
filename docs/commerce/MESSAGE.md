@@ -10,7 +10,7 @@
 
 **Répondre parmi les premiers, avec le bon message et un dossier complet.**
 
-- Titre d'Hugo (2026-11-11) : « Gagner la course au logement. » Le client a trente secondes pour
+- Titre d'Hugo (2026-11-11) : « Gagnez la course au logement. » Le client a trente secondes pour
   comprendre à quoi ça sert : on lui dit ce qu'il veut entendre, puis on déroule du plus fort au
   plus personnel. Ancien titre : « Les bons logements, avant les autres. »
 - Ce qui nous distingue de Jinka et des alertes : eux promettent de **recevoir** l'annonce en
@@ -78,7 +78,7 @@ le site : Hugo n'en veut pas.
 
 Celui qui ne lit que les titres doit avoir toute l'histoire, dans cet ordre :
 
-1. Gagner la course au logement. *(le gain)*
+1. Gagnez la course au logement. *(le gain)*
 2. Partout où vous cherchez. *(les sites : Leboncoin, SeLoger, PAP… en tuiles, c'est ce qui fait « tilt »)*
 3. De l'alerte à votre réponse, sans y passer la soirée. *(comment ça se passe pour vous)*
 4. Près de deux candidats sur trois écrivent dans l'heure. *(pourquoi aller vite, sourcé)*
