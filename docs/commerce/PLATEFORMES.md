@@ -15,7 +15,7 @@ Couleurs de marque : non relevées. Leboncoin, SeLoger, PAP, Logic-Immo et La Ca
 | 7 | ImmoJeune | immojeune.com | Étudiants et jeunes actifs ; « plus de 300 000 offres », candidature en quelques clics | inconnu | Dossier en ligne (candidature) | inconnu | [immojeune.com](https://immojeune.com/), 2026-11-11 |
 | 8 | Studapart | studapart.com | Étudiants, France et Belgique ; locations de 1 à 24 mois, démarches en ligne | inconnu | Démarches et dossier en ligne | inconnu | [Studapart](https://www.studapart.com/fr), [Diplomeo](https://diplomeo.com/actualite-sites_logement_etudiant), 2026-11-11 |
 | 9 | LocService | locservice.fr | Étudiants et particuliers ; mise en relation inversée, inscription payante (24 € pour étudiants selon une source) | inconnu | Mise en relation via le site ; détail inconnu | inconnu | [LocService](https://www.locservice.fr/logement-etudiant.html), 2026-11-11 |
-| 10 | La Carte des Colocs | lacartedescolocs.com | Colocation, recherche par quartier sur carte | inconnu | inconnu | inconnu | [La Carte des Colocs](https://www.lacartedescolocs.com/housing-guide), 2026-11-11 |
+| 10 | La Carte des Colocs | lacartedescolocs.fr | Colocation, recherche par quartier sur carte | inconnu | inconnu | inconnu | [La Carte des Colocs](https://www.lacartedescolocs.fr/housing-guide), 2026-11-11 |
 
 Non relevés faute de source : Lodgis (aucun résultat), ParuVendu, Facebook Marketplace et groupes Facebook (cités par Luko comme canal, sans chiffres).
 

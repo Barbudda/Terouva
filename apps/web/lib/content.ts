@@ -167,7 +167,7 @@ export const PLATEFORMES = {
     {
       id: "cartedescolocs",
       nom: "La Carte des Colocs",
-      domaine: "lacartedescolocs.com",
+      domaine: "lacartedescolocs.fr",
       etat: "Prochaines vagues" as EtatPlateforme,
       gains: [
         "En colocation, on choisit une personne : votre message dit qui vous êtes.",
