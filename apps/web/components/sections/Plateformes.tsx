@@ -84,18 +84,18 @@ export function Plateformes() {
               data-site={s.id}
               className="plateformes-onglet"
             >
-              <span className="plateformes-tuile" aria-hidden>
+              {/* Plus de badge d'état (Hugo, 11 novembre) : la tuile seule. Le nom
+                  du site est le texte de l'icône, qui donne son nom à l'onglet. */}
+              <span className="plateformes-tuile">
                 <Image
                   src={s.icone}
-                  alt=""
-                  fill
-                  sizes="96px"
+                  alt={s.nom}
+                  width={180}
+                  height={180}
                   unoptimized
                   className="plateformes-icone"
                 />
               </span>
-              {/* Plus de badge d'état (Hugo, 11 novembre) : la tuile seule. */}
-              <span className="sr-only">{s.nom}</span>
             </button>
           );
         })}
