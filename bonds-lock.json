@@ -1,10 +1,10 @@
 {
   "version": 1,
   "bondsHome": "C:\\Users\\hugo8\\OneDrive\\Desktop\\BONDS",
-  "bondsCommit": "983ee38f634c70ac10b1b30e719622d5a72b3039",
+  "bondsCommit": "c5d0291240c84d33e6cf145b24925a766cea6758",
   "loadout": "app-premium",
   "equipeLe": "2026-09-15T15:56:31.694Z",
-  "misAJourLe": "2026-11-05T10:46:33.371Z",
+  "misAJourLe": "2026-11-15T17:03:59.931Z",
   "poles": {
     "seo-geo": {
       "installeLe": "2026-11-04T12:07:48.925Z",
@@ -16,7 +16,7 @@
     },
     "design": {
       "installeLe": "2026-11-05T08:17:19.393Z",
-      "misAJourLe": "2026-11-05T08:17:19.393Z"
+      "misAJourLe": "2026-11-15T17:03:59.734Z"
     }
   },
   "assets": {
@@ -37,9 +37,9 @@
     "skill:signaux-vibecodes": {
       "type": "skill",
       "source": "local",
-      "hash": "29d0cdd1a3f6688727cdcff0eb6aa95571296486",
+      "hash": "b9162c637245fc2df202c9844c1a8242a31ad1d4",
       "cible": ".claude/skills/signaux-vibecodes",
-      "installeLe": "2026-11-04T12:29:04.187Z"
+      "installeLe": "2026-11-15T17:03:59.734Z"
     },
     "skill:frontend-design": {
       "type": "skill",
@@ -275,9 +275,9 @@
     "skill:token-economy": {
       "type": "skill",
       "source": "local:Poliguide/.claude/skills/token-economy",
-      "hash": "36f6e93278f205018f39f06b35d39c85347f41d2",
+      "hash": "caf06beb461b7824ab863220b46d10692fb55e74",
       "cible": ".claude/skills/token-economy",
-      "installeLe": "2026-09-15T15:56:31.694Z"
+      "installeLe": "2026-11-15T17:03:59.734Z"
     },
     "skill:hermes-humanizer": {
       "type": "skill",
@@ -807,9 +807,9 @@
     "skill:banques-references": {
       "type": "skill",
       "source": "local:BONDS",
-      "hash": "c60b0043d82b684356648b16d912d922fcfbd8a5",
+      "hash": "0975924bb2bb16fbc31f1335132600b5cecf31af",
       "cible": ".claude/skills/banques-references",
-      "installeLe": "2026-11-04T12:29:04.187Z"
+      "installeLe": "2026-11-15T17:03:59.734Z"
     },
     "skill:copie-de-reference": {
       "type": "skill",
@@ -849,9 +849,9 @@
     "skill:ecrire-pour-le-client": {
       "type": "skill",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "4f00d72773547621e1fe476da4df752d5694e6b7",
+      "hash": "e10c52d76dd451a18e3b76f0a20afdbf5fbbb76f",
       "cible": ".claude/skills/ecrire-pour-le-client",
-      "installeLe": "2026-11-05T10:46:33.371Z"
+      "installeLe": "2026-11-15T17:03:59.931Z"
     },
     "agent:commerce-audit-textes": {
       "type": "agent",
@@ -884,9 +884,65 @@
     "skill:pole-design": {
       "type": "skill",
       "source": "local:BONDS (créé pour Terouva)",
-      "hash": "cf29b9aa8da84e18fd232eb7f6a63f412db840d7",
+      "hash": "3eebba756009afb5d286415b3aed1a81c4b357e2",
       "cible": ".claude/skills/pole-design",
-      "installeLe": "2026-11-05T10:46:33.371Z"
+      "installeLe": "2026-11-15T17:03:59.734Z"
+    },
+    "skill:banque-design": {
+      "type": "skill",
+      "source": "local:BONDS",
+      "hash": "815a488584997bcac928595e00dc39166ada01db",
+      "cible": ".claude/skills/banque-design",
+      "installeLe": "2026-11-15T17:03:59.734Z"
+    },
+    "agent:critique-utilisateurs": {
+      "type": "agent",
+      "source": "bonds:core/agents/critique-utilisateurs.md",
+      "hash": "33c4be460d84a913252c498453cb05056b6e3d66",
+      "cible": ".claude/agents/critique-utilisateurs.md",
+      "installeLe": "2026-11-15T17:03:59.734Z"
+    },
+    "agent:critique-reference": {
+      "type": "agent",
+      "source": "bonds:core/agents/critique-reference.md",
+      "hash": "54891d658b061b14e4fbfc871544ca5c1e371fd9",
+      "cible": ".claude/agents/critique-reference.md",
+      "installeLe": "2026-11-15T17:03:59.734Z"
+    },
+    "skill:ponytail": {
+      "type": "skill",
+      "source": "https://github.com/DietrichGebert/ponytail",
+      "hash": "fd66456163cb2e5bc2004ff8f52de851e4e1c90a",
+      "cible": ".claude/skills/ponytail",
+      "installeLe": "2026-11-15T17:03:59.931Z"
+    },
+    "skill:ponytail-review": {
+      "type": "skill",
+      "source": "https://github.com/DietrichGebert/ponytail",
+      "hash": "63e37d7c85306336637c9e7e87898f1d10bad818",
+      "cible": ".claude/skills/ponytail-review",
+      "installeLe": "2026-11-15T17:03:59.931Z"
+    },
+    "skill:ponytail-audit": {
+      "type": "skill",
+      "source": "https://github.com/DietrichGebert/ponytail",
+      "hash": "580ae673a78aeff7cbe4b89c9c831a415597f535",
+      "cible": ".claude/skills/ponytail-audit",
+      "installeLe": "2026-11-15T17:03:59.931Z"
+    },
+    "skill:ponytail-debt": {
+      "type": "skill",
+      "source": "https://github.com/DietrichGebert/ponytail",
+      "hash": "d3dc6979948079e7b86f4ae58e2852d5c738f19c",
+      "cible": ".claude/skills/ponytail-debt",
+      "installeLe": "2026-11-15T17:03:59.931Z"
+    },
+    "skill:ponytail-help": {
+      "type": "skill",
+      "source": "https://github.com/DietrichGebert/ponytail",
+      "hash": "7ad8a0d2a62c2548774b325099275774abf12088",
+      "cible": ".claude/skills/ponytail-help",
+      "installeLe": "2026-11-15T17:03:59.931Z"
     }
   },
   "derogations": [

@@ -412,7 +412,7 @@ textes, les fait relire par `commerce-relecteur`, vérifie à l'écran et commit
 <!-- bonds:pole:design:start -->
 ## Pôle Design
 
-> Installé par BONDS le 2026-11-05 (`equip --pole=design`). Bloc régénéré par `/bonds update` :
+> Installé par BONDS le 2026-11-15 (`equip --pole=design`). Bloc régénéré par `/bonds update` :
 > écrire les règles propres au projet hors des balises `bonds:pole:design`.
 
 **Point d'entrée : `/pole-design`.** La cheffe tourne dans la session principale : elle regarde le
@@ -431,6 +431,8 @@ finale mouvement, performance et QA.
 - interaction-designer — Designer d'interactions : curseur custom, hover, drag, navigation animée, carrousels, transitions de page et micro-feedbacks.
 - motion-designer — Expert animation web (GSAP, Framer Motion, ScrollTrigger, Lenis) : chorégraphie des transitions, micro-interactions et scroll.
 - visual-qa — Contrôle qualité visuelle via Playwright : captures desktop/tablette/mobile, bugs visuels, cohérence design et revue d'animations.
+- critique-utilisateurs — Panel de trois visiteurs exigeants qui critiquent sans politesse premières impressions, parcours et boutons importants, et rendent un top 7 des corrections.
+- critique-reference — Directeur artistique impitoyable qui met chaque section du site face à la même section des sites de référence du client et rend, mesures à l'appui, ce qui ne tient pas et les 7 corrections qui en rapprochent le plus.
 
 ### Skills du pôle
 - pole-design — Cheffe du pôle Design : regarde le site une fois, écrit un brief commun à zones disjointes, lance une session par zone dans le même dossier, intègre, fait passer une session finale mouvement et QA, consolide DESIGN.md et nourrit BONDS.
@@ -439,6 +441,7 @@ finale mouvement, performance et QA.
 - signaux-vibecodes — Les 39 signaux qui font dire « site vibecodé » (30 du reel aj.on.ai 2026, 4 relevés sur les projets, 4 de deux reels d'avant/après, 1 du chantier de l'aurore), avec sévérité, raison et alternative, plus un protocole avant / pendant / après pour designer hors défauts.
 - frontend-design — Skill officiel Anthropic de design front-end, réécrit pour lister les tics de page générée (mot accentué, labels en capitales, numéros décoratifs, fade-and-slide-up, trois looks IA) ; graine directe pour signaux-vibecodes.
 - banques-references — Répertoire de banques de références visuelles gratuites rangées par décision : composition, typographie, couleur, mouvement, icônes, texture, 3D, images, primitives accessibles. Chaque entrée dit quel défaut elle aide à fuir, avec licence et coût, plus le protocole des trois sources pour s'en servir sans produire un pastiche.
+- banque-design — Mode d'emploi de la banque de BONDS : trouver une pièce (thème, motion, composant, fond, média) dans le registre, la copier dans le projet, la régler par variables et attributs, la brancher sur le DESIGN.md, et faire remonter les correctifs.
 - copie-de-reference — La méthode pour copier franchement une image de référence envoyée par le client : inventaire des calques avant le code, traduction dans la matière du projet, fonction donnée au décor, extension à toute la page, composition propre au mobile, et preuve par captures côte à côte.
 - rideau-de-lumiere — La recette mesurée d'un hero en aurore, en CSS pur : champ de couleur plein cadre à huit arrêts, stries verticales à deux pas, rideau d'égaliseur masqué par une silhouette SVG calculée au module, bouton rond en vitre sombre, flèches, panneaux en perspective et écho au pied de page. Aucune image, aucun canevas, aucune bibliothèque.
 - emil-animate — Skills d'animation de référence (animate, review-animations, animation-vocabulary, apple-design, prototype) pour vitrine et SaaS.
@@ -448,6 +451,7 @@ finale mouvement, performance et QA.
 - ui-slop-audit — Sept skills UI/UX anti-slop (audit en lecture seule avec preuves, refonte visuelle, flux et états, UX writing, porte qualité) qui diagnostiquent puis corrigent une interface au look générique en respectant la marque existante, pour les loadouts vitrine-premium et saas-webapp.
 - playwright-cli — CLI Playwright pilotée depuis le terminal (open, goto, click, snapshot, screenshot, pdf, traces, mocks réseau) qui sert de preuve visuelle desktop/tablette/mobile ; le skill documente les commandes pour l'agent.
 - verification-before-completion — Impose de prouver qu'un travail est terminé (tests, sortie réelle) avant de le déclarer fini.
+- token-economy — Économie de tokens : plan mode, /compact, sous-agents, sortie plafonnée et maintien d'un CODEMAP du projet.
 
 ### MCP du pôle
 - playwright — Pilotage d'un navigateur (navigation, captures, formulaires) pour tester et vérifier visuellement.
