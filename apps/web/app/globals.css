@@ -1275,13 +1275,12 @@ details > summary::-webkit-details-marker {
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
+/* La seconde ligne garde la même grotesque et la même graisse : seule la
+   couleur change, comme chez FanClaw et Rushlot. La Fraunces italique, essayée
+   d'abord, paraissait plus maigre que la première ligne (critique-reference,
+   15 novembre) et revenait trop souvent (critique-utilisateurs). */
 .titre-section__accent {
   display: block;
-  font-family: var(--font-serif);
-  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 144;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.02em;
   color: var(--color-orange-titre);
 }
 .etiquette-section {

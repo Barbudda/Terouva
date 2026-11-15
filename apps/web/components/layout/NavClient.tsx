@@ -66,9 +66,19 @@ export function NavClient({
   const [compacte, setCompacte] = useState(false);
   const [pouce, setPouce] = useState(false);
   useEffect(() => {
+    // Vague 2 (15 novembre) : les deux critiques ont vu la barre cacher le bas
+    // des cartes pendant toute la descente. Elle se retire quand on descend
+    // (on lit) et revient dès qu'on remonte (on cherche où aller).
+    let dernierY = window.scrollY;
+    let remonte = false;
     const lire = () => {
       const h = window.innerHeight;
-      const loin = window.scrollY > h * 0.7;
+      const y = window.scrollY;
+      if (Math.abs(y - dernierY) > 8) {
+        remonte = y < dernierY;
+        dernierY = y;
+      }
+      const loin = y > h * 0.7;
       setCompacte(loin);
       // Le formulaire visé ou le pied à l'écran (ou déjà passé) : la barre
       // de pouce se retire.
@@ -76,7 +86,7 @@ export function NavClient({
       const formulaire = cible.startsWith("#") ? document.getElementById(id) : null;
       const pied = document.querySelector("footer");
       const atteint = (el: Element | null) => !!el && el.getBoundingClientRect().top < h;
-      setPouce(loin && !atteint(formulaire) && !atteint(pied));
+      setPouce(loin && remonte && !atteint(formulaire) && !atteint(pied));
     };
     lire();
     window.addEventListener("scroll", lire, { passive: true });
