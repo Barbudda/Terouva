@@ -2,9 +2,8 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Plateformes } from "@/components/sections/Plateformes";
-import { Parcours } from "@/components/sections/Parcours";
+import { Etapes } from "@/components/sections/Etapes";
 import { Problem } from "@/components/sections/Problem";
-import { Fonctions } from "@/components/sections/Fonctions";
 import { Messages } from "@/components/sections/Messages";
 import { Outils } from "@/components/sections/Outils";
 import { Inscription } from "@/components/sections/Inscription";
@@ -12,22 +11,21 @@ import { FAQ_ITEMS } from "@/lib/content";
 import { DonneesStructurees } from "@/lib/seo";
 
 /**
- * L'accueil : sept blocs, ce que l'on gagne d'abord.
+ * L'accueil, vague 2 du pôle Design (15 novembre, docs/design/VAGUE-2.md).
+ * Hugo : le minimum, en très grand, à la manière de FanClaw et Rushlot. Après
+ * le plein cadre, tout passe sur crème, coupé par deux bandes nuit.
  *
  *   plein cadre   (Hero)        le titre et la proposition de valeur
- *   scène         (Parcours)    les quatre étapes sur un rail, de l'annonce à l'envoi
- *   avant, après  (Problem)     le gain : la même annonce, sans et avec Terouva
- *   mosaïque      (Fonctions)   ce que fait l'outil, chaque carte illustrée
- *   ruban         (Messages)    les messages qu'il écrit
- *   cartes        (Outils)      les deux outils et les derniers guides
- *   bande nuit    (Inscription) questions et liste d'attente
+ *   crème         (Plateformes) partout où vous cherchez
+ *   crème         (Etapes)      le récit produit, quatre grandes cartes
+ *   nuit          (Problem)     le temps gagné, un chiffre géant
+ *   crème         (Messages)    les messages qu'il écrit
+ *   crème         (Outils)      les outils gratuits
+ *   crème et nuit (Inscription) questions, puis clôture et liste d'attente
  *
  * Le 4 novembre, Hugo : le visiteur veut savoir ce qu'il gagne, pas comment
- * c'est fait. L'explication du fonctionnement (la note et ce qui la compose,
- * la vidéo) sort de la page ; la section sur les données aussi, réduite à une
- * ligne des fonctions et à une question de la FAQ. Le même jour, chaque
- * section reçoit un cadre et un sens de lecture : rail, avant et après,
- * mosaïque, cartes.
+ * c'est fait. Le parcours et les fonctions disaient la même chose en deux
+ * sections : ils ne font plus qu'un récit.
  */
 export default function Home() {
   // Les questions fréquentes balisées remontent parfois directement dans les
@@ -64,9 +62,8 @@ export default function Home() {
       <main className="overflow-x-clip">
         <Hero />
         <Plateformes />
-        <Parcours />
+        <Etapes />
         <Problem />
-        <Fonctions />
         <Messages />
         <Outils />
         <Inscription />

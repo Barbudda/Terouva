@@ -1,0 +1,110 @@
+/* ── Le récit produit en quatre étapes (vague 2 du pôle Design, 15 novembre).
+   Composant : components/sections/Etapes.tsx. La manière de Rushlot : une
+   grande carte claire par étape, l'une sous l'autre, le texte à gauche et la
+   vraie interface à droite, posée dans une scène teintée. La teinte de la
+   scène passe du bleu à l'orange d'une étape à l'autre (`--teinte`). */
+
+.etapes {
+  background: var(--color-paper);
+  padding-block: 5rem;
+}
+@media (min-width: 64rem) {
+  .etapes {
+    padding-block: 8rem;
+  }
+}
+
+.etapes-liste {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 76rem;
+  margin: 3.5rem auto 0;
+}
+@media (min-width: 64rem) {
+  .etapes-liste {
+    gap: 2rem;
+    margin-top: 5rem;
+  }
+}
+
+/* La carte : fond carte, coins de 24 px, une ombre douce venue d'en haut. */
+.etape {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: var(--color-card);
+  box-shadow:
+    0 1px 0 color-mix(in oklch, var(--color-ink) 5%, transparent),
+    0 24px 48px -32px color-mix(in oklch, var(--color-ink) 28%, transparent);
+}
+@media (min-width: 64rem) {
+  .etape {
+    grid-template-columns: 5fr 7fr;
+    align-items: center;
+    gap: 3rem;
+    padding: 2.5rem 2.5rem 2.5rem 3.5rem;
+  }
+}
+
+.etape-titre {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(1.875rem, 1.2rem + 2.4vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+.etape-phrase {
+  margin-top: 1rem;
+  max-width: 30ch;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+  text-wrap: pretty;
+}
+
+/* La scène : un lavis de la teinte de l'étape, l'interface au centre. */
+.etape-scene {
+  display: grid;
+  place-items: center;
+  min-height: 18rem;
+  padding: 2rem 1.25rem;
+  border-radius: 1rem;
+  background:
+    radial-gradient(80% 90% at 85% 10%, color-mix(in oklch, var(--teinte) 34%, transparent), transparent 70%),
+    linear-gradient(160deg, color-mix(in oklch, var(--teinte) 14%, var(--color-paper-2)), var(--color-paper-2));
+}
+@media (min-width: 64rem) {
+  .etape-scene {
+    min-height: 28rem;
+    padding: 3rem;
+  }
+}
+
+/* Les panneaux du haut de page sont dessinés à 13 px : on les agrandit d'un
+   bloc (`zoom` garde la mise en page, contrairement à `scale`). */
+.etape-ecran {
+  width: 100%;
+  max-width: 20rem;
+  zoom: 1.1;
+  border-radius: 0.875rem;
+  box-shadow: 0 30px 60px -30px color-mix(in oklch, var(--color-ink) 45%, transparent);
+}
+@media (min-width: 64rem) {
+  .etape-ecran {
+    max-width: 22rem;
+    zoom: 1.45;
+  }
+}
+
+.etapes-fin {
+  margin-top: 3.5rem;
+  text-align: center;
+}
+@media (min-width: 64rem) {
+  .etapes-fin {
+    margin-top: 5rem;
+  }
+}
