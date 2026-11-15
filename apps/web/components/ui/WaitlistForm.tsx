@@ -63,7 +63,16 @@ function ecrireMemoire(adresse: string | null) {
  * moment). L'adresse est vérifiée ici avec la règle même du serveur
  * (`lib/waitlist.ts`) : une faute de frappe se dit sans aller-retour.
  */
-export function WaitlistForm({ className, dark = false }: { className?: string; dark?: boolean }) {
+export function WaitlistForm({
+  className,
+  dark = false,
+  avant,
+}: {
+  className?: string;
+  dark?: boolean;
+  /** Réassurance placée en tête de l'unique ligne sous le guichet (clôture de l'accueil). */
+  avant?: string;
+}) {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [state, setState] = useState<State>({ kind: "idle" });
@@ -126,6 +135,7 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
 
   const reassurance = (
     <p className={cn("champ mt-4", dark ? "text-night-ink-2" : "text-ink-3")}>
+      {avant && <>{avant} · </>}
       Pas de publicité ·{" "}
       <Link
         href="/confidentialite"
@@ -243,7 +253,8 @@ export function WaitlistForm({ className, dark = false }: { className?: string; 
           aria-disabled={state.kind === "sending" || undefined}
           className="bouton bouton--accent guichet-bouton shrink-0 aria-disabled:opacity-70"
         >
-          {state.kind === "sending" ? "Enregistrement…" : "Me prévenir"}
+          {/* Le même libellé que le bouton du hero et de la navigation : un seul bouton sur la page. */}
+          {state.kind === "sending" ? "Enregistrement…" : "Être prévenu"}
         </button>
       </div>
 

@@ -282,15 +282,34 @@
 
 /* ───────────────────────────── L'arrivée (accueil) ───────────────────────────── */
 
-/* Le titre de l'arrivée reprend la voix du hero, à une marche en dessous. */
-.arrivee-titre {
-  font-size: clamp(2.25rem, 1.1rem + 3.9vw, 4rem);
+/* Vague 2 (15 novembre), à la manière de la clôture FanClaw : le titre d'un
+   cran au-dessus des autres sections, le guichet en grand. Le titre reste le
+   composant commun (`TitreSection`) ; seule sa taille change ici. */
+.arrivee .titre-section {
+  font-size: clamp(2.75rem, 0.9rem + 7.2vw, 6.5rem);
 }
-/* Le filet qui sépare la FAQ de l'arrivée part du centre, vers les bords. */
-.arrivee-filet {
-  transform-origin: center;
+.arrivee .guichet-champ,
+.arrivee .guichet-bouton {
+  height: 4rem;
+  font-size: 1.125rem;
 }
-
+.arrivee .guichet-bouton {
+  font-weight: 600;
+}
+@media (min-width: 640px) {
+  .arrivee .guichet {
+    padding: 0.5rem;
+  }
+  .arrivee .guichet-champ,
+  .arrivee .guichet-champ:focus-visible {
+    height: 4rem;
+    padding-inline: 1.75rem;
+  }
+  .arrivee .guichet-bouton {
+    height: 4rem;
+    padding-inline: 2.5rem;
+  }
+}
 /* ───────────────────────────── Les questions ───────────────────────────── */
 
 /* Ouverture animée là où le navigateur sait animer vers `auto` ; ailleurs le
