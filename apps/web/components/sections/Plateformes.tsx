@@ -1,118 +1,40 @@
-"use client";
-
 import Image from "next/image";
-import { useRef, useState, type KeyboardEvent } from "react";
 import { PLATEFORMES } from "@/lib/content";
+import { TitreSection } from "@/components/ui/TitreSection";
 
 /**
- * La rangée des sites où l'on cherche, juste sous le plein cadre : le visiteur
- * reconnaît les icônes qu'il a sur son téléphone avant de lire quoi que ce
- * soit. Une tuile d'app par site, à la couleur de sa marque, et sous la rangée
- * les deux gains du site choisi.
+ * Les sites où l'on cherche, juste sous le plein cadre. Vague 2 du pôle Design
+ * (15 novembre, docs/design/VAGUE-2.md) : à la manière du « Grow everywhere »
+ * de FanClaw, un titre géant et de grandes icônes, rien d'autre. Le visiteur
+ * reconnaît les applis qu'il a sur son téléphone ; il n'a rien à choisir.
+ * Les onglets et les gains par site ont quitté la page (journal v2-vitrine).
  *
- * Chaque tuile porte l'icône officielle du site (Hugo, 11 novembre : « mets
- * leurs plaquettes »), relevée le même jour dans la balise `apple-touch-icon`
- * de sa page d'accueil et rangée dans `public/plateformes/`. Les noms sont cités
- * pour dire où l'outil agit ; le pied de page dit que Terouva n'a de lien avec
- * aucun de ces sites. La couleur de marque (`styles/plateformes.css`) reste en
- * fond, derrière les icônes transparentes.
- *
- * Motif onglets accessible : une seule tuile dans l'ordre de tabulation, les
- * flèches passent d'un site à l'autre, Début et Fin vont aux extrémités.
+ * Les icônes officielles ont été relevées le 11 novembre dans la balise
+ * `apple-touch-icon` de chaque site (`public/plateformes/`). Le pied de page
+ * dit que Terouva n'a de lien avec aucun d'eux. La couleur de marque
+ * (`styles/plateformes.css`) reste en fond, derrière les icônes transparentes.
  */
-const SITES = PLATEFORMES.liste;
-
 export function Plateformes() {
-  const [choisi, setChoisi] = useState(0);
-  const onglets = useRef<(HTMLButtonElement | null)[]>([]);
-  const site = SITES[choisi];
-
-  const aller = (i: number) => {
-    const j = (i + SITES.length) % SITES.length;
-    setChoisi(j);
-    const onglet = onglets.current[j];
-    onglet?.focus();
-    // Sur téléphone, la rangée défile : la tuile choisie au clavier reste visible.
-    onglet?.scrollIntoView({ block: "nearest", inline: "nearest" });
-  };
-
-  const auClavier = (e: KeyboardEvent<HTMLButtonElement>) => {
-    const cibles: Record<string, number> = {
-      ArrowRight: choisi + 1,
-      ArrowLeft: choisi - 1,
-      Home: 0,
-      End: SITES.length - 1,
-    };
-    if (e.key in cibles) {
-      e.preventDefault();
-      aller(cibles[e.key]);
-    }
-  };
-
   return (
     <section
       id="plateformes"
       aria-labelledby="plateformes-titre"
-      className="plateformes cadre scroll-mt-20"
+      className="plateformes monde-papier scroll-mt-20"
     >
-      <h2 id="plateformes-titre" className="titre text-titre-2 text-ink">
-        {PLATEFORMES.titre}
-      </h2>
-      <p className="mt-3 text-ink-2">{PLATEFORMES.aide}</p>
+      <div className="cadre">
+        <TitreSection id="plateformes-titre" titre={PLATEFORMES.titre} />
 
-      <div
-        role="tablist"
-        aria-labelledby="plateformes-titre"
-        className="plateformes-rangee"
-      >
-        {SITES.map((s, i) => {
-          const actif = i === choisi;
-          return (
-            <button
-              key={s.id}
-              ref={(el) => {
-                onglets.current[i] = el;
-              }}
-              type="button"
-              role="tab"
-              id={`plateforme-${s.id}`}
-              aria-selected={actif}
-              aria-controls="plateformes-gains"
-              tabIndex={actif ? 0 : -1}
-              onClick={() => setChoisi(i)}
-              onKeyDown={auClavier}
-              data-site={s.id}
-              className="plateformes-onglet"
-            >
-              {/* Plus de badge d'état (Hugo, 11 novembre) : la tuile seule. Le nom
-                  du site est le texte de l'icône, qui donne son nom à l'onglet. */}
-              <span className="plateformes-tuile">
-                <Image
-                  src={s.icone}
-                  alt={s.nom}
-                  width={180}
-                  height={180}
-                  unoptimized
-                  className="plateformes-icone"
-                />
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      <div
-        role="tabpanel"
-        id="plateformes-gains"
-        aria-labelledby={`plateforme-${site.id}`}
-        data-site={site.id}
-        className="plateformes-gains"
-      >
-        <p className="champ text-ink-3">{site.domaine}</p>
-        <ul key={site.id} className="bascule mt-4 grid gap-4 md:grid-cols-2 md:gap-8">
-          {site.gains.map((g) => (
-            <li key={g} className="plateformes-gain">
-              {g}
+        <ul className="plateformes-icones">
+          {PLATEFORMES.liste.map((s) => (
+            <li key={s.id} data-site={s.id} className="plateformes-tuile">
+              <Image
+                src={s.icone}
+                alt={s.nom}
+                width={180}
+                height={180}
+                unoptimized
+                className="plateformes-icone"
+              />
             </li>
           ))}
         </ul>

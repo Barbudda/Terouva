@@ -45,94 +45,47 @@
   --site-mot: #1c362b; /* son vert profond : 6,1:1 */
 }
 
+/* ── Vague 2 (15 novembre) : sur crème, le titre géant et les huit icônes en
+   grand, comme le « Grow everywhere » de FanClaw. Rien à choisir, rien à lire :
+   on reconnaît. Rythme commun : 80 px sur téléphone, 128 px sur ordinateur. */
 .plateformes {
-  padding-block: var(--spacing-demi-pas);
+  padding-block: 5rem;
 }
-
-/* ── La rangée. Sur téléphone elle défile au doigt et déborde jusqu'aux
-   bords de l'écran : la tuile coupée à droite dit qu'il y en a d'autres. */
-.plateformes-rangee {
-  --tuile: 4.75rem; /* 76 px à 375 px : au moins 72 px demandés */
-  display: flex;
-  gap: 0.25rem;
-  margin-top: 2rem;
-  margin-inline: calc(-1 * var(--marge-cadre));
-  padding: 0.75rem var(--marge-cadre) 0.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scroll-padding-inline: var(--marge-cadre);
-  scrollbar-width: none;
-  overscroll-behavior-x: contain;
-}
-.plateformes-rangee::-webkit-scrollbar {
-  display: none;
-}
-@media (min-width: 48rem) {
-  .plateformes-rangee {
-    --tuile: 6.5rem;
-    gap: 0.75rem;
-    margin-top: 2.5rem;
-  }
-}
-@media (min-width: 80rem) {
-  /* Sur grand écran les huit tiennent : plus de défilement, la rangée se cale
-     sur la grille. */
-  .plateformes-rangee {
-    --tuile: 7.5rem;
-    justify-content: space-between;
-    margin-inline: 0;
-    padding-inline: 0;
-    overflow: visible;
-  }
-  .plateformes-rangee .plateformes-onglet {
-    width: calc(var(--tuile) + 1.5rem);
+@media (min-width: 64rem) {
+  .plateformes {
+    padding-block: 8rem;
   }
 }
 
-/* L'onglet : la tuile et son badge, empilés. Largeur fixe pour que les
-   badges longs ne poussent pas la rangée. */
-.plateformes-onglet {
-  position: relative;
-  display: flex;
-  flex: none;
-  flex-direction: column;
-  align-items: center;
-  width: calc(var(--tuile) + 2.5rem);
-  scroll-snap-align: start;
-  border-radius: 1.5rem;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+/* Quatre par ligne sur téléphone (deux lignes), huit d'un trait sur grand
+   écran. Les tuiles grandissent avec la largeur, jusqu'à 136 px. */
+.plateformes-icones {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.875rem, 0.4rem + 2vw, 2rem);
+  max-width: 72rem;
+  margin: 3rem auto 0;
 }
-.plateformes-onglet:focus-visible {
-  outline: 2px solid var(--color-blue-clair);
-  outline-offset: 4px;
+@media (min-width: 64rem) {
+  .plateformes-icones {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    margin-top: 4.5rem;
+  }
 }
 
 /* La tuile : une icône d'app. Le rayon suit celui des icônes de téléphone
-   (22 % du côté) ; c'est la référence qui le demande, pas un arrondi de carte. */
+   (22 % du côté) ; c'est la référence qui le demande, pas un arrondi de carte.
+   Une seule ombre, vers le bas, douce : la tuile est posée sur le crème. */
 .plateformes-tuile {
-  container-type: inline-size;
-  display: grid;
-  place-items: center;
-  width: var(--tuile);
-  aspect-ratio: 1;
-  padding: 8%;
-  border-radius: 22%;
-  background: var(--site);
-  color: var(--site-mot);
-  /* Un liseré clair en haut, une ombre d'un seul côté : la tuile est posée. */
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.22),
-    0 10px 24px -12px rgb(0 0 0 / 0.7);
-  transition:
-    translate 220ms var(--ease-terouva),
-    box-shadow 220ms var(--ease-terouva);
-}
-/* L'icône officielle remplit la tuile ; la tuile garde l'arrondi et l'ombre. */
-.plateformes-tuile:has(.plateformes-icone) {
   position: relative;
   overflow: hidden;
-  padding: 0;
+  width: 100%;
+  max-width: 8.5rem;
+  justify-self: center;
+  aspect-ratio: 1;
+  border-radius: 22%;
+  background: var(--site);
+  box-shadow: 0 18px 32px -18px rgb(23 24 26 / 0.45);
 }
 .plateformes-icone {
   position: absolute;
@@ -140,72 +93,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-@media (hover: hover) {
-  .plateformes-onglet:hover .plateformes-tuile {
-    translate: 0 -2px;
-  }
-}
-/* Le site choisi se lève et prend un anneau bleu, séparé de la tuile par un
-   liseré de nuit pour que l'anneau se lise même sur la tuile bleue de PAP. */
-.plateformes-onglet[aria-selected="true"] .plateformes-tuile {
-  translate: 0 -3px;
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.22),
-    0 0 0 3px var(--color-paper),
-    0 0 0 5px var(--color-blue-clair),
-    0 14px 28px -12px rgb(0 0 0 / 0.8);
-}
-
-/* ── Le badge d'état, posé sur le bas de la tuile comme les « Add-on » de la
-   référence. « À l'ouverture » à l'orange d'action, texte minuit (7,42:1) ;
-   « Prochaines vagues » en retrait, encre-2 sur panneau (8,6:1). */
-.plateformes-badge {
-  position: relative; /* au-dessus de la tuile et de son anneau */
-  z-index: 1;
-  margin-top: -0.7rem;
-  padding: 0.25rem 0.55rem;
-  border: 1px solid var(--color-rule-fort);
-  border-radius: 999px;
-  background: var(--color-night-2);
-  color: var(--color-ink-2);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-.plateformes-badge--ouverture {
-  border-color: transparent;
-  background: var(--color-action);
-  color: var(--color-action-ink);
-  font-weight: 600;
-}
-
-/* ── Les gains du site choisi : un filet à la couleur de sa marque, puis
-   les deux phrases. */
-.plateformes-gains {
-  margin-top: 2rem;
-  padding-top: 1.25rem;
-  border-top: 2px solid var(--site);
-  max-width: 60rem;
-  transition: border-color 220ms var(--ease-terouva);
-}
-.plateformes-gain {
-  color: var(--color-ink);
-  font-size: 1.0625rem;
-  line-height: 1.45;
-  text-wrap: pretty;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .plateformes-tuile,
-  .plateformes-gains {
-    transition: none;
-  }
-  .plateformes-onglet[aria-selected="true"] .plateformes-tuile {
-    translate: none;
-  }
 }
 
 /* ───────── L'annonce du parcours (HeroExemples, panneau « L'alerte arrive ») ─────────

@@ -130,98 +130,9 @@
   transition: transform 420ms var(--ease-terouva) calc(500ms + var(--rang) * 90ms);
 }
 
-/* ─────────────────────────── Messages : les lettres ───────────────────────────
-   Les fiches du ruban sont des feuilles de papier chaud (.monde-papier
-   redéfinit les jetons) : encre #17181a sur papier #f7f3ed, 16:1 ; gris
-   #4e5154, 7,2:1 ; gris clair #64686b, 5:1. Plus courtes que les gabarits de
-   la coquille : on n'en montre que l'accroche, la lettre entière s'ouvre. */
-#messages .ruban-fiche {
-  height: calc(var(--hauteur, 29rem) * 0.72);
-}
-.lettre {
-  border-radius: 3px;
-  box-shadow: 0 26px 40px -26px rgb(0 0 0 / 0.9);
-  transition: transform 220ms var(--ease-terouva);
-}
-.lettre:hover,
-.lettre:focus-within {
-  transform: translateY(-6px);
-}
-.lettre-feuille {
-  cursor: pointer;
-  border-radius: inherit;
-}
-.lettre-feuille:focus-visible {
-  outline-offset: 4px;
-}
-
-/* Le panneau de lecture. */
-.lecture {
-  width: min(40rem, calc(100vw - 2rem));
-  max-width: none;
-  max-height: none;
-  margin: auto;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  overflow: visible;
-}
-.lecture::backdrop {
-  background: color-mix(in oklch, var(--color-paper) 72%, transparent);
-  backdrop-filter: blur(6px);
-}
-.lecture-feuille {
-  max-height: calc(100dvh - 3rem);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 1.5rem;
-  border-radius: 4px;
-  box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.9);
-}
-@media (min-width: 640px) {
-  .lecture-feuille {
-    padding: 2.5rem 3rem;
-  }
-}
-.lecture-fermer {
-  display: flex;
-  width: 2.75rem;
-  height: 2.75rem;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  color: var(--color-ink-2);
-  transition: background-color 180ms var(--ease-terouva);
-}
-.lecture-fermer:hover {
-  background: var(--color-muted);
-}
-@keyframes lecture-monte {
-  from {
-    transform: translateY(14px);
-    opacity: 0;
-  }
-}
-@keyframes lecture-voile {
-  from {
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .lecture[open] .lecture-feuille {
-    animation: lecture-monte 320ms var(--ease-terouva);
-  }
-  .lecture[open]::backdrop {
-    animation: lecture-voile 240ms var(--ease-terouva);
-  }
-}
-
 /* Sans mouvement : rien ne se déplace, rien ne se remplit sous les yeux. */
 @media (prefers-reduced-motion: reduce) {
   .fil-notif,
-  .lettre,
   .instrument .cadran-arc,
   .instrument .suivi-barre {
     transition: none !important;
@@ -229,22 +140,79 @@
   .fil-arrive {
     animation: none;
   }
-  .lettre:hover,
-  .lettre:focus-within {
-    transform: none;
+}
+
+/* ─────────────────────────── Messages : trois lettres ─────────────────────────
+   Vague 2 (15 novembre) : sur crème (.monde-papier), trois lettres entières en
+   grand, comme le fil d'actions de FanClaw. Carte du monde papier (#fdfbf7),
+   coins de 24 px, une ombre douce vers le bas. Encre #17181a sur la carte :
+   16:1 ; gris #64686b : 5,3:1. Rythme commun : 80 px puis 128 px. */
+.messages {
+  padding-block: 5rem;
+}
+@media (min-width: 64rem) {
+  .messages {
+    padding-block: 8rem;
   }
 }
 
-/* Le ruban de la coquille fond ses bords sur 64 px ; sur du papier, ce fondu se
-   lit comme une ombre sale. Ici, un fondu court : la feuille sort du cadre. */
-#messages .ruban {
-  mask-image: linear-gradient(90deg, transparent, #000 1rem, #000 calc(100% - 1rem), transparent);
+/* Téléphone : une rangée qui glisse au doigt, la lettre suivante dépasse à
+   droite pour dire qu'il y en a d'autres. Rien ne défile tout seul. */
+.messages-lettres {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding: 0.5rem var(--marge-cadre) 2.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--marge-cadre);
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
 }
-/* Le bleu de lien sur papier (#0a6aa8, 5,2:1) au survol du signe « ouvrir ». */
-.lettre-ouvrir {
-  transition: color 180ms var(--ease-terouva);
+.messages-lettres::-webkit-scrollbar {
+  display: none;
 }
-.lettre:hover .lettre-ouvrir,
-.lettre:focus-within .lettre-ouvrir {
-  color: var(--color-accent-ink);
+.messages-lettre {
+  flex: none;
+  width: min(86%, 26rem);
+  padding: 1.75rem 1.5rem;
+  scroll-snap-align: start;
+  border: 1px solid var(--color-rule);
+  border-radius: 1.5rem;
+  background: var(--color-card);
+  box-shadow: 0 24px 48px -28px rgb(23 24 26 / 0.35);
+}
+
+/* Ordinateur : les trois tiennent dans le cadre, celle du milieu avance d'un
+   cran et passe devant ; les deux autres s'inclinent à peine vers elle. */
+@media (min-width: 64rem) {
+  .messages-lettres {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    gap: 0;
+    max-width: 80rem;
+    margin: 4.5rem auto 0;
+    padding: 0 var(--marge-cadre);
+    overflow: visible;
+  }
+  .messages-lettre {
+    width: auto;
+    padding: 2.25rem 2rem;
+  }
+  .messages-lettre:nth-child(1) {
+    margin-top: 3rem;
+    margin-right: -1.5rem;
+    rotate: -2deg;
+  }
+  .messages-lettre:nth-child(2) {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 36px 64px -30px rgb(23 24 26 / 0.45);
+  }
+  .messages-lettre:nth-child(3) {
+    margin-top: 3rem;
+    margin-left: -1.5rem;
+    rotate: 2deg;
+  }
 }

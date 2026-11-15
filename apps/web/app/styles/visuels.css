@@ -72,3 +72,65 @@
     box-shadow: 0 30px 60px -28px rgb(0 0 0 / 0.7);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Accueil, section Outils (vague 2, 15 novembre) : sur crème, trois cartes
+   comme le « 3 steps » de FanClaw. Carte du monde papier, coins de 24 px, une
+   ombre douce vers le bas ; la vignette prend le haut de la carte sur fond
+   cendre (#efe9e0), un cran sous le crème. Au survol, la carte monte de 4 px
+   et la vignette lève son objet (.vg-objet plus haut) : un seul mouvement.
+   Rythme commun : 80 px sur téléphone, 128 px sur ordinateur.
+   --------------------------------------------------------------------------- */
+.outils {
+  padding-block: 5rem;
+}
+@media (min-width: 64rem) {
+  .outils {
+    padding-block: 8rem;
+  }
+}
+.outils-cartes {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 76rem;
+  margin: 3rem auto 0;
+}
+@media (min-width: 48rem) {
+  .outils-cartes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 4.5rem;
+  }
+}
+.outils-carte {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-rule);
+  border-radius: 1.5rem;
+  background: var(--color-card);
+  box-shadow: 0 24px 48px -30px rgb(23 24 26 / 0.35);
+  transition:
+    translate 240ms var(--ease-terouva),
+    box-shadow 240ms var(--ease-terouva);
+}
+.outils-carte:hover {
+  translate: 0 -4px;
+  box-shadow: 0 32px 56px -30px rgb(23 24 26 / 0.45);
+}
+.outils-carte:focus-visible {
+  outline: 2px solid var(--color-accent-ink);
+  outline-offset: 3px;
+}
+.outils-vignette {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-rule);
+}
+@media (prefers-reduced-motion: reduce) {
+  .outils-carte { transition: none; }
+  .outils-carte:hover { translate: none; }
+}
