@@ -36,13 +36,14 @@
 
 ## Ouvert
 
-- **Avant une vague 11, retravailler l'existant** (bilan de la vague 10 dans `MESURES-TOKENS.md` : le
-  gisement s'épuise, 7 sujets sains sur 80 débuts de requête) :
-  - 8 descriptions d'articles de plus de 165 signes et 5 articles à 80-130 impressions sans clic,
-    titre et description à revoir (`JOURNAL.md`, entrée du 15/11 de la session référencement) ;
-  - maillage suggéré par Septune, par exemple `/guides/etat-des-lieux` vers
-    `/blog/documents-proprietaire-doit-fournir-location` ;
-  - à sonder en vague 11 : « entrer dans une colocation existante » (`PLAN-VAGUE-10.md`, Écartés).
+- **Reprise de l'existant faite le 2026-11-15** (`JOURNAL.md`, entrée « Reprise de l'existant ») : les
+  descriptions « trop longues » étaient un faux positif du parcours (entités HTML non décodées, à
+  corriger dans BONDS) ; deux titres et deux descriptions repris des requêtes ; lien du guide état des
+  lieux vers les documents du propriétaire. **Mesurer l'effet vers le 29/11** (Search Console).
+- Le gisement du périmètre « recherche » s'épuise (7 sujets sains sur 80 débuts de requête en vague 10) :
+  une vague 11 attend la mesure du 29/11. À sonder alors : « entrer dans une colocation existante »
+  (`PLAN-VAGUE-10.md`, Écartés) ; cannibalisation guide / articles du pilier C (garant) à vérifier
+  avant tout nouvel article sur le garant.
 - Circuit actuel : des **agents neufs** de la session du chef (plan, rédacteurs, relecteur). Vider une
   session par `clear_session` a été refusé par le classifieur du mode auto le 2026-11-15.
 - Âge Visale tranché le 2026-11-15 (visale.fr et F33453) : « 30 ans ou moins », « à partir de 31 ans ».

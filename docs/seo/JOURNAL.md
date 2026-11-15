@@ -312,3 +312,25 @@ sur 106 et pas `/blog` ; les trois outils ne liaient aucun article.
 - Coût : 17 points de la fenêtre de 5 h, pôles Design et référencement actifs en même temps.
 - Leçon : le checkout est partagé ; les commits du référencement sont partis à 21 h 14 sans porte
   Septune, avec ceux du Design. Contrôle après coup par le chef : aucune régression.
+
+## 2026-11-15 (nuit) — Reprise de l'existant après la vague 10
+
+- **Descriptions « de plus de 165 signes » : faux positif.** Le parcours (`verif-site-en-ligne`,
+  `parcourir.mjs`) compte les entités HTML sans les décoder : `&#x27;` vaut 6 signes au lieu d'une
+  apostrophe. Le texte réel des 8 articles tient sous 155 signes, limite déjà imposée par le
+  vérificateur. Rien à corriger dans les articles ; le script est à corriger dans BONDS.
+- **Articles affichés sans clic** (Search Console, 15/10 au 12/11 ; peu d'impressions par requête, 7 au
+  plus, donc signal faible) : deux titres de recherche reprennent la question tapée (« Peut-on être
+  garant de plusieurs personnes ? », « Peut-on changer de garant en cours de bail ? ») ; deux
+  descriptions répondent d'abord « Oui » (garant de plusieurs, louer sans avis d'imposition, qui
+  nomme Visale). `a-quel-age-louer-un-appartement` et `acompte-reservation-location-appartement`
+  laissés tels quels : leur titre suit déjà la requête. Effet à mesurer à J+14 (vers le 29/11).
+- **Maillage** : le guide état des lieux renvoie vers les documents que le propriétaire doit fournir.
+  Les trois liens proposés par Septune sont écartés : curatelle ↔ RIB (similarité de gabarit, sujets
+  sans rapport) et accueil → DossierFacile (accueil des pôles Commerce et Design).
+- Trois intitulés internes de faits Visale suivent la règle d'âge tranchée (« 30 ans ou moins »).
+- Porte Septune `compare_sites` (production contre prévisualisation de `second/auto`) : aucun problème
+  nouveau ni aggravé ; score 98 → 92 dû au seul `noindex` de prévisualisation. Puis production,
+  contrôle des titres et du lien en ligne, IndexNow (136 adresses, HTTP 200).
+- Build local en échec sur une erreur OneDrive (`readlink EINVAL` dans `.next`, dossier partagé avec
+  un autre serveur) ; le build de prévisualisation Vercel a servi de contrôle.
