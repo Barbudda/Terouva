@@ -7,6 +7,7 @@ import { FinDePage } from "@/components/layout/FinDePage";
 import { GenerateurMessage } from "@/components/outils/GenerateurMessage";
 import { BandeNuit } from "@/components/layout/coquilles/BandeNuit";
 import { Questions } from "@/components/ui/Questions";
+import { ArticlesLies } from "@/components/blog/ArticlesLies";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { OUTILS } from "@/lib/catalogue";
 import { getSiteUrl } from "@/lib/site";
@@ -289,6 +290,9 @@ export default function OutilMessage() {
               .
             </p>
           </section>
+
+          {/* Maillage outil → blog : les articles du guide qui explique l'outil. */}
+          <ArticlesLies chemin="/guides/repondre-a-une-annonce-de-location" />
 
           <FinDePage />
         </div>

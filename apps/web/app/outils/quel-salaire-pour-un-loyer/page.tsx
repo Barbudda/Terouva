@@ -8,6 +8,7 @@ import { CalculLoyer } from "@/components/outils/CalculLoyer";
 import { BandeNuit } from "@/components/layout/coquilles/BandeNuit";
 import { Questions } from "@/components/ui/Questions";
 import { OUTILS } from "@/lib/catalogue";
+import { ArticlesLies } from "@/components/blog/ArticlesLies";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
@@ -188,6 +189,9 @@ export default function OutilSalaireLoyer() {
           </section>
 
           <Questions questions={QUESTIONS} className="mt-16 max-w-3xl" />
+
+          {/* Maillage outil → blog : les articles du guide qui explique l'outil. */}
+          <ArticlesLies chemin="/guides/garantie-visale" />
 
           <div className="max-w-3xl">
             <FinDePage

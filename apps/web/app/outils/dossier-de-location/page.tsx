@@ -8,6 +8,7 @@ import { ListeDossier } from "@/components/outils/ListeDossier";
 import { BandeNuit } from "@/components/layout/coquilles/BandeNuit";
 import { Questions } from "@/components/ui/Questions";
 import { OUTILS } from "@/lib/catalogue";
+import { ArticlesLies } from "@/components/blog/ArticlesLies";
 import { DonneesStructurees, filAriane, pageMetadata } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site";
 
@@ -206,6 +207,9 @@ export default function OutilDossier() {
           </section>
 
           <Questions questions={QUESTIONS} className="mt-16 max-w-3xl" />
+
+          {/* Maillage outil → blog : les articles du guide qui explique l'outil. */}
+          <ArticlesLies chemin="/guides/dossier-de-location" />
 
           <div className="max-w-3xl">
             <FinDePage
