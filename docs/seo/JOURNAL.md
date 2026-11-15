@@ -251,3 +251,51 @@ Gains :
 - Ouvert : âge Visale à trancher sur la source (F33453 écrit « jusqu'à moins de 30 ans » dans son
   introduction, « 30 ans et moins » dans ses titres) ; demande réelle hors plan sur la moisissure et le
   loyer impayé (locataire déjà installé), à décider avec Hugo.
+
+## 2026-11-15 — Petite session référencement : mesures et corrections techniques
+
+### Mesures production avant (2026-11-15)
+| Métrique | Valeur | Outil |
+|---|---|---|
+| metadata / indexing / structure / schema / framework | 99 / 100 / 100 / 100 / 100 | Septune audit_site (24 pages) |
+| images / internal-linking / performance | 89 / 97 / 91 | Septune audit_site |
+| GEO | 96 (seul avertissement : `sameAs`) ; 76 titres en question ; 18/24 pages avec schéma de réponse | Septune geo_audit |
+| Liens morts | 0 sur tout le site | parcourir.mjs |
+| Descriptions > 165 signes | 10 (`/outils`, `/cgu`, 8 articles du blog) | parcourir.mjs |
+| Search Console, 15/10 au 12/11 | **88 pages avec impressions** (le blog est indexé), ~30 clics ; de 8 impressions/jour fin octobre à 250-450 depuis le 6/11 | blogseo query_search_console |
+| Accueil après le pôle Design | un seul h1, titre et description en place, WebSite + Organization + FAQPage valides, 9 images `alt=""` décoratives (faux positif Septune) | audit_page, curl |
+
+Constats : les articles se placent en position 4 à 10, les **guides restent en 33 à 80** sur les
+requêtes génériques (« garant location », « louer sans garant ») ; le guide « répondre à une annonce »
+a 158 impressions en position 5,7 du 6 au 12/11 et aucun clic ; `llms.txt` ne citait que 10 articles
+sur 106 et pas `/blog` ; les trois outils ne liaient aucun article.
+
+### Corrections (commits `c7eb649`, `feb15c4`, non poussés)
+- `llms.txt` : les 106 articles par pilier, avec les pages de pilier, et `/blog` dans les pages.
+- Schéma `Organization` : description (même phrase que le site) et `sameAs` branché sur une liste vide
+  à remplir dans `app/layout.tsx` quand Hugo aura créé les profils (`docs/seo/autorite/PROFILS.md`).
+- Titre du guide « répondre » : « « Je suis intéressé par votre annonce » : modèle », la phrase tapée.
+- Descriptions de `/outils` (169 → 156) et `/cgu` (169 → 143).
+- Bloc « Articles liés » sous les trois outils (articles du guide qui explique chaque outil).
+- Vérifié : typecheck, 1 501 tests, build ; bloc vérifié en 375 px, sans débordement.
+
+### Reste ouvert
+- 8 descriptions d'articles > 165 signes (`garant-location-fonctionnaire` 184, `louer-sans-avis-d-imposition`
+  184, `procuration-etat-des-lieux` 173, `taxe-ordures-menageres-locataire` 171, `detecteur-de-fumee-location`
+  171, `garant-obligatoire-en-cdi` 168, `attestation-hebergement-dossier-location` 168,
+  `logement-decent-criteres-visite` 167) : au blog, après la vague 10.
+- Articles à fortes impressions sans clic (`a-quel-age-louer-un-appartement` 130, `changer-de-garant-en-cours-de-bail`
+  99, `acompte-reservation-location-appartement` 92, `etre-garant-de-plusieurs-locataires` 81,
+  `louer-sans-avis-d-imposition` 81) : titre et description à reprendre au blog.
+- Guides mal placés face à leurs propres articles : vérifier la cannibalisation guide / articles du
+  pilier C (garant) avant d'écrire d'autres articles sur le garant.
+- Mesurer l'effet du nouveau titre « répondre » à J+14 (Search Console).
+
+### Ne dépend que d'Hugo, par ordre de gain
+1. Search Console : déclarer `https://terouva.com/sitemap.xml` (Sitemaps) si ce n'est pas fait, puis
+   lire le rapport « Pages » (indexées / explorées non indexées).
+2. Demander l'indexation (Inspection d'URL) des pages clés : `/`, `/guides/repondre-a-une-annonce-de-location`,
+   `/guides/garant-caution`, `/guides/louer-sans-garant`, `/outils/quel-salaire-pour-un-loyer`, `/blog`.
+3. Créer les profils `sameAs` (LinkedIn personnel puis page Terouva, Crunchbase, Peerlist) avec les
+   textes de `docs/seo/autorite/PROFILS.md`, et envoyer les URL.
+4. Recharger des unités d'API Semrush (volumes de recherche, positions des concurrents).
