@@ -153,6 +153,12 @@
    flou calculé. */
 .halo {
   isolation: isolate;
+  /* Le champ déborde de 91 px sous le hero (inset bas négatif). Tant que la
+     section suivante était nuit, ça se fondait ; sur le crème de la vague 2,
+     il se peignait par-dessus en voile blanchâtre (Hugo, 15 novembre : « c'est
+     moche ce blanc qui passe au-dessus du hero »). On coupe net en bas, en
+     laissant libre le débord du haut, derrière la barre de navigation. */
+  clip-path: inset(-100vh 0 0 0);
 }
 .halo::before,
 .halo::after {
