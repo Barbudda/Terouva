@@ -134,3 +134,13 @@
   .outils-carte { transition: none; }
   .outils-carte:hover { translate: none; }
 }
+
+/* Critiques du 15 novembre : sur crème, les bâtons du petit rideau se lisent
+   comme une règle graduée. Ils sortent des cartes de l'accueil (premier groupe
+   du SVG, voir Vignette.tsx), et l'objet dessiné grandit pour remplir la place. */
+.outils-vignette .vg > g:first-of-type {
+  display: none;
+}
+.outils-vignette .vg > g:last-of-type {
+  transform: translate(200px, 125px) scale(1.16);
+}

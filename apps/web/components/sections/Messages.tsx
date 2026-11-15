@@ -3,9 +3,10 @@ import { TitreSection } from "@/components/ui/TitreSection";
 
 /**
  * Les messages que Terouva écrit. Vague 2 du pôle Design (15 novembre,
- * docs/design/VAGUE-2.md) : sur crème, trois lettres entières, en grand, posées
- * côte à côte comme le fil d'actions de FanClaw. Plus de ruban qui défile ni de
- * panneau de lecture : la lettre se lit là où elle est.
+ * docs/design/VAGUE-2.md) : sur crème, une lettre entière au premier plan, les
+ * deux autres en pile derrière elle, en partie cachées, comme la carte de
+ * FanClaw qui laisse deviner la suivante. Un seul point focal ; sur téléphone,
+ * la lettre du dessus seule.
  *
  * Ce ne sont pas des avis de clients : le produit n'est pas sorti, et inventer
  * des témoignages tromperait les visiteurs. Ce sont les brouillons produits par
@@ -29,11 +30,11 @@ export function Messages() {
         </p>
       </div>
 
-      {/* Sur téléphone, les lettres glissent au doigt ; sur ordinateur, elles
-          tiennent toutes les trois, celle du milieu en avant. */}
-      <ul className="messages-lettres" aria-label="Exemples de messages écrits par Terouva">
-        {LETTRES.map((m) => (
-          <Lettre key={m.annonce} message={m} />
+      {/* La première lettre est devant ; les deux autres dépassent derrière,
+          à gauche et à droite. Sur téléphone, elles disparaissent. */}
+      <ul className="messages-pile" aria-label="Exemples de messages écrits par Terouva">
+        {LETTRES.map((m, i) => (
+          <Lettre key={m.annonce} message={m} place={i} />
         ))}
       </ul>
     </section>
@@ -46,9 +47,9 @@ function expediteur(texte: string) {
   return dernier.split("\n")[1] ?? "";
 }
 
-function Lettre({ message }: { message: MessageExemple }) {
+function Lettre({ message, place }: { message: MessageExemple; place: number }) {
   return (
-    <li className="messages-lettre">
+    <li className="messages-lettre" data-place={place}>
       <p className="flex items-baseline justify-between gap-3 border-b border-rule pb-4">
         <span className="truncate font-serif text-[22px] italic text-ink">{expediteur(message.texte)}</span>
         <span className="shrink-0 text-[13px] text-ink-3">Ton {message.ton.toLowerCase()}</span>

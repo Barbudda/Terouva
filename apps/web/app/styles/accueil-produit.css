@@ -142,11 +142,11 @@
   }
 }
 
-/* ─────────────────────────── Messages : trois lettres ─────────────────────────
-   Vague 2 (15 novembre) : sur crème (.monde-papier), trois lettres entières en
-   grand, comme le fil d'actions de FanClaw. Carte du monde papier (#fdfbf7),
-   coins de 24 px, une ombre douce vers le bas. Encre #17181a sur la carte :
-   16:1 ; gris #64686b : 5,3:1. Rythme commun : 80 px puis 128 px. */
+/* ─────────────────────────── Messages : la pile de lettres ────────────────────
+   Vague 2 (15 novembre), après les critiques : une lettre au premier plan, les
+   deux autres posées derrière, en partie cachées. Un seul point focal. Carte
+   du monde papier (#fdfbf7), coins de 24 px, une ombre douce vers le bas.
+   Encre #17181a sur la carte : 16:1 ; gris #64686b : 5,3:1. */
 .messages {
   padding-block: 5rem;
 }
@@ -156,63 +156,54 @@
   }
 }
 
-/* Téléphone : une rangée qui glisse au doigt, la lettre suivante dépasse à
-   droite pour dire qu'il y en a d'autres. Rien ne défile tout seul. */
-.messages-lettres {
-  display: flex;
-  gap: 1rem;
-  margin-top: 3rem;
-  padding: 0.5rem var(--marge-cadre) 2.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--marge-cadre);
-  scrollbar-width: none;
-  overscroll-behavior-x: contain;
-}
-.messages-lettres::-webkit-scrollbar {
-  display: none;
+/* Les trois lettres dans la même case de grille : la pile prend la hauteur de
+   la plus longue, les lettres de derrière se décalent par transformation. */
+.messages-pile {
+  display: grid;
+  max-width: 36rem;
+  margin: 3rem auto 0;
+  padding-inline: var(--marge-cadre);
 }
 .messages-lettre {
-  flex: none;
-  width: min(86%, 26rem);
+  grid-area: 1 / 1;
+  align-self: start;
   padding: 1.75rem 1.5rem;
-  scroll-snap-align: start;
   border: 1px solid var(--color-rule);
   border-radius: 1.5rem;
   background: var(--color-card);
   box-shadow: 0 24px 48px -28px rgb(23 24 26 / 0.35);
 }
+.messages-lettre[data-place="0"] {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 40px 72px -32px rgb(23 24 26 / 0.5);
+}
+/* Téléphone : la lettre du dessus seule. */
+.messages-lettre:not([data-place="0"]) {
+  display: none;
+}
 
-/* Ordinateur : les trois tiennent dans le cadre, celle du milieu avance d'un
-   cran et passe devant ; les deux autres s'inclinent à peine vers elle. */
 @media (min-width: 64rem) {
-  .messages-lettres {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    align-items: start;
-    gap: 0;
-    max-width: 80rem;
-    margin: 4.5rem auto 0;
-    padding: 0 var(--marge-cadre);
-    overflow: visible;
+  .messages-pile {
+    max-width: 40rem;
+    margin-top: 4.5rem;
+    padding-inline: 0;
   }
   .messages-lettre {
-    width: auto;
-    padding: 2.25rem 2rem;
+    padding: 2.25rem 2.25rem;
   }
-  .messages-lettre:nth-child(1) {
-    margin-top: 3rem;
-    margin-right: -1.5rem;
-    rotate: -2deg;
+  /* Derrière, à gauche et à droite : elles dépassent d'un bon tiers, inclinées,
+     un peu plus basses, et s'effacent sous un voile de crème. */
+  .messages-lettre:not([data-place="0"]) {
+    display: block;
+    opacity: 0.7;
   }
-  .messages-lettre:nth-child(2) {
-    position: relative;
+  .messages-lettre[data-place="1"] {
     z-index: 1;
-    box-shadow: 0 36px 64px -30px rgb(23 24 26 / 0.45);
+    transform: translate(-46%, 2.5rem) rotate(-5deg) scale(0.92);
   }
-  .messages-lettre:nth-child(3) {
-    margin-top: 3rem;
-    margin-left: -1.5rem;
-    rotate: 2deg;
+  .messages-lettre[data-place="2"] {
+    z-index: 1;
+    transform: translate(46%, 2.5rem) rotate(5deg) scale(0.92);
   }
 }

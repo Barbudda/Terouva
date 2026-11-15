@@ -17,3 +17,8 @@ Trois sections passent sur crème (`monde-papier`), titre `TitreSection` centré
 - `components/layout/coquilles/Mosaique.tsx` n'est plus utilisé par l'accueil.
 
 Vérifié : `tsc --noEmit` propre ; captures 1440 et 375 en mouvement réduit regardées.
+
+## Passe des critiques (15 novembre)
+- Plateformes : le nom sous chaque icône ; les onglets reviennent, et une grande carte sous la rangée montre les deux gains du site choisi (textes `gains` repris de `lib/content.ts`).
+- Messages : une pile, la lettre de Camille devant, Yanis et Awa derrière, inclinées et en partie cachées ; à 375 px, la lettre du dessus seule.
+- Outils : plus de bâtons sous les vignettes de l'accueil (masqués en CSS, `Vignette.tsx` intact), objet agrandi de 16 %.

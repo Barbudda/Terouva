@@ -45,9 +45,9 @@
   --site-mot: #1c362b; /* son vert profond : 6,1:1 */
 }
 
-/* ── Vague 2 (15 novembre) : sur crème, le titre géant et les huit icônes en
-   grand, comme le « Grow everywhere » de FanClaw. Rien à choisir, rien à lire :
-   on reconnaît. Rythme commun : 80 px sur téléphone, 128 px sur ordinateur. */
+/* ── Vague 2 (15 novembre) : sur crème, comme le « Grow everywhere » de
+   FanClaw. Titre géant, huit icônes nommées, et sous la rangée une grande
+   carte qui montre les deux gains du site choisi. Rythme : 80 px puis 128 px. */
 .plateformes {
   padding-block: 5rem;
 }
@@ -57,13 +57,12 @@
   }
 }
 
-/* Quatre par ligne sur téléphone (deux lignes), huit d'un trait sur grand
-   écran. Les tuiles grandissent avec la largeur, jusqu'à 136 px. */
+/* Quatre par ligne sur téléphone (deux lignes), huit d'un trait dès 1024 px. */
 .plateformes-icones {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(0.875rem, 0.4rem + 2vw, 2rem);
-  max-width: 72rem;
+  gap: 1.25rem clamp(0.5rem, 0.2rem + 1.6vw, 1.75rem);
+  max-width: 76rem;
   margin: 3rem auto 0;
 }
 @media (min-width: 64rem) {
@@ -73,19 +72,36 @@
   }
 }
 
+/* L'onglet : la tuile, puis le nom du site. */
+.plateformes-onglet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.plateformes-onglet:focus-visible {
+  outline: 2px solid var(--color-accent-ink);
+  outline-offset: 6px;
+}
+
 /* La tuile : une icône d'app. Le rayon suit celui des icônes de téléphone
-   (22 % du côté) ; c'est la référence qui le demande, pas un arrondi de carte.
-   Une seule ombre, vers le bas, douce : la tuile est posée sur le crème. */
+   (22 % du côté) ; une seule ombre, vers le bas, douce. */
 .plateformes-tuile {
   position: relative;
   overflow: hidden;
   width: 100%;
   max-width: 8.5rem;
-  justify-self: center;
   aspect-ratio: 1;
   border-radius: 22%;
   background: var(--site);
   box-shadow: 0 18px 32px -18px rgb(23 24 26 / 0.45);
+  transition:
+    translate 220ms var(--ease-terouva),
+    box-shadow 220ms var(--ease-terouva);
 }
 .plateformes-icone {
   position: absolute;
@@ -93,6 +109,91 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.plateformes-nom {
+  max-width: 100%;
+  color: var(--color-ink-2);
+  font-size: clamp(0.75rem, 0.65rem + 0.4vw, 1rem);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+@media (hover: hover) {
+  .plateformes-onglet:hover .plateformes-tuile {
+    translate: 0 -3px;
+  }
+}
+/* Le site choisi se lève et prend un anneau bleu, séparé de la tuile par un
+   liseré crème ; son nom passe à l'encre. */
+.plateformes-onglet[aria-selected="true"] .plateformes-tuile {
+  translate: 0 -4px;
+  box-shadow:
+    0 0 0 3px var(--color-paper),
+    0 0 0 6px var(--color-accent-ink),
+    0 22px 36px -18px rgb(23 24 26 / 0.55);
+}
+.plateformes-onglet[aria-selected="true"] .plateformes-nom {
+  color: var(--color-ink);
+}
+
+/* La grande carte : carte du monde papier, coins de 24 px, ombre douce vers
+   le bas, un filet à la couleur du site en haut. Les deux gains en grand. */
+.plateformes-carte {
+  max-width: 64rem;
+  margin: 3rem auto 0;
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--color-rule);
+  border-top: 4px solid var(--site);
+  border-radius: 1.5rem;
+  background: var(--color-card);
+  box-shadow: 0 30px 60px -36px rgb(23 24 26 / 0.4);
+  transition: border-color 220ms var(--ease-terouva);
+}
+@media (min-width: 64rem) {
+  .plateformes-carte {
+    margin-top: 4rem;
+    padding: 3rem 3.5rem;
+  }
+}
+.plateformes-carte-site {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-ink);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.plateformes-gains {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+@media (min-width: 48rem) {
+  .plateformes-gains {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+  }
+}
+.plateformes-gains li {
+  color: var(--color-ink);
+  font-size: clamp(1.25rem, 1rem + 0.9vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plateformes-tuile,
+  .plateformes-carte {
+    transition: none;
+  }
+  .plateformes-onglet:hover .plateformes-tuile,
+  .plateformes-onglet[aria-selected="true"] .plateformes-tuile {
+    translate: none;
+  }
 }
 
 /* ───────── L'annonce du parcours (HeroExemples, panneau « L'alerte arrive ») ─────────
