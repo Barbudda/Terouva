@@ -4,7 +4,7 @@
 
    Deux matières qui ne sont pas la carte bleu nuit du bas de page :
    - Parcours : la lumière. Un rail qui se trace et luit, une lueur d'horizon.
-   - Problem : le temps gagné. Un chiffre géant, deux barres, rien d'autre.
+   - Problem : le temps gagné. Un chiffre géant, puis le gain en orange.
    Les apparitions passent par le révélateur commun (`.filet-trace`, `.monte`,
    `--decalage`) : elles ne jouent qu'en descendant et s'éteignent sous
    `prefers-reduced-motion`. */
@@ -107,9 +107,10 @@
 }
 
 /* ── Problem : le temps gagné (vague 2, 15 novembre) ───────────────────────
-   Bande nuit, à la manière du « 48 h gagnées » de Rushlot : un chiffre géant,
-   deux barres nettes, rien d'autre. Pas de piste de fond sous les barres :
-   une piste redevient une règle, et c'est la règle qu'on ne comprenait pas. */
+   Bande nuit, à la manière du « 48 h gagnées » de Rushlot. Après les critiques :
+   plus de barres (sans durée sourcée, aucune échelle n'était honnête). Le
+   chiffre géant, sa phrase, puis le gain du visiteur en orange, le plus gros
+   après le chiffre. Une seule grotesque, la couleur fait l'accent. */
 
 .temps-chiffre {
   font-family: var(--font-sans);
@@ -120,63 +121,40 @@
   font-variant-numeric: lining-nums;
   color: var(--color-ink);
 }
-/* « sur » en Fraunces italique orange, comme la seconde ligne des titres. */
 .temps-chiffre__sur {
   display: inline-block;
-  margin-inline: 0.12em 0.16em;
-  font-family: var(--font-serif);
-  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 144;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 0.42em;
-  letter-spacing: -0.02em;
-  vertical-align: 0.5em;
-  color: var(--color-orange-titre);
+  margin-inline: 0.14em 0.18em;
+  font-size: 0.34em;
+  letter-spacing: -0.03em;
+  vertical-align: 0.62em;
+  color: var(--color-ink-3);
 }
 
 .temps-phrase {
   font-family: var(--font-sans);
-  font-weight: 800;
-  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
-.temps-phrase__accent {
-  font-family: var(--font-serif);
-  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 144;
-  font-style: italic;
-  font-weight: 400;
+
+.temps-sans {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 0.9rem + 1.4vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Le gain : la deuxième chose qu'on voit, juste sous le chiffre. */
+.temps-gain {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 1rem + 6.4vw, 6.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
   color: var(--color-orange-titre);
-}
-
-.temps-quand {
-  font-family: var(--font-serif);
-  font-size: clamp(1.25rem, 1rem + 0.9vw, 1.75rem);
-  line-height: 1.2;
-}
-
-.temps-barre {
-  min-width: 3.5rem;
-  height: 2.5rem;
-  border-radius: 999px;
-  background: color-mix(in oklch, var(--color-ink-3) 55%, transparent);
-}
-.temps-barre--chaud {
-  background: var(--color-action);
-  box-shadow: 0 0 32px -4px color-mix(in oklch, var(--color-action) 55%, transparent);
-}
-@media (width >= 64rem) {
-  .temps-barre { height: 3.5rem; }
-}
-
-@media screen and (prefers-reduced-motion: no-preference) {
-  /* La barre grise se trace lentement : c'est l'attente. L'orange, d'un coup. */
-  .temps-barre.filet-trace[data-vu="joue"] {
-    animation-duration: 1400ms;
-  }
-  .temps-barre--chaud.filet-trace[data-vu="joue"] {
-    animation-duration: 500ms;
-    animation-delay: 900ms;
-  }
 }

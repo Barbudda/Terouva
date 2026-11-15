@@ -21,3 +21,7 @@ la source telle quelle. Barres tracées au révélateur, rien sous mouvement ré
 **À la cheffe / aux critiques :** la barre orange (7 %) est presque un point ; tenue à 3,5 rem au
 moins. Les règles `.recit-rail*` de la feuille servent `Parcours.tsx` : à supprimer si `etapes`
 retire Parcours. tsc propre ; captures 1440 et 375 regardées une fois.
+
+**Passe critiques.** Barres retirées : sans durée sourcée, aucune échelle honnête ; à leur place, le gain en orange 900 de 100 px, juste sous « 2 sur 3 », précédé de « Sans Terouva, vous la découvrez le soir. » en gris.
+Une seule grotesque (plus de Fraunces, plus de serif droit, plus de capitales mono hormis l'étiquette) ; titre sourcé ramené à une phrase de 28 px, source agrandie à 15 px.
+Aucun chiffre nouveau, aucun mot nouveau : les phrases « sans / avec » sont les champs existants de `PROBLEM.vie`, jointes par une virgule.
