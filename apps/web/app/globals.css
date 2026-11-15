@@ -462,6 +462,25 @@
   animation: entree 760ms var(--ease-terouva) both;
   animation-delay: calc(var(--rang, 0) * 90ms);
 }
+/* La phrase du hero est l'élément LCP : partie d'une opacité nulle, elle ne
+   comptait qu'une fois l'hydratation passée, 665 ms après le premier rendu
+   sur mobile lent (15 novembre). Elle monte à son tour, visible d'emblée. */
+@keyframes entree-sans-fondu {
+  from { transform: translateY(22px); }
+  to { transform: none; }
+}
+.entree.entree--lcp {
+  animation-name: entree-sans-fondu;
+}
+/* Sous la ligne de flottaison, l'accueil ne se met en page qu'à l'approche.
+   Avant ce réglage, le premier rendu attendait deux mises en page des 868
+   nœuds de la page (295 et 132 ms à CPU 4×, mesuré le 15 novembre). Aucun
+   contenu visible ne dépasse de ces sections : le confinement ne rogne rien.
+   La taille réservée est une estimation, remplacée par la vraie une fois vue. */
+main > :is(#fonctions, #gains, #messages, #outils, #questions, #inscription) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
+}
 /* Le panneau central respire : six secondes, six pixels. */
 @keyframes flotte {
   from { transform: translateY(0); }

@@ -42,7 +42,7 @@ export function Hero() {
           floutée pour se lire sur la lueur claire du champ, assez claire pour
           laisser voir le dégradé derrière. */}
       <p
-        className="entree mx-auto max-w-[44rem] rounded-[1.5rem] border border-white/20 bg-night/25 px-6 py-5 text-[1.25rem] leading-relaxed text-balance text-ink shadow-[0_24px_60px_-30px_rgb(0_0_0/0.5)] backdrop-blur-[3px] [text-shadow:0_1px_10px_rgb(8_17_32/0.55)] sm:px-8 sm:py-6 sm:text-[1.5rem]"
+        className="entree entree--lcp mx-auto max-w-[44rem] rounded-[1.5rem] border border-white/20 bg-night/25 px-6 py-5 text-[1.25rem] leading-relaxed text-balance text-ink shadow-[0_24px_60px_-30px_rgb(0_0_0/0.5)] backdrop-blur-[3px] [text-shadow:0_1px_10px_rgb(8_17_32/0.55)] sm:px-8 sm:py-6 sm:text-[1.5rem]"
         style={{ "--rang": 2 } as React.CSSProperties}
       >
         {quoi} {gain}
