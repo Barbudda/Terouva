@@ -22,7 +22,7 @@ const enSuite = (phrase: string) => phrase.charAt(0).toLowerCase() + phrase.slic
 export function Problem() {
   const { sans, avec } = PROBLEM.vie;
   return (
-    <section id="gains" aria-labelledby="gains-titre" className="temps cadre scroll-mt-20 py-20 text-center lg:py-32">
+    <section id="gains" aria-labelledby="gains-titre" className="temps cadre scroll-mt-20 py-16 text-center lg:py-24">
       <p className="etiquette-section">{PROBLEM.eyebrow}</p>
       <p aria-hidden className="temps-chiffre monte mt-6">
         2<span className="temps-chiffre__sur">sur</span>3
@@ -35,7 +35,7 @@ export function Problem() {
         {PROBLEM.titreLead} {PROBLEM.titreTail}
       </h2>
 
-      <div className="mx-auto mt-16 max-w-5xl lg:mt-24">
+      <div className="mx-auto mt-12 max-w-6xl lg:mt-14">
         <p className="temps-sans monte text-ink-3" style={{ "--decalage": 2 } as CSSProperties}>
           {sans.nom}, {enSuite(sans.titre)}
         </p>
@@ -45,7 +45,7 @@ export function Problem() {
       </div>
 
       {/* Le chiffre se vérifie en un clic : c'est ce qui le distingue d'une accroche. */}
-      <p className="mt-14 lg:mt-20">
+      <p className="mt-10 lg:mt-12">
         <a
           href={PROBLEM.source.href}
           target="_blank"

@@ -115,7 +115,7 @@
 .temps-chiffre {
   font-family: var(--font-sans);
   font-weight: 900;
-  font-size: clamp(7rem, 2rem + 24vw, 15rem);
+  font-size: clamp(6rem, 2rem + 18vw, 12rem);
   line-height: 0.85;
   letter-spacing: -0.06em;
   font-variant-numeric: lining-nums;
@@ -152,7 +152,7 @@
 .temps-gain {
   font-family: var(--font-sans);
   font-weight: 900;
-  font-size: clamp(2.5rem, 1rem + 6.4vw, 6.25rem);
+  font-size: clamp(2.5rem, 1rem + 5.4vw, 5.25rem);
   line-height: 0.98;
   letter-spacing: -0.04em;
   text-wrap: balance;

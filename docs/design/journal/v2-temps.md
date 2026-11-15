@@ -25,3 +25,5 @@ retire Parcours. tsc propre ; captures 1440 et 375 regardées une fois.
 **Passe critiques.** Barres retirées : sans durée sourcée, aucune échelle honnête ; à leur place, le gain en orange 900 de 100 px, juste sous « 2 sur 3 », précédé de « Sans Terouva, vous la découvrez le soir. » en gris.
 Une seule grotesque (plus de Fraunces, plus de serif droit, plus de capitales mono hormis l'étiquette) ; titre sourcé ramené à une phrase de 28 px, source agrandie à 15 px.
 Aucun chiffre nouveau, aucun mot nouveau : les phrases « sans / avec » sont les champs existants de `PROBLEM.vie`, jointes par une virgule.
+
+**Page plus courte.** Section ramenée de 1 106 à 800 px à 1440 et à 637 px à 375 : marges 96 / 64 px, écarts internes resserrés, chiffre plafonné à 192 px et gain à 84 px sur deux lignes.
