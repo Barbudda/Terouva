@@ -27,3 +27,7 @@ Une seule grotesque (plus de Fraunces, plus de serif droit, plus de capitales mo
 Aucun chiffre nouveau, aucun mot nouveau : les phrases « sans / avec » sont les champs existants de `PROBLEM.vie`, jointes par une virgule.
 
 **Page plus courte.** Section ramenée de 1 106 à 800 px à 1440 et à 637 px à 375 : marges 96 / 64 px, écarts internes resserrés, chiffre plafonné à 192 px et gain à 84 px sur deux lignes.
+
+**Deux colonnes (demande d'Hugo).** À gauche, tout le texte de la section dans un cadre de 32 px de rayon, tailles réduites ; à droite, une scène en verre (flou 22 px, liseré clair, lueur bleue et orange) : annonce d'exemple Leboncoin, compteur « 230 candidatures » qui grimpe à l'arrivée (`TempsCompteur.tsx`, figé à 230 sans JS ou en mouvement réduit), file de trois messages où le vôtre, en orange, arrive à 18:04 pour une annonce publiée à 18:02.
+Texte inventé de la scène, à relire par le pôle Commerce : « T2 lumineux, 42 m² », « Lyon 7e · 890 € / mois », « Publiée à 18:02 », « Exemple », « 1er », « Autre candidat » et les trois débuts de messages.
+Hauteur 754 px à 1440, 1 196 px à 375 (cadre puis scène). Le serveur partagé 3031 rendait une erreur 500 sur toutes les routes : captures prises sur un serveur à part (3039, `.next-dev-temps`), arrêté depuis.
