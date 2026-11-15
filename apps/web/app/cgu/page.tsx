@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   titre: "Conditions générales d'utilisation",
   description:
-    "Les conditions d'utilisation du site Terouva, de ses outils gratuits et de sa liste d'attente. Ce que le service fait, ce qu'il ne fait pas, et ce qu'il n'engage pas.",
+    "Les conditions d'utilisation du site Terouva, de ses outils gratuits et de sa liste d'attente : ce que le service fait et ce qu'il ne fait pas.",
   chemin: "/cgu",
 });
 

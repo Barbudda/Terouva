@@ -15,7 +15,7 @@ const CHEMIN = "/outils";
 export const metadata = pageMetadata({
   titre: "Outils gratuits pour votre recherche de logement",
   description:
-    "Des outils gratuits pour écrire votre message de candidature et préparer votre dossier, sans compte et sans limite. Ce que vous saisissez ne quitte pas votre ordinateur.",
+    "Des outils gratuits pour écrire votre message de candidature et préparer votre dossier, sans compte. Ce que vous saisissez ne quitte pas votre ordinateur.",
   chemin: CHEMIN,
 });
 

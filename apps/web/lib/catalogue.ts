@@ -141,7 +141,10 @@ export const GUIDES: Guide[] = [
     // aucun clic, sur « bonjour je suis intéressé par votre annonce de
     // location ». La personne cherche un modèle de message : le titre le
     // promet, la description cite sa phrase et dit pourquoi elle ne suffit pas.
-    titreSeo: "Répondre à une annonce de location : modèle",
+    // Du 2026-11-06 au 11-12, avec « Répondre à une annonce de location : modèle » : 158
+    // impressions en position 5,7 et toujours zéro clic. Le titre reprend donc la phrase
+    // tapée telle quelle, celle que le lecteur reconnaît dans la liste des résultats.
+    titreSeo: "« Je suis intéressé par votre annonce » : modèle",
     resume:
       "Sur un marché tendu, la visite va souvent au dossier qui arrive tôt et se lit en dix secondes, pas au meilleur dossier.",
     description:

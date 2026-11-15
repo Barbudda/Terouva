@@ -115,6 +115,16 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
+/** La même phrase pour le site et pour l'entité : un assistant qui croise les deux lit un seul produit. */
+const DESCRIPTION_SITE =
+  "Terouva trie vos alertes Leboncoin et écrit votre message de candidature : vous répondez parmi les premiers. Tout reste sur votre ordinateur.";
+
+/**
+ * Profils publics de Terouva (LinkedIn, Crunchbase…), URL exactes données par Hugo. Vide tant
+ * qu'aucun n'existe ; ordre de création et textes à coller dans docs/seo/autorite/PROFILS.md.
+ */
+const SAME_AS: string[] = [];
+
 export default function RootLayout({
   children,
 }: {
@@ -129,8 +139,7 @@ export default function RootLayout({
         "@id": `${siteUrl}/#website`,
         url: `${siteUrl}/`,
         name: "Terouva",
-        description:
-          "Terouva trie vos alertes Leboncoin et écrit votre message de candidature : vous répondez parmi les premiers. Tout reste sur votre ordinateur.",
+        description: DESCRIPTION_SITE,
         inLanguage: "fr-FR",
         publisher: { "@id": `${siteUrl}/#organization` },
       },
@@ -140,6 +149,10 @@ export default function RootLayout({
         name: "Terouva",
         url: `${siteUrl}/`,
         logo: `${siteUrl}/icon.svg`,
+        description: DESCRIPTION_SITE,
+        // Les profils n'entrent ici qu'une fois créés par Hugo (docs/seo/autorite/PROFILS.md) :
+        // un sameAs vers un profil absent ferait mentir l'entité.
+        ...(SAME_AS.length > 0 ? { sameAs: SAME_AS } : {}),
       },
     ],
   };

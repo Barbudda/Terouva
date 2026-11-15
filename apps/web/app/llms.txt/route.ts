@@ -1,19 +1,35 @@
-import { articlesPublies, cheminArticle } from "@/lib/blog";
+import {
+  BLOG,
+  PILIERS,
+  articlesDuPilier,
+  cheminArticle,
+  cheminPilier,
+  piliersAvecPage,
+  piliersHabites,
+} from "@/lib/blog";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
 import { getSiteUrl } from "@/lib/site";
 
 /**
- * Les dix derniers articles publiés, avec leur date. Rien tant que le blog est
- * vide : une section sans entrée annoncerait un contenu qui n'existe pas.
+ * Tous les articles publiés, rangés par pilier, avec leur date. La section ne
+ * listait que les dix derniers : un assistant qui lit ce fichier ignorait
+ * alors plus de quatre-vingt-dix pages, toutes sourcées. Rien tant que le blog
+ * est vide : une section sans entrée annoncerait un contenu qui n'existe pas.
  */
 function sectionArticles(base: string): string {
-  const recents = articlesPublies().slice(0, 10);
-  if (recents.length === 0) return "";
-  return `## Articles récents
-
-${recents.map((a) => `- [${a.titre}](${base}${cheminArticle(a)}) (${a.publieLe}) : ${a.description}`).join("\n")}
-
-`;
+  const piliers = piliersHabites();
+  if (piliers.length === 0) return "";
+  const avecPage = new Set(piliersAvecPage());
+  const blocs = piliers.map((p) => {
+    const lien = avecPage.has(p) ? ` ([tous les articles](${base}${cheminPilier(p)}))` : "";
+    const lignes = articlesDuPilier(p).map(
+      (a) => `- [${a.titre}](${base}${cheminArticle(a)}) (${a.publieLe}) : ${a.description}`,
+    );
+    return `### ${PILIERS[p]}${lien}\n\n${lignes.join("\n")}`;
+  });
+  // L'intitulé garde « Articles récents » : `lib/blog.test.ts` s'en sert pour savoir si la
+  // rubrique est ouverte.
+  return `## Articles récents et anciens, par thème\n\n${blocs.join("\n\n")}\n\n`;
 }
 
 /**
@@ -72,7 +88,7 @@ ${sectionArticles(base)}## Pages
 - [Accueil](${base}/)
 - [Outils gratuits](${base}/outils)
 - [Guides](${base}/guides)
-- [Confidentialité](${base}/confidentialite)
+${piliersHabites().length > 0 ? `- [Blog](${base}${BLOG})\n` : ""}- [Confidentialité](${base}/confidentialite)
 - [Mentions légales](${base}/mentions-legales)
 
 ## Contact
