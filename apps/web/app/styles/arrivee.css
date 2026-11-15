@@ -377,7 +377,7 @@
 .questions-carte__bandeau {
   --color-ink: var(--color-night-ink);
   --color-ink-3: var(--color-night-ink-2);
-  padding: 3.5rem 1.25rem;
+  padding: 2.5rem 1.25rem;
   background: var(--color-night);
 }
 .questions-carte__liste {
@@ -388,10 +388,13 @@
 }
 @media (min-width: 1024px) {
   .questions-carte__bandeau {
-    padding: 5rem 3rem;
+    padding: 2.75rem 3rem;
+  }
+  .questions-carte__bandeau .titre-section {
+    font-size: 4rem;
   }
   .questions-carte__liste {
-    padding: 1rem 4rem 2rem;
+    padding: 0.5rem 4rem 1rem;
   }
 }
 

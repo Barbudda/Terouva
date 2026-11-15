@@ -51,7 +51,7 @@ export function Questions({
             className={cn(
               "flex cursor-pointer items-start justify-between gap-6 [-webkit-tap-highlight-color:transparent]",
               grand
-                ? "py-6 text-[1.25rem] leading-snug font-semibold tracking-[-0.01em] lg:py-8 lg:text-[1.625rem]"
+                ? "py-5 text-[1.25rem] leading-snug font-semibold tracking-[-0.01em] lg:text-[1.375rem]"
                 : "py-5 text-[17px] font-medium",
               nuit ? "text-night-ink" : "text-ink",
             )}
@@ -69,7 +69,7 @@ export function Questions({
               aria-hidden
               className={cn(
                 "shrink-0 transition-transform duration-200 group-open:rotate-180",
-                grand ? "mt-1.5 size-5 lg:mt-2 lg:size-6" : "mt-1.5 size-4",
+                grand ? "mt-1 size-5 lg:mt-1.5" : "mt-1.5 size-4",
                 nuit ? "text-night-ink-2" : "text-ink-3",
               )}
               fill="none"
@@ -84,7 +84,7 @@ export function Questions({
           <p
             className={cn(
               "max-w-2xl leading-relaxed",
-              grand ? "pb-8 text-[17px] lg:text-[1.125rem]" : "pb-6 text-[15px]",
+              grand ? "pb-6 text-[17px]" : "pb-6 text-[15px]",
               nuit && "pl-10",
               nuit ? "text-night-ink-2" : "text-ink-2",
             )}

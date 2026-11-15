@@ -21,7 +21,7 @@ import { WaitlistForm } from "@/components/ui/WaitlistForm";
 export function Inscription() {
   return (
     <>
-      <section id="questions" className="monde-papier plein-cadre py-20 lg:py-32">
+      <section id="questions" className="monde-papier plein-cadre py-20 lg:py-24">
         <div className="cadre">
           {/* La carte de FanClaw : un bandeau nuit porte le titre et casse la
               longue suite crème, la liste vit dessous sur le fond carte. */}

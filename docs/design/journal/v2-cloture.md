@@ -24,3 +24,5 @@ hero et de la navigation (REFERENCE.md, règle 8). Vaut aussi pour `FinDePage`.
 **Passe des critiques** : questions dans une carte (24 px, 1080 px) coiffée d'un bandeau nuit qui porte le titre ; « Est-ce légal ? » reste ouverte.
 Clôture : titre en deux lignes à 1440 (la tête sort du max-w-5xl), guichet de 96 px et bouton d'environ 240 × 96 ; étiquette du champ masquée à l'œil (gardée pour les lecteurs d'écran).
 Réassurances en casse normale avec coche orange (classe `reassurance`, points conservés ailleurs) ; aucun texte ni chiffre ajouté, pas de chiffre géant faute de chiffre validé par le pôle Commerce.
+
+**Page trop longue** : questions ramenées de 1 300 à 935 px à 1440 (marges 96 px, bandeau et lignes resserrés, titre du bandeau à 64 px, seule « Est-ce légal ? » ouverte).
