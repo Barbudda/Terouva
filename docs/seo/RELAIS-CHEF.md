@@ -37,13 +37,17 @@
 ## Ouvert
 
 - **Reprise de l'existant faite le 2026-11-15** (`JOURNAL.md`, entrée « Reprise de l'existant ») : les
-  descriptions « trop longues » étaient un faux positif du parcours (entités HTML non décodées, à
-  corriger dans BONDS) ; deux titres et deux descriptions repris des requêtes ; lien du guide état des
-  lieux vers les documents du propriétaire. **Mesurer l'effet vers le 29/11** (Search Console).
-- Le gisement du périmètre « recherche » s'épuise (7 sujets sains sur 80 débuts de requête en vague 10) :
-  une vague 11 attend la mesure du 29/11. À sonder alors : « entrer dans une colocation existante »
-  (`PLAN-VAGUE-10.md`, Écartés) ; cannibalisation guide / articles du pilier C (garant) à vérifier
-  avant tout nouvel article sur le garant.
+  descriptions « trop longues » étaient un faux positif du parcours (corrigé dans BONDS, commit
+  `33352830`) ; deux titres et deux descriptions repris des requêtes ; lien du guide état des lieux
+  vers les documents du propriétaire.
+- **Guides repris le 2026-11-15** (`JOURNAL.md`, entrée « Trois guides piliers ») : garant-caution
+  (position 43 au départ), refus-de-dossier (44), louer-sans-garant (76). Cannibalisation du pilier C
+  tranchée. Restent à reprendre de la même façon, par impressions : préavis (36), dépôt de garantie
+  (47), dossier (34), état des lieux (36), Visale (64) ; « répondre » (position 6) attend la mesure
+  de son nouveau titre.
+- **Mesurer l'effet de tout cela vers le 29/11** (Search Console, page par page) avant une vague 11 :
+  le gisement du périmètre « recherche » s'épuise (7 sujets sains sur 80 débuts de requête en
+  vague 10). À sonder alors : « entrer dans une colocation existante » (`PLAN-VAGUE-10.md`, Écartés).
 - Circuit actuel : des **agents neufs** de la session du chef (plan, rédacteurs, relecteur). Vider une
   session par `clear_session` a été refusé par le classifieur du mode auto le 2026-11-15.
 - Âge Visale tranché le 2026-11-15 (visale.fr et F33453) : « 30 ans ou moins », « à partir de 31 ans ».

@@ -334,3 +334,27 @@ sur 106 et pas `/blog` ; les trois outils ne liaient aucun article.
   contrôle des titres et du lien en ligne, IndexNow (136 adresses, HTTP 200).
 - Build local en échec sur une erreur OneDrive (`readlink EINVAL` dans `.next`, dossier partagé avec
   un autre serveur) ; le build de prévisualisation Vercel a servi de contrôle.
+
+## 2026-11-15 (nuit) — Trois guides piliers repris sur leur requête générale
+
+Mesure de départ (Search Console, 15/10 au 12/11), par guide : répondre à une annonce 273 impressions
+en position 6 (titre changé le 15/11, laissé à mesurer) ; **garant-caution 78, position 43** ;
+**refus-de-dossier 51, position 44** ; **louer-sans-garant 30, position 76** ; préavis 23 (36) ;
+dépôt de garantie 17 (47) ; dossier 14 (34) ; état des lieux 13 (36) ; Visale 13 (64). Clics : 2 en tout.
+
+- Repris : garant-caution, louer-sans-garant, refus-de-dossier. Pour chacun, titre de recherche sur
+  la requête tapée, description, sections que couvrent les trois premiers résultats (lus par
+  WebSearch, moteur américain : Google.fr n'était pas lisible), questions de FAQ, sources.
+- Cannibalisation : le guide garde la requête générale, l'article la question précise ; « garant
+  obligatoire » et « pas de garant » vont à louer-sans-garant ; deux questions de FAQ en double entre
+  les deux guides du garant retirées ; sept articles renvoient vers leur guide (ancres reprises).
+- Correction juridique : le guide refus présentait la décision 2019-001 comme sanctionnant la nature
+  des revenus ; elle retient le handicap (§ 36), et préférer des revenus d'activité n'est pas interdit
+  en soi (§ 28).
+- Relecture distincte : faits contrôlés à la source, formulations sans source adoucies, `FAITS.md`
+  complété (12 lignes). Légifrance a bloqué le navigateur après l'art. 2288 : les art. 2297, 22-1 et
+  l'art. 6 de la loi de 1990 restent appuyés sur leurs citations déjà relevées et sur service-public.
+- Porte Septune : aucune régression (titres changés comme voulu ; écarts dus à l'échantillon de
+  24 pages et au `noindex` de prévisualisation). Production, titres contrôlés en ligne, IndexNow
+  (136 adresses, HTTP 200).
+- **Mesure de l'effet : vers le 29/11**, avec la reprise des titres d'articles.
