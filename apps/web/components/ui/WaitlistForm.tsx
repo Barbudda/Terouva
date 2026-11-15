@@ -133,16 +133,20 @@ export function WaitlistForm({
     champ.current?.focus();
   };
 
+  // Chaque réassurance est un élément : la ligne garde ses « · » par défaut,
+  // et la clôture de l'accueil les remplace par des coches (arrivee.css).
   const reassurance = (
-    <p className={cn("champ mt-4", dark ? "text-night-ink-2" : "text-ink-3")}>
-      {avant && <>{avant} · </>}
-      Pas de publicité ·{" "}
-      <Link
-        href="/confidentialite"
-        className="inline-flex min-h-11 items-center underline underline-offset-4 hover:opacity-80"
-      >
-        Confidentialité
-      </Link>
+    <p className={cn("reassurance champ mt-4", dark ? "text-night-ink-2" : "text-ink-3")}>
+      {avant && <span>{avant}</span>}
+      <span>Pas de publicité</span>
+      <span>
+        <Link
+          href="/confidentialite"
+          className="inline-flex min-h-11 items-center underline underline-offset-4 hover:opacity-80"
+        >
+          Confidentialité
+        </Link>
+      </span>
     </p>
   );
 
