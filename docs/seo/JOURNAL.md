@@ -299,3 +299,16 @@ sur 106 et pas `/blog` ; les trois outils ne liaient aucun article.
 3. Créer les profils `sameAs` (LinkedIn personnel puis page Terouva, Crunchbase, Peerlist) avec les
    textes de `docs/seo/autorite/PROFILS.md`, et envoyer les URL.
 4. Recharger des unités d'API Semrush (volumes de recherche, positions des concurrents).
+
+## 2026-11-15 (soir) — Vague 10 publiée, âge Visale tranché
+
+- Âge Visale tranché à la source : visale.fr (« entre 18 et 30 ans » ou « salariés de + de 30 ans ») et
+  F33453 (« Locataire de 30 ans et moins », « Locataire de 31 ans et plus ») : la règle des articles,
+  « 30 ans ou moins » puis « à partir de 31 ans », est juste ; aucun article corrigé.
+- Audit (registre, section 11) : 80 débuts de requête d'autocomplétion, forums pour la preuve. Sept
+  requêtes seulement dans le périmètre de la recherche de logement : pas de quota rempli.
+- Livré : 7 articles, relus en entier (7 publiables, 115 citations, dont 24 de Légifrance lues à la
+  source) : **113 articles en ligne**, plan du site à 136 adresses soumises à IndexNow (HTTP 200).
+- Coût : 17 points de la fenêtre de 5 h, pôles Design et référencement actifs en même temps.
+- Leçon : le checkout est partagé ; les commits du référencement sont partis à 21 h 14 sans porte
+  Septune, avec ceux du Design. Contrôle après coup par le chef : aucune régression.

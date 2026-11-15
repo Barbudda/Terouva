@@ -138,3 +138,30 @@ pendant la vague, ce qui suggère sans le prouver que la fenêtre mesure mieux l
    ont pu être lues mot pour mot, au prix de 20 lectures manuelles.
 4. **Une erreur de push GitHub passagère** (`fatal error in commit_refs`) ne se voit pas si la commande
    enchaîne une attente derrière : pousser d'abord, attendre dans un second temps.
+
+## Vague 10 (agents neufs, 7 articles) — départ le 2026-11-15 vers 20 h 05
+
+| Mesure | Départ | Après le plan | Après l'écriture | En ligne |
+|---|---|---|---|---|
+| Forfait, fenêtre de 5 h | 20 % | 26 % | 35 % | 37 % |
+| Forfait, semaine | 53 % | 54 % | 55 % | 55 % |
+
+Travail : audit et plan par un agent neuf (80 débuts de requête, 236 000 tokens), deux rédacteurs
+agents (3 et 4 articles, 218 000 et 276 000 tokens), un relecteur agent qui a tout lu (207 000).
+Vider les sessions de rédaction a été refusé par le classifieur du mode auto : les agents d'une
+session les remplacent, contexte vide aussi.
+
+**Bilan de la vague 10** : **7 articles pour 17 points** (≈ 2,4 par article), le plus cher depuis
+la méthode série. Trois raisons : le plan coûte presque le même prix pour 7 sujets que pour 22
+(6 points) ; le lot B est juridique (curatelle, signature, bail précaire) et a lu 24 articles de loi
+dans le navigateur (94 appels d'outils) ; les pôles Design et référencement travaillaient en même
+temps sur le même compte. Aucun quota rempli : 7 sujets seulement passaient les critères.
+
+### Ce qu'on apprend
+1. **Le gisement du périmètre « recherche » s'épuise** au rythme de 22 articles par vague : la
+   vague 10 n'a trouvé que 7 sujets sains sur 80 débuts de requête. Avant la vague 11, retravailler
+   l'existant (titres sans clic, descriptions trop longues, maillage) rapporte sans doute plus.
+2. **Un plan coûte un prix fixe** : à moins de 15 sujets attendus, le plan et la rédaction peuvent
+   tenir dans un seul agent.
+3. **Checkout partagé** : une session qui pousse `second/auto` vers `main` emporte les commits de
+   tous les pôles ; la porte Septune due à l'un passe donc avant tout push, quel qu'en soit l'auteur.

@@ -7,9 +7,11 @@
 
 - **Périmètre** : le site seulement (terouva.com), objectif de visibilité par un blog en volume. Pas
   d'extension, pas de prix ni d'offre (pôle CTO & Commerce). Brief : `docs/seo/BRIEF.md`.
-- **En ligne** (après la vague 9, le 2026-11-06) : 106 articles de blog (15 au format JSX,
-  91 au format série), 9 guides (dont 6 en questions-réponses), 3 outils (dont « quel salaire pour un
-  loyer »), plan du site à 129 adresses, toutes soumises à IndexNow.
+- **En ligne** (après la vague 10, le 2026-11-15) : 113 articles de blog (15 au format JSX,
+  98 au format série), 9 guides (dont 6 en questions-réponses), 3 outils (dont « quel salaire pour un
+  loyer »), plan du site à 136 adresses, toutes soumises à IndexNow.
+- **Périmètre du blog** (Hugo, 2026-11-06) : la recherche de logement seulement, jamais le locataire
+  déjà installé (`docs/seo/BRIEF.md`).
   `/blog` présenté comme `/guides` (modèle Rushlot / FanClaw), une photo par carte (13 photos du site
   réparties ; champ `photo` facultatif pour une photo propre).
 - **Branches** : on travaille sur `second/auto` et on avance `main` en avance rapide pour mettre en
@@ -34,13 +36,19 @@
 
 ## Ouvert
 
-- Vague 10 : lire d'abord le bilan de la vague 9 dans `MESURES-TOKENS.md` (14 points, sessions vidées,
-  autocomplétion par script). Réutiliser les sessions de rédaction et de relecture, contexte vidé. Les
-  plans 7, 8 et 9 listent les sujets écartés ; l'audit des mots clés est au registre, section 10.
-- Âge Visale à trancher sur la source : F33453 écrit « jusqu'à moins de 30 ans » dans son introduction,
-  « 30 ans et moins » dans ses titres ; les articles suivent la règle « 30 ans ou moins ».
+- **Avant une vague 11, retravailler l'existant** (bilan de la vague 10 dans `MESURES-TOKENS.md` : le
+  gisement s'épuise, 7 sujets sains sur 80 débuts de requête) :
+  - 8 descriptions d'articles de plus de 165 signes et 5 articles à 80-130 impressions sans clic,
+    titre et description à revoir (`JOURNAL.md`, entrée du 15/11 de la session référencement) ;
+  - maillage suggéré par Septune, par exemple `/guides/etat-des-lieux` vers
+    `/blog/documents-proprietaire-doit-fournir-location` ;
+  - à sonder en vague 11 : « entrer dans une colocation existante » (`PLAN-VAGUE-10.md`, Écartés).
+- Circuit actuel : des **agents neufs** de la session du chef (plan, rédacteurs, relecteur). Vider une
+  session par `clear_session` a été refusé par le classifieur du mode auto le 2026-11-15.
+- Âge Visale tranché le 2026-11-15 (visale.fr et F33453) : « 30 ans ou moins », « à partir de 31 ans ».
 - Semrush : plus d'unités d'API (à Hugo s'il veut des volumes).
-- Demande réelle hors plan : moisissure et loyer impayé, côté locataire déjà installé (à décider avec Hugo).
+- Checkout partagé : pousser `second/auto` vers `main` emporte les commits de tous les pôles. Regarder
+  `git log origin/main..HEAD` avant ; la porte Septune due à l'un est due au push.
 - Search Console : vérifier avec Hugo que `https://terouva.com/sitemap.xml` est déclaré (menu
   Sitemaps) ; Google ne reçoit pas IndexNow.
 
