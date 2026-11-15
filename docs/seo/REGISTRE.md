@@ -291,3 +291,29 @@ garant pour location » et « loi garant location » ont déjà leur réponse da
 **Non relevé** : Semrush (pas d'unités d'API), cautioneo (`sitemap.xml` en 404), SERP, Trends. Concurrents lus par
 leurs adresses (slugs), pas leurs titres. F = titres de fils, non lus en entier. Le commentaire de `catalogue.ts`
 (« acte de cautionnement », 2 900 par mois) est une estimation d'origine non retrouvée : elle ne compte pas comme preuve.
+
+## 11. Audit des mots clés du 2026-11-15
+
+Aucun volume : personne n'en a mesuré. AC = autocomplétion Google par script (`hl=fr`, `gl=fr`, une requête toutes les
+1,2 s), 80 débuts de requête en deux passes, aucun refus, trois réponses vides (« annonce location disparue », « dossier
+location incomplet », « marchand de liste location »). F = titre de fil de forum, aucun déjà cité dans les plans 7 à 9.
+GSC : rien de neuf appelé, les données de la vague 9 restent en section 10. P1 = vague 10 (`blog/PLAN-VAGUE-10.md`).
+
+**Débuts de requête** : annonce location appartement, annonce leboncoin location, leboncoin location appartement / arnaque, annonce location particulier / disparue, visite appartement (location, que regarder, payante, absent, avec), peut on visiter un appartement, candidature location / appartement, dossier location (refusé, incomplet, avec, sans, couple, étudiant), propriétaire peut il demander / refuser, un propriétaire a t il le droit de, agence immobilière (location, peut elle, refuse), colocation (dossier, garant, caf, bail, apl), dossier colocation, louer un studio, location studio, logement / location étudiant, étudiant louer appartement, mutation (professionnelle) logement, chercher un appartement à distance, trouver un logement dans une autre ville, premier logement / appartement (seul), jeune actif logement, emménagement, déménagement location, aide déménagement, changement d'adresse, arnaque (location, logement, appartement, dossier location), faux propriétaire, usurpation (d') identité (dossier) location, trouver appartement paris, trouver logement lyon, louer à paris, louer un appartement (sans, avec, quand on est, curatelle), location (appartement, avec, sans, au mois, entre particuliers), chercher appartement / un logement, bail signé, signature bail, locataire peut il, logement urgence, assurance loyer impayé refus dossier, marchand de liste location, chambre chez l'habitant, cohabitation intergénérationnelle, bail précaire.
+
+| Requête | Intention | Demande observée (source) | Page cible | Priorité |
+|---|---|---|---|---|
+| colocation apl | information | AC : apl caf, comment marche, simulation, etudiant, montant, bail individuel, avec parent, ou couple ; colocation caf (bail individuel, montant, chambre ou appartement) ; F : CCM 8597843, 9085556, 7629918 | à créer : `apl-colocation` | P1 |
+| chambre chez l'habitant | information | AC : suivie de dix villes ; F : CCM 6210237, 6473104, 4767143 | à créer : `chambre-chez-l-habitant-locataire` | P1 |
+| aide déménagement | information | AC : caf, étudiant, action logement, france travail, fonctionnaire, caf personne seule, simulation, femme seule | à créer : `aide-demenagement-locataire` | P1 |
+| bail précaire habitation | information | AC : bail précaire habitation, particulier, c'est quoi, durée, modèle ; location au mois (pas cher, airbnb, villes) ; F : CCM 3810924, 7431964, Net-iris 129586 | à créer : `bail-precaire-location-au-mois` | P1 |
+| signature bail par procuration | information | AC : signature bail à distance, en ligne, par procuration ; F : CCM 6098926, 6871059, 5745097 | à créer : `signer-bail-par-procuration` | P1 |
+| louer un appartement sous curatelle | information | AC : location appartement curatelle, signature bail curatelle renforcée ; F : CCM 7801148, 4486763, 6251852 | à créer : `louer-sous-curatelle` | P1 |
+| refus dossier assurance loyer impayé | information | AC : dossier location refusé par assurance ; F : CCM 5752628, 9268312, 9229298 | à créer : `refus-assurance-loyers-impayes` | P1 |
+
+**Vu, sans article** (raisons dans `blog/PLAN-VAGUE-10.md`, « Écartés ») : dossier location étudiant, dossier colocation et
+exemple dossier colocation vont à `/outils/dossier-de-location` (section 5) ; dossier location couple à
+`bail-couple-un-ou-deux-noms` ; colocation dépôt de garantie, mutation et préavis visent le départ ; usurpation d'identité
+dossier location à `arnaque-location-reconnaitre-fausse-annonce` et `filigrane-documents-dossier-location` ; cohabitation
+intergénérationnelle, logement urgence, logement social et Crous sont hors Leboncoin ; les requêtes + ville restent sous la
+conclusion de la section 9.
