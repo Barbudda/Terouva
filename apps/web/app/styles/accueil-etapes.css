@@ -16,41 +16,42 @@
 
 .etapes-liste {
   display: grid;
-  gap: 1.5rem;
+  gap: 3rem;
   max-width: 76rem;
   margin: 3.5rem auto 0;
 }
 @media (min-width: 64rem) {
   .etapes-liste {
-    gap: 2rem;
+    gap: 6rem;
     margin-top: 5rem;
   }
 }
 
-/* La carte : fond carte, coins de 24 px, une ombre douce venue d'en haut. */
+/* La carte : coins de 24 px, un liseré et un fond à peine teintés de la
+   couleur de l'étape (comme Rushlot), une ombre douce venue d'en haut. */
 .etape {
   display: grid;
   gap: 1.5rem;
   padding: 1.5rem;
   border-radius: 1.5rem;
-  background: var(--color-card);
-  box-shadow:
-    0 1px 0 color-mix(in oklch, var(--color-ink) 5%, transparent),
-    0 24px 48px -32px color-mix(in oklch, var(--color-ink) 28%, transparent);
+  border: 1px solid color-mix(in oklch, var(--teinte) 30%, var(--color-rule));
+  background: color-mix(in oklch, var(--teinte) 5%, var(--color-card));
+  box-shadow: 0 24px 48px -32px color-mix(in oklch, var(--color-ink) 28%, transparent);
 }
 @media (min-width: 64rem) {
   .etape {
-    grid-template-columns: 5fr 7fr;
+    /* L'interface prend les deux tiers : plus de 55 % de la carte. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     align-items: center;
-    gap: 3rem;
-    padding: 2.5rem 2.5rem 2.5rem 3.5rem;
+    gap: 2.5rem;
+    padding: 2rem 2rem 2rem 3rem;
   }
 }
 
 .etape-titre {
   font-family: var(--font-sans);
   font-weight: 800;
-  font-size: clamp(1.875rem, 1.2rem + 2.4vw, 3rem);
+  font-size: clamp(2rem, 1.2rem + 2.4vw, 3rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
   color: var(--color-ink);
@@ -65,12 +66,12 @@
   text-wrap: pretty;
 }
 
-/* La scène : un lavis de la teinte de l'étape, l'interface au centre. */
+/* La scène : un lavis de la teinte de l'étape, l'écran au centre. */
 .etape-scene {
   display: grid;
   place-items: center;
-  min-height: 18rem;
-  padding: 2rem 1.25rem;
+  min-height: 16rem;
+  padding: 1.5rem 1rem;
   border-radius: 1rem;
   background:
     radial-gradient(80% 90% at 85% 10%, color-mix(in oklch, var(--teinte) 34%, transparent), transparent 70%),
@@ -78,24 +79,155 @@
 }
 @media (min-width: 64rem) {
   .etape-scene {
-    min-height: 28rem;
-    padding: 3rem;
+    min-height: 30rem;
+    padding: 3rem 1.5rem;
   }
 }
 
-/* Les panneaux du haut de page sont dessinés à 13 px : on les agrandit d'un
-   bloc (`zoom` garde la mise en page, contrairement à `scale`). */
+/* ── Les écrans : dessinés pour leur taille, un seul élément chacun. ── */
 .etape-ecran {
   width: 100%;
-  max-width: 20rem;
-  zoom: 1.1;
-  border-radius: 0.875rem;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
   box-shadow: 0 30px 60px -30px color-mix(in oklch, var(--color-ink) 45%, transparent);
 }
 @media (min-width: 64rem) {
   .etape-ecran {
-    max-width: 22rem;
-    zoom: 1.45;
+    padding: 2.5rem;
+  }
+}
+
+.ecran-annonce-corps {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+.ecran-annonce-vignette {
+  width: 4.5rem;
+  align-self: flex-start;
+}
+.ecran-annonce .annonce-site-mois {
+  font-size: 1rem;
+}
+.ecran-annonce .annonce-site-badge {
+  margin-top: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+.ecran-annonce-titre {
+  font-size: clamp(1.125rem, 0.9rem + 0.8vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.ecran-annonce-prix {
+  margin-top: 0.5rem;
+  font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.ecran-annonce-lieu {
+  font-size: 1rem;
+}
+@media (min-width: 64rem) {
+  .ecran-annonce-vignette {
+    width: 9rem;
+  }
+  .ecran-annonce .annonce-site-nom,
+  .ecran-annonce .annonce-site-tete {
+    font-size: 1.125rem;
+  }
+}
+
+/* Sur téléphone, l'anneau et la coche passent au-dessus du texte. */
+.ecran-note,
+.ecran-envoi {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  background: var(--color-card);
+  color: var(--color-ink);
+}
+.ecran-note-anneau {
+  position: relative;
+  flex: none;
+  width: 7rem;
+  aspect-ratio: 1;
+}
+.ecran-note-chiffre {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-sans);
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.ecran-note-titre,
+.ecran-envoi-titre {
+  font-size: clamp(1.125rem, 0.9rem + 0.8vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.ecran-note-pour,
+.ecran-envoi-annonce {
+  margin-top: 0.5rem;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  color: var(--color-ink-2);
+}
+@media (min-width: 40rem) {
+  .ecran-note,
+  .ecran-envoi {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 64rem) {
+  .ecran-note-anneau {
+    width: 10rem;
+  }
+  .ecran-note-chiffre {
+    font-size: 3.25rem;
+  }
+}
+
+.ecran-message {
+  background: var(--color-night);
+  color: var(--color-night-ink);
+}
+.ecran-message-ton {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-blue-clair);
+}
+.ecran-message-texte {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.1875rem);
+  line-height: 1.55;
+  color: var(--color-night-ink-2);
+}
+
+.ecran-envoi-coche {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 4.5rem;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: var(--color-action);
+  color: var(--color-action-ink);
+}
+@media (min-width: 64rem) {
+  .ecran-envoi-coche {
+    width: 6rem;
   }
 }
 

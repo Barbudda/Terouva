@@ -20,3 +20,8 @@
 ## À nettoyer (hors de mes fichiers)
 - Styles morts : `.recit-*`/`.filet-trace` (accueil-recit.css), `.instrument*`, `.fil*`, `.cadran-arc`,
   `.suivi-barre` (accueil-produit.css ou globals) ; `.rail` dans globals.css.
+
+## Retour des critiques (même jour)
+- Écrans redessinés dans `Etapes.tsx` (plus les panneaux du hero) : 56 % de la carte à 1440, 96 px entre cartes, liseré et fond teintés.
+- Un élément par écran : l'histogramme sous le « 97 » et la barre Envoyée / Réponse / Visite sont retirés, comme toutes les capitales mono dans les cartes.
+- À 375 px : vignette réduite, anneau et coche au-dessus du texte, prix et « / mois » visibles ; les écrans ne suivent plus les flèches du hero.
