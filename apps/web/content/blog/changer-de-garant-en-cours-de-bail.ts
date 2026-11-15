@@ -92,7 +92,7 @@ Tant que l'étape 4 n'est pas faite, l'ancien garant reste engagé : gardez-le i
 ## Le propriétaire peut-il refuser le changement ? {#refus}
 Oui. Rien ne l'oblige à libérer un garant qui reste engagé, ni à accepter un remplaçant qu'il juge moins solide. Son refus ne change rien à votre bail : l'ancien garant reste tenu selon son acte, et vous continuez à payer comme avant. Il vous reste à rendre la proposition plus convaincante, ou à attendre la fin du bail.
 
-Si le propriétaire hésite, proposez d'ajouter le nouveau garant sans retirer l'ancien jusqu'à la fin du bail en cours. Le guide du [garant](/guides/garant-caution) détaille ce que chaque caution peut devoir en cas d'impayé, ce qui aide le nouveau garant à mesurer son engagement.
+Si le propriétaire hésite, proposez d'ajouter le nouveau garant sans retirer l'ancien jusqu'à la fin du bail en cours. Le guide du [garant de location](/guides/garant-caution) détaille ce que chaque caution peut devoir en cas d'impayé, ce qui aide le nouveau garant à mesurer son engagement.
 
 ## Plus de garant du tout : que faire ? {#plus-de-garant}
 Pour le bail en cours, payer à l'heure reste votre meilleure garantie, et le garant qui résilie sans durée fixée couvre le bail jusqu'à son terme. Visale ne vient pas remplacer un garant sur un bail déjà signé : sa demande se fait avant la signature. Elle redevient une option pour votre prochain logement, ou si un nouveau bail est conclu.

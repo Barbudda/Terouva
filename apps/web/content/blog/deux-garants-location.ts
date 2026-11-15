@@ -78,7 +78,7 @@ export default article({
   ],
   corps: `
 ## Un propriétaire a-t-il le droit de demander deux garants ? {#droit}
-Un propriétaire particulier peut accepter deux garants, ou les demander : ni Service-public ni l'ANIL ne fixent de nombre maximal dans leurs fiches sur la caution. Ce qui est encadré, c'est le cumul d'un garant avec d'autres garanties. Le [guide du garant](/guides/garant-caution) rappelle les règles de l'acte de cautionnement, valables pour chaque garant.
+Un propriétaire particulier peut accepter deux garants, ou les demander : ni Service-public ni l'ANIL ne fixent de nombre maximal dans leurs fiches sur la caution. Ce qui est encadré, c'est le cumul d'un garant avec d'autres garanties. Le guide du [garant pour une location](/guides/garant-caution) rappelle les règles de l'acte de cautionnement, valables pour chaque garant.
 
 Un propriétaire demande deux garants quand le revenu d'un seul lui paraît juste face au loyer, ou les accepte quand chacun des parents veut se porter caution. Ce n'est pas une obligation légale : c'est une condition que le propriétaire pose, et que vous pouvez discuter, par exemple en proposant un seul garant au dossier plus solide.
 

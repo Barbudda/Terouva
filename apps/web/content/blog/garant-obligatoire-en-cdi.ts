@@ -126,7 +126,7 @@ export default article({
   ],
   corps: `
 ## Un garant est-il obligatoire quand on est en CDI ? {#obligatoire}
-Aucune loi ne vous impose d'avoir un garant, en CDI comme ailleurs, mais le propriétaire peut vous en demander un. Votre contrat ne change pas cette règle : il compte parmi les pièces qu'il peut réclamer, pour mesurer votre situation, sans vous ouvrir aucune dispense. Le guide [louer sans garant](/guides/louer-sans-garant) donne le cadre général.
+Aucune loi ne vous impose d'avoir un garant, en CDI comme ailleurs, mais le propriétaire peut vous en demander un. Votre contrat ne change pas cette règle : il compte parmi les pièces qu'il peut réclamer, pour mesurer votre situation, sans vous ouvrir aucune dispense. La réponse générale à la question [un garant est-il obligatoire pour louer](/guides/louer-sans-garant#pas-obligatoire) est dans le guide louer sans garant.
 
 Beaucoup de candidats pensent l'inverse parce qu'un CDI rassure souvent assez pour que la question ne se pose plus. C'est un usage, qui dépend du propriétaire, du loyer et de vos revenus. Il peut même, selon votre situation, demander plusieurs garants.
 

@@ -19,13 +19,20 @@ export const metadata = pageMetadata({
  * paragraphe. Le développement qui suit apporte le détail, la façon de le dire
  * et les liens, sans reprendre la réponse : la relecture a refusé un guide où
  * l'ancien paragraphe redisait la même chose juste en dessous.
+ *
+ * Découpage (2026-11-15) : ce guide prend les requêtes générales « louer sans
+ * garant », « pas de garant », « garant obligatoire » et « dossier sans
+ * garant ». Les organismes, la caution bancaire et le cas du CDI n'ont ici
+ * qu'une réponse courte et renvoient à l'article qui porte la question précise.
  */
 export default function GuideLouerSansGarant() {
   return (
     <CadreGuide guide={GUIDE}>
       <p>
         « Il me faut un garant » est la phrase qui arrête le plus de candidatures, souvent avant la
-        visite, et elle est présentée comme une règle.
+        visite, et elle est présentée comme une règle. Louer un appartement sans garant reste
+        possible : selon votre situation, Visale, l&apos;assurance du propriétaire, un organisme ou
+        une société de cautionnement prennent sa place.
       </p>
 
       <h2 id="pas-obligatoire">Un garant est-il obligatoire pour louer ?</h2>
@@ -108,6 +115,25 @@ export default function GuideLouerSansGarant() {
         propriétaires refusent les cautions privées : vous auriez payé pour rien.
       </p>
 
+      <h2 id="autres">Quels autres organismes peuvent se porter garant ?</h2>
+      <p>
+        Une entreprise, comme votre employeur, ou une banque : Service-public les cite parmi les
+        cautions possibles. Et le fonds de solidarité pour le logement (FSL) de votre département,
+        s&apos;il le prévoit : la loi du 31 mai 1990 lui permet d&apos;accorder des aides,
+        notamment sous forme de cautionnements ou de garanties, selon les conditions fixées par
+        chaque département.
+      </p>
+      <p>
+        Le FSL aide les ménages qui ont du mal à payer les frais de leur logement, et la demande
+        passe en général par une assistante sociale.
+        Même sans garantie, il peut prendre en charge le dépôt de garantie ou le premier loyer.
+        Une banque, elle, fixe ses propres conditions, que détaille l&apos;article sur la{" "}
+        <Link href="/blog/caution-bancaire-location">caution bancaire pour une location</Link>.
+        Pour savoir quels organismes s&apos;engagent vraiment, et lequel vous concerne, voyez
+        l&apos;article{" "}
+        <Link href="/blog/organisme-garant-location">organisme garant pour une location</Link>.
+      </p>
+
       <h2 id="etudiant">Un étudiant peut-il louer sans garant ?</h2>
       <p>
         Oui, et c&apos;est la situation la mieux couverte. Visale est ouverte aux locataires de 30
@@ -125,6 +151,27 @@ export default function GuideLouerSansGarant() {
         Trois dispositifs à demander dans cet ordre : Visale pour le garant, Loca-Pass pour le
         dépôt, et les aides au logement une fois installé. Vérifiez les conditions auprès
         d&apos;Action Logement et de la Caf avant de compter sur les trois.
+      </p>
+
+      <h2 id="dossier">Comment monter un dossier de location sans garant ?</h2>
+      <p>
+        Avec les mêmes pièces qu&apos;un autre candidat, choisies dans la liste fixée par le décret
+        du 5 novembre 2015 : identité, domicile, activité professionnelle et ressources. Ajoutez
+        votre visa Visale si vous l&apos;avez obtenu, et placez en tête ce que le propriétaire
+        regarde d&apos;abord : votre contrat, votre revenu et le loyer qu&apos;il permet.
+      </p>
+      <p>
+        Sans garant personnel, ce sont vos revenus qui portent le dossier. Le simulateur{" "}
+        <Link href="/outils/quel-salaire-pour-un-loyer">quel salaire pour quel loyer</Link> vous
+        dit où vous en êtes avant de candidater, et la{" "}
+        <Link href="/outils/dossier-de-location">checklist du dossier de location</Link> liste les
+        pièces de votre situation.
+      </p>
+      <p>
+        Une idée revient souvent : proposer un dépôt de garantie plus élevé pour compenser.
+        Ce n&apos;est pas permis : selon Service-public, le dépôt ne doit pas dépasser un mois de
+        loyer hors charges pour un logement vide, deux pour un meublé. Pour le financer, l&apos;avance Loca-Pass ou le
+        FSL peuvent aider, sous conditions.
       </p>
 
       <h2 id="dire">Que répondre quand on vous demande un garant ?</h2>

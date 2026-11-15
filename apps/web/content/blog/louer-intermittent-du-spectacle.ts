@@ -133,7 +133,7 @@ export default article({
 ## Un propriétaire peut-il refuser un intermittent du spectacle ? {#refus}
 Il peut choisir un autre candidat sur des critères objectifs, comme la situation financière, mais votre statut n'est pas un motif en soi. En pratique, le refus vient de la forme de vos revenus : des cachets et des contrats courts, puis des allocations entre deux périodes de travail. Votre dossier doit montrer que l'ensemble tient sur l'année.
 
-Le bailleur lit souvent un dossier en quelques secondes, et trois bulletins inégaux lui font peur. Tout l'enjeu est de lui donner la vue sur douze mois, que vous seul pouvez assembler.
+Le bailleur lit souvent un dossier en quelques secondes, et trois bulletins inégaux lui font peur. Tout l'enjeu est de lui donner la vue sur douze mois, que vous seul pouvez assembler. Ce qu'un propriétaire a le droit de retenir pour refuser un dossier est détaillé dans le guide du [refus de dossier](/guides/refus-de-dossier).
 
 ## Quelles pièces fournir quand on est intermittent ? {#pieces}
 La liste officielle couvre votre situation : vos trois dernières fiches de paie, le justificatif de versement des allocations des trois derniers mois établi par France Travail, et votre dernier ou avant-dernier avis d'imposition. Ce dernier compte le plus, parce qu'il montre une année entière de cachets et d'allocations, là où trois bulletins ne racontent que trois mois.

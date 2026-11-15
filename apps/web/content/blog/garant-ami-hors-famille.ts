@@ -142,6 +142,6 @@ Trois choses, sans les atténuer : le montant maximum, la durée, et le type de 
 
 Le plus utile se décide avant la signature : convenez qu'en cas de difficulté, vous le prévenez vous-même, avant le propriétaire. L'article [votre garant est-il obligé de payer ?](/blog/garant-oblige-de-payer) détaille ce qui se passe après un impayé.
 
-Si demander ce service vous pèse, ou si votre ami hésite, la [garantie Visale](/guides/garantie-visale) évite de l'engager, quand vous remplissez ses conditions.
+Si demander ce service vous pèse, ou si votre ami hésite, la [garantie Visale](/guides/garantie-visale) évite de l'engager, quand vous remplissez ses conditions. Les autres façons de [louer sans garant](/guides/louer-sans-garant) sont comparées dans le guide.
 `,
 });

@@ -245,26 +245,31 @@ export const GUIDES: Guide[] = [
     chemin: "/guides/garant-caution",
     outilLie: "/outils/dossier-de-location",
     sommaire: [
+      { id: "role", titre: "Garant, caution, dépôt" },
       { id: "qui", titre: "Qui peut se porter garant" },
+      { id: "trouver", titre: "Trouver un garant" },
       { id: "simple-ou-solidaire", titre: "Caution simple ou solidaire" },
       { id: "acte", titre: "L'acte de cautionnement" },
       { id: "justificatifs", titre: "Les documents du garant" },
       { id: "cumul", titre: "Garant et assurance" },
       { id: "fin", titre: "Résilier, et jusqu'à quand" },
+      { id: "loi", titre: "Ce que dit la loi" },
       { id: "sans-garant", titre: "Louer sans garant" },
     ],
     titre: "Garant de location : qui peut s'engager, pour combien, et jusqu'à quand",
     // « garant location » pèse 2 900 recherches par mois en France, « acte de
     // cautionnement » autant pour une difficulté plus basse. Le titre portait
     // « garant » sans « location » : il ratait la requête de peu.
-    titreSeo: "Garant de location : qui peut l'être",
+    // Search Console (15/10 au 12/11) : position 43 en moyenne ; « garant location », « qui peut se
+    // porter garant », « comment trouver un garant », « loi garant location ».
+    titreSeo: "Garant location : qui peut l'être, ce qu'il signe",
     resume:
       "Un garant ne signe pas une formalité : il s'engage sur une dette qui peut courir des années après votre départ.",
     description:
-      "Qui peut se porter garant d'une location, ce que contient l'acte de cautionnement, les documents exigibles, et comment louer sans garant.",
+      "Garant location : qui peut se porter caution, comment en trouver un, l'acte à signer, les pièces exigibles et ce que dit la loi.",
     publieLe: "2026-10-19",
-    modifieLe: "2026-11-04",
-    lecture: 8,
+    modifieLe: "2026-11-15",
+    lecture: 10,
     etape: "avant",
     sources: [
       {
@@ -287,8 +292,24 @@ export const GUIDES: Guide[] = [
         nom: "Légifrance · Décret n° 2015-1437 du 5 novembre 2015",
         url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031444493",
       },
+      {
+        nom: "Légifrance · Article 2288 du Code civil",
+        url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044071209",
+      },
+      {
+        nom: "Service-public.gouv.fr · Dépôt de garantie d'un logement loué",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31269",
+      },
+      {
+        nom: "Service-public.gouv.fr · Garantie Visale",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F33453",
+      },
     ],
     questions: [
+      {
+        q: "Quelle différence entre un garant, une caution et un dépôt de garantie ?",
+        a: "Garant et caution désignent la même personne, qui s'engage à payer vos dettes locatives si vous ne les payez pas. Le dépôt de garantie est une somme que vous versez à la signature du bail et qui vous est rendue après votre départ, une fois déduites les sommes encore dues. Il est plafonné à un mois de loyer hors charges pour un logement vide, deux pour un meublé.",
+      },
       {
         q: "Qui peut se porter garant pour une location ?",
         a: "N'importe quelle personne physique, parent, proche ou ami, sans condition de lien de famille. Une personne morale aussi : Action Logement avec la garantie Visale, un employeur, une banque.",
@@ -314,12 +335,12 @@ export const GUIDES: Guide[] = [
         a: "Oui, rien ne l'interdit, et c'est fréquent quand deux parents se portent caution ensemble. Chacun signe son propre acte de cautionnement et fournit ses propres justificatifs. Attention à ce que l'acte précise : selon sa rédaction, chaque garant peut devoir la totalité de la dette, et pas la moitié.",
       },
       {
-        q: "Peut-on louer sans garant ?",
-        a: "Oui, et c'est le cas le plus fréquent une fois passé le premier logement. Trois voies : la garantie Visale d'Action Logement, gratuite et demandée avant de visiter ; un propriétaire qui souscrit lui-même une assurance contre les loyers impayés, auquel cas il ne peut plus exiger de caution sauf d'un étudiant ou d'un apprenti ; une société de cautionnement privée, payante, qui se porte garant à la place d'un proche.",
+        q: "Que dit la loi sur le garant de location ?",
+        a: "Le Code civil définit le cautionnement et impose à la caution personne physique une mention qu'elle appose elle-même (articles 2288 et 2297). L'article 22-1 de la loi du 6 juillet 1989 interdit notamment de cumuler garant et assurance contre les impayés, sauf pour un étudiant ou un apprenti, et fixe les formalités de l'acte. Le décret du 5 novembre 2015 liste les justificatifs du garant.",
       },
       {
-        q: "Faut-il obligatoirement un garant pour louer ?",
-        a: "Non, aucune loi ne l'impose. C'est le propriétaire qui décide d'en demander un ou non, et il ne peut pas toujours : s'il a déjà une assurance contre les loyers impayés, il ne peut exiger une caution que d'un étudiant ou d'un apprenti.",
+        q: "Quand le propriétaire peut-il actionner le garant ?",
+        a: "Avec une caution solidaire, dès le premier impayé, sans vous réclamer la somme d'abord. Avec une caution simple, seulement après vous l'avoir réclamée par un commandement de payer. Dans les deux cas, il a trois ans pour réclamer les loyers et charges impayés.",
       },
       {
         q: "Peut-on arrêter d'être garant d'une location ?",
@@ -332,22 +353,26 @@ export const GUIDES: Guide[] = [
     outilLie: "/outils/dossier-de-location",
     sommaire: [
       { id: "principe", titre: "Le principe" },
+      { id: "raisons", titre: "Pourquoi un refus" },
       { id: "interdits", titre: "Les critères interdits" },
       { id: "legitimes", titre: "Ce qui reste légitime" },
+      { id: "cas", titre: "Selon votre situation" },
+      { id: "motif", titre: "Demander le motif" },
       { id: "preuve", titre: "Prouver une discrimination" },
       { id: "sanctions", titre: "Les sanctions" },
       { id: "recours", titre: "Où signaler" },
       { id: "entre-temps", titre: "Après un refus" },
     ],
     titre: "Un propriétaire peut-il refuser votre dossier sans donner de motif ?",
-    titreSeo: "Refus de dossier : ce qui est permis",
+    // Requête principale relevée en Search Console (15/10 au 12/11) : « refus de dossier location ».
+    titreSeo: "Refus de dossier de location : motifs et recours",
     resume:
       "Oui, il choisit son locataire, et il n'a pas à se justifier. Mais la liste des raisons qui lui sont interdites est longue, et quand un refus semble en relever, c'est à lui de prouver le contraire.",
     description:
-      "Un propriétaire choisit son locataire, mais pas sur n'importe quel critère. Les motifs interdits, la charge de la preuve, les sanctions, et où signaler.",
+      "Pourquoi un dossier de location est refusé, ce que le propriétaire peut retenir ou non, comment demander le motif, et où signaler un refus interdit.",
     publieLe: "2026-10-19",
-    modifieLe: "2026-11-04",
-    lecture: 7,
+    modifieLe: "2026-11-15",
+    lecture: 11,
     etape: "candidature",
     sources: [
       {
@@ -366,8 +391,32 @@ export const GUIDES: Guide[] = [
         nom: "Défenseur des droits · Discriminations à la location de logement",
         url: "https://www.defenseurdesdroits.fr/discriminations-la-location-de-logement-338",
       },
+      {
+        nom: "ANIL · Un bailleur a encore refusé mon dossier de candidature pour une location",
+        url: "https://www.anil.org/parole-expert-logement-dossier-candidature-location-bailleur/",
+      },
+      {
+        nom: "Service-public.gouv.fr · Futur locataire d'un logement privé : justificatifs à donner au propriétaire",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F1169",
+      },
+      {
+        nom: "Légifrance · Article 22-2 de la loi n° 89-462 du 6 juillet 1989",
+        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000028806691",
+      },
+      {
+        nom: "Défenseur des droits · Décision n° 2019-001 du 28 janvier 2019",
+        url: "https://juridique.defenseurdesdroits.fr/doc_num.php?explnum_id=18508",
+      },
     ],
     questions: [
+      {
+        q: "Pourquoi mon dossier de location a-t-il été refusé ?",
+        a: "Souvent pour une raison banale : des revenus jugés trop justes face au loyer, pas de garant, un dossier incomplet, ou un autre candidat au dossier plus solide ou arrivé plus tôt. Aucun texte ne fixe de minimum de revenus : le « trois fois le loyer » est une habitude, qu'un garant ou la garantie Visale peut compenser.",
+      },
+      {
+        q: "Peut-on demander au propriétaire le motif du refus ?",
+        a: "Oui. Rien ne l'oblige à répondre, mais une réponse dit ce qui a manqué : des revenus, un garant, une pièce. Demandez par écrit, en une phrase et sans reproche : si le motif donné est interdit, ce message devient une preuve.",
+      },
       {
         q: "Un propriétaire doit-il justifier le refus de mon dossier ?",
         a: "Non. Il choisit librement son locataire et n'a aucune obligation de motiver un refus. La loi n'exige aucune explication de sa part ; elle lui interdit seulement de fonder sa décision sur un critère discriminatoire.",
@@ -382,7 +431,11 @@ export const GUIDES: Guide[] = [
       },
       {
         q: "Que risque un propriétaire qui refuse un dossier pour un motif interdit ?",
-        a: "Jusqu'à trois ans d'emprisonnement et 45 000 € d'amende, et jusqu'à cinq ans et 75 000 € quand les faits ont lieu dans un lieu accueillant du public. Par ailleurs, demander une pièce qui ne figure pas dans la liste autorisée est passible d'une amende pouvant aller jusqu'à 3 000 € pour un particulier.",
+        a: "Jusqu'à trois ans d'emprisonnement et 45 000 € d'amende, et jusqu'à cinq ans et 75 000 € quand les faits ont lieu dans un lieu accueillant du public. Par ailleurs, demander une pièce qui ne figure pas dans la liste autorisée est passible d'une amende pouvant aller jusqu'à 3 000 € pour un particulier, et 15 000 € pour une personne morale.",
+      },
+      {
+        q: "Où se faire conseiller après un refus de dossier ?",
+        a: "Pour un conseil gratuit, l'ADIL de votre département répond aux questions de droit du logement. Si le refus vous semble discriminatoire, le Défenseur des droits se saisit gratuitement, en ligne ou au 3928, et peut proposer une médiation de trois mois au plus, renouvelable une fois.",
       },
     ],
   },
@@ -394,19 +447,23 @@ export const GUIDES: Guide[] = [
       { id: "visale", titre: "Visale, en premier" },
       { id: "assurance", titre: "Le propriétaire déjà assuré" },
       { id: "societes", titre: "Les sociétés de cautionnement" },
+      { id: "autres", titre: "Les autres organismes" },
       { id: "etudiant", titre: "Le cas des étudiants" },
+      { id: "dossier", titre: "Le dossier sans garant" },
       { id: "dire", titre: "Quoi répondre en visite" },
       { id: "refus", titre: "Un refus à cause du garant" },
     ],
-    titre: "Louer sans garant : les trois solutions, et ce qu'elles coûtent",
-    titreSeo: "Louer sans garant : les trois solutions",
+    titre: "Louer sans garant : les solutions, ce qu'elles coûtent et le dossier à monter",
+    // Search Console (15/10 au 12/11) : position 76 en moyenne ; « louer sans garant », « pas de
+    // garant », « dossier location sans garant », « logement sans garant ».
+    titreSeo: "Louer sans garant : les solutions et le dossier",
     resume:
       "Aucun texte n'oblige un locataire à présenter un garant, et trois dispositifs permettent d'y répondre sans mobiliser un proche.",
     description:
-      "Aucune loi n'oblige à fournir un garant. Visale, l'assurance du propriétaire, les sociétés de cautionnement : les trois voies, et leur coût réel.",
+      "Louer sans garant : aucune loi n'en impose. Visale, assurance du propriétaire, FSL, banque ou société de cautionnement, et le dossier qui va avec.",
     publieLe: "2026-10-19",
-    modifieLe: "2026-11-04",
-    lecture: 7,
+    modifieLe: "2026-11-15",
+    lecture: 8,
     etape: "avant",
     sources: [
       {
@@ -429,8 +486,24 @@ export const GUIDES: Guide[] = [
         nom: "Légifrance · Décret n° 2015-1437 du 5 novembre 2015",
         url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031444493",
       },
+      {
+        nom: "Légifrance · Article 6 de la loi n° 90-449 du 31 mai 1990",
+        url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037670165",
+      },
+      {
+        nom: "Service-public.gouv.fr · Quelle aide apporte le Fonds de solidarité pour le logement (FSL) ?",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F1334",
+      },
+      {
+        nom: "Service-public.gouv.fr · Dépôt de garantie d'un logement loué",
+        url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31269",
+      },
     ],
     questions: [
+      {
+        q: "Un garant est-il obligatoire pour louer ?",
+        a: "Non. Aucun texte n'impose au locataire de présenter une caution : c'est le propriétaire qui décide d'en demander une. Il ne le peut plus s'il est déjà assuré contre les loyers impayés, sauf si vous êtes étudiant ou apprenti.",
+      },
       {
         q: "Peut-on louer sans garant ?",
         a: "Oui. Aucun texte n'impose au locataire de présenter une caution : c'est le propriétaire qui décide d'en exiger une. Trois voies permettent d'y répondre sans mobiliser un proche : la garantie Visale d'Action Logement, une assurance souscrite par le propriétaire lui-même, ou une société de cautionnement privée.",
@@ -454,6 +527,14 @@ export const GUIDES: Guide[] = [
       {
         q: "La garantie Visale suffit-elle pour être accepté ?",
         a: "Elle remplace le garant, pas le dossier. Le propriétaire regarde toujours vos ressources, votre contrat et la cohérence de l'ensemble. Visale retire la question du garant de la conversation, ce qui est souvent le point de blocage, mais elle ne compense pas un dossier incomplet.",
+      },
+      {
+        q: "Le FSL peut-il se porter garant d'un locataire ?",
+        a: "Oui, si le fonds de votre département le prévoit. La loi du 31 mai 1990 lui permet d'accorder des aides, notamment sous forme de cautionnements ou de garanties, selon les conditions fixées par chaque département. Il aide les ménages qui ont du mal à payer les frais de leur logement et peut aussi payer le dépôt de garantie ou le premier loyer.",
+      },
+      {
+        q: "Comment faire un dossier de location sans garant ?",
+        a: "Réunissez les mêmes pièces qu'un autre candidat, dans la liste fixée par le décret du 5 novembre 2015 : identité, domicile, activité et ressources. Ajoutez votre visa Visale si vous l'avez, et mettez en avant votre contrat et votre revenu au regard du loyer. Proposer un dépôt plus élevé ne marche pas : il est plafonné à un mois de loyer hors charges en location vide, deux en meublé.",
       },
     ],
   },

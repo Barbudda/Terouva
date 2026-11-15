@@ -41,6 +41,26 @@ export default function GuideRefusDeDossier() {
         d&apos;agence, une habitude suffisent.
       </p>
 
+      <h2 id="raisons">Pourquoi un dossier de location est-il refusé ?</h2>
+      <p>
+        Souvent pour une raison banale : des revenus jugés trop justes face au loyer, pas
+        de garant, un dossier incomplet, ou un autre candidat au dossier plus solide, ou arrivé
+        plus tôt. L&apos;ANIL cite les trois premiers parmi les motifs courants. Aucun ne relève de
+        la discrimination.
+      </p>
+      <p>
+        Le seuil de « trois fois le loyer » que demandent beaucoup de propriétaires et
+        d&apos;agences n&apos;est fixé par aucun texte : la liste officielle des justificatifs ne
+        prévoit aucun minimum de revenus. C&apos;est une habitude, que chacun applique à sa façon,
+        et qu&apos;un garant ou la <Link href="/guides/garantie-visale">garantie Visale</Link> peut
+        compenser.
+      </p>
+      <p>
+        Un refus ne dit donc pas que votre dossier est mauvais. Sur une annonce qui reçoit
+        beaucoup de messages, il dit souvent qu&apos;un autre dossier est arrivé avant le vôtre, ou
+        paraissait plus sûr.
+      </p>
+
       <h2 id="interdits">Quels sont les motifs de refus interdits ?</h2>
       <p>
         L&apos;article 225-1 du Code pénal en liste vingt-cinq. Parmi eux : l&apos;origine, le
@@ -67,9 +87,13 @@ export default function GuideRefusDeDossier() {
         Deux points reviennent souvent dans les dossiers du Défenseur des droits. Pour le garant,
         la loi de 1989 est plus précise que le Code pénal : un propriétaire qui exige une caution
         ne peut pas la refuser parce qu&apos;elle n&apos;a pas la nationalité française ou
-        qu&apos;elle ne réside pas en métropole (<span className="loi">article 22-1</span>). Et un
-        refus justifié par la nature « non professionnelle » d&apos;une partie des revenus, comme
-        une pension d&apos;invalidité, a déjà été qualifié de discriminatoire.
+        qu&apos;elle ne réside pas en métropole (<span className="loi">article 22-1</span>). Et
+        quand une agence a écarté un candidat parce qu&apos;une partie de ses revenus était une
+        pension d&apos;invalidité, le Défenseur des droits a retenu une discrimination fondée sur
+        le handicap (<span className="loi">décision 2019-001</span>). La décision
+        précise que préférer des revenus d&apos;activité n&apos;est pas interdit en soi, mais
+        que l&apos;exclusion des personnes handicapées qui en résulte fait présumer la
+        discrimination.
       </p>
 
       <h2 id="legitimes">Quels motifs de refus restent légitimes ?</h2>
@@ -80,8 +104,8 @@ export default function GuideRefusDeDossier() {
         écarté sans que la loi ait rien à dire. C&apos;est le cas de la plupart des refus.
       </p>
       <p>
-        Les pièces qu&apos;il peut demander portent sur votre identité, votre situation
-        professionnelle et vos ressources. Il ne peut pas réclamer un relevé de compte bancaire ni
+        Les pièces qu&apos;il peut demander portent sur votre identité, votre domicile, votre
+        situation professionnelle et vos ressources. Il ne peut pas réclamer un relevé de compte bancaire ni
         un contrat de mariage. Refuser quelqu&apos;un qui veut exercer une activité
         professionnelle dans le logement n&apos;est pas une discrimination. Quand le refus est
         légitime, ce qui se joue est sur le terrain du{" "}
@@ -96,6 +120,94 @@ export default function GuideRefusDeDossier() {
           vraiment motivé la décision.
         </p>
       </div>
+
+      <h2 id="cas">Refus pour chômage, APL, enfants ou animal : que dit la loi ?</h2>
+      <p>
+        Tout dépend du motif. Les enfants, l&apos;âge, l&apos;état de santé et le handicap sont des
+        critères interdits, comme la nationalité d&apos;un garant. Un animal n&apos;en est pas un.
+        Le chômage n&apos;est pas un critère en soi, mais la vulnérabilité économique en est un ;
+        et nous n&apos;avons lu aucune décision qui tranche le cas des APL.
+      </p>
+      <p>Chaque situation a sa page, avec les règles et les pièces qui rassurent :</p>
+      <ul>
+        <li>
+          <Link href="/blog/refus-location-chomage">refus de location au chômage</Link> : ce que le
+          propriétaire peut écarter, et ce qu&apos;il ne peut pas ;
+        </li>
+        <li>
+          <Link href="/blog/louer-avec-rsa-aah">louer avec le RSA ou l&apos;AAH</Link> : une pièce de
+          la liste officielle, jugée comme les autres revenus ;
+        </li>
+        <li>
+          <Link href="/blog/proprietaire-refuse-apl">propriétaire qui refuse les APL</Link> : la
+          question légale, et l&apos;argument du versement direct ;
+        </li>
+        <li>
+          <Link href="/blog/refus-location-enfants">refus de location à cause des enfants</Link> :
+          la situation de famille est un critère interdit ;
+        </li>
+        <li>
+          <Link href="/blog/proprietaire-refuser-animal-location">refus pour un animal</Link> :
+          possible au moment du choix, pas dans le bail ;
+        </li>
+        <li>
+          <Link href="/blog/louer-appartement-retraite">louer à la retraite, après 70 ans</Link> :
+          l&apos;âge ne peut pas être retenu ;
+        </li>
+        <li>
+          <Link href="/blog/louer-en-arret-maladie">louer en arrêt maladie ou en invalidité</Link> :
+          ce que vous n&apos;avez pas à montrer ;
+        </li>
+        <li>
+          <Link href="/blog/louer-avec-recepisse-titre-de-sejour">
+            louer avec un récépissé de titre de séjour
+          </Link>{" "}
+          : la pièce d&apos;identité que le propriétaire peut exiger ;
+        </li>
+        <li>
+          <Link href="/blog/garant-etranger-location">garant étranger refusé</Link> : ce que dit
+          l&apos;article 22-1 ;
+        </li>
+        <li>
+          <Link href="/blog/louer-en-interim">refus d&apos;un intérimaire</Link> : montrer des
+          revenus réguliers et ajouter une garantie ;
+        </li>
+        <li>
+          <Link href="/blog/fiche-banque-de-france-louer-appartement">
+            fiché à la Banque de France
+          </Link>{" "}
+          : un fichage que le propriétaire ne voit pas ;
+        </li>
+        <li>
+          <Link href="/blog/anciens-impayes-loyer-fichier-locataires">
+            d&apos;anciens impayés de loyer
+          </Link>{" "}
+          : ce qui peut ressortir, et comment l&apos;expliquer ;
+        </li>
+        <li>
+          <Link href="/blog/refus-assurance-loyers-impayes">
+            dossier refusé par l&apos;assurance loyers impayés
+          </Link>{" "}
+          : demander le motif à l&apos;assureur ;
+        </li>
+        <li>
+          <Link href="/blog/visale-refusee">garantie Visale refusée</Link> : corriger la demande
+          et la refaire.
+        </li>
+      </ul>
+
+      <h2 id="motif">Peut-on demander au propriétaire pourquoi il a refusé ?</h2>
+      <p>
+        Oui, et c&apos;est souvent utile. Rien ne l&apos;oblige à répondre, mais une réponse vous dit
+        ce qui a manqué : des revenus, un garant, une pièce. Demandez par écrit, en une phrase et
+        sans reproche. Si le motif donné est interdit, ce message devient une preuve.
+      </p>
+      <p>
+        Si le refus tient à une pièce que vous n&apos;avez pas fournie, vérifiez qu&apos;elle figure
+        dans la liste officielle. Le propriétaire ou l&apos;agence ne peut exiger que des
+        justificatifs d&apos;identité, de domicile, de situation professionnelle et de ressources ;
+        réclamer autre chose est puni d&apos;une amende, détaillée plus bas.
+      </p>
 
       <h2 id="preuve">Comment prouver une discrimination au logement ?</h2>
       <p>
@@ -128,7 +240,9 @@ export default function GuideRefusDeDossier() {
       <p>
         Une autre sanction vise le dossier lui-même : demander une pièce qui ne figure pas dans la
         liste autorisée est passible d&apos;une amende pouvant aller jusqu&apos;à{" "}
-        <strong>3&nbsp;000&nbsp;€</strong> pour un particulier. Et quand c&apos;est le propriétaire
+        <strong>3&nbsp;000&nbsp;€</strong> pour un particulier, et 15&nbsp;000&nbsp;€ pour une
+        personne morale comme une agence (<span className="loi">article 22-2</span> de la loi de
+        1989). Et quand c&apos;est le propriétaire
         qui discrimine, l&apos;agent immobilier qui a transmis sa consigne ne peut pas être
         poursuivi pénalement à sa place.
       </p>
@@ -141,8 +255,11 @@ export default function GuideRefusDeDossier() {
         faits. Un signalement en ligne ne vaut pas plainte.
       </p>
       <p>
-        Le Défenseur des droits est souvent la voie la plus simple. Ses démarches, ses coordonnées à
-        jour et les décisions qu&apos;il a publiées se trouvent sur{" "}
+        Le Défenseur des droits est souvent la voie la plus simple. Il se saisit gratuitement, en
+        ligne ou au 3928, et s&apos;il propose une médiation, elle dure trois mois au plus,
+        renouvelable une fois.
+        Ses démarches, ses coordonnées à jour et les décisions qu&apos;il a publiées se trouvent
+        sur{" "}
         <a
           href="https://www.defenseurdesdroits.fr/discriminations-la-location-de-logement-338"
           target="_blank"
@@ -151,6 +268,12 @@ export default function GuideRefusDeDossier() {
           sa page consacrée à la location
         </a>
         .
+      </p>
+      <p>
+        Avant d&apos;engager quoi que ce soit, vous pouvez aussi interroger l&apos;ADIL de votre
+        département, l&apos;agence d&apos;information sur le logement : l&apos;ANIL présente ce
+        conseil comme gratuit et neutre, et service-public y renvoie pour les questions sur le
+        dossier de location.
       </p>
 
       <h2 id="entre-temps">Que faire après un refus de dossier de location ?</h2>

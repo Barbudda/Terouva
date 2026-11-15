@@ -89,7 +89,7 @@ export default article({
   ],
   corps: `
 ## Existe-t-il un revenu minimum pour se porter garant ? {#minimum}
-Non. Ni Service-public ni l'ANIL n'indiquent de revenu minimum pour être garant d'une location. Le propriétaire apprécie lui-même les ressources du garant, à partir des pièces que la réglementation l'autorise à demander. Le [guide du garant](/guides/garant-caution) explique qui peut se porter caution et ce que contient l'acte.
+Non. Ni Service-public ni l'ANIL n'indiquent de revenu minimum pour être garant d'une location. Le propriétaire apprécie lui-même les ressources du garant, à partir des pièces que la réglementation l'autorise à demander. Le guide [garant de location](/guides/garant-caution) explique qui peut se porter caution et ce que contient l'acte.
 
 Un multiple du loyer revient souvent dans les annonces et les conseils entre proches. Il n'est inscrit dans aucun des textes cités ici : c'est un repère que fixe chaque propriétaire, ou l'assureur auquel il s'adresse. Il peut donc varier d'une annonce à l'autre, et se discuter.
 

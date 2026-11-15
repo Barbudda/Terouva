@@ -86,7 +86,7 @@ export default article({
 ## Un propriétaire peut-il refuser un intérimaire ? {#refus}
 Il ne peut pas écarter un candidat sur un critère discriminatoire, et son choix doit reposer sur des critères objectifs, par exemple votre situation financière. Le type de contrat n'est pas un critère en soi : c'est la régularité de vos revenus qu'il juge. Un intérimaire qui travaille sans interruption depuis un an présente souvent mieux qu'il ne le croit.
 
-En pratique, le refus vient surtout de la peur d'un trou entre deux missions. Votre dossier doit donc répondre à cette peur avant qu'elle soit formulée : des revenus montrés sur plusieurs mois, et une garantie. La liste complète des pièces est dans le guide du [dossier de location](/guides/dossier-de-location).
+En pratique, le refus vient surtout de la peur d'un trou entre deux missions. Votre dossier doit donc répondre à cette peur avant qu'elle soit formulée : des revenus montrés sur plusieurs mois, et une garantie. La liste complète des pièces est dans le guide du [dossier de location](/guides/dossier-de-location), et les motifs qu'un propriétaire peut retenir, ou non, dans celui du [refus de dossier](/guides/refus-de-dossier).
 
 ## Quelles pièces fournir quand on est intérimaire ? {#pieces}
 Pour l'activité, le propriétaire peut demander votre contrat de travail : en intérim, c'est le contrat de mission en cours, ou une attestation de l'agence d'emploi qui précise l'emploi et la rémunération. Pour les ressources, il peut demander vos trois derniers bulletins de salaire. Ajoutez votre dernier avis d'imposition s'il montre une année pleine de missions.

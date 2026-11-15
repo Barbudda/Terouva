@@ -19,6 +19,12 @@ export const metadata = pageMetadata({
  * et sous chacune une réponse autonome de 40 à 60 mots, puis le détail sans
  * redite. « Louer sans garant » reste une section : la question appartient au
  * guide voisin, vers lequel elle renvoie.
+ *
+ * Découpage avec le blog (2026-11-15) : ce guide prend la requête générale
+ * « garant location » et répond court à chaque sous-question ; l'article qui
+ * porte la question précise reçoit le détail et un lien d'ici (organismes,
+ * revenu du garant, garant obligé de payer). « Garant obligatoire » et « pas de
+ * garant » appartiennent au guide louer-sans-garant.
  */
 export default function GuideGarantCaution() {
   return (
@@ -28,6 +34,23 @@ export default function GuideGarantCaution() {
         <strong>caution</strong>, est la personne qui s&apos;engage par écrit à payer vos dettes
         locatives si vous ne les payez pas : loyer, charges, intérêts de retard et réparations
         locatives.
+      </p>
+
+      <h2 id="role">Garant, caution, dépôt de garantie : quelle différence ?</h2>
+      <p>
+        Garant et caution sont deux mots pour la même personne. Le dépôt de garantie, lui,
+        désigne une somme d&apos;argent : vous la versez vous-même à la signature du
+        bail, et elle vous est rendue après votre départ, une fois déduites les sommes encore dues
+        au propriétaire.
+      </p>
+      <p>
+        L&apos;<span className="loi">article 2288</span> du Code civil définit le cautionnement
+        comme « le contrat par lequel une caution s&apos;oblige envers le créancier à payer la dette
+        du débiteur en cas de défaillance de celui-ci ». Le dépôt, lui, est « parfois appelé par
+        erreur caution », note Service-public, d&apos;où la confusion. Il est plafonné à un mois de
+        loyer hors charges pour un logement vide, deux pour un meublé, et un propriétaire peut vous
+        demander les deux. Ses règles sont dans le guide du{" "}
+        <Link href="/guides/depot-de-garantie">dépôt de garantie</Link>.
       </p>
 
       <h2 id="qui">Qui peut se porter garant pour une location ?</h2>
@@ -43,6 +66,36 @@ export default function GuideGarantCaution() {
         personne à solliciter, la <Link href="/guides/garantie-visale">garantie Visale</Link> est
         la voie la plus courante.
       </p>
+
+      <h2 id="trouver">Comment trouver un garant pour une location ?</h2>
+      <p>
+        Commencez par vos proches : parent, ami, ancien collègue, aucun lien de famille n&apos;est
+        exigé. Si personne ne peut s&apos;engager, demandez la garantie Visale, gratuite, avant la
+        signature du bail. Votre employeur ou votre banque peuvent aussi se porter caution, et les
+        sociétés de cautionnement le font contre paiement.
+      </p>
+      <p>Ce qui décide, pour chacune de ces voies :</p>
+      <ul>
+        <li>
+          <strong>Un proche</strong> : le propriétaire regarde ses ressources, pas son lien avec
+          vous. Aucun texte ne fixe de revenu minimum, comme le détaille l&apos;article{" "}
+          <Link href="/blog/revenu-minimum-garant-location">
+            quel revenu faut-il pour se porter garant
+          </Link>
+          , et un ami peut s&apos;engager au même titre qu&apos;un parent.
+        </li>
+        <li>
+          <strong>Visale</strong> : Action Logement se porte caution à la place d&apos;un proche,
+          si votre âge, votre situation et votre loyer entrent dans ses conditions. La demande se
+          fait en ligne, avant la signature du bail.
+        </li>
+        <li>
+          <strong>Un organisme</strong> : banque, employeur, fonds de solidarité de votre
+          département ou société privée. Lesquels s&apos;engagent vraiment, et à quelles
+          conditions, est détaillé dans l&apos;article{" "}
+          <Link href="/blog/organisme-garant-location">organisme garant pour une location</Link>.
+        </li>
+      </ul>
 
       <h2 id="simple-ou-solidaire">
         Caution simple ou solidaire : quand le propriétaire peut-il actionner le garant ?
@@ -69,7 +122,9 @@ export default function GuideGarantCaution() {
       </ul>
       <p>
         Dans les deux cas, le propriétaire dispose de <strong>trois ans</strong> pour réclamer les
-        loyers et charges impayés.
+        loyers et charges impayés. Ce qui se passe ensuite, de l&apos;information du garant à ce
+        qu&apos;il peut vous réclamer après avoir payé, est détaillé dans l&apos;article{" "}
+        <Link href="/blog/garant-oblige-de-payer">votre garant est-il obligé de payer</Link>.
       </p>
 
       <h2 id="acte">Que doit contenir l&apos;acte de cautionnement ?</h2>
@@ -204,12 +259,46 @@ export default function GuideGarantCaution() {
         fin de ce préavis. Sans clause de solidarité, chacun ne doit que sa part.
       </p>
 
+      <h2 id="loi">Que dit la loi sur le garant de location ?</h2>
+      <p>
+        L&apos;essentiel tient dans trois textes. Le Code civil définit le cautionnement et impose
+        à la caution personne physique une mention qu&apos;elle appose elle-même. L&apos;article 22-1 de la loi du 6 juillet 1989 dit quand
+        un propriétaire peut demander un garant et ce que l&apos;acte doit contenir. Le décret du 5
+        novembre 2015 fixe la liste des justificatifs que le garant peut avoir à fournir.
+      </p>
+      <ul>
+        <li>
+          <strong>Le Code civil</strong>, aux <span className="loi">articles 2288</span> et
+          suivants : la définition du cautionnement, caution simple ou solidaire, et la mention de
+          l&apos;<span className="loi">article 2297</span>, avec le montant maximal en lettres et
+          en chiffres.
+        </li>
+        <li>
+          <strong>L&apos;article 22-1 de la loi du 6 juillet 1989</strong> : l&apos;interdiction
+          de cumuler garant et assurance contre les impayés (sauf étudiant ou apprenti), les
+          limites du bailleur personne morale, l&apos;interdiction de refuser une caution qui
+          n&apos;est pas française ou qui ne réside pas en métropole, la résiliation d&apos;un
+          engagement sans durée et les formalités de l&apos;acte, à peine de nullité.
+        </li>
+        <li>
+          <strong>Le décret n° 2015-1437 du 5 novembre 2015</strong> : la liste limitative des
+          pièces du garant, distincte de celle du locataire.
+        </li>
+      </ul>
+      <p>
+        Chacune de ces règles est développée plus haut, dans la section qui la concerne.
+      </p>
+
       <h2 id="sans-garant">Louer sans garant</h2>
       <p>
         Ne pas avoir de proche à solliciter est le cas le plus fréquent une fois passé le premier
         logement, et ce n&apos;est pas une impasse : <strong>aucune loi n&apos;oblige à fournir un
-        garant</strong>. C&apos;est le propriétaire qui décide d&apos;en demander un, et trois
-        voies permettent de répondre à sa place.
+        garant</strong>, comme l&apos;explique la réponse à la question{" "}
+        <Link href="/guides/louer-sans-garant#pas-obligatoire">
+          un garant est-il obligatoire pour louer
+        </Link>
+        . C&apos;est le propriétaire qui décide d&apos;en demander un, et trois
+        voies principales permettent de répondre à sa place.
       </p>
       <ul>
         <li>
