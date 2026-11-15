@@ -25,3 +25,8 @@
 - Écrans redessinés dans `Etapes.tsx` (plus les panneaux du hero) : 56 % de la carte à 1440, 96 px entre cartes, liseré et fond teintés.
 - Un élément par écran : l'histogramme sous le « 97 » et la barre Envoyée / Réponse / Visite sont retirés, comme toutes les capitales mono dans les cartes.
 - À 375 px : vignette réduite, anneau et coche au-dessus du texte, prix et « / mois » visibles ; les écrans ne suivent plus les flèches du hero.
+
+## Retour d'Hugo (même soir) : onglets et une seule scène
+- Quatre onglets côte à côte (numéro, titre, phrase), barre orange de 5 s qui fait avancer ; pause au survol, au focus et hors écran, arrêt au clic, rien ne bouge en mouvement réduit ; tablist/tab, flèches, Début, Fin.
+- Une scène crème de 26,5 rem qui montre l'écran choisi avec son détail (annonce entière, note et ses six règles de `DECOMPOSITION`, message complet, envoi avec l'annonce) : section 896 px à 1440.
+- Bouton « Être prévenu » de fin de récit retiré pour tenir dans l'écran (il reste dans la nav et la barre de pouce) ; à 375, les onglets défilent en rangée.
