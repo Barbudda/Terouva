@@ -15,9 +15,10 @@ const TCONSO = "ANIL · Cautionnement et bail d'habitation : exclusion des règl
 export default article({
   slug: "etre-garant-de-plusieurs-locataires",
   titre: "Peut-on être garant de plusieurs locataires en même temps ?",
-  titreSeo: "Être garant de plusieurs locataires",
+  // Titre repris de la Search Console (15/10 au 12/11) : « peut on être garant de plusieurs personnes ».
+  titreSeo: "Peut-on être garant de plusieurs personnes ?",
   description:
-    "Aucun texte lu ne limite le nombre de cautionnements, mais chacun engage vos revenus et vos biens. Ce que regarde le bailleur et ce qui protège le garant.",
+    "Oui : ni Service-public ni l'ANIL ne fixent de maximum, mais chaque acte engage vos revenus et vos biens. Ce que voit le bailleur, ce qui vous protège.",
   chapeau:
     "Oui : ni Service-public ni l'ANIL ne fixent de nombre maximal de cautionnements par personne. Chaque acte vous engage pourtant séparément, et le propriétaire juge vos garanties financières pièces en main. Et ne comptez pas sur la règle de proportionnalité : pour un bail d'habitation, la Cour de cassation a écarté en 2022 les protections du Code de la consommation.",
   publieLe: "2026-11-04",

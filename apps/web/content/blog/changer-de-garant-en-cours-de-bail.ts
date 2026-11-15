@@ -3,7 +3,8 @@ import { article } from "@/lib/blog-format";
 export default article({
   slug: "changer-de-garant-en-cours-de-bail",
   titre: "Changer de garant en cours de bail : comment faire",
-  titreSeo: "Changer de garant en cours de bail",
+  // Titre repris de la Search Console (15/10 au 12/11) : « peut on changer de garant en cours de bail ».
+  titreSeo: "Peut-on changer de garant en cours de bail ?",
   description:
     "Changer de garant suppose l'accord du propriétaire. Ce que peut faire un garant qui veut partir, comment proposer un remplaçant, et sans garant du tout.",
   chapeau:

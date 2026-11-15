@@ -5,7 +5,7 @@ export default article({
   titre: "Peut-on louer un appartement sans avis d'imposition ?",
   titreSeo: "Louer sans avis d'imposition : que fournir ?",
   description:
-    "L'avis d'imposition n'est qu'une pièce de ressources parmi d'autres. Ce qui le remplace pour un primo-déclarant, un étudiant ou un arrivant de l'étranger.",
+    "Oui : l'avis d'imposition n'est qu'une pièce de ressources parmi d'autres. Ce qui le remplace (étudiant, premier emploi, arrivée de l'étranger) et Visale.",
   chapeau:
     "Oui. L'avis d'imposition n'est qu'une des pièces de ressources de la liste officielle : le propriétaire peut en demander une ou plusieurs, pas toutes. Fiches de paie, attestation de l'employeur, justificatif de prestations, indemnités de stage ou avis de bourse peuvent prouver vos revenus. Si vos revenus ont été imposés à l'étranger, l'avis équivalent de ce pays est prévu.",
   publieLe: "2026-11-04",
@@ -74,7 +74,7 @@ export default article({
       citation: "a le droit d'exiger la présentation de l'original",
     },
     {
-      fait: "Avant 30 ans, Visale est ouverte quel que soit le statut",
+      fait: "À 30 ans ou moins, Visale est ouverte quel que soit le statut",
       valeur: "de 17 ans et 10 mois à moins de 30 ans",
       source: "https://www.service-public.gouv.fr/particuliers/vosdroits/F33453",
       titreSource: "Service-public.gouv.fr · Garantie Visale : caution pour le locataire",

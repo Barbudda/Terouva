@@ -69,7 +69,7 @@ export default article({
       citation: "sont pris en compte partiellement (soit à hauteur de 30%) et en fonction de leur pérennité",
     },
     {
-      fait: "Visale, moins de 30 ans : le RSA compte parmi les ressources prises en compte",
+      fait: "Visale, 30 ans ou moins : le RSA compte parmi les ressources prises en compte",
       valeur: "RSA compté dans les ressources",
       source: "https://www.service-public.gouv.fr/particuliers/vosdroits/F33453",
       titreSource: "Service-public.gouv.fr · Garantie Visale : caution pour le locataire",

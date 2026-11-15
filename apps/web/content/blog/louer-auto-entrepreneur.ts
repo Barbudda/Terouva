@@ -66,7 +66,7 @@ export default article({
       citation: "Salarié du secteur privé (y compris agricole)",
     },
     {
-      fait: "Avant 30 ans, Visale est ouverte quel que soit le statut",
+      fait: "À 30 ans ou moins, Visale est ouverte quel que soit le statut",
       valeur: "de 17 ans et 10 mois à moins de 30 ans",
       source: "https://www.service-public.gouv.fr/particuliers/vosdroits/F33453",
       titreSource: "Service-public.gouv.fr · Garantie Visale : caution pour le locataire",

@@ -95,6 +95,14 @@ export default function GuideEtatDesLieux() {
         En meublé, un <strong>inventaire détaillé du mobilier</strong> s&apos;ajoute, signé par les
         deux parties et annexé au bail.
       </p>
+      <p>
+        L&apos;état des lieux s&apos;ajoute aux autres papiers que le propriétaire vous remet avec le
+        bail : la liste est dans{" "}
+        <Link href="/blog/documents-proprietaire-doit-fournir-location">
+          les documents que le propriétaire doit fournir
+        </Link>
+        .
+      </p>
 
       <h2 id="cout">Qui paie</h2>
       <ul>
