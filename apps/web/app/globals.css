@@ -61,6 +61,7 @@
   --color-action: #fc734d;        /* sur minuit : 7,42:1 */
   --color-action-ink: #081120;
   --color-accent: #fc734d;        /* alias : l'action */
+  --color-creme: #f7f3ed;          /* le papier chaud des sections de la vague 2, fixe quel que soit le monde */
   --color-orange-titre: #fc734d;  /* mot ou ligne en valeur d'un titre de section ; sur minuit : 7,42:1 */
   --color-accent-ink: #0297de;    /* alias : le bleu QUAND IL PORTE DU TEXTE (liens) */
   --color-night-accent: #0297de;  /* alias : le bleu de l'instrument */
@@ -184,9 +185,27 @@
     radial-gradient(58% 42% at 50% 42%, rgb(22 142 236 / 0.95) 0%, rgb(12 100 212 / 0.65) 48%, transparent 86%),
     linear-gradient(180deg, #030814 0%, #071a40 14%, #0b3a80 30%, #0e5cc0 45%, #3d7fd6 56%, #c98a9a 66%, #ff8a5c 78%, #ffa47e 88%);
   animation: derive 22s var(--ease-terouva) infinite alternate;
-  /* Le bord bas se fond : coupé net, il traçait une ligne claire en travers de
-     la section suivante (relevé le 1er novembre). */
-  mask-image: linear-gradient(to bottom, #000 0 84%, transparent 99%);
+  /* Plus de fondu vers le transparent en bas : il laissait voir le minuit de la
+     page en bande sombre juste au-dessus du crème (Hugo, 15 novembre : « la
+     transition du hero à la page du dessous est trop vilaine »). Le hero est
+     coupé net (`clip-path` plus haut) et le sol `.halo-sol` fait la transition. */
+}
+/* Le sol du hero : l'aurore se pose dans le crème de la section suivante, comme
+   un coucher de soleil sur du sable. Au-dessus du champ et des bâtons, sous le
+   texte et le bouton ; il finit exactement à la couleur de la page crème. */
+.halo-sol {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  height: clamp(5rem, 1.5rem + 9vw, 9rem);
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(247 243 237 / 0) 0%,
+    rgb(247 243 237 / 0.35) 35%,
+    rgb(247 243 237 / 0.8) 70%,
+    var(--color-creme) 100%
+  );
 }
 /* Les stries : de fins traits verticaux sur toute la hauteur, plus clairs et
    plus sombres que le champ, à des pas irréguliers. Discrètes au sommet,

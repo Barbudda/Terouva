@@ -80,6 +80,8 @@ export function PleinCadre({
           </div>
         </div>
       </div>
+      {/* Le sol : le bas de l'aurore fond dans le crème de la section suivante. */}
+      <div aria-hidden className="halo-sol" />
 
       {controles && (
         <div className="cadre relative z-10 mb-6 lg:hidden">{controles}</div>
