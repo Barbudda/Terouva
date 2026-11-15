@@ -60,6 +60,7 @@
   --color-action: #fc734d;        /* sur minuit : 7,42:1 */
   --color-action-ink: #081120;
   --color-accent: #fc734d;        /* alias : l'action */
+  --color-orange-titre: #fc734d;  /* mot ou ligne en valeur d'un titre de section ; sur minuit : 7,42:1 */
   --color-accent-ink: #0297de;    /* alias : le bleu QUAND IL PORTE DU TEXTE (liens) */
   --color-night-accent: #0297de;  /* alias : le bleu de l'instrument */
 
@@ -136,6 +137,9 @@
   --color-warn-wash: #fdeccd;
   --color-bad: #c62f33;
   --color-bad-wash: #fde4e4;
+  /* L'orange du bouton tombe à 2,47:1 sur le crème : un titre en valeur prend
+     cet orange brûlé, 3,65:1 sur papier, suffisant au-delà de 24 px (AA grand texte). */
+  --color-orange-titre: #d9531f;
   background: var(--color-paper);
   color: var(--color-ink);
   color-scheme: light;
@@ -1255,3 +1259,35 @@ details > summary::-webkit-details-marker {
     padding-bottom: 0;
   }
 }
+
+/* ── Titre de section, vague 2 du pôle Design (15 novembre). Hugo : « tout est
+   trop compliqué, il faut le minimum et guider ce que l'utilisateur regarde, le
+   plus gros possible », à la manière de FanClaw et Rushlot (titres de 56 à 80 px,
+   graisse 900, centrés, la seconde ligne en couleur). Ici la première ligne est
+   en Archivo très gras ; la seconde, en Fraunces italique orange, fait le lien
+   avec le titre du hero. Composant : components/ui/TitreSection.tsx. */
+.titre-section {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 1.1rem + 5.6vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.titre-section__accent {
+  display: block;
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 144;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--color-orange-titre);
+}
+.etiquette-section {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
