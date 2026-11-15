@@ -50,6 +50,11 @@ const dmMono = DM_Mono({
   // des étiquettes, qui passaient sur deux lignes le temps du chargement.
   adjustFontFallback: false,
   fallback: ["Courier New", "monospace"],
+  // Pas de préchargement : elle ne sert qu'à des étiquettes sous la ligne de
+  // flottaison, et ses trois graisses (27 Ko) prenaient la bande passante de
+  // la feuille de style bloquante sur mobile lent (LCP, 15 novembre). Le
+  // secours a sa chasse exacte : l'échange ne décale rien.
+  preload: false,
 });
 
 export const metadata: Metadata = {
