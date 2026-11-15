@@ -152,13 +152,15 @@
 }
 @media (min-width: 64rem) {
   .messages {
-    padding-block: 8rem;
+    padding-block: 6rem;
   }
 }
 
-/* Les trois lettres dans la même case de grille : la pile prend la hauteur de
-   la plus longue, les lettres de derrière se décalent par transformation. */
+/* La lettre du dessus donne sa hauteur à la pile ; celles de derrière s'y
+   calent (position absolue, texte coupé en bas, on n'en voit que le bord) et
+   se décalent par transformation. */
 .messages-pile {
+  position: relative;
   display: grid;
   max-width: 36rem;
   margin: 3rem auto 0;
@@ -185,25 +187,28 @@
 
 @media (min-width: 64rem) {
   .messages-pile {
-    max-width: 40rem;
-    margin-top: 4.5rem;
+    max-width: 50rem;
+    margin-top: 1.75rem;
     padding-inline: 0;
   }
   .messages-lettre {
-    padding: 2.25rem 2.25rem;
+    padding: 1.5rem 2.5rem;
   }
   /* Derrière, à gauche et à droite : elles dépassent d'un bon tiers, inclinées,
      un peu plus basses, et s'effacent sous un voile de crème. */
   .messages-lettre:not([data-place="0"]) {
     display: block;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
     opacity: 0.7;
   }
   .messages-lettre[data-place="1"] {
     z-index: 1;
-    transform: translate(-46%, 2.5rem) rotate(-5deg) scale(0.92);
+    transform: translate(-40%, 2rem) rotate(-5deg) scale(0.92);
   }
   .messages-lettre[data-place="2"] {
     z-index: 1;
-    transform: translate(46%, 2.5rem) rotate(5deg) scale(0.92);
+    transform: translate(40%, 2rem) rotate(5deg) scale(0.92);
   }
 }

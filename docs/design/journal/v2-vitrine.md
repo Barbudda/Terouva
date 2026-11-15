@@ -22,3 +22,7 @@ Vérifié : `tsc --noEmit` propre ; captures 1440 et 375 en mouvement réduit re
 - Plateformes : le nom sous chaque icône ; les onglets reviennent, et une grande carte sous la rangée montre les deux gains du site choisi (textes `gains` repris de `lib/content.ts`).
 - Messages : une pile, la lettre de Camille devant, Yanis et Awa derrière, inclinées et en partie cachées ; à 375 px, la lettre du dessus seule.
 - Outils : plus de bâtons sous les vignettes de l'accueil (masqués en CSS, `Vignette.tsx` intact), objet agrandi de 16 %.
+
+## Défilement raccourci (retour d'Hugo, 15 novembre)
+- Hauteurs à 1440 : plateformes 897 → 753, messages 1 220 → 899, outils 1 103 → 850. Marges de section 128 → 96 px, titre à 32-40 px du visuel au lieu de 72.
+- Lettres en paragraphes à 6 px d'écart (plus de lignes blanches), pile calée sur la lettre du dessus, plus large ; vignettes d'outils en 2/1 dès deux colonnes. Aucun texte touché.

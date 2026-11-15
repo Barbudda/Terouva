@@ -86,7 +86,7 @@
 }
 @media (min-width: 64rem) {
   .outils {
-    padding-block: 8rem;
+    padding-block: 6rem;
   }
 }
 .outils-cartes {
@@ -99,7 +99,7 @@
   .outils-cartes {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
-    margin-top: 4.5rem;
+    margin-top: 2rem;
   }
 }
 .outils-carte {
@@ -130,6 +130,11 @@
   overflow: hidden;
   border-bottom: 1px solid var(--color-rule);
 }
+/* Dès deux colonnes, la vignette passe en 2/1 : le dessin (400 × 250) est
+   rogné en haut et en bas, là où il n'y a que du fond. */
+@media (min-width: 48rem) {
+  .outils-vignette { aspect-ratio: 2 / 1; }
+}
 @media (prefers-reduced-motion: reduce) {
   .outils-carte { transition: none; }
   .outils-carte:hover { translate: none; }
@@ -143,4 +148,11 @@
 }
 .outils-vignette .vg > g:last-of-type {
   transform: translate(200px, 125px) scale(1.16);
+}
+/* En 2/1 (dès deux colonnes), l'objet agrandi toucherait le bord haut : il
+   revient un peu sous sa taille d'origine. */
+@media (min-width: 48rem) {
+  .outils-vignette .vg > g:last-of-type {
+    transform: translate(200px, 124px) scale(0.96);
+  }
 }

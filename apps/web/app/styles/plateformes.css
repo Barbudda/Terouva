@@ -47,13 +47,14 @@
 
 /* ── Vague 2 (15 novembre) : sur crème, comme le « Grow everywhere » de
    FanClaw. Titre géant, huit icônes nommées, et sous la rangée une grande
-   carte qui montre les deux gains du site choisi. Rythme : 80 px puis 128 px. */
+   carte qui montre les deux gains du site choisi. Rythme : 80 px puis 96 px
+   (retour d'Hugo du 15 novembre : la page défilait trop, un écran par section). */
 .plateformes {
   padding-block: 5rem;
 }
 @media (min-width: 64rem) {
   .plateformes {
-    padding-block: 8rem;
+    padding-block: 6rem;
   }
 }
 
@@ -68,7 +69,7 @@
 @media (min-width: 64rem) {
   .plateformes-icones {
     grid-template-columns: repeat(8, minmax(0, 1fr));
-    margin-top: 4.5rem;
+    margin-top: 3rem;
   }
 }
 
@@ -152,8 +153,8 @@
 }
 @media (min-width: 64rem) {
   .plateformes-carte {
-    margin-top: 4rem;
-    padding: 3rem 3.5rem;
+    margin-top: 2rem;
+    padding: 2.25rem 3.5rem;
   }
 }
 .plateformes-carte-site {

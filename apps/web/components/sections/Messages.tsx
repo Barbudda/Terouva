@@ -24,7 +24,7 @@ export function Messages() {
           titre="Un message qui donne envie"
           accent="de vous répondre."
         />
-        <p className="mx-auto mt-6 max-w-[38rem] text-center text-[17px] leading-relaxed text-ink-2">
+        <p className="mx-auto mt-4 max-w-[38rem] text-center text-[17px] leading-relaxed text-ink-2">
           Qui vous êtes, vos revenus, votre garant, quand vous pouvez visiter : tout ce que le
           propriétaire veut savoir, en quelques lignes.
         </p>
@@ -50,11 +50,19 @@ function expediteur(texte: string) {
 function Lettre({ message, place }: { message: MessageExemple; place: number }) {
   return (
     <li className="messages-lettre" data-place={place}>
-      <p className="flex items-baseline justify-between gap-3 border-b border-rule pb-4">
+      <p className="flex items-baseline justify-between gap-3 border-b border-rule pb-3">
         <span className="truncate font-serif text-[22px] italic text-ink">{expediteur(message.texte)}</span>
         <span className="shrink-0 text-[13px] text-ink-3">Ton {message.ton.toLowerCase()}</span>
       </p>
-      <p className="mt-5 text-[15px] leading-[1.6] whitespace-pre-line text-ink">{message.texte}</p>
+      {/* Un paragraphe par bloc, à 6 px d'écart au lieu d'une ligne blanche
+          entière : la lettre garde ses respirations et perd un tiers de hauteur. */}
+      <div className="mt-3 space-y-1.5 text-[15px] leading-[1.55] text-ink">
+        {message.texte.split("\n\n").map((bloc) => (
+          <p key={bloc} className="whitespace-pre-line">
+            {bloc}
+          </p>
+        ))}
+      </div>
     </li>
   );
 }

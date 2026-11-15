@@ -26,18 +26,18 @@ export function Outils() {
                 <span className="outils-vignette">
                   <Vignette motif={motifDe(o.chemin)} graine={o.chemin} />
                 </span>
-                <span className="flex flex-1 flex-col px-7 pt-6 pb-8">
+                <span className="flex flex-1 flex-col px-7 pt-4 pb-6">
                   <span className="text-[22px] leading-snug font-semibold tracking-[-0.01em] text-ink">
                     {o.court}
                   </span>
-                  <span className="mt-2 text-[16px] leading-relaxed text-ink-2">{o.resume}</span>
+                  <span className="mt-1.5 text-[16px] leading-normal text-ink-2">{o.resume}</span>
                 </span>
               </Link>
             </li>
           ))}
         </ul>
 
-        <p className="mt-12 text-center">
+        <p className="mt-5 text-center">
           <Link href="/outils" className="lien text-[16px]">
             Tous les outils
           </Link>
