@@ -358,3 +358,26 @@ dépôt de garantie 17 (47) ; dossier 14 (34) ; état des lieux 13 (36) ; Visale
   24 pages et au `noindex` de prévisualisation). Production, titres contrôlés en ligne, IndexNow
   (136 adresses, HTTP 200).
 - **Mesure de l'effet : vers le 29/11**, avec la reprise des titres d'articles.
+
+## 2026-11-19 — Visibilité auprès des assistants IA et de Google
+
+- **Contrôle technique** : Septune `geo_audit` sur la production, **96/100** ; tous les robots IA de
+  recherche autorisés, `llms.txt` bien formé, texte dans le HTML serveur partout, 85 intertitres en
+  question. Seul manque : `sameAs` (profils à créer par Hugo). Parité HTML serveur sans JavaScript :
+  accueil 1 072 mots, `/outils` 795, les trois outils de 1 196 à 1 435 mots.
+- **Définition unique** (décision d'Hugo, mot pour mot) dans `lib/site.ts`, lue par le schéma
+  `WebSite` / `Organization` et par `llms.txt` ; consignée dans `MESSAGE.md` et le brief. L'accueil
+  reste au pôle Commerce : la phrase lui est proposée.
+- **Cinq pages d'intention « outil »**, Terouva éditeur déclaré, définition reprise, ce qu'il fait et
+  ne fait pas, liste d'attente sans date, aucun prix : `meilleures-applications-trouver-location`
+  (comparatif par catégories), `jinka-application-location`, `alerte-location-appartement`,
+  `automatiser-recherche-location`, `chasseur-immobilier-location`. Demande prouvée par
+  l'autocomplétion, sauf « automatiser » (gardée pour les assistants IA, sujet d'Hugo). Publicité
+  comparative relue (L122-1 et suivants). Relecture distincte : 5 publiables, 19 citations lues au
+  navigateur (sites qui refusent le script).
+- **Captures** : le format série accepte une figure ; trois captures de la démonstration de `/app`
+  (données d'exemple), barre latérale retirée. Vérifiées en ligne sur mobile.
+- **Mentions hors site** : `docs/seo/autorite/PLAN.md` et six brouillons dans `docs/seo/brouillons/` ;
+  l'ancien `docs/plan-backlinks.md` est marqué remplacé.
+- Porte Septune : aucune régression (l'« FAQ perdue » de `/blog` était le changement d'article à la
+  une ; aucune des deux versions n'a de schéma FAQ). Production, IndexNow (141 adresses, HTTP 200).

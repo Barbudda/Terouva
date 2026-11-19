@@ -54,8 +54,23 @@
 - Semrush : plus d'unités d'API (à Hugo s'il veut des volumes).
 - Checkout partagé : pousser `second/auto` vers `main` emporte les commits de tous les pôles. Regarder
   `git log origin/main..HEAD` avant ; la porte Septune due à l'un est due au push.
-- Search Console : vérifier avec Hugo que `https://terouva.com/sitemap.xml` est déclaré (menu
-  Sitemaps) ; Google ne reçoit pas IndexNow.
+- **Visibilité IA (2026-11-19, `JOURNAL.md`)** : définition unique d'Hugo dans `lib/site.ts` (schéma,
+  `llms.txt`) ; cinq pages « outil » avec captures (comparatif, Jinka, alertes, automatiser, chasseur) ;
+  plan des mentions et six brouillons (`docs/seo/autorite/PLAN.md`, `docs/seo/brouillons/`). Les pages
+  comparatives se **relisent quand un concurrent change de prix ou d'offre**, et quand le produit
+  évolue (captures à refaire). Mesurer leur effet et un test de visibilité LLM vers le 03/12.
+- **À Hugo, par ordre de gain** :
+  1. Search Console : déclarer `https://terouva.com/sitemap.xml` (Sitemaps), puis demander
+     l'indexation des pages clés (Inspection de l'URL) ; Google ne reçoit pas IndexNow.
+  2. **Bing Webmaster Tools** : s'inscrire, importer le site depuis la Search Console, déclarer le
+     plan du site. Bing alimente la recherche de ChatGPT et de Copilot.
+  3. Profils `sameAs` (LinkedIn, Crunchbase, Peerlist, Indie Hackers, profil maker Product Hunt dès
+     maintenant pour son ancienneté) avec les textes de `docs/seo/autorite/PROFILS.md`, puis envoyer
+     les adresses : elles entrent dans `SAME_AS` de `app/layout.tsx`.
+  4. Publier les brouillons de `docs/seo/brouillons/` en son nom de fondateur ; décider des paiements
+     (BetaList, Uneed) ; aucun faux avis ni mention d'utilisateur.
+  5. Pôle Commerce : reprendre ou non la définition sur l'accueil (proposition faite).
+  6. Dans l'app : la barre latérale affiche « Extension non connectée » (retirée des captures).
 
 - Photos : 13 pour 62 articles ; proposer une photo libre de droits par article (accord d'Hugo
   requis pour les téléchargements).
