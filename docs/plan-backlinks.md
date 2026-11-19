@@ -1,5 +1,9 @@
 # Plan de liens entrants (backlinks) pour terouva.com
 
+> **Remplacé le 2026-11-19 par `docs/seo/autorite/PLAN.md`** (cibles revérifiées, brouillons dans
+> `docs/seo/brouillons/`, définition d'Hugo). Ne rien publier d'après ce fichier : ses textes (« note
+> sur 100 », « tout reste sur votre ordinateur ») sont faux, et AlternativeTo refuse les bêtas fermées.
+
 Établi le 2026-11-03. Rien n'est soumis ni créé automatiquement : chaque fiche, chaque message et
 chaque compte est fait à la main par Hugo.
 

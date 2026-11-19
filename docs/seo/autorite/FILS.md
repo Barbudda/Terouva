@@ -54,6 +54,16 @@ Dix fils au lieu de quinze : on n'en a pas trouvé d'autres, récents et lisible
 guides. Ajouter des fils plus vieux pour atteindre le compte n'aurait pas de sens : un message
 posté deux mois plus tard dans un fil fermé passe pour du déterrage.
 
+## Relevé du 2026-11-19
+
+Aucun nouveau fil retenu. Reddit refuse toujours les outils de la session. Page 1 de la rubrique
+Immobilier de CommentÇaMarche et rubrique Location du forum Que Choisir
+(https://forum.quechoisir.org/location-f178.html) : les fils récents portent sur des locataires
+installés (caution, état des lieux, travaux), pas sur la recherche. Que Choisir interdit la
+publicité et les liens vers des sites de marques (charte citée par une recherche, à relire sur
+https://forum.quechoisir.org/regles-du-forum-t38322.html). HardWare.fr, dernière page (26/10) : DPE
+et chauffage. Les familles de lieux et leurs règles sont dans `PLAN.md`.
+
 ## À relever par Hugo (non lu par les agents)
 
 Reddit, avec son propre compte, en triant par « Nouveau ». Avant chaque réponse : lire la règle du

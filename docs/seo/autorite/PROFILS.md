@@ -16,9 +16,10 @@ Le `sameAs` actuel est vide (vérifié dans `layout.tsx` le 2026-11-04).
 
 ## Les textes à coller
 
-Alignés sur le résumé de `apps/web/app/llms.txt/route.ts` (la version en ligne au 2026-11-04). Si
-`geo-citabilite` arrête une autre phrase citable, ces textes la suivent : ils ne doivent jamais dire
-autre chose que l'accueil et `llms.txt`. Aucun prix, aucune offre, aucun palier.
+Remplacés le 2026-11-19 par la définition d'Hugo (`docs/seo/BRIEF.md`, `docs/commerce/MESSAGE.md`),
+reprise mot pour mot. Les anciennes bios (« repère, note », « outil local », « tout reste sur votre
+ordinateur ») ne servent plus. Aucun prix, aucune offre, aucun palier, aucune promesse d'envoi
+automatique. Détail des formats courts dans `PLAN.md`.
 
 **Nom** : Terouva
 **Site** : https://terouva.com
@@ -26,34 +27,41 @@ autre chose que l'accueil et `llms.txt`. Aucun prix, aucune offre, aucun palier.
 **Lieu** : Sévrier, Haute-Savoie, France
 **Éditeur** : Blue Lake Dev, entreprise individuelle de Hugo Moëne (comme dans les mentions légales)
 
-**Bio courte** (sous 160 caractères, pour X, Peerlist, champs « tagline ») :
+**Bio courte** (sous 160 caractères, pour X, Peerlist, champs « tagline ») : la première phrase de
+la définition, 88 caractères.
 
-> Terouva repère les annonces de location qui vous correspondent, les note et prépare votre message
-> de candidature. Tout reste sur votre ordinateur.
+> Terouva est un outil d'automatisation de la recherche de location immobilière en France.
 
-**Bio moyenne** (LinkedIn « à propos », Crunchbase « short description », Indie Hackers) :
+**Bio moyenne** (LinkedIn « à propos », Crunchbase « short description », Indie Hackers) : la
+définition courte, ses deux premières phrases.
 
-> Outil local pour trouver une location en France. Terouva repère les annonces qui correspondent à
-> votre recherche, les note et prépare votre message de candidature. Vous relisez et vous envoyez
-> vous-même. Pas de compte, pas de serveur, aucune donnée transmise. En préparation : la liste
-> d'attente est ouverte sur terouva.com.
+> Terouva est un outil d'automatisation de la recherche de location immobilière en France. Il aide
+> les locataires à repérer rapidement les annonces correspondant à leurs critères, à évaluer leur
+> pertinence, à préparer un message de candidature personnalisé et à suivre leurs candidatures.
 
-**Bio longue** (pages entreprise, annuaires qui acceptent plusieurs paragraphes) : reprendre la
-« Description longue » de `docs/plan-backlinks.md`, avec deux corrections :
-- « Une dizaine de guides sourcés » devient « Neuf guides sourcés » (il y en a 9 au 2026-11-04) ;
-- retirer « pas de publicité » si le pôle CTO & Commerce n'a pas tranché le modèle, pour ne rien
-  promettre sur l'offre.
+**Bio longue** (pages entreprise, annuaires qui acceptent plusieurs paragraphes) : la définition
+longue, puis, si le champ le permet, une phrase sur l'état du moment (aujourd'hui : « Terouva ouvre
+par vagues ; l'inscription sur terouva.com réserve une place. »).
 
-**Version anglaise** (annuaires internationaux) :
+> Terouva est un outil d'automatisation de la recherche de location immobilière en France. Il aide
+> les locataires à repérer rapidement les annonces correspondant à leurs critères, à évaluer leur
+> pertinence, à préparer un message de candidature personnalisé et à suivre leurs candidatures.
+> Terouva est conçu pour réduire le temps passé à rechercher un logement et permettre aux candidats
+> de réagir plus rapidement aux nouvelles annonces. L'utilisateur garde le contrôle de l'envoi de ses
+> messages.
 
-> Terouva finds the rental listings that match your search in France, scores them and drafts your
-> application message. You review it and send it yourself. Everything stays on your computer: no
-> account, no server, no data sent.
+**Version anglaise** (annuaires internationaux ; traduction à valider par le chef) :
+
+> Terouva is a tool that automates the search for a rental home in France. It helps tenants quickly
+> spot listings that match their criteria, assess how relevant they are, prepare a personalised
+> application message and keep track of their applications. Terouva is built to cut the time spent
+> looking for a home and to let applicants react faster to new listings. Users stay in control of
+> sending their messages.
 
 **Bio d'Hugo** (profil personnel, pour les plateformes qui lient une personne à un produit) :
 
-> Fondateur de Terouva, un outil local qui aide les locataires à trouver un logement et à répondre
-> aux annonces. Blue Lake Dev, Sévrier (Haute-Savoie).
+> Fondateur de Terouva, un outil d'automatisation de la recherche de location immobilière en France.
+> Blue Lake Dev, Sévrier (Haute-Savoie).
 
 Règles communes : jamais « Leboncoin » dans le nom, la bio ou un texte d'ancre ; le vouvoiement ;
 pas d'emoji ; pas de tiret cadratin ; « Être prévenu », jamais « Télécharger », tant que l'extension
@@ -69,8 +77,8 @@ n'est pas publiée.
 | 4 | GitHub (organisation ou dépôt public) | Preuve technique du « tout en local » ; seulement si Hugo rend un dépôt public. Le dépôt actuel `Barbudda/Terouva` contient tout le site : ne pas le rendre public sans relecture | Bio courte, lien vers le site | à décider par Hugo |
 | 5 | Peerlist (profil d'Hugo, puis projet) | Prévu dans la vague 1 ; la page projet est publique et datée | Bio courte + bio d'Hugo | idée |
 | 6 | Indie Hackers (fiche produit) | Prévu dans la vague 1 ; permet ensuite un post sur le choix du local | Bio moyenne | idée |
-| 7 | BetaList | Fait pour un produit pas encore lancé avec liste d'attente | Bio moyenne + version anglaise | idée |
-| 8 | AlternativeTo | Fiche produit ; à déclarer en alternative seulement à des outils dont la fiche existe et qui font vraiment la même chose | Version anglaise | idée |
+| 7 | BetaList | Fait pour un produit pas encore lancé avec liste d'attente ; payant (remboursé si refusé), relevé le 2026-11-19 | `../brouillons/annuaire-betalist.md` | brouillon, achat à décider par Hugo |
+| 8 | AlternativeTo | Refuse les bêtas fermées et les produits destinés à un seul pays (FAQ lue le 2026-11-19, voir `PLAN.md`) | aucun | écarté |
 | 9 | X (compte de la marque) | Seulement si Hugo compte s'en servir ; un compte vide n'aide pas | Bio courte | à décider par Hugo |
 | 10 | Product Hunt (profil maker d'Hugo, sans lancement) | Le lancement attend que le produit soit utilisable par tous (plan, vague 1) ; le profil peut exister avant | Bio d'Hugo | plus tard |
 | 11 | Chrome Web Store (fiche de l'extension) | Profil d'entité fort une fois publiée ; texte préparé par `seo-fiches-stores` | voir `docs/seo/stores/` | après publication |
