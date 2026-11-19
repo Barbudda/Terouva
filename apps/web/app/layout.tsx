@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, DM_Mono, Fraunces } from "next/font/google";
-import { getSiteUrl } from "@/lib/site";
+import { DEFINITION_TEROUVA, getSiteUrl } from "@/lib/site";
 import { Revelateur } from "@/components/ui/Revelateur";
 import "./globals.css";
 
@@ -115,9 +115,8 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-/** La même phrase pour le site et pour l'entité : un assistant qui croise les deux lit un seul produit. */
-const DESCRIPTION_SITE =
-  "Terouva trie vos alertes Leboncoin et écrit votre message de candidature : vous répondez parmi les premiers. Tout reste sur votre ordinateur.";
+/** La définition unique (lib/site.ts) pour le site et pour l'entité : un assistant qui croise les deux lit un seul produit. */
+const DESCRIPTION_SITE = DEFINITION_TEROUVA;
 
 /**
  * Profils publics de Terouva (LinkedIn, Crunchbase…), URL exactes données par Hugo. Vide tant

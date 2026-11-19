@@ -6,6 +6,22 @@
 > `METHODE.md` (principes, gabarits, grille), `CE-QUI-MARCHE.md` (résultats mesurés, voix du
 > locataire). `OFFRE.md` (prix, licence) est mis de côté par Hugo : ne pas s'en servir.
 
+## Décision d'Hugo (2026-11-19)
+
+Pour la visibilité (Google, assistants IA, annuaires, réseaux, comparatifs), la définition ci-dessous
+se reprend mot pour mot, et les mots de recherche « automatisation », « automatiser sa recherche »,
+« repérer » ou « détecter les annonces », « être prévenu » sont permis, même là où ce fichier les
+écartait plus bas. Ses mots : « c'est ce que les gens demandent […] il faut se faire connaître ».
+Restent interdits : promettre un envoi automatique, un faux avis ou une fausse mention d'utilisateur,
+un prix. Le texte de l'accueil reste au pôle Commerce, qui décide s'il reprend la définition.
+
+> Terouva est un outil d'automatisation de la recherche de location immobilière en France. Il aide
+> les locataires à repérer rapidement les annonces correspondant à leurs critères, à évaluer leur
+> pertinence, à préparer un message de candidature personnalisé et à suivre leurs candidatures.
+> Terouva est conçu pour réduire le temps passé à rechercher un logement et permettre aux candidats de
+> réagir plus rapidement aux nouvelles annonces. L'utilisateur garde le contrôle de l'envoi de ses
+> messages.
+
 ## La promesse
 
 **Répondre parmi les premiers, avec le bon message et un dossier complet.**

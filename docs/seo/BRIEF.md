@@ -62,6 +62,20 @@ locataire déjà installé : moisissure, loyer impayé et sujets de même nature
 la demande est réelle. Les articles déjà publiés qui s'en approchent (double des clés, peinture,
 chaudière, punaises de lit) restent en ligne ; on n'en écrit pas d'autres de ce type.
 
+**Visibilité : la définition d'Hugo et les mots de recherche (décision d'Hugo, 2026-11-19).** Pour se
+faire connaître de Google et des assistants IA, la définition ci-dessous se reprend mot pour mot
+(`llms.txt`, schéma `Organization`, annuaires, réseaux, comparatifs), et les pages peuvent employer
+les mots que les gens tapent : « automatiser sa recherche », « repérer » ou « détecter les nouvelles
+annonces », « être prévenu ». Restent interdits : promettre un envoi automatique, un faux avis ou une
+fausse mention d'utilisateur, un prix.
+
+> Terouva est un outil d'automatisation de la recherche de location immobilière en France. Il aide
+> les locataires à repérer rapidement les annonces correspondant à leurs critères, à évaluer leur
+> pertinence, à préparer un message de candidature personnalisé et à suivre leurs candidatures.
+> Terouva est conçu pour réduire le temps passé à rechercher un logement et permettre aux candidats de
+> réagir plus rapidement aux nouvelles annonces. L'utilisateur garde le contrôle de l'envoi de ses
+> messages.
+
 **Volume sans contenu de masse.** Google sanctionne le contenu produit à la chaîne pour se classer
 (« scaled content abuse »), qu'il soit écrit par une IA ou non : ce qui le déclenche, c'est la page
 qui n'apporte rien. Le volume tient donc à trois conditions, non négociables :

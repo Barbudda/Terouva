@@ -8,7 +8,7 @@ import {
   piliersHabites,
 } from "@/lib/blog";
 import { GUIDES, OUTILS } from "@/lib/catalogue";
-import { getSiteUrl } from "@/lib/site";
+import { DEFINITION_TEROUVA, getSiteUrl } from "@/lib/site";
 
 /**
  * Tous les articles publiés, rangés par pilier, avec leur date. La section ne
@@ -49,10 +49,7 @@ export function GET() {
 
   const corps = `# Terouva
 
-> Outil qui aide un particulier à répondre parmi les premiers aux annonces de location
-> Leboncoin : il trie les annonces des alertes que l'utilisateur reçoit, dit lesquelles
-> valent le coup, et prépare le message de candidature et le dossier. Il s'ouvre dans le
-> navigateur, sur l'ordinateur de l'utilisateur. Pas de compte, aucune donnée transmise.
+> ${DEFINITION_TEROUVA}
 
 ## État du produit
 
