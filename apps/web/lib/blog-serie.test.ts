@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import sitemap from "@/app/sitemap";
 import { ARTICLES, cheminArticle } from "./blog";
-import { article, compterMots, lireBlocs, texteBrut, type FicheSerie } from "./blog-format";
+import { DOSSIER_CAPTURES, dimensionsCapture } from "./blog-captures";
+import { article, compterMots, lireBlocs, sansFigures, texteBrut, type Bloc, type FicheSerie } from "./blog-format";
 import { GUIDES, OUTILS } from "./catalogue";
 
 /**
@@ -91,6 +92,21 @@ Texte.`,
   it("lit les listes et les paragraphes du Markdown restreint", () => {
     expect(lireBlocs(exemple.markdown).map((b) => b.type)).toEqual(["h2", "p", "ul", "h2", "p"]);
   });
+
+  it("lit une figure seule sur sa ligne, et la laisse hors du texte brut", () => {
+    const md = `Avant.
+
+![La liste triée](/blog/captures/x.webp "Terouva en démonstration.")
+
+Après.`;
+    expect(lireBlocs(md)[1]).toEqual({
+      type: "figure",
+      alt: "La liste triée",
+      src: "/blog/captures/x.webp",
+      legende: "Terouva en démonstration.",
+    });
+    expect(texteBrut(md)).toBe("Avant. Après.");
+  });
 });
 
 describe("articles au format série : vérifications mécaniques", () => {
@@ -138,14 +154,36 @@ describe("articles au format série : vérifications mécaniques", () => {
         expect(new Set(ids).size).toBe(ids.length);
       });
 
+      const figures = blocs.filter((b): b is Extract<Bloc, { type: "figure" }> => b.type === "figure");
+
+      it("pose chaque capture seule sur sa ligne, avec un texte alternatif, un fichier et une légende", () => {
+        // Une figure collée à un paragraphe sortirait en texte brut : on la refuse ici.
+        const egarees = blocs.filter((b) => b.type !== "figure" && JSON.stringify(b).includes("!["));
+        expect(egarees, "figure à poser seule, entre deux lignes vides").toEqual([]);
+        for (const f of figures) {
+          expect(f.alt, `${f.src} : texte alternatif vide`).not.toBe("");
+          expect(f.src, "capture attendue sous /blog/captures/, en .webp").toMatch(
+            new RegExp(`^${DOSSIER_CAPTURES}[a-z0-9-]+\\.webp$`),
+          );
+          expect(dimensionsCapture(f.src), `public${f.src} absent ou illisible`).not.toBeNull();
+          expect(f.legende, `${f.src} : légende absente (« "légende" » après l'adresse)`).not.toBe("");
+        }
+      });
+
       it("n'emploie aucune tournure interdite", () => {
-        const texte = [a.titre, a.description, a.chapeau, texteBrut(a.markdown)].join(" \n ");
+        const texte = [
+          a.titre,
+          a.description,
+          a.chapeau,
+          texteBrut(a.markdown),
+          ...figures.flatMap((f) => [f.alt, f.legende]),
+        ].join(" \n ");
         const trouves = INTERDITS.filter(([re]) => re.test(texte)).map(([, nom]) => nom);
         expect(trouves).toEqual([]);
       });
 
       it("ne lie que des pages qui existent (et, publié, aucun brouillon)", () => {
-        const liens = [...a.markdown.matchAll(/\]\((\/[^)\s#]*)/g)].map((m) => m[1].replace(/\/$/, "") || "/");
+        const liens = [...sansFigures(a.markdown).matchAll(/\]\((\/[^)\s#]*)/g)].map((m) => m[1].replace(/\/$/, "") || "/");
         const morts = liens.filter((l) => {
           if (existantes.has(l)) return false;
           // Un brouillon peut viser un autre brouillon de la série : ils partiront dans le même lot.

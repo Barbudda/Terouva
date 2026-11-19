@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { lireBlocs } from "@/lib/blog-format";
+import { dimensionsCapture } from "@/lib/blog-captures";
+import { lireBlocs, type Bloc } from "@/lib/blog-format";
 import { typographier } from "@/components/blog/typographie";
 
 /**
@@ -41,10 +43,37 @@ export function rendreMarkdown(md: string): ReactNode[] {
             ))}
           </ol>
         );
+      case "figure":
+        return <Capture key={i} bloc={b} />;
       default:
         return <p key={i}>{enLigne(b.texte)}</p>;
     }
   });
+}
+
+/**
+ * Une capture de l'outil dans le texte. Largeur et hauteur viennent du fichier : la place est
+ * réservée avant le chargement. `sizes` suit la colonne de l'article : pleine largeur sur téléphone,
+ * la mesure (34 rem) ensuite, puis prose et marge réunies dès 64 rem (voir `lecture.css`).
+ * Un fichier manquant arrête le rendu plutôt que de publier une image cassée ; le vérificateur
+ * l'attrape avant.
+ */
+function Capture({ bloc }: { bloc: Extract<Bloc, { type: "figure" }> }) {
+  const taille = dimensionsCapture(bloc.src);
+  if (!taille) throw new Error(`Capture introuvable ou illisible (WebP attendu) : public${bloc.src}`);
+  return (
+    <figure className="capture">
+      <Image
+        src={bloc.src}
+        alt={bloc.alt}
+        width={taille.largeur}
+        height={taille.hauteur}
+        loading="lazy"
+        sizes="(min-width: 64rem) 54rem, (min-width: 36rem) 34rem, 100vw"
+      />
+      {bloc.legende && <figcaption>{enLigne(bloc.legende)}</figcaption>}
+    </figure>
+  );
 }
 
 const JETON = /(\*\*[^*]+\*\*|\*[^*\s][^*]*\*|\[[^\]]+\]\([^)\s]+\))/g;

@@ -79,7 +79,8 @@ export function compterMots(texte: string): number {
 // ── Markdown restreint ───────────────────────────────────────────────────────
 //
 // Volontairement petit : `## Titre {#id}`, `### Titre`, paragraphes, listes `- ` et `1. `,
-// `**gras**`, `*italique*`, `[texte](/lien)`. Rien d'autre n'est reconnu, ce qui garde les articles
+// `**gras**`, `*italique*`, `[texte](/lien)`, et une figure sur une ligne seule (voir `FIGURE`).
+// Rien d'autre n'est reconnu, ce qui garde les articles
 // homogènes et le rendu prévisible. Zéro dépendance. Ce fichier ne contient aucun JSX : le rendu vit dans
 // `components/blog/Markdown.tsx`, chargé seulement à l'affichage d'une page, si bien que les tests
 // et le vérificateur tournent sans charger `next/link`.
@@ -88,7 +89,24 @@ export type Bloc =
   | { type: "h2"; id: string; texte: string }
   | { type: "h3"; texte: string }
   | { type: "p"; texte: string }
-  | { type: "ul" | "ol"; items: string[] };
+  | { type: "ul" | "ol"; items: string[] }
+  | { type: "figure"; src: string; alt: string; legende: string };
+
+/**
+ * Une capture dans le corps : `![texte alternatif](/blog/captures/<fichier>.webp "légende")`, seule
+ * sur sa ligne et séparée du texte par des lignes vides. Les dimensions ne s'écrivent pas : le rendu
+ * les lit dans le fichier (`lib/blog-captures.ts`), si bien qu'elles ne peuvent pas mentir et que la
+ * place est réservée avant le chargement (pas de décalage, CLS). La légende entre guillemets droits
+ * est obligatoire (le vérificateur la réclame) ; elle ne peut donc pas contenir de « " ».
+ */
+export const FIGURE = /^!\[([^\]]*)\]\((\S+?)(?:\s+"([^"]*)")?\)$/;
+/** La même, pour retirer les lignes de figure d'un texte entier. */
+const LIGNE_FIGURE = /^[ \t]*!\[[^\]]*\]\(\S+?(?:\s+"[^"]*")?\)[ \t]*$/gm;
+
+/** Le corps sans ses figures : pour compter les mots, chercher les liens ou remplir la FAQ. */
+export function sansFigures(md: string): string {
+  return md.replace(LIGNE_FIGURE, "");
+}
 
 export function lireBlocs(md: string): Bloc[] {
   const blocs: Bloc[] = [];
@@ -96,6 +114,11 @@ export function lireBlocs(md: string): Bloc[] {
     const lignes = brut.split("\n").map((l) => l.trim()).filter(Boolean);
     if (!lignes.length) continue;
     const premiere = lignes[0];
+    const figure = lignes.length === 1 ? FIGURE.exec(premiere) : null;
+    if (figure) {
+      blocs.push({ type: "figure", alt: figure[1].trim(), src: figure[2], legende: (figure[3] ?? "").trim() });
+      continue;
+    }
     const h2 = /^##\s+(.+?)(?:\s+\{#([a-z0-9-]+)\})?$/.exec(premiere);
     if (h2 && !premiere.startsWith("###")) {
       blocs.push({ type: "h2", id: h2[2] ?? ancre(h2[1]), texte: h2[1] });
@@ -120,9 +143,9 @@ export function lireBlocs(md: string): Bloc[] {
   return blocs;
 }
 
-/** Le texte sans balisage : pour compter les mots et remplir la FAQ balisée. */
+/** Le texte sans balisage : pour compter les mots et remplir la FAQ balisée. Les figures n'y entrent pas. */
 export function texteBrut(md: string): string {
-  return md
+  return sansFigures(md)
     .replace(/\{#[a-z0-9-]+\}/g, "")
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
     .replace(/[*#]/g, "")
